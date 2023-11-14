@@ -48,27 +48,27 @@
         {{ $t('home_contactenos') }}
       </p>
       <div
-        v-if="dataStore?.geolocalizacion.length"
+        v-if="geolocalizacion.length"
         ref="mySwiper"
         v-swiper:mySwiper="swiperOption"
         class="w-full max-w-6xl flex flex-col justify-center"
       >
         <div class="z-auto swiper-wrapper">
           <div
-            v-for="(item, index) in dataStore.geolocalizacion"
+            v-for="(item, index) in geolocalizacion"
             :key="index"
             class="swiper-slide w-full h-full grid grid-cols-1 lg:grid-cols-4 gap-y-5 gap-x-5 lg:gap-x-10 border py-10 md:px-10 lg:px-15 items-center"
             :style="`color: ${settingByTemplate16[0].contact.color_title}; border-color: ${settingByTemplate16[0].contact.color_border}; border-radius: ${settingByTemplate16[0].settingsGeneral.radius};`"
           >
             <nuxt-link to="/" class="w-[120px] flex justify-center items-start">
               <img
-                :src="`${$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+                :src="`${$store.state.urlKomercia}/logos/${dataStore.logo}`"
                 class="w-full object-contain object-left"
                 alt="LogoStore"
               />
             </nuxt-link>
             <div
-              v-if="dataStore.geolocalizacion.length"
+              v-if="geolocalizacion.length"
               class="h-full flex flex-row justify-start items-start"
             >
               <div class="w-[50px]">
@@ -94,7 +94,7 @@
                   :style="`color: ${settingByTemplate16[0].contact.color_text};`"
                 >
                   <span class="font-bold"> Sede {{ index + 1 }}: </span>
-                  {{ dataStore.geolocalizacion[index].direccion }}
+                  {{ geolocalizacion[index].direccion }}
                 </p>
                 <a
                   :href="`https://www.google.com/maps?q=${item.latitud},${item.longitud}&hl=en-gb&t=m&z=15`"
@@ -110,7 +110,7 @@
 
             <div class="h-full flex flex-col justify-start items-start">
               <div
-                v-if="dataStore.tienda.telefono"
+                v-if="dataStore.tiendasInfo.telefono"
                 class="mb-20 flex flex-row gap-2 items-center"
               >
                 <div class="min-w-[50px] max-w-[50px]">
@@ -136,12 +136,12 @@
                     class="text-14"
                     :style="`color: ${settingByTemplate16[0].contact.color_text};`"
                   >
-                    {{ dataStore.tienda.telefono }}
+                    {{ dataStore.tiendasInfo.telefono }}
                   </p>
                 </div>
               </div>
               <div
-                v-if="dataStore.tienda.whatsapp"
+                v-if="dataStore.redes.whatsapp"
                 class="flex flex-row gap-2 items-center"
               >
                 <div class="min-w-[50px] max-w-[50px]">
@@ -185,7 +185,7 @@
                     class="text-14"
                     :style="`color: ${settingByTemplate16[0].contact.color_text};`"
                   >
-                    {{ dataStore.tienda.whatsapp }}
+                    {{ dataStore.redes.whatsapp }}
                   </p>
                 </div>
               </div>
@@ -193,7 +193,7 @@
 
             <div class="h-full flex flex-col justify-start items-start">
               <div
-                v-if="dataStore.tienda.email_tienda"
+                v-if="dataStore.tiendasInfo.emailTienda"
                 class="mb-20 flex flex-row gap-2 items-center"
               >
                 <div class="min-w-[50px] max-w-[50px]">
@@ -216,12 +216,12 @@
                     class="text-14"
                     :style="`color: ${settingByTemplate16[0].contact.color_text};`"
                   >
-                    {{ dataStore.tienda.email_tienda }}
+                    {{ dataStore.tiendasInfo.emailTienda }}
                   </p>
                 </div>
               </div>
               <div
-                v-if="dataStore.geolocalizacion.length"
+                v-if="geolocalizacion.length"
                 class="flex flex-row gap-2 items-center"
               >
                 <div class="min-w-[50px] max-w-[50px]">
@@ -263,7 +263,7 @@
                     class="w-full text-14"
                     :style="`color: ${settingByTemplate16[0].contact.color_text};`"
                   >
-                    {{ dataStore.geolocalizacion[index].horario }}
+                    {{ geolocalizacion[index].horario }}
                   </p>
                 </div>
               </div>
@@ -306,7 +306,7 @@
                       :style="`color: ${settingByTemplate16[0].contact.color_text_input}; background-color:${settingByTemplate16[0].contact.color_input}; border-color:${settingByTemplate16[0].contact.color_text};`"
                       :placeholder="$t('contact_nombrePlacer')"
                     />
-                    <span class="text-12 text-red-500 ml-5" v-show="errors[0]">
+                    <span v-show="errors[0]" class="text-12 text-red-500 ml-5">
                       {{ errors[0] }}
                     </span>
                   </template>
@@ -405,6 +405,7 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 import idCloudinaryBanner from '@/mixins/idCloudinary'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
@@ -439,40 +440,40 @@ export default {
         {
           nombre: 'Facebook',
           icon: 'facebook-icon',
-          link: this.dataStore.tienda.red_facebook,
+          link: this.dataStore.redes.facebook,
         },
         {
           nombre: 'Twitter',
           icon: 'twitter-icon',
-          link: this.dataStore.tienda.red_twitter,
+          link: this.dataStore.redes.twitter,
         },
         {
           nombre: 'Instagram',
           icon: 'instagram-icon',
-          link: this.dataStore.tienda.red_instagram,
+          link: this.dataStore.redes.instagram,
         },
         {
           nombre: 'Youtube',
           icon: 'youtube-icon',
-          link: this.dataStore.tienda.red_youtube,
+          link: this.dataStore.redes.youtube,
         },
         {
           nombre: 'Tiktok',
           icon: 'tiktok-icon',
-          link: this.dataStore.tienda.red_tiktok,
+          link: this.dataStore.redes.tiktok,
         },
       ],
       dataContact: [
         {
-          dato: this.dataStore.tienda.telefono,
+          dato: this.dataStore.tiendasInfo.telefono,
           icon: 'phone-icon',
         },
         {
-          dato: this.dataStore.tienda.whatsapp,
+          dato: this.dataStore.redes.whatsapp,
           icon: 'whatsapp-icon',
         },
         {
-          dato: this.dataStore.tienda.email_tienda,
+          dato: this.dataStore.tiendasInfo.emailTienda,
           icon: 'email-icon',
         },
       ],
@@ -489,23 +490,24 @@ export default {
     }
   },
   computed: {
-    facebookPixel() {
-      return this.$store.state.analytics_tagmanager
-    },
+    ...mapState(['geolocalizacion']),
+    ...mapState({
+      facebookPixel: (state) => state.analytics_tagmanager,
+    }),
     swiper() {
       return this.$refs.mySwiper.swiper
     },
   },
   watch: {
     'dataStore.tienda'() {
-      this.links[0].link = this.dataStore?.tienda.red_facebook
-      this.links[1].link = this.dataStore?.tienda.red_twitter
-      this.links[2].link = this.dataStore?.tienda.red_instagram
-      this.links[3].link = this.dataStore?.tienda.red_youtube
-      this.links[4].link = this.dataStore?.tienda.red_tiktok
-      this.dataContact[0].dato = this.dataStore?.tienda.telefono
-      this.dataContact[1].dato = this.dataStore?.tienda.whatsapp
-      this.dataContact[2].dato = this.dataStore?.tienda.email_tienda
+      this.links[0].link = this.dataStore.redes.facebook
+      this.links[1].link = this.dataStore.redes.twitter
+      this.links[2].link = this.dataStore.redes.instagram
+      this.links[3].link = this.dataStore.redes.youtube
+      this.links[4].link = this.dataStore.redes.tiktok
+      this.dataContact[0].dato = this.dataStore.tiendasInfo.telefono
+      this.dataContact[1].dato = this.dataStore.redes.whatsapp
+      this.dataContact[2].dato = this.dataStore.tiendasInfo.emailTienda
     },
   },
   destroyed() {

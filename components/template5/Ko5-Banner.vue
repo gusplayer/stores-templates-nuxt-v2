@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import idCloudinaryBanner from '../../mixins/idCloudinary'
+import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
   name: 'Ko5Banner',
   mixins: [idCloudinaryBanner],

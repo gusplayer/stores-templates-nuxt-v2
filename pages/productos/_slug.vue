@@ -54,6 +54,7 @@ export default {
   },
   computed: {
     ...mapState([
+      'envios',
       'dataStore',
       'settingBase',
       'settingByTemplate',
@@ -67,9 +68,7 @@ export default {
       'settingByTemplate16',
       'template',
     ]),
-    fullProducts() {
-      return this.$store.getters['products/allProduct']
-    },
+
     indexTemplate() {
       let productListComponent = ''
       // eslint-disable-next-line no-prototype-builtins
@@ -81,9 +80,8 @@ export default {
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        productsData: this.fullProducts,
-        whatsapp: this.dataStore.tienda.whatsapp,
-        envios: this.dataStore.medios_envio,
+        whatsapp: this.dataStore.redes.whatsapp,
+        envios: this.envios,
         facebookPixel: this.$store.state.analytics_tagmanager,
         settingByTemplate: this.createSettingByTemplate(
           this.settingByTemplate,

@@ -39,12 +39,21 @@
 <script>
 import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko15-information',
+  name: 'Ko15Information',
   mixins: [idCloudinaryBanner],
   props: {
-    information: Object,
-    settingGeneral: Object,
-    dataStore: Object,
+    information: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
 }
 </script>

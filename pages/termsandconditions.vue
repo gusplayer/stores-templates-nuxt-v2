@@ -19,77 +19,60 @@
         {{ $t('footer_condicionesLegales') }}
       </h1>
       <div
-        v-if="
-          dataStore?.politicas?.datos && isSafeHTML(dataStore.politicas.datos)
-        "
+        v-if="storePolicies?.datos"
         class="w-full max-w-[900px] mb-15 px-20 md:px-30"
       >
         <p class="text-17 font-bold mb-10">
           {{ $t('footer_politicaTratamientos') }}
         </p>
-        <div v-html="dataStore.politicas.datos"></div>
+        <div v-html="storePolicies.datos"></div>
       </div>
 
       <div
-        v-if="
-          dataStore?.politicas?.garantia &&
-          isSafeHTML(dataStore.politicas.garantia)
-        "
+        v-if="storePolicies?.garantia"
         class="w-full max-w-[900px] mb-15 px-20 md:px-30"
       >
         <p class="text-17 font-bold mb-10">
           {{ $t('footer_politicaGarantia') }}
         </p>
-        <div v-html="dataStore.politicas.garantia"></div>
+        <div v-html="storePolicies.garantia"></div>
       </div>
 
       <div
-        v-if="
-          dataStore?.politicas?.devolucion &&
-          isSafeHTML(dataStore.politicas.devolucion)
-        "
+        v-if="storePolicies?.devolucion"
         class="w-full max-w-[900px] mb-15 px-20 md:px-30"
       >
         <p class="text-17 font-bold mb-10">
           {{ $t('footer_politicaDevoluciones') }}
         </p>
-        <div v-html="dataStore.politicas.devolucion"></div>
+        <div v-html="storePolicies.devolucion"></div>
       </div>
 
       <div
-        v-if="
-          dataStore?.politicas?.cambio && isSafeHTML(dataStore.politicas.cambio)
-        "
+        v-if="storePolicies?.cambio"
         class="w-full max-w-[900px] mb-15 px-20 md:px-30"
       >
         <p class="text-17 font-bold mb-10">
           {{ $t('footer_politicaCambio') }}
         </p>
-        <div v-html="dataStore.politicas.cambio"></div>
+        <div v-html="storePolicies.cambio"></div>
       </div>
 
       <div
-        v-if="
-          dataStore?.politicas?.envios && isSafeHTML(dataStore.politicas.envios)
-        "
+        v-if="storePolicies?.envios"
         class="w-full max-w-[900px] mb-15 px-30"
       >
         <p class="text-17 font-bold mb-10">
           {{ $t('footer_politicaEnvios') }}
         </p>
-        <div v-html="dataStore.politicas.envios"></div>
+        <div v-html="storePolicies.envios"></div>
       </div>
 
-      <div
-        v-if="
-          dataStore?.politicas?.pagos && isSafeHTML(dataStore.politicas.pagos)
-        "
-        class="w-full max-w-[900px] mb-15 px-30"
-      >
+      <div v-if="storePolicies?.pagos" class="w-full max-w-[900px] mb-15 px-30">
         <p class="text-16 font-bold mb-10">
           {{ $t('footer_politicaPagos') }}
         </p>
-        <div v-html="dataStore.politicas.pagos"></div>
+        <div v-html="storePolicies.pagos"></div>
       </div>
     </div>
   </div>
@@ -100,25 +83,7 @@ export default {
   name: 'TermsAndConditions',
   layout: 'default',
   computed: {
-    ...mapState(['dataStore']),
-  },
-  methods: {
-    isSafeHTML(htmlContent) {
-      // Lista de etiquetas y atributos potencialmente peligrosos
-      const unsafeTags = ['script', 'iframe']
-      const unsafeAttributes = ['onclick', 'onload', 'onerror', 'src']
-
-      // Verificar si el contenido HTML contiene etiquetas o atributos peligrosos
-      const containsUnsafeTags = unsafeTags.some((tag) =>
-        htmlContent.includes(`<${tag}`)
-      )
-      const containsUnsafeAttributes = unsafeAttributes.some((attr) =>
-        htmlContent.includes(` ${attr}=`)
-      )
-
-      // Si se encuentra contenido peligroso, considerarlo inseguro
-      return !(containsUnsafeTags || containsUnsafeAttributes)
-    },
+    ...mapState(['storePolicies']),
   },
 }
 </script>

@@ -4,7 +4,7 @@
       <figure class="promo-banner-images">
         <img
           class="images"
-          :src="idCloudinaryBanner(this.ban.backgroundBanner1, 'banner')"
+          :src="idCloudinaryBanner(ban.backgroundBanner1, 'banner')"
           alt=""
         />
       </figure>
@@ -14,7 +14,7 @@
         <figure class="promo-banner-images">
           <img
             class="images"
-            :src="idCloudinaryBanner(this.ban.backgroundBanner2, 'banner')"
+            :src="idCloudinaryBanner(ban.backgroundBanner2, 'banner')"
             alt=""
           />
         </figure>
@@ -23,7 +23,7 @@
         <figure class="promo-banner-images">
           <img
             class="images"
-            :src="idCloudinaryBanner(this.ban.backgroundBanner3, 'banner')"
+            :src="idCloudinaryBanner(ban.backgroundBanner3, 'banner')"
             alt=""
           />
         </figure>
@@ -33,7 +33,7 @@
       <figure class="promo-banner-images">
         <img
           class="images"
-          :src="idCloudinaryBanner(this.ban.backgroundBanner4, 'banner')"
+          :src="idCloudinaryBanner(ban.backgroundBanner4, 'banner')"
           alt=""
         />
       </figure>
@@ -41,11 +41,14 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   props: {
-    ban: {},
+    ban: {
+      type: Array,
+      required: true,
+    },
   },
 }
 </script>

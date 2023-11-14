@@ -54,13 +54,13 @@
           />
         </a>
       </div>
-      <div class="swiper-pagination" />
+      <div class="swiper-pagination"></div>
     </div>
   </div>
 </template>
 
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'K07Carousel',
   components: {
@@ -69,10 +69,10 @@ export default {
   },
   mixins: [idCloudinary],
   props: {
-    dataStore: {
-      type: Object,
-      required: true,
-    },
+    // dataStore: {
+    //   type: Object,
+    //   required: true,
+    // },
     settingKCarousel: {
       type: Object,
       required: true,

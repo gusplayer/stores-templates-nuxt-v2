@@ -2,7 +2,7 @@
   <div class="producto h-full">
     <nuxt-link
       :to="{
-        path: '/wa/' + dataStore.tienda.id_tienda + '/blog/' + article.slug,
+        path: '/wa/' + dataStore.id + '/blog/' + article.slug,
         query: { idBlog: article.id },
       }"
       class="container"
@@ -52,9 +52,9 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'KoBlogcardWa',
+  name: 'KoBlogCardWa',
   mixins: [idCloudinary],
   props: {
     article: {
@@ -68,8 +68,6 @@ export default {
   },
   data() {
     return {
-      hover: false,
-      shippingCreated: '',
       dayCreate: '',
       monthCreate: '',
       yearCreate: '',
@@ -77,16 +75,8 @@ export default {
     }
   },
   mounted() {
-    if (this.article.created_at) {
-      const creationDateParts = this.article.created_at.split(' ')
-      const dateParts = creationDateParts[0].split('-')
-
-      this.shippingCreated = dateParts[0]
-      this.dayCreate = dateParts[2]
-      this.monthCreate = dateParts[1]
-      this.yearCreate = dateParts[0]
-
-      const monthNames = [
+    if (this.article.updated_at) {
+      const months = [
         'Ene',
         'Feb',
         'Mar',
@@ -100,10 +90,13 @@ export default {
         'Nov',
         'Dic',
       ]
+      const fecha = new Date(this.article.updated_at)
 
-      if (this.monthCreate >= 1 && this.monthCreate <= 12) {
-        this.nameMonth = monthNames[this.monthCreate - 1]
-      }
+      this.yearCreate = fecha.getUTCFullYear()
+      this.monthCreate = fecha.getUTCMonth()
+      this.dayCreate = fecha.getUTCDate()
+
+      this.nameMonth = months[this.monthCreate]
     }
   },
 }

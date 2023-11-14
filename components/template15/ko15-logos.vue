@@ -41,8 +41,14 @@ export default {
   name: 'Ko15Logos',
   mixins: [idCloudinary],
   props: {
-    logos: Object,
-    dataStore: Object,
+    logos: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

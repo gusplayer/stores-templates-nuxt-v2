@@ -5,130 +5,121 @@
       settingKsection,
       settingGeneral,
       {
-        '--font-style-1':
-          this.settingGeneral && this.settingGeneral.fount_1
-            ? this.settingGeneral.fount_1
-            : 'Roboto',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
     <div class="content-wrapper">
       <a
         :href="
-          this.settingKsection.values[0].url_redirect
-            ? this.settingKsection.values[0].url_redirect
+          settingKsection.values[0].url_redirect
+            ? settingKsection.values[0].url_redirect
             : ''
         "
         rel="noreferrer noopener"
       >
         <div class="wrapper-left">
           <img
-            class="img-left"
             v-lazy="
               idCloudinaryBanner(
-                this.settingKsection.values[0].url_img_background,
+                settingKsection.values[0].url_img_background,
                 'banner'
               )
             "
+            class="img-left"
             alt="imagen-1"
           />
           <div
             class="txt-content"
-            :style="`justify-content: ${this.settingKsection.values[0].justingText}; align-items: ${this.settingKsection.values[0].alingText};`"
+            :style="`justify-content: ${settingKsection.values[0].justingText}; align-items: ${settingKsection.values[0].alingText};`"
           >
             <p
               class="txt-top"
-              :style="`color: ${this.settingKsection.values[0].colorPretitle}; margin-bottom:${this.settingKsection.values[0].marginbottomPretitle};`"
+              :style="`color: ${settingKsection.values[0].colorPretitle}; margin-bottom:${settingKsection.values[0].marginbottomPretitle};`"
             >
-              {{
-                this.settingKsection.values[0].pretitle.replace(/&nbsp;/g, ' ')
-              }}
+              {{ settingKsection.values[0].pretitle.replace(/&nbsp;/g, ' ') }}
             </p>
             <p
               class="txt-bottom"
-              :style="`color: ${this.settingKsection.values[0].colorTitle}; margin-bottom:${this.settingKsection.values[0].marginbottomTitle};`"
+              :style="`color: ${settingKsection.values[0].colorTitle}; margin-bottom:${settingKsection.values[0].marginbottomTitle};`"
             >
-              {{ this.settingKsection.values[0].title.replace(/&nbsp;/g, ' ') }}
+              {{ settingKsection.values[0].title.replace(/&nbsp;/g, ' ') }}
             </p>
           </div>
         </div>
       </a>
       <a
         :href="
-          this.settingKsection.values[1].url_redirect
-            ? this.settingKsection.values[1].url_redirect
+          settingKsection.values[1].url_redirect
+            ? settingKsection.values[1].url_redirect
             : ''
         "
         rel="noreferrer noopener"
       >
         <div class="wrapper-center">
           <img
-            class="img-center"
             v-lazy="
               idCloudinaryBanner(
-                this.settingKsection.values[1].url_img_background,
+                settingKsection.values[1].url_img_background,
                 'banner'
               )
             "
+            class="img-center"
             alt="imagen-2"
           />
           <div
             class="txt-content"
-            :style="`justify-content: ${this.settingKsection.values[1].justingText}; align-items: ${this.settingKsection.values[1].alingText};`"
+            :style="`justify-content: ${settingKsection.values[1].justingText}; align-items: ${settingKsection.values[1].alingText};`"
           >
             <p
               class="txt-top"
-              :style="`color: ${this.settingKsection.values[1].colorPretitle}; margin-bottom:${this.settingKsection.values[1].marginbottomPretitle};`"
+              :style="`color: ${settingKsection.values[1].colorPretitle}; margin-bottom:${settingKsection.values[1].marginbottomPretitle};`"
             >
-              {{
-                this.settingKsection.values[1].pretitle.replace(/&nbsp;/g, ' ')
-              }}
+              {{ settingKsection.values[1].pretitle.replace(/&nbsp;/g, ' ') }}
             </p>
             <p
               class="txt-bottom"
-              :style="`color: ${this.settingKsection.values[1].colorTitle}; margin-bottom:${this.settingKsection.values[1].marginbottomTitle};`"
+              :style="`color: ${settingKsection.values[1].colorTitle}; margin-bottom:${settingKsection.values[1].marginbottomTitle};`"
             >
-              {{ this.settingKsection.values[1].title.replace(/&nbsp;/g, ' ') }}
+              {{ settingKsection.values[1].title.replace(/&nbsp;/g, ' ') }}
             </p>
           </div>
         </div>
       </a>
       <a
         :href="
-          this.settingKsection.values[2].url_redirect
-            ? this.settingKsection.values[2].url_redirect
+          settingKsection.values[2].url_redirect
+            ? settingKsection.values[2].url_redirect
             : ''
         "
         rel="noreferrer noopener"
       >
         <div class="wrapper-right">
           <img
-            class="img-right"
             v-lazy="
               idCloudinaryBanner(
-                this.settingKsection.values[2].url_img_background,
+                settingKsection.values[2].url_img_background,
                 'banner'
               )
             "
+            class="img-right"
             alt="imagen-3"
           />
           <div
             class="txt-content"
-            :style="`justify-content: ${this.settingKsection.values[2].justingText}; align-items: ${this.settingKsection.values[2].alingText};`"
+            :style="`justify-content: ${settingKsection.values[2].justingText}; align-items: ${settingKsection.values[2].alingText};`"
           >
             <p
               class="txt-top"
-              :style="`color: ${this.settingKsection.values[2].colorPretitle}; margin-bottom:${this.settingKsection.values[2].marginbottomPretitle};`"
+              :style="`color: ${settingKsection.values[2].colorPretitle}; margin-bottom:${settingKsection.values[2].marginbottomPretitle};`"
             >
-              {{
-                this.settingKsection.values[2].pretitle.replace(/&nbsp;/g, ' ')
-              }}
+              {{ settingKsection.values[2].pretitle.replace(/&nbsp;/g, ' ') }}
             </p>
             <p
               class="txt-bottom"
-              :style="`color: ${this.settingKsection.values[2].colorTitle}; margin-bottom:${this.settingKsection.values[2].marginbottomTitle};`"
+              :style="`color: ${settingKsection.values[2].colorTitle}; margin-bottom:${settingKsection.values[2].marginbottomTitle};`"
             >
-              {{ this.settingKsection.values[2].title.replace(/&nbsp;/g, ' ') }}
+              {{ settingKsection.values[2].title.replace(/&nbsp;/g, ' ') }}
             </p>
           </div>
         </div>
@@ -137,14 +128,20 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko11-section',
-  props: {
-    settingKsection: Object,
-    settingGeneral: Object,
-  },
+  name: 'Ko11Section',
   mixins: [idCloudinary],
+  props: {
+    settingKsection: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+  },
 }
 </script>
 <style scoped>

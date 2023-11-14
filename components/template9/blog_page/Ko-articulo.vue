@@ -54,15 +54,22 @@
             <div class="flex-shrink-0">
               <a href="#">
                 <img
-                  class="h-40 w-40 rounded-full"
                   v-lazy="`${this.$store.state.urlKomercia}/users/user.jpg`"
+                  class="h-40 w-40 rounded-full"
                   alt=""
                 />
               </a>
             </div>
-            <div class="content-date-items">
-              <p>{{ dataArticle.autor }}</p>
-              <p>{{ shippingCreated }}</p>
+            <div class="w-full flex flex-col ml-10">
+              <p class="text-16 font-bold text-[#3a4557bb]">
+                {{ dataArticle.autor }}
+              </p>
+              <p class="text-14 text-[#3a4557bb]">
+                <strong>Creado:</strong> {{ shippingCreated }}
+              </p>
+              <p class="text-14 text-[#3a4557bb]">
+                <strong>Actualizado:</strong> {{ shippingUpdated }}
+              </p>
             </div>
           </div>
           <div class="flex icons">
@@ -138,37 +145,22 @@ export default {
       sharingLinkedin: '',
     }
   },
-  computed: {
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-  },
-  watch: {
-    listArticulos() {
-      this.searchIdForSlug()
-    },
-  },
+
   mounted() {
-    if (this.listArticulos.length) {
-      this.searchIdForSlug()
-    }
+    this.searchIdForSlug()
   },
   methods: {
     async searchIdForSlug() {
       let idBlog = this.$route.query.idBlog
       const { data } = await this.$store.dispatch('GET_DATA_ARTICLE', {
         idBlog: idBlog,
-        idStore: this.dataStore.tienda.id_tienda,
+        idStore: this.dataStore.id,
       })
       if (data) {
         this.dataArticle = data.data
         this.getDataArticle()
-        if (this.dataArticle) {
-          const dateCreated = this.dataArticle.created_at
-          this.shippingCreated = dateCreated.split(' ')[0]
-          const dateUpdate = this.dataArticle.updated_at
-          this.shippingUpdated = dateUpdate.split(' ')[0]
-        }
+        this.shippingCreated = this.formatDate(this.dataArticle.created_at)
+        this.shippingUpdated = this.formatDate(this.dataArticle.updated_at)
       }
     },
     getDataArticle() {
@@ -178,6 +170,40 @@ export default {
       this.sharingFacebook = `https://www.facebook.com/sharer/sharer.php?u=${this.sharing.url}&quote=${this.sharing.quote}`
       this.sharingTwitter = `https://twitter.com/intent/tweet?text=${this.sharing.quoteTwitter}%0A${this.sharing.url}`
       this.sharingLinkedin = `https://www.linkedin.com/shareArticle?mini=true&url=${this.sharing.url}`
+    },
+    formatDate(value) {
+      const fecha = new Date(value)
+
+      const diasSemana = [
+        'Domingo',
+        'Lunes',
+        'Martes',
+        'Miércoles',
+        'Jueves',
+        'Viernes',
+        'Sábado',
+      ]
+      const meses = [
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre',
+      ]
+
+      const dia = fecha.getUTCDate()
+      const mes = fecha.getUTCMonth()
+      const año = fecha.getUTCFullYear()
+      const diaSemana = diasSemana[fecha.getUTCDay()]
+
+      return `${diaSemana}, ${dia} de ${meses[mes]} de ${año}`
     },
   },
 }
@@ -199,7 +225,7 @@ export default {
   background: white;
 }
 .container-article {
-  margin-top: 70px;
+  /* margin-top: 70px; */
   @apply flex justify-center items-center;
 }
 .content-blog {

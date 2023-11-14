@@ -2,7 +2,7 @@
   <div
     class="producto"
     :style="[
-      settingKcardProduct,
+      settingCardProducts,
       settingGeneral,
       {
         '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
@@ -185,8 +185,8 @@
                     ? Math.trunc(minPrice / (1 - product.promocion_valor / 100))
                     : 0)
                     | currency(
-                      dataStore.tienda.codigo_pais,
-                      dataStore.tienda.moneda
+                      dataStore.tiendasInfo.paises.codigo,
+                      dataStore.tiendasInfo.moneda
                     )
                 }}
               </div>
@@ -200,8 +200,8 @@
                     ? Math.trunc(maxPrice / (1 - product.promocion_valor / 100))
                     : 0)
                     | currency(
-                      dataStore.tienda.codigo_pais,
-                      dataStore.tienda.moneda
+                      dataStore.tiendasInfo.paises.codigo,
+                      dataStore.tiendasInfo.moneda
                     )
                 }}
               </div>
@@ -214,8 +214,8 @@
                 {{
                   minPrice
                     | currency(
-                      dataStore.tienda.codigo_pais,
-                      dataStore.tienda.moneda
+                      dataStore.tiendasInfo.paises.codigo,
+                      dataStore.tiendasInfo.moneda
                     )
                 }}
               </div>
@@ -227,8 +227,8 @@
                 {{
                   maxPrice
                     | currency(
-                      dataStore.tienda.codigo_pais,
-                      dataStore.tienda.moneda
+                      dataStore.tiendasInfo.paises.codigo,
+                      dataStore.tiendasInfo.moneda
                     )
                 }}
               </div>
@@ -246,8 +246,8 @@
                     )
                   : 0)
                   | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
+                    dataStore.tiendasInfo.paises.codigo,
+                    dataStore.tiendasInfo.moneda
                   )
               }}
             </p>
@@ -255,8 +255,8 @@
               {{
                 product.precio
                   | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
+                    dataStore.tiendasInfo.paises.codigo,
+                    dataStore.tiendasInfo.moneda
                   )
               }}
             </p>
@@ -271,8 +271,8 @@
               {{
                 minPrice
                   | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
+                    dataStore.tiendasInfo.paises.codigo,
+                    dataStore.tiendasInfo.moneda
                   )
               }}
             </div>
@@ -281,8 +281,8 @@
               {{
                 maxPrice
                   | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
+                    dataStore.tiendasInfo.paises.codigo,
+                    dataStore.tiendasInfo.moneda
                   )
               }}
             </div>
@@ -292,8 +292,8 @@
               {{
                 product.precio
                   | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
+                    dataStore.tiendasInfo.paises.codigo,
+                    dataStore.tiendasInfo.moneda
                   )
               }}
             </p>
@@ -306,8 +306,9 @@
 </template>
 
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
-import currency from '../../../mixins/formatCurrent'
+import { mapState } from 'vuex'
+import idCloudinary from '@/mixins/idCloudinary'
+import currency from '@/mixins/formatCurrent'
 export default {
   name: 'Ko11ProductCard',
   mixins: [idCloudinary, currency],
@@ -320,12 +321,11 @@ export default {
       type: Object,
       required: true,
     },
-    settingKcardProduct: {
+    settingCardProducts: {
       type: Object,
       required: true,
     },
   },
-
   data() {
     return {
       hover: false,
@@ -342,64 +342,33 @@ export default {
     }
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    productsCarts() {
-      return this.$store.state.productsCart
-    },
+    ...mapState(['dataStore', 'productsCart']),
     getFreeShipping() {
-      let free = true
-      if (this.product.envio_gratis == 1) {
-        free = false
-      } else if (this.rangosByCiudad.envio_metodo === 'gratis') {
-        free = false
-      }
-      return free
+      return !(
+        this.product.envio_gratis === 1 ||
+        this.rangosByCiudad.envio_metodo === 'gratis'
+      )
     },
     rangosByCiudad() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
-      return this.rangosByCiudades
+      return this.$store.state.envios.valores
     },
     soldOut() {
-      if (
-        this.product.con_variante &&
-        this.product.variantes[0].variantes !== '[object Object]'
-      ) {
-        // this.estadoCart = true
+      if (this.product.con_variante) {
         const arrCombinations = this.product.variantes
-        let inventario = 0
-        if (
-          arrCombinations.length &&
-          arrCombinations[0].variantes !== '[object Object]'
-        ) {
-          if (
-            arrCombinations[0].combinaciones.length &&
-            arrCombinations[0].combinaciones.length
-          ) {
-            if (
-              JSON.parse(arrCombinations[0].combinaciones[0].combinaciones)
-                .length
-            ) {
-              JSON.parse(
-                arrCombinations[0].combinaciones[0].combinaciones
-              ).forEach((item) => {
-                if (item.unidades) {
-                  inventario += parseInt(item.unidades)
-                }
-              })
-            }
-          }
+        if (arrCombinations && arrCombinations.combinaciones.length) {
+          const inventorySum = JSON.parse(
+            arrCombinations.combinaciones[0].combinaciones
+          )
+            .map((item) => parseInt(item.unidades) || 0)
+            .reduce((acc, val) => acc + val, 0)
+          return inventorySum === 0
         }
-        return !inventario
-      } else {
-        return !this.product.stock
       }
+      return !this.product.stock
     },
   },
   watch: {
-    productsCarts() {
+    productsCart() {
       this.getDataProduct()
     },
   },
@@ -408,7 +377,7 @@ export default {
     this.productPrice()
     if (
       this.product.con_variante &&
-      this.product.variantes[0].variantes !== '[object Object]'
+      this.product.variantes.variantes !== '[object Object]'
     ) {
       this.estadoCart = true
     }
@@ -426,7 +395,7 @@ export default {
           estado: true,
         }
         this.maxQuantityValue = this.product.stock
-        this.productsCarts.find((productCart, index) => {
+        this.productsCart.find((productCart, index) => {
           if (productCart.id == this.product.id) {
             this.productIndexCart = index
             this.productCart = productCart
@@ -482,40 +451,26 @@ export default {
       }
     },
     productPrice() {
-      if (
-        this.product.con_variante &&
-        this.product.variantes[0].variantes !== '[object Object]'
-      ) {
-        const arrCombinations = this.product.variantes
-        if (
-          arrCombinations.length &&
-          arrCombinations[0].variantes !== '[object Object]'
-        ) {
-          this.productVariants = true
-          if (
-            this.product &&
-            this.product.combinaciones &&
-            this.product.combinaciones.length &&
-            this.product.combinaciones.length > 1
-          ) {
-            let arrPrice = []
-            this.product.combinaciones.find((products) => {
-              if (products.precio && products.estado) {
-                arrPrice.push(products.precio)
-              }
-            })
-            if (arrPrice) {
-              let resultPrice = arrPrice.sort(function (prev, next) {
-                return prev - next
-              })
-              if (resultPrice[resultPrice.length - 1]) {
-                this.minPrice = resultPrice[0]
-                this.maxPrice = resultPrice[resultPrice.length - 1]
-              }
-            }
+      if (this.product.con_variante) {
+        const variants = this.product.variantes
+        if (variants && variants.combinaciones.length) {
+          const prices = JSON.parse(variants.combinaciones[0].combinaciones)
+            .filter((item) => item.precio && item.estado)
+            .map((item) => item.precio)
+          if (prices.length > 0) {
+            this.productVariants = true
+            const sortedPrices = prices.sort((a, b) => a - b)
+            this.minPrice = sortedPrices[0]
+            this.maxPrice = sortedPrices[sortedPrices.length - 1]
+            this.equalsPrice = this.minPrice === this.maxPrice
+            return
           }
         }
       }
+      this.productVariants = false
+      this.minPrice = this.product.precio || 0
+      this.maxPrice = this.product.precio || 0
+      this.equalsPrice = true
     },
   },
 }

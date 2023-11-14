@@ -48,7 +48,7 @@
     <div v-if="product && product[0]" class="mt-40">
       <KoProductCard
         :product="product[0]"
-        :card-products="cardProducts"
+        :setting-card-products="cardProducts"
         :setting-general="settingGeneral"
         style="max-width: 300px"
         :style="`border-radius: ${settingGeneral?.radius};`"
@@ -69,7 +69,9 @@ export default {
       required: true,
     },
     product: {
-      type: Array,
+      validator: function (value) {
+        return value === null || Array.isArray(value)
+      },
       required: true,
     },
     settingGeneral: {

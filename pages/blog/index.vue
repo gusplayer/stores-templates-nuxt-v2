@@ -14,6 +14,7 @@ export default {
     K13Blog: () => import('@/components/template13/_blog/Ko-Blog.vue'),
     K14Blog: () => import('@/components/template14/_cardBlog/KoBlog.vue'),
     K15Blog: () => import('@/components/template15/_cardBlog/Ko-index.vue'),
+    K16Blog: () => import('@/components/template16/_cardBlog/Ko-index.vue'),
   },
   layout: 'default',
   data() {
@@ -29,6 +30,7 @@ export default {
         13: 'K13Blog',
         14: 'K14Blog',
         15: 'K15Blog',
+        16: 'K16Blog',
       },
       templateMapping: {
         9: 'SET_CURRENTSETTING09',
@@ -38,7 +40,7 @@ export default {
         13: 'SET_CURRENTSETTING13',
         14: 'SET_CURRENTSETTING14',
         15: 'SET_CURRENTSETTING15',
-        // 16: 'SET_CURRENTSETTING15',
+        16: 'SET_CURRENTSETTING16',
       },
     }
   },
@@ -54,6 +56,7 @@ export default {
       'settingByTemplate13',
       'settingByTemplate14',
       'settingByTemplate15',
+      'settingByTemplate16',
       'template',
     ]),
     indexTemplate() {
@@ -82,6 +85,15 @@ export default {
               {
                 blog: this.settingByTemplate9?.blog ?? null,
                 settingGeneral: this.settingByTemplate9?.settingGeneral ?? null,
+              },
+            ]
+          : null,
+        settingByTemplate10: this.settingByTemplate10
+          ? [
+              {
+                blog: this.settingByTemplate10?.blog ?? null,
+                settingGeneral:
+                  this.settingByTemplate10?.settingGeneral ?? null,
               },
             ]
           : null,
@@ -118,6 +130,16 @@ export default {
                   this.settingByTemplate15?.settingGeneral ?? null,
                 listBlogHome: this.settingByTemplate15?.listBlogHome ?? null,
                 cardBlog: this.settingByTemplate15?.cardBlogs ?? null,
+              },
+            ]
+          : null,
+        settingByTemplate16: this.settingByTemplate16
+          ? [
+              {
+                settingGeneral:
+                  this.settingByTemplate16?.settingsGeneral ?? null,
+                listBlogHome: this.settingByTemplate16?.listBlogHome ?? null,
+                cardBlog: this.settingByTemplate16?.cardBlog ?? null,
               },
             ]
           : null,

@@ -6,7 +6,7 @@
       settingByTemplate13[0].settingGeneral,
       {
         '--font-style-1':
-          this.settingByTemplate13[0]?.settingGeneral?.fount_1 ?? 'Poppins',
+          settingByTemplate13[0]?.settingGeneral?.fount_1 ?? 'Poppins',
       },
     ]"
   >
@@ -41,13 +41,14 @@
                 :href="item.link"
                 target="_blank"
                 rel="noreferrer noopener"
-                >{{ item.nombre }}</a
               >
+                {{ item.nombre }}
+              </a>
             </div>
           </div>
         </div>
         <div class="separator"></div>
-        <div v-if="dataStore.geolocalizacion.length">
+        <div v-if="geolocalizacion.length">
           <p class="contact-text-sub">{{ $t('contact_vistaTienda') }}</p>
 
           <el-carousel
@@ -57,11 +58,11 @@
             class="wrapperCarousel"
           >
             <el-carousel-item
-              v-for="(item, inggeo) in dataStore.geolocalizacion"
-              :key="inggeo"
+              v-for="(item, indexGeo) in geolocalizacion"
+              :key="indexGeo"
             >
               <p class="contact-text-subtitle2">
-                Sede {{ inggeo + 1 }}: {{ item.nombre_sede }}
+                Sede {{ indexGeo + 1 }}: {{ item.nombreSede }}
               </p>
               <iframe
                 :src="`https://maps.google.com/maps?q=${item.latitud},${item.longitud}&hl=es;z=14&amp;output=embed`"
@@ -78,8 +79,8 @@
                   {{ item.horario }}
                 </p>
                 <a class="contact-text-subtitle4">
-                  {{ $t('contact_comollegar') }}</a
-                >
+                  {{ $t('contact_comollegar') }}
+                </a>
               </div>
             </el-carousel-item>
           </el-carousel>
@@ -149,9 +150,9 @@
                   v-model="numberphone"
                   id="ContactPhone"
                 />
-                <span class="text-error" v-show="errors[0]">{{
-                  errors[0]
-                }}</span>
+                <span class="text-error" v-show="errors[0]">
+                  {{ errors[0] }}
+                </span>
               </template>
             </validation-provider>
             <button
@@ -172,16 +173,23 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko13-Contact-1',
-  props: {
-    dataStore: Object,
-    settingByTemplate13: Array,
-  },
+  name: 'Ko13Contact',
   components: {
     ValidationObserver,
     ValidationProvider,
+  },
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate13: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -199,55 +207,68 @@ export default {
         {
           nombre: 'Facebook',
           icon: 'facebook-icon',
-          link: this.dataStore.tienda.red_facebook,
+          link: this.dataStore.redes.facebook,
         },
         {
           nombre: 'Twitter',
           icon: 'twitter-icon',
-          link: this.dataStore.tienda.red_twitter,
+          link: this.dataStore.redes.twitter,
         },
         {
           nombre: 'Instagram',
           icon: 'instagram-icon',
-          link: this.dataStore.tienda.red_instagram,
+          link: this.dataStore.redes.instagram,
         },
         {
           nombre: 'Youtube',
           icon: 'youtube-icon',
-          link: this.dataStore.tienda.red_youtube,
+          link: this.dataStore.redes.youtube,
         },
         {
           nombre: 'Tiktok',
           icon: 'tiktok2-icon',
-          link: this.dataStore.tienda.red_tiktok,
+          link: this.dataStore.redes.tiktok,
         },
       ],
       dataContact: [
         {
-          dato: this.dataStore.tienda.telefono,
+          dato: this.dataStore.tiendasInfo.telefono,
           icon: 'phone-icon',
         },
         {
-          dato: this.dataStore.tienda.whatsapp,
+          dato: this.dataStore.redes.whatsapp,
           icon: 'whatsapp-icon',
         },
         {
-          dato: this.dataStore.tienda.email_tienda,
+          dato: this.dataStore.tiendasInfo.emailTienda,
           icon: 'email-icon',
         },
       ],
     }
+  },
+  computed: {
+    ...mapState(['geolocalizacion']),
+    ...mapState({
+      facebookPixel: (state) => state.analytics_tagmanager,
+    }),
+  },
+  watch: {
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.redes.facebook
+      this.links[1].link = this.dataStore.redes.twitter
+      this.links[2].link = this.dataStore.redes.instagram
+      this.links[3].link = this.dataStore.redes.youtube
+      this.links[4].link = this.dataStore.redes.tiktok
+      this.dataContact[0].dato = this.dataStore.tiendasInfo.telefono
+      this.dataContact[1].dato = this.dataStore.redes.whatsapp
+      this.dataContact[2].dato = this.dataStore.tiendasInfo.emailTienda
+    },
   },
   destroyed() {
     this.nombre = ''
     this.email = ''
     this.numberphone = ''
     this.comment = ''
-  },
-  computed: {
-    facebookPixel() {
-      return this.$store.state.analytics_tagmanager
-    },
   },
   methods: {
     submitContact() {
@@ -265,7 +286,7 @@ export default {
                   correo: this.email,
                   celular: this.numberphone,
                   comentario: this.comment,
-                  tienda: this.dataStore.tienda.id_tienda,
+                  tienda: this.dataStore.id,
                 },
               })
               if (data.status == 200) {
@@ -307,18 +328,6 @@ export default {
       this.email = ''
       this.numberphone = ''
       this.comment = ''
-    },
-  },
-  watch: {
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-      this.links[4].link = this.dataStore.tienda.red_tiktok
-      this.dataContact[0].dato = this.dataStore.tienda.telefono
-      this.dataContact[1].dato = this.dataStore.tienda.whatsapp
-      this.dataContact[2].dato = this.dataStore.tienda.email_tienda
     },
   },
 }

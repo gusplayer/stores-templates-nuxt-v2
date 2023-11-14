@@ -3,10 +3,8 @@ import Vue from 'vue'
 Vue.mixin({
   methods: {
     getIdCloudinary(url) {
-      let str = url
-      let arr = str.split('/')
-      let newArr = arr.splice(arr.length - 4, arr.length)
-      let id = newArr.join('/')
+      const segments = url.split('/')
+      const id = segments.slice(-4).join('/')
       return id
     },
     currency(value) {

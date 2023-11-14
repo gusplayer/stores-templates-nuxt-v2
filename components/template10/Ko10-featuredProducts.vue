@@ -25,19 +25,19 @@
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper">
           <div
-            v-for="product in fullProducts"
+            v-for="product in listProducts"
             :key="product.id"
             class="swiper-slide h-full"
           >
             <KoProductCard
               :product="product"
               :setting-general="settingGeneral"
-              :card-product="cardProduct"
+              :setting-card-products="cardProduct"
               class="gifyload h-full"
             />
           </div>
         </div>
-        <div v-if="fullProducts.length == 0" class="content-products-empty">
+        <div v-if="listProducts.length == 0" class="content-products-empty">
           <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
       </div>
@@ -68,13 +68,10 @@ export default {
       type: Object,
       required: true,
     },
-    fullProducts: {
-      type: Array,
-      required: true,
-    },
   },
   data() {
     return {
+      listProducts: [],
       swiperOption: {
         slidesPerView: '',
         spaceBetween: '',
@@ -112,6 +109,24 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
+    },
+  },
+  mounted() {
+    this.currentChange()
+  },
+  methods: {
+    async currentChange() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_ALL_PRODUCTS',
+        {
+          id_tienda: this.dataStore.id,
+          limit: 8,
+          page: 1,
+        }
+      )
+      if (success) {
+        this.listProducts = data.publicProductList
+      }
     },
   },
 }

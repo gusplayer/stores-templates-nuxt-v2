@@ -17,10 +17,10 @@
           <p class="txt-banner">Últimos blogs</p>
         </div>
         <input
+          v-model="filters.title"
           type="search"
           :placeholder="$t('header_search')"
-          v-model="search"
-          @keyup.enter="getSearch(search)"
+          @keyup.enter="updateFilters"
         />
       </div>
       <div class="contenedor">
@@ -28,18 +28,22 @@
           <div class="content-item-productos">
             <div class="grid-products">
               <div
-                v-for="article in filteredList"
+                v-for="article in listBlogs"
                 :key="article.id"
                 class="content-products"
               >
-                <KoblogCard :article="article" />
+                <KBlogCard
+                  :article="article"
+                  :setting-blog="settingByTemplate10[0].blog"
+                  :setting-general="settingByTemplate10[0].settingGeneral"
+                />
               </div>
             </div>
-            <div v-if="filteredList.length == 0" class="content-products-empty">
+            <div v-if="listBlogs?.length === 0" class="content-products-empty">
               <div class="header-content-logo">
                 <nuxt-link to="/" class="wrapper-logo">
                   <img
-                    :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+                    :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
                     class="header-logo"
                     alt="Logo Img"
                   />
@@ -47,15 +51,16 @@
               </div>
               <p class="txt-products-empty">{{ $t('home_msgCatalogo') }}</p>
             </div>
-            <div class="pagination-medium">
-              <div class="product_pagination" v-if="filteredList.length > 12">
+            <div v-if="totalBlogs > filters.limit" class="pagination-medium">
+              <div class="product_pagination">
                 <el-pagination
                   background
                   layout="prev, pager, next"
-                  :total="filteredList.length"
-                  :page-size="12"
-                  :current-page.sync="currentPage"
-                  class="pagination"
+                  class="pagination bg-transparent"
+                  :total="totalBlogs"
+                  :page-size="filters.limit"
+                  :current-page.sync="filters.page"
+                  @current-change="changePage"
                 />
               </div>
             </div>
@@ -66,41 +71,26 @@
   </div>
 </template>
 <script>
-import KoblogCard from '../blog_page/_blogcard/ko-blogcard.vue'
+import { mapState } from 'vuex'
+import filters from '@/mixins/filterBlogs'
 export default {
-  name: 'Ko-Blog',
+  name: 'KoBlogIndex',
   components: {
-    KoblogCard,
+    KBlogCard: () => import('./_card/k10-blog-card.vue'),
   },
+  mixins: [filters],
   props: {
-    dataStore: Object,
-  },
-  data() {
-    return {
-      currentPage: 1,
-      search: '',
-    }
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate10: {
+      type: Array,
+      required: true,
+    },
   },
   computed: {
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-    filterArticles() {
-      const initial = this.currentPage * 12 - 12
-      const final = initial + 12
-      return this.filteredList.slice(initial, final)
-    },
-    filteredList() {
-      if (this.search) {
-        return this.listArticulos.filter((element) => {
-          return element.titulo
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
-        })
-      } else {
-        return this.listArticulos
-      }
-    },
+    ...mapState(['stateListBLogs']),
   },
 }
 </script>
@@ -171,7 +161,7 @@ export default {
   @apply w-full flex flex-col justify-center items-center;
 }
 .banner-blog {
-  @apply w-full flex flex-row justify-center items-start pt-8 z-10;
+  @apply w-full flex flex-row justify-between items-center pt-8 z-10;
   /* background-color: #efefef; */
 }
 #separator {

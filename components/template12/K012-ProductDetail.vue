@@ -3,7 +3,7 @@
     class="modal-content"
     :style="[
       {
-        '--font-style-1': this.settingByTemplate12?.fontFamily ?? 'Poppins',
+        '--font-style-1': settingByTemplate12?.fontFamily ?? 'Poppins',
       },
     ]"
   >
@@ -16,90 +16,96 @@
         <div class="section">
           <div class="wrapper-left">
             <productSlide
-              :photos="data.fotos"
-              :photo="data.detalle.foto_cloudinary"
-              :id-youtube="idYoutube"
+              :photos="data.productosFotos"
+              :photo="data.fotoCloudinary"
+              :id-you-tube="idYoutube"
             />
           </div>
           <div class="wrapper-right">
             <div class="content-right">
-              <p class="text-name">{{ data.detalle.nombre }}</p>
+              <p class="text-name">{{ data.nombre }}</p>
               <p class="text-marca">
-                <strong>{{ data.info.marca }}</strong>
+                <strong>{{ data.productosInfo.marca }}</strong>
               </p>
               <p
                 v-show="
-                  data.info.tag_promocion == 1 &&
-                  data.info.promocion_valor &&
+                  data.productosInfo.tagPromocion == 1 &&
+                  data.productosInfo.promocionValor &&
                   salesData.precio
                 "
                 class="text-promocion"
               >
                 {{
-                  (data.info.tag_promocion == 1 && data.info.promocion_valor
+                  (data.productosInfo.tagPromocion == 1 &&
+                  data.productosInfo.promocionValor
                     ? Math.trunc(
-                        salesData.precio / (1 - data.info.promocion_valor / 100)
+                        salesData.precio /
+                          (1 - data.productosInfo.promocionValor / 100)
                       )
                     : 0)
                     | currency(
-                      dataStore.tienda.codigo_pais,
-                      dataStore.tienda.moneda
+                      dataStore.tiendasInfo.paises.codigo,
+                      dataStore.tiendasInfo.moneda
                     )
                 }}
               </p>
               <div
                 class="wrapper-price"
                 :class="
-                  data.info.tag_promocion == 1 ? '' : 'wrapper-price_space'
+                  data.productosInfo.tagPromocion == 1
+                    ? ''
+                    : 'wrapper-price_space'
                 "
               >
                 <p v-show="salesData.precio" class="text-precio">
                   {{
                     salesData.precio
                       | currency(
-                        dataStore.tienda.codigo_pais,
-                        dataStore.tienda.moneda
+                        dataStore.tiendasInfo.paises.codigo,
+                        dataStore.tiendasInfo.moneda
                       )
                   }}
                 </p>
                 <p
                   v-show="
-                    data.info.tag_promocion == 1 &&
-                    data.info.promocion_valor &&
+                    data.productosInfo.tagPromocion == 1 &&
+                    data.productosInfo.promocionValor &&
                     salesData.precio
                   "
                   class="card-descuento"
                 >
-                  {{ data.info.promocion_valor }}% OFF
+                  {{ data.productosInfo.promocionValor }}% OFF
                 </p>
               </div>
               <div class="content_buy_action">
-                <div v-if="envio.titulo == 'Envío gratis'">
+                <div
+                  v-if="data.envioGratis == 1 || envio.titulo == 'Envío gratis'"
+                >
                   <p class="card-info-2">{{ $t('home_cardGratis') }}</p>
                 </div>
-                <div class="content_card-info">
-                  <p v-if="spent" class="card-info-1">
+                <div v-else class="content_card-info">
+                  <p class="card-info-1">
                     {{ $t('home_cardAgotado') }}
                   </p>
                 </div>
               </div>
               <div
-                v-if="data.info.descripcion_corta"
+                v-if="data.productosInfo.descripcionCorta"
                 style="margin-top: 10px; margin-bottom: 5px"
               >
                 <p class="text-marca">
-                  <strong>{{ data.info.descripcion_corta }}</strong>
+                  <strong>{{ data.productosInfo.descripcionCorta }}</strong>
                 </p>
               </div>
               <div
-                v-if="this.data.detalle.con_variante > 0"
+                v-if="data.conVariante === 1 && variantes"
                 class="container-variants"
               >
-                <div v-for="(variant, index) in data.variantes" :key="index">
+                <div v-for="(variant, index) in variantes" :key="index">
                   <label for="variant name" class="text-variant-type">
                     {{ variant.nombre }}:
                   </label>
-                  <selectGroup :index="index" :variantes="data.variantes">
+                  <selectGroup :index="index" :variantes="variantes">
                     <option
                       v-for="item in variant.valores"
                       :key="item.option"
@@ -110,7 +116,7 @@
                   </selectGroup>
                 </div>
               </div>
-              <!-- <div class="content-btn-whatsapp" v-if="dataStore.tienda.whatsapp">
+              <!-- <div class="content-btn-whatsapp" v-if="dataStore.redes.whatsapp">
               <button class="btn-whatsapp" @click="redirectWP()">
                 <whatsapp-icon class="wp-icon" />{{
                   $t('productdetail_solicitarInfo')
@@ -120,14 +126,14 @@
             </div>
           </div>
         </div>
-        <div class="content-description">
-          <div v-if="data.info.descripcion" class="wrapper-description">
+        <div v-if="data.productosInfo.descripcion" class="content-description">
+          <div class="wrapper-description">
             <h3 class="text-variant">
               {{ $t('productdetail_description') }}
             </h3>
             <div class="editor content-text-desc">
               <el-tiptap
-                v-model="data.info.descripcion"
+                v-model="data.productosInfo.descripcion"
                 :extensions="extensions"
                 :spellcheck="false"
                 :readonly="true"
@@ -143,13 +149,13 @@
         <div class="responsive-purchase">
           <div class="ko-input">
             <div v-if="!spent && salesData.estado" class="quantity-resposive">
-              <button class="quantity_remove" @click="removeQuantity()">
+              <button class="quantity_remove" @click="removeQuantity">
                 <menos-icon class="icon" />
               </button>
               <p class="quantity_value">
                 {{ quantityValue }}
               </p>
-              <button class="quantity_add" @click="addQuantity()">
+              <button class="quantity_add" @click="addQuantity">
                 <mas-icon class="icon" />
               </button>
               <transition name="slide-fade">
@@ -162,19 +168,13 @@
               </transition>
             </div>
             <button
-              v-if="
-                !spent &&
-                salesData.precio > 0 &&
-                salesData.estado &&
-                (data.info.tipo_servicio == null ||
-                  data.info.tipo_servicio == '0')
-              "
+              v-if="shouldShowAddToCartButton"
               ref="color2"
               class="btn-responsive"
-              @click="addShoppingCart"
+              @click="addToCart"
             >
               <span>
-                {{ $t('productdetail_btnComprar') }}
+                {{ getAddToCartButtonLabel }}
               </span>
             </button>
             <button
@@ -197,13 +197,13 @@
               </span>
             </button>
             <button
-              v-else-if="!spent && data.info.tipo_servicio == '1'"
+              v-else-if="shouldShowBuyButton"
               id="AddToCartTag"
               ref="color2"
               class="btn-responsive"
-              @click="GoPayments"
+              @click="goToPayments"
             >
-              {{ $t('productdetail_btnComprar') }}
+              {{ getBuyButtonLabel }}
             </button>
             <div v-else-if="spent" class="wrapper-btn">
               <p class="card-info-1-res">
@@ -224,15 +224,14 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
 import extensions from '@/mixins/elemenTiptap.vue'
 import currency from '@/mixins/formatCurrent'
-
+import mobileCheck from '@/mixins/mobileCheck'
 export default {
   name: 'Ko12ProductDetail',
   components: {
-    selectGroup: () => import('../whatsapp/_productdetails/selectGroup'),
-    ProductSlide: () => import('./_items/productSlide.vue'),
+    selectGroup: () => import('../_commonComponent/select-group.vue'),
+    ProductSlide: () => import('../_commonComponent/product-slide.vue'),
   },
   filters: {
     toLowerCase(value) {
@@ -242,7 +241,7 @@ export default {
       return ''
     },
   },
-  mixins: [extensions, currency],
+  mixins: [extensions, currency, mobileCheck],
   props: {
     dataStore: {
       type: Object,
@@ -271,7 +270,7 @@ export default {
       productCart: {},
       salesData: null,
       spent: false,
-      envioproducto: '',
+      shippingProduct: '',
       envio: {
         titulo: '',
         desc: '',
@@ -280,54 +279,42 @@ export default {
     }
   },
   computed: {
-    productsData() {
-      return this.$store.getters['products/allProduct']
-    },
-    existPayments() {
-      const mediospago = this.dataStore.medios_pago
-      if (
-        mediospago.consignacion ||
-        mediospago.convenir ||
-        mediospago.payco ||
-        mediospago.tienda ||
-        mediospago.efecty
-      ) {
-        return true
-      }
-      return false
-    },
     beforeCombination() {
       return this.$store.state.beforeCombination
     },
     envios() {
-      return this.dataStore.medios_envio
-    },
-    // eslint-disable-next-line vue/return-in-computed-property
-    precio() {
-      if (this.data.detalle.precio) {
-        return `$${this.data.detalle.precio
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-      }
+      return this.dataStore.envios
     },
     whatsapp() {
-      return this.dataStore.tienda.whatsapp
+      return this.dataStore.redes.whatsapp
     },
-    category() {
-      return this.productsData.filter(
-        (product) =>
-          product.categoria ==
-            this.data.detalle.categoria_producto.nombre_categoria_producto &&
-          product.id !== this.data.detalle.id
+    // eslint-disable-next-line vue/return-in-computed-property
+    variantes() {
+      if (this.data.conVariante === 1) {
+        return JSON.parse(this.data.productosVariantes[0].variantes)
+      }
+    },
+    shouldShowAddToCartButton() {
+      return (
+        !this.spent &&
+        this.salesData.estado &&
+        (this.data.productosInfo.tipoServicio == null ||
+          this.data.productosInfo.tipoServicio == '0')
       )
+    },
+    shouldShowBuyButton() {
+      return !this.spent && this.data.productosInfo.tipoServicio == '1'
+    },
+    getAddToCartButtonLabel() {
+      return this.$t('productdetail_añadiralcarrito')
+    },
+    getBuyButtonLabel() {
+      return this.$t('productdetail_btnComprar')
     },
   },
   watch: {
-    productsData() {
-      this.getDataProduct()
-    },
     envios() {
-      this.setOptionEnvio()
+      this.setOptionShipping()
     },
     quantityValue(value) {
       if (value > this.maxQuantityValue) {
@@ -338,11 +325,11 @@ export default {
       const combinationSelected = JSON.stringify(value)
       if (this.data.combinaciones) {
         if (
-          this.data.combinaciones.combinaciones !== '[object Object]' &&
-          this.data.detalle.con_variante > 0
+          this.data.combinaciones[0][0].combinaciones !== '[object Object]' &&
+          this.data.conVariante > 0
         ) {
           const combinaciones = JSON.parse(
-            this.data.combinaciones.combinaciones
+            this.data.combinaciones[0][0].combinaciones
           )
           const result = combinaciones.find(
             (combinacion) =>
@@ -355,7 +342,7 @@ export default {
             productCart,
           ] of this.$store.state.productsCart.entries()) {
             if (
-              this.data.detalle.id == productCart.id &&
+              this.data.id == productCart.id &&
               JSON.stringify(productCart.combinacion) ==
                 JSON.stringify(result.combinacion)
             ) {
@@ -365,7 +352,7 @@ export default {
           }
           if (result) {
             this.spent = false
-            this.maxQuantityValue = result.unidades
+            this.maxQuantityValue = parseInt(result.unidades)
             if (result.unidades == 0) {
               this.spent = true
             }
@@ -377,6 +364,9 @@ export default {
               }
             }
             this.salesData = result
+            if (typeof this.salesData.unidades === 'string') {
+              this.salesData.unidades = parseInt(this.salesData.unidades)
+            }
             this.quantityValue = 1
           }
         }
@@ -384,140 +374,119 @@ export default {
     },
   },
   mounted() {
+    this.getDataProduct()
     this.$store.state.beforeCombination = []
-    if (this.productsData.length) {
-      this.getDataProduct()
-    } else {
-      this.getDataProductPrev()
-    }
-    if (Object.keys(this.dataStore.medios_envio).length) {
-      this.setOptionEnvio()
+    if (this.envios?.valores) {
+      this.setOptionShipping()
     }
   },
   methods: {
     closeModalpolitics() {
       this.$store.state.modalproductDetails = false
     },
-    getDataProduct() {
-      const idOfSlug = this.tempData.id
-      if (idOfSlug) {
-        axios
-          .get(`${this.$store.state.urlTemplate}/api/producto/${idOfSlug}`)
-          .then((response) => {
-            this.selectedPhoto(response.data.detalle.foto_cloudinary)
-            this.videoYoutube(response.data.info.video)
-            this.data = response.data
-            this.salesData = {
-              precio: this.data.detalle.precio,
-              unidades: this.data.info.inventario,
-              sku: this.data.info.sku,
-              estado: true,
-            }
-            this.maxQuantityValue = this.data.info.inventario
-            this.setOptionEnvio()
-            for (const [
-              index,
-              productCart,
-            ] of this.$store.state.productsCart.entries()) {
-              if (this.data.detalle.id == productCart.id) {
-                this.productIndexCart = index
-                this.productCart = productCart
-                this.maxQuantityValue =
-                  this.data.info.inventario - productCart.cantidad
-              }
-            }
-            if (this.salesData.unidades == 0 || this.maxQuantityValue <= 0) {
-              this.spent = true
-            }
-            this.loading = false
-          })
-      } else {
-        this.selectedPhoto(this.productsData[0].foto_cloudinary)
-        this.data.detalle = {
-          foto_cloudinary: this.productsData[0].foto_cloudinary,
-          nombre: this.productsData[0].nombre,
-          precio: this.productsData[0].precio,
+    async getDataProduct() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_DATA_PRODUCT',
+        {
+          slug: this.tempData.slug,
         }
-        this.data.info = {
-          marca: '',
-          descripcion: '',
+      )
+      if (success && data.data) {
+        this.loading = false
+        this.data = data.data
+
+        this.selectedPhoto(data.data.fotoCloudinary)
+        // this.videoYouTube(data.data.productosInfo.video)
+        if (this.envios?.valores) {
+          this.setOptionShipping()
         }
-        this.maxQuantityValue = 0
+        // this.getSuggestedProducts()
+
         this.salesData = {
-          precio: 29998,
-          unidades: 0,
-          sku: '4a00',
+          precio: data.data.precio,
+          unidades: data.data.productosInfo.inventario,
+          sku: data.data.productosInfo.sku,
+          estado: true,
         }
-        this.spent = true
+        this.maxQuantityValue = data.data.productosInfo.inventario
+        for (const [
+          index,
+          productCart,
+        ] of this.$store.state.productsCart.entries()) {
+          if (data.data.id == productCart.id) {
+            this.productIndexCart = index
+            this.productCart = productCart
+            this.maxQuantityValue =
+              data.data.productosInfo.inventario - productCart.cantidad
+          }
+        }
+        if (this.salesData.unidades == 0 || this.maxQuantityValue <= 0) {
+          this.spent = true
+        }
+        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+          window.fbq('track', 'ViewContent', {
+            content_type: 'product',
+            content_ids: [`${data.data.id}`],
+            contents: [
+              {
+                id: `${data.data.id}`,
+                quantity: this.quantityValue,
+              },
+            ],
+            value: data.data.precio ? this.salesData.precio : 0,
+            currency: this.dataStore.tiendasInfo.moneda,
+            content_name: data.data.nombre,
+            content_category: 'otro',
+          })
+        }
       }
     },
-    getDataProductPrev() {
-      this.data.detalle = {
-        foto_cloudinary:
-          'https://vignette.wikia.nocookie.net/la-bitacora-del-capitan/images/6/67/Not_found.png/revision/latest?cb=20190509042801&path-prefix=es',
-        nombre: 'Producto de prueba',
-        precio: 29999,
-      }
-      this.data.info = {
-        marca: 'Marca de prueba',
-        descripcion: 'Descripción de prueba',
-      }
-      this.maxQuantityValue = 0
-      this.salesData = {
-        precio: 29999,
-        unidades: 0,
-        sku: '4a00',
-      }
-      this.spent = true
-    },
-    setOptionEnvio() {
-      if (this.data.detalle) {
-        if (this.data.detalle.envio_gratis == 1) {
-          this.envio = {
-            titulo: 'Envío gratis',
-            desc: 'Disfruta de este obsequio por parte de la tienda.',
-          }
-        } else {
-          this.data.envioproducto = JSON.parse(this.envios.valores)
-          switch (this.data.envioproducto.envio_metodo) {
-            case 'gratis':
-              this.envio = {
-                titulo: 'Envío gratis',
-                desc: 'Disfruta de este obsequio por parte de la tienda.',
-              }
-              break
-            case 'sinEnvio':
-              this.envio = {
-                titulo: 'Sin envio',
-                desc: 'Tienes que acercarte a la tienda a recoger tu pedido.',
-              }
-              break
-            case 'tarifa_plana':
-              this.envio = {
-                titulo: 'Tarifa plana',
-                desc: `Compra todo lo que quieras en nuestra tienda, el valor del envio siempre sera el mismo: Valor envio $${this.data.envioproducto.valor}`,
-              }
-              break
-            case 'precio':
-              this.envio = {
-                titulo: 'Tarifa por precio',
-                desc: 'Según la suma del costo de tus productos te cobraran el envio',
-              }
-              break
-            case 'precio_ciudad':
-              this.envio = {
-                titulo: 'Tarifa por ciudad',
-                desc: 'Según la ciudad te cobraran el envio',
-              }
-              break
-            case 'peso':
-              this.envio = {
-                titulo: 'Tarifa por peso',
-                desc: '',
-              }
-              break
-            default:
-          }
+    setOptionShipping() {
+      if (this.data.envioGratis == 1) {
+        this.envio = {
+          titulo: 'Envío gratis',
+          desc: 'Disfruta de este obsequio por parte de la tienda.',
+        }
+      } else {
+        this.data.shippingProduct = this.envios.valores
+        switch (this.data.shippingProduct.envio_metodo) {
+          case 'gratis':
+            this.envio = {
+              titulo: 'Envío gratis',
+              desc: 'Disfruta de este obsequio por parte de la tienda.',
+            }
+            break
+          case 'sinEnvio':
+            this.envio = {
+              titulo: 'Sin envio',
+              desc: 'Tienes que acercarte a la tienda a recoger tu pedido.',
+            }
+            break
+          case 'tarifa_plana':
+            this.envio = {
+              titulo: 'Tarifa plana',
+              desc: `Compra todo lo que quieras en nuestra tienda, el valor del envio siempre sera el mismo: Valor envio $${this.data.shippingProduct.valor}`,
+            }
+            break
+          case 'precio':
+            this.envio = {
+              titulo: 'Tarifa por precio',
+              desc: 'Según la suma del costo de tus productos te cobraran el envio',
+            }
+            break
+          case 'precio_ciudad':
+            this.envio = {
+              titulo: 'Tarifa por ciudad',
+              desc: 'Según la ciudad te cobraran el envio',
+            }
+            break
+          case 'peso':
+            this.envio = {
+              titulo: 'Tarifa por peso',
+              desc: '',
+            }
+            break
+          default:
         }
       }
     },
@@ -538,42 +507,30 @@ export default {
         this.data.cantidad = this.quantityValue
       }
     },
-    setMiniPhoto(photo) {
-      return photo
-    },
     selectedPhoto(photo) {
       this.selectPhotoUrl = photo
       this.existYoutube = false
     },
-    videoYoutube(url) {
-      let myregexp =
-        /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
-      let id = ''
-      if (url && url !== '' && url !== 'null') {
-        this.validVideo = true
-        id = url.match(myregexp)
-        if (id) {
-          this.idYoutube = id[1]
-        }
-      }
-    },
-    addShoppingCart() {
+    addToCart() {
       if (!this.data.cantidad) {
         this.data.cantidad = this.quantityValue
       }
       const product = {
-        id: this.data.detalle.id,
+        id: this.data.id,
         precio: this.salesData.precio,
         cantidad: this.data.cantidad,
-        foto_cloudinary: this.data.detalle.foto_cloudinary,
-        nombre: this.data.detalle.nombre,
+        foto_cloudinary: this.data.fotoCloudinary,
+        nombre: this.data.nombre,
         combinacion: this.salesData.combinacion,
-        envio_gratis: this.data.detalle.envio_gratis,
+        envio_gratis: this.data.envioGratis,
+        promocion_valor: this.data.productosInfo.promocionValor,
+        tag_promocion: this.data.productosInfo.tagPromocion,
+        dropshipping: this.userDropshipping.userId,
       }
       if (this.salesData) {
         product.limitQuantity = this.salesData.unidades
       } else {
-        product.limitQuantity = this.data.info.inventario
+        product.limitQuantity = this.data.productosInfo.inventario
       }
       if (typeof this.productIndexCart === 'number') {
         const mutableProduct =
@@ -593,9 +550,9 @@ export default {
       // this.$store.state.orderComponent = true
       this.$store.dispatch('SEND_ADD_TO_CART', 1)
     },
-    GoPayments() {
+    goToPayments() {
       let objeto = {
-        id: this.data.info.id,
+        id: this.data.id,
         cantidad: this.quantityValue,
         combinacion:
           this.salesData && this.salesData.combinacion
@@ -619,66 +576,24 @@ export default {
         }
       }
     },
-    evalStock(mq, qv) {
-      return !(mq - qv < 0)
-    },
-    mobileCheck() {
-      window.mobilecheck = function () {
-        var check = false
-        ;(function (a) {
-          if (
-            /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
-              a
-            ) ||
-            /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
-              a.substr(0, 4)
-            )
-          )
-            check = true
-        })(navigator.userAgent || navigator.vendor || window.opera)
-        return check
-      }
-      return window.mobilecheck()
-    },
     redirectWP() {
-      let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
-      let baseUrlPc = 'https://web.whatsapp.com/send?phone='
+      let baseUrlMovil = 'https://api.whatsapp.com/send?'
+      let baseUrlPc = 'https://web.whatsapp.com/send?'
       let urlProduct = window.location.href
-      let text = `Hola 😀, %0AEstoy en tu tienda ${this.dataStore.tienda.nombre} y me interesa el producto: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
-      if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
-        let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
-        if (this.mobileCheck()) {
-          window.open(
-            `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
-            '_blank'
-          )
-        }
+      let text = `Hola 😀, %0AQuiero compartir contigo éste  producto, seguro te va a encantar: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
+      if (this.mobileCheck()) {
+        window.open(`${baseUrlMovil}text=${text}`, '_blank')
       } else {
-        if (this.mobileCheck()) {
-          window.open(
-            `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`,
-            '_blank'
-          )
-        } else {
-          window.open(
-            `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`,
-            '_blank'
-          )
-        }
+        window.open(`${baseUrlPc}text=${text}`, '_blank')
       }
     },
     WPQuotation() {
       let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
       let baseUrlPc = 'https://web.whatsapp.com/send?phone='
       let urlProduct = window.location.href
-      let text = `Hola%20%F0%9F%98%80%2C%0AEstoy%20en%20tu%20tienda%20%2A${this.dataStore.tienda.nombre}%2A%20y%20quiero%20cotizar%20este%20producto%3A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.data.detalle.nombre}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ALink%3A%20${urlProduct}`
-      if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
-        let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
+      let text = `Hola%20%F0%9F%98%80%2C%0AEstoy%20en%20tu%20tienda%20%2A${this.dataStore.nombre}%2A%20y%20quiero%20cotizar%20este%20producto%3A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.data.detalle.nombre}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ALink%3A%20${urlProduct}`
+      if (this.dataStore.redes.whatsapp.charAt(0) == '+') {
+        let phone_number_whatsapp = this.dataStore.redes.whatsapp.slice(1)
         if (this.mobileCheck()) {
           window.open(
             `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
@@ -693,12 +608,12 @@ export default {
       } else {
         if (this.mobileCheck()) {
           window.open(
-            `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`,
+            `${baseUrlMovil}57${this.dataStore.redes.whatsapp}&text=${text}`,
             '_blank'
           )
         } else {
           window.open(
-            `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`,
+            `${baseUrlPc}57${this.dataStore.redes.whatsapp}&text=${text}`,
             '_blank'
           )
         }

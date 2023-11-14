@@ -6,7 +6,8 @@ import { mapState } from 'vuex'
 export default {
   name: 'ProductIndex',
   components: {
-    K05ProductList: () => import('@/components/template5/Ko5-ProductList.vue'),
+    K05ProductList: () =>
+      import('@/components/template5/Ko5-ProductListHome.vue'),
     K07ProductList: () =>
       import('@/components/template7/Ko-ProductListFilter.vue'),
     K09ProductList: () =>
@@ -54,7 +55,6 @@ export default {
   },
   computed: {
     ...mapState([
-      'dataStore',
       'settingBase',
       'settingByTemplate',
       'settingByTemplate7',
@@ -67,12 +67,6 @@ export default {
       'settingByTemplate16',
       'template',
     ]),
-    fullProducts() {
-      return this.$store.getters['products/filterProducts']
-    },
-    allTags() {
-      return this.$store.getters['products/filterTags']
-    },
     indexTemplate() {
       let productListComponent = ''
       // eslint-disable-next-line no-prototype-builtins
@@ -83,9 +77,6 @@ export default {
     },
     componentsProps() {
       return {
-        dataStore: this.dataStore,
-        fullProducts: this.fullProducts,
-        allTags: this.allTags && this.allTags.length > 0 ? this.allTags : [],
         settingByTemplate: this.createSettingByTemplate(
           this.settingByTemplate,
           'settings',

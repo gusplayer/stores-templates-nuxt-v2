@@ -3,15 +3,14 @@
     <div class="icon-social">
       <div
         v-if="
-          dataStore.tienda.red_facebook != null &&
-          dataStore.tienda.red_facebook != ''
+          dataStore.redes.facebook != null && dataStore.redes.facebook != ''
         "
         class="icons-networks"
       >
         <a
           target="_blank"
           rel="noreferrer noopener"
-          :href="dataStore.tienda.red_facebook"
+          :href="dataStore.redes.facebook"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -73,16 +72,13 @@
         </a>
       </div>
       <div
-        v-if="
-          dataStore.tienda.red_twitter != null &&
-          dataStore.tienda.red_twitter != ''
-        "
+        v-if="dataStore.redes.twitter != null && dataStore.redes.twitter != ''"
         class="icons-networks"
       >
         <a
           target="_blank"
           rel="noreferrer noopener"
-          :href="dataStore.tienda.red_twitter"
+          :href="dataStore.redes.twitter"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -145,16 +141,15 @@
         </a>
       </div>
       <div
-        class="icons-networks"
         v-if="
-          dataStore.tienda.red_instagram != null &&
-          dataStore.tienda.red_instagram != ''
+          dataStore.redes.instagram != null && dataStore.redes.instagram != ''
         "
+        class="icons-networks"
       >
         <a
           target="_blank"
           rel="noreferrer noopener"
-          :href="dataStore.tienda.red_instagram"
+          :href="dataStore.redes.instagram"
           @mouseover="hover = true"
           @mouseleave="hover = false"
         >
@@ -193,9 +188,9 @@
                 transform="matrix(0.8,0,0,0.8,51.19999999999999,51.19999999999999)"
               />
               <linearGradient
+                id="a"
                 class="circle-instagram"
                 xmlns="http://www.w3.org/2000/svg"
-                id="a"
                 gradientTransform="matrix(1 0 0 -1 0 -20854)"
                 gradientUnits="userSpaceOnUse"
                 x1="0"
@@ -212,8 +207,8 @@
             >
               <linearGradient
                 v-if="!hover"
-                xmlns="http://www.w3.org/2000/svg"
                 id="a"
+                xmlns="http://www.w3.org/2000/svg"
                 gradientTransform="matrix(1 0 0 -1 0 -20854)"
                 gradientUnits="userSpaceOnUse"
                 x1="0"
@@ -226,8 +221,8 @@
               </linearGradient>
               <linearGradient
                 v-if="hover"
-                xmlns="http://www.w3.org/2000/svg"
                 id="a"
+                xmlns="http://www.w3.org/2000/svg"
                 gradientTransform="matrix(1 0 0 -1 0 -20854)"
                 gradientUnits="userSpaceOnUse"
                 x1="0"
@@ -267,16 +262,13 @@
         </a>
       </div>
       <div
+        v-if="dataStore.redes.youtube != null && dataStore.redes.youtube != ''"
         class="icons-networks"
-        v-if="
-          dataStore.tienda.red_youtube != null &&
-          dataStore.tienda.red_youtube != ''
-        "
       >
         <a
           target="_blank"
           rel="noreferrer noopener"
-          :href="dataStore.tienda.red_youtube"
+          :href="dataStore.redes.youtube"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -353,16 +345,13 @@
         </a>
       </div>
       <div
+        v-if="dataStore.redes.tiktok != null && dataStore.redes.tiktok != ''"
         class="icons-networks"
-        v-if="
-          dataStore.tienda.red_tiktok != null &&
-          dataStore.tienda.red_tiktok != ''
-        "
       >
         <a
           target="_blank"
           rel="noreferrer noopener"
-          :href="dataStore.tienda.red_tiktok"
+          :href="dataStore.redes.tiktok"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -415,8 +404,14 @@
 export default {
   name: 'Ko7SocialNetworks',
   props: {
-    dataStore: Object,
-    settingByTemplate: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -424,12 +419,12 @@ export default {
     }
   },
   watch: {
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-      this.links[4].link = this.dataStore.tienda.red_tiktok
+    'dataStore.redes'() {
+      this.links[0].link = this.dataStore.redes.facebook
+      this.links[1].link = this.dataStore.redes.twitter
+      this.links[2].link = this.dataStore.redes.instagram
+      this.links[3].link = this.dataStore.redes.youtube
+      this.links[4].link = this.dataStore.redes.tiktok
     },
   },
 }

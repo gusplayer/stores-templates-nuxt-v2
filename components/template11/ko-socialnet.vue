@@ -1,8 +1,8 @@
 <template>
   <div class="content-networks" :style="footerIcon">
     <a
-      v-if="dataStore.tienda.red_facebook != null"
-      :href="dataStore.tienda.red_facebook"
+      v-if="dataStore.redes.facebook != null"
+      :href="dataStore.redes.facebook"
       class="social-networks"
       target="_blank"
       rel="noreferrer noopener"
@@ -23,8 +23,8 @@
       </i>
     </a>
     <a
-      v-if="dataStore.tienda.red_twitter != null"
-      :href="dataStore.tienda.red_twitter"
+      v-if="dataStore.redes.twitter != null"
+      :href="dataStore.redes.twitter"
       class="social-networks"
       target="_blank"
       rel="noreferrer noopener"
@@ -54,8 +54,8 @@
       </svg>
     </a>
     <a
-      v-if="dataStore.tienda.red_instagram != null"
-      :href="dataStore.tienda.red_instagram"
+      v-if="dataStore.redes.instagram != null"
+      :href="dataStore.redes.instagram"
       class="social-networks"
       target="_blank"
       rel="noreferrer noopener"
@@ -80,8 +80,8 @@
       </svg>
     </a>
     <a
-      v-if="dataStore.tienda.red_youtube != null"
-      :href="dataStore.tienda.red_youtube"
+      v-if="dataStore.redes.youtube != null"
+      :href="dataStore.redes.youtube"
       class="social-networks"
       target="_blank"
       rel="noreferrer noopener"
@@ -100,8 +100,8 @@
       </svg>
     </a>
     <a
-      v-if="dataStore.tienda.red_tiktok != null"
-      :href="dataStore.tienda.red_tiktok"
+      v-if="dataStore.redes.tiktok != null"
+      :href="dataStore.redes.tiktok"
       class="social-networks"
       target="_blank"
       rel="noreferrer noopener"
@@ -130,8 +130,14 @@
 export default {
   name: 'KoSocialNetworks',
   props: {
-    dataStore: Object,
-    footerIcon: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    footerIcon: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -140,11 +146,11 @@ export default {
   },
   watch: {
     'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-      this.links[4].link = this.dataStore.tienda.red_tiktok
+      this.links[0].link = this.dataStore.redes.facebook
+      this.links[1].link = this.dataStore.redes.twitter
+      this.links[2].link = this.dataStore.redes.instagram
+      this.links[3].link = this.dataStore.redes.youtube
+      this.links[4].link = this.dataStore.redes.tiktok
     },
   },
 }

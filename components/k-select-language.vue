@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-dropdown">
+  <div class="w-full max-w-[132px] flex flex-row justify-end items-center">
     <el-dropdown>
       <span class="el-dropdown-link" aria-haspopup="list">
         {{ select.label }}
@@ -54,8 +54,8 @@ export default {
     ...mapState(['dataStore']),
   },
   mounted() {
-    if (this.dataStore && this.dataStore.tienda) {
-      switch (this.dataStore.tienda.lenguaje.toLowerCase()) {
+    if (this.dataStore) {
+      switch (this.dataStore.tiendasInfo.lenguaje.toLowerCase()) {
         case 'es':
           this.select.label = 'Spanish (es)'
           this.select.lng = 'es'
@@ -90,14 +90,6 @@ export default {
 </script>
 
 <style scoped>
-.wrapper-dropdown {
-  width: 100%;
-  max-width: 200px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-}
 .el-dropdown-link {
   display: grid;
   grid-auto-flow: column;

@@ -1,13 +1,13 @@
 <template>
   <transition name="fade">
-    <div class="order" @click="closeOrder" v-show="openMenuLeft">
+    <div v-if="openMenuLeft" class="order" @click="closeOrder">
       <div class="order_content">
         <div class="order_header">
           <div class="header-content-logo">
             <nuxt-link to="/" class="wrapper-logo" id="tamaño-img">
               <img
                 v-lazy="
-                  `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
+                  `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
                 "
                 class="header-logo"
                 alt="Logo Img"
@@ -17,6 +17,37 @@
           <div class="close-container" @click="closed">
             <div class="leftright"></div>
             <div class="rightleft"></div>
+          </div>
+        </div>
+        <div class="search-content">
+          <div class="search-input-content">
+            <input
+              v-model="query.name"
+              type="text"
+              :placeholder="$t('header_buscar_producto')"
+              class="input-search"
+              @change="setToQueryFilter('search')"
+              @keyup.enter="setToQueryFilter('search')"
+            />
+          </div>
+          <div
+            class="search-icon-content"
+            @click="setToQueryFilter('search', search)"
+          >
+            <svg
+              class="icon-search"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="{2}"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
           </div>
         </div>
         <div class="content-lateral-menu">
@@ -30,34 +61,34 @@
               {{ $t('header_inicio') }}
             </button>
             <button
-              class="btn-lateral-menu-right"
-              @click="selectTag2"
-              :class="selecttag == 2 ? 'show-select-active' : ''"
               v-if="
                 (categorias && categorias.length > 0) ||
                 (allTags && allTags.length > 0)
               "
+              class="btn-lateral-menu-right"
+              :class="selecttag == 2 ? 'show-select-active' : ''"
+              @click="selectTag2"
             >
               {{ $t('header_categorias') }}
             </button>
           </div>
-          <div class="conten-Menu" v-if="!focusbtn">
+          <div v-if="!focusbtn" class="conten-Menu">
             <div class="header-content-buttons">
               <div
-                v-for="(item, index) in this.settingByTemplate[0].pages.values"
+                v-for="(item, index) in settingByTemplate[0].pages.values"
                 :key="`${index}${item.displayName}`"
                 @click="closed"
               >
-                <nuxt-link :to="item.url" v-if="!item.isExternalLink">
-                  <button class="btn">
+                <nuxt-link v-if="!item.isExternalLink" :to="item.url">
+                  <p class="btn">
                     {{ item.displayName }}
-                  </button>
+                  </p>
                 </nuxt-link>
                 <a
+                  v-else
                   :href="item.url"
                   target="_blank"
                   rel="noreferrer noopener"
-                  v-else
                 >
                   <p class="btn">
                     {{ item.displayName }}
@@ -66,116 +97,89 @@
               </div>
             </div>
           </div>
-          <div class="content-Categorys" v-if="focusbtn">
-            <template>
-              <div class="wrapper-category-all">
-                <li @click="clear">
-                  <p class="btn-category-all">
-                    {{ $t('header_buscar_limpiar') }}
-                  </p>
-                </li>
-                <div v-for="categoria in categorias" :key="categoria.id">
-                  <BaseAccordian>
-                    <template v-slot:categorias>
+          <div v-if="focusbtn" class="content-Categorys">
+            <div class="wrapper-category-all">
+              <li @click="clearFilters">
+                <p class="btn-category-all">
+                  {{ $t('header_buscar_limpiar') }}
+                </p>
+              </li>
+              <div v-for="category in categorias" :key="category.id">
+                <BaseAccordion>
+                  <template v-slot:categorias>
+                    <li
+                      class="btn-category"
+                      :class="
+                        category.id == categorySelect
+                          ? 'text-categoria-active'
+                          : ''
+                      "
+                      @click="setToQueryFilter('category', category)"
+                    >
+                      {{ category.nombreCategoriaProducto }}
+                    </li>
+                  </template>
+                  <template v-slot:subcategorias>
+                    <div v-for="(subcategory, key) in subcategories" :key="key">
                       <li
+                        v-if="subcategory.categoria == category.id"
                         class="btn-category"
-                        @click="
-                          sendCategory(categoria, categoria.id, (ref = false))
-                        "
                         :class="
-                          categoria.id == indexSelect
-                            ? 'text-categoria-active'
+                          subcategory.id == subCategorySelect
+                            ? 'text-subcategoria-active'
                             : ''
                         "
+                        @click="setToQueryFilter('subcategories', subcategory)"
                       >
-                        {{ categoria.nombre_categoria_producto }}
+                        <p class="txt-sub-li">
+                          {{ subcategory.nombreSubcategoria }}
+                        </p>
                       </li>
-                    </template>
-                    <template v-slot:subcategorias>
-                      <template>
-                        <!-- <li
-                          class="btn-category"
-                          v-if="selectedSubcategories.length > 0"
-                          @click="closed()"
-                        >
-                          Ver todo
-                        </li> -->
-                        <div
-                          v-for="(subcategory, key) in subcategories"
-                          :key="key"
-                        >
-                          <li
-                            v-if="subcategory.categoria == categoria.id"
-                            @click="SendSubCategory(subcategory.id)"
-                            class="btn-category"
-                            :class="
-                              subcategory.id == indexSelect2
-                                ? 'text-subcategoria-active'
-                                : ''
-                            "
-                          >
-                            <p class="txt-sub-li">
-                              {{ subcategory.nombre_subcategoria }}
-                            </p>
-                          </li>
-                        </div>
-                      </template>
-                    </template>
-                  </BaseAccordian>
-                </div>
-                <div
-                  v-for="(itemsTags, index) in allTags"
-                  :key="index"
-                  v-show="allTags && allTags.length > 0"
-                >
-                  <BaseAccordian
-                    v-if="
-                      itemsTags &&
-                      itemsTags.status === 1 &&
-                      itemsTags.properties.length > 0
-                    "
-                  >
-                    <template v-slot:categorias>
-                      <li class="btn-category">
-                        {{ itemsTags.name }}
-                      </li>
-                    </template>
-                    <template v-slot:subcategorias>
-                      <template>
-                        <div
-                          v-for="itemsProperties in itemsTags.properties"
-                          :key="itemsProperties.id"
-                          v-show="itemsProperties.status === 1"
-                        >
-                          <li
-                            class="btn-category"
-                            @click="
-                              getProductsFilter(
-                                'tag',
-                                itemsProperties.id,
-                                itemsProperties.name,
-                                true
-                              )
-                            "
-                            :class="
-                              itemsProperties.name == etiqueta1
-                                ? 'text-subcategoria-active'
-                                : '' || itemsProperties.name == etiqueta2
-                                ? 'text-subcategoria-active'
-                                : ''
-                            "
-                          >
-                            <p class="txt-sub-li">
-                              {{ itemsProperties.name }}
-                            </p>
-                          </li>
-                        </div>
-                      </template>
-                    </template>
-                  </BaseAccordian>
-                </div>
+                    </div>
+                  </template>
+                </BaseAccordion>
               </div>
-            </template>
+              <div
+                v-for="(itemsTags, index) in allTags"
+                v-show="allTags?.length > 0"
+                :key="index"
+              >
+                <BaseAccordion
+                  v-if="
+                    itemsTags &&
+                    itemsTags.status === 1 &&
+                    itemsTags.tagProperties.length > 0
+                  "
+                >
+                  <template v-slot:categorias>
+                    <li class="btn-category">
+                      {{ itemsTags.name }}
+                    </li>
+                  </template>
+                  <template v-slot:subcategorias>
+                    <div
+                      v-for="itemsProperties in itemsTags.tagProperties"
+                      v-show="itemsProperties.status === 1"
+                      :key="itemsProperties.id"
+                    >
+                      <li
+                        class="btn-category"
+                        :class="
+                          itemsProperties.name == tagSelect
+                            ? 'text-subcategoria-active'
+                            : ''
+                        "
+                        @click="setToQueryFilter('tag', itemsProperties)"
+                      >
+                        <p class="txt-sub-li">
+                          {{ itemsProperties.name }}
+                        </p>
+                      </li>
+                    </div>
+                  </template>
+                </BaseAccordion>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -184,34 +188,29 @@
 </template>
 
 <script>
-import BaseAccordian from '../_BaseAccordion.vue'
-import filterProducts from '../../../../mixins/filterProducts'
+import { mapState } from 'vuex'
 export default {
-  name: 'Ko-MenuLeft-11',
-  props: {
-    dataStore: Object,
-    settingByTemplate: Array,
-  },
-  mixins: [filterProducts],
+  name: 'KoMenuLeft11',
   components: {
-    BaseAccordian,
+    BaseAccordion: () => import('../_BaseAccordion.vue'),
   },
-  mounted() {
-    this.setHoko()
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
       selecttag: 1,
-      activeNames: [],
       focusbtn: false,
-      search: '',
-      selectSubcategory: '',
-      nameCategory: '',
-      nameSubCategory: '',
-      selectedSubcategories: [],
-      toggleCategories: true,
-      indexSelect: '',
-      indexSelect2: '',
+      categorySelect: '',
+      subCategorySelect: '',
+      tagSelect: '',
       secciones: [
         {
           name: 'header_inicio',
@@ -248,36 +247,33 @@ export default {
           //icon: 'cart-icon',
         },
       ],
+      query: {
+        page: 1,
+        name: null,
+        category: null,
+        subcategory: null,
+        tag: null,
+      },
     }
   },
   computed: {
+    ...mapState(['dataHoko', 'categorias']),
+    ...mapState({
+      facebookPixel: (state) => state.analytics_tagmanager,
+      subcategories: (state) => state.subcategorias,
+      openMenuLeft: (state) => state.openMenuLateralLeft,
+    }),
     allTags() {
-      return this.$store.getters['products/filterTags']
+      return this.dataStore.tags
     },
-    logoImg() {
-      return this.$store.state.dataStore.tienda.logo
-    },
-    openMenuLeft() {
-      return this.$store.state.openMenuLateralLeft
-    },
-    categorias() {
-      return this.dataStore.categorias
-    },
-    subcategories() {
-      return this.dataStore.subcategorias
-    },
-    listArticulos() {
-      return this.$store.state.listArticulos.length
-    },
+  },
+  watch: {
     dataHoko() {
-      return this.$store.state.dataHoko
+      this.setHoko()
     },
-    etiqueta1() {
-      return this.$store.state.products.payloadTagName
-    },
-    etiqueta2() {
-      return this.$store.state.products.payloadTag2Name
-    },
+  },
+  mounted() {
+    this.setHoko()
   },
   methods: {
     setHoko() {
@@ -295,19 +291,6 @@ export default {
       this.selecttag = 2
       this.focusbtn = true
     },
-    getSearch(value) {
-      if (value) {
-        location.href = '?search=' + value
-        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-          window.fbq('track', 'Search', { search_string: value })
-        }
-      } else {
-        location.href = '?search=' + ''
-      }
-    },
-    SearchProduct(search) {
-      this.$store.commit('SET_SEARCH_VALUE', search)
-    },
     closed() {
       this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
     },
@@ -322,82 +305,79 @@ export default {
         this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
       }
     },
-    SendSubCategory(value) {
-      this.indexSelect2 = value
-      this.$store.commit('SET_STATE_BANNER', false)
-      this.$store.commit('SET_PREVIOUS_PAGE', 1)
-      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
-      this.selectSubcategory = value
-      let filtradoSubCategory = this.subcategories.find(
-        (element) => element.id == value
-      )
-      let filtradoCategories = this.categorias.find(
-        (element) => element.id == filtradoSubCategory.categoria
-      )
-      this.$store.commit(
-        'SET_CATEGORY_PRODUCTO',
-        filtradoCategories.nombre_categoria_producto
-      )
-      this.nameSubCategory = filtradoSubCategory.nombre_subcategoria
-      this.$router.push({
-        path: '/productos',
-        query: {
-          subcategory: `${this.nameSubCategory}^${filtradoCategories.id}`,
-        },
-      })
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
-      this.$store.commit('products/FILTER_BY', {
-        type: ['subcategory'],
-        data: value,
-      })
-    },
-    sendCategory(value, categoria, ref) {
-      this.indexSelect = categoria
-      this.$store.commit('SET_PREVIOUS_PAGE', 1)
-      this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$router.push({
-        path: '/productos',
-        query: { category: this.nameCategory },
-      })
-      this.selectedSubcategories = []
-      this.subcategories.find((subcategory) => {
-        if (subcategory.categoria === categoria) {
-          this.toggleCategories = false
-          this.selectedSubcategories.push(subcategory)
-        }
-      })
-      if (this.selectedSubcategories.length === 0) {
-        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
+    setToQueryFilter(type, value) {
+      if (type === 'search') {
+        this.query.name = this.query.name || null
+        this.getSearch(this.query.name)
+      } else if (type === 'category') {
+        this.query.subcategory = null
+        this.subCategorySelect = null
+        this.query.tag = null
+        this.query.category = value.nombreCategoriaProducto || null
+        this.categorySelect = value.id
+        this.$store.commit(
+          'products/SET_CATEGORY_PRODUCTO',
+          value.nombreCategoriaProducto
+        )
+        this.$store.commit('products/SET_SUBCATEGORY_PRODUCTO', null)
+      } else if (type === 'subcategories') {
+        this.categorias.filter((item) => {
+          if (item.id === value.categoria) {
+            this.query.category = item.nombreCategoriaProducto
+          }
+        })
+        this.$store.commit(
+          'products/SET_CATEGORY_PRODUCTO',
+          this.query.category
+        )
+        this.$store.commit(
+          'products/SET_SUBCATEGORY_PRODUCTO',
+          value.nombreSubcategoria || null
+        )
+        this.query.subcategory = value.id || null
+        this.subCategorySelect = value.id
+      } else {
+        this.query.tag = value.id || null
       }
-      this.$store.commit('products/FILTER_BY', {
-        type: ['category'],
-        data: value.nombre_categoria_producto,
-      })
-    },
-    clear() {
-      this.$router.push({
-        path: '/productos',
-      })
-      this.showMenu = false
-      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
-      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: ['all'],
-        data: '',
-      })
-      this.$emit('clear')
 
-      this.nameCategory = ''
+      this.setInformationFromQuery(this.query)
     },
-  },
-  watch: {
-    search(value) {
-      this.SearchProduct(value)
+    async setInformationFromQuery({ page, name, category, subcategory, tag }) {
+      const query = {}
+
+      if (page !== null && page !== undefined) query.page = page
+      if (category !== null) query.category = category
+      if (name !== null) query.name = name
+      if (subcategory !== null) query.subcategory = subcategory
+      if (tag !== null) query.tag = tag
+
+      try {
+        await this.$router.push({ path: '/productos', query })
+      } catch (error) {
+        console.error('Error navigating:', error)
+      }
     },
-    dataHoko() {
-      this.setHoko()
+    clearFilters() {
+      this.query = {
+        page: 1,
+        name: null,
+        category: null,
+        subcategory: null,
+        tag: null,
+      }
+      this.categorySelect = ''
+      this.subCategorySelect = ''
+      this.$router.push({ path: '/productos', query: '' })
+      this.$store.commit('products/SET_CATEGORY_PRODUCTO', null)
+      this.$store.commit('products/SET_SUBCATEGORY_PRODUCTO', null)
+      this.$store.commit('products/SET_TAG_PRODUCT', null)
+    },
+    getSearch(value) {
+      if (value) {
+        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+          window.fbq('track', 'Search', { search_string: value })
+        }
+      }
     },
   },
 }
@@ -464,6 +444,25 @@ export default {
   max-height: 60px;
   object-fit: contain;
   object-position: left;
+}
+.search-content {
+  @apply flex flex-row w-full items-center shadow-xl py-14;
+}
+.search-input-content {
+  @apply w-full;
+}
+.input-search {
+  @apply px-10 py-2 w-full;
+}
+::-webkit-input-placeholder {
+  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
+  @apply text-gray-textHeader;
+}
+.search-icon-content {
+  @apply w-auto h-auto justify-center items-center px-12 cursor-pointer;
+}
+.icon-search {
+  @apply w-24 h-24 text-gray-textHeader;
 }
 .wrapper-category-all {
   display: flex;

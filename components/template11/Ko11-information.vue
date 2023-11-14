@@ -1,16 +1,15 @@
 <template>
-  <div class="content-section" :style="[settingKinformation, settingGeneral]">
-    <div
-      class="content-wrapper"
-      :style="[
-        {
-          '--font-style-1':
-            this.settingGeneral && this.settingGeneral.fount_1
-              ? this.settingGeneral.fount_1
-              : 'Roboto',
-        },
-      ]"
-    >
+  <div
+    class="content-section"
+    :style="[
+      settingKinformation,
+      settingGeneral,
+      {
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
+      },
+    ]"
+  >
+    <div class="content-wrapper">
       <div
         class="wrapper-content-items"
         :style="`border-color: ${
@@ -138,13 +137,19 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
+  name: 'Ko11Information',
   mixins: [idCloudinary],
-  name: 'Ko11-information',
   props: {
-    settingKinformation: Object,
-    settingGeneral: Object,
+    settingKinformation: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
 }
 </script>

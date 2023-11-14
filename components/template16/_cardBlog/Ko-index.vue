@@ -2,10 +2,10 @@
   <div
     class="w-full flex justify-center items-center py-15 lg:py-20 px-10 md:px-0"
     :style="[
-      settingByTemplate14[0].settingGeneral,
+      settingByTemplate16[0].settingGeneral,
       {
         '--font-style-1':
-          this.settingByTemplate14[0]?.settingGeneral?.fount_1 ?? 'Poppins',
+          settingByTemplate16[0]?.settingGeneral?.fount_1 ?? 'Poppins',
       },
     ]"
   >
@@ -13,10 +13,11 @@
       <div class="w-full flex flex-row justify-between items-center">
         <p class="text-left font-semibold text-black text-30">Últimos blogs</p>
         <input
-          type="text"
+          v-model="filters.title"
           class="input-search"
-          placeholder="Buscar artículos..."
-          v-model="search"
+          type="search"
+          :placeholder="$t('header_search')"
+          @keyup.enter="updateFilters"
         />
       </div>
       <div class="w-full flex flex-col justify-center items-center mt-30">
@@ -24,26 +25,26 @@
           class="w-full h-full mb-40 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mlg:gap-8 justify-center items-center box-border"
         >
           <div
-            v-for="article in filteredList"
+            v-for="article in listBlogs"
             :key="article.id"
             class="w-full h-full"
           >
             <KoBlogCard
               :article="article"
-              :cardBlog="settingByTemplate14[0].cardBlog"
-              :settingGeneral="settingByTemplate14[0].settingGeneral"
+              :card-blog="settingByTemplate16[0].cardBlog"
+              :setting-general="settingByTemplate16[0].settingGeneral"
               class="giftLoad w-full h-full"
             />
           </div>
         </div>
         <div
-          v-if="filteredList.length == 0"
+          v-if="listBlogs?.length === 0"
           class="w-full h-full flex flex-col justify-center items-center text-center"
         >
           <nuxt-link to="/" class="wrapper-logo">
             <img
               v-lazy="
-                `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
+                `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
               "
               width="150"
               class="max-w-[150px] max-h-[150px]"
@@ -54,14 +55,15 @@
             No se encontraron artículos relacionados
           </p>
         </div>
-        <div class="mt-10 product_pagination" v-if="filteredList.length > 12">
+        <div v-if="totalBlogs > filters.limit" class="mt-10 product_pagination">
           <el-pagination
             background
             layout="prev, pager, next"
-            :total="filteredList.length"
-            :page-size="12"
-            :current-page.sync="currentPage"
             class="text-18 text-black bg-transparent"
+            :total="totalBlogs"
+            :page-size="filters.limit"
+            :current-page.sync="filters.page"
+            @current-change="changePage"
           />
         </div>
       </div>
@@ -69,41 +71,26 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+import filters from '@/mixins/filterBlogs'
 export default {
-  name: 'Ko15-Blog',
+  name: 'Ko16Blog',
   components: {
-    KoBlogCard: () => import('./blogCard'),
+    KoBlogCard: () => import('./blog-card'),
   },
+  mixins: [filters],
   props: {
-    dataStore: Object,
-    settingByTemplate14: Array,
-  },
-  data() {
-    return {
-      currentPage: 1,
-      search: '',
-    }
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate16: {
+      type: Array,
+      required: true,
+    },
   },
   computed: {
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-    filterArticles() {
-      const initial = this.currentPage * 12 - 12
-      const final = initial + 12
-      return this.filteredList.slice(initial, final)
-    },
-    filteredList() {
-      if (this.search) {
-        return this.listArticulos.filter((element) => {
-          return element.titulo
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
-        })
-      } else {
-        return this.listArticulos
-      }
-    },
+    ...mapState(['stateListBLogs']),
   },
 }
 </script>

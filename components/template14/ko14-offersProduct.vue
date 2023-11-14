@@ -24,7 +24,7 @@
           <div
             class="border h-2 my-10 md:my-15 border-hover"
             :style="`border-color: ${offersProduct.color_border};`"
-          />
+          ></div>
           <div class="mt-10 md:mt-50 flex flex-row justify-start items-center">
             <p
               :style="`color: ${offersProduct.color_price}; font-size: ${offersProduct.fontSizePrice}; font-weight: ${offersProduct.fontWeighPrice};`"
@@ -66,13 +66,22 @@
 <script>
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko15-offersProduct',
-  props: {
-    offersProduct: Object,
-    settingGeneral: Object,
-    dataStore: Object,
-  },
+  name: 'Ko15OffersProduct',
   mixins: [idCloudinary],
+  props: {
+    offersProduct: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+  },
 }
 </script>
 <style scoped>

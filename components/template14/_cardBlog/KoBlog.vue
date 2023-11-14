@@ -13,10 +13,11 @@
       <div class="w-full flex flex-row justify-between items-center">
         <p class="text-left font-semibold text-black text-30">Últimos blogs</p>
         <input
-          v-model="search"
-          type="text"
+          v-model="filters.title"
           class="input-search"
-          placeholder="Buscar artículos..."
+          type="search"
+          :placeholder="$t('header_search')"
+          @keyup.enter="updateFilters"
         />
       </div>
       <div class="w-full flex flex-col justify-center items-center mt-30">
@@ -24,7 +25,7 @@
           class="w-full h-full mb-40 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mlg:gap-8 justify-center items-center box-border"
         >
           <div
-            v-for="article in filteredList"
+            v-for="article in listBlogs"
             :key="article.id"
             class="w-full h-full"
           >
@@ -37,13 +38,13 @@
           </div>
         </div>
         <div
-          v-if="filteredList.length == 0"
+          v-if="listBlogs?.length === 0"
           class="w-full h-full flex flex-col justify-center items-center text-center"
         >
           <nuxt-link to="/" class="wrapper-logo">
             <img
               v-lazy="
-                `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
+                `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
               "
               width="150"
               class="max-w-[150px] max-h-[150px]"
@@ -54,14 +55,15 @@
             No se encontraron artículos relacionados
           </p>
         </div>
-        <div v-if="filteredList.length > 12" class="mt-10 product_pagination">
+        <div v-if="totalBlogs > filters.limit" class="mt-10 product_pagination">
           <el-pagination
             background
             layout="prev, pager, next"
-            :total="filteredList.length"
-            :page-size="12"
-            :current-page.sync="currentPage"
             class="text-18 text-black bg-transparent"
+            :total="totalBlogs"
+            :page-size="filters.limit"
+            :current-page.sync="filters.page"
+            @current-change="changePage"
           />
         </div>
       </div>
@@ -69,11 +71,14 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+import filters from '@/mixins/filterBlogs'
 export default {
   name: 'Ko14Blog',
   components: {
     KoBlogCard: () => import('./Ko_BlogCard.vue'),
   },
+  mixins: [filters],
   props: {
     dataStore: {
       type: Object,
@@ -84,32 +89,8 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      currentPage: 1,
-      search: '',
-    }
-  },
   computed: {
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-    filterArticles() {
-      const initial = this.currentPage * 12 - 12
-      const final = initial + 12
-      return this.filteredList.slice(initial, final)
-    },
-    filteredList() {
-      if (this.search) {
-        return this.listArticulos.filter((element) => {
-          return element.titulo
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
-        })
-      } else {
-        return this.listArticulos
-      }
-    },
+    ...mapState(['stateListBLogs']),
   },
 }
 </script>

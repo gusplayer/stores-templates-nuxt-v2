@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="listArticulos.length > 0"
     class="w-full flex justify-center items-center py-25 lg:py-40 px-10"
     :style="`background-color: ${listBlogHome['--background_color_1']}`"
   >
@@ -21,12 +20,12 @@
       </p>
       <div
         ref="mySwiper"
-        v-swiper:mySwiper="swiperOption"
+        v-swiper:mySwiper="swiperOptions"
         class="w-full h-full"
       >
         <div class="swiper-wrapper w-full h-full">
           <div
-            v-for="article in listArticulos"
+            v-for="article in listBlogs"
             :key="article.id"
             class="swiper-slide w-full h-full"
           >
@@ -47,7 +46,7 @@
 export default {
   name: 'Ko16ListBlogHome',
   components: {
-    KoBlogCard: () => import('./_cardBlog/blogCard'),
+    KoBlogCard: () => import('./_cardBlog/blog-card.vue'),
   },
   props: {
     listBlogHome: {
@@ -69,23 +68,16 @@ export default {
   },
   data() {
     return {
-      swiperOption: {
+      listBlogs: [],
+      swiperOptions: {
         slidesPerView: 3,
         spaceBetween: 30,
-        // autoplay: {
-        //   delay: 7000,
-        //   disableOnInteraction: false,
-        // },
         breakpoints: {
-          10000: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-          1023: {
+          1024: {
             slidesPerView: 2,
             spaceBetween: 30,
           },
-          580: {
+          320: {
             slidesPerView: 1,
             spaceBetween: 10,
           },
@@ -94,12 +86,31 @@ export default {
     }
   },
   computed: {
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
     swiper() {
       return this.$refs.mySwiper.swiper
     },
   },
+  mounted() {
+    this.getBlogs()
+  },
+  methods: {
+    async getBlogs() {
+      const { success, data } = await this.$store.dispatch('GET_ARTICLES', {
+        id_tienda: this.dataStore.id,
+        limit: 6,
+        page: 1,
+      })
+      if (success) {
+        this.listBlogs = data.data
+      }
+    },
+  },
 }
 </script>
+<style scoped>
+.giftLoad,
+.swiper-slide {
+  height: 100%;
+  max-width: 400px;
+}
+</style>

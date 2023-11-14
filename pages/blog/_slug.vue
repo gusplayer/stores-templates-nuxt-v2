@@ -15,6 +15,8 @@ export default {
     K11Article: () =>
       import('@/components/template11/blog_page/Ko-articulo.vue'),
     K13Article: () => import('@/components/template13/_blog/Ko-articulo.vue'),
+    // K16Article: () =>
+    //   import('@/components/template16/_cardBlog/Ko-articulo.vue'),
   },
   layout: 'default',
   data() {
@@ -30,6 +32,7 @@ export default {
         13: 'K13Article',
         14: 'K13Article',
         15: 'K13Article',
+        16: 'K13Article',
       },
       templateMapping: {
         9: 'SET_CURRENTSETTING09',
@@ -39,7 +42,7 @@ export default {
         13: 'SET_CURRENTSETTING13',
         14: 'SET_CURRENTSETTING14',
         15: 'SET_CURRENTSETTING15',
-        // 16: 'SET_CURRENTSETTING15',
+        // 16: 'SET_CURRENTSETTING16',
       },
     }
   },
@@ -53,6 +56,8 @@ export default {
       'settingByTemplate10',
       'settingByTemplate11',
       'settingByTemplate13',
+      // 'settingByTemplate16',
+
       'template',
     ]),
     indexTemplate() {

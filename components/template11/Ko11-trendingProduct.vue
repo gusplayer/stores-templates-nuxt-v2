@@ -18,25 +18,25 @@
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper pb-10">
           <div
-            v-for="product in listProduct"
+            v-for="product in listProducts"
             :key="product.id"
-            class="swiper-slide"
+            class="swiper-slide h-full"
             style="margin-right: 40px; height: auto"
           >
             <KoProductCard
               :product="product"
-              :settingKcardProduct="settingKcardProduct"
+              :setting-card-products="settingCardProduct"
               :setting-general="settingGeneral"
-              class="gifyload"
+              class="gifyload h-full"
             />
           </div>
         </div>
-        <div v-if="fullProducts.length == 0" class="content-products-empty">
+        <div v-if="listProducts.length == 0" class="content-products-empty">
           <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
         <div class="btn-products">
-          <nuxt-link to="/productos">
-            <button class="btn">Ver todos los productos</button>
+          <nuxt-link to="/productos" class="btn">
+            <p>Ver todos los productos</p>
           </nuxt-link>
         </div>
       </div>
@@ -55,10 +55,6 @@ export default {
       type: Object,
       required: true,
     },
-    fullProducts: {
-      type: Array,
-      required: true,
-    },
     settingKtrending: {
       type: Object,
       required: true,
@@ -67,13 +63,14 @@ export default {
       type: Object,
       required: true,
     },
-    settingKcardProduct: {
+    settingCardProduct: {
       type: Object,
       required: true,
     },
   },
   data() {
     return {
+      listProducts: [],
       swiperOption: {
         slidesPerView: '',
         spaceBetween: '',
@@ -82,8 +79,8 @@ export default {
           disableOnInteraction: false,
         },
         breakpoints: {
-          10000: {
-            slidesPerView: 3,
+          1024: {
+            slidesPerView: 4,
             spaceBetween: 40,
           },
           768: {
@@ -106,13 +103,24 @@ export default {
     swiper() {
       return this.$refs.mySwiper.swiper
     },
-    listProduct() {
-      let tempfullProducts = this.fullProducts.slice(0, 12)
-      return tempfullProducts.filter((product) => {
-        if (product.tag_promocion != '1') {
-          return product
+  },
+  mounted() {
+    this.currentChange()
+  },
+  methods: {
+    async currentChange() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_ALL_PRODUCTS',
+        {
+          id_tienda: this.dataStore.id,
+          limit: 8,
+          page: 1,
+          topSales: 1,
         }
-      })
+      )
+      if (success) {
+        this.listProducts = data.publicProductList
+      }
     },
   },
 }

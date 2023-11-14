@@ -44,7 +44,7 @@
           <div class="content-items-right">
             <!-- <div class="content-category">
               <p class="text-category">
-                {{ data.detalle.categoria_producto.nombre_categoria_producto }}
+                {{ data.detalle.categoria_producto.nombreCategoriaProducto }}
               </p>
             </div> -->
             <div class="content-name">

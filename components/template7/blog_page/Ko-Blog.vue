@@ -4,34 +4,21 @@
     :style="[
       settingByTemplate7[0].settingK07Blog,
       settingByTemplate7[0].settingGeneral,
+      {
+        '--font-style-1':
+          settingByTemplate7[0]?.settingGeneral?.fount_1 ?? 'David libre',
+      },
+      {
+        '--font-style-2':
+          settingByTemplate7[0]?.settingGeneral?.fount_2 ?? 'Great Vibes',
+      },
+      {
+        '--font-style-3':
+          settingByTemplate7[0]?.settingGeneral?.fount_3 ?? 'Lora',
+      },
     ]"
   >
-    <div
-      :style="[
-        {
-          '--font-style-1':
-            this.settingByTemplate7[0].settingGeneral &&
-            this.settingByTemplate7[0].settingGeneral.fount_1
-              ? this.settingByTemplate7[0].settingGeneral.fount_1
-              : 'David libre',
-        },
-        {
-          '--font-style-2':
-            this.settingByTemplate7[0].settingGeneral &&
-            this.settingByTemplate7[0].settingGeneral.fount_2
-              ? this.settingByTemplate7[0].settingGeneral.fount_2
-              : 'Great Vibes',
-        },
-        {
-          '--font-style-3':
-            this.settingByTemplate7[0].settingGeneral &&
-            this.settingByTemplate7[0].settingGeneral.fount_3
-              ? this.settingByTemplate7[0].settingGeneral.fount_3
-              : 'Lora',
-        },
-      ]"
-      class="wrapper-banner-blog"
-    >
+    <div class="wrapper-banner-blog">
       <div
         class="banner-blog"
         :style="`background-image: url(${idCloudinaryBanner(
@@ -40,7 +27,7 @@
         )});`"
       >
         <div class="tittle-banner-blog">
-          <p class="txt-banner">{{ dataStore.tienda.nombre }}</p>
+          <p class="txt-banner">{{ dataStore.nombre }}</p>
           <p class="txt-banner" id="separator">{{ $t('header_blog') }}</p>
           <div class="icon-blog">
             <svg
@@ -97,32 +84,7 @@
         </div>
       </div>
     </div>
-    <div
-      class="contenedor"
-      :style="[
-        {
-          '--font-style-1':
-            this.settingByTemplate7[0].settingGeneral &&
-            this.settingByTemplate7[0].settingGeneral.fount_1
-              ? this.settingByTemplate7[0].settingGeneral.fount_1
-              : 'David libre',
-        },
-        {
-          '--font-style-2':
-            this.settingByTemplate7[0].settingGeneral &&
-            this.settingByTemplate7[0].settingGeneral.fount_2
-              ? this.settingByTemplate7[0].settingGeneral.fount_2
-              : 'Great Vibes',
-        },
-        {
-          '--font-style-3':
-            this.settingByTemplate7[0].settingGeneral &&
-            this.settingByTemplate7[0].settingGeneral.fount_3
-              ? this.settingByTemplate7[0].settingGeneral.fount_3
-              : 'Lora',
-        },
-      ]"
-    >
+    <div class="contenedor">
       <div class="content-search-blog">
         <!-- <div class="text-search">
           <p class="title">Buscar Articulo</p>
@@ -131,10 +93,11 @@
         <div class="content-tittle">
           <div class="input-animated">
             <input
-              type="text"
-              v-model="search"
+              v-model="filters.title"
+              type="search"
               class="input-text"
-              placeholder="¿Que deseas buscar?"
+              :placeholder="$t('header_search')"
+              @keyup.enter="updateFilters"
             />
             <span class="search-icon">
               <svg
@@ -160,23 +123,19 @@
       <div class="content-item">
         <div class="content-item-productos">
           <div class="grid-products">
-            <div
-              v-for="article in filteredList"
-              :key="article.id"
-              class="h-full"
-            >
-              <KoProductCard1
+            <div v-for="article in listBlogs" :key="article.id" class="h-full">
+              <KoBlogCard1
                 :article="article"
-                :settingK07Blog="settingByTemplate7[0].settingK07Blog"
-                :settingGeneral="settingByTemplate7[0].settingGeneral"
+                :setting-k07-blog="settingByTemplate7[0].settingK07Blog"
+                :setting-general="settingByTemplate7[0].settingGeneral"
               />
             </div>
           </div>
-          <div v-if="filteredList.length == 0" class="content-products-empty">
+          <div v-if="listBlogs?.length === 0" class="content-products-empty">
             <div class="header-content-logo">
               <nuxt-link to="/" class="wrapper-logo">
                 <img
-                  :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+                  :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
                   class="header-logo"
                   alt="Logo Img"
                 />
@@ -184,15 +143,16 @@
             </div>
             <p class="txt-products-empty">{{ $t('home_msgCatalogo') }}</p>
           </div>
-          <div class="pagination-medium">
-            <div class="product_pagination" v-if="filteredList.length > 12">
+          <div v-if="totalBlogs > filters.limit" class="pagination-medium">
+            <div class="product_pagination">
               <el-pagination
                 background
                 layout="prev, pager, next"
-                :total="filteredList.length"
-                :page-size="12"
-                :current-page.sync="currentPage"
-                class="pagination"
+                class="pagination bg-transparent"
+                :total="totalBlogs"
+                :page-size="filters.limit"
+                :current-page.sync="filters.page"
+                @current-change="changePage"
               />
             </div>
           </div>
@@ -202,44 +162,27 @@
   </div>
 </template>
 <script>
-import KoProductCard1 from '../../../components/template7/blog_page/_blogcard/Ko-cardblog'
-import idCloudinaryBanner from '../../../mixins/idCloudinary'
+import { mapState } from 'vuex'
+import filters from '@/mixins/filterBlogs'
+import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko-Blog',
+  name: 'KoBlog',
   components: {
-    KoProductCard1,
+    KoBlogCard1: () => import('./_blog-card/Ko-card-blog.vue'),
   },
+  mixins: [idCloudinaryBanner, filters],
   props: {
-    dataStore: Object,
-    settingByTemplate7: Array,
-  },
-  mixins: [idCloudinaryBanner],
-  data() {
-    return {
-      currentPage: 1,
-      search: '',
-    }
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate7: {
+      type: Array,
+      required: true,
+    },
   },
   computed: {
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-    filterArticles() {
-      const initial = this.currentPage * 12 - 12
-      const final = initial + 12
-      return this.filteredList.slice(initial, final)
-    },
-    filteredList() {
-      if (this.search) {
-        return this.listArticulos.filter((element) => {
-          return element.titulo
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
-        })
-      } else {
-        return this.listArticulos
-      }
-    },
+    ...mapState(['stateListBLogs']),
   },
   methods: {
     setBg() {

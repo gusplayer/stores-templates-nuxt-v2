@@ -11,7 +11,7 @@
           :style="`max-width:${settingByTemplate12.logoSize};`"
         >
           <img
-            :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+            :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
             class="header-logo"
             alt="Logo Img"
           />
@@ -19,11 +19,11 @@
       </div>
       <div class="content_car">
         <button
-          style="margin-right: 20px"
-          @click="openSearch"
           id="OpenCartTag"
+          style="margin-right: 20px"
           class="btn-cart content_car"
           :class="isVariantLogo ? 'text-1' : 'text-2'"
+          @click="openSearch"
         >
           <search-icon class="icon" />
           <p style="font-size: 18px; margin-left: 2px">
@@ -31,10 +31,10 @@
           </p>
         </button>
         <button
-          @click="openOrder"
           id="OpenCartTag"
           class="btn-cart content_car"
           :class="isVariantLogo ? 'text-1' : 'text-2'"
+          @click="openOrder"
         >
           <cart-icon class="icon" />
           <p style="font-size: 18px; margin-left: 2px">
@@ -43,7 +43,7 @@
         </button>
       </div>
     </header>
-    <KoOrder :dataStore="dataStore" />
+    <KoOrder :data-store="dataStore" />
     <KoSearch />
   </div>
 </template>
@@ -55,7 +55,7 @@ export default {
   name: 'Ko12IHeader',
   components: {
     KoOrder: () => import('../headers/_order1/order1.vue'),
-    KoSearch: () => import('../headers/header1/search.vue'),
+    KoSearch: () => import('../headers/k05_header/search.vue'),
   },
   mixins: [settingsProps],
   data() {

@@ -5,9 +5,7 @@
       settingGeneral,
       blog,
       {
-        '--font-style-1': settingGeneral.fount_1
-          ? settingGeneral.fount_1
-          : 'Roboto',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
@@ -27,14 +25,14 @@
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper">
           <div
-            v-for="(article, index) in filteredList"
+            v-for="article in listBlogs"
             :key="article.id"
-            :class="`swiper-slide wrapper-${index + 1}`"
+            :class="`swiper-slide`"
           >
-            <Kblog
+            <KBlogCard
               :article="article"
-              :blog="blog"
-              :settingGeneral="settingGeneral"
+              :setting-blog="blog"
+              :setting-general="settingGeneral"
             />
           </div>
         </div>
@@ -43,37 +41,41 @@
   </div>
 </template>
 <script>
-import Kblog from '../template10/_blog/blogcard'
 export default {
-  name: 'Ko10-blog',
+  name: 'Ko10Blog',
   components: {
-    Kblog,
+    KBlogCard: () => import('./blog_page/_card/k10-blog-card.vue'),
   },
   props: {
-    blog: Object,
-    dataStore: Object,
-    settingGeneral: Object,
+    blog: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
+      listBlogs: [],
       swiperOption: {
-        slidesPerView: '',
-        spaceBetween: '',
+        slidesPerView: 'auto',
+        spaceBetween: 20,
         breakpoints: {
-          10000: {
-            slidesPerView: 3,
-            spaceBetween: 40,
-          },
           1920: {
             slidesPerView: 3,
-            spaceBetween: 40,
+            spaceBetween: 20,
           },
-          1024: {
+          768: {
             slidesPerView: 2,
             spaceBetween: 30,
           },
-
-          580: {
+          320: {
             slidesPerView: 1,
             spaceBetween: 10,
           },
@@ -85,30 +87,22 @@ export default {
     swiper() {
       return this.$refs.mySwiper.swiper
     },
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-    filterArticles() {
-      const initial = this.currentPage * 12 - 12
-      const final = initial + 12
-      return this.filteredList.slice(initial, final)
-    },
-    filteredList() {
-      if (this.search) {
-        return this.listArticulos.filter((element) => {
-          return element.titulo
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
-        })
-      } else {
-        return this.listArticulos
+  },
+  mounted() {
+    this.getBlogs()
+  },
+  methods: {
+    async getBlogs() {
+      const { success, data } = await this.$store.dispatch('GET_ARTICLES', {
+        id_tienda: this.dataStore.id,
+        limit: 6,
+        page: 1,
+      })
+      if (success) {
+        this.listBlogs = data.data
       }
     },
   },
-  mounted() {
-    this.mySwiper.slideTo(3, 1000, false)
-  },
-  watch: {},
 }
 </script>
 <style scoped>

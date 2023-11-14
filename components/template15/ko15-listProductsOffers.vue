@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="fullProducts.length > 0"
+    v-if="listProducts.length > 0"
     class="w-full flex justify-center items-center py-30 lg:py-50 px-10"
     :style="`background-color: ${listProductsOffers['--background_color_1']}`"
   >
@@ -13,22 +13,23 @@
       >
         {{ listProductsOffers.title }}
       </p>
-      <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="w-full">
+      <div ref="mySwiper" v-swiper:mySwiper="swiperOption" class="w-full">
         <div class="swiper-wrapper w-full">
           <div
-            v-for="(product, index) in fullProducts"
+            v-for="(product, index) in listProducts"
             :key="index"
             class="swiper-slide w-full"
           >
             <KoProductCard
               :product="product"
-              :cardProducts="cardProducts"
-              :settingGeneral="settingGeneral"
+              :setting-card-products="cardProducts"
+              :setting-general="settingGeneral"
+              class="w-full h-full"
             />
           </div>
         </div>
-        <div class="swiper-button-prev" v-if="fullProducts.length > 1" />
-        <div class="swiper-button-next" v-if="fullProducts.length > 1" />
+        <div v-if="listProducts.length > 1" class="swiper-button-prev"></div>
+        <div v-if="listProducts.length > 1" class="swiper-button-next"></div>
       </div>
     </div>
   </div>
@@ -36,7 +37,10 @@
 
 <script>
 export default {
-  name: 'Ko15-listProductsOffers',
+  name: 'Ko15ListProductsOffers',
+  components: {
+    KoProductCard: () => import('./_cardProduct/ProductCard'),
+  },
   props: {
     listProductsOffers: {
       type: Object,
@@ -54,16 +58,10 @@ export default {
       type: Object,
       required: true,
     },
-    fullProducts: {
-      type: Array,
-      required: true,
-    },
-  },
-  components: {
-    KoProductCard: () => import('./_cardProduct/ProductCard'),
   },
   data() {
     return {
+      listProducts: [],
       swiperOption: {
         direction: 'horizontal',
         setWrapperSize: true,
@@ -115,6 +113,26 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
+    },
+  },
+  mounted() {
+    this.currentChange()
+  },
+  methods: {
+    async currentChange() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_ALL_PRODUCTS',
+        {
+          id_tienda: this.dataStore.id,
+          limit: 8,
+          page: 1,
+          // topSales: 1,
+          promotion: 1,
+        }
+      )
+      if (success) {
+        this.listProducts = data.publicProductList
+      }
     },
   },
 }

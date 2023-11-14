@@ -4,21 +4,21 @@
       <div
         v-if="contentDescription"
         class="tab"
-        :class="selecttag == 1 ? 'show-select-active' : ''"
-        @click="selectTag1"
+        :class="selectTag == 1 ? 'show-select-active' : ''"
+        @click="sendIndexTag(1)"
       >
         <p class="tittle">{{ $t('productdetail_description') }}</p>
       </div>
       <div
         class="tab"
-        :class="selecttag == 2 ? 'show-select-active' : ''"
-        @click="selectTag2"
+        :class="selectTag == 2 ? 'show-select-active' : ''"
+        @click="sendIndexTag(2)"
       >
         <p class="tittle">{{ $t('productdetail_opcionesPago') }}</p>
       </div>
     </div>
     <div class="content-tab">
-      <div v-if="focusbtn1 && contentDescription" class="editor">
+      <div v-if="selectTag === 1 && contentDescription" class="editor">
         <el-tiptap
           v-model="contentDescription"
           :extensions="extensions"
@@ -30,7 +30,7 @@
           :showMenubar="false"
         />
       </div>
-      <div v-if="focusbtn2" class="item-content opcpago">
+      <div v-if="selectTag === 2" class="item-content opcpago">
         <ul>
           <li v-if="mediospago.consignacion == 1">
             <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
@@ -209,7 +209,7 @@
             </a>
           </li>
           <li v-if="mediospago.flow == 1">
-            <h4>Tucompra</h4>
+            <h4>Flow</h4>
             <p>
               {{ $t('text_pago_flowInfo') }}
             </p>
@@ -260,53 +260,30 @@ export default {
   },
   data() {
     return {
-      medioEnvio: '',
-      envioproducto: '',
-      selecttag: 1,
-      focusbtn1: true,
-      focusbtn2: false,
-      focusbtn3: false,
+      selectTag: 1,
       contentDescription: this.data?.description,
     }
   },
   computed: {
     mediospago() {
-      return this.dataStore.medios_pago
+      return this.dataStore.medioPagos
     },
     activeClass() {
-      if (this.data.description == '' || this.data.description == null) {
-        return true
-      } else {
-        return false
-      }
+      return (
+        !this.data.productosInfo.descripcion ||
+        this.data.productosInfo.descripcion == null
+      )
     },
     envios() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties, vue/no-mutating-props
-      this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
-      return this.data.medioEnvio
+      return this.$store.state.envios.valores
     },
   },
   mounted() {
-    this.contentDescription ? this.selectTag1() : this.selectTag2()
+    this.sendIndexTag(this.contentDescription ? 1 : 2)
   },
   methods: {
-    selectTag1() {
-      this.selecttag = 1
-      this.focusbtn1 = true
-      this.focusbtn2 = false
-      this.focusbtn3 = false
-    },
-    selectTag2() {
-      this.selecttag = 2
-      this.focusbtn1 = false
-      this.focusbtn2 = true
-      this.focusbtn3 = false
-    },
-    selectTag3() {
-      this.selecttag = 3
-      this.focusbtn1 = false
-      this.focusbtn2 = false
-      this.focusbtn3 = true
+    sendIndexTag(value) {
+      this.selectTag = value
     },
   },
 }

@@ -1,7 +1,13 @@
 <template>
-  <div id="width" class="w-full">
-    <KoProductDetail />
-    <KFooterWaLogo v-bind="componentsProps" />
+  <div
+    id="width"
+    class="w-full flex flex-col justify-center items-center bg-slate-100"
+  >
+    <KoProductDetail class="w-full" />
+    <KFooterWaLogo
+      v-bind="componentsProps"
+      class="w-full max-w-[900px] bg-white-white shadow-md"
+    />
   </div>
 </template>
 
@@ -12,7 +18,7 @@ export default {
     KoProductDetail: () =>
       import('@/components/whatsapp/Ko-ProductDetail-wa.vue'),
     KFooterWaLogo: () =>
-      import('@/components/footers/footerWa/footerWa1/ko-Footer-wa-logo.vue'),
+      import('@/components/footers/footer_wa/ko-Footer-wa-logo.vue'),
   },
   layout: 'wa',
   computed: {

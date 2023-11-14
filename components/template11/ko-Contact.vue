@@ -6,13 +6,14 @@
       settingByTemplate11[0].settingGeneral,
       {
         '--font-style-1':
-          this.settingByTemplate11[0]?.settingGeneral?.fount_1 ?? 'Roboto',
+          settingByTemplate11[0]?.settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
     <div class="content-form-contact">
       <div class="banner-mapa">
         <el-carousel
+          v-if="geolocalizacion?.length"
           :interval="5000"
           arrow="always"
           height="250px"
@@ -20,15 +21,10 @@
           style="width: 100%"
           class="wrapperCarousel"
           @change="changeLocation"
-          v-if="
-            this.dataStore &&
-            this.dataStore.geolocalizacion &&
-            this.dataStore.geolocalizacion.length
-          "
         >
           <el-carousel-item
-            v-for="(item, inggeo) in dataStore.geolocalizacion"
-            :key="inggeo"
+            v-for="(item, indexGeo) in geolocalizacion"
+            :key="indexGeo"
           >
             <iframe
               :src="`https://maps.google.com/maps?q=${item.latitud},${item.longitud}&hl=es;z=14&amp;output=embed`"
@@ -47,10 +43,7 @@
             <div class="content-info">
               <p class="txt-info">Información</p>
             </div>
-            <div
-              class="content-locatioin"
-              v-if="this.dataStore.geolocalizacion.length"
-            >
+            <div v-if="geolocalizacion?.length" class="content-locatioin">
               <svg
                 class="icon-left"
                 xmlns="http://www.w3.org/2000/svg"
@@ -64,11 +57,8 @@
                 />
               </svg>
               <p class="txt-left">
-                Sede {{ this.positionLocation + 1 }}:
-                {{
-                  this.dataStore.geolocalizacion[this.positionLocation]
-                    .direccion
-                }}
+                Sede {{ positionLocation + 1 }}:
+                {{ geolocalizacion[positionLocation].direccion }}
               </p>
             </div>
             <div class="empty"></div>
@@ -88,7 +78,7 @@
               <div class="email">
                 <p class="txt-left">Envíenos un correo electrónico</p>
                 <p class="txt-left">
-                  {{ this.dataStore.tienda.email_tienda }}
+                  {{ dataStore.tiendasInfo.emailTienda }}
                 </p>
               </div>
             </div>
@@ -113,12 +103,12 @@
                     >
                       <template slot-scope="{ errors }">
                         <input
+                          id="ContactName"
+                          v-model="nombre"
                           name="nombre"
                           type="text"
-                          v-model="nombre"
                           class="input-text"
                           :placeholder="$t('contact_nombrePlacer')"
-                          id="ContactName"
                         />
                         <span class="text-error" v-show="errors[0]">
                           {{ errors[0] }}
@@ -135,12 +125,12 @@
                     >
                       <template slot-scope="{ errors }">
                         <input
+                          id="ContactEmail"
+                          v-model="email"
                           name="email"
                           type="email"
-                          v-model="email"
                           :placeholder="$t('contact_emailPlacer')"
                           class="input-text"
-                          id="ContactEmail"
                         />
                         <span class="text-error" v-show="errors[0]">
                           {{ errors[0] }}
@@ -157,10 +147,10 @@
                     >
                       <template slot-scope="{ errors }">
                         <textarea
+                          v-model="comment"
                           class="input-text-rectangule"
                           name="comentario"
                           :placeholder="$t('contact_mensalePlacer')"
-                          v-model="comment"
                         ></textarea>
                         <span class="text-error" v-show="errors[0]">
                           {{ errors[0] }}
@@ -178,12 +168,12 @@
                       >
                         <template slot-scope="{ errors }">
                           <input
+                            id="ContactPhone"
+                            v-model="numberphone"
                             class="input-text"
                             name="celular"
                             type="number"
                             :placeholder="$t('contact_telefonoPlacer')"
-                            v-model="numberphone"
-                            id="ContactPhone"
                           />
                           <span class="text-error" v-show="errors[0]">
                             {{ errors[0] }}
@@ -216,16 +206,23 @@
 </template>
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko-Contact',
-  props: {
-    dataStore: Object,
-    settingByTemplate11: Array,
-  },
+  name: 'Ko11Contact',
   components: {
     ValidationObserver,
     ValidationProvider,
+  },
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate11: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -243,51 +240,63 @@ export default {
         {
           nombre: 'Facebook',
           icon: 'facebook-icon',
-          link: this.dataStore.tienda.red_facebook,
+          link: this.dataStore.redes.facebook,
         },
         {
           nombre: 'Twitter',
           icon: 'twitter-icon',
-          link: this.dataStore.tienda.red_twitter,
+          link: this.dataStore.redes.twitter,
         },
         {
           nombre: 'Instagram',
           icon: 'instagram-icon',
-          link: this.dataStore.tienda.red_instagram,
+          link: this.dataStore.redes.instagram,
         },
         {
           nombre: 'Youtube',
           icon: 'youtube-icon',
-          link: this.dataStore.tienda.red_youtube,
+          link: this.dataStore.redes.youtube,
         },
       ],
       dataContact: [
         {
-          dato: this.dataStore.tienda.telefono,
+          dato: this.dataStore.tiendasInfo.telefono,
           icon: 'phone-icon',
         },
         {
-          dato: this.dataStore.tienda.whatsapp,
+          dato: this.dataStore.redes.whatsapp,
           icon: 'whatsapp-icon',
         },
         {
-          dato: this.dataStore.tienda.email_tienda,
+          dato: this.dataStore.tiendasInfo.emailTienda,
           icon: 'email-icon',
         },
       ],
       positionLocation: 0,
     }
   },
+  computed: {
+    ...mapState(['geolocalizacion']),
+    ...mapState({
+      facebookPixel: (state) => state.analytics_tagmanager,
+    }),
+  },
+  watch: {
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.redes.facebook
+      this.links[1].link = this.dataStore.redes.twitter
+      this.links[2].link = this.dataStore.redes.instagram
+      this.links[3].link = this.dataStore.redes.youtube
+      this.dataContact[0].dato = this.dataStore.tiendasInfo.telefono
+      this.dataContact[1].dato = this.dataStore.redes.whatsapp
+      this.dataContact[2].dato = this.dataStore.tiendasInfo.emailTienda
+    },
+  },
   destroyed() {
     this.nombre = ''
     this.email = ''
     this.numberphone = ''
     this.comment = ''
-  },
-  computed: {
-    facebookPixel() {
-      return this.$store.state.analytics_tagmanager
-    },
   },
   methods: {
     changeLocation(value) {
@@ -308,7 +317,7 @@ export default {
                   correo: this.email,
                   celular: this.numberphone,
                   comentario: this.comment,
-                  tienda: this.dataStore.tienda.id_tienda,
+                  tienda: this.dataStore.id,
                 },
               })
               if (data.status == 200) {
@@ -350,17 +359,6 @@ export default {
       this.email = ''
       this.numberphone = ''
       this.comment = ''
-    },
-  },
-  watch: {
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-      this.dataContact[0].dato = this.dataStore.tienda.telefono
-      this.dataContact[1].dato = this.dataStore.tienda.whatsapp
-      this.dataContact[2].dato = this.dataStore.tienda.email_tienda
     },
   },
 }

@@ -5,9 +5,7 @@
         <div class="w-full flex flex-row justify-center items-center">
           <nuxt-link
             :to="{
-              path: stateWapiME
-                ? `/wa/${dataStore.tienda.id_tienda}/blog`
-                : `/`,
+              path: stateWapiME ? `/wa/${dataStore.id}/blog` : `/`,
             }"
           >
             <p class="title-form">{{ $t('header_inicio') }}</p>
@@ -170,7 +168,7 @@
                 {{ orden.venta.total | currency }}
               </span>
             </p>
-            <p class="title-info-orden" v-if="choicePayment">
+            <p v-if="choicePayment" class="title-info-orden">
               {{ $t('mcompra_metodoPago') }}
               <span class="value-info-orden">
                 {{ $t(`${choicePayment.title}`) }}
@@ -346,34 +344,34 @@
                   </p>
                   <p class="address">
                     {{ $t('mcompra_direccion') }}
-                    <span
-                      class="value-data"
-                      v-if="dataStore.geolocalizacion.length"
-                    >
-                      {{ dataStore.geolocalizacion[0].direccion }}
+                    <span v-if="geolocalizacion.length" class="value-data">
+                      {{ geolocalizacion[0].direccion }}
                     </span>
                     <span v-else class="value-data">N/A</span>
                   </p>
                   <p class="telephone">
                     {{ $t('mcompra_telefono') }}
-                    <span v-if="dataStore.tienda.telefono" class="value-data">
-                      {{ dataStore.tienda.telefono }}
+                    <span
+                      v-if="dataStore.tiendasInfo.telefono"
+                      class="value-data"
+                    >
+                      {{ dataStore.tiendasInfo.telefono }}
                     </span>
                     <span v-else class="value-data">N/A</span>
                   </p>
                   <p class="owner">
                     {{ $t('mcompra_nombreTienda') }}
-                    <span v-if="dataStore.tienda.nombre" class="value-data">
-                      {{ dataStore.tienda.nombre }}
+                    <span v-if="dataStore.nombre" class="value-data">
+                      {{ dataStore.nombre }}
                     </span>
                     <span v-else class="value-data">N/A</span>
                   </p>
                 </div>
               </el-collapse-item>
               <el-collapse-item
+                v-if="dataTransporter"
                 :title="$t('mcompra_infoTransporter')"
                 name="3"
-                v-if="dataTransporter"
               >
                 <div class="content-info-buyer">
                   <p
@@ -416,9 +414,9 @@
 <script>
 import { mapState } from 'vuex'
 import axios from 'axios'
-import idCloudinary from '../../mixins/idCloudinary'
-import currency from '../../mixins/formatCurrent'
-import states from '../../mixins/states'
+import idCloudinary from '@/mixins/idCloudinary'
+import currency from '@/mixins/formatCurrent'
+import states from '@/mixins/states'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   name: 'KoMiCompraWa',
@@ -467,13 +465,11 @@ export default {
     }
   },
   computed: {
-    ...mapState(['stateWapiME']),
-    stateLayoutWa() {
-      return this.$store.state.layoutWa
-    },
-    dataHoko() {
-      return this.$store.state.dataHoko
-    },
+    ...mapState(['stateWapiME', 'geolocalizacion', 'dataHoko', 'cities']),
+    ...mapState({
+      stateLayoutWa: (state) => state.layoutWa,
+      facebookPixel: (state) => state.analytics_tagmanager,
+    }),
     choicePayment() {
       return this.payments.find(
         (payment) => payment.id === this.orden.venta.metodo_pago
@@ -483,12 +479,6 @@ export default {
       return this.statusUpdate.find(
         (payment) => payment.id === this.orden.venta.estado
       )
-    },
-    cities() {
-      return this.$store.state.cities
-    },
-    facebookPixel() {
-      return this.$store.state.analytics_tagmanager
     },
   },
   watch: {
@@ -651,11 +641,11 @@ export default {
       this.$refs.observer
         .validate()
         .then((response) => {
-          if (response && this.dataStore && this.dataStore.tienda) {
+          if (response) {
             this.$router.replace({ query: {} })
             return axios
               .get(
-                `${this.$store.state.urlKomercia}/api/orden/${this.dataStore.tienda.id_tienda}/${this.numOrden}`,
+                `${this.$store.state.urlKomercia}/api/orden/${this.dataStore.id}/${this.numOrden}`,
                 {
                   headers: {
                     'content-type': 'application/json',
@@ -707,7 +697,7 @@ export default {
           content_ids: array,
           contents: content,
           value: this.orden.venta.total,
-          currency: this.dataStore.tienda.moneda,
+          currency: this.dataStore.tiendasInfo.moneda,
           description: `Orden: ${this.numOrden}, Estado de la venta: ${this.choiceState.ref}`,
         })
       }
@@ -715,7 +705,7 @@ export default {
     setCity() {
       if (this.cities) {
         this.city = this.cities.find(
-          (city) => city.id === this.dataStore.tienda.ciudad
+          (city) => city.id === this.dataStore.ciudad
         )
       }
     },

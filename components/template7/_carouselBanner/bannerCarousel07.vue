@@ -6,16 +6,10 @@
       banner,
       settingGeneral,
       {
-        '--font-style-2':
-          settingGeneral && settingGeneral.fount_2
-            ? settingGeneral.fount_2
-            : 'Great Vibes',
+        '--font-style-2': settingGeneral?.fount_2 ?? 'Great Vibes',
       },
       {
-        '--font-style-3':
-          settingGeneral && settingGeneral.fount_3
-            ? settingGeneral.fount_3
-            : 'Lora',
+        '--font-style-3': settingGeneral?.fount_3 ?? 'Lora',
       },
     ]"
   >
@@ -47,13 +41,22 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   props: {
-    banner: Object,
-    settingKCarousel: Object,
-    settingGeneral: Object,
+    banner: {
+      type: Object,
+      required: true,
+    },
+    settingKCarousel: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
 }
 </script>

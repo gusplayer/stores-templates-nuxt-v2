@@ -4,49 +4,72 @@
       <div class="content-items-product">
         <div class="content-categories">
           <div class="content-items-categorias-text">
-            <p class="txt-catalogo" @click="clear">
+            <button class="txt-catalogo" @click="clearFilters">
               {{ $t('home_catalogo') }}
-            </p>
-            <p v-if="nameCategoryHeader" class="txt-category mx-2">/</p>
-            <p v-if="nameCategoryHeader" class="txt-category">
-              {{ nameCategoryHeader }}
-            </p>
-            <p v-if="nameSubCategoryHeader" class="txt-category mx-2">/</p>
-            <p v-if="nameSubCategoryHeader" class="txt-category">
-              {{ nameSubCategoryHeader }}
-            </p>
+            </button>
+            <div class="flex flex-row justify-center items-start">
+              <button
+                v-if="nameCategory"
+                class="txt-category"
+                @click="breadcrumbsClear(1)"
+              >
+                <span class="font-normal pr-4">/</span>{{ nameCategory }}
+              </button>
+              <button
+                v-if="nameSubCategory"
+                class="txt-category"
+                @click="breadcrumbsClear(2)"
+              >
+                <span class="font-normal pr-4">/</span>{{ nameSubCategory }}
+              </button>
+              <p v-if="tagProduct" class="txt-category">
+                <span class="font-normal pr-4">/</span>{{ tagProduct }}
+              </p>
+            </div>
           </div>
           <div>
             <search-icon class="icon-s" @click="openSearch" />
-            <menu-icon
-              class="icon-s icon-responsive"
-              @click="openMenuLateral"
-            />
+            <div class="flex md:hidden">
+              <menu-icon class="icon-s" @click="openMenuLateral" />
+            </div>
           </div>
         </div>
-        <KoSearch :setting-by-template="settingByTemplate" />
+        <KoSearch
+          :data-store="dataStore"
+          :setting-by-template="settingByTemplate"
+        />
+        <KoMenu
+          :data-store="dataStore"
+          :setting-by-template="settingByTemplate"
+        />
         <div class="content-grid-product">
           <div
-            v-for="product in filterProduct"
+            v-for="product in listProducts"
             :key="product.id"
             class="card-product"
           >
-            <ProductCard :product="product" :data-store="dataStore" />
+            <ProductCard
+              :product="product"
+              :data-store="dataStore"
+              class="h-full"
+            />
           </div>
         </div>
-        <div v-if="fullProducts.length == 0" class="content-products-empty">
+        <div v-if="listProducts.length === 0" class="content-products-empty">
           <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
         <br />
-        <div v-if="fullProducts.length > 16" class="wrapper-pagination">
+        <div v-if="totalProducts > filters.limit" class="wrapper-pagination">
           <div class="pagination-medium">
             <el-pagination
-              background
               small
+              background
               layout="prev, pager, next"
-              :total="fullProducts.length"
-              :page-size="16"
-              :current-page.sync="currentPage"
+              :total="totalProducts"
+              :page-size="filters.limit"
+              :current-page.sync="previousPage"
+              class="pagination bg-transparent"
+              @current-change="changePage"
             />
           </div>
         </div>
@@ -55,227 +78,38 @@
   </div>
 </template>
 <script>
-import ProductCard from '../template3/productCard/ko-productCard'
-import KoSearch from '../searchWa.vue'
-import filterProducts from '../../../mixins/filterProducts'
-// import KoMenu from '../../headers/_lateralMenu/_lateralMenu/openMenuLeftWapi.vue'
+import filters from '@/mixins/filterProducts'
 export default {
   name: 'ProductListWa3',
-  components: { ProductCard, KoSearch },
-  mixins: [filterProducts],
+  components: {
+    ProductCard: () => import('../product-card/Ko99-product-card-3.vue'),
+    KoMenu: () =>
+      import('../../headers/_lateralMenu/_lateralMenu/openMenuLeftWapi.vue'),
+    KoSearch: () => import('../ko99-search-wa.vue'),
+  },
+  mixins: [filters],
   props: {
-    dataStore: {
+    settingByTemplate: {
       type: Object,
       required: true,
     },
-    fullProducts: {
-      type: Array,
-      required: true,
-    },
-  },
-
-  data() {
-    return {
-      search: '',
-      currentPage: 1,
-    }
-  },
-  computed: {
-    categorias() {
-      return this.dataStore.categorias
-    },
-    subcategories() {
-      return this.dataStore.subcategorias
-    },
-    getProductsCategorie() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
-      return this.fullProducts
-        .filter((product) => product.categoria == this.select)
-        .slice(initial, final)
-    },
-    filterProduct() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
-      return this.fullProducts.slice(initial, final)
-    },
-    selectedCategory() {
-      return this.$store.state.products.payload
-    },
-    selectedType() {
-      return this.$store.state.products.type
-    },
-    heightHeader() {
-      return this.$refs.header.offsetHeight
-    },
-    nameCategoryHeader() {
-      return this.$store.state.category_producto_header
-    },
-    nameSubCategoryHeader() {
-      return this.$store.state.subcategory_producto_header
-    },
-    searchValue() {
-      return this.$store.state.searchValue
-    },
-    previousPage() {
-      return this.$store.state.previousPage
-    },
-    settingByTemplate() {
-      return this.$store.state.settingByTemplate
-    },
   },
   watch: {
-    search(value) {
-      this.SearchProduct2(value)
-    },
-    currentPage() {
-      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
+    previousPage() {
       let timerTimeout = null
+      // eslint-disable-next-line no-unused-vars
       timerTimeout = setTimeout(() => {
         timerTimeout = null
-        window.scrollTo(0, 0)
+        window.scrollBy(0, -1500)
       }, 250)
     },
-    previousPage() {
-      if (this.previousPage) {
-        this.currentPage = this.previousPage
-      }
-    },
-    nameCategoryHeader(value) {
-      return value
-    },
-    nameSubCategoryHeader(value) {
-      return value
-    },
-    searchValue(value) {
-      this.SearchProduct2(value)
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.getQuery()
-    },
-  },
-  mounted() {
-    this.getQuery()
-    if (this.previousPage) {
-      this.currentPage = this.previousPage
-    }
   },
   methods: {
     openMenuLateral() {
       this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', true)
     },
-    getQuery() {
-      if (this.$route.query && this.$route.query.category) {
-        this.sendCategoryUrlMix(this.$route.query.category)
-      } else if (this.$route.query && this.$route.query.subcategory) {
-        this.SendSubCategoryUrlMix(
-          this.$route.query.subcategory,
-          this.categorias,
-          this.subcategories
-        )
-      } else if (
-        this.$route.query &&
-        this.$route.query.tagId &&
-        this.$route.query.tagName
-      ) {
-        this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
-      } else if (this.$route.query && this.$route.query.search) {
-        this.SearchProduct(decodeURIComponent(this.$route.query.search))
-      } else if (this.$route.fullPath == '/') {
-        this.allCategories()
-      }
-    },
     openSearch() {
       this.$store.commit('SET_OPEN_SEARCH', true)
-    },
-    SearchProduct2(search) {
-      if (search.length) {
-        this.$store.commit('products/FILTER_BY', {
-          type: ['search'],
-          data: search,
-        })
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: ['all'],
-          data: '',
-        })
-      }
-      this.currentPage = 1
-    },
-    breadcrumbsSendCategory(value) {
-      let filtradoCategories = this.categorias.find((element) => {
-        if (element.nombre_categoria_producto == value) {
-          return element
-        }
-      })
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: ['category'],
-        data: filtradoCategories.nombre_categoria_producto,
-      })
-    },
-    clear() {
-      this.$store.commit('SET_STATE_BANNER', true)
-      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: ['all'],
-        data: '',
-      })
-      this.$emit('clear')
-    },
-    sendCategoryUrl(value) {
-      let urlFiltrada = decodeURIComponent(value)
-      this.$store.commit('products/FILTER_BY', {
-        type: ['category'],
-        data: urlFiltrada,
-      })
-      if (this.$store.getters['products/filterProducts'].length) {
-        this.$store.commit('SET_CATEGORY_PRODUCTO', urlFiltrada)
-      } else {
-        this.$store.commit('SET_CATEGORY_PRODUCTO', '')
-      }
-    },
-    SendSubCategoryUrl(value) {
-      let urlFiltradaTemp = decodeURIComponent(value)
-      let resTemp = urlFiltradaTemp.split('^')
-      let urlFiltrada = decodeURIComponent(resTemp[0])
-      let filtradoSubCategory = this.subcategories.find((element) => {
-        if (
-          element.categoria == parseInt(resTemp[1]) &&
-          element.nombre_subcategoria == urlFiltrada
-        ) {
-          return element
-        }
-      })
-      if (filtradoSubCategory) {
-        let filtradoCategories = this.categorias.find(
-          (element) => element.id == parseInt(resTemp[1])
-        )
-        this.$store.commit('products/FILTER_BY', {
-          type: ['subcategory'],
-          data: filtradoSubCategory.id,
-        })
-        if (this.$store.getters['products/filterProducts'].length) {
-          this.$store.commit(
-            'SET_CATEGORY_PRODUCTO',
-            filtradoCategories.nombre_categoria_producto
-          )
-          this.$store.commit(
-            'SET_SUBCATEGORY_PRODUCTO',
-            filtradoSubCategory.nombre_subcategoria
-          )
-        } else {
-          this.$store.commit('SET_CATEGORY_PRODUCTO', '')
-          this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-        }
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: ['subcategory'],
-          data: '',
-        })
-      }
     },
   },
 }

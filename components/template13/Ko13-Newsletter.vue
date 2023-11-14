@@ -1,50 +1,57 @@
 <template>
   <div
-    class="wrapper_newsletter"
-    :style="[newsletter, settingGeneral]"
     v-if="newsletter"
+    class="w-full flex justify-center items-center box-border wrapper_newsletter"
+    :style="[newsletter, settingGeneral]"
   >
-    <div class="contenedor px-20">
-      <p class="subtext">{{ $t('newsletter_subtitle') }}</p>
-      <p class="title">
+    <div
+      class="contenedor w-full max-w-[1300px] flex flex-col justify-center items-center px-20"
+    >
+      <p class="text-center subtext">{{ $t('newsletter_subtitle') }}</p>
+      <p class="w-[600px] text-center pb-50 title">
         {{ $t('newsletter_title') }}
       </p>
-      <div class="content-button">
+      <div class="w-full flex flex-row justify-center pb-10">
         <ValidationProvider
           ref="validate"
           name="email"
           rules="required|email"
-          class="content-input-error"
+          class="flex flex-col"
         >
           <template slot-scope="{ errors }">
             <input
+              id="CorreoElectronicoNewslletter"
+              v-model="email"
               name="email"
               class="input-text"
               type="email"
               :placeholder="$t('newsletter_email')"
-              v-model="email"
-              id="CorreoElectronicoNewslletter"
             />
             <span
               v-show="errors[0] || register"
-              class="text-error"
+              class="w-full text-12 ml-10 text-[#cb2027]"
               :style="register ? 'color:green' : ''"
-              >{{ errorsCheckbox || register }}</span
             >
+              {{ errorsCheckbox || register }}
+            </span>
           </template>
         </ValidationProvider>
         <button ref="colorBtn" class="btn" @click="submitNewsletter">
           {{ $t('newsletter_btn') }}
         </button>
       </div>
-      <div class="content-checkbox">
-        <input id="checkboxNewsletter" type="checkbox" v-model="checked" />
+      <div class="w-full flex flex-row justify-center">
+        <input id="checkboxNewsletter" v-model="checked" type="checkbox" />
         <label for="checkboxNewsletter" class="text-checkbox">
           {{ $t('newsletter_msg') }}
         </label>
       </div>
-      <div class="content-checkbox">
-        <p class="text-error" v-if="stateChecked" style="max-width: 340px">
+      <div class="w-full flex flex-row justify-center">
+        <p
+          v-if="stateChecked"
+          class="w-full text-12 ml-10 text-[#cb2027]"
+          style="max-width: 340px"
+        >
           Marcar checkbox para poder suscribirse al boletín informativo
         </p>
       </div>
@@ -56,17 +63,25 @@
 import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko13-Newsletter-1',
-  props: {
-    dataStore: Object,
-    newsletter: Object,
-    settingGeneral: Object,
-  },
+  name: 'Ko13Newsletter',
   components: {
     ValidationObserver,
     ValidationProvider,
   },
-  mounted() {},
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    newsletter: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       errorsCheckbox: 'El campo checkbox y email son obligatorios',
@@ -76,13 +91,13 @@ export default {
       stateChecked: false,
     }
   },
-  destroyed() {
-    this.email = ''
-  },
   computed: {
     facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
+  },
+  destroyed() {
+    this.email = ''
   },
   methods: {
     submitNewsletter() {
@@ -93,7 +108,7 @@ export default {
             if (response.valid) {
               const json = {
                 email: this.email,
-                tienda: this.dataStore.tienda.id_tienda,
+                tienda: this.dataStore.id,
               }
               axios
                 .post(
@@ -127,31 +142,18 @@ export default {
       }
     },
   },
-  watch: {},
 }
 </script>
 
 <style scoped>
 .wrapper_newsletter {
-  display: flex;
-  width: 100%;
   background-color: var(--background_color_1);
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
 }
 .contenedor {
-  width: 100%;
-  max-width: 1300px;
   padding-bottom: var(--padding);
   padding-top: var(--padding);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 }
 .subtext {
-  text-align: center;
   color: var(--color_pretitle);
   font-size: var(--fontSizepreTitle);
   font-weight: var(--fontWeighpreTitle);
@@ -164,16 +166,6 @@ export default {
   line-height: 1.24;
   letter-spacing: -0.4px;
   color: var(--color_title);
-  text-align: center;
-  width: 600px;
-  padding-bottom: 50px;
-}
-.content-button {
-  display: flex;
-  padding-bottom: 10px;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
 }
 .input-text {
   font-size: 14px;
@@ -194,16 +186,7 @@ export default {
   outline: 0;
   border: solid 2px var(--color_border);
 }
-.content-input-error {
-  display: flex;
-  flex-direction: column;
-}
-.text-error {
-  font-size: 12px;
-  color: #cb2027;
-  width: 100%;
-  margin-left: 10px;
-}
+
 .btn {
   color: var(--color_text_btn);
   background-color: var(--color_background_btn);
@@ -223,12 +206,6 @@ export default {
   color: var(--hover_text_btn);
   background-color: var(--hover_text_btn);
   border: 1px solid var(--hover_Border_btn);
-}
-.content-checkbox {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
 }
 .text-checkbox {
   margin-left: 5px;

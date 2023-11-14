@@ -42,10 +42,8 @@
               href="https://www.credibanco.com/"
               target="_blank"
               rel="noreferrer noopener"
-              class="cursor_point"
             >
               <img
-                class="logo-pasarela"
                 src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335270/Templates%20Modos%20de%20pago/Credibanco_lprsof.png"
                 alt="logo Credibanco"
               />
@@ -57,7 +55,6 @@
               {{ $t('productdetail_ConsignaciondaviplataMsg') }}
             </p>
             <img
-              class="logo-pasarela-daviplata"
               src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333767/Templates%20Modos%20de%20pago/5c89c897e1917d9209a762af_davi_qn90y9.png"
               alt="logo daviPlata"
             />
@@ -69,10 +66,8 @@
               href="https://www.efecty.com.co/web/"
               target="_blank"
               rel="noreferrer noopener"
-              class="cursor_point"
             >
               <img
-                class="logo-pasarela-efecty"
                 src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333023/Templates%20Modos%20de%20pago/Efecty-png_q3fvog.png"
                 alt="logo efecty"
               />
@@ -87,10 +82,8 @@
               href="https://www.mercadopago.com"
               target="_blank"
               rel="noreferrer noopener"
-              class="cursor_point"
             >
               <img
-                class="logo-pasarela-daviplata"
                 src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606331948/Templates%20Modos%20de%20pago/mercadopago_jyalpa.png"
                 alt="logo mercadopago"
               />
@@ -105,10 +98,8 @@
               href="https://www.nequi.com.co/"
               target="_blank"
               rel="noreferrer noopener"
-              class="cursor_point"
             >
               <img
-                class="logo-pasarela-daviplata"
                 src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333553/Templates%20Modos%20de%20pago/Nequi_by_Bancolombia_hxhkhb.png"
                 alt="logo nequi"
               />
@@ -120,7 +111,6 @@
               {{ $t('productdetail_PasarelaEpaycoMsg') }}
             </p>
             <img
-              class="logo-pasarela-payco"
               src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1579296851/assets/pasarela-epayco.png"
               alt="Pasarela de pagos epayco"
             />
@@ -136,7 +126,6 @@
               rel="noreferrer noopener"
             >
               <img
-                class="logo-pasarela-payu"
                 src="https://ecommerce.payulatam.com/logos/PayU_CO.png"
                 alt="PayU"
                 border="0"
@@ -154,7 +143,6 @@
               rel="noreferrer noopener"
             >
               <img
-                class="logo-pasarela-wompi"
                 src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335739/Templates%20Modos%20de%20pago/wompi_jxuitu.png"
                 alt="wompi"
                 border="0"
@@ -172,8 +160,7 @@
               rel="noreferrer noopener"
             >
               <img
-                class="logo-pasarela-wompi"
-                src="https://res.cloudinary.com/komerciaacademico/image/upload/v1639078440/wePay4u/powered_by_z7sgqp.png"
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1639078440/wePay4u/powered_by_z7sgqp.png"
                 alt="wePay4u"
                 border="0"
               />
@@ -190,8 +177,7 @@
               rel="noreferrer noopener"
             >
               <img
-                class="logo-pasarela-wompi"
-                src="https://res.cloudinary.com/komerciaacademico/image/upload/v1645131256/komerica/tucompra_ss0oys.png"
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1645131256/komerica/tucompra_ss0oys.png"
                 alt="tu_compra"
                 border="0"
               />
@@ -208,7 +194,6 @@
               rel="noreferrer noopener"
             >
               <img
-                class="logo-pasarela-wompi"
                 src="https://res.cloudinary.com/komerciaacademico/image/upload/v1645131256/komerica/flow_jevnwy.png"
                 alt="flow"
                 border="0"
@@ -222,56 +207,50 @@
         :title="$t('productdetail_opinionesEnvio')"
         name="3"
       >
-        <div class="content">
-          <h3 class="title-section">
-            {{ $t('productdetail_opinionesEnvio') }}
-          </h3>
-        </div>
-        <div
-          v-if="envios.envio_metodo === 'precio_ciudad'"
-          class="wrapper-method"
-        >
+        <div v-if="envios.envio_metodo === 'precio_ciudad'">
           <h4>• {{ envios.envio_metodo.replace('_', ' por ') }}</h4>
-          <p class="description-method">
+          <p>
             {{ $t('productdetail_opinionesEnvioMsg1') }}
           </p>
         </div>
-        <div
-          v-if="envios.envio_metodo === 'tarifa_plana'"
-          class="wrapper-method"
-        >
+        <div v-if="envios.envio_metodo === 'tarifa_plana'">
           <h4>
             {{ envios.envio_metodo.replace('_', ' ') }}
           </h4>
-          <p class="description-method">
+          <p>
             {{ $t('productdetail_opinionesEnvioMsg2') }}
           </p>
-          <p class="price">
+          <p>
             {{ $t('cart_precio') }}
             {{
               envios.valor
                 | currency(
-                  dataStore.tienda.codigo_pais,
-                  dataStore.tienda.moneda
+                  dataStore.tiendasInfo.paises.codigo,
+                  dataStore.tiendasInfo.moneda
                 )
             }}
           </p>
         </div>
-        <div v-if="envios.envio_metodo === 'precio'" class="wrapper-method">
+        <div v-if="envios.envio_metodo === 'precio'">
           <h4>{{ $t('productdetail_precioTotalCompra') }}</h4>
-          <p class="description-method">
+          <p>
             {{ $t('productdetail_precioTotalCompraMsg') }}
           </p>
         </div>
-        <div v-if="envios.envio_metodo === 'gratis'" class="wrapper-method">
+        <div v-if="envios.envio_metodo === 'gratis'">
           <h4>{{ $t('productdetail_gratis') }}</h4>
-          <p class="description-method">
+          <p>
             {{ $t('productdetail_gratisMsg') }}
           </p>
         </div>
-        <div v-if="envios.envio_metodo === 'SinEnvio'" class="wrapper-method">
-          <p class="description-method">Pasas a recoger tu compra</p>
-        </div>
+
+        <p v-if="envios.envio_metodo === 'SinEnvio'">
+          Pasas a recoger tu compra
+        </p>
+
+        <p v-if="envios.envio_metodo === 'sintarifa'">
+          El costo del envío no esta definido, este costo lo asume el comprador
+        </p>
       </el-collapse-item>
     </el-collapse>
   </div>
@@ -282,10 +261,12 @@ import currency from '@/mixins/formatCurrent'
 export default {
   filters: {
     capitalize(value) {
-      if (value) {
-        value = value.toLowerCase()
-        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
+      if (!value) {
+        return value
       }
+      return value
+        .toLowerCase()
+        .replace(/(?:^|\s)\w/g, (match) => match.toUpperCase())
     },
   },
   mixins: [extensions, currency],
@@ -307,17 +288,15 @@ export default {
   data() {
     return {
       activeNames: ['1'],
-      contentDescription: this.data?.info?.descripcion,
+      contentDescription: this.data?.productosInfo?.descripcion,
     }
   },
   computed: {
     mediospago() {
-      return this.dataStore.medios_pago
+      return this.dataStore.medioPagos
     },
     envios() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties, vue/no-mutating-props
-      this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
-      return this.data.medioEnvio
+      return this.$store.state.envios.valores
     },
   },
   mounted() {
@@ -442,5 +421,8 @@ img {
 }
 .editor >>> .el-popper.el-tiptap-image-popper {
   display: none;
+}
+img {
+  @apply py-12 w-full max-w-[250px];
 }
 </style>

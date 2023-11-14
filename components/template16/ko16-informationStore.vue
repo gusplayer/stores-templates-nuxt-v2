@@ -45,7 +45,7 @@
             class="swiper-slide w-full h-full flex flex-row items-center justify-start"
           >
             <img
-              v-lazy="idCloudinary(items.icono, 150, 150)"
+              v-lazy="items.icono"
               width="40"
               height="40"
               class="object-contain object-center max-w-[40px] max-h-[40px]"

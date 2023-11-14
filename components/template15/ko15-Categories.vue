@@ -13,11 +13,11 @@
         {{ categories.title }}
       </p>
 
-      <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="w-full">
+      <div ref="mySwiper" v-swiper:mySwiper="swiperOption" class="w-full">
         <div class="swiper-wrapper w-full">
           <a
-            :id="`slide${index + 1}`"
             v-for="(item, index) in categories.values"
+            :id="`slide${index + 1}`"
             :key="index"
             :href="item.url_redirect"
             class="swiper-slide w-full"
@@ -37,8 +37,14 @@
             </div>
           </a>
         </div>
-        <div class="swiper-button-prev" v-if="categories.values.length > 1" />
-        <div class="swiper-button-next" v-if="categories.values.length > 1" />
+        <div
+          v-if="categories.values.length > 1"
+          class="swiper-button-prev"
+        ></div>
+        <div
+          v-if="categories.values.length > 1"
+          class="swiper-button-next"
+        ></div>
       </div>
     </div>
   </div>
@@ -47,7 +53,7 @@
 <script>
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko15-categories',
+  name: 'Ko15Categories',
   mixins: [idCloudinary],
   props: {
     categories: {
@@ -70,36 +76,36 @@ export default {
         setWrapperSize: true,
         paginationClickable: true,
         slidesPerView: 5,
-        spaceBetween: 26,
+        spaceBetween: 35,
         grabCursor: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
         breakpoints: {
-          1250: {
+          1440: {
             slidesPerView: 5,
             spaceBetween: 35,
           },
-          1060: {
+          1024: {
             slidesPerView: 4,
             spaceBetween: 50,
           },
-          1000: {
-            slidesPerView: 4,
-            spaceBetween: 20,
-          },
-          990: {
-            slidesPerView: 4,
-            spaceBetween: 20,
-          },
-          790: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-          770: {
+          768: {
             slidesPerView: 3,
             spaceBetween: 15,
           },
-          500: {
+          425: {
             slidesPerView: 2,
-            spaceBetween: 20,
+            spaceBetween: 15,
+          },
+          375: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 5,
           },
         },
         navigation: {

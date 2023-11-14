@@ -1,17 +1,16 @@
 <template>
   <div
     class="wrapper_blog"
-    :style="[settingByTemplate9[0].blog, settingByTemplate9[0].settingGeneral]"
+    :style="[
+      settingByTemplate9[0].blog,
+      settingByTemplate9[0].settingGeneral,
+      {
+        '--font-style-1':
+          settingByTemplate9[0]?.settingGeneral?.fount_1 ?? 'Poppins',
+      },
+    ]"
   >
-    <div
-      class="banner-blog"
-      :style="[
-        {
-          '--font-style-1':
-            this.settingByTemplate9[0]?.settingGeneral?.fount_1 ?? 'Poppins',
-        },
-      ]"
-    >
+    <div class="banner-blog">
       <div class="crumb">
         <nuxt-link to="/">
           <p
@@ -34,75 +33,51 @@
           Blog
         </p>
       </div>
-      <div class="tittle-banner-blog">
-        <p class="txt-banner">{{ $t('header_blog') }}</p>
+      <div
+        class="w-full flex flex-row justify-between items-center pr-15 md:pr-20"
+      >
+        <div class="tittle-banner-blog">
+          <p class="txt-banner">{{ $t('header_blog') }}</p>
+        </div>
+        <div class="flex flex-row justify-end items-center relative">
+          <div class="absolute -right-10">
+            <search-icon
+              class="text-25 ml-5 cursor-pointer text-gray-600 color-icon"
+            />
+          </div>
+          <input
+            v-model="filters.title"
+            type="search"
+            class="block w-full min-w-[250px] border-0 bg-gray-50 py-1.5 text-gray-900 focus:ring-0 sm:text-sm sm:leading-6 border-b border-gray-900"
+            :placeholder="$t('header_search')"
+            @keyup.enter="updateFilters"
+          />
+        </div>
       </div>
     </div>
-    <div
-      class="contenedor"
-      :style="[
-        {
-          '--font-style-1':
-            this.settingByTemplate9[0]?.settingGeneral?.fount_1 ?? 'Poppins',
-        },
-      ]"
-    >
-      <div class="content-search-blog">
-        <div class="text-search">
-          <p class="title">Buscar Articulo</p>
-        </div>
-        <div class="empty-space"></div>
-        <div class="content-tittle">
-          <div class="input-animated">
-            <input
-              type="text"
-              v-model="search"
-              class="input-text"
-              placeholder="¿Que deseas buscar?"
-            />
-            <span class="search-icon">
-              <svg
-                class="search-header"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                width="20px"
-                height="20px"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </span>
-          </div>
-        </div>
-      </div>
+    <div class="contenedor">
       <div class="content-item w-full">
         <div class="content-item-productos">
           <div class="grid-products">
             <div
-              v-for="article in filteredList"
+              v-for="article in listBlogs"
               :key="article.id"
               class="content-products"
             >
-              <KoblogCard
+              <KoBlogCard
                 :article="article"
-                :blog="settingByTemplate9[0].blog"
-                :settingGeneral="settingByTemplate9[0].settingGeneral"
+                :setting-blog="settingByTemplate9[0].blog"
+                :setting-general="settingByTemplate9[0].settingGeneral"
                 style="max-height: 560px"
               />
             </div>
           </div>
-          <div v-if="filteredList.length == 0" class="content-products-empty">
+          <div v-if="listBlogs?.length === 0" class="content-products-empty">
             <div class="header-content-logo">
               <nuxt-link to="/" class="wrapper-logo">
                 <img
                   v-lazy="
-                    `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
+                    `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
                   "
                   class="header-logo"
                   alt="Logo Img"
@@ -111,15 +86,16 @@
             </div>
             <p class="txt-products-empty">{{ $t('home_msgCatalogo') }}</p>
           </div>
-          <div class="pagination-medium">
-            <div class="product_pagination" v-if="filteredList.length > 12">
+          <div v-if="totalBlogs > filters.limit" class="pagination-medium">
+            <div class="product_pagination">
               <el-pagination
                 background
                 layout="prev, pager, next"
-                :total="filteredList.length"
-                :page-size="12"
-                :current-page.sync="currentPage"
-                class="pagination"
+                class="pagination bg-transparent"
+                :total="totalBlogs"
+                :page-size="filters.limit"
+                :current-page.sync="filters.page"
+                @current-change="changePage"
               />
             </div>
           </div>
@@ -129,42 +105,26 @@
   </div>
 </template>
 <script>
-import KoblogCard from '../_blog/blogcard.vue'
+import { mapState } from 'vuex'
+import filters from '@/mixins/filterBlogs'
 export default {
   name: 'Ko9Blog',
   components: {
-    KoblogCard,
+    KoBlogCard: () => import('./_card/blog-card.vue'),
   },
+  mixins: [filters],
   props: {
-    dataStore: Object,
-    settingByTemplate9: Array,
-  },
-  data() {
-    return {
-      currentPage: 1,
-      search: '',
-    }
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate9: {
+      type: Array,
+      required: true,
+    },
   },
   computed: {
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-    filterArticles() {
-      const initial = this.currentPage * 12 - 12
-      const final = initial + 12
-      return this.filteredList.slice(initial, final)
-    },
-    filteredList() {
-      if (this.search) {
-        return this.listArticulos.filter((element) => {
-          return element.titulo
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
-        })
-      } else {
-        return this.listArticulos
-      }
-    },
+    ...mapState(['stateListBLogs']),
   },
 }
 </script>

@@ -1,9 +1,9 @@
 <template>
   <div class="header-container">
     <div class="wrapper-header">
-      <KoOrderWa :dataStore="dataStore" :stateOrderWapi="true" />
+      <KoOrderWa :data-store="dataStore" :state-order-wapi="true" />
       <div v-if="settingByTemplate && settingByTemplate.banner">
-        <div class="wrapper-banner-img" v-if="settingByTemplate.banner">
+        <div v-if="settingByTemplate.banner" class="wrapper-banner-img">
           <img
             :src="
               idCloudinaryBanner(settingByTemplate.banner, 'bannerRes', 900)
@@ -24,7 +24,7 @@
       </div>
       <div class="header">
         <nuxt-link
-          :to="stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`"
+          :to="stateWapiME ? `/wa/${dataStore.id}/` : `/`"
           class="containt-image"
           :class="
             settingByTemplate.logo_cuadrado == 1
@@ -33,22 +33,22 @@
           "
         >
           <img
-            :src="`${$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+            :src="`${$store.state.urlKomercia}/logos/${dataStore.logo}`"
             class="header-logo"
             alt="Logo Img"
           />
         </nuxt-link>
         <div class="header-content-text">
           <p class="header-title">
-            {{ dataStore.tienda.nombre }}
+            {{ dataStore.nombre }}
           </p>
           <p
+            v-if="settingByTemplate?.mensaje_principal"
             class="header-subtitle"
-            v-if="settingByTemplate && settingByTemplate.mensaje_principal"
           >
             {{ settingByTemplate.mensaje_principal }}
           </p>
-          <div v-if="settingByTemplate && settingByTemplate.descripcion">
+          <div v-if="settingByTemplate?.descripcion">
             <p class="header-description">
               {{ settingByTemplate.descripcion }}
             </p>
@@ -63,18 +63,22 @@
 </template>
 
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
-// import KoOrderWa from '../_order1/orderWa'
-import KoOrderWa from '../_order1/order1.vue'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  mixins: [idCloudinary],
-  name: 'Ko-Header-wa',
+  name: 'KoHeaderWa',
   components: {
-    KoOrderWa,
+    KoOrderWa: () => import('../_order1/order1.vue'),
   },
+  mixins: [idCloudinary],
   props: {
-    dataStore: Object,
-    settingByTemplate: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -82,27 +86,27 @@ export default {
         {
           nombre: 'Facebook',
           icon: 'facebook-icon',
-          link: this.dataStore.tienda.red_facebook,
+          link: this.dataStore.redes.facebook,
         },
         {
           nombre: 'Twitter',
           icon: 'twitter-icon',
-          link: this.dataStore.tienda.red_twitter,
+          link: this.dataStore.redes.twitter,
         },
         {
           nombre: 'Instagram',
           icon: 'instagram-icon',
-          link: this.dataStore.tienda.red_instagram,
+          link: this.dataStore.redes.instagram,
         },
         {
           nombre: 'Youtube',
           icon: 'youtube-icon',
-          link: this.dataStore.tienda.red_youtube,
+          link: this.dataStore.redes.youtube,
         },
         {
           nombre: 'Tiktok',
           icon: 'tiktok-icon',
-          link: this.dataStore.tienda.red_tiktok,
+          link: this.dataStore.redes.tiktok,
         },
       ],
     }
@@ -115,18 +119,18 @@ export default {
       return this.$store.state.stateWapiME
     },
   },
+  watch: {
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.redes.facebook
+      this.links[1].link = this.dataStore.redes.twitter
+      this.links[2].link = this.dataStore.redes.instagram
+      this.links[3].link = this.dataStore.redes.youtube
+      this.links[4].link = this.dataStore.redes.tiktok
+    },
+  },
   methods: {
     openOrder() {
       this.$store.commit('SET_OPEN_ORDER', true)
-    },
-  },
-  watch: {
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-      this.links[4].link = this.dataStore.tienda.red_tiktok
     },
   },
 }

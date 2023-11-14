@@ -10,7 +10,7 @@
         :style="`max-width:${settingByTemplate12.logoSize};`"
       >
         <img
-          :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+          :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
           class="header-logo"
           alt="Logo Img"
         />
@@ -36,15 +36,15 @@
       </div>
     </div>
     <button
-      v-if="dataStore.politicas"
+      v-if="storePolicies"
       class="text-politics"
       :style="`color:${settingByTemplate12.footerText} ;`"
       @click="OpenModalPolitics"
     >
       <p>{{ $t('footer_politicasyterminos') }}</p>
     </button>
-    <div v-if="showModal && dataStore.politicas" class="modal">
-      <KoTermsConditions :dataStore="dataStore" />
+    <div v-if="showModal && storePolicies" class="modal">
+      <KoTermsConditions :store-policies="storePolicies" />
     </div>
     <div
       class="footer_resources w-full text-gray-400 text-center text-sm font-normal"
@@ -80,6 +80,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import settingsProps from './mixins/ComponentProps'
 export default {
   name: 'Ko12IFooter',
@@ -94,33 +95,34 @@ export default {
         {
           nombre: 'Facebook',
           icon: 'facebook-icon',
-          link: this.dataStore.tienda.red_facebook,
+          link: this.dataStore.redes.facebook,
         },
         {
           nombre: 'Twitter',
           icon: 'twitter-icon',
-          link: this.dataStore.tienda.red_twitter,
+          link: this.dataStore.redes.twitter,
         },
         {
           nombre: 'Instagram',
           icon: 'instagram-icon',
-          link: this.dataStore.tienda.red_instagram,
+          link: this.dataStore.redes.instagram,
         },
         {
           nombre: 'Youtube',
           icon: 'youtube-icon',
-          link: this.dataStore.tienda.red_youtube,
+          link: this.dataStore.redes.youtube,
         },
         {
           nombre: 'Tiktok',
           icon: 'tiktok-icon',
-          link: this.dataStore.tienda.red_tiktok,
+          link: this.dataStore.redes.tiktok,
         },
       ],
       logo: true,
     }
   },
   computed: {
+    ...mapState(['storePolicies']),
     showModal() {
       return this.$store.state.modalpolitics05
     },
@@ -142,11 +144,11 @@ export default {
       }
     },
     'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-      this.links[4].link = this.dataStore.tienda.red_tiktok
+      this.links[0].link = this.dataStore.redes.facebook
+      this.links[1].link = this.dataStore.redes.twitter
+      this.links[2].link = this.dataStore.redes.instagram
+      this.links[3].link = this.dataStore.redes.youtube
+      this.links[4].link = this.dataStore.redes.tiktok
     },
   },
   mounted() {

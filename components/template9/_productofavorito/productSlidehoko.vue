@@ -92,11 +92,6 @@ export default {
       return this.$refs.mySwiper.swiper
     },
   },
-  methods: {
-    changeSlide() {
-      this.swiper.slidePrev(700, false)
-    },
-  },
 }
 </script>
 

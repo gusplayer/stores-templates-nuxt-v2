@@ -2,7 +2,7 @@
   <div
     id="product-card"
     class="h-full w-full flex flex-col justify-start items-center cursor-pointer relative wrapper_container"
-    :style="[settingGeneral, cardProducts]"
+    :style="[settingGeneral, settingCardProducts]"
   >
     <div
       class="relative max-w-full h-full shadow-sm border rounded-5 container"
@@ -11,21 +11,19 @@
         :to="{ path: `/productos/` + product.slug }"
         class="w-full h-full"
       >
-        <client-only>
-          <img
-            v-lazy="
-              product.foto_cloudinary == 'sin_foto.jpeg'
-                ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
-                : idCloudinary(product.foto_cloudinary, 550, 550)
-            "
-            width="294"
-            height="294"
-            loading="lazy"
-            :class="!soldOut ? '' : 'grayscale'"
-            class="w-full h-full object-cover overflow-hidden rounded-t-5 max-w-[300px] max-h-[350px]"
-            alt="Lazy-loaded Product Img"
-          />
-        </client-only>
+        <img
+          v-lazy="
+            product.foto_cloudinary == 'sin_foto.jpeg'
+              ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
+              : idCloudinary(product.foto_cloudinary, 550, 550)
+          "
+          width="294"
+          height="294"
+          loading="lazy"
+          :class="!soldOut ? '' : 'grayscale'"
+          class="w-full h-full object-cover overflow-hidden rounded-t-5 max-w-[408px] max-h-[408px]"
+          alt="Lazy-loaded Product Img"
+        />
       </nuxt-link>
       <p
         v-if="soldOut"
@@ -59,13 +57,13 @@
         </div>
       </nuxt-link>
       <div class="mt-10">
-        <div v-if="estadoCart && equalsPrice">
-          <p v-if="minPrice" class="text-price">
+        <div v-if="estadoCart && equalsPrice && minPrice">
+          <p class="text-price">
             {{
               minPrice
                 | currency(
-                  dataStore.tienda.codigo_pais,
-                  dataStore.tienda.moneda
+                  dataStore.tiendasInfo.paises.codigo,
+                  dataStore.tiendasInfo.moneda
                 )
             }}
           </p>
@@ -78,8 +76,8 @@
             {{
               minPrice
                 | currency(
-                  dataStore.tienda.codigo_pais,
-                  dataStore.tienda.moneda
+                  dataStore.tiendasInfo.paises.codigo,
+                  dataStore.tiendasInfo.moneda
                 )
             }}
           </div>
@@ -88,8 +86,8 @@
             {{
               maxPrice
                 | currency(
-                  dataStore.tienda.codigo_pais,
-                  dataStore.tienda.moneda
+                  dataStore.tiendasInfo.paises.codigo,
+                  dataStore.tiendasInfo.moneda
                 )
             }}
           </div>
@@ -99,8 +97,8 @@
             {{
               product.precio
                 | currency(
-                  dataStore.tienda.codigo_pais,
-                  dataStore.tienda.moneda
+                  dataStore.tiendasInfo.paises.codigo,
+                  dataStore.tiendasInfo.moneda
                 )
             }}
           </p>
@@ -113,7 +111,7 @@
       <nuxt-link
         :to="{ path: `/productos/` + product.slug }"
         class="px-12 py-8 shadow-lg rounded-full btn"
-        :style="`background-color:${cardProducts.color_btn};color:${cardProducts.color_icon};`"
+        :style="`background-color:${settingCardProducts.color_btn};color:${settingCardProducts.color_icon};`"
       >
         <eye-outline-icon />
       </nuxt-link>
@@ -125,7 +123,7 @@
           (product.tipo_servicio === null || product.tipo_servicio === '0')
         "
         class="mt-10 px-12 py-8 shadow-lg rounded-full btn"
-        :style="`background-color:${cardProducts.color_btn};color:${cardProducts.color_icon};`"
+        :style="`background-color:${settingCardProducts.color_btn};color:${settingCardProducts.color_icon};`"
         @click="addShoppingCart"
       >
         <cart-icon />
@@ -139,6 +137,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import idCloudinary from '@/mixins/idCloudinary'
 import currency from '@/mixins/formatCurrent'
 export default {
@@ -149,7 +148,7 @@ export default {
       type: Object,
       required: true,
     },
-    cardProducts: {
+    settingCardProducts: {
       type: Object,
       required: true,
     },
@@ -175,63 +174,33 @@ export default {
     }
   },
   computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    productsCarts() {
-      return this.$store.state.productsCart
-    },
+    ...mapState(['dataStore', 'productsCart']),
     getFreeShipping() {
-      let free = true
-      if (this.product.envio_gratis == 1) {
-        free = false
-      } else if (this.rangosByCiudad.envio_metodo === 'gratis') {
-        free = false
-      }
-      return free
+      return !(
+        this.product.envio_gratis === 1 ||
+        this.rangosByCiudad.envio_metodo === 'gratis'
+      )
     },
     rangosByCiudad() {
-      this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
-      return this.rangosByCiudades
+      return this.$store.state.envios.valores
     },
     soldOut() {
-      if (
-        this.product.con_variante &&
-        this.product.variantes[0].variantes !== '[object Object]'
-      ) {
-        // this.estadoCart = true
+      if (this.product.con_variante) {
         const arrCombinations = this.product.variantes
-        let inventario = 0
-        if (
-          arrCombinations.length &&
-          arrCombinations[0].variantes !== '[object Object]'
-        ) {
-          if (
-            arrCombinations[0].combinaciones.length &&
-            arrCombinations[0].combinaciones.length
-          ) {
-            if (
-              JSON.parse(arrCombinations[0].combinaciones[0].combinaciones)
-                .length
-            ) {
-              JSON.parse(
-                arrCombinations[0].combinaciones[0].combinaciones
-              ).forEach((item) => {
-                if (item.unidades) {
-                  inventario += parseInt(item.unidades)
-                }
-              })
-            }
-          }
+        if (arrCombinations && arrCombinations.combinaciones.length) {
+          const inventorySum = JSON.parse(
+            arrCombinations.combinaciones[0].combinaciones
+          )
+            .map((item) => parseInt(item.unidades) || 0)
+            .reduce((acc, val) => acc + val, 0)
+          return inventorySum === 0
         }
-        return !inventario
-      } else {
-        return !this.product.stock
       }
+      return !this.product.stock
     },
   },
   watch: {
-    productsCarts() {
+    productsCart() {
       this.getDataProduct()
     },
   },
@@ -240,7 +209,7 @@ export default {
     this.productPrice()
     if (
       this.product.con_variante &&
-      this.product.variantes[0].variantes !== '[object Object]'
+      this.product.variantes.variantes !== '[object Object]'
     ) {
       this.estadoCart = true
     }
@@ -258,7 +227,7 @@ export default {
           estado: true,
         }
         this.maxQuantityValue = this.product.stock
-        this.productsCarts.find((productCart, index) => {
+        this.productsCart.find((productCart, index) => {
           if (productCart.id == this.product.id) {
             this.productIndexCart = index
             this.productCart = productCart
@@ -314,45 +283,26 @@ export default {
       }
     },
     productPrice() {
-      if (
-        this.product.con_variante &&
-        this.product.variantes[0].variantes !== '[object Object]'
-      ) {
-        const arrCombinations = this.product.variantes
-        if (
-          arrCombinations.length &&
-          arrCombinations[0].variantes !== '[object Object]'
-        ) {
-          this.productVariants = true
-          if (
-            this.product &&
-            this.product.combinaciones &&
-            this.product.combinaciones.length &&
-            this.product.combinaciones.length > 1
-          ) {
-            let arrPrice = []
-            this.product.combinaciones.find((products) => {
-              if (products.precio && products.estado) {
-                arrPrice.push(products.precio)
-              }
-            })
-            if (arrPrice) {
-              let resultPrice = arrPrice.sort(function (prev, next) {
-                return prev - next
-              })
-              if (resultPrice[resultPrice.length - 1]) {
-                this.minPrice = resultPrice[0]
-                this.maxPrice = resultPrice[resultPrice.length - 1]
-                if (this.minPrice === this.maxPrice) {
-                  this.equalsPrice = true
-                } else {
-                  this.equalsPrice = false
-                }
-              }
-            }
+      if (this.product.con_variante) {
+        const variants = this.product.variantes
+        if (variants && variants.combinaciones.length) {
+          const prices = JSON.parse(variants.combinaciones[0].combinaciones)
+            .filter((item) => item.precio && item.estado)
+            .map((item) => item.precio)
+          if (prices.length > 0) {
+            this.productVariants = true
+            const sortedPrices = prices.sort((a, b) => a - b)
+            this.minPrice = sortedPrices[0]
+            this.maxPrice = sortedPrices[sortedPrices.length - 1]
+            this.equalsPrice = this.minPrice === this.maxPrice
+            return
           }
         }
       }
+      this.productVariants = false
+      this.minPrice = this.product.precio || 0
+      this.maxPrice = this.product.precio || 0
+      this.equalsPrice = true
     },
   },
 }

@@ -20,7 +20,7 @@
         <div class="separador-stats"></div>
         <div class="stats">
           <div class="stats-container">
-            <p class="card-info-1" v-if="soldOut">
+            <p v-if="soldOut" class="card-info-1">
               {{ $t('home_cardAgotado') }}
             </p>
             <div class="content-name-product">
@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'Ko5ProductCardHoko',
   filters: {

@@ -2,79 +2,91 @@
   <div :style="settingK05Blog">
     <div
       :style="{
-        '--font-style':
-          settingK05Blog && settingK05Blog.tipo_letra
-            ? settingK05Blog.tipo_letra
-            : 'Roboto',
+        '--font-style': settingK05Blog?.tipo_letra ?? 'Roboto',
       }"
       class="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8"
     >
-      <div class="max-w-7xl mx-auto content-blog-list">
-        <div class="padding flex flex-row justify-between items-center">
+      <div
+        class="max-w-7xl mx-auto content-blog-list"
+        style="min-height: calc(59vh)"
+      >
+        <div
+          class="flex flex-row justify-between items-center px:10 md:px-30 pb-10"
+        >
           <h2
             class="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl"
           >
             Blog
           </h2>
-          <div class="prueba">
-            <div class="search">
-              <form id="demo-2" style="position: relative">
-                <search-icon class="icon-s" @click="focusInput" />
-                <input
-                  id="SearchHeader"
-                  v-model="search"
-                  type="search"
-                  :placeholder="$t('header_search')"
-                  @keyup.enter="getSearch(search)"
-                />
-              </form>
+
+          <div class="flex flex-row justify-end items-center relative">
+            <div class="absolute -right-10">
+              <search-icon
+                class="text-25 ml-5 cursor-pointer text-gray-600 color-icon"
+              />
             </div>
+            <input
+              v-model="filters.title"
+              type="search"
+              class="block w-full min-w-[250px] border-0 bg-gray-50 py-1.5 text-gray-900 focus:ring-0 sm:text-sm sm:leading-6 border-b border-gray-900"
+              :placeholder="$t('header_search')"
+              @keyup.enter="updateFilters"
+            />
           </div>
         </div>
         <div
           class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
         >
-          <div v-for="article in filteredList" :key="article.id">
-            <KoProductCard1 :article="article" />
+          <div v-for="article in listBlogs" :key="article.id">
+            <KoBlogCard1 :article="article" :setting-blog="settingK05Blog" />
           </div>
         </div>
-        <div v-if="filteredList.length == 0" class="content-products-empty">
-          <div class="wrapper_logo">
+        <div
+          v-if="listBlogs?.length === 0"
+          class="w-full flex flex-col justify-center items-center"
+          style="min-height: calc(50vh)"
+        >
+          <div class="w-full max-w-[180px]">
             <nuxt-link to="/">
               <img
                 v-lazy="
-                  `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
+                  `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
                 "
                 alt="Logo Img"
               />
             </nuxt-link>
           </div>
-          <p>{{ $t('home_msgCatalogo') }}</p>
+          <p class="text-18 opacity-60 font-bold color-text-empty">
+            No se encontraron artículos relacionados
+          </p>
         </div>
-        <div class="w-full flex items-center justify-center">
-          <div class="pagination-medium">
-            <div v-if="filteredList.length > 12" class="product_pagination">
-              <el-pagination
-                background
-                layout="prev, pager, next"
-                :total="filteredList.length"
-                :page-size="12"
-                :current-page.sync="currentPage"
-                class="pagination"
-              />
-            </div>
-          </div>
+        <div
+          v-if="totalBlogs > filters.limit"
+          class="w-full flex items-center justify-center mt-40"
+        >
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            class="pagination bg-transparent"
+            :total="totalBlogs"
+            :page-size="filters.limit"
+            :current-page.sync="filters.page"
+            @current-change="changePage"
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+import filters from '@/mixins/filterBlogs'
 export default {
   name: 'KoBlogIndex5',
   components: {
-    KoProductCard1: () => import('./_blogcard/Ko-cardblog.vue'),
+    KoBlogCard1: () => import('./_blog-card/Ko-card-blog.vue'),
   },
+  mixins: [filters],
   props: {
     dataStore: {
       type: Object,
@@ -85,47 +97,14 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      currentPage: 1,
-      search: '',
-    }
-  },
   computed: {
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-    filterArticles() {
-      const initial = this.currentPage * 12 - 12
-      const final = initial + 12
-      return this.filteredList.slice(initial, final)
-    },
-    filteredList() {
-      if (this.search) {
-        return this.listArticulos.filter((element) => {
-          return element.titulo
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
-        })
-      } else {
-        return this.listArticulos
-      }
-    },
-  },
-  methods: {
-    focusInput() {
-      document.getElementById('SearchHeader').focus()
-    },
+    ...mapState(['stateListBLogs']),
   },
 }
 </script>
 <style scoped>
-.padding {
-  padding: 0 30px 10px;
-}
-.pagination-medium {
-  margin-top: 20px;
-  background: transparent;
+* {
+  font-family: var(--font-style) !important;
 }
 .pagination {
   font-size: 18px;
@@ -163,79 +142,8 @@ export default {
   background-color: var(--color_icon);
   color: white;
 }
-.content-products-empty {
-  width: 100%;
-  min-height: calc(50vh);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.content-blog-list {
-  min-height: calc(59vh);
-}
-.content-products-empty p {
-  font-size: 18px;
-  opacity: 0.6;
-  font-weight: bold;
-  color: var(--color_subtext);
-}
-.wrapper_logo {
-  max-width: 200px;
-}
-.icon-s {
-  font-size: 25px;
-  color: black;
-  position: absolute;
-  top: 3px;
-  left: 5px;
-  cursor: pointer;
-}
-.icon-s:hover {
-  color: var(--btnhover);
-}
-input[type='search'] {
-  background: transparent;
-  border: solid 2px black;
-}
-input[type='search']:focus {
-  background-color: #fff;
-  border-color: var(--btnhover);
-}
-input:-moz-placeholder {
-  color: black;
-}
-input::-webkit-input-placeholder {
-  color: black;
-}
-#demo-2 input[type='search'] {
-  width: 35px;
-  height: 35px;
-  padding-left: 10px;
-  color: transparent;
-  cursor: pointer;
-  box-sizing: border-box;
 
-  background: transparent;
-  border: black 2px solid;
-  border-radius: 50px;
-  transition: all 200ms ease-in;
-}
-#demo-2 input[type='search']:hover {
-  background: transparent;
-}
-#demo-2 input[type='search']:focus {
-  width: 200px;
-  padding-left: 32px;
-  color: black;
-  background: transparent;
-  cursor: auto;
-}
-#demo-2 input:-moz-placeholder {
-  color: transparent;
-}
-#demo-2 input::-webkit-input-placeholder {
-  color: transparent;
+.color-icon:hover {
+  color: var(--btnhover);
 }
 </style>

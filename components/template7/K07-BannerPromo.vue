@@ -1,23 +1,19 @@
 <template>
-  <div class="promo-banner-content" :style="[settingKPromo, settingGeneral]">
-    <div class="separador-blog" v-if="!settingKCarousel.visible"></div>
-    <div
-      class="promo-banner-items"
-      :style="[
-        {
-          '--font-style-2':
-            settingGeneral && settingGeneral.fount_2
-              ? settingGeneral.fount_2
-              : 'Great Vibes',
-        },
-        {
-          '--font-style-3':
-            settingGeneral && settingGeneral.fount_3
-              ? settingGeneral.fount_3
-              : 'Lora',
-        },
-      ]"
-    >
+  <div
+    class="promo-banner-content"
+    :style="[
+      settingKPromo,
+      settingGeneral,
+      {
+        '--font-style-2': settingGeneral?.fount_2 ?? 'Great Vibes',
+      },
+      {
+        '--font-style-3': settingGeneral?.fount_3 ?? 'Lora',
+      },
+    ]"
+  >
+    <div v-if="!settingKCarousel.visible" class="separador-blog"></div>
+    <div class="promo-banner-items">
       <div class="promo-banners" :style="settingKPromo.values[0]">
         <a
           :href="`${settingKPromo.values[0].url_redirect}`"
@@ -37,15 +33,15 @@
             </div>
             <div class="promo-banner-text" id="promo-banner-text-1">
               <p
-                class="promo-banner-tittle"
                 id="promo-banner-tittle-1"
+                class="promo-banner-tittle"
                 :style="`color: ${settingKPromo.values[0]['--color_text']};`"
               >
                 {{ settingKPromo.values[0].tittle }}
               </p>
               <span
-                class="promo-banner-subtittle"
                 id="promo-banner-subtittle-1"
+                class="promo-banner-subtittle"
                 :style="`color: ${settingKPromo.values[0]['--color_subtext']};`"
               >
                 {{ settingKPromo.values[0].description }}
@@ -70,27 +66,27 @@
               <div class="content-2">
                 <img
                   id="images-2"
-                  class="images"
                   v-lazy="
                     idCloudinaryBanner(
                       settingKPromo.values[1].url_img,
                       'banner'
                     )
                   "
+                  class="images"
                   alt="medium-top-banner"
                 />
               </div>
-              <div class="promo-banner-text" id="promo-banner-text-2">
+              <div id="promo-banner-text-2" class="promo-banner-text">
                 <p
-                  class="promo-banner-tittle"
                   id="promo-banner-tittle-2"
+                  class="promo-banner-tittle"
                   :style="`color: ${settingKPromo.values[1]['--color_text']};`"
                 >
                   {{ settingKPromo.values[1].tittle }}
                 </p>
                 <span
-                  class="promo-banner-subtittle"
                   id="promo-banner-subtittle-medium"
+                  class="promo-banner-subtittle"
                   :style="`color: ${settingKPromo.values[1]['--color_subtext']};`"
                 >
                   {{ settingKPromo.values[1].description }}
@@ -108,27 +104,27 @@
               <div class="content-2">
                 <img
                   id="images-3"
-                  class="images"
                   v-lazy="
                     idCloudinaryBanner(
                       settingKPromo.values[2].url_img,
                       'banner'
                     )
                   "
+                  class="images"
                   alt="medium-top-banner"
                 />
               </div>
-              <div class="promo-banner-text" id="promo-banner-text-3">
+              <div id="promo-banner-text-3" class="promo-banner-text">
                 <p
-                  class="promo-banner-tittle"
                   id="promo-banner-tittle-3"
+                  class="promo-banner-tittle"
                   :style="`color: ${settingKPromo.values[2]['--color_text']};`"
                 >
                   {{ settingKPromo.values[2].tittle }}
                 </p>
                 <span
-                  class="promo-banner-subtittle"
                   id="promo-banner-subtittle-medium"
+                  class="promo-banner-subtittle"
                   :style="`color: ${settingKPromo.values[2]['--color_subtext']};`"
                 >
                   {{ settingKPromo.values[2].description }}
@@ -148,24 +144,24 @@
             <div class="content-4">
               <img
                 id="images-4"
-                class="images"
                 :src="
                   idCloudinaryBanner(settingKPromo.values[3].url_img, 'banner')
                 "
+                class="images"
                 alt="right-banner"
               />
             </div>
-            <div class="promo-banner-text text4" id="promo-banner-text-4">
+            <div id="promo-banner-text-4" class="promo-banner-text text4">
               <p
-                class="promo-banner-tittle"
                 id="promo-banner-tittle-4"
+                class="promo-banner-tittle"
                 :style="`color: ${settingKPromo.values[3]['--color_text']};`"
               >
                 {{ settingKPromo.values[3].tittle }}
               </p>
               <span
-                class="promo-banner-subtittle"
                 id="promo-banner-subtittle-4"
+                class="promo-banner-subtittle"
                 :style="`color: ${settingKPromo.values[3]['--color_subtext']};`"
               >
                 {{ settingKPromo.values[3].description }}
@@ -180,15 +176,27 @@
 </template>
 
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'K07BannerPromo',
   mixins: [idCloudinary],
   props: {
-    settingKPromo: Object,
-    settingGeneral: Object,
-    settingKCarousel: Object,
-    dataStore: Object,
+    settingKPromo: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    settingKCarousel: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {}

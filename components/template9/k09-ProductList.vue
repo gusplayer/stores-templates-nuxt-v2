@@ -18,8 +18,8 @@
       <div class="product-text">
         <span class="tittle">{{ productList.title }}</span>
       </div>
-      <div class="content-item">
-        <div class="content-item-productos">
+      <div class="w-full flex flex-row justify-center items-center mb-40">
+        <div class="w-full flex flex-col justify-center items-center">
           <div class="product-content-items">
             <div
               v-for="product in listProducts"
@@ -28,15 +28,13 @@
             >
               <KoProductCard
                 :product="product"
-                :product-list-card="productListCard"
+                :setting-card-products="productListCard"
                 :setting-general="settingGeneral"
               />
             </div>
           </div>
-          <nuxt-link to="/productos" class="cont-product">
-            <button class="btn-products">
-              {{ $t('home_allproducts') }}
-            </button>
+          <nuxt-link to="/productos" class="btn-products">
+            {{ $t('home_allproducts') }}
           </nuxt-link>
         </div>
       </div>
@@ -45,45 +43,52 @@
 </template>
 
 <script>
-import KoProductCard from '../template9/_productcard/ProductCard'
-
 export default {
   name: 'Ko09ProductList',
   components: {
-    KoProductCard,
+    KoProductCard: () => import('./_productcard/ProductCard.vue'),
   },
   props: {
-    dataStore: Object,
-    fullProducts: {},
-    productList: Object,
-    settingGeneral: Object,
-    productListCard: Object,
-  },
-
-  computed: {
-    listProducts() {
-      return this.fullProducts.slice(0, 8)
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    productList: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    productListCard: {
+      type: Object,
+      required: true,
     },
   },
-  watch: {
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.clear()
-    },
+  data() {
+    return {
+      listProducts: [],
+    }
   },
   mounted() {
-    this.clear()
+    this.currentChange()
     var el = document.querySelector('.tittle')
     el.innerHTML = el.innerHTML.replace(/&nbsp;/g, ' ')
   },
   methods: {
-    clear() {
-      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: ['all'],
-        data: '',
-      })
+    async currentChange() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_ALL_PRODUCTS',
+        {
+          id_tienda: this.dataStore.id,
+          limit: 8,
+          page: 1,
+        }
+      )
+      if (success) {
+        this.listProducts = data.publicProductList
+      }
     },
   },
 }
@@ -102,8 +107,7 @@ export default {
 }
 .product-text {
   max-width: 470px;
-  text-align: center;
-  @apply w-full mb-30;
+  @apply w-full mb-30 text-center;
 }
 .tittle {
   /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
@@ -111,34 +115,13 @@ export default {
   color: var(--color_title);
   font-weight: 700;
 }
-.content-item {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  margin-bottom: 40px;
-}
-.content-item-productos {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
 .btn-products {
-  @apply px-5;
-  margin-top: 80px;
-  width: auto;
-  height: 45px;
   border: 2px solid var(--color_background_btn);
   color: var(--color_text_btn);
-  font-size: 15px;
-  font-weight: 800;
   letter-spacing: 1px;
   transition: all 150ms ease-in;
-  /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
   font-family: var(--font-style-2);
+  @apply mt-60 py-5 px-8 text-15 font-extrabold;
 }
 .btn-products:hover {
   color: #fff;

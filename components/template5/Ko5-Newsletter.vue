@@ -14,19 +14,20 @@
         >
           <template slot-scope="{ errors }">
             <input
+              id="CorreoElectronicoNewslletter"
+              v-model="email"
               name="email"
               class="input-text"
               type="email"
               :placeholder="$t('newsletter_email')"
-              v-model="email"
-              id="CorreoElectronicoNewslletter"
             />
             <span
               v-show="errors[0] || register"
               class="text-error"
               :style="register ? 'color:green' : ''"
-              >{{ errorsCheckbox || register }}</span
             >
+              {{ errorsCheckbox || register }}
+            </span>
           </template>
         </ValidationProvider>
         <button ref="colorBtn" class="btn" @click="submitNewsletter">
@@ -34,13 +35,13 @@
         </button>
       </div>
       <div class="content-checkbox">
-        <input id="checkboxNewsletter" type="checkbox" v-model="checked" />
+        <input id="checkboxNewsletter" v-model="checked" type="checkbox" />
         <label for="checkboxNewsletter" class="text-checkbox">
           {{ $t('newsletter_msg') }}
         </label>
       </div>
       <div class="content-checkbox">
-        <p class="text-error" v-if="stateChehed" style="max-width: 340px">
+        <p v-if="stateChehed" class="text-error" style="max-width: 340px">
           Marcar checkbox para poder suscribirse al boletín informativo
         </p>
       </div>
@@ -90,7 +91,7 @@ export default {
             if (response.valid) {
               const json = {
                 email: this.email,
-                tienda: this.dataStore.tienda.id_tienda,
+                tienda: this.dataStore.id,
               }
               axios
                 .post(

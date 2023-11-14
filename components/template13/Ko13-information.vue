@@ -112,13 +112,19 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko13-Information',
+  name: 'Ko13Information',
   mixins: [idCloudinary],
   props: {
-    information: Object,
-    settingGeneral: Object,
+    information: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
 }
 </script>

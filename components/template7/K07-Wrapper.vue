@@ -62,7 +62,7 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'K07Wrapper',
   mixins: [idCloudinary],
@@ -124,15 +124,12 @@ export default {
       return this.$refs.mySwiper.swiper
     },
   },
-  mounted() {
-    this.mySwiper.slideTo(3, 1000, false)
-  },
   watch: {
     'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
+      this.links[0].link = this.dataStore.redes.facebook
+      this.links[1].link = this.dataStore.redes.twitter
+      this.links[2].link = this.dataStore.redes.instagram
+      this.links[3].link = this.dataStore.redes.youtube
     },
   },
 }

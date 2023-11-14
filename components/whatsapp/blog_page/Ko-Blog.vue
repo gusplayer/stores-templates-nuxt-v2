@@ -4,7 +4,7 @@
       <div class="crumb">
         <nuxt-link
           :to="{
-            path: stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`,
+            path: stateWapiME ? `/wa/${dataStore.id}/` : `/`,
           }"
         >
           <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
@@ -17,34 +17,43 @@
     </div>
     <div class="wrapper-art-blog">
       <div class="content-art-blog">
-        <div class="banner-blog">
-          <div class="tittle-banner-blog">
-            <p class="txt-banner">Últimos blogs</p>
-          </div>
+        <div class="w-full flex flex-row justify-between items-center">
+          <p class="text-left font-semibold text-black text-30">
+            Últimos blogs
+          </p>
+          <input
+            v-model="filters.title"
+            class="input-search"
+            type="search"
+            :placeholder="$t('header_search')"
+            @keyup.enter="updateFilters"
+          />
         </div>
         <div class="contenedor">
           <div class="content-item w-full">
             <div class="content-item-productos">
               <div class="grid-products">
                 <div
-                  v-for="article in filteredList"
+                  v-for="article in listBlogs"
                   :key="article.id"
                   class="content-products"
                 >
                   <KoBlogCard :article="article" :dataStore="dataStore" />
                 </div>
               </div>
-              <div class="pagination-medium">
-                <div v-if="filteredList.length > 12" class="product_pagination">
-                  <el-pagination
-                    background
-                    layout="prev, pager, next"
-                    :total="filteredList.length"
-                    :page-size="12"
-                    :current-page.sync="currentPage"
-                    class="pagination"
-                  />
-                </div>
+              <div
+                v-if="totalBlogs > filters.limit"
+                class="mt-10 product_pagination"
+              >
+                <el-pagination
+                  background
+                  layout="prev, pager, next"
+                  class="text-18 text-black bg-transparent"
+                  :total="totalBlogs"
+                  :page-size="filters.limit"
+                  :current-page.sync="filters.page"
+                  @current-change="changePage"
+                />
               </div>
             </div>
           </div>
@@ -55,36 +64,15 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import KoBlogCard from './Ko-blog-card.vue'
+import filters from '@/mixins/filterBlogs'
 export default {
   name: 'KoBlogWa',
   components: {
-    KoBlogCard,
+    KoBlogCard: () => import('./Ko-blog-card.vue'),
   },
-  data() {
-    return {
-      currentPage: 1,
-      search: '',
-    }
-  },
+  mixins: [filters],
   computed: {
-    ...mapState(['dataStore', 'stateWapiME', 'listArticulos']),
-    filterArticles() {
-      const initial = this.currentPage * 12 - 12
-      const final = initial + 12
-      return this.filteredList.slice(initial, final)
-    },
-    filteredList() {
-      if (this.search) {
-        return this.listArticulos.filter((element) => {
-          return element.titulo
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
-        })
-      } else {
-        return this.listArticulos
-      }
-    },
+    ...mapState(['dataStore', 'stateWapiME', 'stateListBLogs']),
   },
 }
 </script>

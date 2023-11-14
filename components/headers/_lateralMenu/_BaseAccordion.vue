@@ -14,7 +14,7 @@
 </template>
 <script>
 export default {
-  name: 'Ko-aseAccordion-header-1',
+  name: 'KoBseAccordion',
   data: function () {
     return {
       show: false,

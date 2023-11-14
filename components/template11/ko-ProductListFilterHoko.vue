@@ -6,7 +6,7 @@
       settingByTemplate11[0].productList,
       {
         '--font-style-1':
-          this.settingByTemplate11[0]?.settingGeneral?.fount_1 ?? 'Roboto',
+          settingByTemplate11[0]?.settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
@@ -37,7 +37,7 @@
                     class="product-list"
                     :settingKcardProduct="settingByTemplate11[0].cardProduct"
                     :settingGeneral="settingByTemplate11[0].settingGeneral"
-                  ></KoProdcutCardFilter>
+                  />
                 </div>
               </div>
               <div v-if="producthoko.total == 0" class="content-products-empty">
@@ -45,7 +45,7 @@
                   <nuxt-link to="/productos" class="wrapper-logo">
                     <img
                       v-lazy="
-                        `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
+                        `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
                       "
                       class="header-logo"
                       alt="Logo Img"
@@ -55,7 +55,7 @@
                 <p class="txt-products-empty">{{ $t('home_msgCatalogo') }}</p>
               </div>
               <div class="pagination-medium">
-                <div class="product_pagination" v-if="producthoko.total > 10">
+                <div v-if="producthoko.total > 10" class="product_pagination">
                   <el-pagination
                     background
                     layout="prev, pager, next"
@@ -64,7 +64,7 @@
                     @current-change="currentChange"
                     :current-page="currentPage"
                     class="pagination"
-                  ></el-pagination>
+                  />
                 </div>
               </div>
             </div>
@@ -78,19 +78,19 @@
 <script>
 import KoProdcutCardFilter from './_productcard/ProductCardHoko.vue'
 export default {
+  name: 'Ko11ProductListFilter',
   components: {
     KoProdcutCardFilter,
   },
   props: {
-    settingByTemplate11: Array,
-    dataStore: Object,
-  },
-  name: 'Ko-ProductList-Filter',
-  mounted() {
-    if (this.previousPage) {
-      this.currentPage = this.previousPage
-    }
-    this.currentChange(1)
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate11: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -105,16 +105,11 @@ export default {
       return this.$store.state.producthoko
     },
   },
-  methods: {
-    currentChange(page) {
-      this.$store.dispatch('GET_PRODUCTSHOKO', page)
-      this.currentPage = page
-    },
-  },
   watch: {
     currentPage() {
       this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
       let timerTimeout = null
+      // eslint-disable-next-line no-unused-vars
       timerTimeout = setTimeout(() => {
         timerTimeout = null
         window.scrollBy(0, -1500)
@@ -124,6 +119,18 @@ export default {
       if (this.previousPage) {
         this.currentPage = this.previousPage
       }
+    },
+  },
+  mounted() {
+    if (this.previousPage) {
+      this.currentPage = this.previousPage
+    }
+    this.currentChange(1)
+  },
+  methods: {
+    currentChange(page) {
+      this.$store.dispatch('GET_PRODUCTSHOKO', page)
+      this.currentPage = page
     },
   },
 }

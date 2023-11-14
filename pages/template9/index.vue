@@ -31,14 +31,12 @@
       v-bind="componentsProps"
     />
     <K09-productList
-      v-if="
-        settingByTemplate9?.productList?.visible && fullProducts?.length > 0
-      "
+      v-if="settingByTemplate9?.productList?.visible"
       id="KProductListX"
       v-bind="componentsProps"
     />
     <K09-blog
-      v-if="listArticulos?.length > 0 && settingByTemplate9?.blog?.visible"
+      v-if="stateListBLogs && settingByTemplate9?.blog?.visible"
       id="KBlogX"
       v-bind="componentsProps"
     />
@@ -77,17 +75,13 @@ export default {
   computed: {
     ...mapState([
       'dataStore',
-      'listArticulos',
+      'stateListBLogs',
       'settingByTemplate9',
       'dataHoko',
     ]),
-    fullProducts() {
-      return this.$store.getters['products/allProduct']
-    },
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        fullProducts: this.fullProducts,
         settingGeneral: this.settingByTemplate9?.settingGeneral ?? null,
         banner: this.settingByTemplate9?.banner ?? null,
         koffers: this.settingByTemplate9?.koffers ?? null,
@@ -107,7 +101,7 @@ export default {
     window.addEventListener('message', this.addEventListenerTemplate09)
   },
   methods: {
-    addEventListenerTemplate09(e) {
+    async addEventListenerTemplate09(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080')
@@ -152,9 +146,15 @@ export default {
               this.moverseA('KNewsX')
               break
             case 'detailsProduct':
-              if (this.fullProducts) {
+              // eslint-disable-next-line no-case-declarations
+              const { success, data } = await this.currentChange()
+              if ((success, data.length > 0)) {
                 this.$router.push({
-                  path: '/productos/' + this.fullProducts[0].slug,
+                  path: '/productos/' + data[0].slug,
+                })
+              } else {
+                this.$router.push({
+                  path: '/productos',
                 })
               }
               break
@@ -180,6 +180,19 @@ export default {
     },
     moverseA(idDelElemento) {
       location.hash = '#' + idDelElemento
+    },
+    async currentChange() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_ALL_PRODUCTS',
+        {
+          id_tienda: this.dataStore.id,
+          limit: 1,
+          page: 1,
+        }
+      )
+      if (success) {
+        return { success: true, data: data.publicProductList }
+      }
     },
   },
 }

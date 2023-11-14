@@ -6,11 +6,16 @@
       settingByTemplate11[0].settingGeneral,
       {
         '--font-style-1':
-          this.settingByTemplate11[0]?.settingGeneral?.fount_1 ?? 'Roboto',
+          settingByTemplate11[0]?.settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
-    <div v-if="loading" class="container-productDetail-loading" />
+    <div
+      v-if="loading"
+      class="w-full flex max-w-[1300px] flex-col justify-start items-center pt-25 px-10 pb-20 md:pt-50 md:px-30 md:pb-30"
+    >
+      <Skeleton />
+    </div>
     <div v-else class="container-productDetail">
       <div class="banner-detail">
         <div class="crumb">
@@ -19,7 +24,7 @@
           </nuxt-link>
           <p class="separatorCrumb">/</p>
           <p class="txt-crumb s2">
-            {{ data.detalle.nombre }}
+            {{ data.nombre }}
           </p>
         </div>
       </div>
@@ -33,28 +38,26 @@
                   <div class="swiper-slide">
                     <div class="photos_selected">
                       <img
-                        @click="selectedPhoto(data.detalle.foto_cloudinary)"
+                        v-lazy="idCloudinary(data.fotoCloudinary, 150, 150)"
                         class="img-list"
-                        v-lazy="
-                          idCloudinary(data.detalle.foto_cloudinary, 150, 150)
-                        "
                         alt="Product Img"
+                        @click="selectedPhoto(data.fotoCloudinary)"
                       />
                     </div>
                   </div>
                   <div
+                    v-for="(photo, indexPhoto) in data.productosFotos"
+                    :key="indexPhoto"
                     class="swiper-slide h-full"
-                    v-for="(foto, itemsfoto) in data.fotos"
-                    :key="itemsfoto"
                   >
                     <div class="photos_selected">
                       <img
-                        @click="selectedPhoto(foto.foto_cloudinary)"
-                        class="img-list"
                         v-lazy="
-                          idCloudinaryQuality(foto.foto_cloudinary, 850, 850)
+                          idCloudinaryQuality(photo.fotoCloudinary, 850, 850)
                         "
+                        class="img-list"
                         alt="Product Img"
+                        @click="selectedPhoto(photo.fotoCloudinary)"
                       />
                     </div>
                   </div>
@@ -63,40 +66,37 @@
                       <img
                         v-if="idYoutube"
                         v-lazy="`https://img.youtube.com/vi/${idYoutube}/0.jpg`"
-                        v-show="idYoutube"
-                        @mouseover="existYoutube = true"
                         class="video"
                         alt="Product Img"
+                        @mouseover="existYoutube = true"
                       />
                     </div>
                   </div>
                 </div>
-                <div class="swiper-prev" v-if="data.fotos.length > 3">
+                <div v-if="data.productosFotos.length > 3" class="swiper-prev">
                   <FlechaUp-icon class="icon-swiper" />
                 </div>
-                <div class="swiper-next" v-if="data.fotos.length > 3">
+                <div v-if="data.productosFotos.length > 3" class="swiper-next">
                   <Flechadown-icon class="icon-swiper" />
                 </div>
               </div>
             </div>
             <div class="wrapper-photo_main">
               <div
-                @mouseover="activeZoom = !activeZoom"
-                v-if="this.activeZoom"
-                v-show="!existYoutube"
+                v-if="activeZoom && !existYoutube"
                 class="photo_main"
+                @mouseover="activeZoom = !activeZoom"
               >
                 <img
-                  class="photo_main"
                   v-lazy="idCloudinaryQuality(selectPhotoUrl, 850, 850)"
+                  class="photo_main"
                   alt="Product Zoom"
                 />
               </div>
               <div
-                @mouseleave="activeZoom = !activeZoom"
-                v-if="!this.activeZoom"
-                v-show="!existYoutube"
+                v-if="!activeZoom && !existYoutube"
                 class="photo_main"
+                @mouseleave="activeZoom = !activeZoom"
               >
                 <zoom :photo="selectPhotoUrl" />
               </div>
@@ -110,61 +110,62 @@
             </div>
             <ProductSlide
               class="w-full h-full box-border photos_responsive"
-              :photos="data.fotos"
-              :photo="data.detalle.foto_cloudinary"
-              :idYoutube="idYoutube"
+              :photos="data.productosFotos"
+              :photo="data.fotoCloudinary"
+              :id-you-tube="idYoutube"
             />
           </div>
         </div>
         <div
           class="right"
-          :style="`margin-top:${this.settingByTemplate11[0].detailsProduct['--marginTopTitle']};`"
+          :style="`margin-top:${settingByTemplate11[0].detailsProduct['--marginTopTitle']};`"
         >
           <div class="content-items-right">
             <div class="content-name">
               <p
                 class="text-name"
-                :style="`font-size:${this.settingByTemplate11[0].detailsProduct['--fontSizeTitle']}; font-weight:${this.settingByTemplate11[0].detailsProduct['--fontWeighTitle']};`"
+                :style="`font-size:${settingByTemplate11[0].detailsProduct['--fontSizeTitle']}; font-weight:${settingByTemplate11[0].detailsProduct['--fontWeighTitle']};`"
               >
-                {{ data.detalle.nombre }}
+                {{ data.nombre }}
               </p>
             </div>
             <div class="content-price">
               <p
-                class="text-price"
-                :style="`font-size:${this.settingByTemplate11[0].detailsProduct['--fontSizePrice']}; font-weight:${this.settingByTemplate11[0].detailsProduct['--fontWeighPrice']};`"
                 v-show="salesData.precio"
+                class="text-price"
+                :style="`font-size:${settingByTemplate11[0].detailsProduct['--fontSizePrice']}; font-weight:${settingByTemplate11[0].detailsProduct['--fontWeighPrice']};`"
               >
                 {{
                   salesData.precio
                     | currency(
-                      dataStore.tienda.codigo_pais,
-                      dataStore.tienda.moneda
+                      dataStore.tiendasInfo.paises.codigo,
+                      dataStore.tiendasInfo.moneda
                     )
                 }}
               </p>
               <div
-                class="flex flex-row justify-center items-center"
                 v-show="
-                  data.info.tag_promocion == 1 &&
-                  data.info.promocion_valor &&
+                  data.productosInfo.tagPromocion == 1 &&
+                  data.productosInfo.promocionValor &&
                   salesData.precio
                 "
+                class="flex flex-row justify-center items-center"
               >
                 <p class="card-discont">
-                  {{ data.info.promocion_valor }}% De Descuento
+                  {{ data.productosInfo.promocionValor }}% De Descuento
                 </p>
                 <p class="text-promocion">
                   {{
-                    (data.info.tag_promocion == 1 && data.info.promocion_valor
+                    (data.productosInfo.tagPromocion == 1 &&
+                    data.productosInfo.promocionValor
                       ? Math.trunc(
                           salesData.precio /
-                            (1 - data.info.promocion_valor / 100)
+                            (1 - data.productosInfo.promocionValor / 100)
                         )
                       : 0)
                       | currency(
-                        dataStore.tienda.codigo_pais,
-                        dataStore.tienda.moneda
+                        dataStore.tiendasInfo.paises.codigo,
+                        dataStore.tiendasInfo.moneda
                       )
                   }}
                 </p>
@@ -172,27 +173,72 @@
             </div>
             <div class="empty"></div>
             <div class="content-stock">
-              <p class="stock-text-1">{{ $t('productdetail_stock') }}:</p>
-              <p class="stock-text-2">{{ salesData.unidades }}</p>
+              <p
+                v-if="salesData.unidades > 0"
+                class="text-stock"
+                style="color: #92bb35"
+              >
+                {{ $t('productdetail_stock') }}
+              </p>
+              <p
+                v-if="spent && salesData.unidades == 0"
+                class="text-stock"
+                style="color: #ed2353"
+              >
+                {{ $t('productdetail_productoAgotado') }}
+              </p>
             </div>
-            <div class="content-stock" v-if="data.info.descripcion_corta">
-              <p class="stock-text-1">{{ $t('productdetail_informacion') }}:</p>
-              <p class="stock-text-2">{{ data.info.descripcion_corta }}</p>
+            <div class="content-stock">
+              <p
+                v-if="data.envioGratis == 1"
+                class="text-stock"
+                style="color: #00a650"
+              >
+                <TruckIcon class="text-16 mr-5" />
+                {{ $t('footer_tarifaPrecio') }}
+              </p>
             </div>
-            <div class="empty"></div>
+            <div v-if="data.categoriaProducto > 0" class="content-stock">
+              <p class="stock-text-1">{{ $t('productdetail_categoria') }}:</p>
+              <p class="stock-text-2">
+                {{ data.categoriaProducto2.nombreCategoriaProducto }}
+              </p>
+            </div>
+            <div v-if="data.subcategoria > 0" class="content-stock">
+              <p class="stock-text-1">{{ $t('home_subcategory') }}:</p>
+              <p class="stock-text-2">
+                {{ data.subcategoria2.nombreSubcategoria }}
+              </p>
+            </div>
+            <div v-if="data.productosInfo.garantia" class="content-stock">
+              <p class="stock-text-1">{{ $t('productdetail_garantia') }}:</p>
+              <p class="stock-text-2">
+                {{ data.productosInfo.garantia }}
+              </p>
+            </div>
             <div
+              v-if="data.productosInfo.descripcionCorta"
+              class="content-stock"
+            >
+              <p class="stock-text-1">{{ $t('productdetail_informacion') }}:</p>
+              <p class="stock-text-2">
+                {{ data.productosInfo.descripcionCorta }}
+              </p>
+            </div>
+            <div class="empty mb-10"></div>
+            <div
+              v-if="data.conVariante === 1 && variantes"
               class="content-variant"
-              v-if="this.data.detalle.con_variante > 0"
             >
               <div
-                class="content-items-variant"
-                v-for="(variant, index) in data.variantes"
+                v-for="(variant, index) in variantes"
                 :key="index"
+                class="content-items-variant"
               >
-                <label for="variant name" class="text-variant"
-                  >{{ variant.nombre }}:</label
-                >
-                <SelectGroup :index="index" :variantes="data.variantes">
+                <label for="variant name" class="text-variant">
+                  {{ variant.nombre }}:
+                </label>
+                <SelectGroup :index="index" :variantes="variantes">
                   <option
                     v-for="item in variant.valores"
                     :key="item.option"
@@ -206,8 +252,8 @@
               </div>
             </div>
             <div
-              class="w-full flex flex-row items-center my-8"
               v-if="userDropshipping.userName"
+              class="w-full flex flex-row items-center my-8"
             >
               <p class="text-variant" style="margin-right: 10px">
                 {{ $t('productdetail_dropshipping') }}
@@ -221,7 +267,7 @@
                 {{ $t('productdetail_compartir') }}
               </p>
               <a
-                :href="this.sharingFacebook"
+                :href="sharingFacebook"
                 target="_blank"
                 rel="noreferrer noopener"
                 class="btn-facebook"
@@ -232,7 +278,9 @@
                 <whatsapp-icon class="wp-icon" />
               </button>
             </div>
-            <div class="content-direction-btns">
+            <div
+              class="mt-0 pb-10 md:mt-15 md:pb-20 fixed md:sticky w-full flex gap-x-4 flex-row justify-center md:justify-start items-center left-0 bottom-0 px-6 pt-10 md:px-0 md:pt-0 bg-gray-200 md:bg-transparent border-t md:border-t-0 z-100 md:z-0 md:border-b border-color"
+            >
               <div
                 class="content-quantity-boxes"
                 :class="{ disabled: !salesData.estado }"
@@ -251,16 +299,10 @@
               </div>
               <div class="content-addCart">
                 <button
+                  v-if="shouldShowAddToCartButton"
                   ref="colorBtn"
                   class="btn"
-                  v-if="
-                    !spent &&
-                    this.salesData.estado &&
-                    (data.info.tipo_servicio == null ||
-                      data.info.tipo_servicio == '0')
-                  "
-                  @click="addShoppingCart"
-                  id="AddToCartTag"
+                  @click="addToCart"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -274,25 +316,21 @@
                       d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
                     />
                   </svg>
-                  <p class="text-addCart">
-                    {{ $t('productdetail_añadiralcarrito') }}
-                  </p>
+                  {{ getAddToCartButtonLabel }}
                 </button>
                 <button
+                  v-else-if="!salesData.estado"
                   disabled
                   class="btn-disabled"
-                  v-else-if="!this.salesData.estado"
                 >
-                  <p class="text-addCart">
-                    {{ $t('productdetail_btnANodisponible') }}
-                  </p>
+                  {{ $t('productdetail_btnANodisponible') }}
                 </button>
                 <button
+                  v-else-if="shouldShowBuyButton"
+                  id="AddToCartTag"
                   ref="colorBtn"
                   class="btn"
-                  v-else-if="!spent && data.info.tipo_servicio == '1'"
-                  @click="GoPayments"
-                  id="AddToCartTag"
+                  @click="goToPayments"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -306,14 +344,10 @@
                       d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
                     />
                   </svg>
-                  <p class="text-addCart">
-                    {{ $t('productdetail_btnComprar') }}
-                  </p>
+                  {{ getBuyButtonLabel }}
                 </button>
-                <button disabled class="btn-disabled" v-else-if="spent">
-                  <p class="text-addCart">
-                    {{ $t('home_cardAgotado') }}
-                  </p>
+                <button v-else-if="spent" disabled class="btn-disabled">
+                  {{ $t('home_cardAgotado') }}
                 </button>
               </div>
             </div>
@@ -321,30 +355,34 @@
         </div>
       </div>
       <div class="tab">
-        <OptionTab :dataStore="dataStore" :data="data" :envio="envio" />
+        <OptionTab :data-store="dataStore" :data="data" :envio="envio" />
       </div>
       <div class="section-suggesProduct">
-        <KoSuggesProduct
-          :category="category.slice(0, 8)"
-          :setting-card-product="settingByTemplate11[0].cardProduct"
+        <KoSuggestProduct
+          v-if="filterSuggestedProducts?.length > 0"
+          :suggested-products="filterSuggestedProducts"
           :setting-general="settingByTemplate11[0].settingGeneral"
+          :setting-card-products="settingByTemplate11[0].cardProduct"
         />
       </div>
     </div>
   </div>
 </template>
 <script>
-import axios from 'axios'
-import idCloudinary from '../../mixins/idCloudinary'
-import currency from '../../mixins/formatCurrent'
+import idCloudinary from '@/mixins/idCloudinary'
+import currency from '@/mixins/formatCurrent'
+import mobileCheck from '@/mixins/mobileCheck'
+import { productHeadMixin } from '@/mixins/productHeadMixin'
 export default {
   name: 'Ko11ProductDetail',
   components: {
-    OptionTab: () => import('./_productdetails/OptTab'),
-    SelectGroup: () => import('./_productdetails/selectGroup'),
-    KoSuggesProduct: () => import('./_productdetails/suggestionsProducto'),
-    ProductSlide: () => import('./_productdetails/productSlide'),
-    Zoom: () => import('./_productdetails/zoomImg'),
+    Skeleton: () => import('../_commonComponent/skeleton-detail.vue'),
+    ProductSlide: () => import('../_commonComponent/product-slide.vue'),
+    SelectGroup: () => import('../_commonComponent/select-group.vue'),
+    KoSuggestProduct: () =>
+      import('../_commonComponent/suggestions-producto.vue'),
+    OptionTab: () => import('../_commonComponent/opt-tab-top.vue'),
+    Zoom: () => import('../_commonComponent/zoom-img.vue'),
   },
   filters: {
     toLowerCase(value) {
@@ -354,14 +392,28 @@ export default {
       return ''
     },
   },
-  mixins: [idCloudinary, currency],
+  mixins: [idCloudinary, currency, mobileCheck, productHeadMixin],
   props: {
-    dataStore: Object,
-    productsData: Array,
-    whatsapp: String,
-    envios: Object,
-    facebookPixel: Object,
-    settingByTemplate11: Array,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    whatsapp: {
+      type: String,
+      required: true,
+    },
+    envios: {
+      type: Object,
+      required: true,
+    },
+    facebookPixel: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate11: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -378,7 +430,8 @@ export default {
       productCart: {},
       salesData: null,
       spent: false,
-      envioproducto: '',
+      shippingProduct: '',
+      suggestedProducts: [],
       envio: {
         titulo: '',
         desc: '',
@@ -410,181 +463,68 @@ export default {
     }
   },
   head() {
-    return {
-      title: `Vista del producto ${
-        this.data && this.data.detalle ? this.data.detalle.nombre : ''
-      }`,
-      meta: [
-        {
-          hid: 'product:catalog_id',
-          property: 'product:catalog_id',
-          content: this.data && this.data.detalle ? this.data.detalle.id : '',
-        },
-
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content:
-            this.data && this.data.detalle ? this.data.detalle.nombre : '',
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: this.sharing && this.sharing.url ? this.sharing.url : '',
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content:
-            this.data && this.data.info ? this.data.info.descripcion_corta : '',
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content:
-            this.data && this.data.detalle
-              ? this.data.detalle.foto_cloudinary
-              : '',
-        },
-        {
-          hid: 'og:price:amount',
-          property: 'og:price:amount',
-          content:
-            this.salesData && this.salesData.precio
-              ? this.salesData.precio
-              : '',
-        },
-        {
-          hid: 'og:price:currency',
-          property: 'og:price:currency',
-          content: this.dataStore.tienda.moneda
-            ? this.dataStore.tienda.moneda
-            : '',
-        },
-        {
-          hid: 'product:brand',
-          property: 'product:brand',
-          content:
-            this.data && this.data.info && this.data.info.marca
-              ? this.data.info.marca
-              : '',
-        },
-        {
-          hid: 'product:availability',
-          property: 'product:availability',
-          content:
-            this.salesData && this.salesData.unidades > 0
-              ? 'in stock'
-              : 'out of stock',
-        },
-        {
-          hid: 'product:condition',
-          property: 'product:condition',
-          content: 'new',
-        },
-        {
-          hid: 'product:price:amount',
-          property: 'product:price:amount',
-          content:
-            this.salesData && this.salesData.precio
-              ? this.salesData.precio
-              : '',
-        },
-        {
-          hid: 'product:price:currency',
-          property: 'product:price:currency',
-          content: this.dataStore.tienda.moneda
-            ? this.dataStore.tienda.moneda
-            : '',
-        },
-        {
-          hid: 'product:sale_price:amount',
-          property: 'product:sale_price:amount',
-          content:
-            this.data &&
-            this.data.info &&
-            this.data.info.tag_promocion == 1 &&
-            this.data.info.promocion_valor
-              ? Math.trunc(
-                  this.salesData.precio /
-                    (1 - this.data.info.promocion_valor / 100)
-                )
-              : '',
-        },
-        {
-          hid: 'product:sale_price:currency',
-          property: 'product:sale_price:currency',
-          content: this.dataStore.tienda.moneda
-            ? this.dataStore.tienda.moneda
-            : '',
-        },
-      ],
-    }
+    return this.generateHead()
   },
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
     },
-    existPayments() {
-      const mediospago = this.dataStore.medios_pago
-      if (
-        mediospago.consignacion ||
-        mediospago.convenir ||
-        mediospago.payco ||
-        mediospago.tienda ||
-        mediospago.efecty
-      ) {
-        return true
-      }
-      return false
-    },
     beforeCombination() {
       return this.$store.state.beforeCombination
     },
     // eslint-disable-next-line vue/return-in-computed-property
-    precio() {
-      if (this.data.detalle.precio) {
-        return `$${this.data.detalle.precio
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+    variantes() {
+      if (this.data.conVariante === 1) {
+        return JSON.parse(this.data.productosVariantes[0].variantes)
       }
     },
-    category() {
-      return this.productsData.filter(
-        (product) =>
-          product.categoria ==
-            this.data.detalle.categoria_producto.nombre_categoria_producto &&
-          product.id !== this.data.detalle.id
+    shouldShowAddToCartButton() {
+      return (
+        !this.spent &&
+        this.salesData.estado &&
+        (this.data.productosInfo.tipoServicio == null ||
+          this.data.productosInfo.tipoServicio == '0')
+      )
+    },
+    shouldShowBuyButton() {
+      return !this.spent && this.data.productosInfo.tipoServicio == '1'
+    },
+    getAddToCartButtonLabel() {
+      return this.$t('productdetail_añadiralcarrito')
+    },
+    getBuyButtonLabel() {
+      return this.$t('productdetail_btnComprar')
+    },
+    filterSuggestedProducts() {
+      return this.suggestedProducts.filter(
+        (product) => product.id !== this.data.id
       )
     },
   },
   watch: {
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-    },
-    productsData() {
-      this.getDataProduct()
-    },
     envios() {
-      this.setOptionEnvio()
+      this.setOptionShipping()
     },
     quantityValue(value) {
       if (value > this.maxQuantityValue) {
         this.quantityValue = this.maxQuantityValue
       }
     },
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.redes.facebook
+      this.links[1].link = this.dataStore.redes.twitter
+      this.links[2].link = this.dataStore.redes.instagram
+      this.links[3].link = this.dataStore.redes.youtube
+    },
     beforeCombination(value) {
       const combinationSelected = JSON.stringify(value)
       if (this.data.combinaciones) {
         if (
-          this.data.combinaciones.combinaciones !== '[object Object]' &&
-          this.data.detalle.con_variante > 0
+          this.data.combinaciones[0][0].combinaciones !== '[object Object]' &&
+          this.data.conVariante > 0
         ) {
           const combinaciones = JSON.parse(
-            this.data.combinaciones.combinaciones
+            this.data.combinaciones[0][0].combinaciones
           )
           const result = combinaciones.find(
             (combinacion) =>
@@ -597,7 +537,7 @@ export default {
             productCart,
           ] of this.$store.state.productsCart.entries()) {
             if (
-              this.data.detalle.id == productCart.id &&
+              this.data.id == productCart.id &&
               JSON.stringify(productCart.combinacion) ==
                 JSON.stringify(result.combinacion)
             ) {
@@ -607,7 +547,7 @@ export default {
           }
           if (result) {
             this.spent = false
-            this.maxQuantityValue = result.unidades
+            this.maxQuantityValue = parseInt(result.unidades)
             if (result.unidades == 0) {
               this.spent = true
             }
@@ -619,6 +559,9 @@ export default {
               }
             }
             this.salesData = result
+            if (typeof this.salesData.unidades === 'string') {
+              this.salesData.unidades = parseInt(this.salesData.unidades)
+            }
             this.quantityValue = 1
           }
         }
@@ -626,18 +569,10 @@ export default {
     },
   },
   mounted() {
+    this.getDataProduct()
     this.$store.state.beforeCombination = []
-    if (
-      this.productsData &&
-      this.productsData.length &&
-      this.productsData.length > 0
-    ) {
-      this.getDataProduct()
-    } else {
-      this.getDataProductPrev()
-    }
-    if (Object.keys(this.dataStore.medios_envio).length) {
-      this.setOptionEnvio()
+    if (this.envios?.valores) {
+      this.setOptionShipping()
     }
     if (
       this.$route.query &&
@@ -649,162 +584,110 @@ export default {
     }
   },
   methods: {
-    changeSlide() {
-      this.swiper.slidePrev(700, false)
-    },
-    searchIdForSlug() {
-      const product = this.productsData.filter(
-        (product) => product.slug === this.id
+    async getDataProduct() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_DATA_PRODUCT',
+        {
+          slug: this.id,
+        }
       )
-      if (product.length) {
-        return product[0].id
-      }
-      return this.productsData[0].id
-    },
-    getDataProduct() {
-      const idOfSlug = this.searchIdForSlug()
-      if (idOfSlug) {
-        axios
-          .get(`${this.$store.state.urlTemplate}/api/producto/${idOfSlug}`)
-          .then((response) => {
-            this.selectedPhoto(response.data.detalle.foto_cloudinary)
-            this.videoYoutube(response.data.info.video)
-            this.data = response.data
-            this.salesData = {
-              precio: this.data.detalle.precio,
-              unidades: this.data.info.inventario,
-              sku: this.data.info.sku,
-              estado: true,
-            }
-            if (response && response.data) {
-              this.sharing.url = window.location.href
-              this.sharing.quote = `Explora%20el%20producto%20${response.data.detalle.nombre}%2C%20te%20van%20a%20encantar.%0ALink%20del%20producto%3A%20${this.sharing.url}`
-              this.sharingFacebook = `https://www.facebook.com/sharer/sharer.php?u=${this.sharing.url}&quote=${this.sharing.quote}`
-            }
-            this.maxQuantityValue = this.data.info.inventario
-            this.setOptionEnvio()
-            for (const [
-              index,
-              productCart,
-            ] of this.$store.state.productsCart.entries()) {
-              if (this.data.detalle.id == productCart.id) {
-                this.productIndexCart = index
-                this.productCart = productCart
-                this.maxQuantityValue =
-                  this.data.info.inventario - productCart.cantidad
-              }
-            }
-            if (this.salesData.unidades == 0 || this.maxQuantityValue <= 0) {
-              this.spent = true
-            }
-            this.loading = false
-            if (
-              this.facebookPixel &&
-              this.facebookPixel.pixel_facebook != null
-            ) {
-              window.fbq('track', 'ViewContent', {
-                content_type: 'product',
-                content_ids: [`${this.data.detalle.id}`],
-                contents: [
-                  {
-                    id: `${this.data.detalle.id}`,
-                    quantity: this.quantityValue,
-                  },
-                ],
-                value: this.salesData.precio ? this.salesData.precio : 0,
-                currency: this.dataStore.tienda.moneda,
-                content_name: this.data.detalle.nombre,
-                content_category: 'otro',
-              })
-            }
-          })
-      } else {
-        this.selectedPhoto(this.productsData[0].foto_cloudinary)
-        this.data.detalle = {
-          foto_cloudinary: this.productsData[0].foto_cloudinary,
-          nombre: this.productsData[0].nombre,
-          precio: this.productsData[0].precio,
-        }
-        this.data.info = {
-          marca: '',
-          descripcion: '',
-        }
-        this.maxQuantityValue = 0
+      if (success && data.data) {
+        this.loading = false
+        this.data = data.data
+
+        this.selectedPhoto(data.data.fotoCloudinary)
+        this.videoYouTube(data.data.productosInfo.video)
+        this.setOptionShipping()
+        this.getSuggestedProducts()
+
         this.salesData = {
-          precio: 29998,
-          unidades: 0,
-          sku: '4a00',
+          precio: data.data.precio,
+          unidades: data.data.productosInfo.inventario,
+          sku: data.data.productosInfo.sku,
+          estado: true,
         }
-        this.spent = true
+        this.maxQuantityValue = data.data.productosInfo.inventario
+        for (const [
+          index,
+          productCart,
+        ] of this.$store.state.productsCart.entries()) {
+          if (data.data.id == productCart.id) {
+            this.productIndexCart = index
+            this.productCart = productCart
+            this.maxQuantityValue =
+              data.data.productosInfo.inventario - productCart.cantidad
+          }
+        }
+        if (this.salesData.unidades == 0 || this.maxQuantityValue <= 0) {
+          this.spent = true
+        }
+        this.sharing.url = window.location.href
+        this.sharing.quote = `Explora%20el%20producto%20${data.data.nombre}%2C%20te%20van%20a%20encantar.%0ALink%20del%20producto%3A%20${this.sharing.url}`
+        this.sharingFacebook = `https://www.facebook.com/sharer/sharer.php?u=${this.sharing.url}&quote=${this.sharing.quote}`
+        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+          window.fbq('track', 'ViewContent', {
+            content_type: 'product',
+            content_ids: [`${data.data.id}`],
+            contents: [
+              {
+                id: `${data.data.id}`,
+                quantity: this.quantityValue,
+              },
+            ],
+            value: data.data.precio ? this.salesData.precio : 0,
+            currency: this.dataStore.tiendasInfo.moneda,
+            content_name: data.data.nombre,
+            content_category: 'otro',
+          })
+        }
       }
     },
-    getDataProductPrev() {
-      this.data.detalle = {
-        foto_cloudinary:
-          'https://vignette.wikia.nocookie.net/la-bitacora-del-capitan/images/6/67/Not_found.png/revision/latest?cb=20190509042801&path-prefix=es',
-        nombre: 'Producto de prueba',
-        precio: 29999,
-      }
-      this.data.info = {
-        marca: 'Marca de prueba',
-        descripcion: 'Descripción de prueba',
-      }
-      this.maxQuantityValue = 0
-      this.salesData = {
-        precio: 29999,
-        unidades: 0,
-        sku: '4a00',
-      }
-      this.spent = true
-    },
-    setOptionEnvio() {
-      if (this.data.detalle) {
-        if (this.data.detalle.envio_gratis == 1) {
-          this.envio = {
-            titulo: 'Envío gratis',
-            desc: 'Disfruta de este obsequio por parte de la tienda.',
-          }
-        } else {
-          this.data.envioproducto = JSON.parse(this.envios.valores)
-          switch (this.data.envioproducto.envio_metodo) {
-            case 'gratis':
-              this.envio = {
-                titulo: 'Envío gratis',
-                desc: 'Disfruta de este obsequio por parte de la tienda.',
-              }
-              break
-            case 'sinEnvio':
-              this.envio = {
-                titulo: 'Sin envio',
-                desc: 'Tienes que acercarte a la tienda a recoger tu pedido.',
-              }
-              break
-            case 'tarifa_plana':
-              this.envio = {
-                titulo: 'Tarifa plana',
-                desc: `Compra todo lo que quieras en nuestra tienda, el valor del envio siempre sera el mismo: Valor envio $${this.data.envioproducto.valor}`,
-              }
-              break
-            case 'precio':
-              this.envio = {
-                titulo: 'Tarifa por precio',
-                desc: 'Según la suma del costo de tus productos te cobraran el envio',
-              }
-              break
-            case 'precio_ciudad':
-              this.envio = {
-                titulo: 'Tarifa por ciudad',
-                desc: 'Según la ciudad te cobraran el envio',
-              }
-              break
-            case 'peso':
-              this.envio = {
-                titulo: 'Tarifa por peso',
-                desc: '',
-              }
-              break
-            default:
-          }
+    setOptionShipping() {
+      if (this.data.envioGratis == 1) {
+        this.envio = {
+          titulo: 'Envío gratis',
+          desc: 'Disfruta de este obsequio por parte de la tienda.',
+        }
+      } else {
+        this.data.shippingProduct = this.envios.valores
+        switch (this.data.shippingProduct.envio_metodo) {
+          case 'gratis':
+            this.envio = {
+              titulo: 'Envío gratis',
+              desc: 'Disfruta de este obsequio por parte de la tienda.',
+            }
+            break
+          case 'sinEnvio':
+            this.envio = {
+              titulo: 'Sin envio',
+              desc: 'Tienes que acercarte a la tienda a recoger tu pedido.',
+            }
+            break
+          case 'tarifa_plana':
+            this.envio = {
+              titulo: 'Tarifa plana',
+              desc: `Compra todo lo que quieras en nuestra tienda, el valor del envio siempre sera el mismo: Valor envio $${this.data.shippingProduct.valor}`,
+            }
+            break
+          case 'precio':
+            this.envio = {
+              titulo: 'Tarifa por precio',
+              desc: 'Según la suma del costo de tus productos te cobraran el envio',
+            }
+            break
+          case 'precio_ciudad':
+            this.envio = {
+              titulo: 'Tarifa por ciudad',
+              desc: 'Según la ciudad te cobraran el envio',
+            }
+            break
+          case 'peso':
+            this.envio = {
+              titulo: 'Tarifa por peso',
+              desc: '',
+            }
+            break
+          default:
         }
       }
     },
@@ -815,8 +698,6 @@ export default {
       if (this.maxQuantityValue > this.quantityValue) {
         this.quantityValue++
         this.data.cantidad = this.quantityValue
-      } else {
-        // Alerta de limite de sku
       }
     },
     removeQuantity() {
@@ -825,14 +706,11 @@ export default {
         this.data.cantidad = this.quantityValue
       }
     },
-    setMiniPhoto(photo) {
-      return photo
-    },
     selectedPhoto(photo) {
       this.selectPhotoUrl = photo
       this.existYoutube = false
     },
-    videoYoutube(url) {
+    videoYouTube(url) {
       let myregexp =
         /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
       let id = ''
@@ -844,26 +722,26 @@ export default {
         }
       }
     },
-    addShoppingCart() {
+    addToCart() {
       if (!this.data.cantidad) {
         this.data.cantidad = this.quantityValue
       }
       const product = {
-        id: this.data.detalle.id,
+        id: this.data.id,
         precio: this.salesData.precio,
         cantidad: this.data.cantidad,
-        foto_cloudinary: this.data.detalle.foto_cloudinary,
-        nombre: this.data.detalle.nombre,
+        foto_cloudinary: this.data.fotoCloudinary,
+        nombre: this.data.nombre,
         combinacion: this.salesData.combinacion,
-        envio_gratis: this.data.detalle.envio_gratis,
-        promocion_valor: this.data.info.promocion_valor,
-        tag_promocion: this.data.info.tag_promocion,
+        envio_gratis: this.data.envioGratis,
+        promocion_valor: this.data.productosInfo.promocionValor,
+        tag_promocion: this.data.productosInfo.tagPromocion,
         dropshipping: this.userDropshipping.userId,
       }
       if (this.salesData) {
         product.limitQuantity = this.salesData.unidades
       } else {
-        product.limitQuantity = this.data.info.inventario
+        product.limitQuantity = this.data.productosInfo.inventario
       }
       if (typeof this.productIndexCart === 'number') {
         const mutableProduct =
@@ -883,9 +761,9 @@ export default {
       // this.$store.state.orderComponent = true
       this.$store.dispatch('SEND_ADD_TO_CART', 1)
     },
-    GoPayments() {
+    goToPayments() {
       let objeto = {
-        id: this.data.info.id,
+        id: this.data.id,
         cantidad: this.quantityValue,
         combinacion:
           this.salesData && this.salesData.combinacion
@@ -910,27 +788,6 @@ export default {
         }
       }
     },
-    evalStock(mq, qv) {
-      return !(mq - qv < 0)
-    },
-    mobileCheck() {
-      window.mobilecheck = function () {
-        var check = false
-        ;(function (a) {
-          if (
-            /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
-              a
-            ) ||
-            /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
-              a.substr(0, 4)
-            )
-          )
-            check = true
-        })(navigator.userAgent || navigator.vendor || window.opera)
-        return check
-      }
-      return window.mobilecheck()
-    },
     redirectWP() {
       let baseUrlMovil = 'https://api.whatsapp.com/send?'
       let baseUrlPc = 'https://web.whatsapp.com/send?'
@@ -942,49 +799,44 @@ export default {
         window.open(`${baseUrlPc}text=${text}`, '_blank')
       }
     },
+    async getSuggestedProducts() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_ALL_PRODUCTS',
+        {
+          id_tienda: this.dataStore.id,
+          page: 1,
+          limit: 12,
+          category: this.data.categoriaProducto2.nombreCategoriaProducto,
+          // subcategory: this.data.subcategoria,
+        }
+      )
+      if (success) {
+        this.suggestedProducts = data.publicProductList
+      }
+    },
   },
   jsonld() {
     return {
       '@context': 'https://schema.org',
       '@type': 'Product',
-      productID:
-        this.data && this.data.detalle && this.data.detalle.id
-          ? this.data.detalle.id
-          : '',
-      name:
-        this.data && this.data.detalle && this.data.detalle.nombre
-          ? this.data.detalle.nombre.slice(0, 149)
-          : '',
-      description:
-        this.data && this.data.info && this.data.info.descripcion_corta
-          ? this.data.info.descripcion_corta.slice(0, 9998)
-          : `Producto de la tienda ${this.dataStore.tienda.nombre}`,
-      url: this.sharing && this.sharing.url ? this.sharing.url : '',
-      image:
-        this.data && this.data.detalle && this.data.detalle.foto_cloudinary
-          ? this.data.detalle.foto_cloudinary
-          : '',
-      brand:
-        this.data && this.data.info && this.data.info.marca
-          ? this.data.info.marca
-          : '',
-      sku:
-        this.salesData && this.salesData.unidades
-          ? this.salesData.unidades
-          : '',
+      productID: this.data?.id || '',
+      name: (this.data?.nombre || '').slice(0, 149),
+      description: (
+        this.data?.productosInfo?.descripcionCorta ||
+        `Producto de la tienda ${this.dataStore.nombre}`
+      ).slice(0, 9998),
+      url: this.sharing?.url || '',
+      image: this.data?.fotoCloudinary || '',
+      brand: this.data?.productosInfo?.marca || '',
+      sku: this.salesData?.unidades || '',
       offers: [
         {
           '@type': 'Offer',
-          price:
-            this.salesData && this.salesData.precio
-              ? this.salesData.precio
-              : '',
-          priceCurrency: this.dataStore.tienda.moneda
-            ? this.dataStore.tienda.moneda
-            : '',
+          price: this.salesData?.precio || '',
+          priceCurrency: this.dataStore.tiendasInfo?.moneda || '',
           itemCondition: 'https://schema.org/NewCondition',
           availability:
-            this.salesData && this.salesData.unidades > 0
+            this.salesData?.unidades > 0
               ? 'https://schema.org/InStock'
               : 'https://schema.org/OutOfStock',
         },
@@ -994,8 +846,8 @@ export default {
           '@type': 'PropertyValue',
           propertyID: 'item_group_id',
           value:
-            this.data && this.data.detalle
-              ? `FB${this.data.detalle.categoria_producto.id}_${this.data.detalle.categoria_producto.nombre_categoria_producto}`
+            this.categoriaProducto > 0
+              ? `FB${this.data.categoriaProducto}_${this.data.categoriaProducto2.nombreCategoriaProducto}`
               : '',
           status: 'active',
         },
@@ -1170,10 +1022,7 @@ export default {
   @apply w-full my-40;
 }
 .content-quantity-boxes {
-  @apply w-full flex flex-row justify-start items-center;
-}
-.content-quantity-boxes {
-  @apply w-full flex justify-start items-center my-30;
+  @apply flex flex-row justify-start items-center;
 }
 .box-quantity {
   background-color: transparent;
@@ -1232,18 +1081,20 @@ export default {
   .btn {
     color: var(--color_text_btn);
     background-color: var(--color_background_btn);
+    border-radius: var(--radius_btn);
     transition: all 0.15s ease-in;
     @apply w-full h-54 flex flex-row justify-center items-center;
   }
   .btn-disabled {
     color: var(--color_text_btn);
     background-color: var(--color_background_btn);
+    border-radius: var(--radius_btn);
     transition: all 0.15s ease-in;
     @apply w-full h-54 flex flex-row justify-center items-center;
   }
   .btn:hover .text-addCart {
+    background-color: var(--hover_Bg_btn);
     color: var(--hover_text_btn);
-    background: var(--hover_Bg_btn);
     transition: all 0.15s ease-in;
   }
   .quantity {
@@ -1263,12 +1114,9 @@ export default {
     font-family: var(--font-style-1) !important;
   }
   .text-stock {
-    color: #92bb35;
     font-size: 14px;
-    line-height: 1.42857143;
-    letter-spacing: -0.02em;
     font-family: var(--font-style-1) !important;
-    @apply font-semibold ml-30;
+    @apply font-semibold;
   }
   .text-icon {
     display: flex;

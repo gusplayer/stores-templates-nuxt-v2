@@ -8,66 +8,69 @@
       <span class="close" @click="closeModalPolitics">&times;</span>
     </div>
     <div class="content-items-modal">
-      <button v-if="dataStore.politicas.datos" class="content-modal accordion">
+      <button v-if="storePolicies.datos" class="content-modal accordion">
         {{ $t('footer_politicaTratamientos') }}
       </button>
       <div
-        v-if="dataStore.politicas.datos"
+        v-if="storePolicies.datos"
         class="panel"
-        v-html="dataStore.politicas.datos"
+        v-html="storePolicies.datos"
       ></div>
-      <button
-        v-if="dataStore.politicas.garantia"
-        class="content-modal accordion"
-      >
+      <button v-if="storePolicies.garantia" class="content-modal accordion">
         {{ $t('footer_politicaGarantia') }}
       </button>
 
       <div
-        v-if="dataStore.politicas.garantia"
+        v-if="storePolicies.garantia"
         class="panel"
-        v-html="dataStore.politicas.garantia"
+        v-html="storePolicies.garantia"
       ></div>
-      <button
-        v-if="dataStore.politicas.devolucion"
-        class="content-modal accordion"
-      >
+      <button v-if="storePolicies.devolucion" class="content-modal accordion">
         {{ $t('footer_politicaDevoluciones') }}
       </button>
       <div
-        v-if="dataStore.politicas.devolucion"
+        v-if="storePolicies.devolucion"
         class="panel"
-        v-html="dataStore.politicas.devolucion"
+        v-html="storePolicies.devolucion"
       ></div>
-      <button v-if="dataStore.politicas.cambio" class="content-modal accordion">
+      <button v-if="storePolicies.cambio" class="content-modal accordion">
         {{ $t('footer_politicaCambio') }}
       </button>
       <div
-        v-if="dataStore.politicas.cambio"
+        v-if="storePolicies.cambio"
         class="panel"
-        v-html="dataStore.politicas.cambio"
+        v-html="storePolicies.cambio"
       ></div>
-      <button v-if="dataStore.politicas.envios" class="content-modal accordion">
+      <button v-if="storePolicies.envios" class="content-modal accordion">
         {{ $t('footer_politicaEnvios') }}
       </button>
       <div
-        v-if="dataStore.politicas.envios"
+        v-if="storePolicies.envios"
         class="panel"
-        v-html="dataStore.politicas.envios"
+        v-html="storePolicies.envios"
       ></div>
-      <button v-if="dataStore.politicas.pagos" class="content-modal accordion">
+      <button v-if="storePolicies.pagos" class="content-modal accordion">
         {{ $t('footer_politicaPagos') }}
       </button>
       <div
-        v-if="dataStore.politicas.pagos"
+        v-if="storePolicies.pagos"
         class="panel"
-        v-html="dataStore.politicas.pagos"
+        v-html="storePolicies.pagos"
       ></div>
     </div>
-    <div class="px-10 py-4" style="background-color: #222">
+    <div
+      class="px-10 py-4 w-full flex justify-between items-center"
+      style="background-color: #222"
+    >
       <button @click="goRouter" class="txt-Legal">
         🔗 {{ $t('footer_irPagina') }}
       </button>
+      <div class="flex flex-row justify-end">
+        <p class="text-white-white text-14">
+          <span class="font-bold mr-3">Actualizado:</span>
+          {{ dayCreate }}/{{ nameMonth }}/{{ yearUpdate }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -75,12 +78,21 @@
 export default {
   name: 'KoTermsAndConditions',
   props: {
-    dataStore: {
+    storePolicies: {
       type: Object,
       required: true,
     },
   },
+  data() {
+    return {
+      yearUpdate: '',
+      monthCreate: '',
+      dayCreate: '',
+      nameMonth: '',
+    }
+  },
   mounted() {
+    this.setUpdate()
     var acc = document.getElementsByClassName('accordion')
     var i
     for (i = 0; i < acc.length; i++) {
@@ -100,6 +112,31 @@ export default {
     }
   },
   methods: {
+    setUpdate() {
+      if (this.storePolicies.updatedAt) {
+        const months = [
+          'Ene',
+          'Feb',
+          'Mar',
+          'Abr',
+          'May',
+          'Jun',
+          'Jul',
+          'Ago',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dic',
+        ]
+        const fecha = new Date(this.storePolicies.updatedAt)
+
+        this.yearUpdate = fecha.getUTCFullYear()
+        this.monthCreate = fecha.getUTCMonth()
+        this.dayCreate = fecha.getUTCDate()
+
+        this.nameMonth = months[this.monthCreate]
+      }
+    },
     closeModalPolitics() {
       this.$store.state.modalpolitics05 = false
     },

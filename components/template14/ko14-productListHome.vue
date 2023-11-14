@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="fullProducts.length > 0"
+    v-if="listProducts.length > 0"
     class="w-full flex justify-center items-center py-15 lg:py-20 px-10"
     :style="`background-color: ${listProductsHome['--background_color_1']}`"
   >
@@ -34,13 +34,13 @@
       >
         <div class="swiper-wrapper w-full">
           <div
-            v-for="product in fullProducts.slice(0, 12)"
+            v-for="product in listProducts"
             :key="product.id"
             class="swiper-slide w-full"
           >
             <KoProductCard
               :product="product"
-              :card-products="cardProducts"
+              :setting-card-products="cardProducts"
               :setting-general="settingGeneral"
               class="w-full"
             />
@@ -74,13 +74,10 @@ export default {
       type: Object,
       required: true,
     },
-    fullProducts: {
-      type: Array,
-      required: true,
-    },
   },
   data() {
     return {
+      listProducts: [],
       swiperOptions: {
         direction: 'horizontal',
         setWrapperSize: true,
@@ -128,6 +125,25 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
+    },
+  },
+  mounted() {
+    this.currentChange()
+  },
+  methods: {
+    async currentChange() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_ALL_PRODUCTS',
+        {
+          id_tienda: this.dataStore.id,
+          limit: 8,
+          page: 1,
+          topSales: 1,
+        }
+      )
+      if (success) {
+        this.listProducts = data.publicProductList
+      }
     },
   },
 }

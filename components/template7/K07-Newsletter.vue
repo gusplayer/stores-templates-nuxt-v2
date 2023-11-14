@@ -5,21 +5,15 @@
       settingKNews,
       settingGeneral,
       {
-        '--font-style-2':
-          settingGeneral && settingGeneral.fount_2
-            ? settingGeneral.fount_2
-            : 'Great Vibes',
+        '--font-style-2': settingGeneral?.fount_2 ?? 'Great Vibes',
       },
       {
-        '--font-style-3':
-          settingGeneral && settingGeneral.fount_3
-            ? settingGeneral.fount_3
-            : 'Lora',
+        '--font-style-3': settingGeneral?.fount_3 ?? 'Lora',
       },
     ]"
   >
-    <div class="separador-blog" v-if="!settingKCarousel.visible"></div>
-    <div class="wrapper-items-content" :style="[]">
+    <div v-if="!settingKCarousel.visible" class="separador-blog"></div>
+    <div class="wrapper-items-content">
       <div class="wrapper-content-items">
         <div class="wrapper-items-text">
           <div class="tittle">
@@ -58,8 +52,9 @@
                 v-show="errors[0] || register"
                 class="text-error"
                 :style="register ? 'color:green' : ''"
-                >{{ errorsCheckbox || register }}</span
               >
+                {{ errorsCheckbox || register }}
+              </span>
             </template>
           </ValidationProvider>
         </div>
@@ -74,7 +69,7 @@
             {{ $t('newsletter_msg') }}
           </p>
         </div>
-        <p class="text-error" v-if="stateChehed">
+        <p v-if="stateChehed" class="text-error">
           Marcar checkbox para poder suscribirse al boletín informativo
         </p>
       </div>
@@ -82,8 +77,8 @@
       <div class="content-button">
         <button
           ref="colorBtn"
-          @click="submitNewsletter"
           class="content-bttns-shop"
+          @click="submitNewsletter"
         >
           <span class="content-textbutton-shop">
             {{ $t('newsletter_btn') }}
@@ -104,10 +99,22 @@ export default {
     ValidationProvider,
   },
   props: {
-    dataStore: Object,
-    settingGeneral: Object,
-    settingKNews: Object,
-    settingKCarousel: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    settingKNews: {
+      type: Object,
+      required: true,
+    },
+    settingKCarousel: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -135,7 +142,7 @@ export default {
             if (response.valid) {
               const json = {
                 email: this.email,
-                tienda: this.dataStore.tienda.id_tienda,
+                tienda: this.dataStore.id,
               }
               axios
                 .post(

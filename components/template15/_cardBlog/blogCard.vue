@@ -13,7 +13,7 @@
         height="250"
         alt="right-banner"
       />
-      <div v-else class="w-full h-full bg-slate-200" />
+      <div v-else class="w-full h-full bg-slate-200"></div>
       <div
         class="absolute bottom-10 left-10 p-10 flex flex-col justify-center items-center rounded-5"
         :style="`background-color: ${cardBlog.color_bg_date}`"
@@ -46,43 +46,56 @@
   </nuxt-link>
 </template>
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'Ko15BlogCard',
   mixins: [idCloudinary],
-  props: { article: Object, cardBlog: Object, settingGeneral: Object },
+  props: {
+    article: {
+      type: Object,
+      required: true,
+    },
+    cardBlog: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
-      shippingCreated: '',
       dayCreate: '',
       monthCreate: '',
       yearCreate: '',
       nameMonth: '',
-      monthNames: {
-        1: 'Ene',
-        2: 'Feb',
-        3: 'Mar',
-        4: 'Abr',
-        5: 'May',
-        6: 'Jun',
-        7: 'Jul',
-        8: 'Ago',
-        9: 'Sep',
-        10: 'Oct',
-        11: 'Nov',
-        12: 'Dic',
-      },
     }
   },
   mounted() {
-    if (this.article.created_at) {
-      const [shippingCreated] = this.article.created_at.split(' ')
-      const [yearCreate, monthCreate, dayCreate] = shippingCreated.split('-')
-      this.dayCreate = dayCreate
-      this.monthCreate = monthCreate
-      this.yearCreate = yearCreate
+    if (this.article.updated_at) {
+      const months = [
+        'Ene',
+        'Feb',
+        'Mar',
+        'Abr',
+        'May',
+        'Jun',
+        'Jul',
+        'Ago',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dic',
+      ]
+      const fecha = new Date(this.article.updated_at)
+
+      this.yearCreate = fecha.getUTCFullYear()
+      this.monthCreate = fecha.getUTCMonth()
+      this.dayCreate = fecha.getUTCDate()
+
+      this.nameMonth = months[this.monthCreate]
     }
-    this.nameMonth = this.monthNames[parseInt(this.monthCreate)]
   },
 }
 </script>

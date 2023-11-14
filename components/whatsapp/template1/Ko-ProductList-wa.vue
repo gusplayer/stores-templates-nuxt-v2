@@ -1,20 +1,29 @@
 <template>
-  <div class="wrapper-productlist">
-    <div class="container-productlist">
-      <div class="content-items-categorias">
-        <div class="content-items-categorias-text">
-          <p class="text-categorias" @click="clear">
-            {{ $t('home_catalogo') }}
-          </p>
-          <p
-            v-if="nameCategoryHeader"
-            class="text-categorias-select"
-            @click="breadcrumbsSendCategory(nameCategoryHeader)"
+  <div
+    class="w-full flex justify-center items-center bg-white-white pt-5 box-border"
+  >
+    <div class="w-full flex flex-col justify-center px-20 pb-30">
+      <div class="w-full flex flex-row justify-start items-start mb-20">
+        <button class="text-categorias" @click="clearFilters">
+          {{ $t('home_catalogo') }}
+        </button>
+        <div class="flex flex-row justify-center items-start">
+          <button
+            v-if="nameCategory"
+            class="text-categorias"
+            @click="breadcrumbsClear(1)"
           >
-            > {{ nameCategoryHeader }}
-          </p>
-          <p v-if="nameSubCategoryHeader" class="text-categorias-select">
-            > {{ nameSubCategoryHeader }}
+            <span class="font-normal pr-4">/</span>{{ nameCategory }}
+          </button>
+          <button
+            v-if="nameSubCategory"
+            class="text-categorias"
+            @click="breadcrumbsClear(2)"
+          >
+            <span class="font-normal pr-4">/</span>{{ nameSubCategory }}
+          </button>
+          <p v-if="tagProduct" class="text-categorias">
+            <span class="font-normal pr-4">/</span>{{ tagProduct }}
           </p>
         </div>
       </div>
@@ -22,30 +31,32 @@
         <div class="content-item-productos">
           <div div class="grid-products">
             <div
-              v-for="product in filterProduct"
+              v-for="product in listProducts"
               :key="product.id"
               class="content-products"
             >
-              <KoProductCard1 :product="product" :dataStore="dataStore" />
+              <KoProductCard :product="product" :data-store="dataStore" />
             </div>
           </div>
-          <div v-if="fullProducts.length == 0" class="content-products-empty">
+          <div v-if="listProducts.length === 0" class="content-products-empty">
             <p>{{ $t('home_msgCatalogo') }}</p>
           </div>
           <br />
           <div class="wrapper-pagination-web">
-            <div v-if="fullProducts.length > 16" class="pagination-medium">
+            <div v-if="totalProducts > filters.limit" class="pagination-medium">
               <el-pagination
                 background
                 layout="prev, pager, next"
-                :total="fullProducts.length"
-                :page-size="16"
-                :current-page.sync="currentPage"
+                :total="totalProducts"
+                :page-size="filters.limit"
+                :current-page.sync="previousPage"
+                class="pagination bg-transparent"
+                @current-change="changePage"
               />
             </div>
           </div>
           <div
-            v-if="fullProducts.length > 16"
+            v-if="totalProducts > filters.limit"
             class="wrapper-pagination-responsive"
           >
             <div class="pagination-medium">
@@ -53,9 +64,11 @@
                 small
                 background
                 layout="prev, pager, next"
-                :total="fullProducts.length"
-                :page-size="16"
-                :current-page.sync="currentPage"
+                :total="totalProducts"
+                :page-size="filters.limit"
+                :current-page.sync="previousPage"
+                class="pagination bg-transparent"
+                @current-change="changePage"
               />
             </div>
           </div>
@@ -66,213 +79,34 @@
 </template>
 
 <script>
-import KoProductCard1 from './_productcard/Ko-ProductCard-1'
-import filterProducts from '../../../mixins/filterProducts'
+import filters from '@/mixins/filterProducts'
 export default {
   name: 'ProductGridWa1',
   components: {
-    KoProductCard1,
+    KoProductCard: () => import('../product-card/Ko99-product-card-1.vue'),
   },
-  mixins: [filterProducts],
+  mixins: [filters],
   props: {
-    dataStore: {
-      type: Object,
-      required: true,
-    },
-    fullProducts: {
-      type: Array,
-      required: true,
-    },
     settingByTemplate: {
       type: Object,
       required: true,
     },
   },
-  data() {
-    return {
-      search: '',
-      currentPage: 1,
-    }
-  },
-  computed: {
-    categorias() {
-      return this.dataStore.categorias
-    },
-    subcategories() {
-      return this.dataStore.subcategorias
-    },
-    getProductsCategorie() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
-      return this.fullProducts
-        .filter((product) => product.categoria == this.select)
-        .slice(initial, final)
-    },
-    filterProduct() {
-      const initial = this.currentPage * 16 - 16
-      const final = initial + 16
-      return this.fullProducts.slice(initial, final)
-    },
-    selectedCategory() {
-      return this.$store.state.products.payload
-    },
-    selectedType() {
-      return this.$store.state.products.type
-    },
-    heightHeader() {
-      return this.$refs.header.offsetHeight
-    },
-    nameCategoryHeader() {
-      return this.$store.state.category_producto_header
-    },
-    nameSubCategoryHeader() {
-      return this.$store.state.subcategory_producto_header
-    },
-    searchValue() {
-      return this.$store.state.searchValue
-    },
-    previousPage() {
-      return this.$store.state.previousPage
-    },
-  },
+
   watch: {
-    search(value) {
-      this.SearchProduct2(value)
-    },
-    currentPage() {
-      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
+    previousPage() {
       let timerTimeout = null
+      // eslint-disable-next-line no-unused-vars
       timerTimeout = setTimeout(() => {
         timerTimeout = null
-        window.scrollTo(0, 0)
+        window.scrollBy(0, -1500)
       }, 250)
-    },
-    previousPage() {
-      if (this.previousPage) {
-        this.currentPage = this.previousPage
-      }
-    },
-    nameCategoryHeader(value) {
-      return value
-    },
-    nameSubCategoryHeader(value) {
-      return value
-    },
-    searchValue(value) {
-      this.SearchProduct2(value)
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      if (this.$route.query && this.$route.query.category) {
-        this.sendCategoryUrlMix(this.$route.query.category)
-      } else if (this.$route.query && this.$route.query.subcategory) {
-        this.SendSubCategoryUrlMix(
-          this.$route.query.subcategory,
-          this.categorias,
-          this.subcategories
-        )
-      } else if (
-        this.$route.query &&
-        this.$route.query.tagId &&
-        this.$route.query.tagName
-      ) {
-        this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
-      } else if (this.$route.fullPath == '/') {
-        this.allCategories()
-      }
-    },
-  },
-  mounted() {
-    if (this.$route.query && this.$route.query.category) {
-      this.sendCategoryUrlMix(this.$route.query.category)
-    } else if (this.$route.query && this.$route.query.subcategory) {
-      this.SendSubCategoryUrlMix(
-        this.$route.query.subcategory,
-        this.categorias,
-        this.subcategories
-      )
-    } else if (
-      this.$route.query &&
-      this.$route.query.tagId &&
-      this.$route.query.tagName
-    ) {
-      this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
-    } else if (this.$route.fullPath == '/') {
-      this.allCategories()
-    }
-    if (this.previousPage) {
-      this.currentPage = this.previousPage
-    }
-  },
-  methods: {
-    SearchProduct2(search) {
-      if (search.length) {
-        this.$store.commit('products/FILTER_BY', {
-          type: ['search'],
-          data: search,
-        })
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: ['all'],
-          data: '',
-        })
-      }
-      this.currentPage = 1
-    },
-    breadcrumbsSendCategory(value) {
-      let filtradoCategories = this.categorias.find((element) => {
-        if (element.nombre_categoria_producto == value) {
-          return element
-        }
-      })
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: ['category'],
-        data: filtradoCategories.nombre_categoria_producto,
-      })
-    },
-    clear() {
-      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: ['all'],
-        data: '',
-      })
-      this.$emit('clear')
     },
   },
 }
 </script>
 
 <style scoped>
-.wrapper-productlist {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  box-sizing: border-box;
-  margin-top: 0px;
-  padding-top: 5px;
-}
-.container-productlist {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 0px 20px 30px 20px;
-  flex-direction: column;
-}
-.content-items-categorias {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  height: 40px;
-}
-.content-items-categorias-text {
-  display: flex;
-  flex-direction: row;
-}
 .text-categorias {
   background: transparent;
   font-size: 1rem;
@@ -282,19 +116,7 @@ export default {
   color: #4c4c4c;
   display: flex;
 }
-.text-categorias-select {
-  background: transparent;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 1.4;
-  color: rgb(46, 46, 46);
-  align-self: flex-end;
-  margin-right: 2px;
-  margin-left: 5px;
-  cursor: pointer;
-  opacity: 0.6;
-  display: flex;
-}
+
 .content-item-productos {
   display: flex;
   width: 100%;

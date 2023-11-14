@@ -1,5 +1,8 @@
 <template>
-  <div class="wrapper-blog">
+  <div
+    class="w-full flex flex-col justify-start items-center bg-white-white"
+    style="min-height: calc(72vh)"
+  >
     <div v-if="dataArticle" class="container-article">
       <div class="content-blog">
         <nav class="flex mt-20 mb-5 sm:mb-10" aria-label="Breadcrumb">
@@ -45,7 +48,7 @@
           </ol>
         </nav>
         <div>
-          <p class="size_title mt-10 text-start">
+          <p class="size_title my-10 text-start">
             {{ dataArticle.titulo }}
           </p>
         </div>
@@ -54,15 +57,22 @@
             <div class="flex-shrink-0">
               <a href="#">
                 <img
-                  class="h-40 w-40 rounded-full"
+                  class="h-60 w-60 rounded-full"
                   v-lazy="`${this.$store.state.urlKomercia}/users/user.jpg`"
-                  alt=""
+                  alt="logoStore"
                 />
               </a>
             </div>
-            <div class="content-date-items">
-              <p>{{ dataArticle.autor }}</p>
-              <p>{{ shippingCreated }}</p>
+            <div class="w-full flex flex-col ml-10">
+              <p class="text-16 font-bold text-[#3a4557bb]">
+                {{ dataArticle.autor }}
+              </p>
+              <p class="text-14 text-[#3a4557bb]">
+                <strong>Creado:</strong> {{ shippingCreated }}
+              </p>
+              <p class="text-14 text-[#3a4557bb]">
+                <strong>Actualizado:</strong> {{ shippingUpdated }}
+              </p>
             </div>
           </div>
           <div class="flex icons">
@@ -139,39 +149,21 @@ export default {
       sharingLinkedin: '',
     }
   },
-  computed: {
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-  },
-  watch: {
-    listArticulos() {
-      this.searchIdForSlug()
-    },
-  },
   mounted() {
-    if (this.listArticulos.length) {
-      this.searchIdForSlug()
-    }
+    this.searchIdForSlug()
   },
   methods: {
     async searchIdForSlug() {
       let idBlog = this.$route.query.idBlog
       const { data } = await this.$store.dispatch('GET_DATA_ARTICLE', {
         idBlog: idBlog,
-        idStore: this.dataStore.tienda.id_tienda,
+        idStore: this.dataStore.id,
       })
       if (data) {
         this.dataArticle = data.data
         this.getDataArticle()
-        if (this.dataArticle && this.dataArticle.created_at) {
-          let dateCreated = this.dataArticle.created_at
-          let resultCreated = dateCreated.split(' ')
-          this.shippingCreated = resultCreated[0]
-          let dateUpdate = this.dataArticle.updated_at
-          let resultUpdate = dateUpdate.split(' ')
-          this.shippingUpdated = resultUpdate[0]
-        }
+        this.shippingCreated = this.formatDate(this.dataArticle.created_at)
+        this.shippingUpdated = this.formatDate(this.dataArticle.updated_at)
       }
     },
     getDataArticle() {
@@ -181,6 +173,40 @@ export default {
       this.sharingFacebook = `https://www.facebook.com/sharer/sharer.php?u=${this.sharing.url}&quote=${this.sharing.quote}`
       this.sharingTwitter = `https://twitter.com/intent/tweet?text=${this.sharing.quoteTwitter}%0A${this.sharing.url}`
       this.sharingLinkedin = `https://www.linkedin.com/shareArticle?mini=true&url=${this.sharing.url}`
+    },
+    formatDate(value) {
+      const fecha = new Date(value)
+
+      const diasSemana = [
+        'Domingo',
+        'Lunes',
+        'Martes',
+        'Miércoles',
+        'Jueves',
+        'Viernes',
+        'Sábado',
+      ]
+      const meses = [
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre',
+      ]
+
+      const dia = fecha.getUTCDate()
+      const mes = fecha.getUTCMonth()
+      const año = fecha.getUTCFullYear()
+      const diaSemana = diasSemana[fecha.getUTCDay()]
+
+      return `${diaSemana}, ${dia} de ${meses[mes]} de ${año}`
     },
   },
 }
@@ -192,11 +218,7 @@ export default {
   color: black;
   line-height: 48px;
 }
-.wrapper-blog {
-  min-height: calc(72vh);
-  background: white;
-  @apply w-full flex flex-col justify-start items-center;
-}
+
 .container-article {
   @apply flex justify-center items-center;
 }
@@ -216,19 +238,7 @@ export default {
   margin-bottom: 20px;
   margin-top: 10px;
 }
-.content-date-items {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-}
-.content-date-items p {
-  font-size: 14px;
-  color: #3a4557bb;
-}
-.content-date-items p:nth-child(1) {
-  font-weight: bold;
-}
+
 .editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
   border: none;
   padding: 10px 5px;

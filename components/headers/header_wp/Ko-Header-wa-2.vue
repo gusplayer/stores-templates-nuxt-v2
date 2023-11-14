@@ -21,7 +21,7 @@
       </div>
       <div class="content-data-store">
         <nuxt-link
-          :to="stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`"
+          :to="stateWapiME ? `/wa/${dataStore.id}/` : `/`"
           class="data-item-logo"
           :class="
             settingByTemplate.logo_cuadrado == 1
@@ -36,25 +36,19 @@
                 ? `imagen-cuadrado`
                 : `imagen-redondo`
             "
-            :src="`${$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+            :src="`${$store.state.urlKomercia}/logos/${dataStore.logo}`"
             alt="logo-Store"
           />
         </nuxt-link>
         <div class="data-item-name">
           <p class="name-store">
-            {{ dataStore.tienda.nombre }}
+            {{ dataStore.nombre }}
           </p>
-          <p
-            class="category-store"
-            v-if="settingByTemplate && settingByTemplate.mensaje_principal"
-          >
+          <p v-if="settingByTemplate?.mensaje_principal" class="category-store">
             {{ settingByTemplate.mensaje_principal }}
           </p>
         </div>
-        <div
-          class="content-seeMore"
-          v-if="settingByTemplate && settingByTemplate.descripcion"
-        >
+        <div v-if="settingByTemplate?.descripcion" class="content-seeMore">
           <p
             v-if="!showInfoStore"
             class="txt-seeMore"
@@ -67,18 +61,18 @@
           </p>
           <div>
             <Flechadown-icon
-              class="svg-arrow"
               v-if="!showInfoStore"
+              class="svg-arrow"
               @click="showInfoStore = true"
             />
             <FlechaUp-icon
-              class="svg-arrow"
               v-else
+              class="svg-arrow"
               @click="showInfoStore = false"
             />
           </div>
         </div>
-        <div class="content-infoStore" v-if="showInfoStore">
+        <div v-if="showInfoStore" class="content-infoStore">
           <div v-if="settingByTemplate && settingByTemplate.descripcion">
             <p class="txt-direccion">
               {{ settingByTemplate.descripcion }}
@@ -87,20 +81,24 @@
         </div>
       </div>
     </div>
-    <KoOrderWa :dataStore="dataStore" :stateOrderWapi="true" />
+    <KoOrderWa :data-store="dataStore" :state-order-wapi="true" />
   </div>
 </template>
 <script>
-// import KoOrderWa from '../_order1/orderWa'
-import KoOrderWa from '../_order1/order1.vue'
-import idCloudinary from '../../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'HeaderWa2',
+  components: { KoOrderWa: () => import('../_order1/order1.vue') },
   mixins: [idCloudinary],
-  components: { KoOrderWa },
   props: {
-    dataStore: Object,
-    settingByTemplate: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -109,27 +107,27 @@ export default {
         {
           nombre: 'Facebook',
           icon: 'facebook-icon',
-          link: this.dataStore.tienda.red_facebook,
+          link: this.dataStore.redes.facebook,
         },
         {
           nombre: 'Twitter',
           icon: 'twitter-icon',
-          link: this.dataStore.tienda.red_twitter,
+          link: this.dataStore.redes.twitter,
         },
         {
           nombre: 'Instagram',
           icon: 'instagram-icon',
-          link: this.dataStore.tienda.red_instagram,
+          link: this.dataStore.redes.instagram,
         },
         {
           nombre: 'Youtube',
           icon: 'youtube-icon',
-          link: this.dataStore.tienda.red_youtube,
+          link: this.dataStore.redes.youtube,
         },
         {
           nombre: 'Tiktok',
           icon: 'tiktok-icon',
-          link: this.dataStore.tienda.red_tiktok,
+          link: this.dataStore.redes.tiktok,
         },
       ],
     }
@@ -144,11 +142,11 @@ export default {
   },
   watch: {
     'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-      this.links[4].link = this.dataStore.tienda.red_tiktok
+      this.links[0].link = this.dataStore.redes.facebook
+      this.links[1].link = this.dataStore.redes.twitter
+      this.links[2].link = this.dataStore.redes.instagram
+      this.links[3].link = this.dataStore.redes.youtube
+      this.links[4].link = this.dataStore.redes.tiktok
     },
   },
 }

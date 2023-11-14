@@ -5,29 +5,20 @@
         :to="{ path: `/productos/` + product.slug }"
         class="wrapper-image"
       >
-        <client-only>
-          <img
-            v-if="!soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 400, 400)"
-            class="product-image"
-            alt="Product Img"
-          />
-          <img
-            v-if="soldOut"
-            v-lazy="idCloudinary(this.product.foto_cloudinary, 400, 400)"
-            class="product-image-soldOut"
-            alt="Product Img"
-          />
-        </client-only>
+        <img
+          v-lazy="idCloudinary(product.foto_cloudinary, 400, 400)"
+          class="product-image"
+          :class="{ 'product-image-soldOut': soldOut }"
+          alt="Product Img"
+        />
         <div class="image_overlay"></div>
       </nuxt-link>
-
-      <div class="overlay-sould" v-if="soldOut">
+      <div v-if="soldOut" class="overlay-sould">
         <div class="text-sould">
           <svg
+            id="Layer_1"
             class="svg-sould-out"
             xmlns="http://www.w3.org/2000/svg"
-            id="Layer_1"
             enable-background="new 0 0 512 512"
             viewBox="0 0 512 512"
           >
@@ -106,15 +97,14 @@
         </div>
       </div>
       <div
-        class="overlay-bottom"
-        @click="addShoppingCart"
         v-if="
-          !this.estadoCart &&
+          !estadoCart &&
           !soldOut &&
           !spent &&
-          (this.product.tipo_servicio == null ||
-            this.product.tipo_servicio == '0')
+          (product.tipo_servicio == null || product.tipo_servicio == '0')
         "
+        class="overlay-bottom"
+        @click="addShoppingCart"
       >
         <div class="cart-shop-mobile">
           <div class="icon-cart">
@@ -126,15 +116,15 @@
           @mouseover="hover = true"
           @mouseleave="hover = false"
         >
-          <div class="text-cart" v-if="!hover">
+          <div v-if="!hover" class="text-cart">
             <p class="w-full">{{ $t('productdetail_añadiralcarrito') }}</p>
           </div>
-          <div class="icon-cart" v-if="hover">
+          <div v-if="hover" class="icon-cart">
             <cart-icon class="icon" />
           </div>
         </div>
       </div>
-      <div class="overlay-bottom" v-else>
+      <div v-else class="overlay-bottom">
         <div class="cart-shop-mobile">
           <svg
             class="icon-show-mobile"
@@ -164,65 +154,57 @@
         {{ this.product.categoria }}
       </div> -->
       <div class="tittle">
-        <p class="card-title" v-if="this.product.nombre.length >= 54">
-          {{ `${this.product.nombre.slice(0, 54)}...` }}
+        <p v-if="product.nombre.length >= 54" class="card-title">
+          {{ `${product.nombre.slice(0, 54)}...` }}
         </p>
-        <p class="card-title" v-else>
-          {{ `${this.product.nombre.slice(0, 54)}` }}
+        <p v-else class="card-title">
+          {{ `${product.nombre.slice(0, 54)}` }}
         </p>
       </div>
       <div class="precio">
         <div class="content-text-price">
-          <div v-if="this.estadoCart && this.equalsPrice">
-            <p class="text-price" v-if="this.minPrice">
+          <div v-if="estadoCart && equalsPrice">
+            <p v-if="minPrice" class="text-price">
               {{
-                this.minPrice
+                minPrice
                   | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
+                    dataStore.tiendasInfo.paises.codigo,
+                    dataStore.tiendasInfo.moneda
                   )
               }}
             </p>
           </div>
           <div
+            v-else-if="estadoCart && minPrice && maxPrice && !equalsPrice"
             class="content-price"
-            v-else-if="
-              this.estadoCart &&
-              this.minPrice &&
-              this.maxPrice &&
-              !this.equalsPrice
-            "
           >
             <div class="text-price">
               {{
-                this.minPrice
+                minPrice
                   | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
+                    dataStore.tiendasInfo.paises.codigo,
+                    dataStore.tiendasInfo.moneda
                   )
               }}
             </div>
             <p class="separator-price mx-4">-</p>
             <div class="text-price">
               {{
-                this.maxPrice
+                maxPrice
                   | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
+                    dataStore.tiendasInfo.paises.codigo,
+                    dataStore.tiendasInfo.moneda
                   )
               }}
             </div>
           </div>
           <div v-else>
-            <p
-              class="text-price"
-              v-if="this.product.precio > 0 || this.product.precio"
-            >
+            <p v-if="product.precio > 0 || product.precio" class="text-price">
               {{
-                this.product.precio
+                product.precio
                   | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
+                    dataStore.tiendasInfo.paises.codigo,
+                    dataStore.tiendasInfo.moneda
                   )
               }}
             </p>
@@ -252,11 +234,11 @@
           </div>
         </div>
         <!-- Producto agotado -->
-        <div class="content_card-info" v-if="soldOut">
+        <div v-if="soldOut" class="content_card-info">
           <div class="icon-card-info-sould">
             <svg
-              xmlns="http://www.w3.org/2000/svg"
               id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg"
               enable-background="new 0 0 512 512"
               height="50px"
               viewBox="0 0 512 512"
@@ -343,17 +325,16 @@
       <!-- Btn comprar -->
       <div class="content-button">
         <button
-          ref="colorBtn"
-          class="btn"
           v-if="
-            !this.estadoCart &&
+            !estadoCart &&
             !soldOut &&
             !spent &&
-            (this.product.tipo_servicio == null ||
-              this.product.tipo_servicio == '0')
+            (product.tipo_servicio == null || product.tipo_servicio == '0')
           "
-          @click="addShoppingCart"
           id="AddToCartTag"
+          ref="colorBtn"
+          class="btn"
+          @click="addShoppingCart"
         >
           <i class="header-content-cart">
             <svg
@@ -373,7 +354,7 @@
             {{ $t('productdetail_añadiralcarrito') }}
           </p>
         </button>
-        <button disabled class="btn-disabled" v-else-if="soldOut">
+        <button v-else-if="soldOut" disabled class="btn-disabled">
           <p class="txt-btn-product">{{ $t('home_cardAgotado') }}</p>
         </button>
         <nuxt-link
@@ -390,14 +371,18 @@
 </template>
 
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
-import currency from '../../../mixins/formatCurrent'
-
+import { mapState } from 'vuex'
+import idCloudinary from '@/mixins/idCloudinary'
+import currency from '@/mixins/formatCurrent'
 export default {
+  name: 'Ko10ProductCardFilterList',
   mixins: [idCloudinary, currency],
-  name: 'Ko-ProductCardFilterList',
-  props: { product: Object },
-
+  props: {
+    product: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       hover: false,
@@ -414,75 +399,50 @@ export default {
       equalsPrice: false,
     }
   },
+
+  computed: {
+    ...mapState(['dataStore', 'productsCart']),
+    getFreeShipping() {
+      return !(
+        this.product.envio_gratis === 1 ||
+        this.rangosByCiudad.envio_metodo === 'gratis'
+      )
+    },
+    rangosByCiudad() {
+      return this.$store.state.envios.valores
+    },
+    soldOut() {
+      if (this.product.con_variante) {
+        const arrCombinations = this.product.variantes
+        if (arrCombinations && arrCombinations.combinaciones.length) {
+          const inventorySum = JSON.parse(
+            arrCombinations.combinaciones[0].combinaciones
+          )
+            .map((item) => parseInt(item.unidades) || 0)
+            .reduce((acc, val) => acc + val, 0)
+          return inventorySum === 0
+        }
+      }
+      return !this.product.stock
+    },
+  },
+  watch: {
+    productsCart() {
+      this.getDataProduct()
+    },
+  },
   mounted() {
     this.idSlug = this.product.id
     this.productPrice()
     if (
       this.product.con_variante &&
-      this.product.variantes[0].variantes !== '[object Object]'
+      this.product.variantes.variantes !== '[object Object]'
     ) {
       this.estadoCart = true
     }
     if (this.product) {
       this.getDataProduct()
     }
-  },
-  computed: {
-    dataStore() {
-      return this.$store.state.dataStore
-    },
-    productsCarts() {
-      return this.$store.state.productsCart
-    },
-    getFreeShipping() {
-      let free = true
-      if (this.product.envio_gratis == 1) {
-        free = false
-      } else if (this.rangosByCiudad.envio_metodo === 'gratis') {
-        free = false
-      }
-      return free
-    },
-    rangosByCiudad() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
-      return this.rangosByCiudades
-    },
-    soldOut() {
-      if (
-        this.product.con_variante &&
-        this.product.variantes[0].variantes !== '[object Object]'
-      ) {
-        // this.estadoCart = true
-        const arrCombinations = this.product.variantes
-        let inventario = 0
-        if (
-          arrCombinations.length &&
-          arrCombinations[0].variantes !== '[object Object]'
-        ) {
-          if (
-            arrCombinations[0].combinaciones.length &&
-            arrCombinations[0].combinaciones.length
-          ) {
-            if (
-              JSON.parse(arrCombinations[0].combinaciones[0].combinaciones)
-                .length
-            ) {
-              JSON.parse(
-                arrCombinations[0].combinaciones[0].combinaciones
-              ).forEach((item) => {
-                if (item.unidades) {
-                  inventario += parseInt(item.unidades)
-                }
-              })
-            }
-          }
-        }
-        return !inventario
-      } else {
-        return !this.product.stock
-      }
-    },
   },
   methods: {
     getDataProduct() {
@@ -494,7 +454,7 @@ export default {
           estado: true,
         }
         this.maxQuantityValue = this.product.stock
-        this.productsCarts.find((productCart, index) => {
+        this.productsCart.find((productCart, index) => {
           if (productCart.id == this.product.id) {
             this.productIndexCart = index
             this.productCart = productCart
@@ -550,50 +510,26 @@ export default {
       }
     },
     productPrice() {
-      if (
-        this.product.con_variante &&
-        this.product.variantes[0].variantes !== '[object Object]'
-      ) {
-        const arrCombinations = this.product.variantes
-        if (
-          arrCombinations.length &&
-          arrCombinations[0].variantes !== '[object Object]'
-        ) {
-          this.productVariants = true
-          if (
-            this.product &&
-            this.product.combinaciones &&
-            this.product.combinaciones.length &&
-            this.product.combinaciones.length > 1
-          ) {
-            let arrPrice = []
-            this.product.combinaciones.find((products) => {
-              if (products.precio && products.estado) {
-                arrPrice.push(products.precio)
-              }
-            })
-            if (arrPrice) {
-              let resultPrice = arrPrice.sort(function (prev, next) {
-                return prev - next
-              })
-              if (resultPrice[resultPrice.length - 1]) {
-                this.minPrice = resultPrice[0]
-                this.maxPrice = resultPrice[resultPrice.length - 1]
-                if (this.minPrice === this.maxPrice) {
-                  this.equalsPrice = true
-                } else {
-                  this.equalsPrice = false
-                }
-              }
-            }
+      if (this.product.con_variante) {
+        const variants = this.product.variantes
+        if (variants && variants.combinaciones.length) {
+          const prices = JSON.parse(variants.combinaciones[0].combinaciones)
+            .filter((item) => item.precio && item.estado)
+            .map((item) => item.precio)
+          if (prices.length > 0) {
+            this.productVariants = true
+            const sortedPrices = prices.sort((a, b) => a - b)
+            this.minPrice = sortedPrices[0]
+            this.maxPrice = sortedPrices[sortedPrices.length - 1]
+            this.equalsPrice = this.minPrice === this.maxPrice
+            return
           }
         }
       }
-    },
-  },
-  watch: {
-    productsCarts(value) {
-      this.getDataProduct()
+      this.productVariants = false
+      this.minPrice = this.product.precio || 0
+      this.maxPrice = this.product.precio || 0
+      this.equalsPrice = true
     },
   },
 }

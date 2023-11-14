@@ -5,10 +5,7 @@
       settingKtrending,
       settingGeneral,
       {
-        '--font-style-1':
-          this.settingGeneral && this.settingGeneral.fount_1
-            ? this.settingGeneral.fount_1
-            : 'Roboto',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
@@ -28,10 +25,10 @@
           >
             <KoproductCard
               :product="product"
-              :settingKcardProduct="settingKcardProduct"
+              :settingCardProduct="settingCardProduct"
               :settingGeneral="settingGeneral"
               class="gifyload"
-            ></KoproductCard>
+            />
           </div>
         </div>
         <div
@@ -42,7 +39,7 @@
         </div>
         <div class="btn-products">
           <nuxt-link to="/productosHoko">
-            <button class="btn">Ver todos los productos</button>
+            <p class="btn">Ver todos los productos</p>
           </nuxt-link>
         </div>
       </div>
@@ -53,7 +50,7 @@
 <script>
 import KoproductCard from './_productcard/ProductCardHoko.vue'
 export default {
-  name: 'Ko11-trendingProductHoko',
+  name: 'Ko11TrendingProductHoko',
   components: {
     KoproductCard,
   },
@@ -61,7 +58,7 @@ export default {
     dataStore: Object,
     settingKtrending: Object,
     settingGeneral: Object,
-    settingKcardProduct: Object,
+    settingCardProduct: Object,
   },
   mounted() {
     this.currentChange(1)

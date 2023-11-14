@@ -126,9 +126,18 @@ export default {
   name: 'Ko15Content',
   mixins: [idCloudinary],
   props: {
-    content: Object,
-    settingGeneral: Object,
-    dataStore: Object,
+    content: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
 }
 </script>

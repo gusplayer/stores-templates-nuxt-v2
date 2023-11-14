@@ -51,10 +51,14 @@
                 >
                   <K0CountDown
                     :information="item"
-                    :product="setProduct(item.item)"
+                    :product="product"
                     :card-products="cardProducts"
                     :setting-general="settingGeneral"
+                    class="h-full w-full"
                   />
+                  <div v-if="index === 0" class="hidden">
+                    {{ setProduct(item.item) }}
+                  </div>
                 </div>
               </div>
               <div class="swiper-pagination" slot="pagination"></div>
@@ -87,13 +91,14 @@ export default {
       type: Object,
       required: true,
     },
-    fullProducts: {
-      type: Array,
+    dataStore: {
+      type: Object,
       required: true,
     },
   },
   data() {
     return {
+      product: null,
       swiperOption: {
         slidesPerView: 1,
         spaceBetween: 10,
@@ -109,11 +114,21 @@ export default {
     },
   },
   methods: {
-    setProduct(value) {
-      const product = this.fullProducts.filter(
-        (product) => product.slug === value
-      )
-      return product
+    async setProduct(value) {
+      if (!this.product) {
+        const { success, data } = await this.$store.dispatch(
+          'products/GET_ALL_PRODUCTS',
+          {
+            id_tienda: this.dataStore.id,
+            limit: 1,
+            page: 1,
+            name: value,
+          }
+        )
+        if (success) {
+          this.product = data.publicProductList
+        }
+      }
     },
   },
 }

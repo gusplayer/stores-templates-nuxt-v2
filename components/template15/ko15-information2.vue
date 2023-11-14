@@ -57,9 +57,18 @@ export default {
   name: 'Ko15Information2',
   mixins: [idCloudinaryBanner],
   props: {
-    information2: Object,
-    settingGeneral: Object,
-    dataStore: Object,
+    information2: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
 }
 </script>

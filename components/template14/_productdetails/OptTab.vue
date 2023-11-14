@@ -2,11 +2,11 @@
   <div
     class="content-opt-tab"
     :style="[
-      settingByTemplate14[0].settingsGeneral,
-      settingByTemplate14[0].detailsProducts,
+      settingByTemplate[0].settingsGeneral,
+      settingByTemplate[0].detailsProducts,
       {
         '--font-style-1':
-          this.settingByTemplate14[0]?.settingsGeneral?.fount_1 ?? 'Poppins',
+          settingByTemplate[0]?.settingsGeneral?.fount_1 ?? 'Poppins',
       },
     ]"
   >
@@ -15,7 +15,8 @@
         v-if="contentDescription"
         :title="$t('productdetail_description')"
         name="1"
-        :style="`color: ${settingByTemplate14[0].detailsProducts.color_text}; border-color:${settingByTemplate14[0].detailsProducts.color_border}`"
+        class="border-t"
+        :style="`color: ${settingByTemplate[0].detailsProducts.color_text}; border-color:${settingByTemplate[0].detailsProducts.color_border}`"
       >
         <div class="editor">
           <el-tiptap
@@ -33,396 +34,375 @@
       <el-collapse-item
         :title="$t('productdetail_opcionesPago')"
         name="2"
-        :style="`color: ${settingByTemplate14[0].detailsProducts.color_text}; border-color:${settingByTemplate14[0].detailsProducts.color_border}`"
+        class="border-t"
+        :style="`color: ${settingByTemplate[0].detailsProducts.color_text}; border-color:${settingByTemplate[0].detailsProducts.color_border}`"
       >
-        <div class="item-content opcpago">
-          <ul>
-            <li v-if="mediospago.consignacion == 1">
-              <h4
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                {{ $t('productdetail_consignacionBancaria') }}
-              </h4>
-              <p
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('productdetail_consignacionBancariaMsg') }}
-              </p>
-            </li>
-            <li v-if="mediospago.contraentrega == 1">
-              <h4
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                {{ $t('productdetail_PagoContra') }}
-              </h4>
-              <p
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('productdetail_PagoContraMsg') }}
-              </p>
-            </li>
-            <li v-if="mediospago.convenir == 1">
-              <h4
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                {{ $t('productdetail_pagoConvenir') }}
-              </h4>
-              <p
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('productdetail_pagoConvenirMsg') }}
-              </p>
-            </li>
-            <li v-if="mediospago.credibanco == 1">
-              <h4
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                {{ $t('productdetail_ConsignacionCredibanco') }}
-              </h4>
-              <p
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('productdetail_ConsignacionCredibancoMsg') }}
-              </p>
-              <a
-                href="https://www.credibanco.com/"
-                target="_blank"
-                rel="noreferrer noopener"
-                class="cursor_point"
-              >
-                <img
-                  class="logo-pasarela"
-                  src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335270/Templates%20Modos%20de%20pago/Credibanco_lprsof.png"
-                  alt="logo Credibanco"
-                />
-              </a>
-            </li>
-            <li v-if="mediospago.daviplata == 1">
-              <h4
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                {{ $t('productdetail_Consignaciondaviplata') }}
-              </h4>
-              <p
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('productdetail_ConsignaciondaviplataMsg') }}
-              </p>
+        <div
+          class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 justify-start items-start pb-4"
+        >
+          <div v-if="mediospago.consignacion == 1">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              {{ $t('productdetail_consignacionBancaria') }}
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('productdetail_consignacionBancariaMsg') }}
+            </p>
+          </div>
+          <div v-if="mediospago.contraentrega == 1">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              {{ $t('productdetail_PagoContra') }}
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('productdetail_PagoContraMsg') }}
+            </p>
+          </div>
+          <div v-if="mediospago.convenir == 1">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              {{ $t('productdetail_pagoConvenir') }}
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('productdetail_pagoConvenirMsg') }}
+            </p>
+          </div>
+
+          <div v-if="mediospago.credibanco == 1">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              {{ $t('productdetail_ConsignacionCredibanco') }}
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('productdetail_ConsignacionCredibancoMsg') }}
+            </p>
+            <a
+              href="https://www.credibanco.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              class="cursor_point"
+            >
               <img
-                class="logo-pasarela-daviplata"
-                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333767/Templates%20Modos%20de%20pago/5c89c897e1917d9209a762af_davi_qn90y9.png"
-                alt="logo daviPlata"
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335270/Templates%20Modos%20de%20pago/Credibanco_lprsof.png"
+                alt="logo Credibanco"
               />
-            </li>
-            <li v-if="mediospago.efecty == 1">
-              <h4
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                {{ $t('productdetail_ConsignacionEfecty') }}
-              </h4>
-              <p
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('productdetail_ConsignacionEfectyMsg') }}
-              </p>
-              <a
-                href="https://www.efecty.com.co/web/"
-                target="_blank"
-                rel="noreferrer noopener"
-                class="cursor_point"
-              >
-                <img
-                  class="logo-pasarela-efecty"
-                  src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333023/Templates%20Modos%20de%20pago/Efecty-png_q3fvog.png"
-                  alt="logo efecty"
-                />
-              </a>
-            </li>
-            <li v-if="mediospago.mercado_pago == 1">
-              <h4
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                {{ $t('productdetail_PasarelaMercado') }}
-              </h4>
-              <p
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('productdetail_PasarelaMercadoMsg') }}
-              </p>
-              <a
-                href="https://www.mercadopago.com"
-                target="_blank"
-                rel="noreferrer noopener"
-                class="cursor_point"
-              >
-                <img
-                  class="logo-pasarela-daviplata"
-                  src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606331948/Templates%20Modos%20de%20pago/mercadopago_jyalpa.png"
-                  alt="logo mercadopago"
-                />
-              </a>
-            </li>
-            <li v-if="mediospago.nequi == 1">
-              <h4
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                {{ $t('productdetail_Consignacionnequi') }}
-              </h4>
-              <p
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('productdetail_ConsignacionnequiMsg') }}
-              </p>
-              <a
-                href="https://www.nequi.com.co/"
-                target="_blank"
-                rel="noreferrer noopener"
-                class="cursor_point"
-              >
-                <img
-                  class="logo-pasarela-daviplata"
-                  src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333553/Templates%20Modos%20de%20pago/Nequi_by_Bancolombia_hxhkhb.png"
-                  alt="logo nequi"
-                />
-              </a>
-            </li>
-            <li v-if="mediospago.payco == 1">
-              <h4
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                {{ $t('productdetail_PasarelaEpayco') }}
-              </h4>
-              <p
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('productdetail_PasarelaEpaycoMsg') }}
-              </p>
+            </a>
+          </div>
+
+          <div v-if="mediospago.daviplata == 1">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              {{ $t('productdetail_Consignaciondaviplata') }}
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('productdetail_ConsignaciondaviplataMsg') }}
+            </p>
+            <img
+              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333767/Templates%20Modos%20de%20pago/5c89c897e1917d9209a762af_davi_qn90y9.png"
+              alt="logo daviPlata"
+            />
+          </div>
+
+          <div v-if="mediospago.efecty == 1">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              {{ $t('productdetail_ConsignacionEfecty') }}
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('productdetail_ConsignacionEfectyMsg') }}
+            </p>
+            <a
+              href="https://www.efecty.com.co/web/"
+              target="_blank"
+              rel="noreferrer noopener"
+              class="cursor_point"
+            >
               <img
-                class="logo-pasarela-payco"
-                src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1579296851/assets/pasarela-epayco.png"
-                alt="Pasarela de pagos epayco"
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333023/Templates%20Modos%20de%20pago/Efecty-png_q3fvog.png"
+                alt="logo efecty"
               />
-            </li>
-            <li v-if="mediospago.payu == 1">
-              <h4
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                {{ $t('productdetail_PasarelaPayu') }}
-              </h4>
-              <p
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('productdetail_PasarelaPayuMsg') }}
-              </p>
-              <a
-                href="https://www.payulatam.com/co/"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                <img
-                  class="logo-pasarela-payu"
-                  src="https://ecommerce.payulatam.com/logos/PayU_CO.png"
-                  alt="PayU"
-                  border="0"
-                />
-              </a>
-            </li>
-            <li v-if="mediospago.wompi == 1">
-              <h4
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                {{ $t('productdetail_Consignacionwompi') }}
-              </h4>
-              <p
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('productdetail_PasarelaPayuMsg') }}
-              </p>
-              <a
-                href="https://wompi.co/"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                <img
-                  class="logo-pasarela-wompi"
-                  src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335739/Templates%20Modos%20de%20pago/wompi_jxuitu.png"
-                  alt="wompi"
-                  border="0"
-                />
-              </a>
-            </li>
-            <li v-if="mediospago.wepay4u == 1">
-              <h4
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                WePay4U
-              </h4>
-              <p
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('text_pago_WePay4U') }}
-              </p>
-              <a
-                href="https://wepay4u.com/"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                <img
-                  class="logo-pasarela-wompi"
-                  src="https://res.cloudinary.com/komerciaacademico/image/upload/v1639078440/wePay4u/powered_by_z7sgqp.png"
-                  alt="wePay4u"
-                  border="0"
-                />
-              </a>
-            </li>
-            <li v-if="mediospago.tu_compra == 1">
-              <h4
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                Tucompra
-              </h4>
-              <p
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('text_pago_Tucompra') }}
-              </p>
-              <a
-                href="https://tucompra.com.co/"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                <img
-                  class="logo-pasarela-wompi"
-                  src="https://res.cloudinary.com/komerciaacademico/image/upload/v1645131256/komerica/tucompra_ss0oys.png"
-                  alt="tu_compra"
-                  border="0"
-                />
-              </a>
-            </li>
-            <li v-if="mediospago.flow == 1">
-              <h4
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                Tucompra
-              </h4>
-              <p
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('text_pago_flowInfo') }}
-              </p>
-              <a
-                href="https://www.flow.cl/"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                <img
-                  class="logo-pasarela-wompi"
-                  src="https://res.cloudinary.com/komerciaacademico/image/upload/v1645131256/komerica/flow_jevnwy.png"
-                  alt="flow"
-                  border="0"
-                />
-              </a>
-            </li>
-          </ul>
+            </a>
+          </div>
+          <div v-if="mediospago.mercado_pago == 1">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              {{ $t('productdetail_PasarelaMercado') }}
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('productdetail_PasarelaMercadoMsg') }}
+            </p>
+            <a
+              href="https://www.mercadopago.com"
+              target="_blank"
+              rel="noreferrer noopener"
+              class="cursor_point"
+            >
+              <img
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606331948/Templates%20Modos%20de%20pago/mercadopago_jyalpa.png"
+                alt="logo mercadopago"
+              />
+            </a>
+          </div>
+          <div v-if="mediospago.nequi == 1">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              {{ $t('productdetail_Consignacionnequi') }}
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('productdetail_ConsignacionnequiMsg') }}
+            </p>
+            <a
+              href="https://www.nequi.com.co/"
+              target="_blank"
+              rel="noreferrer noopener"
+              class="cursor_point"
+            >
+              <img
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333553/Templates%20Modos%20de%20pago/Nequi_by_Bancolombia_hxhkhb.png"
+                alt="logo nequi"
+              />
+            </a>
+          </div>
+          <div v-if="mediospago.payco == 1">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              {{ $t('productdetail_PasarelaEpayco') }}
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('productdetail_PasarelaEpaycoMsg') }}
+            </p>
+            <img
+              src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1579296851/assets/pasarela-epayco.png"
+              alt="Pasarela de pagos epayco"
+            />
+          </div>
+
+          <div v-if="mediospago.payu == 1">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              {{ $t('productdetail_PasarelaPayu') }}
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('productdetail_PasarelaPayuMsg') }}
+            </p>
+            <a
+              href="https://www.payulatam.com/co/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img
+                src="https://ecommerce.payulatam.com/logos/PayU_CO.png"
+                alt="PayU"
+                border="0"
+              />
+            </a>
+          </div>
+          <div v-if="mediospago.wompi == 1">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              {{ $t('productdetail_Consignacionwompi') }}
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('productdetail_PasarelaPayuMsg') }}
+            </p>
+            <a
+              href="https://wompi.co/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335739/Templates%20Modos%20de%20pago/wompi_jxuitu.png"
+                alt="wompi"
+                border="0"
+              />
+            </a>
+          </div>
+          <div v-if="mediospago.wepay4u == 1">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              WePay4U
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('text_pago_WePay4U') }}
+            </p>
+            <a
+              href="https://wepay4u.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1639078440/wePay4u/powered_by_z7sgqp.png"
+                alt="wePay4u"
+                border="0"
+              />
+            </a>
+          </div>
+          <div v-if="mediospago.tu_compra == 1">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              Tucompra
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('text_pago_Tucompra') }}
+            </p>
+            <a
+              href="https://tucompra.com.co/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1645131256/komerica/tucompra_ss0oys.png"
+                alt="tu_compra"
+                border="0"
+              />
+            </a>
+          </div>
+          <div v-if="mediospago.flow == 1">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              Flow
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('text_pago_flowInfo') }}
+            </p>
+            <a
+              href="https://www.flow.cl/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1645131256/komerica/flow_jevnwy.png"
+                alt="flow"
+                border="0"
+              />
+            </a>
+          </div>
         </div>
       </el-collapse-item>
       <el-collapse-item
         v-if="envios.envio_metodo"
         :title="$t('productdetail_opinionesEnvio')"
         name="3"
-        :style="`color: ${settingByTemplate14[0].detailsProducts.color_text}; border-color:${settingByTemplate14[0].detailsProducts.color_border}`"
+        class="border-t"
+        :style="`color: ${settingByTemplate[0].detailsProducts.color_text}; border-color:${settingByTemplate[0].detailsProducts.color_border}`"
       >
-        <div class="item-content opcenvio">
-          <div class="deliverys section">
-            <div class="content">
-              <h3
-                class="title-section"
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                {{ $t('productdetail_opinionesEnvio') }}
-              </h3>
-            </div>
-            <div
-              v-if="envios.envio_metodo === 'precio_ciudad'"
-              class="wrapper-method"
+        <div class="w-full flex flex-col justify-start items-start pb-4">
+          <div v-if="envios.envio_metodo === 'precio_ciudad'">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
             >
-              <h4
-                class="capitalize"
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                • {{ envios.envio_metodo.replace('_', ' por ') }}
-              </h4>
-              <p
-                class="description-method"
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('productdetail_opinionesEnvioMsg1') }}
-              </p>
-            </div>
-            <div
-              v-if="envios.envio_metodo === 'tarifa_plana'"
-              class="wrapper-method"
+              • {{ envios.envio_metodo.replace('_', ' por ') }}
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
             >
-              <h4
-                class="capitalize"
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                {{ envios.envio_metodo.replace('_', ' ') }}
-              </h4>
-              <p
-                class="description-method"
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('productdetail_opinionesEnvioMsg2') }}
-              </p>
-              <p
-                class="price"
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('cart_precio') }}
-                {{
-                  envios.valor
-                    | currency(
-                      dataStore.tienda.codigo_pais,
-                      dataStore.tienda.moneda
-                    )
-                }}
-              </p>
-            </div>
-            <div v-if="envios.envio_metodo === 'precio'" class="wrapper-method">
-              <h4
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                {{ $t('productdetail_precioTotalCompra') }}
-              </h4>
-              <p
-                class="description-method"
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('productdetail_precioTotalCompraMsg') }}
-              </p>
-            </div>
-            <div v-if="envios.envio_metodo === 'gratis'" class="wrapper-method">
-              <h4
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-              >
-                {{ $t('productdetail_gratis') }}
-              </h4>
-              <p
-                class="description-method"
-                :style="`color: ${settingByTemplate14[0].detailsProducts.color_subtext};`"
-              >
-                {{ $t('productdetail_gratisMsg') }}
-              </p>
-            </div>
-            <div
-              v-if="envios.envio_metodo === 'sinEnvio'"
-              class="wrapper-method"
-              :style="`color: ${settingByTemplate14[0].detailsProducts.color_text};`"
-            >
-              <p class="description-method">Pasas a recoger tu compra</p>
-            </div>
+              {{ $t('productdetail_opinionesEnvioMsg1') }}
+            </p>
           </div>
+          <div v-if="envios.envio_metodo === 'tarifa_plana'">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              • {{ envios.envio_metodo.replace('_', ' ') }}
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('productdetail_opinionesEnvioMsg2') }}
+            </p>
+            <p
+              class="price"
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('cart_precio') }}
+              {{
+                envios.valor
+                  | currency(
+                    dataStore.tiendasInfo.paises.codigo,
+                    dataStore.tiendasInfo.moneda
+                  )
+              }}
+            </p>
+          </div>
+          <div v-if="envios.envio_metodo === 'precio'">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              • {{ $t('productdetail_precioTotalCompra') }}
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('productdetail_precioTotalCompraMsg') }}
+            </p>
+          </div>
+          <div v-if="envios.envio_metodo === 'gratis'">
+            <h4
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+            >
+              • {{ $t('productdetail_gratis') }}
+            </h4>
+            <p
+              :style="`color: ${settingByTemplate[0].detailsProducts.color_subtext};`"
+            >
+              {{ $t('productdetail_gratisMsg') }}
+            </p>
+          </div>
+          <p
+            v-if="envios.envio_metodo === 'sinEnvio'"
+            :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+          >
+            Pasas a recoger tu compra
+          </p>
+          <p
+            v-if="envios.envio_metodo === 'sintarifa'"
+            :style="`color: ${settingByTemplate[0].detailsProducts.color_text};`"
+          >
+            El costo del envío no esta definido, este costo lo asume el
+            comprador
+          </p>
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -454,7 +434,7 @@ export default {
       type: Object,
       required: true,
     },
-    settingByTemplate14: {
+    settingByTemplate: {
       type: Array,
       required: true,
     },
@@ -462,27 +442,21 @@ export default {
   data() {
     return {
       activeNames: ['1'],
-      contentDescription: this.data?.info?.descripcion,
+      contentDescription: this.data?.productosInfo?.descripcion,
     }
   },
   computed: {
     mediospago() {
-      return this.dataStore.medios_pago
+      return this.dataStore.medioPagos
     },
     activeClass() {
-      if (
-        this.data.info.descripcion == '' ||
-        this.data.info.descripcion == null
-      ) {
-        return true
-      } else {
-        return false
-      }
+      return (
+        !this.data.productosInfo.descripcion ||
+        this.data.productosInfo.descripcion == null
+      )
     },
     envios() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
-      return this.data.medioEnvio
+      return this.$store.state.envios.valores
     },
   },
   mounted() {
@@ -565,17 +539,11 @@ export default {
 .editor >>> .el-popper.el-tiptap-image-popper {
   display: none;
 }
-
-.item-content {
-  @apply w-full flex flex-col justify-start items-start pb-4;
-}
-
 .content-opt-tab >>> .el-collapse {
   border-top: transparent;
   border-bottom: transparent;
   @apply w-full;
 }
-
 .content-opt-tab >>> .el-collapse-item__wrap {
   will-change: height;
   background-color: transparent;
@@ -630,18 +598,11 @@ li p {
   margin-bottom: 15px;
 }
 img {
-  max-width: 300px;
-  width: 30%;
-  margin-top: 15px;
+  @apply py-12 w-full max-w-[250px];
 }
 @screen sm {
   .content-opt-tab {
     @apply w-full flex flex-col justify-center items-center;
-  }
-}
-@media (min-width: 425px) {
-  .head-content {
-    @apply grid grid-cols-3 mb-40;
   }
 }
 @screen md {

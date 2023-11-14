@@ -1,25 +1,21 @@
 <template>
   <div
     :style="[
+      settingByTemplate?.settings ?? settingBase,
       {
         '--font-style': settingByTemplate?.settings?.tipo_letra ?? 'Roboto',
       },
-      settingByTemplate?.settings ?? settingBase,
     ]"
   >
     <K05-banner v-if="stateBanner" id="KHeaderX" />
     <K05-component360 v-if="stateBanner" />
-    <K05-productFavoritos v-if="stateBanner" />
+    <K05-productFavoritos v-if="stateBanner" :data-store="dataStore" />
     <K05-productListHomeHoko
       v-if="dataHoko?.statehoko == 1 && stateBanner"
       id="KProductX"
       :data-store="dataStore"
     />
-    <K05-productListHome
-      id="KProductX"
-      :data-store="dataStore"
-      :full-products="fullProducts"
-    />
+    <K05-productListHome id="KProductX" />
     <K05-bannerFooter id="KFooterX" />
     <K05-newsletter :data-store="dataStore" />
   </div>
@@ -53,9 +49,6 @@ export default {
       'settingByTemplate',
       'dataHoko',
     ]),
-    fullProducts() {
-      return this.$store.getters['products/filterProducts']
-    },
   },
   mounted() {
     window.parent.postMessage('message', '*')

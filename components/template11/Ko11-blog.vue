@@ -5,10 +5,7 @@
       settingKblog,
       settingGeneral,
       {
-        '--font-style-1':
-          this.settingGeneral && this.settingGeneral.fount_1
-            ? this.settingGeneral.fount_1
-            : 'Roboto',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
@@ -23,12 +20,12 @@
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper">
           <div
-            v-for="(article, index) in filteredList"
-            :key="article.id"
-            :class="`swiper-slide wrapper-${index + 1}`"
+            v-for="(article, index) in listBlogs"
+            :key="index"
+            class="swiper-slide"
             style="height: auto"
           >
-            <Kblog :article="article" :settingKblog="settingKblog" />
+            <KBlogCard :article="article" :setting-blog="settingKblog" />
           </div>
         </div>
       </div>
@@ -36,24 +33,33 @@
   </div>
 </template>
 <script>
-import Kblog from '../template11/_blog/blogcard'
 export default {
-  name: 'Ko11-blog',
+  name: 'Ko11BlogHome',
   components: {
-    Kblog,
+    KBlogCard: () => import('./blog_page/_card/k11-blog-card.vue'),
   },
   props: {
-    dataStore: Object,
-    settingKblog: Object,
-    settingGeneral: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingKblog: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
+      listBlogs: [],
       swiperOption: {
         slidesPerView: '',
         spaceBetween: '',
         breakpoints: {
-          10000: {
+          1920: {
             slidesPerView: 3,
             spaceBetween: 30,
           },
@@ -74,30 +80,22 @@ export default {
     swiper() {
       return this.$refs.mySwiper.swiper
     },
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-    filterArticles() {
-      const initial = this.currentPage * 12 - 12
-      const final = initial + 12
-      return this.filteredList.slice(initial, final)
-    },
-    filteredList() {
-      if (this.search) {
-        return this.listArticulos.filter((element) => {
-          return element.titulo
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
-        })
-      } else {
-        return this.listArticulos
+  },
+  mounted() {
+    this.getBlogs()
+  },
+  methods: {
+    async getBlogs() {
+      const { success, data } = await this.$store.dispatch('GET_ARTICLES', {
+        id_tienda: this.dataStore.id,
+        limit: 6,
+        page: 1,
+      })
+      if (success) {
+        this.listBlogs = data.data
       }
     },
   },
-  mounted() {
-    this.mySwiper.slideTo(3, 1000, false)
-  },
-  watch: {},
 }
 </script>
 <style scoped>

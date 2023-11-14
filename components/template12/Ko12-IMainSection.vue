@@ -1,104 +1,87 @@
 <template>
-  <main>
+  <main class="w-full flex justify-center items-center">
     <div
-      class="pt-20"
+      v-if="listProducts?.length > 0"
+      class="pt-20 w-full max-w-[940px]"
       :style="`background:${settingByTemplate12.backgroundColor};`"
     >
-      <div v-if="dataStore.categorias.length > 0">
-        <div
-          v-for="category in dataStore.categorias"
-          :key="category.id"
-          class="pt-4 pb-4"
+      <div
+        v-for="category in categorias"
+        v-show="categorias"
+        :key="category.id"
+        class="pt-4 pb-4"
+      >
+        <template
+          v-if="
+            getProductsCategories(category.nombreCategoriaProducto).length >
+              0 ||
+            getProductosSinSubcategories(category.nombreCategoriaProducto)
+              .length > 0
+          "
         >
-          <header class="text-center">
-            <h2
-              class="text-title"
-              :style="`color:${settingByTemplate12.titleColor};`"
-            >
-              {{ category.nombre_categoria_producto }}
-            </h2>
-          </header>
-          <div v-if="dataStore.subcategorias.length > 0">
-            <div
-              v-for="(subcategory, key) in dataStore.subcategorias"
-              v-show="subcategory.categoria == category.id"
-              :key="key"
-              class="products-wrapper"
-            >
-              <div class="subcategori-Content">
-                <p
-                  v-if="subcategory.categoria == category.id"
-                  class="text-subtitle"
+          <h2
+            class="text-center font-semibold mb-10 text-2xl md:text-4xl uppercase"
+            :style="`color:${settingByTemplate12.titleColor};`"
+          >
+            {{ category.nombreCategoriaProducto }}
+          </h2>
+          <div
+            v-for="subcategories in getSubcategorias(category.id)"
+            :key="subcategories.id"
+          >
+            <template v-if="getProductos(subcategories.id).length > 0">
+              <div class="w-full m-auto pt-30 px-10 pb-20">
+                <h3
+                  class="text-22 font-semibold uppercase mb-10"
                   :style="`color:${settingByTemplate12.titleColor};`"
                 >
-                  {{ subcategory.nombre_subcategoria }}
-                </p>
+                  {{ subcategories.nombreSubcategoria }}
+                </h3>
               </div>
-              <div class="products-content">
+              <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div
-                  v-for="product in fullProducts"
-                  v-show="
-                    product.categoria == category.nombre_categoria_producto &&
-                    product.subcategoria == subcategory.id
-                  "
-                  :key="product.id"
-                  @click="OpenModalProductDetails(product)"
+                  v-for="producto in getProductos(subcategories.id)"
+                  :key="producto.id"
+                  @click="OpenModalProductDetails(producto)"
                 >
                   <ProductCard
-                    :product="
-                      product.categoria == category.nombre_categoria_producto &&
-                      product.subcategoria == subcategory.id
-                        ? product
-                        : {}
-                    "
+                    :product="producto"
                     :data-store="dataStore"
                     :setting-by-template12="settingByTemplate12"
                   />
                 </div>
               </div>
-            </div>
+            </template>
           </div>
-          <div v-else class="products-content">
+          <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
             <div
-              v-for="product in fullProducts"
-              v-show="product.categoria == category.nombre_categoria_producto"
-              :key="product.id"
-              @click="OpenModalProductDetails(product)"
+              v-for="producto in getProductosSinSubcategories(
+                category.nombreCategoriaProducto
+              )"
+              :key="producto.id"
+              @click="OpenModalProductDetails(producto)"
             >
               <ProductCard
-                :product="
-                  product.categoria == category.nombre_categoria_producto
-                    ? product
-                    : {}
-                "
+                :product="producto"
                 :data-store="dataStore"
                 :setting-by-template12="settingByTemplate12"
               />
             </div>
           </div>
-        </div>
+        </template>
       </div>
-      <div v-else>
-        <header class="text-center">
-          <h2
-            class="text-title"
-            :style="`color:${settingByTemplate12.titleColor};`"
-          >
-            {{ $t('header_productos') }}
-          </h2>
-        </header>
-        <div class="products-content">
-          <div
-            v-for="product in fullProducts"
-            :key="product.id"
-            @click="OpenModalProductDetails(product)"
-          >
-            <ProductCard
-              :product="product"
-              :data-store="dataStore"
-              :setting-by-template12="settingByTemplate12"
-            />
-          </div>
+      <div class="w-full py-10"></div>
+      <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div
+          v-for="producto in getProductosSinCategory"
+          :key="producto.id"
+          @click="OpenModalProductDetails(producto)"
+        >
+          <ProductCard
+            :product="producto"
+            :data-store="dataStore"
+            :setting-by-template12="settingByTemplate12"
+          />
         </div>
       </div>
       <div v-if="showModal" class="modal">
@@ -111,21 +94,42 @@
       <hr class="h-20 bg-transparent border-transparent" />
       <hr class="border-transparent divider border-0" />
     </div>
+    <div v-else class="pt-20 w-full max-w-[940px]">
+      <div v-for="(content, index) in 2" :key="index" class="w-full mb-20">
+        <div class="w-full flex flex-col justify-center items-center p-4">
+          <div class="w-full max-w-[200px]">
+            <div class="w-full h-35 bg-gray-200 animate-pulse mb-20"></div>
+          </div>
+        </div>
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-5">
+          <div v-for="(items, index2) in 10" :key="index2" class="w-full">
+            <div class="w-full h-70 bg-gray-200 animate-pulse mt-8 pb-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 </template>
 
 <script>
-import settingsProps from './mixins/ComponentProps'
-
+// import settingsProps from './mixins/ComponentProps'
+import filterProducts from '@/mixins/filterProducts'
 export default {
   name: 'Ko12IMainSection',
   components: {
     ProductCard: () => import('./ProductCard'),
     K012ProductDetail: () => import('./K012-ProductDetail.vue'),
   },
-  mixins: [settingsProps],
+  mixins: [filterProducts],
+  props: {
+    settingByTemplate12: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
+      listProducts: [],
       section: {
         title: 'MEAT & FIRST DISHES',
         subtitle: 'Slow cook meals and fresh fishes',
@@ -134,37 +138,57 @@ export default {
     }
   },
   computed: {
-    fullProducts() {
-      return this.$store.getters['products/allProduct']
-    },
-    searchValue() {
-      return this.$store.state.searchValue
-    },
     showModal() {
       return this.$store.state.modalproductDetails
     },
-  },
-  watch: {
-    searchValue(value) {
-      this.SearchProduct(value)
+    getProductosSinCategory() {
+      return this.listProducts.filter(
+        (producto) => producto.categoria === 'Sin categoría'
+      )
     },
+  },
+  mounted() {
+    this.currentChange()
   },
   methods: {
     OpenModalProductDetails(value) {
       this.tempData = value
       this.$store.state.modalproductDetails = true
     },
-    SearchProduct(search) {
-      if (search.length) {
-        this.$store.commit('products/FILTER_BY', {
-          type: ['search'],
-          data: search,
-        })
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: ['all'],
-          data: '',
-        })
+    getSubcategorias(categoryId) {
+      return this.subcategories.filter(
+        (subcategoria) => subcategoria.categoria === categoryId
+      )
+    },
+    getProductos(subcategoriesId) {
+      return this.listProducts.filter(
+        (producto) => producto.subcategoria === subcategoriesId
+      )
+    },
+    getProductosSinSubcategories(categoryId) {
+      return this.listProducts.filter(
+        (producto) =>
+          producto.categoria === categoryId && !producto.subcategoria
+      )
+    },
+
+    getProductsCategories(categoryName) {
+      return this.listProducts.filter(
+        (producto) => producto.categoria === categoryName
+      )
+    },
+    async currentChange() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_ALL_PRODUCTS',
+        {
+          id_tienda: this.dataStore.id,
+          limit: 8,
+          page: 1,
+          topSales: 1,
+        }
+      )
+      if (success) {
+        this.listProducts = data.publicProductList
       }
     },
   },
@@ -180,59 +204,16 @@ export default {
   width: 25%;
   margin: 0 auto;
 }
-.products-wrapper {
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-.subcategori-Content {
-  max-width: 940px;
-  width: 100%;
-  padding: 30px 10px 20px;
-  margin: 0 auto;
-}
-.products-content {
-  max-width: 940px;
-  width: 100%;
-  padding: 10px 10px 20px;
-  margin: 0 auto;
-  display: grid;
-  -ms-grid-columns: repeat(2, minmax(420px, 1fr));
-  grid-template-columns: repeat(2, minmax(420px, 1fr));
-  column-gap: 20px;
-  /* row-gap: 15px; */
-}
 .modal {
   padding-top: 200px;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
   @apply w-full h-full fixed z-10 left-0 top-0 overflow-auto;
 }
-.text-title {
-  @apply font-semibold text-4xl uppercase;
-}
-.text-subtitle {
-  font-size: 22px;
-  @apply font-semibold uppercase;
-}
-@media (max-width: 800px) {
-  .products-wrapper {
-    -ms-grid-columns: repeat(1, minmax(100%, 1fr));
-    grid-template-columns: repeat(1, minmax(100%, 1fr));
-  }
-  .text-title {
-    @apply text-2xl;
-  }
-}
+
 @media (max-width: 500px) {
   .modal {
     padding-top: 80px;
-  }
-  .products-wrapper {
-    padding: 25px 10px 20px;
-  }
-  .text-title {
-    @apply text-2xl;
   }
 }
 </style>
