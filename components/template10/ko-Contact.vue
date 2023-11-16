@@ -13,7 +13,7 @@
     <div class="content-form-contact">
       <div class="banner-mapa">
         <el-carousel
-          v-if="dataStore?.geolocalizacion?.length"
+          v-if="geolocalizacion?.length"
           :interval="5000"
           arrow="always"
           height="250px"

@@ -15,9 +15,8 @@
         },
       ]"
     >
-      <div class="banner-mapa">
+      <div v-if="geolocalizacion?.length" class="banner-mapa">
         <el-carousel
-          v-if="dataStore?.geolocalizacion?.length"
           :interval="5000"
           arrow="always"
           height="250px"
@@ -48,7 +47,7 @@
               <p class="txt-info">Información</p>
             </div>
             <div
-              v-if="dataStore?.geolocalizacion[0]?.direccion"
+              v-if="geolocalizacion[positionLocation]?.direccion"
               class="content-locatioin"
             >
               <svg
@@ -69,7 +68,7 @@
               </p>
             </div>
             <div
-              v-if="dataStore?.geolocalizacion[0]?.direccion"
+              v-if="geolocalizacion[positionLocation]?.direccion"
               class="empty"
             ></div>
             <div v-if="dataStore?.tienda?.email_tienda" class="content-email">
@@ -216,6 +215,7 @@
 </template>
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   name: 'Ko9Contact',
@@ -285,9 +285,10 @@ export default {
     }
   },
   computed: {
-    facebookPixel() {
-      return this.$store.state.analytics_tagmanager
-    },
+    ...mapState(['geolocalizacion']),
+    ...mapState({
+      facebookPixel: (state) => state.analytics_tagmanager,
+    }),
   },
   watch: {
     'dataStore.tienda'() {
