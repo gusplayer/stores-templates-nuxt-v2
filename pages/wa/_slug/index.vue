@@ -5,10 +5,7 @@
   >
     <waTemplate />
     <div
-      v-if="
-        dataStore.tienda.estado == 0 ||
-        !expiredDate(dataStore.tienda.fecha_expiracion)
-      "
+      v-if="dataStore.estado == 0 || !expiredDate(dataStore.fechaExpiracion)"
       id="modalNotification"
       class="w-full h-screen fixed top-0 flex justify-center items-center"
       style="z-index: 9998"
@@ -16,7 +13,7 @@
       <div
         class="w-full h-screen top-0 absolute backdrop-blur"
         style="background-color: rgba(0, 0, 0, 0.767)"
-      />
+      ></div>
       <div
         class="w-full py-20 px-30 flex flex-col justify-center items-center bg-white-white rounded-10 shadow-md z-100"
         style="max-width: 250px"
@@ -29,14 +26,14 @@
           Disculpa, no podrá realizar compras por el momento,
         </p>
         <p
-          v-if="expiredDate(dataStore.tienda.fecha_expiracion)"
+          v-if="expiredDate(dataStore.fechaExpiracion)"
           class="font-bold text-17 mt-15"
           style="color: #ff314d"
         >
           ¿Deseas continuar?
         </p>
         <button
-          v-if="expiredDate(dataStore.tienda.fecha_expiracion)"
+          v-if="expiredDate(dataStore.fechaExpiracion)"
           class="w-full py-4 mt-15 text-base rounded-10 bg-black text-white-white hover:bg-slate-300 hover:text-black transition ease-in-out delay-75"
           @click="acceptClose()"
         >
@@ -45,7 +42,7 @@
       </div>
     </div>
     <div
-      v-if="dataStore.tienda.whatsapp == ''"
+      v-if="dataStore.redes.whatsapp == ''"
       class="wrapper-notificacion"
       style="z-index: 9999"
     >

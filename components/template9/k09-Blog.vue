@@ -1,37 +1,35 @@
 <template>
-  <div class="wrapper-content" :style="[blog, settingGeneral]">
-    <div
-      :style="[
-        {
-          '--font-style-1':
-            this.settingGeneral && this.settingGeneral.fount_1
-              ? this.settingGeneral.fount_1
-              : 'Poppins',
-        },
-      ]"
-    >
-      <div class="wrapper-items-content">
-        <div class="product-text">
-          <div class="product-tittle">
-            <span class="tittle">{{ blog.title }}</span>
-          </div>
+  <div
+    class="wrapper-content"
+    :style="[
+      blog,
+      settingGeneral,
+      {
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Poppins',
+      },
+    ]"
+  >
+    <div v-if="blog?.title" class="wrapper-items-content">
+      <div class="product-text">
+        <div class="product-tittle">
+          <span class="tittle">{{ blog.title }}</span>
         </div>
       </div>
-      <div class="wrapper-items">
-        <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
-          <div class="swiper-wrapper">
-            <div
-              v-for="(article, index) in filteredList"
-              :key="article.id"
-              :class="`swiper-slide wrapper-${index + 1}`"
-            >
-              <Kblog
-                :article="article"
-                :blog="blog"
-                :settingGeneral="settingGeneral"
-                style="max-height: 560px"
-              />
-            </div>
+    </div>
+    <div class="wrapper-items">
+      <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
+        <div class="swiper-wrapper">
+          <div
+            v-for="(article, index) in listBlogs"
+            :key="index"
+            class="swiper-slide"
+          >
+            <KoBlogCard
+              :article="article"
+              :setting-blog="blog"
+              :setting-general="settingGeneral"
+              style="max-height: 560px"
+            />
           </div>
         </div>
       </div>
@@ -39,41 +37,41 @@
   </div>
 </template>
 <script>
-import Kblog from '../template9/_blog/blogcard'
 export default {
-  name: 'ko-Blog',
+  name: 'Ko9Blog',
   components: {
-    Kblog,
+    KoBlogCard: () => import('./blog_page/_card/blog-card.vue'),
   },
   props: {
-    dataStore: Object,
-    blog: Object,
-    settingGeneral: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    blog: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
+      listBlogs: [],
       swiperOption: {
-        slidesPerView: '',
-        spaceBetween: 30,
+        slidesPerView: 'auto',
+        spaceBetween: 20,
         breakpoints: {
-          10000: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-          2560: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
           1920: {
             slidesPerView: 3,
-            spaceBetween: 30,
+            spaceBetween: 20,
           },
           1024: {
             slidesPerView: 2,
             spaceBetween: 30,
           },
-
-          580: {
+          320: {
             slidesPerView: 1,
             spaceBetween: 10,
           },
@@ -85,30 +83,22 @@ export default {
     swiper() {
       return this.$refs.mySwiper.swiper
     },
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-    filterArticles() {
-      const initial = this.currentPage * 12 - 12
-      const final = initial + 12
-      return this.filteredList.slice(initial, final)
-    },
-    filteredList() {
-      if (this.search) {
-        return this.listArticulos.filter((element) => {
-          return element.titulo
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
-        })
-      } else {
-        return this.listArticulos
+  },
+  mounted() {
+    this.getBlogs()
+  },
+  methods: {
+    async getBlogs() {
+      const { success, data } = await this.$store.dispatch('GET_ARTICLES', {
+        id_tienda: this.dataStore.id,
+        limit: 6,
+        page: 1,
+      })
+      if (success) {
+        this.listBlogs = data.data
       }
     },
   },
-  mounted() {
-    this.mySwiper.slideTo(3, 1000, false)
-  },
-  watch: {},
 }
 </script>
 <style scoped>

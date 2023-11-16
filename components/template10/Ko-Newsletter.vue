@@ -6,21 +6,17 @@
       settingByTemplate10[0].setting10General,
       {
         '--font-style-1':
-          this.settingByTemplate10 &&
-          this.settingByTemplate10[0].setting10General &&
-          this.settingByTemplate10[0].setting10General.fount_1
-            ? this.settingByTemplate10[0].setting10General.fount_1
-            : 'Roboto',
+          settingByTemplate10[0]?.setting10General?.fount_1 ?? 'Roboto',
       },
     ]"
   >
     <div class="wrapper-items-content">
       <div class="product-tittle">
         <span class="tittle txt-1">Inscríbase al boletín</span>
-        <span class="tittle txt-2"
-          >Manténgase actualizado sobre todo lo que es nuevo agregar digno de
-          mención</span
-        >
+        <span class="tittle txt-2">
+          Manténgase actualizado sobre todo lo que es nuevo agregar digno de
+          mención
+        </span>
       </div>
     </div>
 
@@ -51,37 +47,38 @@
                   </svg>
                 </div>
                 <input
+                  v-model="email"
                   name="email"
                   class="input-text"
                   type="email"
                   :placeholder="$t('newsletter_email')"
-                  v-model="email"
                 />
               </div>
               <span
                 v-show="errors[0] || register"
                 class="text-error"
                 :style="register ? 'color:green' : ''"
-                >{{ errorsCheckbox || register }}</span
               >
+                {{ errorsCheckbox || register }}
+              </span>
             </template>
           </ValidationProvider>
         </div>
         <div class="content-checkbox">
-          <input type="checkbox" id="checkbox" v-model="checked" />
+          <input id="checkbox" v-model="checked" type="checkbox" />
           <p class="text-checkbox">
             {{ $t('newsletter_msg') }}
           </p>
         </div>
-        <p class="text-error mt-2" v-if="stateChehed">
+        <p v-if="stateChehed" class="text-error mt-2">
           Marcar checkbox para poder suscribirse al boletín informativo
         </p>
       </div>
       <div class="content-button">
         <button
           ref="colorBtn"
-          @click="submitNewsletter"
           class="content-bttns-shop"
+          @click="submitNewsletter"
         >
           <span class="content-textbutton-shop">
             {{ $t('newsletter_btn') }}
@@ -96,16 +93,21 @@
 import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko-Newsletter-1',
-  props: {
-    dataStore: Object,
-    settingByTemplate10: Array,
-  },
+  name: 'Ko10Newsletter',
   components: {
     ValidationObserver,
     ValidationProvider,
   },
-  mounted() {},
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate10: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       errorsCheckbox: 'El campo checkbox y email son obligatorios',
@@ -115,13 +117,13 @@ export default {
       stateChehed: false,
     }
   },
-  destroyed() {
-    this.email = ''
-  },
   computed: {
     facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
+  },
+  destroyed() {
+    this.email = ''
   },
   methods: {
     submitNewsletter() {
@@ -132,7 +134,7 @@ export default {
             if (response.valid) {
               const json = {
                 email: this.email,
-                tienda: this.dataStore.tienda.id_tienda,
+                tienda: this.dataStore.id,
               }
               axios
                 .post(
@@ -166,7 +168,6 @@ export default {
       }
     },
   },
-  watch: {},
 }
 </script>
 

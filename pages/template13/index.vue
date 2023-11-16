@@ -57,19 +57,10 @@ export default {
     }
   },
   computed: {
-    ...mapState([
-      'dataStore',
-      'listArticulos',
-      'settingByTemplate13',
-      'dataHoko',
-    ]),
-    fullProducts() {
-      return this.$store.getters['products/allProduct']
-    },
+    ...mapState(['dataStore', 'settingByTemplate13', 'dataHoko']),
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        fullProducts: this.fullProducts,
         settingGeneral: this.settingByTemplate13?.settingGeneral ?? null,
         banner: this.settingByTemplate13?.banner ?? null,
         productList: this.settingByTemplate13?.productList ?? null,
@@ -91,7 +82,7 @@ export default {
     window.addEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
-    addEventListenerTemplate(e) {
+    async addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080')
@@ -137,9 +128,15 @@ export default {
               this.moverseA('kListX')
               break
             case 'detailsProduct':
-              if (this.fullProducts) {
+              // eslint-disable-next-line no-case-declarations
+              const { success, data } = await this.currentChange()
+              if ((success, data.length > 0)) {
                 this.$router.push({
-                  path: '/productos/' + this.fullProducts[0].slug,
+                  path: '/productos/' + data[0].slug,
+                })
+              } else {
+                this.$router.push({
+                  path: '/productos',
                 })
               }
               break
@@ -165,6 +162,19 @@ export default {
     },
     moverseA(idDelElemento) {
       location.hash = '#' + idDelElemento
+    },
+    async currentChange() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_ALL_PRODUCTS',
+        {
+          id_tienda: this.dataStore.id,
+          limit: 1,
+          page: 1,
+        }
+      )
+      if (success) {
+        return { success: true, data: data.publicProductList }
+      }
     },
   },
 }

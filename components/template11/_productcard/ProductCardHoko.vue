@@ -40,34 +40,34 @@
     <div class="datos-producto">
       <nuxt-link :to="{ path: `/productosHoko/` + product.id }">
         <div class="tittle tittle-xml">
-          <p class="card-title" v-if="this.product.name >= 90">
-            {{ `${this.product.name.slice(0, 90)}...` }}
+          <p class="card-title" v-if="product.name >= 90">
+            {{ `${product.name.slice(0, 90)}...` }}
           </p>
           <p class="card-title" v-else>
-            {{ `${this.product.name.slice(0, 90)}` }}
+            {{ `${product.name.slice(0, 90)}` }}
           </p>
         </div>
         <div class="tittle tittle-lg">
-          <p class="card-title" v-if="this.product.name >= 54">
-            {{ `${this.product.name.slice(0, 54)}...` }}
+          <p class="card-title" v-if="product.name >= 54">
+            {{ `${product.name.slice(0, 54)}...` }}
           </p>
           <p class="card-title" v-else>
-            {{ `${this.product.name.slice(0, 54)}` }}
+            {{ `${product.name.slice(0, 54)}` }}
           </p>
         </div>
         <div class="tittle tittle-sm">
-          <p class="card-title" v-if="this.product.name >= 30">
-            {{ `${this.product.name.slice(0, 30)}...` }}
+          <p class="card-title" v-if="product.name >= 30">
+            {{ `${product.name.slice(0, 30)}...` }}
           </p>
           <p class="card-title" v-else>
-            {{ `${this.product.name.slice(0, 30)}` }}
+            {{ `${product.name.slice(0, 30)}` }}
           </p>
         </div>
       </nuxt-link>
       <div class="precio">
-        <div class="content-text-price" v-if="this.product.price">
+        <div class="content-text-price" v-if="product.price">
           <p class="text-price">
-            {{ this.product.price | currency }}
+            {{ product.price | currency }}
           </p>
         </div>
         <div v-else class="h-27"></div>

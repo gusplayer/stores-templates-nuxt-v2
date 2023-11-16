@@ -16,7 +16,7 @@
           <p class="txt-crumb s1">{{ $t('header_inicio') }}</p>
         </nuxt-link>
         <p class="separatorCrumb">/</p>
-        <p class="txt-crumb s2" @click="clear">
+        <p class="txt-crumb s2" @click="clearFilters">
           {{ $t('header_productos') }}
         </p>
       </div>
@@ -25,14 +25,14 @@
       <div class="content-shop-items">
         <div class="content-left">
           <nuxt-link class="content-home" to="/productos">
-            <p class="txt-content-home" @click="clear">
+            <p class="txt-content-home" @click="clearFilters">
               {{ $t('header_buscar_limpiar') }}
             </p>
           </nuxt-link>
           <el-collapse v-model="activeNames">
             <el-collapse-item :title="$t('header_buscar_producto')" name="1">
               <input
-                v-model="search"
+                v-model="searchProduct"
                 class="input-slide"
                 type="search"
                 :placeholder="$t('header_search')"
@@ -44,93 +44,73 @@
               name="2"
             >
               <div class="categorys-list">
-                <div
-                  v-for="(categorys, index) in categorias"
-                  :key="index"
-                  @click="showSubCategory = true"
-                >
-                  <div
-                    @click="
-                      sendCategory(categorys, categorys.id, (ref = false))
-                    "
-                  >
+                <div v-for="(category, index) in categorias" :key="index">
+                  <div @click="sendCategory(category)">
                     <p
                       class="txt-categorys"
                       :class="
-                        categorys.id == indexSelect
+                        category.nombreCategoriaProducto == filters.category
                           ? 'txt-categorys-active'
                           : ''
                       "
                     >
-                      {{ categorys.nombre_categoria_producto }}
+                      {{ category.nombreCategoriaProducto }}
                     </p>
                   </div>
                 </div>
               </div>
             </el-collapse-item>
             <el-collapse-item
-              v-show="showSubCategory && selectedSubcategories.length"
+              v-show="selectedSubcategories?.length"
               :title="$t('home_subcategory')"
               name="3"
             >
-              <div
-                v-show="showSubCategory && selectedSubcategories.length"
-                class="subcategory-list"
-              >
+              <div class="subcategory-list">
                 <div
-                  v-for="(subcategorys, index) in selectedSubcategories"
+                  v-for="(subcategory, index) in selectedSubcategories"
                   :key="index"
                 >
-                  <div @click="SendSubCategory(subcategorys.id)">
+                  <div @click="sendSubCategory(subcategory)">
                     <p
                       class="txt-categorys"
                       :class="
-                        subcategorys.id == indexSelect2
+                        subcategory.id == filters.subcategory
                           ? 'txt-categorys-active'
                           : ''
                       "
                     >
-                      {{ subcategorys.nombre_subcategoria }}
+                      {{ subcategory.nombreSubcategoria }}
                     </p>
                   </div>
                 </div>
               </div>
             </el-collapse-item>
             <div
-              v-for="(itemsTags, index) in allTags"
-              v-show="allTags && allTags.length > 0"
+              v-for="(itemsTags, index) in tags"
+              v-show="tags?.length > 0"
               :key="index"
             >
               <el-collapse-item
                 v-if="
                   itemsTags &&
                   itemsTags.status === 1 &&
-                  itemsTags.properties.length > 0
+                  itemsTags.tagProperties.length > 0
                 "
                 :title="itemsTags.name"
                 :name="6 + index"
               >
                 <div class="categorys-list">
                   <button
-                    v-for="itemsProperties in itemsTags.properties"
+                    v-for="itemsProperties in itemsTags.tagProperties"
                     v-show="itemsProperties.status === 1"
                     :key="itemsProperties.id"
+                    class="txt-Filter"
                     :class="
-                      itemsProperties.name == etiqueta1
-                        ? 'txt-categorys-active'
-                        : '' || itemsProperties.name == etiqueta2
+                      itemsProperties.id == filters.tag
                         ? 'txt-categorys-active'
                         : ''
                     "
-                    class="txt-Filter"
-                    @click="
-                      getProductsFilter(
-                        'tag',
-                        itemsProperties.id,
-                        itemsProperties.name,
-                        false
-                      )
-                    "
+                    @click="sendTag(itemsProperties)"
                   >
                     {{ itemsProperties.name }}
                   </button>
@@ -142,187 +122,185 @@
               :title="$t('home_fenvio')"
               name="4"
             >
-              <div class="categorys-list">
-                <button
-                  class="txt-Filter"
-                  @click="getProductsFilter('ShippingFree')"
-                >
-                  {{ $t('home_gratis') }}
-                </button>
-                <button
-                  class="txt-Filter"
-                  @click="getProductsFilter('NoShippingFree')"
-                >
-                  {{ $t('home_Singratis') }}
-                </button>
-              </div>
-            </el-collapse-item>
-            <el-collapse-item :title="$t('home_fprecio')" name="5">
-              <div class="categorys-list">
-                <button
-                  class="txt-Filter"
-                  @click="getProductsFilter('higherNumber')"
-                >
-                  {{ $t('home_fpreciom') }}
-                </button>
-                <button
-                  class="txt-Filter"
-                  @click="getProductsFilter('smallerNumber')"
-                >
-                  {{ $t('home_fprecioM') }}
-                </button>
+              <div class="w-full flex flex-row justify-between items-center">
+                <input
+                  v-model="filters.minPrice"
+                  :min="minPrice"
+                  :max="maxPrice"
+                  placeholder="Mínimo"
+                  class="block w-full rounded-4 px-4 py-4 text-gray-900 shadow-sm border border-[#DCDFE6] placeholder:text-gray-400"
+                  onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode>96 && event.charCode<105)"
+                  @keyup.enter="sendFilter"
+                  @change="sendFilter"
+                />
+                <span class="px-5 icon-price text-16">-</span>
+                <input
+                  v-model="filters.maxPrice"
+                  :min="minPrice"
+                  :max="maxPrice"
+                  placeholder="Máximo"
+                  class="block w-full rounded-4 px-4 py-4 text-gray-900 shadow-sm border border-[#DCDFE6] placeholder:text-gray-400"
+                  onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode>96 && event.charCode<105)"
+                  @keyup.enter="sendFilter"
+                  @change="sendFilter"
+                />
               </div>
             </el-collapse-item>
           </el-collapse>
         </div>
-        <div class="content-right">
-          <nuxt-link class="content-home hidd" to="/productos">
-            <p class="txt-content-home" @click="clear">
-              {{ $t('header_buscar_limpiar') }}
-            </p>
-          </nuxt-link>
-          <div class="empty hidd"></div>
-          <div class="content-banner-shop-r">
-            <div class="tittle-banner-shop">
-              <p class="btn-tittle-shop" v-if="!nameCategoryHeader">
+        <div class="w-full flex flex-col justify-center items-center">
+          <div
+            class="w-full flex flex-col justify-between items-center mb-10 pb-5 top-content"
+          >
+            <div class="w-full flex justify-start items-center">
+              <p class="txt-content-home" @click="clearFilters">
                 {{ $t('header_productos') }}
               </p>
-              <div v-else class="flex flex-col justify-start">
-                <p class="btn-tittle-shop">
-                  {{ nameCategoryHeader }}
-                </p>
-                <!-- v-if="selectSubcategory" -->
-                <div class="flex flex-row">
-                  <p v-if="nameSubCategoryHeader" class="text-12 mr-4">
-                    {{ nameSubCategoryHeader }}
-                  </p>
-                  <p
-                    v-if="nameSubCategoryHeader && etiqueta1"
-                    class="text-12 mr-4"
-                  >
-                    /
-                  </p>
-                  <p v-if="etiqueta1" class="text-12">
-                    {{ etiqueta1 }}
-                  </p>
-                  <p v-if="etiqueta2" class="ml-4 text-12">/ {{ etiqueta2 }}</p>
-                </div>
-              </div>
-              <div
-                v-if="
-                  etiqueta1 &&
-                  nameCategoryHeader == '' &&
-                  nameSubCategoryHeader == ''
-                "
-                class="flex flex-col justify-start"
+              <p
+                v-if="nameCategory"
+                class="ml-4 txt-color"
+                @click="breadcrumbsClear(1)"
               >
-                <p v-if="etiqueta1" class="text-12">
-                  {{ etiqueta1 }}
-                </p>
-              </div>
+                <span class="font-normal pr-4">/</span>{{ nameCategory }}
+              </p>
+              <p
+                v-if="nameSubCategory"
+                class="txt-color"
+                @click="breadcrumbsClear(2)"
+              >
+                <span class="font-normal pr-4">/</span>{{ nameSubCategory }}
+              </p>
+              <p v-if="tagProduct" class="txt-color">
+                <span class="font-normal pr-4">/</span>{{ tagProduct }}
+              </p>
             </div>
-          </div>
-          <div class="top-content">
-            <div class="content-items-categorias">
-              <div class="items-end">
-                <div class="show-view-per-list">
-                  <button class="show">
-                    <svg
-                      class="show-icon"
-                      :class="indexShowList == 3 ? 'show-icon-active' : ''"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink"
-                      version="1.1"
-                      width="30px"
-                      height="30px"
-                      viewBox="0 0 24 24"
-                      @click="showGrid3"
-                    >
-                      <path
-                        d="M12 16C13.1 16 14 16.9 14 18S13.1 20 12 20 10 19.1 10 18 10.9 16 12 16M12 10C13.1 10 14 10.9 14 12S13.1 14 12 14 10 13.1 10 12 10.9 10 12 10M12 4C13.1 4 14 4.9 14 6S13.1 8 12 8 10 7.1 10 6 10.9 4 12 4M6 16C7.1 16 8 16.9 8 18S7.1 20 6 20 4 19.1 4 18 4.9 16 6 16M6 10C7.1 10 8 10.9 8 12S7.1 14 6 14 4 13.1 4 12 4.9 10 6 10M6 4C7.1 4 8 4.9 8 6S7.1 8 6 8 4 7.1 4 6 4.9 4 6 4M18 16C19.1 16 20 16.9 20 18S19.1 20 18 20 16 19.1 16 18 16.9 16 18 16M18 10C19.1 10 20 10.9 20 12S19.1 14 18 14 16 13.1 16 12 16.9 10 18 10M18 4C19.1 4 20 4.9 20 6S19.1 8 18 8 16 7.1 16 6 16.9 4 18 4Z"
-                      />
-                    </svg>
-                  </button>
-                  <button class="show">
-                    <svg
-                      :class="indexShowList == 1 ? 'show-icon-active' : ''"
-                      class="show-icon"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink"
-                      version="1.1"
-                      width="30px"
-                      height="30px"
-                      viewBox="0 0 24 24"
-                      @click="showList"
-                    >
-                      <path
-                        d="M7,5H21V7H7V5M7,13V11H21V13H7M4,4.5A1.5,1.5 0 0,1 5.5,6A1.5,1.5 0 0,1 4,7.5A1.5,1.5 0 0,1 2.5,6A1.5,1.5 0 0,1 4,4.5M4,10.5A1.5,1.5 0 0,1 5.5,12A1.5,1.5 0 0,1 4,13.5A1.5,1.5 0 0,1 2.5,12A1.5,1.5 0 0,1 4,10.5M7,19V17H21V19H7M4,16.5A1.5,1.5 0 0,1 5.5,18A1.5,1.5 0 0,1 4,19.5A1.5,1.5 0 0,1 2.5,18A1.5,1.5 0 0,1 4,16.5Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="producto-items-content" id="section">
-            <div class="content-item">
-              <div class="content-item-productos">
-                <div class="product-conten-items" id="grid-selection">
-                  <div
-                    v-for="product in filterProduct"
-                    :key="product.id"
-                    class="content-products h-full"
-                  >
-                    <KoProductCardFilter
-                      v-if="!showInList"
-                      :product="product"
-                      class="product-list"
-                      :settingKcardProduct="settingByTemplate11[0].cardProduct"
-                      :setting-general="settingByTemplate11[0].settingGeneral"
-                    />
-                    <KoProductCardFilerList
-                      v-if="showInList"
-                      :product="product"
-                      class="product-list"
-                      :settingKcardProduct="settingByTemplate11[0].cardProduct"
-                      :setting-general="settingByTemplate11[0].settingGeneral"
-                    />
-                  </div>
-                </div>
-                <div
-                  v-if="fullProducts.length == 0"
-                  class="content-products-empty"
+            <div class="w-full flex justify-between items-center">
+              <div class="w-full flex items-center gap-x-3 justify-start">
+                <svg
+                  class="cursor-pointer p-12 show-icon"
+                  :class="indexShowList === 1 ? 'show-icon-active' : ''"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="25px"
+                  height="25px"
+                  viewBox="0 0 12 12"
+                  @click="showList(1, true)"
                 >
-                  <div class="header-content-logo">
-                    <nuxt-link to="/productos" class="wrapper-logo">
-                      <img
-                        v-lazy="
-                          `${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
-                        "
-                        class="header-logo"
-                        alt="Logo Img"
-                        @click="clear"
-                      />
-                    </nuxt-link>
-                  </div>
-                  <p class="txt-products-empty">{{ $t('home_msgCatalogo') }}</p>
-                </div>
-                <div class="pagination-medium">
-                  <div
-                    v-if="fullProducts.length > numVistas"
-                    class="product_pagination"
-                  >
-                    <el-pagination
-                      background
-                      layout="prev, pager, next"
-                      :total="fullProducts.length"
-                      :page-size="numVistas"
-                      :current-page.sync="currentPage"
-                      class="pagination"
-                    />
-                  </div>
-                </div>
+                  <path d="M5,0H0v5h5V0z"></path>
+                  <rect x="7" y="0" width="5" height="2"></rect>
+                  <rect x="7" y="3" width="5" height="2"></rect>
+                  <rect x="7" y="7" width="5" height="2"></rect>
+                  <rect x="7" y="10" width="5" height="2"></rect>
+                  <path d="M5,7H0v5h5V7z"></path>
+                </svg>
+                <svg
+                  class="cursor-pointer p-12 show-icon"
+                  :class="indexShowList === 3 ? 'show-icon-active' : ''"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="25px"
+                  height="25px"
+                  viewBox="0 0 12 12"
+                  @click="showList(3, false)"
+                >
+                  <path d="M5,0H0v5h5V0z"></path>
+                  <path d="M12,0H7v5h5V0z"></path>
+                  <path d="M5,7H0v5h5V7z"></path>
+                  <path d="M12,7H7v5h5V7z"></path>
+                </svg>
               </div>
+              <el-dropdown
+                class="w-full flex justify-end items-center"
+                :hide-on-click="false"
+                @command="sendOrder"
+              >
+                <span
+                  class="el-dropdown-link txt-color justify-center items-center"
+                >
+                  Ordenar por:
+                  <span
+                    v-if="sortingFilter?.label"
+                    class="textSortingFilter"
+                    @click="clearOrder"
+                  >
+                    {{ $t(sortingFilter.label) }}
+                  </span>
+                  <i class="el-icon-arrow-down el-icon--right leading-21"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item
+                    v-for="items in listOrderFilter"
+                    v-show="!stateShipping"
+                    :key="items.id"
+                    :command="items"
+                    :class="
+                      sortingFilter?.id === items.id
+                        ? 'bg-black text-white-white'
+                        : ''
+                    "
+                  >
+                    {{ $t(items.label) }}
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </div>
+          </div>
+          <div class="w-full h-full flex flex-col justify-center items-center">
+            <div
+              class="w-full justify-start items-start text-center grid grid-cols-2 gap-4"
+              :class="`md:grid-cols-${indexShowList}`"
+            >
+              <div
+                v-for="product in listProducts"
+                :key="product.id"
+                class="content-products h-full"
+              >
+                <KoProductCardFilter
+                  v-if="!showInList"
+                  :product="product"
+                  :setting-card-products="settingByTemplate11[0].cardProduct"
+                  :setting-general="settingByTemplate11[0].settingGeneral"
+                  class="w-full h-full product-list"
+                />
+                <KoProductCardFilerList
+                  v-if="showInList"
+                  :product="product"
+                  :setting-card-products="settingByTemplate11[0].cardProduct"
+                  :setting-general="settingByTemplate11[0].settingGeneral"
+                  class="product-list"
+                />
+              </div>
+            </div>
+            <div v-if="listProducts.length == 0" class="content-products-empty">
+              <div class="header-content-logo">
+                <nuxt-link to="/productos" class="wrapper-logo">
+                  <img
+                    v-lazy="
+                      `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
+                    "
+                    class="header-logo"
+                    alt="Logo Img"
+                    @click="clearFilters"
+                  />
+                </nuxt-link>
+              </div>
+              <p class="txt-products-empty">{{ $t('home_msgCatalogo') }}</p>
+            </div>
+            <div
+              v-if="totalProducts > filters.limit"
+              class="mt-50 bg-transparent text-18 product_pagination"
+            >
+              <el-pagination
+                background
+                layout="prev, pager, next"
+                class="pagination bg-transparent"
+                :total="totalProducts"
+                :page-size="filters.limit"
+                :current-page.sync="previousPage"
+                @current-change="changePage"
+              />
             </div>
           </div>
         </div>
@@ -332,280 +310,43 @@
 </template>
 
 <script>
-import KoProductCardFilter from './_productcard/ProductCard'
-import KoProductCardFilerList from './_productcard/ProductCardFilterList'
-import filterProducts from '../../mixins/filterProducts'
+import mobileCheck from '@/mixins/mobileCheck'
+import filters from '@/mixins/filterProducts'
 export default {
+  name: 'Ko11ProductListFilter',
   components: {
-    KoProductCardFilter,
-    KoProductCardFilerList,
+    KoProductCardFilter: () => import('./_productcard/ProductCard.vue'),
+    KoProductCardFilerList: () =>
+      import('./_productcard/ProductCardFilterList.vue'),
   },
+  mixins: [mobileCheck, filters],
   props: {
-    settingByTemplate11: Array,
-    dataStore: Object,
-    fullProducts: {},
-    allTags: Array,
-  },
-  mixins: [filterProducts],
-  name: 'Ko-ProductList-Filter',
-  mounted() {
-    this.setOptionShipping()
-    this.getQuery()
-    if (this.previousPage) {
-      this.currentPage = this.previousPage
-    }
+    settingByTemplate11: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
       showInList: false,
-      showSubCategory: false,
-      stateSub: false,
-      search: '',
-      currentPage: 1,
-      selectSubcategory: '',
-      nameCategory: '',
-      nameSubCategory: '',
-      selectedSubcategories: [],
-      toggleCategories: true,
-      indexSelect: '',
-      indexSelect2: '',
       indexShowList: 3,
-      numVistas: 15,
-      stateShipping: false,
-      activeNames: ['1', '2', '3', '4', '5'],
+      activeNames: ['1', '2', '3', '4'],
     }
   },
-  computed: {
-    categorias() {
-      return this.dataStore.categorias
-    },
-    subcategories() {
-      return this.dataStore.subcategorias
-    },
-    getProductsCategorie() {
-      const initial = this.currentPage * 15 - 15
-      const final = initial + 15
-      return this.fullProducts
-        .filter((product) => product.categoria == this.select)
-        .slice(initial, final)
-    },
-    filterProduct() {
-      const initial = this.currentPage * 15 - 15
-      const final = initial + 15
-      return this.fullProducts.slice(initial, final)
-    },
-    selectedCategory() {
-      return this.$store.state.products.payload
-    },
-    selectedType() {
-      return this.$store.state.products.type
-    },
-    nameCategoryHeader() {
-      return this.$store.state.category_producto_header
-    },
-    nameSubCategoryHeader() {
-      return this.$store.state.subcategory_producto_header
-    },
-    searchValue() {
-      return this.$store.state.searchValue
-    },
-    previousPage() {
-      return this.$store.state.previousPage
-    },
-    etiqueta1() {
-      return this.$store.state.products.payloadTagName
-    },
-    etiqueta2() {
-      return this.$store.state.products.payloadTag2Name
-    },
-  },
-  methods: {
-    getQuery() {
-      if (this.$route.query && this.$route.query.category) {
-        this.sendCategoryUrlMix(this.$route.query.category)
-      } else if (this.$route.query && this.$route.query.subcategory) {
-        this.SendSubCategoryUrlMix(
-          this.$route.query.subcategory,
-          this.categorias,
-          this.subcategories
-        )
-      } else if (
-        this.$route.query &&
-        this.$route.query.tagId &&
-        this.$route.query.tagName
-      ) {
-        this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
-      } else if (this.$route.query && this.$route.query.search) {
-        this.SearchProduct(decodeURIComponent(this.$route.query.search))
-      } else if (this.$route.fullPath == '/') {
-        this.allCategories()
-      }
-    },
-    setOptionShipping() {
-      if (this.dataStore && this.dataStore.medios_envio) {
-        let shipping = JSON.parse(this.dataStore.medios_envio.valores)
-        switch (shipping.envio_metodo) {
-          case 'sintarifa':
-            this.stateShipping = false
-            break
-          case 'gratis':
-            this.stateShipping = true
-            break
-          case 'tarifa_plana':
-            this.stateShipping = false
-            break
-          case 'precio':
-            this.stateShipping = false
-            break
-          case 'precio_ciudad':
-            this.stateShipping = false
-            break
-          case 'peso':
-            this.stateShipping = false
-            break
-          default:
-        }
-      }
-    },
-    showList() {
-      this.indexShowList = 1
-      this.showInList = true
-      var gridSelector = document.getElementById('grid-selection')
-      if (gridSelector) {
-        gridSelector.setAttribute(
-          'style',
-          'grid-template-columns: repeat(1, minmax(0, 1fr))'
-        )
-      }
-    },
-    showGrid3() {
-      this.indexShowList = 3
-      this.showInList = false
-      var gridSelector = document.getElementById('grid-selection')
-      if (gridSelector) {
-        gridSelector.setAttribute(
-          'style',
-          'grid-template-columns: repeat(3, minmax(0, 1fr))'
-        )
-      }
-    },
-    SendSubCategory(value) {
-      this.$store.commit('products/SET_PAYLOAD_TAG', '')
-      this.$store.commit('products/SET_PAYLOAD_TAG2', '')
-      this.stateSub = false
-      this.indexSelect2 = value
-      this.selectSubcategory = value
-      let filtradoSubCategory = this.subcategories.find(
-        (element) => element.id == value
-      )
-      let filtradoCategories = this.categorias.find(
-        (element) => element.id == filtradoSubCategory.categoria
-      )
-      this.$store.commit(
-        'SET_CATEGORY_PRODUCTO',
-        filtradoCategories.nombre_categoria_producto
-      )
-      this.nameSubCategory = filtradoSubCategory.nombre_subcategoria
-      this.$router.push({
-        path: '',
-        query: {
-          subcategory: `${this.nameSubCategory}^${filtradoCategories.id}`,
-        },
-      })
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
-      this.$store.commit('products/FILTER_BY', {
-        type: ['subcategory'],
-        data: value,
-      })
-    },
-    sendCategory(value, categoria, index, ref) {
-      this.stateSub = true
-      this.currentPage = 1
-      this.indexSelect = categoria
-      this.nameCategory = value.nombre_categoria_producto
-      this.nameSubCategory = ''
-      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$store.commit('products/SET_PAYLOAD_TAG', '')
-      this.$store.commit('products/SET_PAYLOAD_TAG2', '')
-      this.$router.push({
-        path: '',
-        query: { category: this.nameCategory },
-      })
-      this.selectedSubcategories = []
-      this.subcategories.find((subcategory) => {
-        if (subcategory.categoria === categoria) {
-          this.toggleCategories = false
-          this.selectedSubcategories.push(subcategory)
-        }
-      })
-      this.$store.commit('products/FILTER_BY', {
-        type: ['category'],
-        data: value.nombre_categoria_producto,
-      })
-    },
-    breadcrumbsSendCategory(value) {
-      this.stateSub = true
-
-      let filtradoCategories = this.categorias.find((element) => {
-        if (element.nombre_categoria_producto == value) {
-          return element
-        }
-      })
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: ['category'],
-        data: filtradoCategories.nombre_categoria_producto,
-      })
-    },
-    clear() {
-      this.indexSelect = ''
-      this.indexSelect2 = ''
-      this.$router.push({
-        path: '',
-        query: {},
-      })
-      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: ['all'],
-        data: '',
-      })
-      this.$emit('clear')
-      this.nameCategory = ''
-      this.showSubCategory = false
-      this.selectedSubcategories = []
-    },
-  },
   watch: {
-    search(value) {
-      this.SearchProduct(value)
-    },
-    currentPage() {
-      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
+    previousPage() {
       let timerTimeout = null
+      // eslint-disable-next-line no-unused-vars
       timerTimeout = setTimeout(() => {
         timerTimeout = null
         window.scrollBy(0, -1500)
       }, 250)
     },
-    previousPage() {
-      if (this.previousPage) {
-        this.currentPage = this.previousPage
-      }
-    },
-    nameCategoryHeader(value) {
-      return value
-    },
-    nameSubCategoryHeader(value) {
-      return value
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.getQuery()
-    },
-    searchValue(value) {
-      this.SearchProduct(value)
+  },
+  methods: {
+    showList(index, state) {
+      this.indexShowList = index
+      this.showInList = state
     },
   },
 }
@@ -619,15 +360,6 @@ export default {
 .product-content {
   background: var(--background_color_1);
   @apply flex flex-col justify-center items-center w-full pb-80;
-}
-.content-banner-shop {
-  @apply w-full flex flex-col;
-}
-.content-banner-shop-r {
-  @apply w-full flex flex-col justify-start items-start;
-}
-.itemLeft-range-slide {
-  @apply w-full flex justify-center items-center mb-20;
 }
 .content-left >>> .el-collapse {
   border-top: 1px solid var(--border);
@@ -655,95 +387,19 @@ export default {
 .content-left >>> .el-collapse-item__arrow {
   color: var(--color_icon);
 }
+.content-left {
+  position: sticky;
+  top: 25px;
+  transition: all 0.25s ease;
+}
 .input-slide {
   font-family: var(--font-style-1) !important;
   @apply w-full h-30 cursor-pointer border-none;
   background: transparent;
   /* border-bottom: 2px solid #2c2930; */
 }
-.txt-tittles {
-  color: var(--color_text);
-  font-size: 15px;
-  font-family: var(--font-style-1) !important;
-  @apply w-full flex justify-start items-center font-semibold tracking-0 cursor-pointer uppercase transition-all ease-in duration-0.2;
-}
-.value-range-slide {
-  @apply w-full flex flex-row justify-start items-center;
-}
-.values-prices {
-  @apply w-8/0 flex flex-row justify-start items-center;
-}
-.value-price {
-  color: #717171;
-  font-size: 14px;
-  font-family: var(--font-style-1) !important;
-  @apply w-auto pr-1 cursor-default transition-all ease-in duration-0.2;
-}
-.value-precio-change {
-  @apply w-full flex flex-row justify-start items-center;
-}
-.price {
-  color: #2d2a2a;
-  font-size: 14px;
-  font-family: var(--font-style-1) !important;
-  @apply flex flex-row justify-start items-center font-semibold transition-all ease-in duration-0.2 cursor-default;
-}
-
-.btn-slider {
-  @apply w-3/0 flex justify-center items-center;
-}
-.btn-items-left {
-  background-color: #ededed;
-  font-size: 12px;
-  border-radius: 35px;
-  padding: 10px 14px;
-  letter-spacing: 0.3px;
-  font-family: var(--font-style-1) !important;
-  @apply flex justify-center items-center text-center uppercase font-semibold cursor-pointer transition-all ease-in duration-0.2;
-}
-.btn-items-left:hover {
-  background-color: #e5e5e5;
-}
-.content-items-categorias {
-  @apply w-full flex flex-col justify-start items-center;
-}
-.content-items-categorias-text {
-  @apply w-full flex flex-row;
-}
-.text-categorias {
-  color: #333333;
-  font-size: 14px;
-  font-family: var(--font-style-1) !important;
-  @apply w-auto flex flex-row mr-6 font-semibold cursor-pointer;
-}
-.separator-breadCrumbs {
-  color: #8e8e8e;
-  font-size: 14px;
-  font-family: var(--font-style-1) !important;
-  @apply w-auto mr-6 ml-6 cursor-pointer transition-all ease-in duration-0.2;
-}
-.product-stock-text {
-  color: #8e8e8e;
-  font-size: 14px;
-  font-family: var(--font-style-1) !important;
-  @apply font-semibold;
-}
-.product-stock-active {
-  color: #000;
-  font-size: 15px;
-  font-family: var(--font-style-1) !important;
-  @apply font-semibold;
-}
-.text-categorias-select {
-  color: #8e8e8e;
-  font-size: 14px;
-  font-family: var(--font-style-1) !important;
-  @apply w-full flex flex-row mr-6 font-normal cursor-pointer transition-all ease-in duration-0.2;
-}
-
 .top-content {
-  font-size: 100%;
-  @apply w-full max-w-full flex justify-between items-center flex-wrap mb-20;
+  border-bottom: 1px solid var(--border);
 }
 .categorys-list {
   max-height: 300px;
@@ -823,26 +479,6 @@ export default {
   background-color: #eb7025;
   @apply transition-all ease-in duration-0.2;
 }
-.rounded-list {
-  background-color: #e5e5e5;
-  @apply w-10 h-10 rounded-full mr-10 transition-all ease-in duration-0.2;
-}
-.txt-rounded-list-active {
-  background-color: #eb7025;
-  @apply transition-all ease-in duration-0.2;
-}
-.product-stock {
-  color: #333;
-  font-size: 14px;
-  font-family: var(--font-style-1) !important;
-  @apply mr-6 font-semibold cursor-pointer transition-all ease-in duration-0.2;
-}
-.show-view-per-list {
-  @apply w-auto justify-center items-center;
-}
-.show {
-  @apply w-full cursor-pointer mt-4;
-}
 .show-icon {
   fill: var(--color_text);
   @apply p-3;
@@ -858,33 +494,6 @@ export default {
 .show:focus .show-icon {
   fill: #000;
 }
-.items-end {
-  @apply w-full flex flex-row justify-start items-center;
-}
-.tittle-banner-shop {
-  @apply w-full flex justify-start items-start;
-}
-.btn-tittle-shop {
-  color: var(--color_text);
-  font-family: var(--font-style-1) !important;
-  @apply font-semibold uppercase justify-start items-start;
-}
-.product-text {
-  @apply flex flex-col justify-center items-center w-full;
-}
-
-.product-conten-items {
-  @apply justify-center items-center text-center gap-4;
-}
-.producto-items-content {
-  @apply w-full;
-}
-.content-item {
-  @apply w-full flex flex-row justify-center items-center mb-40;
-}
-.content-item-productos {
-  @apply w-full flex flex-col justify-center items-center;
-}
 .content-products {
   /* border-bottom: 0.5px solid #f2f2f2; */
   @apply w-full flex flex-col justify-center items-center;
@@ -898,10 +507,6 @@ export default {
   color: #3f3f3f;
   font-family: var(--font-style-1) !important;
   @apply mt-6 font-semibold;
-}
-.pagination-medium {
-  margin-top: 50px;
-  background: transparent;
 }
 .pagination {
   font-size: 18px;
@@ -939,11 +544,6 @@ export default {
   background-color: #eb7025;
   color: #fff;
 }
-.show-number-items,
-.product-stock,
-.separator-breadCrumbs {
-  cursor: default;
-}
 .crumb {
   @apply w-full flex flex-row justify-center items-center;
 }
@@ -974,33 +574,11 @@ export default {
   @apply shadow-lg;
 } */
 @screen sm {
-  .product-conten-items {
-    @apply w-full grid grid-cols-1;
-  }
-  .btn-tittle-shop {
-    font-size: 16px;
-    @apply mb-10;
-  }
   .content-shop-items {
     @apply w-9/0 flex flex-row justify-start items-start;
   }
   .content-left {
     @apply hidden;
-  }
-  .content-right {
-    @apply w-full flex flex-col justify-center items-center;
-  }
-  .top-content {
-    @apply hidden;
-  }
-  .content-items-categorias-text {
-    @apply justify-center items-center;
-  }
-  .text-categorias-select {
-    @apply w-auto;
-  }
-  .content-banner-shop {
-    @apply justify-start items-start my-8 pl-20;
   }
   .bannerProduct {
     @apply hidden;
@@ -1018,17 +596,18 @@ export default {
   .txt-content-home:hover {
     color: #000;
   }
-}
-@media (min-width: 440px) {
-  .product-conten-items {
-    @apply grid grid-cols-2;
+  .txt-color {
+    color: var(--color_text);
+    font-family: var(--font-style-1) !important;
+  }
+  .textSortingFilter {
+    color: var(--color_text);
+    font-family: var(--font-style-1) !important ;
+    transition: all 0.25s ease;
+    @apply font-normal text-11 ml-5;
   }
 }
 @screen md {
-  .btn-tittle-shop {
-    font-size: 36px;
-    @apply mb-0;
-  }
   .content-shop-items {
     @apply w-9/3;
   }
@@ -1038,46 +617,12 @@ export default {
   }
 }
 @screen lg {
-  .product-text {
-    @apply w-full;
-  }
-  .product-conten-items {
-    @apply grid grid-cols-3 gap-10;
-  }
-  .content-items-categorias-text {
-    @apply justify-start items-center;
-  }
-  .items-end {
-    @apply flex pb-20;
-  }
-  .show-number-items {
-    @apply w-full flex justify-end items-center;
-  }
-  .show-view-per-list {
-    @apply w-auto grid grid-cols-2 gap-0 justify-center items-center;
-  }
-  .btn-tittle-shop {
-    font-size: 20px;
-  }
-  .top-content {
-    border-bottom: 1px solid var(--border);
-    @apply flex pt-0 pb-5;
-  }
   .content-left {
     width: 300px;
     @apply mr-30 flex flex-col justify-between items-start;
   }
-  .content-banner-shop {
-    @apply hidden;
-  }
-  .content-banner-shop-r {
-    @apply flex pb-40;
-  }
   .content-shop-items {
     @apply w-9/5 flex flex-row justify-start items-start mt-40;
-  }
-  .hidd {
-    @apply hidden;
   }
 }
 @screen mlg {

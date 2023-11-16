@@ -3,36 +3,40 @@
     class="content-opt-tab"
     :style="[
       settingByTemplate10[0].detailsProduct,
-      settingByTemplate10[0].setting10General,
+      settingByTemplate10[0].settingGeneral,
+      {
+        '--font-style-1':
+          settingByTemplate10[0]?.settingGeneral?.fount_1 ?? 'Roboto',
+      },
     ]"
   >
     <div class="head-content">
       <div
         v-if="contentDescription"
         class="tab"
-        :class="selecttag == 1 ? 'show-select-active' : ''"
-        @click="selectTag1"
+        :class="selectTag == 1 ? 'show-select-active' : ''"
+        @click="sendIndexTag(1)"
       >
         <p class="tittle">{{ $t('productdetail_description') }}</p>
       </div>
       <div
         class="tab"
-        :class="selecttag == 2 ? 'show-select-active' : ''"
-        @click="selectTag2"
+        :class="selectTag == 2 ? 'show-select-active' : ''"
+        @click="sendIndexTag(2)"
       >
         <p class="tittle">{{ $t('productdetail_opcionesPago') }}</p>
       </div>
       <div
         class="tab"
-        :class="selecttag == 3 ? 'show-select-active' : ''"
-        @click="selectTag3"
+        :class="selectTag == 3 ? 'show-select-active' : ''"
+        @click="sendIndexTag(3)"
       >
         <p class="tittle">{{ $t('productdetail_opinionesEnvio') }}</p>
       </div>
     </div>
 
     <div class="content-tab">
-      <div v-if="focusbtn1 && contentDescription" class="editor">
+      <div v-if="selectTag === 1 && contentDescription" class="editor">
         <el-tiptap
           v-model="contentDescription"
           :extensions="extensions"
@@ -44,7 +48,7 @@
           :charCounterCount="false"
         />
       </div>
-      <div class="item-content opcpago" v-if="focusbtn2">
+      <div v-if="selectTag === 2" class="item-content opcpago">
         <ul>
           <li v-if="mediospago.consignacion == 1">
             <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
@@ -189,8 +193,8 @@
         </ul>
       </div>
       <div
+        v-if="selectTag === 3 && envios.envio_metodo"
         class="item-content opcenvio"
-        v-if="focusbtn3 && envios.envio_metodo"
       >
         <div class="deliverys section">
           <div class="content">
@@ -224,8 +228,8 @@
               {{
                 envios.valor
                   | currency(
-                    dataStore.tienda.codigo_pais,
-                    dataStore.tienda.moneda
+                    dataStore.tiendasInfo.paises.codigo,
+                    dataStore.tiendasInfo.moneda
                   )
               }}
             </p>
@@ -245,6 +249,15 @@
           <div v-if="envios.envio_metodo === 'sinEnvio'" class="wrapper-method">
             <p class="description-method">Pasas a recoger tu compra</p>
           </div>
+          <div
+            v-if="envios.envio_metodo === 'sintarifa'"
+            class="wrapper-method"
+          >
+            <p class="description-method">
+              El costo del envío no esta definido, este costo lo asume el
+              comprador
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -256,10 +269,12 @@ import currency from '@/mixins/formatCurrent'
 export default {
   filters: {
     capitalize(value) {
-      if (value) {
-        value = value.toLowerCase()
-        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
+      if (!value) {
+        return value
       }
+      return value
+        .toLowerCase()
+        .replace(/(?:^|\s)\w/g, (match) => match.toUpperCase())
     },
   },
   mixins: [currency, extensions],
@@ -283,56 +298,30 @@ export default {
   },
   data() {
     return {
-      medioEnvio: '',
-      envioproducto: '',
-      selecttag: 1,
-      focusbtn1: true,
-      focusbtn2: false,
-      focusbtn3: false,
-      contentDescription: this.data?.info?.descripcion,
+      selectTag: 1,
+      contentDescription: this.data?.productosInfo?.descripcion,
     }
   },
   computed: {
     mediospago() {
-      return this.dataStore.medios_pago
+      return this.dataStore.medioPagos
     },
     activeClass() {
-      if (
-        this.data.info.descripcion == '' ||
-        this.data.info.descripcion == null
-      ) {
-        return true
-      } else {
-        return false
-      }
+      return (
+        !this.data.productosInfo.descripcion ||
+        this.data.productosInfo.descripcion == null
+      )
     },
     envios() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties, vue/no-mutating-props
-      this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
-      return this.data.medioEnvio
+      return this.$store.state.envios.valores
     },
   },
   mounted() {
-    this.contentDescription ? this.selectTag1() : this.selectTag2()
+    this.sendIndexTag(this.contentDescription ? 1 : 2)
   },
   methods: {
-    selectTag1() {
-      this.selecttag = 1
-      this.focusbtn1 = true
-      this.focusbtn2 = false
-      this.focusbtn3 = false
-    },
-    selectTag2() {
-      this.selecttag = 2
-      this.focusbtn1 = false
-      this.focusbtn2 = true
-      this.focusbtn3 = false
-    },
-    selectTag3() {
-      this.selecttag = 3
-      this.focusbtn1 = false
-      this.focusbtn2 = false
-      this.focusbtn3 = true
+    sendIndexTag(value) {
+      this.selectTag = value
     },
   },
 }

@@ -9,9 +9,9 @@
         <FlechaLeft-icon class="btn-scroll-icon" />
       </div>
       <div id="swiper-slide-categories" class="itens-slide-categories">
-        <div class="wrapper-img-text" @click="clear">
+        <div class="wrapper-img-text" @click="clearFilters">
           <img
-            v-if="dataStore.tienda.id_tienda == 12664"
+            v-if="dataStore.id == 12664"
             src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649430112/Xiaomi_logo__2021_ejxsbk.png"
             class="product-image"
             alt="icon all"
@@ -33,26 +33,26 @@
               };`"
               :class="idCategory == '' ? 'active-tag ' : 'disable-tag'"
               class="txt-category"
-              @click="sendCategory('', '')"
+              @click="clearFilters"
             >
               {{ $t('home_todo') }}
             </p>
           </div>
         </div>
         <div
-          v-for="categoria in categorias"
-          :key="categoria.id"
+          v-for="category in categorias"
+          :key="category.id"
           class="wrapper-img-text"
-          @click="sendCategory(categoria, categoria.id)"
+          @click="setToQueryFilter('category', category)"
         >
           <img
             v-lazy="
-              categoria.imagen_cloudinary == null
+              category.imagen_cloudinary == null
                 ? 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649367838/2659360_s1ap5f.png'
-                : idCloudinary(categoria.imagen_cloudinary, 150, 150)
+                : idCloudinary(category.imagen_cloudinary, 150, 150)
             "
             :class="
-              categoria.imagen_cloudinary == 'sin_foto.jpeg'
+              category.imagen_cloudinary == 'sin_foto.jpeg'
                 ? 'notproduct-image-res'
                 : ''
             "
@@ -64,14 +64,16 @@
               :style="`border-color: ${
                 settingByTemplate &&
                 settingByTemplate.color_primario &&
-                categoria.id == idCategory
+                category.id == idCategory
                   ? settingByTemplate.color_primario
                   : '#25D366'
               };`"
               class="txt-category"
-              :class="categoria.id == idCategory ? 'active-tag' : 'disable-tag'"
+              :class="
+                category.id == categorySelect ? 'active-tag' : 'disable-tag'
+              "
             >
-              {{ categoria.nombre_categoria_producto }}
+              {{ category.nombreCategoriaProducto }}
             </p>
           </div>
         </div>
@@ -93,19 +95,19 @@
     >
       <div class="itens-slide-categories">
         <div
-          v-for="(subcategorys, index) in selectedSubcategories"
+          v-for="(subcategory, index) in selectedSubcategories"
           :key="index"
           class="wrapper-img-text"
-          @click="SendSubCategory(subcategorys.id)"
+          @click="setToQueryFilter('subcategories', subcategory)"
         >
           <img
             v-lazy="
-              subcategorys.imagen_cloudinary == null
+              subcategory.imagen_cloudinary == null
                 ? 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649367838/2659360_s1ap5f.png'
-                : idCloudinary(subcategorys.imagen_cloudinary, 150, 150)
+                : idCloudinary(subcategory.imagen_cloudinary, 150, 150)
             "
             :class="
-              subcategorys.imagen_cloudinary == 'sin_foto.jpeg'
+              subcategory.imagen_cloudinary == 'sin_foto.jpeg'
                 ? 'notproduct-image-res'
                 : ''
             "
@@ -117,16 +119,18 @@
               :style="`border-color: ${
                 settingByTemplate &&
                 settingByTemplate.color_primario &&
-                subcategorys.id == idSubCategory
+                subcategory.id == idSubCategory
                   ? settingByTemplate.color_primario
                   : '#25D366'
               };`"
               class="txt-category"
               :class="
-                subcategorys.id == idSubCategory ? 'active-tag' : 'disable-tag'
+                subcategory.id == subCategorySelect
+                  ? 'active-tag'
+                  : 'disable-tag'
               "
             >
-              {{ subcategorys.nombre_subcategoria }}
+              {{ subcategory.nombreSubcategoria }}
             </p>
           </div>
         </div>
@@ -135,7 +139,8 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
+import { mapState } from 'vuex'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'CategorySlideWa',
   mixins: [idCloudinary],
@@ -151,43 +156,125 @@ export default {
   },
   data() {
     return {
-      selectSubcategory: '',
-      nameCategory: '',
-      nameSubCategory: '',
-      selectedSubcategories: [],
-      toggleCategories: true,
       idCategory: '',
-      idSubCategory: '',
+      categorySelect: '',
+      subCategorySelect: '',
+      selectedSubcategories: [],
+      query: {
+        page: 1,
+        category: null,
+        subcategory: null,
+      },
     }
   },
   computed: {
-    categorias() {
-      return this.dataStore.categorias
-    },
-    subcategories() {
-      return this.dataStore.subcategorias
-    },
-    product() {
-      return this.$store.getters['products/allProduct']
-    },
-    stateWapiME() {
-      return this.$store.state.stateWapiME
-    },
+    ...mapState(['categorias', 'stateWapiME']),
+    ...mapState({
+      subcategories: (state) => state.subcategorias,
+    }),
+  },
+  mounted() {
+    this.getInformationFromQuery()
   },
   methods: {
-    SendSubCategory(value) {
-      this.updateRouteAndFilters(value, 'subcategory')
+    setToQueryFilter(type, value) {
+      if (type === 'category') {
+        this.query.subcategory = null
+        this.subCategorySelect = null
+        this.query.category = value.nombreCategoriaProducto || null
+        this.categorySelect = value.id
+        this.idCategory = value.id
+        this.selectedSubcategories = this.subcategories.filter(
+          (item) => item.categoria === value.id
+        )
+        this.$store.commit(
+          'products/SET_CATEGORY_PRODUCTO',
+          value.nombreCategoriaProducto
+        )
+        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
+      } else if (type === 'subcategories') {
+        this.categorias.filter((item) => {
+          if (item.id === value.categoria) {
+            this.query.category = item.nombreCategoriaProducto
+          }
+        })
+        this.$store.commit(
+          'products/SET_CATEGORY_PRODUCTO',
+          this.query.category
+        )
+        this.$store.commit(
+          'products/SET_SUBCATEGORY_PRODUCTO',
+          value.nombreSubcategoria || null
+        )
+        this.query.subcategory = value.id || null
+        this.subCategorySelect = value.id
+        this.idCategory = value.id
+        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
+      }
+      this.$store.commit('SET_STATE_BANNER', false)
+      this.setInformationFromQuery(this.query)
     },
-    sendCategory(value, categoria) {
-      this.updateRouteAndFilters(
-        value.nombre_categoria_producto,
-        'category',
-        categoria
-      )
+
+    async setInformationFromQuery({ page, category, subcategory }) {
+      const query = {}
+
+      if (page !== null && page !== undefined) query.page = page
+      if (category !== null) query.category = category
+      if (subcategory !== null) query.subcategory = subcategory
+
+      try {
+        await this.$router.push({
+          path: `${this.stateWapiME ? `/wa/${this.dataStore.id}` : '/'}`,
+          query,
+        })
+      } catch (error) {
+        console.error('Error navigating:', error)
+      }
     },
-    clear() {
-      this.resetRouteAndFilters()
-      this.$emit('clear')
+    async getInformationFromQuery() {
+      const query = this.$route.query
+
+      this.query.category = query.category || null
+      this.query.subcategory = query.subcategory || null
+
+      if (this.query.category || this.query.subcategory) {
+        this.setData(this.query)
+      }
+    },
+    setData(value) {
+      if (value.category) {
+        this.categorias.filter((item) => {
+          if (item.nombreCategoriaProducto === value.category) {
+            this.categorySelect = item.id
+            this.idCategory = item.id
+          }
+        })
+        this.selectedSubcategories = this.subcategories.filter(
+          (item) => item.categoria === this.idCategory
+        )
+      }
+
+      this.subCategorySelect = value.subcategory ?? ''
+
+      this.$store.commit('SET_STATE_BANNER', false)
+    },
+    clearFilters() {
+      this.query = {
+        page: 1,
+        category: null,
+        subcategory: null,
+      }
+      this.idCategory = ''
+      this.categorySelect = ''
+      this.subCategorySelect = ''
+      this.$router.push({
+        path: `${this.stateWapiME ? `/wa/${this.dataStore.id}` : '/'}`,
+        query: '',
+      })
+      this.$store.commit('products/SET_CATEGORY_PRODUCTO', null)
+      this.$store.commit('products/SET_SUBCATEGORY_PRODUCTO', null)
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
+      this.$store.commit('SET_STATE_BANNER', true)
     },
     scrollLeft(value) {
       this.scrollSwiperSlide(value, -300)
@@ -195,75 +282,10 @@ export default {
     scrollRight(value) {
       this.scrollSwiperSlide(value, 300)
     },
-    updateRouteAndFilters(value, filterType, categoryId = null) {
-      if (this.stateWapiME) {
-        this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
-      } else {
-        this.$router.push(`/`)
-      }
-      this.$store.commit('SET_STATE_BANNER', false)
-      if (filterType === 'subcategory') {
-        this.idSubCategory = value
-        const subCategory = this.subcategories.find(
-          (element) => element.id === value
-        )
-        const category = this.categorias.find(
-          (element) => element.id === subCategory.categoria
-        )
-        this.$store.commit(
-          'SET_CATEGORY_PRODUCTO',
-          category.nombre_categoria_producto
-        )
-        this.nameSubCategory = subCategory.nombre_subcategoria
-        this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
-      } else if (filterType === 'category') {
-        this.idCategory = categoryId
-        this.nameCategory = value
-        this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
-        this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-        this.selectedSubcategories = this.subcategories.filter(
-          (subcategory) => subcategory.categoria === categoryId
-        )
-      }
-      this.updateRouteQuery(filterType, value)
-      this.$store.commit('products/FILTER_BY', {
-        type: [filterType],
-        data: value,
-      })
-      this.$store.commit('SET_PREVIOUS_PAGE', 1)
-    },
-    resetRouteAndFilters() {
-      this.idCategory = ''
-      this.idSubCategory = ''
-      this.selectedSubcategories = ''
-      this.$store.commit('SET_STATE_BANNER', true)
-      this.$router.push({
-        path: '',
-        query: {},
-      })
-      if (this.stateWapiME) {
-        this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
-      } else {
-        this.$router.push(`/`)
-      }
-      this.$store.commit('products/FILTER_BY', {
-        type: ['all'],
-        data: '',
-      })
-    },
     scrollSwiperSlide(value, scrollAmount) {
       const elementId =
         value === 1 ? 'swiper-slide-categories' : 'swiper-slide-subcategories'
       document.getElementById(elementId).scrollLeft += scrollAmount
-    },
-    updateRouteQuery(filterType, value) {
-      const query = {}
-      if (filterType === 'subcategory') {
-        query.subcategory = `${this.nameSubCategory}^${value}`
-      } else if (filterType === 'category') {
-        query.category = this.nameCategory
-      }
-      this.$router.push({ query })
     },
   },
 }

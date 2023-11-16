@@ -5,20 +5,14 @@
       settingKBlog,
       settingGeneral,
       {
-        '--font-style-2':
-          settingGeneral && settingGeneral.fount_2
-            ? settingGeneral.fount_2
-            : 'Great Vibes',
+        '--font-style-2': settingGeneral?.fount_2 ?? 'Great Vibes',
       },
       {
-        '--font-style-3':
-          settingGeneral && settingGeneral.fount_3
-            ? settingGeneral.fount_3
-            : 'Lora',
+        '--font-style-3': settingGeneral?.fount_3 ?? 'Lora',
       },
     ]"
   >
-    <div class="separador-blog" v-if="!settingKCarousel.visible"></div>
+    <div v-if="!settingKCarousel.visible" class="separador-blog"></div>
     <div v-if="settingKBlog" class="wrapper-items-content">
       <div class="wrapper-content-items">
         <div class="wrapper-items-text">
@@ -40,51 +34,54 @@
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper">
           <div
-            v-for="(article, index) in filteredList"
+            v-for="article in listBlogs"
             :key="article.id"
-            :class="`swiper-slide wrapper-${index + 1}`"
+            class="swiper-slide"
           >
-            <Kblog
+            <KBlog
               :article="article"
-              :settingKBlog="settingKBlog"
-              :settingGeneral="settingGeneral"
+              :setting-k-blog="settingKBlog"
+              :setting-general="settingGeneral"
             />
           </div>
         </div>
-        <div class="swiper-button-prev" v-if="filteredList.length > 3" />
-        <div class="swiper-button-next" v-if="filteredList.length > 3" />
+        <div v-if="listBlogs.length > 3" class="swiper-button-prev"></div>
+        <div v-if="listBlogs.length > 3" class="swiper-button-next"></div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import Kblog from '../template7/_blog/blogcard'
 export default {
   name: 'K07Blog',
   components: {
-    Kblog,
+    KBlog: () => import('./_blog/K07BlogCard.vue'),
   },
   props: {
-    dataStore: Object,
-    settingKBlog: Object,
-    settingGeneral: Object,
-    settingKCarousel: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingKBlog: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    settingKCarousel: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
+      listBlogs: [],
       swiperOption: {
         slidesPerView: 'auto',
-        loop: true,
         spaceBetween: 20,
         breakpoints: {
-          10000: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-          2560: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
           1920: {
             slidesPerView: 3,
             spaceBetween: 20,
@@ -93,7 +90,7 @@ export default {
             slidesPerView: 2,
             spaceBetween: 30,
           },
-          580: {
+          320: {
             slidesPerView: 1,
             spaceBetween: 10,
           },
@@ -113,30 +110,22 @@ export default {
     swiper() {
       return this.$refs.mySwiper.swiper
     },
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-    filterArticles() {
-      const initial = this.currentPage * 12 - 12
-      const final = initial + 12
-      return this.filteredList.slice(initial, final)
-    },
-    filteredList() {
-      if (this.search) {
-        return this.listArticulos.filter((element) => {
-          return element.titulo
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
-        })
-      } else {
-        return this.listArticulos
+  },
+  mounted() {
+    this.getBlogs()
+  },
+  methods: {
+    async getBlogs() {
+      const { success, data } = await this.$store.dispatch('GET_ARTICLES', {
+        id_tienda: this.dataStore.id,
+        limit: 6,
+        page: 1,
+      })
+      if (success) {
+        this.listBlogs = data.data
       }
     },
   },
-  mounted() {
-    this.mySwiper.slideTo(3, 1000, false)
-  },
-  watch: {},
 }
 </script>
 <style scoped>

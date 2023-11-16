@@ -15,7 +15,7 @@
         >
           <div class="content-logo-name">
             <nuxt-link
-              :to="stateWapiME ? `/wa/${dataStore.tienda.id_tienda}/` : `/`"
+              :to="stateWapiME ? `/wa/${dataStore.id}/` : `/`"
               class="data-item-logo"
               :class="
                 settingByTemplate.logo_cuadrado == 1
@@ -30,26 +30,23 @@
                     ? `imagen-cuadrado`
                     : `imagen-redondo`
                 "
-                :src="`${$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+                :src="`${$store.state.urlKomercia}/logos/${dataStore.logo}`"
                 alt="logo-Store"
               />
             </nuxt-link>
             <div class="data-item-name">
               <p class="name-store">
-                {{ dataStore.tienda.nombre }}
+                {{ dataStore.nombre }}
               </p>
               <p
+                v-if="settingByTemplate?.mensaje_principal"
                 class="category-store"
-                v-if="settingByTemplate && settingByTemplate.mensaje_principal"
               >
                 {{ settingByTemplate.mensaje_principal }}
               </p>
             </div>
           </div>
-          <div
-            class="content-seeMore"
-            v-if="settingByTemplate && settingByTemplate.descripcion"
-          >
+          <div v-if="settingByTemplate?.descripcion" class="content-seeMore">
             <p
               v-if="!showInfoStore"
               class="txt-seeMore"
@@ -62,13 +59,13 @@
             </p>
             <div>
               <Flechadown-icon
-                class="svg-arrow"
                 v-if="!showInfoStore"
+                class="svg-arrow"
                 @click="showInfoStore = true"
               />
               <FlechaUp-icon
-                class="svg-arrow"
                 v-else
+                class="svg-arrow"
                 @click="showInfoStore = false"
               />
             </div>
@@ -76,34 +73,31 @@
         </div>
       </div>
     </div>
-    <div class="content-infoStore" v-if="showInfoStore">
-      <div v-if="settingByTemplate && settingByTemplate.descripcion">
+    <div v-if="showInfoStore" class="content-infoStore">
+      <div v-if="settingByTemplate?.descripcion">
         <p class="txt-direccion">
           {{ settingByTemplate.descripcion }}
         </p>
       </div>
     </div>
-    <KoOrderWa :dataStore="dataStore" :stateOrderWapi="true" />
+    <KoOrderWa :data-store="dataStore" :state-order-wapi="true" />
   </div>
 </template>
 <script>
-import KoOrderWa from '../_order1/order1.vue'
-import idCloudinaryBanner from '../../../mixins/idCloudinary'
+import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
   name: 'HeaderWa3',
-  components: { KoOrderWa },
-  props: {
-    dataStore: Object,
-    settingByTemplate: Object,
-  },
+  components: { KoOrderWa: () => import('../_order1/order1.vue') },
   mixins: [idCloudinaryBanner],
-  mounted() {
-    if (this.settingByTemplate && this.settingByTemplate.banner) {
-      this.bannerUrl = this.settingByTemplate.banner
-    } else {
-      this.bannerUrl =
-        'https://www.kellyservices.pl/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcTFlIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c649985d042e87fdb30660e80b7dd19a010450b2/banner-default.jpg'
-    }
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -113,27 +107,27 @@ export default {
         {
           nombre: 'Facebook',
           icon: 'facebook-icon',
-          link: this.dataStore.tienda.red_facebook,
+          link: this.dataStore.redes.facebook,
         },
         {
           nombre: 'Twitter',
           icon: 'twitter-icon',
-          link: this.dataStore.tienda.red_twitter,
+          link: this.dataStore.redes.twitter,
         },
         {
           nombre: 'Instagram',
           icon: 'instagram-icon',
-          link: this.dataStore.tienda.red_instagram,
+          link: this.dataStore.redes.instagram,
         },
         {
           nombre: 'Youtube',
           icon: 'youtube-icon',
-          link: this.dataStore.tienda.red_youtube,
+          link: this.dataStore.redes.youtube,
         },
         {
           nombre: 'Tiktok',
           icon: 'tiktok-icon',
-          link: this.dataStore.tienda.red_tiktok,
+          link: this.dataStore.redes.tiktok,
         },
       ],
     }
@@ -148,12 +142,20 @@ export default {
   },
   watch: {
     'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-      this.links[4].link = this.dataStore.tienda.red_tiktok
+      this.links[0].link = this.dataStore.redes.facebook
+      this.links[1].link = this.dataStore.redes.twitter
+      this.links[2].link = this.dataStore.redes.instagram
+      this.links[3].link = this.dataStore.redes.youtube
+      this.links[4].link = this.dataStore.redes.tiktok
     },
+  },
+  mounted() {
+    if (this.settingByTemplate?.banner) {
+      this.bannerUrl = this.settingByTemplate.banner
+    } else {
+      this.bannerUrl =
+        'https://www.kellyservices.pl/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcTFlIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c649985d042e87fdb30660e80b7dd19a010450b2/banner-default.jpg'
+    }
   },
 }
 </script>

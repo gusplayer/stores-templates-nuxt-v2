@@ -1,77 +1,63 @@
 <template>
-  <div v-if="dataProductFavorite.length" class="wrapper-ProductFavoritos">
-    <div class="content-title-ProductFavoritos">
-      <p class="title-ProductFavoritos">{{ $t('home_destacados') }}</p>
+  <div
+    v-if="listProducts.length"
+    class="w-full flex justify-center items-center box-border pt-20 color-bg"
+  >
+    <div
+      class="w-full max-w-[1300px] px-10 py-20 flex flex-col justify-center items-start"
+    >
+      <p class="bg-transparent text-18 font-bold p-10 color-title">
+        {{ $t('home_destacados') }}
+      </p>
+      <KoSwiper :products="listProducts" />
     </div>
-    <KoSwipper :products="dataProductFavorite" />
   </div>
 </template>
 
 <script>
-import KoSwipper from './_productofavorito/productSlide'
 export default {
   name: 'Ko5ProductFavoritos',
   components: {
-    KoSwipper,
+    KoSwiper: () => import('./_product-favorite/product-slide.vue'),
   },
-  computed: {
-    dataProductFavorite() {
-      return this.$store.state.products.fullProducts.filter(
-        (product) => product.favorito === 1
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      listProducts: [],
+    }
+  },
+  mounted() {
+    this.getProducts()
+  },
+  methods: {
+    async getProducts() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_ALL_PRODUCTS',
+        {
+          id_tienda: this.dataStore.id,
+          limit: 10,
+          page: 1,
+          promotion: 1,
+        }
       )
+      if (success) {
+        this.listProducts = data.publicProductList
+      }
     },
   },
 }
 </script>
 
 <style scoped>
-.wrapper-ProductFavoritos {
-  display: flex;
-  width: 100%;
+.color-bg {
   background-color: var(--background_color_2);
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  padding-top: 20px;
 }
-.swiper-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  max-width: 1300px;
-  padding: 10px 20px;
-  z-index: 1;
-}
-.content-title-ProductFavoritos {
-  width: 100%;
-  max-width: 1300px;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-.title-ProductFavoritos {
-  background: transparent;
-  font-size: 18px;
-  font-weight: bold;
-  line-height: 1.4;
+.color-title {
   color: var(--color_subtext);
-  cursor: pointer;
-}
-@media (max-width: 770px) {
-  .swiper-container {
-    padding: 20px 8px;
-  }
-  .content-title-ProductFavoritos {
-    padding: 10px 10px;
-  }
-}
-@media (max-width: 380px) {
-  .swiper-container {
-    padding: 20px 5px;
-  }
 }
 </style>

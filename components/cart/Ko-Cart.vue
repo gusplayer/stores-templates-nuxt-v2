@@ -67,8 +67,8 @@
                         {{
                           product.precio
                             | currency(
-                              dataStore.tienda.codigo_pais,
-                              dataStore.tienda.moneda
+                              dataStore.tiendasInfo.paises.codigo,
+                              dataStore.tiendasInfo.moneda
                             )
                         }}
                       </p>
@@ -127,8 +127,8 @@
                     {{
                       (product.precio * product.cantidad)
                         | currency(
-                          dataStore.tienda.codigo_pais,
-                          dataStore.tienda.moneda
+                          dataStore.tiendasInfo.paises.codigo,
+                          dataStore.tiendasInfo.moneda
                         )
                     }}
                   </p>
@@ -140,8 +140,8 @@
                     {{
                       (product.precio * product.cantidad)
                         | currency(
-                          dataStore.tienda.codigo_pais,
-                          dataStore.tienda.moneda
+                          dataStore.tiendasInfo.paises.codigo,
+                          dataStore.tiendasInfo.moneda
                         )
                     }}
                   </p>
@@ -189,8 +189,8 @@
                 {{
                   discountDescuentos
                     | currency(
-                      dataStore.tienda.codigo_pais,
-                      dataStore.tienda.moneda
+                      dataStore.tiendasInfo.paises.codigo,
+                      dataStore.tiendasInfo.moneda
                     )
                 }}
               </p>
@@ -230,8 +230,8 @@
                             {{
                               ciudad.price
                                 | currency(
-                                  dataStore.tienda.codigo_pais,
-                                  dataStore.tienda.moneda
+                                  dataStore.tiendasInfo.paises.codigo,
+                                  dataStore.tiendasInfo.moneda
                                 )
                             }}
                           </p>
@@ -257,10 +257,10 @@
                   <div class="content-list">
                     <p class="txt_summary_price">
                       {{
-                        rangosByCiudades.valor
+                        rangosByCiudad.valor
                           | currency(
-                            dataStore.tienda.codigo_pais,
-                            dataStore.tienda.moneda
+                            dataStore.tiendasInfo.paises.codigo,
+                            dataStore.tiendasInfo.moneda
                           )
                       }}
                     </p>
@@ -284,8 +284,8 @@
                       {{
                         shippingTarifaPrecio
                           | currency(
-                            dataStore.tienda.codigo_pais,
-                            dataStore.tienda.moneda
+                            dataStore.tiendasInfo.paises.codigo,
+                            dataStore.tiendasInfo.moneda
                           )
                       }}
                     </p>
@@ -307,8 +307,8 @@
                   {{
                     shipping
                       | currency(
-                        dataStore.tienda.codigo_pais,
-                        dataStore.tienda.moneda
+                        dataStore.tiendasInfo.paises.codigo,
+                        dataStore.tiendasInfo.moneda
                       )
                   }}
                 </p>
@@ -331,8 +331,8 @@
                     {{
                       0
                         | currency(
-                          dataStore.tienda.codigo_pais,
-                          dataStore.tienda.moneda
+                          dataStore.tiendasInfo.paises.codigo,
+                          dataStore.tiendasInfo.moneda
                         )
                     }}
                   </p> -->
@@ -377,8 +377,8 @@
                 {{
                   totalCart
                     | currency(
-                      dataStore.tienda.codigo_pais,
-                      dataStore.tienda.moneda
+                      dataStore.tiendasInfo.paises.codigo,
+                      dataStore.tiendasInfo.moneda
                     )
                 }}
               </p>
@@ -400,8 +400,8 @@
                         : 0) -
                       discountDescuentos)
                       | currency(
-                        dataStore.tienda.codigo_pais,
-                        dataStore.tienda.moneda
+                        dataStore.tiendasInfo.paises.codigo,
+                        dataStore.tiendasInfo.moneda
                       )
                   }}
                 </p>
@@ -412,7 +412,7 @@
               >
                 {{ $t('footer_contactoMgs') }}
               </p>
-              <p v-if="dataStore.tienda.estado == 0" class="Quotation-message">
+              <p v-if="dataStore.estado == 0" class="Quotation-message">
                 {{ $t('footer_tiendaCerrada') }}
               </p>
               <!-- <p class="Quotation-message" v-if="!stateModalPwd">
@@ -427,10 +427,10 @@
               >
                 {{ $t('cart_minimovalorProductos1') }}
                 {{
-                  dataStore.tienda.minimo_compra
+                  dataStore.tiendasInfo.valorCompraMinimo
                     | currency(
-                      dataStore.tienda.codigo_pais,
-                      dataStore.tienda.moneda
+                      dataStore.tiendasInfo.paises.codigo,
+                      dataStore.tiendasInfo.moneda
                     )
                 }}
                 {{ $t('cart_minimovalorProductos2') }}
@@ -440,11 +440,11 @@
                 v-if="
                   productsCart.length &&
                   !isQuotation() &&
-                  dataStore.tienda.estado == 1 &&
+                  dataStore.estado == 1 &&
                   !estadoShippingTarifaPrecio &&
                   countryStore &&
                   IsMinValorTotal() &&
-                  expiredDate(dataStore.tienda.fecha_expiracion)
+                  expiredDate(dataStore.fechaExpiracion)
                 "
                 ref="colorBtn"
                 class="btn-buy-1"
@@ -473,18 +473,18 @@
         {{ $t('footer_carritoVacio3') }}
       </p>
       <nuxt-link :to="`${redirectCart}`">
-        <button ref="colorBtn" class="btn3">
+        <p ref="colorBtn" class="btn3">
           {{ $t('cart_agregarProductos') }}
-        </button>
+        </p>
       </nuxt-link>
     </div>
   </div>
 </template>
 
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
-import currency from '../../mixins/formatCurrent'
-import expiredDate from '../../mixins/expiredDate'
+import idCloudinary from '@/mixins/idCloudinary'
+import currency from '@/mixins/formatCurrent'
+import expiredDate from '@/mixins/expiredDate'
 // import { Empty } from 'element-ui'
 export default {
   name: 'KoCartG',
@@ -507,10 +507,10 @@ export default {
   data() {
     return {
       // img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
-      envioProducto: '',
-      layoutLogin: true,
+      // envioProducto: '',
+      // layoutLogin: true,
       shippingCities: [],
-      rangosByCiudades: [],
+      // rangosByCiudad: [],
       shippingTarifaPrecio: '',
       estadoShippingTarifaPrecio: false,
       FreeShippingCart: false,
@@ -551,105 +551,46 @@ export default {
       return resultURl
     },
     getFreeShipping() {
-      let free = true
-      if (this.rangosByCiudad.envio_metodo === 'gratis') {
-        free = false
-      }
-      if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
-        free = false
-      }
-      if (this.rangosByCiudad.envio_metodo === 'tarifa_plana') {
-        free = true
-      }
-      if (this.rangosByCiudad.envio_metodo === 'precio') {
-        free = true
-      }
-      if (this.rangosByCiudad.envio_metodo === 'sintarifa') {
-        free = false
-      }
-      if (this.rangosByCiudad.envio_metodo === 'sinEnvio') {
-        free = false
-      }
-      return free
+      const freeMethods = ['tarifa_plana', 'precio']
+      return freeMethods.includes(this.rangosByCiudad.envio_metodo)
     },
     rangosByCiudad() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
-      return this.rangosByCiudades
+      return this.$store.state.envios.valores
     },
     shipping() {
+      // if (this.FreeShippingCart || !this.$store.state?.envios?.estado) {
+
       if (this.FreeShippingCart) {
         return 0
-      } else {
-        if (this.$store.state.envios.estado) {
-          let shipping = JSON.parse(this.$store.state.envios.valores)
-          switch (shipping.envio_metodo) {
-            case 'sinEnvio':
-              return 0
-              // eslint-disable-next-line no-unreachable
-              break
-            case 'sintarifa':
-              return 0
-              // eslint-disable-next-line no-unreachable
-              break
-            case 'gratis':
-              return 0
-              // eslint-disable-next-line no-unreachable
-              break
-            case 'tarifa_plana':
-              return shipping.valor
-              // eslint-disable-next-line no-unreachable
-              break
-            case 'precio_ciudad':
-              // eslint-disable-next-line no-case-declarations
-              let result = shipping.rangos.find((rango) => {
-                if (
-                  this.totalCart >= rango.inicial &&
-                  this.totalCart <= rango.final
-                ) {
-                  return rango
-                }
-              })
-              if (result) {
-                return result.precio
-              } else {
-                return 0
-              }
-              // eslint-disable-next-line no-unreachable
-              break
-            default:
-              return 0
-          }
-        } else {
+      }
+
+      switch (this.rangosByCiudad.envio_metodo) {
+        case 'sinEnvio':
+        case 'sintarifa':
+        case 'gratis':
           return 0
-        }
+        case 'tarifa_plana':
+          return this.rangosByCiudad.valor
+        case 'precio_ciudad':
+          // eslint-disable-next-line no-case-declarations
+          const result = this.rangosByCiudad.rangos.find((rango) => {
+            return (
+              this.totalCart >= rango.inicial && this.totalCart <= rango.final
+            )
+          })
+          return result ? result.precio : 0
+        default:
+          return 0
       }
     },
     countryStore() {
-      if (this.dataStore && this.dataStore.tienda.pais) {
-        switch (this.dataStore.tienda.pais) {
-          case 'Colombia':
-            return true
-            // eslint-disable-next-line no-unreachable
-            break
-          case 'Chile':
-            return true
-            // eslint-disable-next-line no-unreachable
-            break
-          case 'Perú':
-            return true
-            // eslint-disable-next-line no-unreachable
-            break
-          case 'Panamá':
-            return true
-            // eslint-disable-next-line no-unreachable
-            break
-          default:
-            return false
-        }
-      } else {
-        return false
+      if (this.dataStore && this.dataStore.tiendasInfo.paises.pais) {
+        const supportedCountries = ['Colombia', 'Chile', 'Perú', 'Panamá']
+        return supportedCountries.includes(
+          this.dataStore.tiendasInfo.paises.pais
+        )
       }
+      return false
     },
     productsCart() {
       return this.$store.state.productsCart
@@ -693,7 +634,7 @@ export default {
     this.$store.dispatch('GET_DESCUENTOS')
     this.$store.dispatch('GET_SHOPPING_CART')
     this.$store.commit('CALCULATE_TOTAL_CART')
-    if (this.rangosByCiudades.envio_metodo == 'precio') {
+    if (this.rangosByCiudad.envio_metodo == 'precio') {
       this.shippingPrecio()
     }
     this.productsFreeShippingCart()
@@ -720,8 +661,8 @@ export default {
       return 0
     },
     shippingPrecio() {
-      if (this.rangosByCiudades.envio_metodo === 'precio') {
-        const result = this.rangosByCiudades.rangos.find(
+      if (this.rangosByCiudad.envio_metodo === 'precio') {
+        const result = this.rangosByCiudad.rangos.find(
           (rango) =>
             this.totalCart >= rango.inicial && this.totalCart <= rango.final
         )
@@ -748,17 +689,38 @@ export default {
         product.cantidad = product.limitQuantity
       }
     },
+    addQuantity(product) {
+      if (product.limitQuantity > product.cantidad) {
+        product.cantidad++
+        this.$store.commit('UPDATE_CONTENT_CART')
+        this.$store.commit('CALCULATE_TOTAL_CART')
+        this.$store.dispatch('VERIFY_PRODUCTS')
+      }
+    },
     removeQuantity(product) {
       if (product.cantidad >= 2) {
         product.cantidad--
-        this.updateCartAndVerify()
+        this.$store.commit('UPDATE_CONTENT_CART')
+        this.$store.commit('CALCULATE_TOTAL_CART')
+        this.$store.dispatch('VERIFY_PRODUCTS')
       }
     },
     deleteItemCart(i) {
-      this.$store.state.productsCart.splice(i, 1)
-      this.updateCartAndVerify()
+      this.$store.commit('DELETEITEMCART', i)
+      this.$store.commit('UPDATE_CONTENT_CART')
+      this.$store.dispatch('VERIFY_PRODUCTS')
+    },
+    removeCartItems() {
+      this.remove = false
+      location.reload(true)
+      this.$store.commit('DELETE_ALL_ITEMS_CART')
+      this.$store.commit('UPDATE_CONTENT_CART')
+      this.$store.dispatch('VERIFY_PRODUCTS')
     },
     canChangeQuantity(product) {
+      this.$store.commit('DELETE_ALL_ITEMS_CART')
+      this.$store.commit('UPDATE_CONTENT_CART')
+      this.$store.dispatch('VERIFY_PRODUCTS')
       return product.limitQuantity > product.cantidad
     },
     updateCartAndVerify() {
@@ -801,22 +763,9 @@ export default {
     },
     async getCities() {
       if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
-        try {
-          const storeCities = JSON.parse(localStorage.getItem('storeCities'))
-          if (storeCities) {
-            this.$store.commit('SET_CITIES', storeCities)
-            this.filterCities()
-          } else {
-            const { success } = await this.$store.dispatch('GET_CITIES')
-            if (success) {
-              this.filterCities()
-            }
-          }
-        } catch (err) {
-          const { success } = await this.$store.dispatch('GET_CITIES')
-          if (success) {
-            this.filterCities()
-          }
+        const { success } = await this.$store.dispatch('GET_CITIES')
+        if (success) {
+          this.filterCities()
         }
       }
     },
@@ -836,8 +785,8 @@ export default {
     },
     IsMinValorTotal() {
       if (
-        !this.dataStore.tienda.minimo_compra ||
-        this.dataStore.tienda.minimo_compra === 0
+        !this.dataStore.tiendasInfo.valorCompraMinimo ||
+        this.dataStore.tiendasInfo.valorCompraMinimo === 0
       ) {
         return true
       }
@@ -861,7 +810,7 @@ export default {
             ? this.shippingDescuento2.precio
             : 0))
 
-      return totalWithShipping >= this.dataStore.tienda.minimo_compra
+      return totalWithShipping >= this.dataStore.tiendasInfo.valorCompraMinimo
     },
     productsFreeShippingCart() {
       if (this.productsCart) {

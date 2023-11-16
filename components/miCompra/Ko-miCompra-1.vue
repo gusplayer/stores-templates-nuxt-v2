@@ -506,25 +506,25 @@
                   </p>
                   <p class="address">
                     {{ $t('mcompra_direccion') }}
-                    <span
-                      v-if="dataStore.geolocalizacion.length"
-                      class="value-data"
-                    >
-                      {{ dataStore.geolocalizacion[0].direccion }}
+                    <span v-if="geolocalizacion.length" class="value-data">
+                      {{ geolocalizacion[0].direccion }}
                     </span>
                     <span v-else class="value-data">N/A</span>
                   </p>
                   <p class="telephone">
                     {{ $t('mcompra_telefono') }}
-                    <span v-if="dataStore.tienda.telefono" class="value-data">
-                      {{ dataStore.tienda.telefono }}
+                    <span
+                      v-if="dataStore.tiendasInfo.telefono"
+                      class="value-data"
+                    >
+                      {{ dataStore.tiendasInfo.telefono }}
                     </span>
                     <span v-else class="value-data">N/A</span>
                   </p>
                   <p class="owner">
                     {{ $t('mcompra_nombreTienda') }}
-                    <span v-if="dataStore.tienda.nombre" class="value-data">
-                      {{ dataStore.tienda.nombre }}
+                    <span v-if="dataStore.nombre" class="value-data">
+                      {{ dataStore.nombre }}
                     </span>
                     <span v-else class="value-data">N/A</span>
                   </p>
@@ -575,9 +575,10 @@
 
 <script>
 import axios from 'axios'
-import idCloudinary from '../../mixins/idCloudinary'
-import currency from '../../mixins/formatCurrent'
-import states from '../../mixins/states'
+import idCloudinary from '@/mixins/idCloudinary'
+import currency from '@/mixins/formatCurrent'
+import states from '@/mixins/states'
+import { mapState } from 'vuex'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   name: 'KomiCompraG',
@@ -625,9 +626,10 @@ export default {
     }
   },
   computed: {
-    dataHoko() {
-      return this.$store.state.dataHoko
-    },
+    ...mapState(['geolocalizacion', 'dataHoko', 'cities']),
+    ...mapState({
+      facebookPixel: (state) => state.analytics_tagmanager,
+    }),
     choicePayment() {
       return this.payments.find(
         (payment) => payment.id === this.orden.venta.metodo_pago
@@ -637,12 +639,6 @@ export default {
       return this.statusUpdate.find(
         (payment) => payment.id === this.orden.venta.estado
       )
-    },
-    cities() {
-      return this.$store.state.cities
-    },
-    facebookPixel() {
-      return this.$store.state.analytics_tagmanager
     },
   },
   watch: {
@@ -704,16 +700,7 @@ export default {
       }
       this.setUser()
       this.setTransportadora()
-      try {
-        const storeCities = JSON.parse(localStorage.getItem('storeCities'))
-        if (storeCities) {
-          this.$store.commit('SET_CITIES', storeCities)
-        } else {
-          this.$store.dispatch('GET_CITIES')
-        }
-      } catch (err) {
-        this.$store.dispatch('GET_CITIES')
-      }
+      this.$store.dispatch('GET_CITIES')
     }
   },
   destroyed() {
@@ -798,7 +785,7 @@ export default {
             this.$router.replace({ query: {} })
             return axios
               .get(
-                `${this.$store.state.urlKomercia}/api/orden/${this.dataStore.tienda.id_tienda}/${this.numOrden}`,
+                `${this.$store.state.urlKomercia}/api/orden/${this.dataStore.id}/${this.numOrden}`,
                 {
                   headers: {
                     'content-type': 'application/json',
@@ -848,7 +835,7 @@ export default {
           content_ids: array,
           contents: content,
           value: this.orden.venta.total,
-          currency: this.dataStore.tienda.moneda,
+          currency: this.dataStore.tiendasInfo.moneda,
           description: `Orden: ${this.numOrden}, Estado de la venta: ${this.choiceState.ref}`,
         })
       }
@@ -856,7 +843,7 @@ export default {
     setCity() {
       if (this.cities) {
         this.city = this.cities.find(
-          (city) => city.id === this.dataStore.tienda.ciudad
+          (city) => city.id === this.dataStore.ciudad
         )
       }
     },

@@ -12,113 +12,72 @@
         },
       ]"
     >
-      <div class="wrapper-content-items">
+      <div
+        v-for="(item, index) in information.values"
+        :key="index"
+        class="wrapper-content-items"
+      >
         <img
-          v-lazy="idCloudinary(information.values[0].url_img, 150, 150)"
+          v-lazy="idCloudinary(item.url_img, 150, 150)"
           alt="imgInfo1"
           class="contentImg"
         />
         <p
           class="text-title"
-          :style="`color: ${information.values[0].colorTitle}; font-weight: ${information.values[0].fontWeighTitle};`"
+          :style="`color: ${item.colorTitle}; font-weight: ${item.fontWeighTitle};`"
         >
-          {{ information.values[0].title }}
+          {{ item.title }}
         </p>
         <p
           class="text-description"
-          :style="`color: ${information.values[0].colorDescription}; font-weight: ${information.values[0].fontWeighPretitle};`"
+          :style="`color: ${item.colorDescription}; font-weight: ${item.fontWeighPretitle};`"
         >
-          {{ information.values[0].description }}
+          {{ item.description }}
         </p>
-        <a
-          v-if="information.values[0].visbleBtn"
-          :href="
-            information.values[0].url_redirect
-              ? information.values[0].url_redirect
-              : ''
-          "
-          class="btn"
-          :style="`color: ${information.values[0].colorBtn};`"
-          rel="noreferrer noopener"
-        >
-          {{ information.values[0].textBtn }}
-        </a>
-      </div>
-      <div class="wrapper-content-items">
-        <img
-          v-lazy="idCloudinary(information.values[1].url_img, 150, 150)"
-          alt="imgInfo2"
-          class="contentImg"
-        />
-        <p
-          class="text-title"
-          :style="`color: ${information.values[1].colorTitle}; font-weight: ${information.values[1].fontWeighTitle};`"
-        >
-          {{ information.values[1].title }}
-        </p>
-        <p
-          class="text-description"
-          :style="`color: ${information.values[1].colorDescription}; font-weight: ${information.values[1].fontWeighPretitle};`"
-        >
-          {{ information.values[1].description }}
-        </p>
-        <a
-          v-if="information.values[1].visbleBtn"
-          :href="
-            information.values[1].url_redirect
-              ? information.values[1].url_redirect
-              : ''
-          "
-          class="btn"
-          :style="`color: ${information.values[1].colorBtn};`"
-          rel="noreferrer noopener"
-        >
-          {{ information.values[1].textBtn }}
-        </a>
-      </div>
-      <div class="wrapper-content-items">
-        <img
-          v-lazy="idCloudinary(information.values[2].url_img, 150, 150)"
-          alt="imgInfo3"
-          class="contentImg"
-        />
-        <p
-          class="text-title"
-          :style="`color: ${information.values[2].colorTitle}; font-weight: ${information.values[2].fontWeighTitle};`"
-        >
-          {{ information.values[2].title }}
-        </p>
-        <p
-          class="text-description"
-          :style="`color: ${information.values[2].colorDescription}; font-weight: ${information.values[2].fontWeighPretitle};`"
-        >
-          {{ information.values[2].description }}
-        </p>
-        <a
-          v-if="information.values[2].visbleBtn"
-          :href="
-            information.values[2].url_redirect
-              ? information.values[2].url_redirect
-              : ''
-          "
-          class="btn"
-          :style="`color: ${information.values[2].colorBtn};`"
-          rel="noreferrer noopener"
-        >
-          {{ information.values[2].textBtn }}
-        </a>
+        <template v-if="isInternalUrl(item.url_redirect)">
+          <nuxt-link
+            v-if="item.visbleBtn"
+            :to="item.url_redirect ? item.url_redirect : ''"
+            class="btn"
+            :style="`color: ${item.colorBtn};`"
+          >
+            {{ item.textBtn }}
+          </nuxt-link>
+        </template>
+        <template v-else>
+          <a
+            v-if="item.visbleBtn"
+            :href="item.url_redirect ? item.url_redirect : ''"
+            class="btn"
+            :style="`color: ${item.colorBtn};`"
+            rel="noreferrer noopener"
+          >
+            {{ item.textBtn }}
+          </a>
+        </template>
       </div>
     </div>
   </div>
 </template>
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko13-Information',
+  name: 'Ko13Information',
   mixins: [idCloudinary],
   props: {
-    information: Object,
-    settingGeneral: Object,
+    information: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+  },
+  methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
+    },
   },
 }
 </script>

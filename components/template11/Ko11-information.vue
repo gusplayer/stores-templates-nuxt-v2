@@ -1,150 +1,88 @@
 <template>
-  <div class="content-section" :style="[settingKinformation, settingGeneral]">
-    <div
-      class="content-wrapper"
-      :style="[
-        {
-          '--font-style-1':
-            this.settingGeneral && this.settingGeneral.fount_1
-              ? this.settingGeneral.fount_1
-              : 'Roboto',
-        },
-      ]"
-    >
+  <div
+    class="content-section"
+    :style="[
+      settingKinformation,
+      settingGeneral,
+      {
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
+      },
+    ]"
+  >
+    <div class="content-wrapper">
       <div
-        class="wrapper-content-items"
-        :style="`border-color: ${
-          settingKinformation.values[0].visibleBorder
-            ? settingKinformation.values[0].colorBorder
-            : none
-        }; background:${settingKinformation.values[0].color_bg}; `"
+        v-for="(item, index) in settingKinformation.values"
+        :key="index"
+        class="w-full h-full"
       >
-        <img
-          v-lazy="
-            idCloudinary(settingKinformation.values[0].url_img_Top, 550, 550)
-          "
-          alt="imgInfo1"
-          class="contentimg"
-        />
-        <p
-          class="text-title"
-          :style="`color: ${settingKinformation.values[0].colorTitle}; font-weight: ${settingKinformation.values[0].fontWeighTitle};`"
+        <div
+          class="wrapper-content-items"
+          :style="`border-color: ${
+            item.visibleBorder ? item.colorBorder : none
+          }; background:${item.color_bg}; `"
         >
-          {{ settingKinformation.values[0].title }}
-        </p>
-        <p
-          class="text-description"
-          :style="`color: ${settingKinformation.values[0].colorDescription}; font-weight: ${settingKinformation.values[0].fontWeighPretitle};`"
-        >
-          {{ settingKinformation.values[0].description }}
-        </p>
-        <a
-          v-if="settingKinformation.values[0].visbleBtn"
-          :href="
-            settingKinformation.values[0].url_redirect
-              ? settingKinformation.values[0].url_redirect
-              : ''
-          "
-          class="btn"
-          :style="`color: ${settingKinformation.values[0].colorBtn};`"
-          rel="noreferrer noopener"
-        >
-          {{ settingKinformation.values[0].textBtn }}
-        </a>
-      </div>
-      <div
-        class="wrapper-content-items"
-        :style="`border-color: ${
-          settingKinformation.values[1].visibleBorder
-            ? settingKinformation.values[1].colorBorder
-            : none
-        }; background:${settingKinformation.values[1].color_bg}; `"
-      >
-        <img
-          v-lazy="
-            idCloudinary(settingKinformation.values[1].url_img_Top, 550, 550)
-          "
-          alt="imgInfo2"
-          class="contentimg"
-        />
-        <p
-          class="text-title"
-          :style="`color: ${settingKinformation.values[1].colorTitle}; font-weight: ${settingKinformation.values[1].fontWeighTitle};`"
-        >
-          {{ settingKinformation.values[1].title }}
-        </p>
-        <p
-          class="text-description"
-          :style="`color: ${settingKinformation.values[1].colorDescription}; font-weight: ${settingKinformation.values[1].fontWeighPretitle};`"
-        >
-          {{ settingKinformation.values[1].description }}
-        </p>
-        <a
-          v-if="settingKinformation.values[1].visbleBtn"
-          :href="
-            settingKinformation.values[1].url_redirect
-              ? settingKinformation.values[1].url_redirect
-              : ''
-          "
-          class="btn"
-          :style="`color: ${settingKinformation.values[1].colorBtn};`"
-          rel="noreferrer noopener"
-        >
-          {{ settingKinformation.values[1].textBtn }}
-        </a>
-      </div>
-      <div
-        class="wrapper-content-items"
-        :style="`border-color: ${
-          settingKinformation.values[2].visibleBorder
-            ? settingKinformation.values[2].colorBorder
-            : none
-        }; background:${settingKinformation.values[2].color_bg}; `"
-      >
-        <img
-          v-lazy="
-            idCloudinary(settingKinformation.values[2].url_img_Top, 550, 550)
-          "
-          alt="imgInfo3"
-          class="contentimg"
-        />
-        <p
-          class="text-title"
-          :style="`color: ${settingKinformation.values[2].colorTitle}; font-weight: ${settingKinformation.values[2].fontWeighTitle};`"
-        >
-          {{ settingKinformation.values[2].title }}
-        </p>
-        <p
-          class="text-description"
-          :style="`color: ${settingKinformation.values[2].colorDescription}; font-weight: ${settingKinformation.values[2].fontWeighPretitle};`"
-        >
-          {{ settingKinformation.values[2].description }}
-        </p>
-        <a
-          v-if="settingKinformation.values[2].visbleBtn"
-          :href="
-            settingKinformation.values[2].url_redirect
-              ? settingKinformation.values[2].url_redirect
-              : ''
-          "
-          class="btn"
-          :style="`color: ${settingKinformation.values[2].colorBtn};`"
-          rel="noreferrer noopener"
-        >
-          {{ settingKinformation.values[2].textBtn }}
-        </a>
+          <img
+            v-lazy="idCloudinary(item.url_img_Top, 550, 550)"
+            class="contentimg"
+            :alt="`imgInfo${index}`"
+          />
+          <p
+            class="text-title"
+            :style="`color: ${item.colorTitle}; font-weight: ${item.fontWeighTitle};`"
+          >
+            {{ item.title }}
+          </p>
+          <p
+            class="text-description"
+            :style="`color: ${item.colorDescription}; font-weight: ${item.fontWeighPretitle};`"
+          >
+            {{ item.description }}
+          </p>
+          <template v-if="isInternalUrl(item.url_redirect)">
+            <nuxt-link
+              v-if="item.visbleBtn"
+              :to="item.url_redirect ? item.url_redirect : ''"
+              class="btn"
+              :style="`color: ${item.colorBtn};`"
+            >
+              {{ item.textBtn }}
+            </nuxt-link>
+          </template>
+          <template v-else>
+            <a
+              v-if="item.visbleBtn"
+              :href="item.url_redirect ? item.url_redirect : ''"
+              class="btn"
+              :style="`color: ${item.colorBtn};`"
+              rel="noreferrer noopener"
+            >
+              {{ item.textBtn }}
+            </a>
+          </template>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
+  name: 'Ko11Information',
   mixins: [idCloudinary],
-  name: 'Ko11-information',
   props: {
-    settingKinformation: Object,
-    settingGeneral: Object,
+    settingKinformation: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+  },
+  methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
+    },
   },
 }
 </script>

@@ -6,12 +6,12 @@
         <nuxt />
         <component :is="footerTemplate" v-bind="componentsProps" />
         <KoFooterCountry
-          v-if="dataStore.tienda.template != 99"
+          v-if="dataStore.template != 99"
           :data-store="dataStore"
           :value-wa="false"
         />
         <div
-          v-if="dataStore.tienda.whatsapp"
+          v-if="dataStore.redes.whatsapp"
           class="wrapper-whatsapp"
           @click="redirectWhatsApp()"
         >
@@ -20,14 +20,13 @@
             WhatsApp
             <br />
             <small>
-              {{ dataStore.tienda.whatsapp }}
+              {{ dataStore.redes.whatsapp }}
             </small>
           </span>
         </div>
         <div
           v-if="
-            dataStore.tienda.estado == 0 ||
-            !expiredDate(dataStore.tienda.fecha_expiracion)
+            dataStore.estado == 0 || !expiredDate(dataStore.fechaExpiracion)
           "
           id="modalNotificacion"
           class="w-full h-screen fixed top-0 flex justify-center items-center z-100"
@@ -35,7 +34,7 @@
           <div
             class="w-full h-screen top-0 absolute backdrop-blur"
             style="background-color: rgba(0, 0, 0, 0.767)"
-          />
+          ></div>
           <div
             class="w-full py-20 px-30 flex flex-col justify-center items-center bg-white-white rounded-10 shadow-md z-100"
             style="max-width: 250px"
@@ -48,14 +47,14 @@
               Disculpa, no podrá realizar compras por el momento,
             </p>
             <p
-              v-if="expiredDate(dataStore.tienda.fecha_expiracion)"
+              v-if="expiredDate(dataStore.fechaExpiracion)"
               class="font-bold text-17 mt-15"
               style="color: #ff314d"
             >
               ¿Deseas continuar?
             </p>
             <button
-              v-if="expiredDate(dataStore.tienda.fecha_expiracion)"
+              v-if="expiredDate(dataStore.fechaExpiracion)"
               class="w-full py-4 mt-15 text-base rounded-10 bg-black text-white-white hover:bg-slate-300 hover:text-black transition ease-in-out delay-75"
               @click="acceptClose()"
             >
@@ -74,54 +73,52 @@
 <script>
 import { mapState } from 'vuex'
 import expiredDate from '@/mixins/expiredDate'
+import mobileCheck from '@/mixins/mobileCheck'
 export default {
   name: 'LayoutDefault',
   components: {
     // HEADER
-    KoHeader1: () => import('../components/headers/header1/Ko-Header-1.vue'),
-    // KoHeader2: () => import('../components/headers/header2/Ko-Header-2.vue'),
-    KoHeader3: () => import('../components/headers/header3/Ko-Header-3.vue'),
-    KoHeader4: () => import('../components/headers/header4/Ko-Header-4.vue'),
-    KoHeader5: () => import('../components/headers/header5/Ko-Header-5.vue'),
-    KoHeader6: () => import('../components/headers/header6/Ko-Header-6.vue'),
-    KoHeader7: () => import('../components/headers/header7/Ko-Header-7.vue'),
-    KoHeader8: () => import('../components/headers/header8/Ko-Header-8.vue'),
-    KoHeader9: () => import('../components/headers/header9/Ko-Header-9.vue'),
+    KoHeader1: () => import('@/components/headers/k05_header/Ko-Header-1.vue'),
+    KoHeader4: () => import('@/components/headers/k07_header/Ko-Header-4.vue'),
+    KoHeader5: () => import('@/components/headers/k09_header/Ko-Header-5.vue'),
+    KoHeader6: () => import('@/components/headers/k10_header/Ko-Header-6.vue'),
+    KoHeader7: () => import('@/components/headers/k11_header/Ko-Header-7.vue'),
+    KoHeader8: () => import('@/components/headers/k13_header/Ko-Header-8.vue'),
+    KoHeader9: () => import('@/components/headers/k14_header/Ko-Header-9.vue'),
     KoHeader10: () =>
-      import('../components/headers/Ko15_header/Ko-Header-10.vue'),
+      import('@/components/headers/k15_header/Ko-Header-10.vue'),
     KoHeader11: () =>
-      import('../components/headers/Ko16_header/Ko-Header-11.vue'),
+      import('@/components/headers/k16_header/Ko-Header-11.vue'),
     // FOOTER
-    KoFooter1: () => import('../components/footers/footer1/Ko-Footer-1.vue'),
-    // KoFooter2: () => import('../components/footers/footer2/Ko-Footer-2.vue'),
-    KoFooter4: () => import('../components/footers/footer4/Ko-Footer-4.vue'),
-    KoFooter5: () => import('../components/footers/footer5/Ko-Footer-5.vue'),
-    KoFooter6: () => import('../components/footers/footer6/Ko-Footer-6.vue'),
-    KoFooter7: () => import('../components/footers/footer7/Ko-Footer-7.vue'),
-    KoFooter8: () => import('../components/footers/footer8/Ko-Footer-8.vue'),
-    KoFooter9: () =>
-      import('../components/footers/K14_footer9/Ko-Footer-9.vue'),
+    KoFooter1: () => import('@/components/footers/k05_footer/Ko-Footer-1.vue'),
+    // KoFooter2: () => import('@/components/footers/footer2/Ko-Footer-2.vue'),
+    KoFooter4: () => import('@/components/footers/k07_footer/Ko-Footer-4.vue'),
+    KoFooter5: () => import('@/components/footers/k09_footer/Ko-Footer-5.vue'),
+    KoFooter6: () => import('@/components/footers/k10_footer/Ko-Footer-6.vue'),
+    KoFooter7: () => import('@/components/footers/k11_footer/Ko-Footer-7.vue'),
+    KoFooter8: () => import('@/components/footers/k13_footer/Ko-Footer-8.vue'),
+    KoFooter9: () => import('@/components/footers/k14_footer/Ko-Footer-9.vue'),
     KoFooter10: () =>
-      import('../components/footers/K15_footer10/Ko-Footer-10.vue'),
+      import('@/components/footers/k15_footer/Ko-Footer-10.vue'),
     KoFooter11: () =>
-      import('../components/footers/K16_footer11/Ko-Footer-11.vue'),
+      import('@/components/footers/k16_footer/Ko-Footer-11.vue'),
     // OTROS
     KoFooterCountry: () =>
-      import('../components/footers/footer1/Ko-Footer-Country.vue'),
-    koTiendaCerrada: () => import('../assets/img/tiendaCerrada.vue'),
-    koTiendaError: () => import('../components/Ko-errorStore.vue'),
-    koModalSecurity: () => import('../components/modal/Ko-modal-security.vue'),
-    koWhatsApp: () => import('../components/whatsapp/Ko-whatsApp.vue'),
+      import('@/components/footers/k_country/Ko-Footer-Country.vue'),
+    koTiendaCerrada: () => import('@/assets/img/tiendaCerrada.vue'),
+    koTiendaError: () => import('@/components/Ko-errorStore.vue'),
+    koModalSecurity: () => import('@/components/modal/Ko-modal-security.vue'),
+    koWhatsApp: () => import('@/assets/Ko-whatsApp.vue'),
   },
-  mixins: [expiredDate],
+  mixins: [expiredDate, mobileCheck],
   data() {
     return {
       headerComponentMap: {
         3: 'KoHeader1',
         5: 'KoHeader1',
-        // 6: 'KoHeader2',
+        // 6: 'KoHeader1',
         7: 'KoHeader4',
-        8: 'KoHeader3',
+        // 8: 'KoHeader1',
         9: 'KoHeader5',
         10: 'KoHeader6',
         11: 'KoHeader7',
@@ -133,9 +130,9 @@ export default {
       footerComponentMap: {
         3: 'KoFooter1',
         5: 'KoFooter1',
-        // 6: 'KoFooter2',
+        // 6: 'KoFooter1',
         7: 'KoFooter4',
-        8: 'KoFooter1',
+        // 8: 'KoFooter1',
         9: 'KoFooter5',
         10: 'KoFooter6',
         11: 'KoFooter7',
@@ -147,13 +144,14 @@ export default {
     }
   },
   head() {
-    let tienda = this.$store.state?.dataStore?.tienda ?? ''
+    let tienda = this.dataStore ?? ''
     let tidio = this.analytics_tagmanager?.tidio_user ?? ''
     let FacebookPixel1 =
       this.analytics_tagmanager?.facebook_pixel_metatag_1 ?? ''
     let googleMerchants = this.analytics_tagmanager?.google_merchant ?? ''
-    let geolocation = this.$store.state.dataStore.geolocalizacion
-    let description = tienda?.descripcion?.replace(/<[^>]*>?/g, '') ?? ''
+    let geolocation = this.geolocalizacion
+    let description =
+      tienda?.tiendasInfo?.descripcion?.replace(/<[^>]*>?/g, '') ?? ''
     let tipo_letra, tipo_letra2, tipo_letra3
 
     // Mapeo de las opciones de tipo de letra para cada template
@@ -271,26 +269,30 @@ export default {
           name: 'og:description',
           content: description ? description : 'Tienda Online',
         },
-        { hid: 'og:email', name: 'og:email', content: tienda.email_tienda },
+        {
+          hid: 'og:email',
+          name: 'og:email',
+          content: tienda.tiendasInfo.emailTienda,
+        },
         {
           hid: 'og:phone_number',
           name: 'og:phone_number',
-          content: `${tienda.telefono}`,
+          content: `${tienda.tiendasInfo.telefono}`,
         },
         {
           hid: 'og:latitude',
           name: 'og:latitude',
-          content: geolocation?.latitud ?? '',
+          content: geolocation[0]?.latitud ?? '',
         },
         {
           hid: 'og:longitude',
           name: 'og:longitude',
-          content: geolocation?.longitud ?? '',
+          content: geolocation[0]?.longitud ?? '',
         },
         {
           hid: 'og:street-address',
           name: 'og:street-address',
-          content: geolocation?.direccion ?? '',
+          content: geolocation[0]?.direccion ?? '',
         },
         {
           name: 'facebook-domain-verification',
@@ -366,8 +368,9 @@ export default {
     ...mapState([
       'template',
       'dataStore',
-      'dataCookies',
+      // 'dataCookies',
       'settingBase',
+      'geolocalizacion',
       'settingByTemplate',
       'settingByTemplate7',
       'settingByTemplate9',
@@ -457,8 +460,8 @@ export default {
                 setting14General:
                   this.settingByTemplate14?.settingsGeneral ?? null,
                 pages: this.settingByTemplate14?.pages ?? null,
-                // listProductsFilter:
-                //   this.settingByTemplate14?.listProductsFilter ?? null,
+                listProductsFilter:
+                  this.settingByTemplate14?.listProductsFilter ?? null,
               },
             ]
           : null,
@@ -471,8 +474,8 @@ export default {
                 settingGeneral:
                   this.settingByTemplate15?.settingGeneral ?? null,
                 pages: this.settingByTemplate15?.pageHeader ?? null,
-                // listProductsFilter:
-                //   this.settingByTemplate15?.listProductsFilter ?? null,
+                listProductsFilter:
+                  this.settingByTemplate15?.listProductsFilter ?? null,
               },
             ]
           : null,
@@ -485,6 +488,8 @@ export default {
                 settingGeneral:
                   this.settingByTemplate16?.settingsGeneral ?? null,
                 pages: this.settingByTemplate16?.pageHeader ?? null,
+                listProductsFilter:
+                  this.settingByTemplate16?.listProductsFilter ?? null,
               },
             ]
           : null,
@@ -500,7 +505,7 @@ export default {
     },
   },
   beforeMount() {
-    if (this.dataStore.tienda.dominio) {
+    if (this.dataStore.tiendasInfo.dominio) {
       caches.keys().then(function (names) {
         for (let name of names) caches.delete(name)
       })
@@ -540,26 +545,8 @@ export default {
     window.removeEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
-    mobileCheck() {
-      window.mobilecheck = function () {
-        var check = false
-        ;(function (a) {
-          if (
-            /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
-              a
-            ) ||
-            /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
-              a.substr(0, 4)
-            )
-          )
-            check = true
-        })(navigator.userAgent || navigator.vendor || window.opera)
-        return check
-      }
-      return window.mobilecheck()
-    },
     redirectWhatsApp() {
-      let phone_number_whatsapp = this.dataStore.tienda.whatsapp
+      let phone_number_whatsapp = this.dataStore.redes.whatsapp
       if (phone_number_whatsapp.charAt(0) === '+') {
         phone_number_whatsapp = phone_number_whatsapp.slice(1)
       } else {
@@ -576,11 +563,10 @@ export default {
       window.open(whatsappUrl, '_blank')
     },
     constructMessageText() {
-      const tienda = this.dataStore.tienda
-      const nombre = encodeURIComponent(tienda.nombre)
+      const nombre = encodeURIComponent(this.dataStore.nombre)
       const url = encodeURIComponent(window.location)
 
-      switch (tienda.lenguaje) {
+      switch (this.dataStore.tiendasInfo.lenguaje) {
         case 'en':
           return `Hi%2C%20I%20came%20from%20your%20online%20store%20${nombre}%20and%20I%20would%20like%20to%20receive%20more%20information.%20%0AURL%3A%20${url}`
         case 'pt':

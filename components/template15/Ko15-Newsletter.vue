@@ -49,7 +49,7 @@
             </template>
           </ValidationProvider>
           <div class="flex justify-center mt-6">
-            <input type="checkbox" id="checkbox" v-model="checked" />
+            <input id="checkbox" v-model="checked" type="checkbox" />
             <p
               class="ml-6 text-12"
               :style="`color: ${settingByTemplate15[0].newsletter.color_text};`"
@@ -91,16 +91,21 @@
 import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko14-Newsletter',
-  props: {
-    dataStore: Object,
-    settingByTemplate15: Array,
-  },
+  name: 'Ko14Newsletter',
   components: {
     ValidationObserver,
     ValidationProvider,
   },
-  mounted() {},
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate15: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       errorsCheckbox: 'El campo checkbox y email son obligatorios',
@@ -110,13 +115,13 @@ export default {
       stateChehed: false,
     }
   },
-  destroyed() {
-    this.email = ''
-  },
   computed: {
     facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
+  },
+  destroyed() {
+    this.email = ''
   },
   methods: {
     submitNewsletter() {
@@ -127,7 +132,7 @@ export default {
             if (response.valid) {
               const json = {
                 email: this.email,
-                tienda: this.dataStore.tienda.id_tienda,
+                tienda: this.dataStore.id,
               }
               axios
                 .post(

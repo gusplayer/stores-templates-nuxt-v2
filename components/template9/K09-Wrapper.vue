@@ -3,10 +3,7 @@
     <div
       :style="[
         {
-          '--font-style-1':
-            settingGeneral && settingGeneral.fount_1
-              ? settingGeneral.fount_1
-              : 'Poppins',
+          '--font-style-1': settingGeneral?.fount_1 ?? 'Poppins',
         },
       ]"
     >
@@ -39,7 +36,7 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'K09Wrapper',
   mixins: [idCloudinary],

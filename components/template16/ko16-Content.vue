@@ -6,114 +6,48 @@
     <div
       class="w-full max-w-[1200px] grid grid-cols-1 md:grid-cols-3 gap-x-5 md:gap-x-4 items-center justify-center"
     >
-      <a
-        class="w-full"
-        :href="content.values[0]?.url_redirect ?? ''"
-        rel="noreferrer noopener"
+      <div
+        v-for="(item, index) in content.values"
+        :key="index"
+        class="w-full h-full"
       >
-        <div class="wrapper-left">
-          <img
-            v-lazy="idCloudinaryBanner(content.values[0].img, 'banner')"
-            class="img-left max-w-[377px] max-h-[230px]"
-            :style="`border-radius: ${settingGeneral?.radius};`"
-            alt="imagen-1"
-          />
-          <div
-            class="absolute w-full h-full flex flex-col justify-center items-start pl-30 md:pl-20 lg:pl-30 pr-10"
-          >
-            <p
-              class="text-16 md:text-18 lg:text-20 max-w-[180px] mb-15 leading-tight"
-              :style="`color: ${content.values[0].color_title}; font-weight: ${content.values[0].fontWeighTitle};`"
+        <a
+          class="w-full"
+          :href="item?.url_redirect ?? ''"
+          rel="noreferrer noopener"
+        >
+          <div class="wrapper-items">
+            <img
+              v-lazy="idCloudinaryBanner(item.img, 'banner')"
+              class="img-item max-w-[377px] max-h-[230px]"
+              :style="`border-radius: ${settingGeneral?.radius};`"
+              alt="imagen-1"
+            />
+            <div
+              class="absolute w-full h-full flex flex-col justify-center items-start pl-30 md:pl-20 lg:pl-30 pr-10"
             >
-              {{ content.values[0].title.replace(/&nbsp;/g, ' ') }}
-            </p>
-            <p
-              class="text-13 md:text-14"
-              :style="`color: ${content.values[0].color_text}; font-weight: ${content.values[0].fontWeighText};`"
-            >
-              {{ content.values[0].subTitle.replace(/&nbsp;/g, ' ') }}
-              <span
-                class="text-16 md:text-18 lg:text-20"
-                :style="`color: ${content.values[0].color_price}; font-weight: ${content.values[0].fontWeighPrice};`"
+              <p
+                class="text-16 md:text-18 lg:text-20 max-w-[180px] mb-15 leading-tight"
+                :style="`color: ${item.color_title}; font-weight: ${item.fontWeighTitle};`"
               >
-                {{ content.values[0].price.replace(/&nbsp;/g, ' ') }}
-              </span>
-            </p>
-          </div>
-        </div>
-      </a>
-      <a
-        class="w-full"
-        :href="content.values[1]?.url_redirect ?? ''"
-        rel="noreferrer noopener"
-      >
-        <div class="wrapper-left">
-          <img
-            v-lazy="idCloudinaryBanner(content.values[1].img, 'banner')"
-            class="img-left max-w-[377px] max-h-[230px]"
-            :style="`border-radius: ${settingGeneral?.radius};`"
-            alt="imagen-1"
-          />
-          <div
-            class="absolute w-full h-full flex flex-col justify-center items-start pl-30 md:pl-20 lg:pl-30 pr-10"
-          >
-            <p
-              class="text-16 md:text-18 lg:text-20 max-w-[180px] mb-15 leading-tight"
-              :style="`color: ${content.values[1].color_title}; font-weight: ${content.values[1].fontWeighTitle};`"
-            >
-              {{ content.values[1].title.replace(/&nbsp;/g, ' ') }}
-            </p>
-            <p
-              class="text-13 md:text-14"
-              :style="`color: ${content.values[1].color_text}; font-weight: ${content.values[1].fontWeighText};`"
-            >
-              {{ content.values[1].subTitle.replace(/&nbsp;/g, ' ') }}
-              <span
-                class="text-16 md:text-18 lg:text-20"
-                :style="`color: ${content.values[1].color_price}; font-weight: ${content.values[1].fontWeighPrice};`"
+                {{ item.title.replace(/&nbsp;/g, ' ') }}
+              </p>
+              <p
+                class="text-13 md:text-14"
+                :style="`color: ${item.color_text}; font-weight: ${item.fontWeighText};`"
               >
-                {{ content.values[1].price.replace(/&nbsp;/g, ' ') }}
-              </span>
-            </p>
+                {{ item.subTitle.replace(/&nbsp;/g, ' ') }}
+                <span
+                  class="text-16 md:text-18 lg:text-20"
+                  :style="`color: ${item.color_price}; font-weight: ${item.fontWeighPrice};`"
+                >
+                  {{ item.price.replace(/&nbsp;/g, ' ') }}
+                </span>
+              </p>
+            </div>
           </div>
-        </div>
-      </a>
-      <a
-        class="w-full"
-        :href="content.values[2]?.url_redirect ?? ''"
-        rel="noreferrer noopener"
-      >
-        <div class="wrapper-left">
-          <img
-            v-lazy="idCloudinaryBanner(content.values[2].img, 'banner')"
-            class="img-left max-w-[377px] max-h-[230px]"
-            :style="`border-radius: ${settingGeneral?.radius};`"
-            alt="imagen-1"
-          />
-          <div
-            class="absolute w-full h-full flex flex-col justify-center items-start pl-30 md:pl-20 lg:pl-30 pr-10"
-          >
-            <p
-              class="text-16 md:text-18 lg:text-20 max-w-[180px] mb-15 leading-tight"
-              :style="`color: ${content.values[2].color_title}; font-weight: ${content.values[2].fontWeighTitle};`"
-            >
-              {{ content.values[2].title.replace(/&nbsp;/g, ' ') }}
-            </p>
-            <p
-              class="text-13 md:text-14"
-              :style="`color: ${content.values[2].color_text}; font-weight: ${content.values[2].fontWeighText};`"
-            >
-              {{ content.values[2].subTitle.replace(/&nbsp;/g, ' ') }}
-              <span
-                class="text-16 md:text-18 lg:text-20"
-                :style="`color: ${content.values[2].color_price}; font-weight: ${content.values[2].fontWeighPrice};`"
-              >
-                {{ content.values[2].price.replace(/&nbsp;/g, ' ') }}
-              </span>
-            </p>
-          </div>
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -139,31 +73,16 @@ export default {
 }
 </script>
 <style scoped>
-.wrapper-left,
-.wrapper-center,
-.wrapper-right {
+.wrapper-items {
   @apply w-full h-auto relative flex justify-start cursor-pointer overflow-hidden;
   -webkit-transition: all 600ms ease 0s;
 }
-.img-left,
-.img-center,
-.img-right {
+
+.img-item {
   @apply w-full object-cover overflow-hidden;
   -webkit-transition: all 600ms ease 0s;
 }
-.wrapper-left:hover .img-left {
-  @apply relative overflow-hidden;
-  -webkit-transition: all 600ms ease 0s;
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
-.wrapper-center:hover .img-center {
-  @apply relative overflow-hidden;
-  -webkit-transition: all 600ms ease 0s;
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
-.wrapper-right:hover .img-right {
+.wrapper-items:hover .img-item {
   @apply relative overflow-hidden;
   -webkit-transition: all 600ms ease 0s;
   -webkit-transform: scale(1.1);

@@ -1,12 +1,8 @@
 /* eslint-disable no-undef */
 export default ({ store }) => {
-  let pixel_facebook =
-    store.state.analytics_tagmanager != null &&
-    store.state.analytics_tagmanager.pixel_facebook
-      ? store.state.analytics_tagmanager.pixel_facebook
-      : ''
+  const pixelFacebook = store.state.analytics_tagmanager?.pixel_facebook
 
-  if (process.browser && pixel_facebook) {
+  if (process.browser && pixelFacebook) {
     !(function (f, b, e, v, n, t, s) {
       if (f.fbq) return
       n = f.fbq = function () {
@@ -30,16 +26,8 @@ export default ({ store }) => {
       'script',
       'https://connect.facebook.net/en_US/fbevents.js'
     )
-    fbq('set', 'autoConfig', false, pixel_facebook)
+    fbq('set', 'autoConfig', false, pixelFacebook)
     //Insert Your Facebook Pixel ID below.
-    fbq('init', pixel_facebook)
-    // fbq('track', 'PageView')
-    // fbq('init', pixel_facebook)
-    // eslint-disable-next-line no-unused-vars
-    // app.router.afterEach((to, from) => {
-    //   fbq('track', 'PageView', {
-    //     description: 'StoreKomercia',
-    //   })
-    // })
+    fbq('init', pixelFacebook)
   }
 }

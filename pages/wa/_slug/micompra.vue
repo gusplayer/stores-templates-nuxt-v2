@@ -11,7 +11,7 @@
 
 <script>
 import axios from 'axios'
-import KoMiCompra from '../../../components/whatsapp/Ko-miCompra-1.vue'
+import KoMiCompra from '@/components/whatsapp/Ko-miCompra-1.vue'
 
 export default {
   name: 'MiCompraWa',
@@ -45,7 +45,7 @@ export default {
       if (this.$route.query.orden) {
         return axios
           .get(
-            `${this.$store.state.urlKomercia}/api/orden/${this.dataStore.tienda.id_tienda}/${this.$route.query.orden}`,
+            `${this.$store.state.urlKomercia}/api/orden/${this.dataStore.id}/${this.$route.query.orden}`,
             {
               headers: {
                 'content-type': 'application/json',

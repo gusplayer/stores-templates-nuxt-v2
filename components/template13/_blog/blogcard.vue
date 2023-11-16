@@ -13,8 +13,8 @@
           <div class="content-imge">
             <img
               v-if="article.imagen_principal_url"
+              v-lazy="idCloudinary(article.imagen_principal_url, 550, 550)"
               class="images"
-              v-lazy="idCloudinary(this.article.imagen_principal_url, 550, 550)"
               alt="right-banner"
             />
             <div v-else class="empty"></div>
@@ -28,10 +28,10 @@
         <div class="overlay-top">
           <div class="text-tittle">
             <p class="txt-day">
-              {{ this.dayCreate }}
+              {{ dayCreate }}
             </p>
             <p class="txt-month">
-              {{ this.nameMonth }}
+              {{ nameMonth }}
             </p>
           </div>
         </div>
@@ -47,13 +47,13 @@
             class="contet"
           >
             <p class="txt-article-tittle">
-              {{ this.article.titulo }}
+              {{ article.titulo }}
             </p>
           </nuxt-link>
         </div>
         <div class="content-abstract-article">
           <p class="txt-article-abstract">
-            {{ this.article.resumen }}
+            {{ article.resumen }}
           </p>
         </div>
       </div>
@@ -61,43 +61,47 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
+  name: 'Ko13BlogCard',
   mixins: [idCloudinary],
-  name: 'Ko13-BlogCard',
-  props: { article: Object },
-  mounted() {
-    if (this.article.created_at) {
-      const [shippingCreated] = this.article.created_at.split(' ')
-      const [yearCreate, monthCreate, dayCreate] = shippingCreated.split('-')
-      this.dayCreate = dayCreate
-      this.monthCreate = monthCreate
-      this.yearCreate = yearCreate
-    }
-    this.nameMonth = this.monthNames[parseInt(this.monthCreate)]
+  props: {
+    article: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
-      hover: false,
-      shippingCreated: '',
       dayCreate: '',
       monthCreate: '',
       yearCreate: '',
       nameMonth: '',
-      monthNames: {
-        1: 'Ene',
-        2: 'Feb',
-        3: 'Mar',
-        4: 'Abr',
-        5: 'May',
-        6: 'Jun',
-        7: 'Jul',
-        8: 'Ago',
-        9: 'Sep',
-        10: 'Oct',
-        11: 'Nov',
-        12: 'Dic',
-      },
+    }
+  },
+  mounted() {
+    if (this.article.updated_at) {
+      const months = [
+        'Ene',
+        'Feb',
+        'Mar',
+        'Abr',
+        'May',
+        'Jun',
+        'Jul',
+        'Ago',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dic',
+      ]
+      const fecha = new Date(this.article.updated_at)
+
+      this.yearCreate = fecha.getUTCFullYear()
+      this.monthCreate = fecha.getUTCMonth()
+      this.dayCreate = fecha.getUTCDate()
+
+      this.nameMonth = months[this.monthCreate]
     }
   },
 }

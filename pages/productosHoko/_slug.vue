@@ -30,6 +30,7 @@ export default {
   },
   computed: {
     ...mapState([
+      'envios',
       'dataStore',
       'settingBase',
       'settingByTemplate',
@@ -51,25 +52,16 @@ export default {
     dataStore() {
       return this.$store.state.dataStore
     },
-    fullProducts() {
-      return this.$store.getters['products/filterProducts']
-    },
-    whatsapp() {
-      return this.dataStore.tienda.whatsapp
-    },
-    envios() {
-      return this.dataStore.medios_envio
-    },
-    integracioneStore() {
+    integrationStore() {
       return this.$store.state.analytics_tagmanager
     },
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        productsData: this.fullProducts,
-        whatsapp: this.whatsapp,
+        // productsData: this.fullProducts,
+        whatsapp: this.dataStore.redes.whatsapp,
         envios: this.envios,
-        facebookPixel: this.integracioneStore,
+        facebookPixel: this.integrationStore,
         settingByTemplate: this.createSettingByTemplate(
           this.settingByTemplate,
           'settings',

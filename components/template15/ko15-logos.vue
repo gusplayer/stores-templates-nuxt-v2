@@ -14,22 +14,38 @@
       </p>
       <div ref="mySwiper" v-swiper:mySwiper="swiperOption" class="w-full">
         <div class="swiper-wrapper w-full">
-          <a
+          <div
             v-for="(item, index) in logos.values"
-            :id="`slide${index + 1}`"
             :key="index"
-            :href="item.url_redirect"
             class="swiper-slide w-full"
-            rel="noreferrer noopener"
           >
-            <img
-              :src="idCloudinary(item.img, 550, 550)"
-              class="h-full w-full remove_bg max-w-[150px] max-h-[150px]"
-              width="150"
-              height="150"
-              :alt="`imágenes logos${index}`"
-            />
-          </a>
+            <template v-if="isInternalUrl(item.url_redirect)">
+              <nuxt-link :to="item.url_redirect" class="w-full">
+                <img
+                  :src="idCloudinary(item.img, 550, 550)"
+                  class="h-full w-full remove_bg max-w-[150px] max-h-[150px]"
+                  width="150"
+                  height="150"
+                  :alt="`imágenes logos${index}`"
+                />
+              </nuxt-link>
+            </template>
+            <template v-else>
+              <a
+                :href="item.url_redirect"
+                class="w-full"
+                rel="noreferrer noopener"
+              >
+                <img
+                  :src="idCloudinary(item.img, 550, 550)"
+                  class="h-full w-full remove_bg max-w-[150px] max-h-[150px]"
+                  width="150"
+                  height="150"
+                  :alt="`imágenes logos${index}`"
+                />
+              </a>
+            </template>
+          </div>
         </div>
       </div>
     </div>
@@ -41,8 +57,14 @@ export default {
   name: 'Ko15Logos',
   mixins: [idCloudinary],
   props: {
-    logos: Object,
-    dataStore: Object,
+    logos: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -78,6 +100,11 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
+    },
+  },
+  methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
     },
   },
 }

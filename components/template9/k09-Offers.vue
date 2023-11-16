@@ -1,14 +1,14 @@
 <template>
-  <div class="container-offers" :style="[settingGeneral]">
-    <div
-      v-if="koffers"
-      :style="[
-        {
-          '--font-style-1': settingGeneral?.fount_1 ?? 'Poppins',
-        },
-      ]"
-      class="wrapper-items"
-    >
+  <div
+    class="container-offers"
+    :style="[
+      settingGeneral,
+      {
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Poppins',
+      },
+    ]"
+  >
+    <div v-if="koffers" class="wrapper-items">
       <div class="content-items">
         <a
           :href="`${koffers.values[0].url_redirect}`"
@@ -87,10 +87,7 @@
               alt="imagen center gift"
             />
           </div>
-          <div
-            v-if="dataStore.tienda.id_tienda === 889"
-            class="content-txt-right top-0"
-          >
+          <div v-if="dataStore.id === 889" class="content-txt-right top-0">
             <div class="right">
               <div class="container">
                 <p
@@ -221,13 +218,22 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   mixins: [idCloudinary],
   props: {
-    dataStore: Object,
-    koffers: Object,
-    settingGeneral: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    koffers: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

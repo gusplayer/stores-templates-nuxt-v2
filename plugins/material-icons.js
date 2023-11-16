@@ -16,6 +16,8 @@ import Menu from 'vue-material-design-icons/Menu.vue'
 import MenuDots from 'vue-material-design-icons/DotsVertical.vue'
 import Close from 'vue-material-design-icons/CloseCircle.vue'
 import WindowClose from 'vue-material-design-icons/WindowClose.vue'
+import Check from 'vue-material-design-icons/Check.vue'
+import Truck from 'vue-material-design-icons/Truck.vue'
 import Phone from 'vue-material-design-icons/Phone.vue'
 import Email from 'vue-material-design-icons/Email.vue'
 import Whatsapp from 'vue-material-design-icons/Whatsapp.vue'
@@ -42,6 +44,11 @@ import FilterOutline from 'vue-material-design-icons/FilterOutline.vue'
 import tiktok from '../assets/img/tiktok.vue'
 import tiktok2 from '../assets/img/tiktok2.vue'
 
+import formatListBulleted from 'vue-material-design-icons/FormatListBulleted.vue'
+import viewGrid from 'vue-material-design-icons/ViewGrid.vue'
+import apps from 'vue-material-design-icons/Apps.vue'
+import viewComfy from 'vue-material-design-icons/ViewComfy.vue'
+
 Vue.component('menu-icon', MenuIcon)
 Vue.component('account-icon', Account)
 
@@ -62,6 +69,8 @@ Vue.component('shopping-search-icon', ShoppingSearch)
 Vue.component('menu-icon', Menu)
 Vue.component('menuDots-icon', MenuDots)
 Vue.component('close-icon', Close)
+Vue.component('CheckIcon', Check)
+Vue.component('TruckIcon', Truck)
 Vue.component('window-close-icon', WindowClose)
 Vue.component('boteBasura-icon', boteBasura)
 Vue.component('search-icon', Search)
@@ -89,3 +98,8 @@ Vue.component('cloud-download-icon', CloudDownload)
 Vue.component('eye-outline-icon', EyeOutline)
 
 Vue.component('filterOutLine-icon', FilterOutline)
+
+Vue.component('IconFormatListBulleted', formatListBulleted)
+Vue.component('IconViewGrid', viewGrid)
+Vue.component('IconApps', apps)
+Vue.component('IconViewComfy', viewComfy)

@@ -29,11 +29,13 @@ import { mapState } from 'vuex'
 export default {
   name: 'TemplateWhatsApp',
   components: {
+    // header
     KoHeaderWp1: () =>
       import('@/components/headers/header_wp/Ko-Header-wa-1.vue'),
     KoHeaderWp2: () =>
       import('@/components/headers/header_wp/Ko-Header-wa-2.vue'),
     KoHeaderWp3: () =>
+      // Categories
       import('@/components/headers/header_wp/Ko-Header-wa-3.vue'),
     KCategory01: () =>
       import('@/components/whatsapp/template1/Ko-Categories-wa.vue'),
@@ -43,20 +45,21 @@ export default {
       import('@/components/whatsapp/template3/ko-slide-categorys.vue'),
     KCategory04: () =>
       import('@/components/whatsapp/categorys_img/ko-categorys-img.vue'),
+    // Product list
     KProductFavoritos: () =>
-      import('@/components/whatsapp/template1/Ko-ProductFavoritos-1.vue'),
+      import('@/components/whatsapp/Ko99-ProductFavoritos.vue'),
     KProductList: () =>
       import('@/components/whatsapp/template1/Ko-ProductList-wa.vue'),
     KProductList2: () =>
       import('@/components/whatsapp/template2/ko-productList.vue'),
     KProductList3: () =>
       import('@/components/whatsapp/template3/ko-productList.vue'),
+    // Footer
     KFooterWaLogo: () =>
-      import('@/components/footers/footerWa/footerWa1/ko-Footer-wa-logo'),
-    KFooterWa: () =>
-      import('@/components/footers/footerWa/footerWa2/ko-Footer-wa.vue'),
+      import('@/components/footers/footer_wa/ko-Footer-wa-logo'),
+    KFooterWa: () => import('@/components/footers/footer_wa/ko-Footer-wa.vue'),
     WCountry: () =>
-      import('@/components/footers/footer1/Ko-Footer-Country.vue'),
+      import('@/components/footers/k_country/Ko-Footer-Country.vue'),
   },
   layout: 'wa',
   computed: {
@@ -65,10 +68,8 @@ export default {
       'stateBanner',
       'settingByTemplate',
       'settingBaseWapi',
+      'categorias',
     ]),
-    dataStore() {
-      return this.$store.state.dataStore
-    },
     indexTema() {
       let componentTemplate = ''
       if (this.settingByTemplate?.tema) {
@@ -136,16 +137,9 @@ export default {
         return false
       }
     },
-    categorias() {
-      return this.dataStore.categorias
-    },
-    fullProducts() {
-      return this.$store.getters['products/filterProducts']
-    },
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        fullProducts: this.fullProducts,
         settingByTemplate:
           this.settingByTemplate &&
           this.settingByTemplate.tema &&

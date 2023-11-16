@@ -2,93 +2,94 @@
   <div class="wrapper-productlist">
     <div class="container-productlist">
       <div class="content-items-categorias-text">
-        <p class="text-categorias" @click="clear">Catálogo</p>
-        <p
-          v-if="nameCategoryHeader"
+        <button class="text-categorias" @click="clearFilters">Catálogo</button>
+        <button
+          v-if="nameCategory"
           class="text-categorias-select"
-          @click="breadcrumbsSendCategory(nameCategoryHeader)"
+          @click="breadcrumbsClear(1)"
         >
-          >
-          {{ nameCategoryHeader }}
-        </p>
-        <p v-if="nameSubCategoryHeader" class="text-categorias-select">
-          >
-          {{ nameSubCategoryHeader }}
-        </p>
+          <span class="font-normal pr-4">/</span>{{ nameCategory }}
+        </button>
+        <button
+          v-if="nameSubCategory"
+          class="text-categorias-select"
+          @click="breadcrumbsClear(2)"
+        >
+          <span class="font-normal pr-4">/</span>{{ nameSubCategory }}
+        </button>
       </div>
       <div class="content-item">
         <div class="wrapper-filter">
           <div class="content-sticky">
             <div
-              v-for="categoria in categorias"
-              :key="categoria.id"
+              v-for="category in categorias"
+              :key="category.id"
               class="content-categoria"
             >
-              <BaseAccordian>
+              <BaseAccordion>
                 <template v-slot:categorias>
-                  <li
+                  <p
                     class="text-categoria"
                     :class="
-                      categoria.id == indexSelect ? 'text-categoria-active' : ''
+                      category.nombreCategoriaProducto == filters.category
+                        ? 'txt-categorys-active'
+                        : ''
                     "
-                    @click="
-                      sendCategory(
-                        categoria,
-                        categoria.id,
-                        index,
-                        (ref = false)
-                      )
-                    "
+                    @click="sendCategory(category)"
                   >
-                    {{ categoria.nombre_categoria_producto }}
-                  </li>
+                    {{ category.nombreCategoriaProducto }}
+                  </p>
                 </template>
                 <template v-slot:subcategorias>
-                  <template>
-                    <div v-for="(subcategory, key) in subcategories" :key="key">
-                      <li
-                        v-if="subcategory.categoria == categoria.id"
-                        class="text-subcategoria"
-                        :class="
-                          subcategory.id == indexSelect2
-                            ? 'text-subcategoria-active'
-                            : ''
-                        "
-                        @click="SendSubCategory(subcategory.id)"
-                      >
-                        {{ subcategory.nombre_subcategoria }}
-                      </li>
-                    </div>
-                  </template>
+                  <div
+                    v-for="(subcategory, key) in selectedSubcategories"
+                    v-show="selectedSubcategories?.length"
+                    :key="key"
+                  >
+                    <p
+                      v-if="subcategory.categoria == categoria.id"
+                      class="text-subcategoria"
+                      :class="
+                        subcategory.id == filters.subcategory
+                          ? 'txt-categorys-active'
+                          : ''
+                      "
+                      @click="sendSubCategory(subcategory)"
+                    >
+                      {{ subcategory.nombreSubcategoria }}
+                    </p>
+                  </div>
                 </template>
-              </BaseAccordian>
+              </BaseAccordion>
             </div>
           </div>
         </div>
         <div class="content-item-productos">
           <div class="grid-products">
             <div
-              v-for="product in filterProduct"
+              v-for="product in listProducts"
               :key="product.id"
               class="content-products"
             >
               <KoProductCard1 :product="product" />
             </div>
           </div>
-          <div v-if="fullProducts.length == 0" class="content-products-empty">
+          <div v-if="listProducts.length == 0" class="content-products-empty">
             <p>No se encontraron productos relacionados.</p>
           </div>
-          <div class="pagination-medium">
-            <div v-if="fullProducts.length > 24" class="product_pagination">
-              <el-pagination
-                background
-                layout="prev, pager, next"
-                :total="fullProducts.length"
-                :page-size="24"
-                :current-page.sync="currentPage"
-                class="pagination"
-              />
-            </div>
+          <div
+            v-if="totalProducts > filters.limit"
+            class="mt-50 bg-transparent text-18 product_pagination"
+          >
+            <el-pagination
+              background
+              layout="prev, pager, next"
+              class="pagination bg-transparent"
+              :total="totalProducts"
+              :page-size="filters.limit"
+              :current-page.sync="previousPage"
+              @current-change="changePage"
+            />
           </div>
         </div>
       </div>
@@ -97,235 +98,19 @@
 </template>
 
 <script>
-import KoProductCard1 from '../template5/_productcard/Ko-ProductCard-1'
-import BaseAccordian from '../headers/_order1/_AccordionList'
-import filterProducts from '../../mixins/filterProducts'
+import mobileCheck from '@/mixins/mobileCheck'
+import filters from '@/mixins/filterProducts'
 export default {
   name: 'Ko5ProductList',
   components: {
-    KoProductCard1,
-    BaseAccordian,
+    BaseAccordion: () => import('../headers/_lateralMenu/_AccordionList.vue'),
+    KoProductCard1: () => import('./_productcard/Ko-ProductCard-1.vue'),
   },
-  mixins: [filterProducts],
+  mixins: [mobileCheck, filters],
   props: {
     dataStore: {
       type: Object,
       required: true,
-    },
-    fullProducts: {
-      type: Object,
-      required: true,
-    },
-  },
-  data() {
-    return {
-      search: '',
-      currentPage: 1,
-    }
-  },
-  computed: {
-    categorias() {
-      return this.dataStore.categorias
-    },
-    subcategories() {
-      return this.dataStore.subcategorias
-    },
-    getProductsCategorie() {
-      const initial = this.currentPage * 24 - 24
-      const final = initial + 24
-      return this.fullProducts
-        .filter((product) => product.categoria == this.select)
-        .slice(initial, final)
-    },
-    filterProduct() {
-      const initial = this.currentPage * 24 - 24
-      const final = initial + 24
-      return this.fullProducts.slice(initial, final)
-    },
-    selectedCategory() {
-      return this.$store.state.products.payload
-    },
-    selectedType() {
-      return this.$store.state.products.type
-    },
-    heightHeader() {
-      return this.$refs.header.offsetHeight
-    },
-    nameCategoryHeader() {
-      return this.$store.state.category_producto_header
-    },
-    nameSubCategoryHeader() {
-      return this.$store.state.subcategory_producto_header
-    },
-    searchValue() {
-      return this.$store.state.searchValue
-    },
-    previousPage() {
-      return this.$store.state.previousPage
-    },
-  },
-  watch: {
-    search(value) {
-      this.SearchProduct2(value)
-    },
-    currentPage() {
-      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
-      window.scrollBy(0, -3300)
-    },
-    previousPage() {
-      if (this.previousPage) {
-        this.currentPage = this.previousPage
-      }
-    },
-    nameCategoryHeader(value) {
-      return value
-    },
-    nameSubCategoryHeader(value) {
-      return value
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      if (this.$route.query && this.$route.query.category) {
-        this.sendCategoryUrlMix(this.$route.query.category)
-      } else if (this.$route.query && this.$route.query.subcategory) {
-        this.SendSubCategoryUrlMix(
-          this.$route.query.subcategory,
-          this.categorias,
-          this.subcategories
-        )
-      } else if (
-        this.$route.query &&
-        this.$route.query.tagId &&
-        this.$route.query.tagName
-      ) {
-        this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
-      } else if (this.$route.fullPath == '/') {
-        this.allCategories()
-      }
-    },
-    searchValue(value) {
-      this.SearchProduct2(value)
-    },
-  },
-  mounted() {
-    if (this.$route.query && this.$route.query.category) {
-      this.sendCategoryUrlMix(this.$route.query.category)
-    } else if (this.$route.query && this.$route.query.subcategory) {
-      this.SendSubCategoryUrlMix(
-        this.$route.query.subcategory,
-        this.categorias,
-        this.subcategories
-      )
-    } else if (
-      this.$route.query &&
-      this.$route.query.tagId &&
-      this.$route.query.tagName
-    ) {
-      this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
-    } else if (this.$route.fullPath == '/') {
-      this.allCategories()
-    }
-    if (this.previousPage) {
-      this.currentPage = this.previousPage
-    }
-    if (this.nameCategoryHeader && this.nameSubCategoryHeader == '') {
-      this.$store.commit('products/FILTER_BY', {
-        type: ['category'],
-        data: this.nameCategoryHeader,
-      })
-    } else if (this.nameCategoryHeader && this.nameSubCategoryHeader) {
-      let filtradoSubCategory = this.subcategories.find(
-        (element) => element.nombre_subcategoria == this.nameSubCategoryHeader
-      )
-      if (filtradoSubCategory) {
-        this.categorias.find(
-          (element) => element.id == filtradoSubCategory.categoria
-        )
-        this.$store.commit('products/FILTER_BY', {
-          type: ['subcategory'],
-          data: filtradoSubCategory.id,
-        })
-      }
-    }
-  },
-  methods: {
-    SearchProduct2(search) {
-      if (search.length) {
-        this.$store.commit('products/FILTER_BY', {
-          type: ['search'],
-          data: search,
-        })
-      } else {
-        this.$store.commit('products/FILTER_BY', {
-          type: ['all'],
-          data: '',
-        })
-      }
-      this.currentPage = 1
-    },
-    SendSubCategory(value) {
-      this.indexSelect2 = value
-
-      this.selectSubcategory = value
-      let filtradoSubCategoria = this.subcategories.find(
-        (element) => element.id == value
-      )
-      let filtradoCategories = this.categorias.find(
-        (element) => element.id == filtradoSubCategoria.categoria
-      )
-      this.$store.commit(
-        'SET_CATEGORY_PRODUCTO',
-        filtradoCategories.nombre_categoria_producto
-      )
-      this.nameSubCategory = filtradoSubCategoria.nombre_subcategoria
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
-      this.$store.commit('products/FILTER_BY', {
-        type: ['subcategory'],
-        data: value,
-      })
-    },
-    sendCategory(value, categoria, index, ref) {
-      this.indexSelect = categoria
-      this.currentPage = 1
-      this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.selectedSubcategories = []
-      this.subcategories.find((subcategoria) => {
-        if (subcategoria.categoria === categoria) {
-          this.toggleCategories = false
-          this.selectedSubcategories.push(subcategoria)
-        }
-      })
-      this.$store.commit('products/FILTER_BY', {
-        type: ['category'],
-        data: value.nombre_categoria_producto,
-      })
-    },
-    breadcrumbsSendCategory(value) {
-      let filtradoCategories = this.categorias.find((element) => {
-        if (element.nombre_categoria_producto == value) {
-          return element
-        }
-      })
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: ['category'],
-        data: filtradoCategories.nombre_categoria_producto,
-      })
-    },
-    clear() {
-      this.indexSelect = ''
-      this.indexSelect2 = ''
-      this.$store.commit('SET_STATE_BANNER', true)
-      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: ['all'],
-        data: '',
-      })
-      this.$emit('clear')
-      this.nameCategory = ''
     },
   },
 }
@@ -476,10 +261,6 @@ export default {
 }
 
 /* //////paginacion//////// */
-.pagination-medium {
-  margin-top: 10px;
-  background: transparent;
-}
 .pagination {
   font-size: 18px;
   color: var(--color_text);

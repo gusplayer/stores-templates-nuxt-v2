@@ -71,7 +71,7 @@
           </div>
         </a>
       </div>
-      <div class="swiper-pagination" />
+      <div class="swiper-pagination"></div>
     </div>
   </div>
 </template>
@@ -79,11 +79,17 @@
 import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
   name: 'Ko15Banner',
-  props: {
-    banner: Object,
-    settingGeneral: Object,
-  },
   mixins: [idCloudinaryBanner],
+  props: {
+    banner: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       swiperOption: {

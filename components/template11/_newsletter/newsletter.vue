@@ -12,11 +12,11 @@
             <template slot-scope="{ errors }">
               <div class="content-subError">
                 <input
+                  v-model="email"
                   name="email"
                   class="input-text"
                   type="email"
                   :placeholder="$t('newsletter_email')"
-                  v-model="email"
                 />
                 <span
                   v-show="errors[0] || register"
@@ -30,21 +30,21 @@
         </div>
       </div>
       <div class="content-button">
-        <button ref="colorBtn" @click="submitNewsletter" class="btn btn-sm">
+        <button ref="colorBtn" class="btn btn-sm" @click="submitNewsletter">
           OK
         </button>
-        <button ref="colorBtn" @click="submitNewsletter" class="btn btn-md">
+        <button ref="colorBtn" class="btn btn-md" @click="submitNewsletter">
           {{ $t('newsletter_btn') }}
         </button>
       </div>
     </div>
     <div class="content-checkbox">
-      <input type="checkbox" id="checkbox" v-model="checked" />
+      <input id="checkbox" v-model="checked" type="checkbox" />
       <p class="text-checkbox">
         {{ $t('newsletter_msg') }}
       </p>
     </div>
-    <p class="text-error" v-if="stateChehed">
+    <p v-if="stateChehed" class="text-error">
       Marcar checkbox para poder suscribirse al boletín informativo
     </p>
   </div>
@@ -54,15 +54,17 @@
 import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko-Newsletter-1',
-  props: {
-    dataStore: Object,
-  },
+  name: 'Ko11Newsletter',
   components: {
     ValidationObserver,
     ValidationProvider,
   },
-  mounted() {},
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       errorsCheckbox: 'El campo checkbox y email son obligatorios',
@@ -72,13 +74,13 @@ export default {
       stateChehed: false,
     }
   },
-  destroyed() {
-    this.email = ''
-  },
   computed: {
     facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
+  },
+  destroyed() {
+    this.email = ''
   },
   methods: {
     submitNewsletter() {
@@ -90,7 +92,7 @@ export default {
             if (response.valid) {
               const json = {
                 email: this.email,
-                tienda: this.dataStore.tienda.id_tienda,
+                tienda: this.dataStore.id,
               }
               axios
                 .post(

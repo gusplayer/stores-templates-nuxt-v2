@@ -5,9 +5,7 @@
       settingGeneral,
       productList,
       {
-        '--font-style-1': settingGeneral.fount_1
-          ? settingGeneral.fount_1
-          : 'Poppins',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Poppins',
       },
     ]"
   >
@@ -18,17 +16,17 @@
         </div>
       </div>
       <div ref="mySwiper" v-swiper:mySwiper="swiperOption">
-        <div v-if="fullProducts.length > 0" class="swiper-wrapper pb-10">
+        <div v-if="listProducts.length > 0" class="swiper-wrapper pb-10">
           <div
-            v-for="product in fullProducts.slice(0, 12)"
+            v-for="product in listProducts"
             :key="product.id"
-            class="swiper-slide"
+            class="swiper-slide h-full ml-20"
           >
             <KoProductCard
               :product="product"
-              :card-product="cardProduct"
+              :setting-card-products="cardProduct"
               :setting-general="settingGeneral"
-              class="giftLoad"
+              class="giftLoad h-full"
             />
           </div>
         </div>
@@ -37,12 +35,23 @@
         </div>
       </div>
       <div v-if="productList.visibleBtn" class="btn-products">
-        <a
-          :href="productList.url_redirect ? productList.url_redirect : ''"
-          rel="noreferrer noopener"
-        >
-          <button class="btn">{{ productList.displayName }}</button>
-        </a>
+        <template v-if="isInternalUrl(productList.url_redirect)">
+          <nuxt-link
+            :to="productList.url_redirect ? productList.url_redirect : ''"
+            class="btn"
+          >
+            {{ productList.displayName }}
+          </nuxt-link>
+        </template>
+        <template v-else>
+          <a
+            :href="productList.url_redirect ? productList.url_redirect : ''"
+            rel="noreferrer noopener"
+            class="btn"
+          >
+            {{ productList.displayName }}
+          </a>
+        </template>
       </div>
     </div>
   </div>
@@ -52,9 +61,13 @@
 export default {
   name: 'Ko13ProductList',
   components: {
-    KoProductCard: () => import('./_productcard/Ko-ProductCard-1.vue'),
+    KoProductCard: () => import('./_productcard/Ko13-product-card.vue'),
   },
   props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
     productList: {
       type: Object,
       required: true,
@@ -67,39 +80,36 @@ export default {
       type: Object,
       required: true,
     },
-    dataStore: {
-      type: Object,
-      required: true,
-    },
-    fullProducts: {
-      type: Array,
-      required: true,
-    },
   },
   data() {
     return {
+      listProducts: [],
       swiperOption: {
-        slidesPerView: '',
-        spaceBetween: '',
+        direction: 'horizontal',
+        setWrapperSize: true,
+        paginationClickable: true,
+        slidesPerView: 4,
+        spaceBetween: 20,
+        grabCursor: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
         breakpoints: {
-          10000: {
+          1024: {
             slidesPerView: 4,
-            spaceBetween: 25,
+            spaceBetween: 20,
           },
-          900: {
+          768: {
             slidesPerView: 3,
-            spaceBetween: 30,
+            spaceBetween: 10,
           },
-          640: {
+          500: {
             slidesPerView: 2,
             spaceBetween: 10,
           },
-          425: {
-            slidesPerView: 2,
-            spaceBetween: 5,
-          },
           320: {
-            slidesPerView: 2,
+            slidesPerView: 1,
             spaceBetween: 5,
           },
         },
@@ -109,6 +119,28 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
+    },
+  },
+  mounted() {
+    this.currentChange()
+  },
+  methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
+    },
+    async currentChange() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_ALL_PRODUCTS',
+        {
+          id_tienda: this.dataStore.id,
+          limit: 8,
+          page: 1,
+          topSales: 1,
+        }
+      )
+      if (success) {
+        this.listProducts = data.publicProductList
+      }
     },
   },
 }

@@ -16,19 +16,20 @@
               :key="index"
               class="swiper-slide cursor-pointer h-full w-full"
             >
-              <a
-                :href="imagen.url_redirect"
-                rel="noreferrer noopener"
-                class="h-full w-full"
-              >
-                <img
-                  :src="idCloudinary(imagen.img, 550, 550)"
-                  class="h-full w-full remove_bg max-w-[110px] max-h-[110px]"
-                  width="110"
-                  height="110"
-                  :alt="`imágenes logos${index}`"
+              <template v-if="isInternalUrl(imagen.url_redirect)">
+                <InternalLink
+                  :to="imagen.url_redirect"
+                  :image="imagen"
+                  :index="index"
                 />
-              </a>
+              </template>
+              <template v-else>
+                <ExternalLink
+                  :href="imagen.url_redirect"
+                  :image="imagen"
+                  :index="index"
+                />
+              </template>
             </div>
           </div>
         </div>
@@ -37,10 +38,12 @@
   </div>
 </template>
 <script>
-import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'Ko14Logos',
-  mixins: [idCloudinary],
+  components: {
+    InternalLink: () => import('./_link/internal-link-logos.vue'),
+    ExternalLink: () => import('./_link/external-link-logos.vue'),
+  },
   props: {
     logos: {
       type: Object,
@@ -85,6 +88,11 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
+    },
+  },
+  methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
     },
   },
 }

@@ -1,95 +1,90 @@
 <template>
-  <div class="wrapper_newsletter" :style="[newsletter, settingGeneral]">
-    <div
-      :style="[
-        {
-          '--font-style-1':
-            this.settingGeneral && this.settingGeneral.fount_1
-              ? this.settingGeneral.fount_1
-              : 'Poppins',
-        },
-        {
-          '--font-style-2':
-            this.settingGeneral && this.settingGeneral.fount_2
-              ? this.settingGeneral.fount_2
-              : 'Roboto',
-        },
-      ]"
-    >
-      <div class="wrapper-items-content">
-        <div class="product-text">
-          <div class="product-tittle">
-            <span class="tittle">Obtenga las últimas</span>
-            <span class="tittle">ofertas y más.</span>
-          </div>
+  <div
+    class="wrapper_newsletter"
+    :style="[
+      newsletter,
+      settingGeneral,
+      {
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Poppins',
+      },
+      {
+        '--font-style-2': settingGeneral?.fount_2 ?? 'Roboto',
+      },
+    ]"
+  >
+    <div class="wrapper-items-content">
+      <div class="product-text">
+        <div class="product-tittle">
+          <span class="tittle">Obtenga las últimas</span>
+          <span class="tittle">ofertas y más.</span>
         </div>
       </div>
-      <div class="wrapper-items">
-        <div class="conten-input-check">
-          <div class="content-input">
-            <ValidationProvider
-              ref="validate"
-              name="email"
-              rules="required|email"
-              class="content-input-error"
-            >
-              <template slot-scope="{ errors }">
-                <div class="input-icon">
-                  <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink"
-                      version="1.1"
-                      width="100%"
-                      height="100%"
-                      viewBox="0 0 24 24"
-                      color="#2c2930"
-                      class="icon-msg"
-                    >
-                      <path
-                        d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z"
-                      />
-                    </svg>
-                  </div>
-                  <input
-                    id="CorreoElectronicoNewslletter"
-                    v-model="email"
-                    name="email"
-                    class="input-text"
-                    type="email"
-                    :placeholder="$t('newsletter_email')"
-                  />
+    </div>
+    <div class="wrapper-items">
+      <div class="conten-input-check">
+        <div class="content-input">
+          <ValidationProvider
+            ref="validate"
+            name="email"
+            rules="required|email"
+            class="content-input-error"
+          >
+            <template slot-scope="{ errors }">
+              <div class="input-icon">
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    version="1.1"
+                    width="100%"
+                    height="100%"
+                    viewBox="0 0 24 24"
+                    color="#2c2930"
+                    class="icon-msg"
+                  >
+                    <path
+                      d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z"
+                    />
+                  </svg>
                 </div>
-                <span
-                  v-show="errors[0] || register"
-                  class="text-error"
-                  :style="register ? 'color:green' : ''"
-                >
-                  {{ errorsCheckbox || register }}
-                </span>
-              </template>
-            </ValidationProvider>
-          </div>
-          <div class="content-checkbox">
-            <input id="checkbox" v-model="checked" type="checkbox" />
-            <p class="text-checkbox">
-              {{ $t('newsletter_msg') }}
-            </p>
-          </div>
-          <p v-if="stateChehed" class="text-error">
-            Marcar checkbox para poder suscribirse al boletín informativo
+                <input
+                  id="CorreoElectronicoNewslletter"
+                  v-model="email"
+                  name="email"
+                  class="input-text"
+                  type="email"
+                  :placeholder="$t('newsletter_email')"
+                />
+              </div>
+              <span
+                v-show="errors[0] || register"
+                class="text-error"
+                :style="register ? 'color:green' : ''"
+              >
+                {{ errorsCheckbox || register }}
+              </span>
+            </template>
+          </ValidationProvider>
+        </div>
+        <div class="content-checkbox">
+          <input id="checkbox" v-model="checked" type="checkbox" />
+          <p class="text-checkbox">
+            {{ $t('newsletter_msg') }}
           </p>
         </div>
+        <p v-if="stateChehed" class="text-error">
+          Marcar checkbox para poder suscribirse al boletín informativo
+        </p>
+      </div>
 
-        <div class="content-button">
-          <button
-            ref="colorBtn"
-            class="content-bttns-shop"
-            @click="submitNewsletter"
-          >
-            {{ $t('newsletter_btn') }}
-          </button>
-        </div>
+      <div class="content-button">
+        <button
+          ref="colorBtn"
+          class="content-bttns-shop"
+          @click="submitNewsletter"
+        >
+          {{ $t('newsletter_btn') }}
+        </button>
       </div>
     </div>
   </div>
@@ -105,9 +100,18 @@ export default {
     ValidationProvider,
   },
   props: {
-    dataStore: Object,
-    newsletter: Object,
-    settingGeneral: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    newsletter: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -135,7 +139,7 @@ export default {
             if (response.valid) {
               const json = {
                 email: this.email,
-                tienda: this.dataStore.tienda.id_tienda,
+                tienda: this.dataStore.id,
               }
               axios
                 .post(

@@ -16,14 +16,27 @@
         >
           {{ information.text }}
         </p>
-        <a
-          v-if="information.visible_btn"
-          :href="information.url_redirect"
-          class="px-20 py-5 md:py-8 mt-25 md:mt-20 lg:mt-40 mb-20 lg:mb-0 text-12 md:text-14 xl:text-16"
-          :style="`color: ${information.color_text_btn}; background-color: ${information.color_bg_btn}; border-radius: ${settingGeneral?.radius};`"
-        >
-          {{ information.text_btn }}
-        </a>
+        <template v-if="isInternalUrl(information.url_redirect)">
+          <nuxt-link
+            v-if="information.visible_btn"
+            :to="information.url_redirect"
+            class="px-20 py-5 md:py-8 mt-25 md:mt-20 lg:mt-40 mb-20 lg:mb-0 text-12 md:text-14 xl:text-16"
+            :style="`color: ${information.color_text_btn}; background-color: ${information.color_bg_btn}; border-radius: ${settingGeneral?.radius};`"
+          >
+            {{ information.text_btn }}
+          </nuxt-link>
+        </template>
+        <template v-else>
+          <a
+            v-if="information.visible_btn"
+            :href="information.url_redirect"
+            class="px-20 py-5 md:py-8 mt-25 md:mt-20 lg:mt-40 mb-20 lg:mb-0 text-12 md:text-14 xl:text-16"
+            :style="`color: ${information.color_text_btn}; background-color: ${information.color_bg_btn}; border-radius: ${settingGeneral?.radius};`"
+            rel="noreferrer noopener"
+          >
+            {{ information.text_btn }}
+          </a>
+        </template>
       </div>
       <div :style="`background-color: ${information['--background_color_2']}`">
         <img
@@ -39,12 +52,26 @@
 <script>
 import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko15-information',
+  name: 'Ko15Information',
   mixins: [idCloudinaryBanner],
   props: {
-    information: Object,
-    settingGeneral: Object,
-    dataStore: Object,
+    information: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+  },
+  methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
+    },
   },
 }
 </script>

@@ -5,10 +5,7 @@
       newsletter,
       setting11General,
       {
-        '--font-style-1':
-          this.setting11General && this.setting11General.fount_1
-            ? this.setting11General.fount_1
-            : 'Roboto',
+        '--font-style-1': setting11General?.fount_1 ?? 'Roboto',
       },
     ]"
   >
@@ -23,25 +20,33 @@
         <p class="txt-top">Para actualizaciones diarias</p>
         <p class="txt-bottom">Suscríbete a nuestro boletín informativo</p>
         <div class="content-newsletter">
-          <Newsletter :dataStore="dataStore" :newsletter="newsletter" />
+          <Newsletter :data-store="dataStore" :newsletter="newsletter" />
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import Newsletter from '../../components/template11/_newsletter/newsletter'
-import idCloudinaryBanner from '../../mixins/idCloudinary'
+import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko-Newsletter',
-  props: {
-    dataStore: Object,
-    newsletter: Object,
-    setting11General: Object,
+  name: 'Ko11Newsletter',
+  components: {
+    Newsletter: () => import('./_newsletter/newsletter'),
   },
   mixins: [idCloudinaryBanner],
-  components: {
-    Newsletter,
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    newsletter: {
+      type: Object,
+      required: true,
+    },
+    setting11General: {
+      type: Object,
+      required: true,
+    },
   },
 }
 </script>

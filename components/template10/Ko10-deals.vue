@@ -41,20 +41,30 @@
           </p>
         </div>
         <div v-if="offers.visibleBtn" class="grid-item-button">
-          <a
-            class="btn"
-            :href="offers.url_redirect ? offers.url_redirect : ''"
-            rel="noreferrer noopener"
-          >
-            {{ offers.displayName }}
-          </a>
+          <template v-if="isInternalUrl(offers.url_redirect)">
+            <nuxt-link
+              class="btn"
+              :to="offers.url_redirect ? offers.url_redirect : ''"
+            >
+              {{ offers.displayName }}
+            </nuxt-link>
+          </template>
+          <template v-else>
+            <a
+              class="btn"
+              :href="offers.url_redirect ? offers.url_redirect : ''"
+              rel="noreferrer noopener"
+            >
+              {{ offers.displayName }}
+            </a>
+          </template>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import idCloudinaryBanner from '../../mixins/idCloudinary'
+import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
   name: 'Ko10Deals',
   mixins: [idCloudinaryBanner],
@@ -66,6 +76,11 @@ export default {
     settingGeneral: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
     },
   },
 }

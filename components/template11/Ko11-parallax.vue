@@ -1,14 +1,11 @@
 <template>
   <div
-    class="content-parallax"
+    class="w-full h-full max-h-[500px] flex flex-col justify-center items-center"
     :style="[
       settingKparallax,
       settingGeneral,
       {
-        '--font-style-1':
-          this.settingGeneral && this.settingGeneral.fount_1
-            ? this.settingGeneral.fount_1
-            : 'Roboto',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
@@ -32,36 +29,31 @@
         <p class="txt-bottom">
           {{ settingKparallax.title.replace(/&nbsp;/g, ' ') }}
         </p>
-        <div class="content-btn" v-if="settingKparallax.visbleBtn">
-          <a
-            :href="
-              settingKparallax.url_redirect ? settingKparallax.url_redirect : ''
-            "
-            rel="noreferrer noopener"
-          >
-            <button class="btn">{{ $t('home_comprarAhora') }}</button>
-          </a>
+        <div v-if="settingKparallax.visbleBtn" class="content-btn">
+          <p class="btn">{{ $t('home_comprarAhora') }}</p>
         </div>
       </div>
     </a>
   </div>
 </template>
 <script>
-import idCloudinaryBanner from '../../mixins/idCloudinary'
+import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko11-parallax',
-  props: {
-    settingKparallax: Object,
-    settingGeneral: Object,
-  },
+  name: 'Ko11Parallax',
   mixins: [idCloudinaryBanner],
+  props: {
+    settingKparallax: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+  },
 }
 </script>
 <style scoped>
-.content-parallax {
-  max-height: 500px;
-  @apply w-full flex flex-col justify-center items-center;
-}
 .content-bg {
   max-height: 500px;
   background-position: 50% 73.2661%;

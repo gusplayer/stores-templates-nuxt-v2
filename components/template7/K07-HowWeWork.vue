@@ -5,26 +5,17 @@
       settingKHowwork,
       settingGeneral,
       {
-        '--font-style-1':
-          this.settingGeneral && this.settingGeneral.fount_1
-            ? this.settingGeneral.fount_1
-            : 'David Libre',
+        '--font-style-1': settingGeneral.fount_1 ?? 'David Libre',
       },
       {
-        '--font-style-2':
-          this.settingGeneral && this.settingGeneral.fount_2
-            ? this.settingGeneral.fount_2
-            : 'Great Vibes',
+        '--font-style-2': settingGeneral.fount_2 ?? 'Great Vibes',
       },
       {
-        '--font-style-3':
-          this.settingGeneral && this.settingGeneral.fount_3
-            ? this.settingGeneral.fount_3
-            : 'Lora',
+        '--font-style-3': settingGeneral.fount_3 ?? 'Lora',
       },
     ]"
   >
-    <div class="separador-blog" v-if="!settingKCarousel.visible"></div>
+    <div v-if="!settingKCarousel.visible" class="separador-blog"></div>
     <div class="hwwork-content-items">
       <div class="hwwork-items">
         <div class="tittle">
@@ -39,7 +30,7 @@
           </span>
         </div>
       </div>
-      <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="hwork-dates">
+      <div ref="mySwiper" v-swiper:mySwiper="swiperOption" class="hwork-dates">
         <div id="hwork-imgaes" class="swiper-wrapper">
           <div
             id="hwork-text-1"
@@ -119,14 +110,23 @@
   </div>
 </template>
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'K07HowWeWork',
   mixins: [idCloudinary],
   props: {
-    settingKHowwork: Object,
-    settingGeneral: Object,
-    settingKCarousel: Object,
+    settingKHowwork: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    settingKCarousel: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -163,9 +163,6 @@ export default {
     swiper() {
       return this.$refs.mySwiper.swiper
     },
-  },
-  mounted() {
-    this.mySwiper.slideTo(3, 1000, false)
   },
 }
 </script>

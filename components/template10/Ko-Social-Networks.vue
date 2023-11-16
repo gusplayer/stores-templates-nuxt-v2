@@ -5,26 +5,22 @@
       setting10Footer,
       setting10General,
       {
-        '--font-style-1':
-          setting10General && setting10General.fount_1
-            ? setting10General.fount_1
-            : 'Roboto',
+        '--font-style-1': setting10General?.fount_1 ?? 'Roboto',
       },
     ]"
   >
     <div class="icon-social">
       <div
-        class="icons-networks"
         v-if="
-          dataStore.tienda.red_facebook != null &&
-          dataStore.tienda.red_facebook != ''
+          dataStore.redes.facebook != null && dataStore.redes.facebook != ''
         "
+        class="icons-networks"
       >
         <a
           class="social facebook-icon"
           target="_blank"
           rel="noreferrer noopener"
-          :href="dataStore.tienda.red_facebook"
+          :href="dataStore.redes.facebook"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -89,17 +85,14 @@
         </a>
       </div>
       <div
+        v-if="dataStore.redes.twitter != null && dataStore.redes.twitter != ''"
         class="icons-networks"
-        v-if="
-          dataStore.tienda.red_twitter != null &&
-          dataStore.tienda.red_twitter != ''
-        "
       >
         <a
           class="social twitter-icon"
           target="_blank"
           rel="noreferrer noopener"
-          :href="dataStore.tienda.red_twitter"
+          :href="dataStore.redes.twitter"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -166,17 +159,16 @@
         </a>
       </div>
       <div
-        class="icons-networks"
         v-if="
-          dataStore.tienda.red_instagram != null &&
-          dataStore.tienda.red_instagram != ''
+          dataStore.redes.instagram != null && dataStore.redes.instagram != ''
         "
+        class="icons-networks"
       >
         <a
           class="social instagram-icon"
           target="_blank"
           rel="noreferrer noopener"
-          :href="dataStore.tienda.red_instagram"
+          :href="dataStore.redes.instagram"
           @mouseover="hover = true"
           @mouseleave="hover = false"
         >
@@ -200,7 +192,7 @@
                 r="256"
                 cx="256"
                 cy="256"
-                :fill="`${this.setting10Footer['--color_icon']}`"
+                :fill="`${setting10Footer['--color_icon']}`"
                 shape="circle"
                 transform="matrix(0.8,0,0,0.8,51.19999999999999,51.19999999999999)"
               />
@@ -212,14 +204,14 @@
                 cx="256"
                 cy="256"
                 fill="url(#a)"
-                :data-original="`${this.setting10Footer['--color_icon']}`"
+                :data-original="`${setting10Footer['--color_icon']}`"
                 shape="circle"
                 transform="matrix(0.8,0,0,0.8,51.19999999999999,51.19999999999999)"
               />
               <linearGradient
+                id="a"
                 class="circle-instagram"
                 xmlns="http://www.w3.org/2000/svg"
-                id="a"
                 gradientTransform="matrix(1 0 0 -1 0 -20854)"
                 gradientUnits="userSpaceOnUse"
                 x1="0"
@@ -236,8 +228,8 @@
             >
               <linearGradient
                 v-if="!hover"
-                xmlns="http://www.w3.org/2000/svg"
                 id="a"
+                xmlns="http://www.w3.org/2000/svg"
                 gradientTransform="matrix(1 0 0 -1 0 -20854)"
                 gradientUnits="userSpaceOnUse"
                 x1="0"
@@ -247,15 +239,15 @@
               >
                 <stop
                   stop-opacity="1"
-                  :stop-color="`${this.setting10Footer['--color_icon']}`"
+                  :stop-color="`${setting10Footer['--color_icon']}`"
                   offset="1"
                 />
                 <stop stop-opacity="1" stop-color="#009eff" offset="1" />
               </linearGradient>
               <linearGradient
                 v-if="hover"
-                xmlns="http://www.w3.org/2000/svg"
                 id="a"
+                xmlns="http://www.w3.org/2000/svg"
                 gradientTransform="matrix(1 0 0 -1 0 -20854)"
                 gradientUnits="userSpaceOnUse"
                 x1="0"
@@ -265,7 +257,7 @@
               >
                 <stop
                   stop-opacity="1"
-                  :stop-color="`${this.setting10Footer['--color_icon']}`"
+                  :stop-color="`${setting10Footer['--color_icon']}`"
                   offset="0"
                 />
                 <stop stop-opacity="1" stop-color="#ea00f3" offset="1" />
@@ -308,17 +300,14 @@
         </a>
       </div>
       <div
+        v-if="dataStore.redes.youtube != null && dataStore.redes.youtube != ''"
         class="icons-networks"
-        v-if="
-          dataStore.tienda.red_youtube != null &&
-          dataStore.tienda.red_youtube != ''
-        "
       >
         <a
           class="social youtube-icon"
           target="_blank"
           rel="noreferrer noopener"
-          :href="dataStore.tienda.red_youtube"
+          :href="dataStore.redes.youtube"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -397,17 +386,14 @@
         </a>
       </div>
       <div
+        v-if="dataStore.redes.tiktok != null && dataStore.redes.tiktok != ''"
         class="icons-networks"
-        v-if="
-          dataStore.tienda.red_tiktok != null &&
-          dataStore.tienda.red_tiktok != ''
-        "
       >
         <a
           class="social instagram-icon"
           target="_blank"
           rel="noreferrer noopener"
-          :href="dataStore.tienda.red_tiktok"
+          :href="dataStore.redes.tiktok"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -459,13 +445,21 @@
 </template>
 <script>
 export default {
-  name: 'Ko-Social-Networks',
+  name: 'Ko10SocialNetworks',
   props: {
-    dataStore: Object,
-    setting10Footer: Object,
-    setting10General: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    setting10Footer: {
+      type: Object,
+      required: true,
+    },
+    setting10General: {
+      type: Object,
+      required: true,
+    },
   },
-
   data() {
     return {
       hover: false,
@@ -473,11 +467,11 @@ export default {
   },
   watch: {
     'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-      this.links[4].link = this.dataStore.tienda.red_tiktok
+      this.links[0].link = this.dataStore.redes.facebook
+      this.links[1].link = this.dataStore.redes.twitter
+      this.links[2].link = this.dataStore.redes.instagram
+      this.links[3].link = this.dataStore.redes.youtube
+      this.links[4].link = this.dataStore.redes.tiktok
     },
   },
 }

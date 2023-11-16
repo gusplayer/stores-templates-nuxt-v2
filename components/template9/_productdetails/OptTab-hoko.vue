@@ -209,7 +209,7 @@
             </a>
           </li>
           <li v-if="mediospago.flow == 1">
-            <h4>Tucompra</h4>
+            <h4>Flow</h4>
             <p>
               {{ $t('text_pago_flowInfo') }}
             </p>
@@ -272,7 +272,7 @@ export default {
   },
   computed: {
     mediospago() {
-      return this.dataStore.medios_pago
+      return this.dataStore.medioPagos
     },
     activeClass() {
       if (this.data.description == '' || this.data.description == null) {

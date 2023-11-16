@@ -1,23 +1,19 @@
 <template>
-  <div class="contein-carousel" :style="[banner, settingGeneral]">
-    <div
-      v-if="banner"
-      class="carousel-content"
-      :style="[
-        {
-          '--font-style-1':
-            settingGeneral && settingGeneral.fount_1
-              ? settingGeneral.fount_1
-              : 'Poppins',
-        },
-        {
-          '--font-style-2':
-            settingGeneral && settingGeneral.fount_2
-              ? settingGeneral.fount_2
-              : 'Roboto',
-        },
-      ]"
-    >
+  <div
+    v-if="banner"
+    class="contein-carousel"
+    :style="[
+      banner,
+      settingGeneral,
+      {
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Poppins',
+      },
+      {
+        '--font-style-2': settingGeneral?.fount_2 ?? 'Roboto',
+      },
+    ]"
+  >
+    <div class="carousel-content">
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div v-if="banner.values" class="swiper-wrapper">
           <div
@@ -25,7 +21,7 @@
             :key="index"
             class="swiper-slide swiper-slide w-full flex justify-center items-center"
           >
-            <picture v-if="dataStore.tienda.id_tienda === 889">
+            <picture v-if="dataStore.id === 889">
               <source
                 media="(max-width: 799px)"
                 srcset="../../assets/img/perfecta/banner1.webp"
@@ -88,35 +84,62 @@
                   </p>
                 </div>
                 <div v-if="elementBanner.url_redirect" class="banner-button">
-                  <a
-                    :href="`${elementBanner.url_redirect}`"
-                    rel="noreferrer noopener"
-                    class="btn-shop"
-                    :class="elementBanner.url_redirect ? 'cursorPointer' : null"
-                  >
-                    <span class="text-button">
-                      {{ $t('home_comprarAhora') }}
-                    </span>
-                  </a>
+                  <template v-if="isInternalUrl(elementBanner.url_redirect)">
+                    <nuxt-link
+                      :to="`${elementBanner.url_redirect}`"
+                      rel="noreferrer noopener"
+                      class="btn-shop"
+                      :class="
+                        elementBanner.url_redirect ? 'cursorPointer' : null
+                      "
+                    >
+                      <span class="text-button">
+                        {{ $t('home_comprarAhora') }}
+                      </span>
+                    </nuxt-link>
+                  </template>
+                  <template v-else>
+                    <a
+                      :href="`${elementBanner.url_redirect}`"
+                      rel="noreferrer noopener"
+                      class="btn-shop"
+                      :class="
+                        elementBanner.url_redirect ? 'cursorPointer' : null
+                      "
+                    >
+                      <span class="text-button">
+                        {{ $t('home_comprarAhora') }}
+                      </span>
+                    </a>
+                  </template>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="swiper-pagination" />
+        <div class="swiper-pagination"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import idCloudinaryBanner from '../../mixins/idCloudinary'
+import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
   mixins: [idCloudinaryBanner],
   props: {
-    dataStore: Object,
-    banner: Object,
-    settingGeneral: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    banner: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -149,6 +172,9 @@ export default {
     this.autoplayBanner()
   },
   methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
+    },
     autoplayBanner() {
       if (this.banner && this.banner.values.length == 1) {
         this.swiperOption.autoplay.delay = 900000000000000000

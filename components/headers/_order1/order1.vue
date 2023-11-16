@@ -1,9 +1,9 @@
 <template>
   <el-drawer
-    :visible.sync="openOrder"
-    :withHeader="false"
     direction="rtl"
     class="width-drawer"
+    :visible.sync="openOrder"
+    :withHeader="false"
     :modalAppendToBody="false"
   >
     <!-- <transition name="fade"> -->
@@ -22,9 +22,9 @@
               <div class="order_products">
                 <ul class="order_products_list">
                   <li
-                    class="order_products_list_item"
                     v-for="(product, index) in productsCart"
                     :key="index"
+                    class="order_products_list_item"
                   >
                     <img
                       v-lazy="idCloudinary(product.foto_cloudinary, 150, 150)"
@@ -33,19 +33,19 @@
                     />
                     <div class="w-full flex flex-col">
                       <div class="name">
-                        <p class="order-text" style="font-weight: bold">
+                        <p class="order-text font-bold">
                           {{ product.nombre | capitalize }}
                         </p>
                         <span v-if="product.precio">
-                          <b class="unidades"
-                            >{{ $t('cart_cantidad') }} {{ product.cantidad }}</b
-                          >
+                          <b class="unidades">
+                            {{ $t('cart_cantidad') }} {{ product.cantidad }}
+                          </b>
                           <b class="unidades">
                             X{{
                               product.precio
                                 | currency(
-                                  dataStore.tienda.codigo_pais,
-                                  dataStore.tienda.moneda
+                                  dataStore.tiendasInfo.paises.codigo,
+                                  dataStore.tiendasInfo.moneda
                                 )
                             }}
                           </b>
@@ -74,12 +74,12 @@
                               <mas-icon class="icon-quantity" />
                             </button>
                             <div
-                              class="container-alerta"
                               v-if="product.limitQuantity == product.cantidad"
+                              class="container-alerta"
                             >
                               <span class="alerta">
-                                {{ $t('cart_ultimaUnidad') }}</span
-                              >
+                                {{ $t('cart_ultimaUnidad') }}
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -97,33 +97,33 @@
                           </el-tag>
                         </div>
                         <el-tag
-                          type="danger"
                           v-if="product.activo == 0"
+                          type="danger"
                           style="background-color: rgb(223, 62, 62)"
                         >
                           Producto agotado!
                         </el-tag>
                         <el-tag
+                          v-if="product.stock_disponible == 0"
                           type="danger"
                           style="background-color: rgb(223, 62, 62)"
-                          v-if="product.stock_disponible == 0"
                         >
                           ¡No tiene las unidades disponibles!
                         </el-tag>
                       </div>
                     </div>
-                    <div class="price" v-if="product.precio > 0">
+                    <div v-if="product.precio > 0" class="price">
                       <p>
                         {{
                           (product.precio * product.cantidad)
                             | currency(
-                              dataStore.tienda.codigo_pais,
-                              dataStore.tienda.moneda
+                              dataStore.tiendasInfo.paises.codigo,
+                              dataStore.tiendasInfo.moneda
                             )
                         }}
                       </p>
                     </div>
-                    <div v-else class="price" />
+                    <div v-else class="price"></div>
                     <boteBasura-icon
                       class="icon-delete"
                       @click="deleteItemCart(index)"
@@ -178,8 +178,8 @@
                                 {{
                                   ciudad.price
                                     | currency(
-                                      dataStore.tienda.codigo_pais,
-                                      dataStore.tienda.moneda
+                                      dataStore.tiendasInfo.paises.codigo,
+                                      dataStore.tiendasInfo.moneda
                                     )
                                 }}
                               </p>
@@ -196,13 +196,13 @@
                         !FreeShippingCart
                       "
                     >
-                      <li class="text-color" style="list-style: none">
+                      <li class="text-color list-none">
                         {{ $t('footer_tarifaPlana') }}
                         {{
-                          rangosByCiudades.valor
+                          rangosByCiudad.valor
                             | currency(
-                              dataStore.tienda.codigo_pais,
-                              dataStore.tienda.moneda
+                              dataStore.tiendasInfo.paises.codigo,
+                              dataStore.tiendasInfo.moneda
                             )
                         }}
                       </li>
@@ -214,19 +214,19 @@
                         !FreeShippingCart
                       "
                     >
-                      <div v-if="this.shippingTarifaPrecio > 0">
+                      <div v-if="shippingTarifaPrecio > 0">
                         <p class="text-color">
                           {{
-                            this.shippingTarifaPrecio
+                            shippingTarifaPrecio
                               | currency(
-                                dataStore.tienda.codigo_pais,
-                                dataStore.tienda.moneda
+                                dataStore.tiendasInfo.paises.codigo,
+                                dataStore.tiendasInfo.moneda
                               )
                           }}
                         </p>
                       </div>
                       <p
-                        v-else-if="this.shippingTarifaPrecio >= 0"
+                        v-else-if="shippingTarifaPrecio >= 0"
                         class="text-color"
                       >
                         {{ $t('footer_tarifaPrecio') }}
@@ -235,71 +235,54 @@
                         {{ $t('footer_encioNoconfig') }}
                       </p>
                     </div>
-                    <!-- <div
-                      v-else-if="
-                        shipping &&
-                        !getFreeShipping  &&
-                        !FreeShippingCart 
-                      "
-                    >
-                      <p>
-                        {{
-                          shipping
-                            | currency(
-                              dataStore.tienda.codigo_pais,
-                              dataStore.tienda.moneda
-                            )
-                        }}
-                      </p>
-                    </div> -->
                     <p
-                      class="without_shipping_cost"
                       v-else-if="
                         rangosByCiudad.envio_metodo === 'gratis' &&
                         shippingCities.length <= 0 &&
                         !getFreeShipping &&
                         !FreeShippingCart
                       "
+                      class="without_shipping_cost"
                     >
                       {{ $t('footer_encioGratis') }}
                     </p>
                     <p
-                      class="without_shipping_cost"
                       v-else-if="
                         rangosByCiudad.envio_metodo === 'sintarifa' &&
                         shippingCities.length <= 0 &&
                         !getFreeShipping &&
                         !FreeShippingCart
                       "
+                      class="without_shipping_cost"
                     >
                       {{ $t('footer_enviosPorPagar') }}
                     </p>
                     <p
-                      class="without_shipping_cost"
                       v-else-if="
                         rangosByCiudad.envio_metodo === 'sinEnvio' &&
                         shippingCities.length <= 0 &&
                         !getFreeShipping
                       "
+                      class="without_shipping_cost"
                     >
                       Pasas a recoger tu compra
                     </p>
                     <p
-                      class="without_shipping_cost"
                       v-else-if="FreeShippingCart"
+                      class="without_shipping_cost"
                     >
                       {{ $t('footer_tarifaPrecio') }}
                     </p>
                   </span>
-                  <span class="order_total_net" v-if="discountDescuentos">
+                  <span v-if="discountDescuentos" class="order_total_net">
                     <p>{{ $t('footer_descuento') }}</p>
                     <p>
                       -
                       {{
                         discountDescuentos
                           | currency(
-                            dataStore.tienda.codigo_pais,
-                            dataStore.tienda.moneda
+                            dataStore.tiendasInfo.paises.codigo,
+                            dataStore.tiendasInfo.moneda
                           )
                       }}
                     </p>
@@ -310,8 +293,8 @@
                       {{
                         totalCart
                           | currency(
-                            dataStore.tienda.codigo_pais,
-                            dataStore.tienda.moneda
+                            dataStore.tiendasInfo.paises.codigo,
+                            dataStore.tiendasInfo.moneda
                           )
                       }}
                     </p>
@@ -321,16 +304,16 @@
                     <p>
                       {{
                         (totalCart +
-                          (this.shipping ? this.shipping : 0) +
-                          (this.shippingTarifaPrecio &&
-                          this.shippingTarifaPrecio != 'empty' &&
-                          !this.FreeShippingCart
-                            ? this.shippingTarifaPrecio
+                          (shipping ? shipping : 0) +
+                          (shippingTarifaPrecio &&
+                          shippingTarifaPrecio != 'empty' &&
+                          !FreeShippingCart
+                            ? shippingTarifaPrecio
                             : 0) -
-                          this.discountDescuentos)
+                          discountDescuentos)
                           | currency(
-                            dataStore.tienda.codigo_pais,
-                            dataStore.tienda.moneda
+                            dataStore.tiendasInfo.paises.codigo,
+                            dataStore.tiendasInfo.moneda
                           )
                       }}
                     </p>
@@ -343,7 +326,7 @@
                       isQuotation() ||
                       (!countryStore &&
                         productsCart.length &&
-                        dataStore.tienda.estado == 1)
+                        dataStore.estado == 1)
                     "
                     class="wrapper-Quotation"
                   >
@@ -353,7 +336,7 @@
                     <button
                       v-if="
                         !stateOrderWapi &&
-                        expiredDate(dataStore.tienda.fecha_expiracion)
+                        expiredDate(dataStore.fechaExpiracion)
                       "
                       class="continue_shopping_whatsapp"
                       @click="modalBehaviorWhatsApp(true)"
@@ -364,20 +347,17 @@
                   </div>
                   <!-- rango de domicilio no configurado -->
                   <p
-                    class="domicilio-message"
                     v-if="
                       productsCart.length &&
-                      this.shippingTarifaPrecio == 'empty' &&
-                      this.estadoShippingTarifaPrecio
+                      shippingTarifaPrecio == 'empty' &&
+                      estadoShippingTarifaPrecio
                     "
+                    class="domicilio-message"
                   >
                     {{ $t('footer_contactoMgs2') }}
                   </p>
                   <!-- tienda cerrada -->
-                  <p
-                    class="Quotation-message"
-                    v-if="dataStore.tienda.estado == 0"
-                  >
+                  <p v-if="dataStore.estado == 0" class="Quotation-message">
                     {{ $t('footer_tiendaCerrada') }}
                   </p>
                   <!-- <p class="Quotation-message" v-if="verifyProducts == 0">
@@ -388,15 +368,15 @@
                   </p> -->
                   <!-- limite de productos para comprar -->
                   <p
-                    class="Quotation-message"
                     v-if="!IsMinValorTotal() && productsCart.length"
+                    class="Quotation-message"
                   >
                     {{ $t('cart_minimovalorProductos1') }}
                     {{
-                      this.dataStore.tienda.minimo_compra
+                      dataStore.tiendasInfo.valorCompraMinimo
                         | currency(
-                          dataStore.tienda.codigo_pais,
-                          dataStore.tienda.moneda
+                          dataStore.tiendasInfo.paises.codigo,
+                          dataStore.tiendasInfo.moneda
                         )
                     }}
                     {{ $t('cart_minimovalorProductos2') }}
@@ -407,15 +387,15 @@
                       !stateOrderWapi &&
                       productsCart.length &&
                       !isQuotation() &&
-                      dataStore.tienda.estado == 1 &&
-                      !this.estadoShippingTarifaPrecio &&
+                      dataStore.estado == 1 &&
+                      !estadoShippingTarifaPrecio &&
                       countryStore &&
                       IsMinValorTotal() &&
-                      expiredDate(dataStore.tienda.fecha_expiracion)
+                      expiredDate(dataStore.fechaExpiracion)
                     "
+                    id="InitiateCheckoutTag"
                     class="continue_shopping"
                     @click="GoPayments"
-                    id="InitiateCheckoutTag"
                   >
                     {{ $t('footer_finalizarCompra') }}
                   </button>
@@ -425,13 +405,14 @@
                       stateOrderWapi &&
                       productsCart.length &&
                       !isQuotation() &&
-                      dataStore.tienda.estado == 1 &&
-                      !this.estadoShippingTarifaPrecio &&
+                      dataStore.estado == 1 &&
+                      !estadoShippingTarifaPrecio &&
                       countryStore &&
                       IsMinValorTotal() &&
                       settingByTemplate.pago_online == 1 &&
-                      expiredDate(dataStore.tienda.fecha_expiracion)
+                      expiredDate(dataStore.fechaExpiracion)
                     "
+                    id="InitiateCheckoutTag"
                     class="continue_shopping2"
                     :style="`color: ${
                       settingByTemplate && settingByTemplate.color_primario
@@ -443,7 +424,6 @@
                         : '#25D366'
                     };`"
                     @click="GoPayments"
-                    id="InitiateCheckoutTag"
                   >
                     {{ $t('footer_finalizarCompra') }}
                   </button>
@@ -454,9 +434,9 @@
                       productsCart.length &&
                       !isQuotation() &&
                       IsMinValorTotal() &&
-                      dataStore.tienda.estado == 1 &&
-                      dataStore.tienda.whatsapp &&
-                      expiredDate(dataStore.tienda.fecha_expiracion)
+                      dataStore.estado == 1 &&
+                      dataStore.redes.whatsapp &&
+                      expiredDate(dataStore.fechaExpiracion)
                     "
                     class="continue_shopping_whatsapp"
                     :style="`background: ${
@@ -481,14 +461,14 @@
                   </button>
                   <!-- seguir comprando, cerrar order -->
                   <nuxt-link
+                    v-if="!stateOrderWapi"
                     class="conten-btn"
                     to="/"
                     @click="closeOrder"
-                    v-if="!stateOrderWapi"
                   >
-                    <button class="continue_shopping2">
+                    <p class="continue_shopping2">
                       {{ $t('footer_seguirCompra') }}
-                    </button>
+                    </p>
                   </nuxt-link>
                   <!-- ir al carrito componente -->
                   <!-- <nuxt-link
@@ -497,8 +477,8 @@
                     @click="closeOrder"
                     v-if="
                       !stateOrderWapi &&
-                      (dataStore.tienda.template != 12 ||
-                        dataStore.tienda.template != 99)
+                      (dataStore.template != 12 ||
+                        dataStore.template != 99)
                     "
                   >
                     <button class="continue_shopping2">
@@ -509,7 +489,7 @@
               </div>
             </div>
           </template>
-          <div class="order--wrapper" v-else>
+          <div v-else class="order--wrapper">
             <div class="w-full flex flex-col justify-center items-center">
               <img
                 src="../../../assets/img/icono_cesta.png"
@@ -524,15 +504,15 @@
             </div>
             <div>
               <nuxt-link class="conten-btn" to="/" @click="closeOrder">
-                <button class="continue_shopping2">
+                <p class="continue_shopping2">
                   {{ $t('footer_seguirCompra') }}
-                </button>
+                </p>
               </nuxt-link>
               <!-- <nuxt-link
                 to="/cart"
                 class="conten-btn"
                 @click="closeOrder"
-                v-if="dataStore.tienda.template != 12"
+                v-if="dataStore.template != 12"
               >
                 <button class="continue_shopping2">
                   {{ $t('footer_irCarrito') }}
@@ -542,7 +522,7 @@
           </div>
         </transition>
       </div>
-      <div class="wrapper-items-remove" v-if="remove">
+      <div v-if="remove" class="wrapper-items-remove">
         <div class="content-items-remove">
           <p class="text-remove">
             {{ $t('footer_contactoMgs3') }}
@@ -557,7 +537,7 @@
           </div>
         </div>
       </div>
-      <div class="wrapper-items-form" v-if="formOrdenWhatsAPP">
+      <div v-if="formOrdenWhatsAPP" class="wrapper-items-form">
         <div class="content-items-form">
           <p class="form-text">{{ $t('footer_formtittle') }}</p>
           <ValidationObserver
@@ -578,15 +558,15 @@
             >
               <template slot-scope="{ errors }">
                 <input
+                  id="ContactName"
+                  v-model="form.nombre"
                   name="nombre"
                   type="text"
-                  v-model="form.nombre"
                   class="input-text"
                   :placeholder="$t('footer_formNombreMgs')"
-                  id="ContactName"
                   onkeypress="return ((event.charCode>96 && event.charCode<123) || (event.charCode>64 && event.charCode<91) || (event.charCode==32) || (event.charCode==241) || (event.charCode==209))"
                 />
-                <span class="text-error" v-if="errors[0]">
+                <span v-if="errors[0]" class="text-error">
                   {{ errors[0] }}
                 </span>
                 <div v-else style="margin-bottom: 18px"></div>
@@ -600,15 +580,15 @@
             >
               <template slot-scope="{ errors }">
                 <input
+                  id="ContactId"
+                  v-model="form.phone"
                   name="id"
                   type="number"
-                  v-model="form.phone"
                   class="input-text"
                   :placeholder="$t('footer_formIdentiMgs')"
-                  id="ContactId"
                   onkeypress="return ((event.charCode>47 && event.charCode<58))"
                 />
-                <span class="text-error" v-if="errors[0]">
+                <span v-if="errors[0]" class="text-error">
                   {{ errors[0] }}
                 </span>
                 <div v-else style="margin-bottom: 18px"></div>
@@ -620,14 +600,14 @@
             <validation-provider name="email" class="content-input">
               <template slot-scope="{ errors }">
                 <input
+                  id="ContactEmail"
+                  v-model="form.email"
                   name="email"
                   type="text"
-                  v-model="form.email"
                   class="input-text"
                   :placeholder="$t('footer_formCorreoMgs')"
-                  id="ContactEmail"
                 />
-                <span class="text-error" v-if="errors[0]">
+                <span v-if="errors[0]" class="text-error">
                   {{ errors[0] }}
                 </span>
                 <div v-else style="margin-bottom: 18px"></div>
@@ -641,15 +621,15 @@
             >
               <template slot-scope="{ errors }">
                 <input
+                  id="ContactTelephone"
+                  v-model="form.identificacion"
                   name="telephone"
                   type="text"
-                  v-model="form.identificacion"
                   class="input-text"
                   :placeholder="$t('footer_formPhoneMgs')"
-                  id="ContactTelephone"
                   onkeypress="return ((event.charCode>47 && event.charCode<58))"
                 />
-                <span class="text-error" v-if="errors[0]">
+                <span v-if="errors[0]" class="text-error">
                   {{ errors[0] }}
                 </span>
                 <div v-else style="margin-bottom: 18px"></div>
@@ -663,13 +643,13 @@
             >
               <template slot-scope="{ errors }">
                 <input
+                  v-model="form.ciudad"
                   class="input-text"
                   name="ciudad"
                   :placeholder="$t('footer_formBarrioMgs')"
-                  v-model="form.ciudad"
                   onkeypress="return ((event.charCode>96 && event.charCode<123) || (event.charCode>64 && event.charCode<91) || (event.charCode==32) || (event.charCode==241) || (event.charCode==209))"
                 />
-                <span class="text-error" v-if="errors[0]">
+                <span v-if="errors[0]" class="text-error">
                   {{ errors[0] }}
                 </span>
                 <div v-else style="margin-bottom: 18px"></div>
@@ -683,13 +663,13 @@
             >
               <template slot-scope="{ errors }">
                 <input
+                  v-model="form.barrio"
                   class="input-text"
                   name="barrio"
                   :placeholder="$t(`${placeholderMsgBarrio}`)"
-                  v-model="form.barrio"
                   onkeypress="return ((event.charCode>96 && event.charCode<123) || (event.charCode>64 && event.charCode<91) || (event.charCode==32) || (event.charCode==241) || (event.charCode==209))"
                 />
-                <span class="text-error" v-if="errors[0]">
+                <span v-if="errors[0]" class="text-error">
                   {{ errors[0] }}
                 </span>
                 <div v-else style="margin-bottom: 18px"></div>
@@ -703,12 +683,12 @@
             >
               <template slot-scope="{ errors }">
                 <input
+                  v-model="form.dirreccion"
                   class="input-text"
                   name="dirreccion"
                   :placeholder="$t('footer_formDireccionMgs')"
-                  v-model="form.dirreccion"
                 />
-                <span class="text-error" v-if="errors[0]">
+                <span v-if="errors[0]" class="text-error">
                   {{ errors[0] }}
                 </span>
                 <div v-else style="margin-bottom: 18px"></div>
@@ -731,8 +711,8 @@
                 <validation-provider class="content-input">
                   <template
                     slot-scope="{ errors }"
-                    :name="item.id"
                     rules="required"
+                    :name="item.id"
                   >
                     <input
                       :type="item.type"
@@ -741,7 +721,7 @@
                       class="input-text"
                       :required="item.requerid ? true : false"
                     />
-                    <span class="text-error" v-if="errors[0]">
+                    <span v-if="errors[0]" class="text-error">
                       {{ errors[0] }}
                     </span>
                     <div v-else style="margin-bottom: 18px"></div>
@@ -752,8 +732,8 @@
           </div>
           <label
             for="order_close"
-            @click="modalBehaviorWhatsApp(false)"
             class="form_close"
+            @click="modalBehaviorWhatsApp(false)"
           >
             <close-icon />
           </label>
@@ -775,24 +755,24 @@
               : '#25D366'
           };          
           `"
-          @click.prevent="setOrderWa()"
           style="margin-top: 15px"
+          @click.prevent="setOrderWa()"
         >
           <whatsapp-icon class="wp-icon" /> {{ $t('footer_finalizarCompra') }}
         </button>
       </div>
-      <div class="modal-confirmation" v-if="this.modalConfirmation">
-        <p class="text-16">{{ this.textConfirmation }}</p>
+      <div v-if="modalConfirmation" class="modal-confirmation">
+        <p class="text-16">{{ textConfirmation }}</p>
         <div
-          class="flex flex-col justify-center items-center my-2"
           v-if="stateBtnConfirmation"
+          class="flex flex-col justify-center items-center my-2"
         >
           <p class="text-14 text-red-500">
             Es importante enviar la información al whatsApp dueño.
           </p>
           <span class="text-14 text-gray-200 w-9/12 mt-3">
             Si no abre whatsApp escribirle al dueño de la tienda por tu numero
-            de order: {{ this.numberOrder }}
+            de order: {{ numberOrder }}
           </span>
           <button
             class="continue_form_confirmation"
@@ -811,8 +791,8 @@
               : '#25D366'
           };          
           `"
-            @click="redirectWP"
             style="margin-top: 15px"
+            @click="redirectWP"
           >
             <whatsapp-icon class="wp-icon" /> Enviar información al WhatsApp
           </button>
@@ -825,13 +805,27 @@
 
 <script>
 import axios from 'axios'
-import idCloudinary from '../../../mixins/idCloudinary'
-import currency from '../../../mixins/formatCurrent'
-import expiredDate from '../../../mixins/expiredDate'
+import { mapState, mapGetters } from 'vuex'
+import idCloudinary from '@/mixins/idCloudinary'
+import currency from '@/mixins/formatCurrent'
+import expiredDate from '@/mixins/expiredDate'
+import mobileCheck from '@/mixins/mobileCheck'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  mixins: [idCloudinary, currency, expiredDate],
-  name: 'ko-Order1-cart-2',
+  name: 'KoOrderCart',
+  components: {
+    ValidationObserver,
+    ValidationProvider,
+  },
+  filters: {
+    capitalize(value) {
+      if (value) {
+        value = value.toLowerCase()
+        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
+      }
+    },
+  },
+  mixins: [idCloudinary, currency, expiredDate, mobileCheck],
   props: {
     dataStore: {
       type: Object,
@@ -848,28 +842,11 @@ export default {
       default: () => ({}),
     },
   },
-  components: {
-    ValidationObserver,
-    ValidationProvider,
-  },
-  async mounted() {
-    this.getCities()
-    this.setPlaceholderDep()
-    this.$store.dispatch('GET_DESCUENTOS')
-    this.$store.dispatch('GET_SHOPPING_CART')
-    this.$store.commit('CALCULATE_TOTAL_CART')
-    if (this.rangosByCiudades.envio_metodo == 'precio') {
-      this.shippingPrecio()
-    }
-    this.productsFreeShippingCart()
-    this.IsMinValorTotal()
-    this.obtainDiscountValue()
-  },
   data() {
     return {
       // img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
       shippingCities: [],
-      rangosByCiudades: [],
+      // rangosByCiudad: [],
       remove: false,
       shippingTarifaPrecio: '',
       estadoShippingTarifaPrecio: false,
@@ -898,9 +875,12 @@ export default {
     }
   },
   computed: {
-    layoutUniCentro() {
-      return this.$store.state.layoutUnicentro
-    },
+    ...mapState(['cities', 'totalCart', 'productsCart', 'checkoutWhatsApp']),
+    ...mapGetters(['userDropshipping', 'locationStore', 'cantidadProductos']),
+    ...mapState({
+      layoutUniCentro: (state) => state.layoutUnicentro,
+      facebookPixel: (state) => state.analytics_tagmanager,
+    }),
     openOrder: {
       get() {
         return this.$store.state.openOrder
@@ -917,158 +897,112 @@ export default {
         this.$store.commit('SET_STATE_FORM_MODAL_WHATS_APP', value)
       },
     },
-    // verifyProducts() {
-    //   return this.$store.getters.verifyProducts
-    // },
-    userDropshipping() {
-      return this.$store.getters.userDropshipping
-    },
-    locationStore() {
-      return this.$store.getters.locationStore
-    },
-    cantidadProductos() {
-      return this.$store.getters.cantidadProductos
-    },
     shippingDescuento() {
       return this.$store.getters.listaDescuentosProductos
     },
     shippingDescuento2() {
       return this.$store.getters.listaDescuentosPrecio
     },
-    totalCart() {
-      return this.$store.state.totalCart
-    },
-    productsCart() {
-      return this.$store.state.productsCart
-    },
     getFreeShipping() {
-      let free = true
-      if (this.rangosByCiudad.envio_metodo === 'gratis') {
-        free = false
-      }
-      if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
-        free = false
-      }
-      if (this.rangosByCiudad.envio_metodo === 'tarifa_plana') {
-        free = true
-      }
-      if (this.rangosByCiudad.envio_metodo === 'precio') {
-        free = true
-      }
-      if (this.rangosByCiudad.envio_metodo === 'sintarifa') {
-        free = false
-      }
-      if (this.rangosByCiudad.envio_metodo === 'sinEnvio') {
-        free = false
-      }
-      return free
+      const freeMethods = ['tarifa_plana', 'precio']
+      return freeMethods.includes(this.rangosByCiudad.envio_metodo)
     },
     rangosByCiudad() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
-      return this.rangosByCiudades
-    },
-    cities() {
-      return this.$store.state.cities
+      return this.$store.state.envios.valores
     },
     shipping() {
+      // if (this.FreeShippingCart || !this.$store.state?.envios?.estado) {
+
       if (this.FreeShippingCart) {
         return 0
-      } else {
-        if (this.$store.state.envios.estado) {
-          let shipping = JSON.parse(this.$store.state.envios.valores)
-          switch (shipping.envio_metodo) {
-            case 'sinEnvio':
-              return 0
-              // eslint-disable-next-line no-unreachable
-              break
-            case 'sintarifa':
-              return 0
-              // eslint-disable-next-line no-unreachable
-              break
-            case 'gratis':
-              return 0
-              // eslint-disable-next-line no-unreachable
-              break
-            case 'tarifa_plana':
-              return shipping.valor
-              // eslint-disable-next-line no-unreachable
-              break
-            case 'precio_ciudad':
-              // eslint-disable-next-line no-case-declarations
-              let result = shipping.rangos.find((rango) => {
-                if (
-                  this.totalCart >= rango.inicial &&
-                  this.totalCart <= rango.final
-                ) {
-                  return rango
-                }
-              })
-              if (result) {
-                return result.precio
-              } else {
-                return 0
-              }
-              // eslint-disable-next-line no-unreachable
-              break
-            default:
-              return 0
-          }
-        } else {
-          return 0
-        }
       }
-    },
-    facebookPixel() {
-      return this.$store.state.analytics_tagmanager
+
+      switch (this.rangosByCiudad.envio_metodo) {
+        case 'sinEnvio':
+        case 'sintarifa':
+        case 'gratis':
+          return 0
+        case 'tarifa_plana':
+          return this.rangosByCiudad.valor
+        case 'precio_ciudad':
+          // eslint-disable-next-line no-case-declarations
+          const result = this.rangosByCiudad.rangos.find((rango) => {
+            return (
+              this.totalCart >= rango.inicial && this.totalCart <= rango.final
+            )
+          })
+          return result ? result.precio : 0
+        default:
+          return 0
+      }
     },
     countryStore() {
-      if (this.dataStore && this.dataStore.tienda.pais) {
-        switch (this.dataStore.tienda.pais) {
-          case 'Colombia':
-            return true
-            // eslint-disable-next-line no-unreachable
-            break
-          case 'Chile':
-            return true
-            // eslint-disable-next-line no-unreachable
-            break
-          case 'Perú':
-            return true
-            // eslint-disable-next-line no-unreachable
-            break
-          case 'Panamá':
-            return true
-            // eslint-disable-next-line no-unreachable
-            break
-          default:
-            return false
-        }
-      } else {
-        return false
+      if (this.dataStore && this.dataStore.tiendasInfo.paises.pais) {
+        const supportedCountries = ['Colombia', 'Chile', 'Perú', 'Panamá']
+        return supportedCountries.includes(
+          this.dataStore.tiendasInfo.paises.pais
+        )
       }
+      return false
     },
     settingByTemplate() {
-      if (this.$store.state.settingByTemplate) {
-        return this.$store.state.settingByTemplate
-      } else {
-        return this.$store.state.settingBaseWapir
-      }
+      return (
+        this.$store.state.settingByTemplate ||
+        this.$store.state.settingBaseWapir
+      )
     },
     inputCheckoutWPP() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      if (
-        this.dataStore &&
-        this.dataStore.whatsapp_checkout &&
-        this.dataStore.whatsapp_checkout.configuration
-      ) {
-        let myJSON = JSON.parse(this.dataStore.whatsapp_checkout.configuration)
-        return myJSON
+      return this.checkoutWhatsApp?.configuration
+        ? JSON.parse(this.checkoutWhatsApp.configuration)
+        : null
+    },
+  },
+  watch: {
+    rangosByCiudad() {
+      this.filterCities()
+    },
+    // cities() {
+    //   this.filterCities()
+    // },
+    productsCart() {
+      if (this.productsCart) {
+        this.tempCart = this.productsCart
+        this.shippingPrecio()
+        this.productsFreeShippingCart()
       }
     },
-    // stateModalPwd() {
-    //   return this.$store.state.stateModalPwd
-    // },
+    totalCart() {
+      this.shippingPrecio()
+      this.IsMinValorTotal()
+      this.obtainDiscountValue()
+    },
+    shippingDescuento() {
+      this.obtainDiscountValue()
+    },
+    shippingDescuento2() {
+      this.obtainDiscountValue()
+    },
+    openOrder(value) {
+      if (!value && this.quickSale && this.quickSale.state) {
+        this.$store.commit('DELETE_ALL_ITEMS_CART')
+        this.$store.commit('UPDATE_CONTENT_CART')
+        this.$store.commit('SET_OPEN_ORDER', false)
+        this.$store.commit('SET_STATE_FORM_MODAL_WHATS_APP', false)
+      }
+    },
+  },
+  async mounted() {
+    this.getCities()
+    this.setPlaceholderDep()
+    this.$store.dispatch('GET_DESCUENTOS')
+    this.$store.dispatch('GET_SHOPPING_CART')
+    this.$store.commit('CALCULATE_TOTAL_CART')
+    if (this.rangosByCiudad.envio_metodo == 'precio') {
+      this.shippingPrecio()
+    }
+    this.productsFreeShippingCart()
+    this.IsMinValorTotal()
+    this.obtainDiscountValue()
   },
   methods: {
     modalBehaviorWhatsApp(value) {
@@ -1107,8 +1041,8 @@ export default {
     },
     shippingPrecio() {
       if (!this.FreeShippingCart) {
-        if (this.rangosByCiudades.envio_metodo == 'precio') {
-          let result = this.rangosByCiudades.rangos.find(
+        if (this.rangosByCiudad.envio_metodo == 'precio') {
+          let result = this.rangosByCiudad.rangos.find(
             (rango) =>
               this.totalCart >= rango.inicial && this.totalCart <= rango.final
           )
@@ -1118,19 +1052,14 @@ export default {
       }
     },
     isQuotation() {
-      let result = this.productsCart.some((product) => product.precio === 0)
-      return result
+      return this.productsCart.some((product) => product.precio === 0)
     },
     IsMinValorTotal() {
-      let result = false
-      if (
-        this.dataStore.tienda.minimo_compra == 0 ||
-        this.dataStore.tienda.minimo_compra == null ||
-        this.totalCart >= this.dataStore.tienda.minimo_compra
-      ) {
-        result = true
-      }
-      return result
+      return (
+        this.dataStore.tiendasInfo.valorCompraMinimo == 0 ||
+        this.dataStore.tiendasInfo.valorCompraMinimo == null ||
+        this.totalCart >= this.dataStore.tiendasInfo.valorCompraMinimo
+      )
     },
     addQuantity(product) {
       if (product.limitQuantity > product.cantidad) {
@@ -1215,22 +1144,9 @@ export default {
     },
     async getCities() {
       if (this.rangosByCiudad.envio_metodo === 'precio_ciudad') {
-        try {
-          const storeCities = JSON.parse(localStorage.getItem('storeCities'))
-          if (storeCities) {
-            this.$store.commit('SET_CITIES', storeCities)
-            this.filterCities()
-          } else {
-            const { success } = await this.$store.dispatch('GET_CITIES')
-            if (success) {
-              this.filterCities()
-            }
-          }
-        } catch (err) {
-          const { success } = await this.$store.dispatch('GET_CITIES')
-          if (success) {
-            this.filterCities()
-          }
+        const { success } = await this.$store.dispatch('GET_CITIES')
+        if (success) {
+          this.filterCities()
         }
       }
     },
@@ -1248,24 +1164,6 @@ export default {
         })
       }
     },
-    mobileCheck() {
-      window.mobilecheck = function () {
-        var check = false
-        ;(function (a) {
-          if (
-            /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
-              a
-            ) ||
-            /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
-              a.substr(0, 4)
-            )
-          )
-            check = true
-        })(navigator.userAgent || navigator.vendor || window.opera)
-        return check
-      }
-      return window.mobilecheck()
-    },
     redirectWP() {
       let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
       let baseUrlPc = 'https://web.whatsapp.com/send?phone='
@@ -1279,13 +1177,13 @@ export default {
             `${element.cantidad} x ${
               element.nombre
             } = Variantes: ${resultcombitList} -> Valor: ${
-              this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+              this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
             }${element.cantidad * element.precio}`
           )
         } else {
           productosCart.push(
             `${element.cantidad} x ${element.nombre} -> Valor: ${
-              this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+              this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
             }${element.cantidad * element.precio}`
           )
         }
@@ -1300,23 +1198,23 @@ export default {
         this.inputCheckoutWPP === null ||
         this.inputCheckoutWPP === undefined
       ) {
-        if (this.dataStore.tienda.lenguaje == 'es') {
+        if (this.dataStore.tiendasInfo.lenguaje == 'es') {
           text = `Hola%2C%20soy%20${
             this.form.nombre
           }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${encodeURIComponent(
-            this.dataStore.tienda.nombre
+            this.dataStore.nombre
           )}%0ANumero%20de%20orden%3A%20${
             this.numberOrder
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20${
             this.discountDescuentos
-              ? this.dataStore.tienda.moneda == 'PEN'
+              ? this.dataStore.tiendasInfo.moneda == 'PEN'
                 ? '- S/'
                 : '- $' + this.discountDescuentos
               : 'No%20aplica'
           }%0A%2ASubtotal%2A%3A%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${
             this.totalCart +
             (this.shipping ? this.shipping : 0) +
@@ -1343,23 +1241,23 @@ export default {
           )}%0A%0A%2Avolver%20a%20la%20tienda%2A%3A%20${
             window.location
           }?clearCart=true`
-        } else if (this.dataStore.tienda.lenguaje == 'en') {
+        } else if (this.dataStore.tiendasInfo.lenguaje == 'en') {
           text = `Hello%2C%20I%20am%20${
             this.form.nombre
           }%2C%0AI%20made%20this%20order%20at%20your%20store%20${encodeURIComponent(
-            this.dataStore.tienda.nombre
+            this.dataStore.nombre
           )}%0AOrder%20number%3A%20${
             this.numberOrder
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADiscount%2A%3A%20${
             this.discountDescuentos
-              ? this.dataStore.tienda.moneda == 'PEN'
+              ? this.dataStore.tiendasInfo.moneda == 'PEN'
                 ? '- S/'
                 : '- $' + this.discountDescuentos
               : 'Not%20applicable'
           }%0A%2ASubtotal%2A%3A%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${
             this.totalCart +
             (this.shipping ? this.shipping : 0) +
@@ -1384,23 +1282,23 @@ export default {
           )}%0A%0A%2Aback%20to%20the%20store%2A%3A%20${
             window.location
           }?clearCart=true`
-        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+        } else if (this.dataStore.tiendasInfo.lenguaje == 'pt') {
           text = `Olá%2C%20aqui%20é%20${
             this.form.nombre
           }%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${encodeURIComponent(
-            this.dataStore.tienda.nombre
+            this.dataStore.nombre
           )}%0AN%C3%BAmero%20do%20pedido%3A%20${
             this.numberOrder
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADesconto%2A%3A%20${
             this.discountDescuentos
-              ? this.dataStore.tienda.moneda == 'PEN'
+              ? this.dataStore.tiendasInfo.moneda == 'PEN'
                 ? '- S/'
                 : '- $' + this.discountDescuentos
               : 'Não%20aplicável'
           }%0A%2ASubtotal%2A%3A%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${
             this.totalCart +
             (this.shipping ? this.shipping : 0) +
@@ -1429,19 +1327,19 @@ export default {
           text = `Hola%2C%20soy%20${
             this.form.nombre
           }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${encodeURIComponent(
-            this.dataStore.tienda.nombre
+            this.dataStore.nombre
           )}%0ANumero%20de%20orden%3A%20${
             this.numberOrder
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20${
             this.discountDescuentos
-              ? this.dataStore.tienda.moneda == 'PEN'
+              ? this.dataStore.tiendasInfo.moneda == 'PEN'
                 ? '- S/'
                 : '- $' + this.discountDescuentos
               : 'No%20aplica'
           }%0A%2ASubtotal%2A%3A%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${
             this.totalCart +
             (this.shipping ? this.shipping : 0) +
@@ -1470,21 +1368,21 @@ export default {
           }?clearCart=true`
         }
       } else {
-        if (this.dataStore.tienda.lenguaje == 'es') {
+        if (this.dataStore.tiendasInfo.lenguaje == 'es') {
           text = `Hola%20%F0%9F%91%8B.%0AHice%20este%20pedido%20%F0%9F%93%A6%20en%20tu%20tienda%20${encodeURIComponent(
-            this.dataStore.tienda.nombre
+            this.dataStore.nombre
           )}%0ANumero%20de%20orden%3A%20${
             this.numberOrder
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20-${
             this.discountDescuentos
-              ? this.dataStore.tienda.moneda == 'PEN'
+              ? this.dataStore.tiendasInfo.moneda == 'PEN'
                 ? 'S/'
                 : '$' + this.discountDescuentos
               : 'No%20aplica'
           }%0A%2ASubtotal%2A%3A%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${
             this.totalCart +
             (this.shipping ? this.shipping : 0) +
@@ -1499,21 +1397,21 @@ export default {
               ? this.locationStore
               : window.location
           }?clearCart=true`
-        } else if (this.dataStore.tienda.lenguaje == 'en') {
+        } else if (this.dataStore.tiendasInfo.lenguaje == 'en') {
           text = `Hello%20%F0%9F%91%8B.%0AI%20placed%20this%20order%20%F0%9F%93%A6%20in%20your%20store.%20${encodeURIComponent(
-            this.dataStore.tienda.nombre
+            this.dataStore.nombre
           )}%0AOrder%20number%3A%20${
             this.numberOrder
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADiscount%2A%3A%20${
             this.discountDescuentos
-              ? this.dataStore.tienda.moneda == 'PEN'
+              ? this.dataStore.tiendasInfo.moneda == 'PEN'
                 ? '- S/'
                 : '- $' + this.discountDescuentos
               : 'Not%20applicable'
           }%0A%2ASubtotal%2A%3A%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${
             this.totalCart +
             (this.shipping ? this.shipping : 0) +
@@ -1528,21 +1426,21 @@ export default {
               ? this.locationStore
               : window.location
           }?clearCart=true`
-        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+        } else if (this.dataStore.tiendasInfo.lenguaje == 'pt') {
           text = `Ol%C3%A1%20%F0%9F%91%8B.%0AEu%20coloquei%20este%20pedido%20%F0%9F%93%A6%20em%20sua%20loja.%20${encodeURIComponent(
-            this.dataStore.tienda.nombre
+            this.dataStore.nombre
           )}%0AN%C3%BAmero%20do%20pedido%3A%20${
             this.numberOrder
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADesconto%2A%3A%20-${
             this.discountDescuentos
-              ? this.dataStore.tienda.moneda == 'PEN'
+              ? this.dataStore.tiendasInfo.moneda == 'PEN'
                 ? 'S/'
                 : '$' + this.discountDescuentos
               : 'Não%20aplicável'
           }%0A%2ASubtotal%2A%3A%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${
             this.totalCart +
             (this.shipping ? this.shipping : 0) +
@@ -1558,21 +1456,21 @@ export default {
               : window.location
           }?clearCart=true`
         } else {
-          if (this.dataStore.tienda.lenguaje == 'es') {
+          if (this.dataStore.tiendasInfo.lenguaje == 'es') {
             text = `Hola%20%F0%9F%91%8B.%0AHice%20este%20pedido%20%F0%9F%93%A6%20en%20tu%20tienda%20${encodeURIComponent(
-              this.dataStore.tienda.nombre
+              this.dataStore.nombre
             )}%0ANumero%20de%20orden%3A%20${
               this.numberOrder
             }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A${result}%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20${
               this.discountDescuentos
-                ? this.dataStore.tienda.moneda == 'PEN'
+                ? this.dataStore.tiendasInfo.moneda == 'PEN'
                   ? '- S/'
                   : '- $' + this.discountDescuentos
                 : 'No%20aplica'
             }%0A%2ASubtotal%2A%3A%20${
-              this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+              this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
             }${this.totalCart}%0A%2ATOTAL%2A%3A%20${
-              this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+              this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
             }${
               this.totalCart +
               (this.shipping ? this.shipping : 0) +
@@ -1606,8 +1504,8 @@ export default {
           }
         }
       } else {
-        if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
-          let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
+        if (this.dataStore.redes.whatsapp.charAt(0) == '+') {
+          let phone_number_whatsapp = this.dataStore.redes.whatsapp.slice(1)
           if (this.mobileCheck()) {
             window.location.href = `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`
           } else {
@@ -1615,9 +1513,9 @@ export default {
           }
         } else {
           if (this.mobileCheck()) {
-            window.location.href = `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`
+            window.location.href = `${baseUrlMovil}57${this.dataStore.redes.whatsapp}&text=${text}`
           } else {
-            window.location.href = `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`
+            window.location.href = `${baseUrlPc}57${this.dataStore.redes.whatsapp}&text=${text}`
           }
         }
       }
@@ -1661,7 +1559,7 @@ export default {
             canal: 1,
             usuario: 30866,
             tipo: 0,
-            tienda: this.dataStore.tienda.id_tienda,
+            tienda: this.dataStore.id,
             total:
               this.totalCart +
               (this.shipping ? this.shipping : 0) +
@@ -1700,117 +1598,99 @@ export default {
       })
     },
     setShipping() {
-      let resultShipping
-      if (
-        this.rangosByCiudades &&
-        this.rangosByCiudades.envio_metodo == 'gratis'
-      ) {
-        resultShipping = 0
-      } else if (
-        this.rangosByCiudades &&
-        this.rangosByCiudades.envio_metodo == 'sinEnvio'
-      ) {
-        resultShipping = this.rangosByCiudades.valor
-      } else if (
-        this.rangosByCiudades &&
-        this.rangosByCiudades.envio_metodo == 'tarifa_plana'
-      ) {
-        resultShipping = this.rangosByCiudades.valor
-      } else if (
-        this.rangosByCiudades &&
-        this.rangosByCiudades.envio_metodo == 'precio_ciudad'
-      ) {
-        resultShipping = 0
-      } else if (
-        this.rangosByCiudades &&
-        this.rangosByCiudades.envio_metodo == 'precio'
-      ) {
-        resultShipping = this.shippingTarifaPrecio
-      } else if (
-        this.rangosByCiudades &&
-        this.rangosByCiudades.envio_metodo == 'sintarifa'
-      ) {
-        resultShipping = 0
+      if (this.rangosByCiudad) {
+        switch (this.rangosByCiudad.envio_metodo) {
+          case 'gratis':
+          case 'precio_ciudad':
+          case 'sintarifa':
+            return 0
+
+          case 'sinEnvio':
+          case 'tarifa_plana':
+            return this.rangosByCiudad.valor
+
+          case 'precio':
+            return this.shippingTarifaPrecio
+
+          default:
+            return 0
+        }
       } else {
-        resultShipping = 0
+        return 0
       }
-      return resultShipping
     },
     translateDeliveryMethod() {
       let textFreeShippingCart
-      if (
-        this.rangosByCiudades &&
-        this.rangosByCiudades.envio_metodo == 'gratis'
-      ) {
-        if (this.dataStore.tienda.lenguaje == 'es') {
+      if (this.rangosByCiudad && this.rangosByCiudad.envio_metodo == 'gratis') {
+        if (this.dataStore.tiendasInfo.lenguaje == 'es') {
           textFreeShippingCart = 'Env%C3%ADo%20gratis'
-        } else if (this.dataStore.tienda.lenguaje == 'en') {
+        } else if (this.dataStore.tiendasInfo.lenguaje == 'en') {
           textFreeShippingCart = 'Free%20shippings'
-        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+        } else if (this.dataStore.tiendasInfo.lenguaje == 'pt') {
           textFreeShippingCart = 'Frete%20gr%C3%A1tis'
         }
       } else if (
-        this.rangosByCiudades &&
-        this.rangosByCiudades.envio_metodo == 'tarifa_plana'
+        this.rangosByCiudad &&
+        this.rangosByCiudad.envio_metodo == 'tarifa_plana'
       ) {
-        if (this.dataStore.tienda.lenguaje == 'es') {
+        if (this.dataStore.tiendasInfo.lenguaje == 'es') {
           textFreeShippingCart = `Costo%20domicilio:%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
-          }${this.rangosByCiudades.valor}`
-        } else if (this.dataStore.tienda.lenguaje == 'en') {
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
+          }${this.rangosByCiudad.valor}`
+        } else if (this.dataStore.tiendasInfo.lenguaje == 'en') {
           textFreeShippingCart = `Shipping%cost:%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
-          }${this.rangosByCiudades.valor}`
-        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
+          }${this.rangosByCiudad.valor}`
+        } else if (this.dataStore.tiendasInfo.lenguaje == 'pt') {
           textFreeShippingCart = `Custos%20envio:%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
-          }${this.rangosByCiudades.valor}`
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
+          }${this.rangosByCiudad.valor}`
         }
       } else if (
-        this.rangosByCiudades &&
-        this.rangosByCiudades.envio_metodo == 'precio_ciudad'
+        this.rangosByCiudad &&
+        this.rangosByCiudad.envio_metodo == 'precio_ciudad'
       ) {
-        if (this.dataStore.tienda.lenguaje == 'es') {
+        if (this.dataStore.tiendasInfo.lenguaje == 'es') {
           textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
-        } else if (this.dataStore.tienda.lenguaje == 'en') {
+        } else if (this.dataStore.tiendasInfo.lenguaje == 'en') {
           textFreeShippingCart = 'Shipping%20cost%20separately'
-        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+        } else if (this.dataStore.tiendasInfo.lenguaje == 'pt') {
           textFreeShippingCart = 'Custos%20de%20envio%20negociar%20a%20parte'
         }
       } else if (
-        this.rangosByCiudades &&
-        this.rangosByCiudades.envio_metodo == 'precio'
+        this.rangosByCiudad &&
+        this.rangosByCiudad.envio_metodo == 'precio'
       ) {
-        if (this.dataStore.tienda.lenguaje == 'es') {
+        if (this.dataStore.tiendasInfo.lenguaje == 'es') {
           textFreeShippingCart = `Costo%20domicilio:%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${this.shippingTarifaPrecio}`
-        } else if (this.dataStore.tienda.lenguaje == 'en') {
+        } else if (this.dataStore.tiendasInfo.lenguaje == 'en') {
           textFreeShippingCart = `Shipping%cost:%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${this.shippingTarifaPrecio}`
-        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+        } else if (this.dataStore.tiendasInfo.lenguaje == 'pt') {
           textFreeShippingCart = `Custos%20envio:%20${
-            this.dataStore.tienda.moneda == 'PEN' ? 'S/' : '$'
+            this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
           }${this.shippingTarifaPrecio}`
         }
       } else if (
-        this.rangosByCiudades &&
-        this.rangosByCiudades.envio_metodo == 'sintarifa'
+        this.rangosByCiudad &&
+        this.rangosByCiudad.envio_metodo == 'sintarifa'
       ) {
-        if (this.dataStore.tienda.lenguaje == 'es') {
+        if (this.dataStore.tiendasInfo.lenguaje == 'es') {
           textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
-        } else if (this.dataStore.tienda.lenguaje == 'en') {
+        } else if (this.dataStore.tiendasInfo.lenguaje == 'en') {
           textFreeShippingCart = 'Shipping%20cost%20separately'
-        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+        } else if (this.dataStore.tiendasInfo.lenguaje == 'pt') {
           textFreeShippingCart = 'Custos%20de%20envio%20negociar%20a%20parte'
         }
       } else {
-        if (this.dataStore.tienda.lenguaje == 'es') {
+        if (this.dataStore.tiendasInfo.lenguaje == 'es') {
           textFreeShippingCart = 'Costos%20de%20Env%C3%ADo%20por%20separado'
-        } else if (this.dataStore.tienda.lenguaje == 'en') {
+        } else if (this.dataStore.tiendasInfo.lenguaje == 'en') {
           textFreeShippingCart = 'Shipping%20cost%20separately'
-        } else if (this.dataStore.tienda.lenguaje == 'pt') {
+        } else if (this.dataStore.tiendasInfo.lenguaje == 'pt') {
           textFreeShippingCart = 'Custos%20de%20envio%20negociar%20a%20parte'
         }
       }
@@ -1851,7 +1731,7 @@ export default {
               ? this.shippingTarifaPrecio
               : 0) -
             this.discountDescuentos,
-          currency: this.dataStore.tienda.moneda,
+          currency: this.dataStore.tiendasInfo.moneda,
         })
       }
     },
@@ -1864,7 +1744,7 @@ export default {
       }
     },
     setPlaceholderDep() {
-      switch (this.dataStore.tienda.id_pais) {
+      switch (this.dataStore.tiendasInfo.paises.id) {
         //colombia
         case 1:
           this.placeholderDepart = 'footer_formDepartamento'
@@ -1921,48 +1801,6 @@ export default {
           ;(this.textDepartment = 'Provincia'),
             (this.textCiudad = 'Distritos / Zona')
           break
-      }
-    },
-  },
-  watch: {
-    rangosByCiudad() {
-      this.filterCities()
-    },
-    // cities() {
-    //   this.filterCities()
-    // },
-    productsCart() {
-      if (this.productsCart) {
-        this.tempCart = this.productsCart
-        this.shippingPrecio()
-        this.productsFreeShippingCart()
-      }
-    },
-    totalCart() {
-      this.shippingPrecio()
-      this.IsMinValorTotal()
-      this.obtainDiscountValue()
-    },
-    shippingDescuento() {
-      this.obtainDiscountValue()
-    },
-    shippingDescuento2() {
-      this.obtainDiscountValue()
-    },
-    openOrder(value) {
-      if (!value && this.quickSale && this.quickSale.state) {
-        this.$store.commit('DELETE_ALL_ITEMS_CART')
-        this.$store.commit('UPDATE_CONTENT_CART')
-        this.$store.commit('SET_OPEN_ORDER', false)
-        this.$store.commit('SET_STATE_FORM_MODAL_WHATS_APP', false)
-      }
-    },
-  },
-  filters: {
-    capitalize(value) {
-      if (value) {
-        value = value.toLowerCase()
-        return value.replace(/^\w|\s\w/g, (l) => l.toUpperCase())
       }
     },
   },

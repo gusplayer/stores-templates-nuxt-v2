@@ -5,21 +5,20 @@
         <div
           class="tag"
           :class="idCategory == '' ? 'active-tag' : 'disable-tag'"
-          @click="clear"
         >
-          <p class="txt-category" @click="sendCategory('', '')">
+          <button class="txt-category" @click="clearFilters">
             {{ $t('home_todo') }}
-          </p>
+          </button>
         </div>
         <div
-          v-for="categoria in categorias"
-          :key="categoria.id"
+          v-for="category in categorias"
+          :key="category.id"
           class="tag"
-          :class="categoria.id == idCategory ? 'active-tag' : 'disable-tag'"
-          @click="sendCategory(categoria, categoria.id)"
+          :class="category.id == categorySelect ? 'active-tag' : 'disable-tag'"
+          @click="setToQueryFilter('category', category)"
         >
           <p class="txt-category">
-            {{ categoria.nombre_categoria_producto }}
+            {{ category.nombreCategoriaProducto }}
           </p>
         </div>
       </div>
@@ -33,15 +32,18 @@
     >
       <div class="itens-slide-categories">
         <div
-          v-for="(subcategorys, index) in selectedSubcategories"
+          v-for="(subcategory, index) in selectedSubcategories"
           :key="index"
           class="tag"
           :class="
-            subcategorys.id == idSubCategory ? 'active-tag' : 'disable-tag'
+            subcategory.id == subCategorySelect ? 'active-tag' : 'disable-tag'
           "
         >
-          <p class="txt-category" @click="sendSubCategory(subcategorys.id)">
-            {{ subcategorys.nombre_subcategoria }}
+          <p
+            class="txt-category"
+            @click="setToQueryFilter('subcategories', subcategory)"
+          >
+            {{ subcategory.nombreSubcategoria }}
           </p>
         </div>
       </div>
@@ -49,6 +51,7 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'CategorySlideWa2',
   props: {
@@ -63,107 +66,122 @@ export default {
   },
   data() {
     return {
-      nameCategory: '',
-      nameSubCategory: '',
-      selectedSubcategories: [],
-      toggleCategories: true,
       idCategory: '',
-      idSubCategory: '',
+      categorySelect: '',
+      subCategorySelect: '',
+      selectedSubcategories: [],
+      query: {
+        page: 1,
+        category: null,
+        subcategory: null,
+      },
     }
   },
   computed: {
-    categorias() {
-      return this.dataStore.categorias
-    },
-    subcategories() {
-      return this.dataStore.subcategorias
-    },
-    product() {
-      return this.$store.getters['products/allProduct']
-    },
-    stateWapiME() {
-      return this.$store.state.stateWapiME
-    },
+    ...mapState(['categorias', 'stateWapiME']),
+    ...mapState({
+      subcategories: (state) => state.subcategorias,
+    }),
   },
   methods: {
-    navigateToRoute(route) {
-      if (this.stateWapiME) {
-        this.$router.push(`/wa/${this.dataStore.tienda.id_tienda}`)
-      } else {
-        this.$router.push(route)
-      }
-    },
-    sendSubCategory(value) {
-      this.idSubCategory = value
-      this.navigateToRoute(`/`)
-      this.$store.commit('SET_STATE_BANNER', false)
-
-      const filtradoSubCategory = this.subcategories.find(
-        (element) => element.id == value
-      )
-
-      if (filtradoSubCategory && filtradoSubCategory.categoria) {
-        const filtradoCategories = this.categorias.find(
-          (element) => element.id == filtradoSubCategory.categoria
+    setToQueryFilter(type, value) {
+      if (type === 'category') {
+        this.query.subcategory = null
+        this.subCategorySelect = null
+        this.query.category = value.nombreCategoriaProducto || null
+        this.categorySelect = value.id
+        this.idCategory = value.id
+        this.selectedSubcategories = this.subcategories.filter(
+          (item) => item.categoria === value.id
         )
         this.$store.commit(
-          'SET_CATEGORY_PRODUCTO',
-          filtradoCategories.nombre_categoria_producto
+          'products/SET_CATEGORY_PRODUCTO',
+          value.nombreCategoriaProducto
         )
-        this.nameSubCategory = filtradoSubCategory.nombre_subcategoria
-        this.$router.push({
-          path: '',
-          query: {
-            subcategory: `${this.nameSubCategory}^${filtradoCategories.id}`,
-          },
+        this.$store.commit('products/SET_SUBCATEGORY_PRODUCTO', null)
+        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
+      } else if (type === 'subcategories') {
+        this.categorias.filter((item) => {
+          if (item.id === value.categoria) {
+            this.query.category = item.nombreCategoriaProducto
+          }
         })
-        this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
-        this.$store.commit('products/FILTER_BY', {
-          type: ['subcategory'],
-          data: value,
+        this.$store.commit(
+          'products/SET_CATEGORY_PRODUCTO',
+          this.query.category
+        )
+        this.$store.commit(
+          'products/SET_SUBCATEGORY_PRODUCTO',
+          value.nombreSubcategoria || null
+        )
+        this.query.subcategory = value.id || null
+        this.subCategorySelect = value.id
+        this.idCategory = value.id
+        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
+      }
+      this.$store.commit('SET_STATE_BANNER', false)
+      this.setInformationFromQuery(this.query)
+    },
+    async setInformationFromQuery({ page, category, subcategory }) {
+      const query = {}
+
+      if (page !== null && page !== undefined) query.page = page
+      if (category !== null) query.category = category
+      if (subcategory !== null) query.subcategory = subcategory
+
+      try {
+        await this.$router.push({
+          path: `${this.stateWapiME ? `/wa/${this.dataStore.id}` : '/'}`,
+          query,
         })
-        this.$store.commit('SET_PREVIOUS_PAGE', 1)
+      } catch (error) {
+        console.error('Error navigating:', error)
       }
     },
-    sendCategory(value, categoria) {
-      this.idCategory = categoria
-      this.navigateToRoute(`/`)
-      this.$store.commit('SET_STATE_BANNER', false)
-      this.nameCategory = value.nombre_categoria_producto
-      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$router.push({
-        path: '',
-        query: { category: this.nameCategory },
-      })
+    async getInformationFromQuery() {
+      const query = this.$route.query
 
-      this.selectedSubcategories = []
-      this.subcategories.forEach((subcategory) => {
-        if (subcategory.categoria === categoria) {
-          this.toggleCategories = false
-          this.selectedSubcategories.push(subcategory)
-        }
-      })
+      this.query.category = query.category || null
+      this.query.subcategory = query.subcategory || null
 
-      this.$store.commit('products/FILTER_BY', {
-        type: ['category'],
-        data: value.nombre_categoria_producto,
-      })
-      this.$store.commit('SET_PREVIOUS_PAGE', 1)
+      if (this.query.category || this.query.subcategory) {
+        this.setData(this.query)
+      }
     },
-    clear() {
+    setData(value) {
+      if (value.category) {
+        this.categorias.filter((item) => {
+          if (item.nombreCategoriaProducto === value.category) {
+            this.categorySelect = item.id
+            this.idCategory = item.id
+          }
+        })
+        this.selectedSubcategories = this.subcategories.filter(
+          (item) => item.categoria === this.idCategory
+        )
+      }
+
+      this.subCategorySelect = value.subcategory ?? ''
+
+      this.$store.commit('SET_STATE_BANNER', false)
+    },
+    clearFilters() {
+      this.query = {
+        page: 1,
+        category: null,
+        subcategory: null,
+      }
       this.idCategory = ''
-      this.idSubCategory = ''
-      this.selectedSubcategories = ''
-      this.$store.commit('SET_STATE_BANNER', true)
-      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.navigateToRoute('/')
-      this.$store.commit('products/FILTER_BY', {
-        type: ['all'],
-        data: '',
+      this.categorySelect = ''
+      this.subCategorySelect = ''
+      this.$router.push({
+        path: `${this.stateWapiME ? `/wa/${this.dataStore.id}` : '/'}`,
+        query: '',
       })
-      this.$emit('clear')
+      this.$store.commit('products/SET_CATEGORY_PRODUCTO', null)
+      this.$store.commit('products/SET_SUBCATEGORY_PRODUCTO', null)
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
+      this.$store.commit('SET_STATE_BANNER', true)
     },
   },
 }

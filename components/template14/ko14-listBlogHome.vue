@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="listArticulos.length > 0"
     class="w-full flex justify-center items-center py-20 lg:py-30 px-10"
     :style="`background-color: ${listBlogHome['--background_color_1']}`"
   >
@@ -34,7 +33,7 @@
       >
         <div class="swiper-wrapper w-full h-full">
           <div
-            v-for="article in listArticulos"
+            v-for="article in listBlogs"
             :key="article.id"
             class="swiper-slide w-full"
           >
@@ -78,6 +77,7 @@ export default {
 
   data() {
     return {
+      listBlogs: [],
       swiperOptions: {
         slidesPerView: 3,
         spaceBetween: 30,
@@ -95,11 +95,23 @@ export default {
     }
   },
   computed: {
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
     swiper() {
       return this.$refs.mySwiper.swiper
+    },
+  },
+  mounted() {
+    this.getBlogs()
+  },
+  methods: {
+    async getBlogs() {
+      const { success, data } = await this.$store.dispatch('GET_ARTICLES', {
+        id_tienda: this.dataStore.id,
+        limit: 6,
+        page: 1,
+      })
+      if (success) {
+        this.listBlogs = data.data
+      }
     },
   },
 }

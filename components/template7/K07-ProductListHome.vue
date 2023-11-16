@@ -5,26 +5,17 @@
       settingKProductList,
       settingGeneral,
       {
-        '--font-style-1':
-          settingGeneral && settingGeneral.fount_1
-            ? settingGeneral.fount_1
-            : 'David Libre',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'David Libre',
       },
       {
-        '--font-style-2':
-          settingGeneral && settingGeneral.fount_2
-            ? settingGeneral.fount_2
-            : 'Great Vibes',
+        '--font-style-2': settingGeneral?.fount_2 ?? 'Great Vibes',
       },
       {
-        '--font-style-3':
-          settingGeneral && settingGeneral.fount_3
-            ? settingGeneral.fount_3
-            : 'Lora',
+        '--font-style-3': settingGeneral?.fount_3 ?? 'Lora',
       },
     ]"
   >
-    <div class="separador-blog" v-if="!settingKCarousel.visible"></div>
+    <div v-if="!settingKCarousel.visible" class="separador-blog"></div>
     <div id="section" class="producto-items-content">
       <div class="product-text">
         <div class="product-tittle">
@@ -49,22 +40,18 @@
             >
               <KoProductCard
                 :product="product"
-                :settingKProductCard="settingKProductCard"
-                :settingGeneral="settingGeneral"
+                :setting-card-products="settingCardProducts"
+                :setting-general="settingGeneral"
               />
             </div>
           </div>
-          <div
-            v-if="this.listProducts.length == 0"
-            class="content-products-empty"
-          >
+          <div v-if="listProducts?.length === 0" class="content-products-empty">
             <div class="header-content-logo">
               <nuxt-link to="/productos" class="wrapper-logo">
                 <img
-                  :src="`${this.$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`"
+                  :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
                   class="header-logo"
                   alt="Logo Img"
-                  @click="clear"
                 />
               </nuxt-link>
             </div>
@@ -77,49 +64,54 @@
 </template>
 
 <script>
-import KoProductCard from './_productcard/ProductCard'
-
 export default {
   name: 'K07ProductListHome',
   components: {
-    KoProductCard,
+    KoProductCard: () => import('./_productcard/ProductCard.vue'),
   },
   props: {
-    dataStore: Object,
-    fullProducts: {},
-    settingKProductList: Object,
-    settingGeneral: Object,
-    settingKProductCard: Object,
-    settingKCarousel: Object,
-  },
-  computed: {
-    listProducts() {
-      return this.fullProducts.slice(0, 8)
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingKProductList: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    settingCardProducts: {
+      type: Object,
+      required: true,
+    },
+    settingKCarousel: {
+      type: Object,
+      required: true,
     },
   },
-  watch: {
-    $route(to, from) {
-      let domain = this.$route.fullPath
-      if (domain === '/') {
-        this.clear()
-      }
-    },
-  },
-  mounted() {
-    let domain = this.$route.fullPath
-    if (domain === '/') {
-      this.clear()
+  data() {
+    return {
+      listProducts: [],
     }
   },
-
+  mounted() {
+    this.currentChange()
+  },
   methods: {
-    clear() {
-      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: ['all'],
-        data: '',
-      })
+    async currentChange() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_ALL_PRODUCTS',
+        {
+          id_tienda: this.dataStore.id,
+          limit: 8,
+          page: 1,
+        }
+      )
+      if (success) {
+        this.listProducts = data.publicProductList
+      }
     },
   },
 }

@@ -6,21 +6,14 @@
       settingByTemplate10[0].setting10General,
       {
         '--font-style-1':
-          settingByTemplate10[0].setting10General &&
-          settingByTemplate10[0].setting10General.fount_1
-            ? settingByTemplate10[0].setting10General.fount_1
-            : 'Roboto',
+          settingByTemplate10[0]?.setting10General?.fount_1 ?? 'Roboto',
       },
     ]"
   >
     <div class="content-form-contact">
       <div class="banner-mapa">
         <el-carousel
-          v-if="
-            dataStore &&
-            dataStore.geolocalizacion &&
-            dataStore.geolocalizacion.length
-          "
+          v-if="dataStore?.geolocalizacion?.length"
           :interval="5000"
           arrow="always"
           height="250px"
@@ -30,7 +23,7 @@
           @change="changeLocation"
         >
           <el-carousel-item
-            v-for="(item, inggeo) in dataStore.geolocalizacion"
+            v-for="(item, inggeo) in geolocalizacion"
             :key="inggeo"
           >
             <iframe
@@ -51,10 +44,7 @@
             <div class="content-info">
               <p class="txt-info">Información</p>
             </div>
-            <div
-              v-if="dataStore.geolocalizacion.length"
-              class="content-locatioin"
-            >
+            <div v-if="geolocalizacion.length" class="content-locatioin">
               <svg
                 class="icon-left"
                 xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +59,7 @@
               </svg>
               <p class="txt-left">
                 Sede {{ positionLocation + 1 }}:
-                {{ dataStore.geolocalizacion[positionLocation].direccion }}
+                {{ geolocalizacion[positionLocation].direccion }}
               </p>
             </div>
             <div class="empty"></div>
@@ -89,7 +79,7 @@
               <div class="email">
                 <p class="txt-left">Envíenos un correo electrónico</p>
                 <p class="txt-left">
-                  {{ dataStore.tienda.email_tienda }}
+                  {{ dataStore.tiendasInfo.emailTienda }}
                 </p>
               </div>
             </div>
@@ -120,12 +110,12 @@
                     >
                       <template slot-scope="{ errors }">
                         <input
+                          id="ContactName"
+                          v-model="nombre"
                           name="nombre"
                           type="text"
-                          v-model="nombre"
                           class="input-text"
                           :placeholder="$t('contact_nombrePlacer')"
-                          id="ContactName"
                         />
                         <span class="text-error" v-show="errors[0]">{{
                           errors[0]
@@ -142,16 +132,16 @@
                     >
                       <template slot-scope="{ errors }">
                         <input
+                          id="ContactEmail"
+                          v-model="email"
                           name="email"
                           type="email"
-                          v-model="email"
                           :placeholder="$t('contact_emailPlacer')"
                           class="input-text"
-                          id="ContactEmail"
                         />
-                        <span class="text-error" v-show="errors[0]">{{
-                          errors[0]
-                        }}</span>
+                        <span class="text-error" v-show="errors[0]">
+                          {{ errors[0] }}
+                        </span>
                       </template>
                     </validation-provider>
                   </div>
@@ -164,14 +154,14 @@
                     >
                       <template slot-scope="{ errors }">
                         <textarea
+                          v-model="comment"
                           class="input-text-rectangule"
                           name="comentario"
                           :placeholder="$t('contact_mensalePlacer')"
-                          v-model="comment"
                         ></textarea>
-                        <span class="text-error" v-show="errors[0]">{{
-                          errors[0]
-                        }}</span>
+                        <span class="text-error" v-show="errors[0]">
+                          {{ errors[0] }}
+                        </span>
                       </template>
                     </validation-provider>
                   </div>
@@ -185,16 +175,16 @@
                       >
                         <template slot-scope="{ errors }">
                           <input
+                            id="ContactPhone"
+                            v-model="numberphone"
                             class="input-text"
                             name="celular"
                             type="number"
                             :placeholder="$t('contact_telefonoPlacer')"
-                            v-model="numberphone"
-                            id="ContactPhone"
                           />
-                          <span class="text-error" v-show="errors[0]">{{
-                            errors[0]
-                          }}</span>
+                          <span class="text-error" v-show="errors[0]">
+                            {{ errors[0] }}
+                          </span>
                         </template>
                       </validation-provider>
                     </div>
@@ -223,6 +213,7 @@
 </template>
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   name: 'Ko10Contact',
@@ -255,40 +246,40 @@ export default {
         {
           nombre: 'Facebook',
           icon: 'facebook-icon',
-          link: this.dataStore.tienda.red_facebook,
+          link: this.dataStore.redes.facebook,
         },
         {
           nombre: 'Twitter',
           icon: 'twitter-icon',
-          link: this.dataStore.tienda.red_twitter,
+          link: this.dataStore.redes.twitter,
         },
         {
           nombre: 'Instagram',
           icon: 'instagram-icon',
-          link: this.dataStore.tienda.red_instagram,
+          link: this.dataStore.redes.instagram,
         },
         {
           nombre: 'Youtube',
           icon: 'youtube-icon',
-          link: this.dataStore.tienda.red_youtube,
+          link: this.dataStore.redes.youtube,
         },
         {
           nombre: 'Tiktok',
           icon: 'tiktok-icon',
-          link: this.dataStore.tienda.red_tiktok,
+          link: this.dataStore.redes.tiktok,
         },
       ],
       dataContact: [
         {
-          dato: this.dataStore.tienda.telefono,
+          dato: this.dataStore.tiendasInfo.telefono,
           icon: 'phone-icon',
         },
         {
-          dato: this.dataStore.tienda.whatsapp,
+          dato: this.dataStore.redes.whatsapp,
           icon: 'whatsapp-icon',
         },
         {
-          dato: this.dataStore.tienda.email_tienda,
+          dato: this.dataStore.tiendasInfo.emailTienda,
           icon: 'email-icon',
         },
       ],
@@ -297,20 +288,21 @@ export default {
     }
   },
   computed: {
-    facebookPixel() {
-      return this.$store.state.analytics_tagmanager
-    },
+    ...mapState(['geolocalizacion']),
+    ...mapState({
+      facebookPixel: (state) => state.analytics_tagmanager,
+    }),
   },
   watch: {
     'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-      this.links[4].link = this.dataStore.tienda.red_tiktok
-      this.dataContact[0].dato = this.dataStore.tienda.telefono
-      this.dataContact[1].dato = this.dataStore.tienda.whatsapp
-      this.dataContact[2].dato = this.dataStore.tienda.email_tienda
+      this.links[0].link = this.dataStore.redes.facebook
+      this.links[1].link = this.dataStore.redes.twitter
+      this.links[2].link = this.dataStore.redes.instagram
+      this.links[3].link = this.dataStore.redes.youtube
+      this.links[4].link = this.dataStore.redes.tiktok
+      this.dataContact[0].dato = this.dataStore.tiendasInfo.telefono
+      this.dataContact[1].dato = this.dataStore.redes.whatsapp
+      this.dataContact[2].dato = this.dataStore.tiendasInfo.emailTienda
     },
   },
   destroyed() {
@@ -339,7 +331,7 @@ export default {
                   correo: this.email,
                   celular: this.numberphone,
                   comentario: this.comment,
-                  tienda: this.dataStore.tienda.id_tienda,
+                  tienda: this.dataStore.id,
                 },
               })
               if (data.status == 200) {

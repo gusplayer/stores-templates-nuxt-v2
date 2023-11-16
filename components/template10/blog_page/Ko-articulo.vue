@@ -30,9 +30,16 @@
               alt=""
             />
           </div>
-          <div class="content-date-items">
-            <p>{{ dataArticle.autor }}</p>
-            <p>{{ shippingCreated }}</p>
+          <div class="w-full flex flex-col ml-10">
+            <p class="text-16 font-bold text-[#3a4557bb]">
+              {{ dataArticle.autor }}
+            </p>
+            <p class="text-14 text-[#3a4557bb]">
+              <strong>Creado:</strong> {{ shippingCreated }}
+            </p>
+            <p class="text-14 text-[#3a4557bb]">
+              <strong>Actualizado:</strong> {{ shippingUpdated }}
+            </p>
           </div>
         </div>
         <div v-if="dataArticle.contenido" class="editor">
@@ -66,7 +73,6 @@ export default {
       required: true,
     },
   },
-
   data() {
     return {
       dataArticle: {},
@@ -74,37 +80,56 @@ export default {
       shippingUpdated: '',
     }
   },
-  computed: {
-    listArticulos() {
-      return this.$store.state.listArticulos
-    },
-  },
-  watch: {
-    listArticulos() {
-      this.searchIdForSlug()
-    },
-  },
   mounted() {
-    if (this.listArticulos.length) {
-      this.searchIdForSlug()
-    }
+    this.searchIdForSlug()
   },
   methods: {
     async searchIdForSlug() {
       let idBlog = this.$route.query.idBlog
       const { data } = await this.$store.dispatch('GET_DATA_ARTICLE', {
         idBlog: idBlog,
-        idStore: this.dataStore.tienda.id_tienda,
+        idStore: this.dataStore.id,
       })
       if (data) {
         this.dataArticle = data.data
-        if (this.dataArticle) {
-          const dateCreated = this.dataArticle.created_at
-          this.shippingCreated = dateCreated.split(' ')[0]
-          const dateUpdate = this.dataArticle.updated_at
-          this.shippingUpdated = dateUpdate.split(' ')[0]
-        }
+
+        this.shippingCreated = this.formatDate(this.dataArticle.created_at)
+        this.shippingUpdated = this.formatDate(this.dataArticle.updated_at)
       }
+    },
+    formatDate(value) {
+      const fecha = new Date(value)
+
+      const diasSemana = [
+        'Domingo',
+        'Lunes',
+        'Martes',
+        'Miércoles',
+        'Jueves',
+        'Viernes',
+        'Sábado',
+      ]
+      const meses = [
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre',
+      ]
+
+      const dia = fecha.getUTCDate()
+      const mes = fecha.getUTCMonth()
+      const año = fecha.getUTCFullYear()
+      const diaSemana = diasSemana[fecha.getUTCDay()]
+
+      return `${diaSemana}, ${dia} de ${meses[mes]} de ${año}`
     },
   },
 }

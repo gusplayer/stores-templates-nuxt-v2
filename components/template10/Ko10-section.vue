@@ -10,110 +10,46 @@
     ]"
   >
     <div class="content-wrapper">
-      <a
-        :href="
-          section.values[0].url_redirect ? section.values[0].url_redirect : ''
-        "
-        rel="noreferrer noopener"
+      <div
+        v-for="(item, index) in section.values"
+        :key="index"
+        class="w-full h-full"
       >
-        <div class="wrapper-left">
-          <img
-            v-lazy="
-              idCloudinaryBanner(section.values[0].url_img_background, 'banner')
-            "
-            class="img-left"
-            alt="banner-1"
-          />
-          <div
-            class="txt-content"
-            :style="`justify-content: ${section.values[0].justingText}; align-items: ${section.values[0].alingText};`"
-          >
-            <p
-              class="txt-tittle"
-              :style="`color: ${section.values[0].colorPretitle}; margin-bottom:${section.values[0].marginbottomPretitle};`"
+        <a
+          :href="item.url_redirect ? item.url_redirect : ''"
+          rel="noreferrer noopener"
+        >
+          <div class="wrapper-items">
+            <img
+              v-lazy="idCloudinaryBanner(item.url_img_background, 'banner')"
+              class="img-item"
+              alt="banner-1"
+            />
+            <div
+              class="txt-content"
+              :style="`justify-content: ${item.justingText}; align-items: ${item.alingText};`"
             >
-              {{ section.values[0].pretitle }}
-            </p>
-            <p
-              class="txt-subtittle"
-              :style="`color: ${section.values[0].colorTitle}; margin-bottom:${section.values[0].marginbottomTitle};`"
-            >
-              {{ section.values[0].title }}
-            </p>
+              <p
+                class="txt-tittle"
+                :style="`color: ${item.colorPretitle}; margin-bottom:${item.marginbottomPretitle};`"
+              >
+                {{ item.pretitle }}
+              </p>
+              <p
+                class="txt-subtittle"
+                :style="`color: ${item.colorTitle}; margin-bottom:${item.marginbottomTitle};`"
+              >
+                {{ item.title }}
+              </p>
+            </div>
           </div>
-        </div>
-      </a>
-      <a
-        :href="
-          section.values[1].url_redirect ? section.values[1].url_redirect : ''
-        "
-        rel="noreferrer noopener"
-      >
-        <div class="wrapper-center">
-          <img
-            v-lazy="
-              idCloudinaryBanner(section.values[1].url_img_background, 'banner')
-            "
-            class="img-center"
-            alt="banner-2"
-          />
-          <div
-            class="txt-content"
-            :style="`justify-content: ${section.values[1].justingText}; align-items: ${section.values[1].alingText};`"
-          >
-            <p
-              class="txt-tittle"
-              :style="`color: ${section.values[1].colorPretitle}; margin-bottom:${section.values[1].marginbottomPretitle};`"
-            >
-              {{ section.values[1].pretitle }}
-            </p>
-            <p
-              class="txt-subtittle"
-              :style="`color: ${section.values[1].colorTitle}; margin-bottom:${section.values[1].marginbottomTitle};`"
-            >
-              {{ section.values[1].title }}
-            </p>
-          </div>
-        </div>
-      </a>
-      <a
-        :href="
-          section.values[2].url_redirect ? section.values[2].url_redirect : ''
-        "
-        rel="noreferrer noopener"
-      >
-        <div class="wrapper-right">
-          <img
-            v-lazy="
-              idCloudinaryBanner(section.values[2].url_img_background, 'banner')
-            "
-            class="img-right"
-            alt="banner-3"
-          />
-          <div
-            class="txt-content"
-            :style="`justify-content: ${section.values[2].justingText}; align-items: ${section.values[2].alingText};`"
-          >
-            <p
-              class="txt-tittle"
-              :style="`color: ${section.values[2].colorPretitle}; margin-bottom:${section.values[2].marginbottomPretitle};`"
-            >
-              {{ section.values[2].pretitle }}
-            </p>
-            <p
-              class="txt-subtittle"
-              :style="`color: ${section.values[2].colorTitle}; margin-bottom:${section.values[2].marginbottomTitle};`"
-            >
-              {{ section.values[2].title }}
-            </p>
-          </div>
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'Ko10Section',
   mixins: [idCloudinary],
@@ -139,27 +75,13 @@ export default {
 .content-wrapper {
   @apply justify-center items-center;
 }
-.wrapper-left,
-.wrapper-center,
-.wrapper-right {
+.wrapper-items {
   @apply w-full h-auto relative flex justify-start cursor-pointer overflow-hidden transition-all ease-in duration-0.2;
 }
-.img-left,
-.img-center,
-.img-right {
+.img-item {
   @apply w-full object-cover overflow-hidden transition-all ease-in duration-0.2;
 }
-.wrapper-left:hover .img-left {
-  @apply relative overflow-hidden transition-all ease-in duration-0.2;
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
-.wrapper-center:hover .img-center {
-  @apply relative overflow-hidden transition-all ease-in duration-0.2;
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
-.wrapper-right:hover .img-right {
+.wrapper-items:hover .img-item {
   @apply relative overflow-hidden transition-all ease-in duration-0.2;
   -webkit-transform: scale(1.1);
   transform: scale(1.1);

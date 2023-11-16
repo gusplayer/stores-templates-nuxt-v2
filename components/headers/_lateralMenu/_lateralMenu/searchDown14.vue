@@ -34,20 +34,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'Ko14-Search',
+  name: 'Ko14Search',
   data() {
     return {
       search: '',
     }
   },
   computed: {
-    openSearch() {
-      return this.$store.state.openSearch
-    },
-    FacebookPixel() {
-      return this.$store.state.analytics_tagmanager
-    },
+    ...mapState(['openSearch']),
+    ...mapState({
+      facebookPixel: (state) => state.analytics_tagmanager,
+    }),
   },
   methods: {
     closedSearch() {

@@ -40,7 +40,7 @@
             />
           </picture>
         </div>
-        <div v-else class="w-full h-[300px]" />
+        <div v-else class="w-full h-[300px]"></div>
         <div
           class="absolute top-2/5 lg:top-3/0 mlg:top-4/0 left-4/7 flex flex-col items-center"
         >
@@ -67,8 +67,8 @@
       <div
         class="w-full flex flex-col md:flex-row justify-center md:justify-start"
       >
-        <div class="w-full max-w-2/0" />
-        <div v-if="dataStore.geolocalizacion.length" class="w-full relative">
+        <div class="w-full max-w-2/0"></div>
+        <div v-if="geolocalizacion.length" class="w-full relative">
           <!-- <p class="contact-text-sub">{{ $t('contact_vistaTienda') }}</p> -->
           <el-carousel
             :interval="5000"
@@ -78,8 +78,8 @@
             @change="changeLocation"
           >
             <el-carousel-item
-              v-for="(item, inggeo) in dataStore.geolocalizacion"
-              :key="inggeo"
+              v-for="(item, indexGeo) in geolocalizacion"
+              :key="indexGeo"
             >
               <iframe
                 :src="`https://maps.google.com/maps?q=${item.latitud},${item.longitud}&hl=es;z=14&amp;output=embed`"
@@ -113,7 +113,7 @@
             </p>
             <div class="pl-10">
               <div
-                v-if="this.dataStore.geolocalizacion.length"
+                v-if="geolocalizacion.length"
                 class="mb-15 flex flex-row gap-2 items-center"
               >
                 <div class="w-full max-w-[50px]">
@@ -138,14 +138,12 @@
                     <span class="font-bold">
                       Sede {{ positionLocationStore + 1 }}:
                     </span>
-                    {{
-                      dataStore.geolocalizacion[positionLocationStore].direccion
-                    }}
+                    {{ geolocalizacion[positionLocationStore].direccion }}
                   </p>
                 </div>
               </div>
               <div
-                v-if="dataStore.tienda.telefono"
+                v-if="dataStore.tiendasInfo.telefono"
                 class="mb-15 flex flex-row gap-2 items-center"
               >
                 <div class="w-full max-w-[50px]">
@@ -166,12 +164,12 @@
                 <div class="w-full">
                   <p class="text-14 font-bold">{{ $t('mcompra_telefono') }}</p>
                   <p class="text-14">
-                    {{ this.dataStore.tienda.telefono }}
+                    {{ dataStore.tiendasInfo.telefono }}
                   </p>
                 </div>
               </div>
               <div
-                v-if="this.dataStore.tienda.whatsapp"
+                v-if="dataStore.redes.whatsapp"
                 class="mb-15 flex flex-row gap-2 items-center"
               >
                 <div class="w-full max-w-[50px]">
@@ -212,12 +210,12 @@
                 <div class="w-full">
                   <p class="text-14 font-bold">WhatsApp</p>
                   <p class="text-14">
-                    {{ this.dataStore.tienda.whatsapp }}
+                    {{ dataStore.redes.whatsapp }}
                   </p>
                 </div>
               </div>
               <div
-                v-if="this.dataStore.tienda.email_tienda"
+                v-if="dataStore.tiendasInfo.emailTienda"
                 class="mb-15 flex flex-row gap-2 items-center"
               >
                 <div class="w-full max-w-[50px]">
@@ -237,7 +235,7 @@
                 <div class="w-full">
                   <p class="text-14 font-bold">Email</p>
                   <p class="text-14">
-                    {{ this.dataStore.tienda.email_tienda }}
+                    {{ dataStore.tiendasInfo.emailTienda }}
                   </p>
                 </div>
               </div>
@@ -307,11 +305,9 @@
                       :style="`color: ${settingByTemplate15[0].contact.color_text_input}; background-color:${settingByTemplate15[0].contact.color_input}; border-color:${settingByTemplate15[0].contact.color_title_form};`"
                       :placeholder="$t('contact_emailPlacer')"
                     />
-                    <span
-                      class="text-12 text-red-500 ml-5"
-                      v-show="errors[0]"
-                      >{{ errors[0] }}</span
-                    >
+                    <span v-show="errors[0]" class="text-12 text-red-500 ml-5">
+                      {{ errors[0] }}
+                    </span>
                   </template>
                 </validation-provider>
               </div>
@@ -332,9 +328,9 @@
                     :style="`color: ${settingByTemplate15[0].contact.color_text_input}; background-color:${settingByTemplate15[0].contact.color_input}; border-color:${settingByTemplate15[0].contact.color_title_form};`"
                     :placeholder="$t('contact_mensalePlacer')"
                   ></textarea>
-                  <span class="text-12 text-red-500 ml-5" v-show="errors[0]">{{
-                    errors[0]
-                  }}</span>
+                  <span v-show="errors[0]" class="text-12 text-red-500 ml-5">
+                    {{ errors[0] }}
+                  </span>
                 </template>
               </validation-provider>
             </div>
@@ -357,11 +353,9 @@
                       :style="`color: ${settingByTemplate15[0].contact.color_text_input}; background-color:${settingByTemplate15[0].contact.color_input}; border-color:${settingByTemplate15[0].contact.color_title_form};`"
                       :placeholder="$t('contact_telefonoPlacer')"
                     />
-                    <span
-                      class="text-12 text-red-500 ml-5"
-                      v-show="errors[0]"
-                      >{{ errors[0] }}</span
-                    >
+                    <span v-show="errors[0]" class="text-12 text-red-500 ml-5">
+                      {{ errors[0] }}
+                    </span>
                   </template>
                 </validation-provider>
               </div>
@@ -386,19 +380,26 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 import idCloudinaryBanner from '@/mixins/idCloudinary'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
-  name: 'Ko15-Contact-1',
-  props: {
-    dataStore: Object,
-    settingByTemplate15: Array,
-  },
+  name: 'Ko15Contact',
   components: {
     ValidationObserver,
     ValidationProvider,
   },
   mixins: [idCloudinaryBanner],
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingByTemplate15: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       positionLocationStore: 0,
@@ -415,56 +416,70 @@ export default {
         {
           nombre: 'Facebook',
           icon: 'facebook-icon',
-          link: this.dataStore.tienda.red_facebook,
+          link: this.dataStore.redes.facebook,
         },
         {
           nombre: 'Twitter',
           icon: 'twitter-icon',
-          link: this.dataStore.tienda.red_twitter,
+          link: this.dataStore.redes.twitter,
         },
         {
           nombre: 'Instagram',
           icon: 'instagram-icon',
-          link: this.dataStore.tienda.red_instagram,
+          link: this.dataStore.redes.instagram,
         },
         {
           nombre: 'Youtube',
           icon: 'youtube-icon',
-          link: this.dataStore.tienda.red_youtube,
+          link: this.dataStore.redes.youtube,
         },
         {
           nombre: 'Tiktok',
           icon: 'tiktok-icon',
-          link: this.dataStore.tienda.red_tiktok,
+          link: this.dataStore.redes.tiktok,
         },
       ],
       dataContact: [
         {
-          dato: this.dataStore.tienda.telefono,
+          dato: this.dataStore.tiendasInfo.telefono,
           icon: 'phone-icon',
         },
         {
-          dato: this.dataStore.tienda.whatsapp,
+          dato: this.dataStore.redes.whatsapp,
           icon: 'whatsapp-icon',
         },
         {
-          dato: this.dataStore.tienda.email_tienda,
+          dato: this.dataStore.tiendasInfo.emailTienda,
           icon: 'email-icon',
         },
       ],
       stateBtn: true,
     }
   },
+
+  computed: {
+    ...mapState(['geolocalizacion']),
+    ...mapState({
+      facebookPixel: (state) => state.analytics_tagmanager,
+    }),
+  },
+  watch: {
+    'dataStore.tienda'() {
+      this.links[0].link = this.dataStore.redes.facebook
+      this.links[1].link = this.dataStore.redes.twitter
+      this.links[2].link = this.dataStore.redes.instagram
+      this.links[3].link = this.dataStore.redes.youtube
+      this.links[4].link = this.dataStore.redes.tiktok
+      this.dataContact[0].dato = this.dataStore.tiendasInfo.telefono
+      this.dataContact[1].dato = this.dataStore.redes.whatsapp
+      this.dataContact[2].dato = this.dataStore.tiendasInfo.emailTienda
+    },
+  },
   destroyed() {
     this.nombre = ''
     this.email = ''
     this.numberphone = ''
     this.comment = ''
-  },
-  computed: {
-    facebookPixel() {
-      return this.$store.state.analytics_tagmanager
-    },
   },
   methods: {
     changeLocation(value) {
@@ -485,7 +500,7 @@ export default {
                   correo: this.email,
                   celular: this.numberphone,
                   comentario: this.comment,
-                  tienda: this.dataStore.tienda.id_tienda,
+                  tienda: this.dataStore.id,
                 },
               })
               if (data.status == 200) {
@@ -527,18 +542,6 @@ export default {
       this.email = ''
       this.numberphone = ''
       this.comment = ''
-    },
-  },
-  watch: {
-    'dataStore.tienda'() {
-      this.links[0].link = this.dataStore.tienda.red_facebook
-      this.links[1].link = this.dataStore.tienda.red_twitter
-      this.links[2].link = this.dataStore.tienda.red_instagram
-      this.links[3].link = this.dataStore.tienda.red_youtube
-      this.links[4].link = this.dataStore.tienda.red_tiktok
-      this.dataContact[0].dato = this.dataStore.tienda.telefono
-      this.dataContact[1].dato = this.dataStore.tienda.whatsapp
-      this.dataContact[2].dato = this.dataStore.tienda.email_tienda
     },
   },
 }

@@ -16,11 +16,13 @@
                 <p class="txt-search-up">{{ $t('home_buscar') }}</p>
               </div>
               <input
+                v-model="search"
                 type="search "
                 :placeholder="$t('home_buscar')"
-                v-model="search"
                 required
                 class="input-search"
+                @change="getSuggestedProducts"
+                @keyup.enter="getSuggestedProducts"
               />
               <i class="header-search-icon">
                 <svg
@@ -62,8 +64,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'Ko-Search-10',
+  name: 'KoSearch10',
   props: {
     showMenu: Boolean,
   },
@@ -73,9 +76,10 @@ export default {
     }
   },
   computed: {
-    openSearch() {
-      return this.$store.state.openSearch
-    },
+    ...mapState(['openSearch']),
+    ...mapState({
+      facebookPixel: (state) => state.analytics_tagmanager,
+    }),
   },
   methods: {
     closedSearch() {
@@ -87,6 +91,16 @@ export default {
         this.$store.commit('SET_OPEN_SEARCH', false)
       }
     },
+    async setInformationFromQuery({ page, name }) {
+      const query = {}
+      if (page !== null && page !== undefined) query.page = page
+      if (name !== null) this.search = name
+      try {
+        await this.$router.push({ path: '', query })
+      } catch (error) {
+        console.error('Error navigating:', error)
+      }
+    },
     SearchProduct(search) {
       this.$store.commit('SET_SEARCH_VALUE', search)
       if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
@@ -96,11 +110,6 @@ export default {
         path: '/productos',
         query: { search: search },
       })
-    },
-  },
-  watch: {
-    search(value) {
-      this.SearchProduct(value)
     },
   },
 }

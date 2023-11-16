@@ -61,22 +61,77 @@
     </div>
     <div class="wrapper-price">
       <span
+        v-if="estadoCart && equalsPrice && minPrice"
         class="font-semibold"
         :style="`color:${settingByTemplate12.priceColor};`"
       >
         {{
-          product.precio
-            | currency(dataStore.tienda.codigo_pais, dataStore.tienda.moneda)
+          minPrice
+            | currency(
+              dataStore.tiendasInfo.paises.codigo,
+              dataStore.tiendasInfo.moneda
+            )
         }}
       </span>
+      <div
+        v-else-if="estadoCart && minPrice && maxPrice && !equalsPrice"
+        class="flex flex-row items-center"
+      >
+        <div
+          class="font-semibold"
+          :style="`color:${settingByTemplate12.priceColor};`"
+        >
+          {{
+            minPrice
+              | currency(
+                dataStore.tiendasInfo.paises.codigo,
+                dataStore.tiendasInfo.moneda
+              )
+          }}
+        </div>
+        <p
+          class="font-semibold px-5"
+          :style="`color:${settingByTemplate12.priceColor};`"
+        >
+          -
+        </p>
+        <div
+          class="font-semibold"
+          :style="`color:${settingByTemplate12.priceColor};`"
+        >
+          {{
+            maxPrice
+              | currency(
+                dataStore.tiendasInfo.paises.codigo,
+                dataStore.tiendasInfo.moneda
+              )
+          }}
+        </div>
+      </div>
+
+      <div v-else>
+        <span
+          v-if="product.precio > 0 || product.precio"
+          class="font-semibold"
+          :style="`color:${settingByTemplate12.priceColor};`"
+        >
+          {{
+            product.precio
+              | currency(
+                dataStore.tiendasInfo.paises.codigo,
+                dataStore.tiendasInfo.moneda
+              )
+          }}
+        </span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import idCloudinary from '../../mixins/idCloudinary'
-import currency from '../../mixins/formatCurrent'
-
+import { mapState } from 'vuex'
+import idCloudinary from '@/mixins/idCloudinary'
+import currency from '@/mixins/formatCurrent'
 export default {
   name: 'ProductCard',
   mixins: [idCloudinary, currency],
@@ -109,64 +164,29 @@ export default {
     }
   },
   computed: {
-    settingByTemplate() {
-      if (this.$store.state.settingByTemplate) {
-        return this.$store.state.settingByTemplate
-      } else {
-        return this.$store.state.settingBaseWapir
-      }
-    },
-    productsCarts() {
-      return this.$store.state.productsCart
-    },
+    ...mapState(['productsCart']),
     getFreeShipping() {
-      let free = true
-      if (this.product.envio_gratis == 1) {
-        free = false
-      } else if (this.rangosByCiudad.envio_metodo === 'gratis') {
-        free = false
-      }
-      return free
+      return !(
+        this.product.envio_gratis === 1 ||
+        this.rangosByCiudad.envio_metodo === 'gratis'
+      )
     },
     rangosByCiudad() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.rangosByCiudades = JSON.parse(this.$store.state.envios.valores)
-      return this.rangosByCiudades
+      return this.$store.state.envios.valores
     },
     soldOut() {
-      if (
-        this.product.con_variante &&
-        this.product.variantes[0].variantes !== '[object Object]'
-      ) {
-        // this.estadoCart = true
+      if (this.product.con_variante) {
         const arrCombinations = this.product.variantes
-        let inventario = 0
-        if (
-          arrCombinations.length &&
-          arrCombinations[0].variantes !== '[object Object]'
-        ) {
-          if (
-            arrCombinations[0].combinaciones.length &&
-            arrCombinations[0].combinaciones.length
-          ) {
-            if (
-              JSON.parse(arrCombinations[0].combinaciones[0].combinaciones)
-                .length
-            ) {
-              JSON.parse(
-                arrCombinations[0].combinaciones[0].combinaciones
-              ).forEach((item) => {
-                if (item.unidades) {
-                  inventario += parseInt(item.unidades)
-                }
-              })
-            }
-          }
+        if (arrCombinations && arrCombinations.combinaciones.length) {
+          const inventorySum = JSON.parse(
+            arrCombinations.combinaciones[0].combinaciones
+          )
+            .map((item) => parseInt(item.unidades) || 0)
+            .reduce((acc, val) => acc + val, 0)
+          return inventorySum === 0
         }
-        return !inventario
-      } else {
-        return !this.product.stock
       }
+      return !this.product.stock
     },
   },
   watch: {
@@ -179,7 +199,7 @@ export default {
     this.productPrice()
     if (
       this.product.con_variante &&
-      this.product.variantes[0].variantes !== '[object Object]'
+      this.product.variantes.variantes !== '[object Object]'
     ) {
       this.estadoCart = true
     }
@@ -258,40 +278,26 @@ export default {
       }
     },
     productPrice() {
-      if (
-        this.product.con_variante &&
-        this.product.variantes[0].variantes !== '[object Object]'
-      ) {
-        const arrCombinations = this.product.variantes
-        if (
-          arrCombinations.length &&
-          arrCombinations[0].variantes !== '[object Object]'
-        ) {
-          this.productVariants = true
-          if (
-            this.product &&
-            this.product.combinaciones &&
-            this.product.combinaciones.length &&
-            this.product.combinaciones.length > 1
-          ) {
-            let arrPrice = []
-            this.product.combinaciones.find((products) => {
-              if (products.precio && products.estado) {
-                arrPrice.push(products.precio)
-              }
-            })
-            if (arrPrice) {
-              let resultPrice = arrPrice.sort(function (prev, next) {
-                return prev - next
-              })
-              if (resultPrice[resultPrice.length - 1]) {
-                this.minPrice = resultPrice[0]
-                this.maxPrice = resultPrice[resultPrice.length - 1]
-              }
-            }
+      if (this.product.con_variante) {
+        const variants = this.product.variantes
+        if (variants && variants.combinaciones.length) {
+          const prices = JSON.parse(variants.combinaciones[0].combinaciones)
+            .filter((item) => item.precio && item.estado)
+            .map((item) => item.precio)
+          if (prices.length > 0) {
+            this.productVariants = true
+            const sortedPrices = prices.sort((a, b) => a - b)
+            this.minPrice = sortedPrices[0]
+            this.maxPrice = sortedPrices[sortedPrices.length - 1]
+            this.equalsPrice = this.minPrice === this.maxPrice
+            return
           }
         }
       }
+      this.productVariants = false
+      this.minPrice = this.product.precio || 0
+      this.maxPrice = this.product.precio || 0
+      this.equalsPrice = true
     },
   },
 }

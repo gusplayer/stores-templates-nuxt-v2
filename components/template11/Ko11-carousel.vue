@@ -1,22 +1,19 @@
 <template>
   <div
-    v-swiper:mySwiper="swiperOption"
     ref="mySwiper"
+    v-swiper:mySwiper="swiperOption"
     :style="[
       {
-        '--font-style-1':
-          this.settingGeneral && this.settingGeneral.fount_1
-            ? this.settingGeneral.fount_1
-            : 'Roboto',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
     <div class="swiper-wrapper z-auto">
       <a
-        class="swiper-slide w-full flex justify-center items-center z-10"
+        v-for="(item, index) in settingKbanner.values"
         :id="`slide${index + 1}`"
-        v-for="(item, index) in this.settingKbanner.values"
         :key="index"
+        class="swiper-slide w-full flex justify-center items-center z-10"
         :class="item.visbleBtn ? 'pointer-events-none' : 'cursorPointer'"
         :href="`${item.visbleBtn ? '' : item.url_redirect}`"
         rel="noreferrer noopener"
@@ -33,8 +30,8 @@
             :srcset="idCloudinaryBanner(item.url_img_background, 'banner')"
           />
           <img
-            loading="lazy"
             v-lazy="idCloudinaryBanner(item.url_img_background, 'banner')"
+            loading="lazy"
             class="w-full h-full object-cover object-center"
             alt="Banner_tienda_template11"
           />
@@ -42,29 +39,32 @@
         <CarouselContent
           class="absolute"
           :banner="item"
-          :settingGeneral="settingGeneral"
+          :setting-general="settingGeneral"
         />
       </a>
     </div>
   </div>
 </template>
 <script>
-import CarouselContent from '../../components/template11/_carouselBanner/banner-carousel'
-import idCloudinaryBanner from '../../mixins/idCloudinary'
+import idCloudinaryBanner from '@/mixins/idCloudinary'
 
 export default {
-  name: 'Ko11-carousel',
+  name: 'Ko11Carousel',
   components: {
-    CarouselContent,
-  },
-  props: {
-    settingKbanner: Object,
-    settingGeneral: Object,
+    CarouselContent: () => import('./_carouselBanner/banner-carousel.vue'),
   },
   mixins: [idCloudinaryBanner],
-  mounted() {
-    this.autoplayBanner()
+  props: {
+    settingKbanner: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
+
   data() {
     return {
       swiperOption: {
@@ -92,6 +92,14 @@ export default {
       return this.$refs.mySwiper.swiper
     },
   },
+  watch: {
+    'settingKCarousel.values'() {
+      this.autoplayBanner()
+    },
+  },
+  mounted() {
+    this.autoplayBanner()
+  },
   methods: {
     autoplayBanner() {
       if (this.settingKCarousel && this.settingKCarousel.values.length == 1) {
@@ -99,11 +107,6 @@ export default {
       } else {
         this.swiperOption.autoplay.delay = 6000
       }
-    },
-  },
-  watch: {
-    'settingKCarousel.values'() {
-      this.autoplayBanner()
     },
   },
 }

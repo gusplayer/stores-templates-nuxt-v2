@@ -21,7 +21,9 @@
     <div class="right">
       <div class="payments section">
         <div class="content">
-          <h3 class="title-section">{{ $t('productdetail_opcionesPago') }}</h3>
+          <h3 class="title-section font-bold">
+            {{ $t('productdetail_opcionesPago') }}
+          </h3>
         </div>
         <p>
           {{ $t('productdetail_opcionesPagoMsg') }}
@@ -214,7 +216,7 @@
             </a>
           </li>
           <li v-if="mediospago.flow == 1">
-            <h4>Tucompra</h4>
+            <h4>Flow</h4>
             <p>
               {{ $t('text_pago_flowInfo') }}
             </p>
@@ -237,7 +239,7 @@
       <div class="line"></div>
       <div v-if="envios.envio_metodo" class="deliverys section">
         <div class="content">
-          <h3 class="title-section">
+          <h3 class="title-section font-bold">
             {{ $t('productdetail_opinionesEnvio') }}
           </h3>
         </div>
@@ -267,8 +269,8 @@
             {{
               envios.valor
                 | currency(
-                  dataStore.tienda.codigo_pais,
-                  dataStore.tienda.moneda
+                  dataStore.tiendasInfo.paises.codigo,
+                  dataStore.tiendasInfo.moneda
                 )
             }}
           </p>
@@ -286,12 +288,14 @@
         <div v-if="envios.envio_metodo === 'sinEnvio'" class="wrapper-method">
           <p class="description-method">Pasas a recoger tu compra</p>
         </div>
+        <div v-if="envios.envio_metodo === 'sintarifa'" class="wrapper-method">
+          <p class="description-method">
+            El costo del envío no esta definido, este costo lo asume el
+            comprador
+          </p>
+        </div>
       </div>
-      <!-- <div class="line-comments"></div> -->
     </div>
-    <!-- <div class="wrapper-comments-responsive">
-      <KoComments :dataStore="dataStore" />
-    </div> -->
   </div>
 </template>
 
@@ -325,29 +329,21 @@ export default {
   },
   data() {
     return {
-      medioEnvio: '',
-      envioproducto: '',
-      contentDescription: this.data?.info?.descripcion,
+      contentDescription: this.data?.productosInfo?.descripcion,
     }
   },
   computed: {
     mediospago() {
-      return this.dataStore.medios_pago
+      return this.dataStore.medioPagos
     },
     activeClass() {
-      if (
-        this.data.info.descripcion == '' ||
-        this.data.info.descripcion == null
-      ) {
-        return true
-      } else {
-        return false
-      }
+      return (
+        this.data.productosInfo.descripcion == '' ||
+        this.data.productosInfo.descripcion == null
+      )
     },
     envios() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties, vue/no-mutating-props
-      this.data.medioEnvio = JSON.parse(this.dataStore.medios_envio.valores)
-      return this.data.medioEnvio
+      return this.$store.state.envios.valores
     },
   },
 }

@@ -5,26 +5,17 @@
       settingKGify,
       settingGeneral,
       {
-        '--font-style-1':
-          settingGeneral && settingGeneral.fount_1
-            ? settingGeneral.fount_1
-            : 'David Libre',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'David Libre',
       },
       {
-        '--font-style-2':
-          settingGeneral && settingGeneral.fount_2
-            ? settingGeneral.fount_2
-            : 'Great Vibes',
+        '--font-style-2': settingGeneral?.fount_2 ?? 'Great Vibes',
       },
       {
-        '--font-style-3':
-          settingGeneral && settingGeneral.fount_3
-            ? settingGeneral.fount_3
-            : 'Lora',
+        '--font-style-3': settingGeneral?.fount_3 ?? 'Lora',
       },
     ]"
   >
-    <div class="separador-blog" v-if="!settingKCarousel.visible"></div>
+    <div v-if="!settingKCarousel.visible" class="separador-blog"></div>
     <div class="producto-items-content">
       <div class="product-text">
         <div class="product-tittle">
@@ -42,19 +33,19 @@
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
         <div class="swiper-wrapper">
           <div
-            v-for="product in fullProducts"
+            v-for="product in listProducts"
             :key="product.id"
             class="swiper-slide"
           >
             <KoProductGifyCard
               :product="product"
-              class="gifyload"
-              :settingKProductCard="settingKProductCard"
-              :settingGeneral="settingGeneral"
+              :setting-card-products="settingCardProducts"
+              :setting-general="settingGeneral"
+              class="h-full"
             />
           </div>
         </div>
-        <div v-if="fullProducts.length == 0" class="content-products-empty">
+        <div v-if="listProducts?.length === 0" class="content-products-empty">
           <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
       </div>
@@ -63,22 +54,36 @@
 </template>
 
 <script>
-import KoProductGifyCard from './_productcard/ProductCard'
 export default {
   name: 'K07Gify',
   components: {
-    KoProductGifyCard,
+    KoProductGifyCard: () => import('./_productcard/ProductCard'),
   },
   props: {
-    dataStore: Object,
-    fullProducts: {},
-    settingGeneral: Object,
-    settingKProductCard: Object,
-    settingKGify: Object,
-    settingKCarousel: Object,
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    settingCardProducts: {
+      type: Object,
+      required: true,
+    },
+    settingKGify: {
+      type: Object,
+      required: true,
+    },
+    settingKCarousel: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
+      listProducts: [],
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 20,
@@ -87,15 +92,6 @@ export default {
           disableOnInteraction: false,
         },
         breakpoints: {
-          10000: {
-            slidesPerView: 6,
-            spaceBetween: 20,
-          },
-          2560: {
-            slidesPerView: 5,
-            slidesPerGroup: 5,
-            spaceBetween: 30,
-          },
           1024: {
             slidesPerView: 4,
             slidesPerGroup: 4,
@@ -111,7 +107,7 @@ export default {
             slidesPerGroup: 2,
             spaceBetween: 10,
           },
-          425: {
+          320: {
             slidesPerView: 2,
             slidesPerGroup: 2,
             spaceBetween: 10,
@@ -123,6 +119,25 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
+    },
+  },
+  mounted() {
+    this.getProducts()
+  },
+  methods: {
+    async getProducts() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_ALL_PRODUCTS',
+        {
+          id_tienda: this.dataStore.id,
+          limit: 10,
+          page: 1,
+          promotion: 1,
+        }
+      )
+      if (success) {
+        this.listProducts = data.publicProductList
+      }
     },
   },
 }

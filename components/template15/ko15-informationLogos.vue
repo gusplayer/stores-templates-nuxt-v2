@@ -91,9 +91,18 @@ export default {
   name: 'Ko15InformationLogos',
   mixins: [idCloudinary],
   props: {
-    informationLogos: Object,
-    settingGeneral: Object,
-    dataStore: Object,
+    informationLogos: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

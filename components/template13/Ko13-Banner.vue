@@ -8,9 +8,9 @@
   >
     <div class="swiper-wrapper z-auto">
       <a
+        v-for="(item, index) in banner.values"
         :id="`slide${index + 1}`"
         :key="index"
-        v-for="(item, index) in this.banner.values"
         :href="item.url_redirect"
         class="swiper-slide w-full flex justify-center items-center z-10"
         rel="noreferrer noopener"
@@ -34,21 +34,23 @@
         </picture>
       </a>
     </div>
-    <div v-if="banner.visible_pagination" class="swiper-pagination" />
+    <div v-if="banner.visible_pagination" class="swiper-pagination"></div>
   </div>
 </template>
 <script>
-import idCloudinaryBanner from '../../mixins/idCloudinary'
+import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko13-Banner-1',
-  props: {
-    banner: Object,
-    settingGeneral: Object,
-  },
+  name: 'Ko13Banner1',
   mixins: [idCloudinaryBanner],
-  mounted() {
-    this.mobileCheck()
-    this.autoplayBanner()
+  props: {
+    banner: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -78,6 +80,15 @@ export default {
       return this.$refs.mySwiper.swiper
     },
   },
+  watch: {
+    banner() {
+      this.autoplayBanner()
+    },
+  },
+  mounted() {
+    this.mobileCheck()
+    this.autoplayBanner()
+  },
   methods: {
     autoplayBanner() {
       if (this.banner && this.banner.values.length == 1) {
@@ -103,11 +114,6 @@ export default {
         return check
       }
       this.checkMobile = window.mobilecheck()
-    },
-  },
-  watch: {
-    banner() {
-      this.autoplayBanner()
     },
   },
 }

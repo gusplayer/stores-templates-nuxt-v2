@@ -42,9 +42,9 @@ export default {
       'template',
       'dataHoko',
     ]),
-    fullProducts() {
-      return this.$store.getters['products/filterProducts']
-    },
+    // fullProducts() {
+    //   return this.$store.getters['products/filterProducts']
+    // },
     indexTemplate() {
       let productListComponent = ''
       // eslint-disable-next-line no-prototype-builtins
@@ -56,7 +56,7 @@ export default {
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        fullProducts: this.fullProducts,
+        // fullProducts: this.fullProducts,
         settingByTemplate: this.createSettingByTemplate(
           this.settingByTemplate,
           'settings',

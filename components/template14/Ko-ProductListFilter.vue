@@ -60,9 +60,9 @@
               {{ $t('header_inicio') }}
             </nuxt-link>
             <p class="px-10 text-14 font-bold">></p>
-            <p class="text-14 font-bold">
+            <button class="text-14 font-bold" @click="clearFilters">
               {{ $t('header_productos') }}
-            </p>
+            </button>
           </div>
         </div>
       </div>
@@ -72,50 +72,79 @@
         <div
           class="w-full h-full flex flex-col justify-center items-center mr-0 md:mr-20"
         >
-          <div class="w-full flex flex-row justify-between items-center pb-25">
+          <div class="w-full flex flex-row justify-between items-start pb-25">
             <div class="w-full flex flex-col justify-start items-start">
-              <p
-                v-if="!nameCategoryHeader"
+              <button
                 class="font-semibold uppercase justify-start items-start"
                 :style="`color: ${settingByTemplate14[0].listProductsFilter['--color_subCategories']};`"
+                @click="clearFilters"
               >
                 {{ $t('header_productos') }}
-              </p>
-              <div v-else class="flex flex-col justify-start">
-                <p class="font-semibold uppercase justify-start items-start">
-                  {{ nameCategoryHeader }}
-                </p>
-                <div class="flex flex-row">
-                  <p v-if="nameSubCategoryHeader" class="text-12 mr-4">
-                    {{ nameSubCategoryHeader }}
-                  </p>
-                  <p
-                    v-if="nameSubCategoryHeader && etiqueta1"
-                    class="text-12 mr-4"
-                  >
-                    /
-                  </p>
-                  <p v-if="etiqueta1" class="text-12">
-                    {{ etiqueta1 }}
-                  </p>
-                  <p v-if="etiqueta2" class="ml-4 text-12">/ {{ etiqueta2 }}</p>
-                </div>
-              </div>
-              <div
-                v-if="
-                  etiqueta1 &&
-                  nameCategoryHeader == '' &&
-                  nameSubCategoryHeader == ''
-                "
-                class="flex flex-col justify-start"
+              </button>
+              <button
+                v-if="nameCategory"
+                :style="`color: ${settingByTemplate14[0].listProductsFilter['--color_subCategories']};`"
+                @click="breadcrumbsClear(1)"
               >
-                <p class="text-12">
-                  {{ etiqueta1 }}
-                </p>
-              </div>
+                {{ nameCategory }}
+              </button>
+              <button
+                v-if="nameSubCategory"
+                :style="`color: ${settingByTemplate14[0].listProductsFilter['--color_subCategories']};`"
+                @click="breadcrumbsClear(2)"
+              >
+                <span class="font-normal pr-4">/</span>{{ nameSubCategory }}
+              </button>
+              <p
+                v-if="tagProduct"
+                :style="`color: ${settingByTemplate14[0].listProductsFilter['--color_subCategories']};`"
+              >
+                <span class="font-normal pr-4">/</span>{{ tagProduct }}
+              </p>
             </div>
-            <div class="flex md:hidden">
-              <filterOutLine-icon class="text-25" @click="openMenuLateral" />
+            <div class="w-full flex justify-end items-start gap-x-2">
+              <el-dropdown
+                class="w-full flex justify-end items-center"
+                :hide-on-click="false"
+                @command="sendOrder"
+              >
+                <span
+                  class="el-dropdown-link txt-color justify-center items-center"
+                >
+                  Ordenar por:
+                  <span
+                    v-if="sortingFilter?.label"
+                    class="font-normal text-11 ml-5"
+                    :style="`color: ${settingByTemplate14[0].listProductsFilter['--color_subCategories']};`"
+                    @click="clearOrder"
+                  >
+                    {{ $t(sortingFilter.label) }}
+                  </span>
+                  <i class="el-icon-arrow-down el-icon--right leading-21"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item
+                    v-for="items in listOrderFilter"
+                    v-show="!stateShipping"
+                    :key="items.id"
+                    :command="items"
+                    :class="
+                      sortingFilter?.id === items.id
+                        ? 'bg-black text-white-white'
+                        : ''
+                    "
+                  >
+                    {{ $t(items.label) }}
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+              <button class="flex md:hidden">
+                <filterOutLine-icon
+                  class="text-25"
+                  :style="`color: ${settingByTemplate14[0].listProductsFilter['--color_icon']};`"
+                  @click="openMenuLateral"
+                />
+              </button>
             </div>
           </div>
           <div class="w-full h-full flex flex-col justify-center items-center">
@@ -123,31 +152,29 @@
               class="w-full grid grid-cols-2 md:grid-cols-3 gap-4 justify-center items-center text-center"
             >
               <div
-                v-for="product in filterProduct"
+                v-for="product in listProducts"
                 :key="product.id"
                 class="w-full h-full flex flex-col justify-center items-center"
               >
                 <Ko14ProductCard
-                  class="w-full"
                   :product="product"
-                  :card-products="settingByTemplate14[0].cardProducts"
+                  :setting-card-products="settingByTemplate14[0].cardProducts"
                   :setting-general="settingByTemplate14[0].settingsGeneral"
+                  class="w-full h-full"
                 />
               </div>
             </div>
             <div
-              v-if="fullProducts.length == 0"
+              v-if="listProducts.length == 0"
               class="w-full h-full flex flex-col justify-center items-center text-center"
             >
               <nuxt-link to="/productos">
                 <img
-                  v-lazy="
-                    `${$store.state.urlKomercia}/logos/${dataStore.tienda.logo}`
-                  "
+                  v-lazy="`${$store.state.urlKomercia}/logos/${dataStore.logo}`"
                   width="150"
                   class="max-w-[150px] max-h-[150px]"
                   alt="LogoStore img"
-                  @click="clear"
+                  @click="clearFilters"
                 />
               </nuxt-link>
               <p class="my-15 font-semibold text-20 text-gray-600">
@@ -155,16 +182,17 @@
               </p>
             </div>
             <div
-              v-if="fullProducts.length > numVistas"
+              v-if="totalProducts > filters.limit"
               class="w-full flex justify-center items-center wrapper_pagination mt-20"
             >
               <el-pagination
                 background
                 layout="prev, pager, next"
-                :total="fullProducts.length"
-                :page-size="numVistas"
-                :current-page.sync="currentPage"
-                class="pagination"
+                class="pagination bg-transparent"
+                :total="totalProducts"
+                :page-size="filters.limit"
+                :current-page.sync="previousPage"
+                @current-change="changePage"
               />
             </div>
           </div>
@@ -176,7 +204,7 @@
           <button
             class="w-full flex justify-between items-center pb-10 uppercase font-semibold cursor-pointer text-16 my-5"
             :style="`color: ${settingByTemplate14[0].listProductsFilter['--color_subCategories']};`"
-            @click="clear"
+            @click="clearFilters"
           >
             {{ $t('header_buscar_limpiar') }}
             <close-icon class="color_icon" />
@@ -184,7 +212,7 @@
           <el-collapse v-model="activeNames">
             <el-collapse-item :title="$t('header_buscar_producto')" name="1">
               <input
-                v-model="search"
+                v-model="searchProduct"
                 class="input-slide"
                 type="search"
                 :placeholder="$t('header_search')"
@@ -196,89 +224,73 @@
               name="2"
             >
               <div class="categorys-list">
-                <div
-                  v-for="(categorys, index) in categorias"
-                  :key="index"
-                  @click="showSubCategory = true"
-                >
-                  <div @click="sendCategory(categorys, categorys.id)">
+                <div v-for="(category, index) in categorias" :key="index">
+                  <div @click="sendCategory(category)">
                     <p
                       class="txt-categorys"
                       :class="
-                        categorys.id == indexSelect
+                        category.nombreCategoriaProducto == filters.category
                           ? 'txt-categorys-active'
                           : ''
                       "
                     >
-                      {{ categorys.nombre_categoria_producto }}
+                      {{ category.nombreCategoriaProducto }}
                     </p>
                   </div>
                 </div>
               </div>
             </el-collapse-item>
             <el-collapse-item
-              v-show="showSubCategory && selectedSubcategories.length"
+              v-show="selectedSubcategories?.length"
               :title="$t('home_subcategory')"
               name="3"
             >
-              <div
-                v-show="showSubCategory && selectedSubcategories.length"
-                class="subcategory-list"
-              >
+              <div class="subcategory-list">
                 <div
-                  v-for="(subcategorys, index) in selectedSubcategories"
+                  v-for="(subcategory, index) in selectedSubcategories"
                   :key="index"
                 >
-                  <div @click="SendSubCategory(subcategorys.id)">
+                  <div @click="sendSubCategory(subcategory)">
                     <p
                       class="txt-categorys"
                       :class="
-                        subcategorys.id == indexSelect2
+                        subcategory.id == filters.subcategory
                           ? 'txt-categorys-active'
                           : ''
                       "
                     >
-                      {{ subcategorys.nombre_subcategoria }}
+                      {{ subcategory.nombreSubcategoria }}
                     </p>
                   </div>
                 </div>
               </div>
             </el-collapse-item>
             <div
-              v-for="(itemsTags, index) in allTags"
-              v-show="allTags && allTags.length > 0"
+              v-for="(itemsTags, index) in tags"
+              v-show="tags?.length > 0"
               :key="index"
             >
               <el-collapse-item
                 v-if="
                   itemsTags &&
                   itemsTags.status === 1 &&
-                  itemsTags.properties.length > 0
+                  itemsTags.tagProperties.length > 0
                 "
                 :title="itemsTags.name"
                 :name="6 + index"
               >
                 <div class="categorys-list">
                   <button
-                    v-for="itemsProperties in itemsTags.properties"
+                    v-for="itemsProperties in itemsTags.tagProperties"
                     v-show="itemsProperties.status === 1"
                     :key="itemsProperties.id"
                     class="txt-Filter"
                     :class="
-                      itemsProperties.name == etiqueta1
-                        ? 'txt-categorys-active'
-                        : '' || itemsProperties.name == etiqueta2
+                      itemsProperties.id == filters.tag
                         ? 'txt-categorys-active'
                         : ''
                     "
-                    @click="
-                      getProductsFilter(
-                        'tag',
-                        itemsProperties.id,
-                        itemsProperties.name,
-                        false
-                      )
-                    "
+                    @click="sendTag(itemsProperties)"
                   >
                     {{ itemsProperties.name }}
                   </button>
@@ -290,35 +302,28 @@
               :title="$t('home_fenvio')"
               name="4"
             >
-              <div class="categorys-list">
-                <button
-                  class="txt-Filter"
-                  @click="getProductsFilter('ShippingFree')"
-                >
-                  {{ $t('home_gratis') }}
-                </button>
-                <button
-                  class="txt-Filter"
-                  @click="getProductsFilter('NoShippingFree')"
-                >
-                  {{ $t('home_Singratis') }}
-                </button>
-              </div>
-            </el-collapse-item>
-            <el-collapse-item :title="$t('home_fprecio')" name="5">
-              <div class="categorys-list">
-                <button
-                  class="txt-Filter"
-                  @click="getProductsFilter('higherNumber')"
-                >
-                  {{ $t('home_fpreciom') }}
-                </button>
-                <button
-                  class="txt-Filter"
-                  @click="getProductsFilter('smallerNumber')"
-                >
-                  {{ $t('home_fprecioM') }}
-                </button>
+              <div class="w-full flex flex-row justify-between items-center">
+                <input
+                  v-model="filters.minPrice"
+                  :min="minPrice"
+                  :max="maxPrice"
+                  placeholder="Mínimo"
+                  class="block w-full rounded-4 px-4 py-4 text-gray-900 shadow-sm border border-[#DCDFE6] placeholder:text-gray-400"
+                  onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode>96 && event.charCode<105)"
+                  @keyup.enter="sendFilter"
+                  @change="sendFilter"
+                />
+                <span class="px-5 icon-price text-16">-</span>
+                <input
+                  v-model="filters.maxPrice"
+                  :min="minPrice"
+                  :max="maxPrice"
+                  placeholder="Máximo"
+                  class="block w-full rounded-4 px-4 py-4 text-gray-900 shadow-sm border border-[#DCDFE6] placeholder:text-gray-400"
+                  onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode>96 && event.charCode<105)"
+                  @keyup.enter="sendFilter"
+                  @change="sendFilter"
+                />
               </div>
             </el-collapse-item>
           </el-collapse>
@@ -328,94 +333,28 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
-import filterProducts from '@/mixins/filterProducts'
+import mobileCheck from '@/mixins/mobileCheck'
+import filters from '@/mixins/filterProducts'
 import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
   name: 'Ko14ProductListFilter',
   components: {
     Ko14ProductCard: () => import('./_cardProduct/ProductCard.vue'),
   },
-  mixins: [filterProducts, idCloudinaryBanner],
+  mixins: [mobileCheck, filters, idCloudinaryBanner],
   props: {
-    dataStore: {
-      type: Object,
-      required: true,
-    },
     settingByTemplate14: {
-      type: Array,
-      required: true,
-    },
-    fullProducts: {
-      type: Array,
-      required: true,
-    },
-    allTags: {
       type: Array,
       required: true,
     },
   },
   data() {
     return {
-      search: '',
-      currentPage: 1,
-      showSubCategory: false,
-      selectSubcategory: '',
-      nameCategory: '',
-      nameSubCategory: '',
-      selectedSubcategories: [],
-      indexSelect: '',
-      indexSelect2: '',
-      numVistas: 15,
-      activeNames: ['1', '2', '3', '4', '5'],
-      stateShipping: false,
+      activeNames: ['1', '2', '3', '4'],
     }
   },
-  computed: {
-    ...mapState(['searchValue', 'previousPage']),
-    categorias() {
-      return this.dataStore.categorias
-    },
-    subcategories() {
-      return this.dataStore.subcategorias
-    },
-    getProductsCategories() {
-      const initial = this.currentPage * 15 - 15
-      const final = initial + 15
-      return this.fullProducts
-        .filter((product) => product.categoria == this.select)
-        .slice(initial, final)
-    },
-    filterProduct() {
-      const initial = this.currentPage * 15 - 15
-      const final = initial + 15
-      return this.fullProducts.slice(initial, final)
-    },
-    selectedCategory() {
-      return this.$store.state.products.payload
-    },
-    selectedType() {
-      return this.$store.state.products.type
-    },
-    nameCategoryHeader() {
-      return this.$store.state.category_producto_header
-    },
-    nameSubCategoryHeader() {
-      return this.$store.state.subcategory_producto_header
-    },
-    etiqueta1() {
-      return this.$store.state.products.payloadTagName
-    },
-    etiqueta2() {
-      return this.$store.state.products.payloadTag2Name
-    },
-  },
   watch: {
-    search(value) {
-      this.SearchProduct(value)
-    },
-    currentPage() {
-      this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
+    previousPage() {
       let timerTimeout = null
       // eslint-disable-next-line no-unused-vars
       timerTimeout = setTimeout(() => {
@@ -423,151 +362,10 @@ export default {
         window.scrollBy(0, -1500)
       }, 250)
     },
-    previousPage() {
-      if (this.previousPage) {
-        this.currentPage = this.previousPage
-      }
-    },
-    nameCategoryHeader(value) {
-      return value
-    },
-    nameSubCategoryHeader(value) {
-      return value
-    },
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
-      this.getQuery()
-    },
-    searchValue(value) {
-      this.SearchProduct(value)
-    },
-  },
-  mounted() {
-    this.getQuery()
-    if (this.previousPage) {
-      this.currentPage = this.previousPage
-    }
   },
   methods: {
     openMenuLateral() {
       this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', true)
-    },
-    getQuery() {
-      if (this.$route.query && this.$route.query.category) {
-        this.sendCategoryUrlMix(this.$route.query.category)
-      } else if (this.$route.query && this.$route.query.subcategory) {
-        this.SendSubCategoryUrlMix(
-          this.$route.query.subcategory,
-          this.categorias,
-          this.subcategories
-        )
-      } else if (
-        this.$route.query &&
-        this.$route.query.tagId &&
-        this.$route.query.tagName
-      ) {
-        this.sendTagUrlMix(this.$route.query.tagId, this.$route.query.tagName)
-      } else if (this.$route.query && this.$route.query.search) {
-        this.SearchProduct(decodeURIComponent(this.$route.query.search))
-      } else if (this.$route.fullPath === '/') {
-        this.allCategories()
-      }
-    },
-    setOptionShipping() {
-      if (this.dataStore && this.dataStore.medios_envio) {
-        let shipping = JSON.parse(this.dataStore.medios_envio.valores)
-        switch (shipping.envio_metodo) {
-          case 'sintarifa':
-            this.stateShipping = false
-            break
-          case 'gratis':
-            this.stateShipping = true
-            break
-          case 'tarifa_plana':
-            this.stateShipping = false
-            break
-          case 'precio':
-            this.stateShipping = false
-            break
-          case 'precio_ciudad':
-            this.stateShipping = false
-            break
-          case 'peso':
-            this.stateShipping = false
-            break
-          default:
-        }
-      }
-    },
-    SendSubCategory(value) {
-      this.$store.commit('products/SET_PAYLOAD_TAG', '')
-      this.$store.commit('products/SET_PAYLOAD_TAG2', '')
-      this.indexSelect2 = value
-      this.selectSubcategory = value
-      let filtradoSubCategory = this.subcategories.find(
-        (element) => element.id == value
-      )
-      let filtradoCategories = this.categorias.find(
-        (element) => element.id == filtradoSubCategory.categoria
-      )
-      this.$store.commit(
-        'SET_CATEGORY_PRODUCTO',
-        filtradoCategories.nombre_categoria_producto
-      )
-      this.nameSubCategory = filtradoSubCategory.nombre_subcategoria
-      this.$router.push({
-        path: '',
-        query: {
-          subcategory: `${this.nameSubCategory}^${filtradoCategories.id}`,
-        },
-      })
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', this.nameSubCategory)
-      this.$store.commit('products/FILTER_BY', {
-        type: ['subcategory'],
-        data: value,
-      })
-    },
-    sendCategory(value, categoria) {
-      this.indexSelect = categoria
-      this.currentPage = 1
-      this.nameCategory = value.nombre_categoria_producto
-      this.nameSubCategory = ''
-      this.$store.commit('SET_CATEGORY_PRODUCTO', this.nameCategory)
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$store.commit('products/SET_PAYLOAD_TAG', '')
-      this.$store.commit('products/SET_PAYLOAD_TAG2', '')
-      this.$router.push({
-        path: '',
-        query: { category: this.nameCategory },
-      })
-      this.selectedSubcategories = []
-      this.subcategories.find((subcategory) => {
-        if (subcategory.categoria === categoria) {
-          this.selectedSubcategories.push(subcategory)
-        }
-      })
-      this.$store.commit('products/FILTER_BY', {
-        type: ['category'],
-        data: value.nombre_categoria_producto,
-      })
-    },
-    clear() {
-      this.indexSelect = ''
-      this.indexSelect2 = ''
-      this.$router.push({
-        path: '',
-        query: {},
-      })
-      this.$store.commit('SET_CATEGORY_PRODUCTO', '')
-      this.$store.commit('SET_SUBCATEGORY_PRODUCTO', '')
-      this.$store.commit('products/FILTER_BY', {
-        type: ['all'],
-        data: '',
-      })
-      this.$emit('clear')
-      this.nameCategory = ''
-      this.showSubCategory = false
-      this.selectedSubcategories = []
     },
   },
 }

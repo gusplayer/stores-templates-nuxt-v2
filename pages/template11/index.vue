@@ -1,13 +1,11 @@
 <template>
   <div v-if="settingByTemplate11">
-    <client-only>
-      <K011-carousel
-        v-if="settingByTemplate11?.banner?.visible"
-        id="kCarouselX"
-        :key="bannerRendering"
-        v-bind="componentsProps"
-      />
-    </client-only>
+    <K011-carousel
+      v-if="settingByTemplate11?.banner?.visible"
+      id="kCarouselX"
+      :key="bannerRendering"
+      v-bind="componentsProps"
+    />
     <K011-section
       v-if="settingByTemplate11?.section?.visible"
       id="kSectionX"
@@ -19,17 +17,15 @@
       v-bind="componentsProps"
     />
     <K011-trendingProduct
-      v-if="settingByTemplate11?.trending?.visible && fullProducts?.length > 0"
+      v-if="settingByTemplate11?.trending?.visible"
       id="kTredingX"
       v-bind="componentsProps"
     />
-    <client-only>
-      <K011-parallax
-        v-if="settingByTemplate11?.parallax?.visible"
-        id="kParallaxX"
-        v-bind="componentsProps"
-      />
-    </client-only>
+    <K011-parallax
+      v-if="settingByTemplate11?.parallax?.visible"
+      id="kParallaxX"
+      v-bind="componentsProps"
+    />
     <K011-listTrending
       v-if="dataHoko?.length == 0 || dataHoko?.statehoko == 0"
       v-bind="componentsProps"
@@ -40,7 +36,7 @@
       v-bind="componentsProps"
     />
     <K011-blog
-      v-if="settingByTemplate11?.blog?.visible && listArticulos?.length > 0"
+      v-if="settingByTemplate11?.blog?.visible && stateListBLogs"
       id="kBlogX"
       v-bind="componentsProps"
     />
@@ -73,21 +69,17 @@ export default {
   computed: {
     ...mapState([
       'dataStore',
-      'listArticulos',
+      'stateListBLogs',
       'settingByTemplate11',
       'dataHoko',
     ]),
-    fullProducts() {
-      return this.$store.getters['products/allProduct']
-    },
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        fullProducts: this.fullProducts,
         settingGeneral: this.settingByTemplate11?.settingGeneral ?? null,
         settingKbanner: this.settingByTemplate11?.banner ?? null,
         settingKblog: this.settingByTemplate11?.blog ?? null,
-        settingKcardProduct: this.settingByTemplate11?.cardProduct ?? null,
+        settingCardProduct: this.settingByTemplate11?.cardProduct ?? null,
         settingKcontact: this.settingByTemplate11?.contact ?? null,
         settingKinformation: this.settingByTemplate11?.information ?? null,
         settingKparallax: this.settingByTemplate11?.parallax ?? null,
@@ -108,7 +100,7 @@ export default {
     window.addEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
-    addEventListenerTemplate(e) {
+    async addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
         e.origin.includes('http://localhost:8080')
@@ -159,9 +151,15 @@ export default {
               this.moverseA('kBlogX')
               break
             case 'detailsProduct':
-              if (this.fullProducts) {
+              // eslint-disable-next-line no-case-declarations
+              const { success, data } = await this.currentChange()
+              if ((success, data.length > 0)) {
                 this.$router.push({
-                  path: '/productos/' + this.fullProducts[0].slug,
+                  path: '/productos/' + data[0].slug,
+                })
+              } else {
+                this.$router.push({
+                  path: '/productos',
                 })
               }
               break
@@ -187,6 +185,19 @@ export default {
     },
     moverseA(idDelElemento) {
       location.hash = '#' + idDelElemento
+    },
+    async currentChange() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_ALL_PRODUCTS',
+        {
+          id_tienda: this.dataStore.id,
+          limit: 1,
+          page: 1,
+        }
+      )
+      if (success) {
+        return { success: true, data: data.publicProductList }
+      }
     },
   },
 }

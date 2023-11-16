@@ -25,7 +25,7 @@
           <div
             class="border h-2 my-10 md:my-15 border-hover"
             :style="`border-color: ${newsletter.color_border};`"
-          />
+          ></div>
           <div class="w-full flex flex-col justify-center">
             <div
               class="w-full flex flex-col justify-between md:flex-row py-10 px-10 rounded-2"
@@ -125,17 +125,27 @@ import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  name: 'Ko15-Newsletter',
-  props: {
-    newsletter: Object,
-    settingGeneral: Object,
-    dataStore: Object,
-  },
+  name: 'Ko15Newsletter',
   components: {
     ValidationObserver,
     ValidationProvider,
   },
   mixins: [idCloudinary],
+  props: {
+    newsletter: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+  },
+
   data() {
     return {
       errorsCheckbox: 'El campo checkbox y email son obligatorios',
@@ -145,13 +155,13 @@ export default {
       stateChecked: false,
     }
   },
-  destroyed() {
-    this.email = ''
-  },
   computed: {
     facebookPixel() {
       return this.$store.state.analytics_tagmanager
     },
+  },
+  destroyed() {
+    this.email = ''
   },
   methods: {
     submitNewsletter() {
@@ -162,7 +172,7 @@ export default {
             if (response.valid) {
               const json = {
                 email: this.email,
-                tienda: this.dataStore.tienda.id_tienda,
+                tienda: this.dataStore.id,
               }
               axios
                 .post(

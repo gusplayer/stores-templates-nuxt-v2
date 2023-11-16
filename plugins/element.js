@@ -6,6 +6,8 @@ import {
   Input,
   Carousel,
   CarouselItem,
+  Radio,
+  RadioGroup,
   Dropdown,
   DropdownMenu,
   DropdownItem,
@@ -42,6 +44,8 @@ export default () => {
   Vue.use(Input)
   Vue.use(Carousel)
   Vue.use(CarouselItem)
+  Vue.use(Radio)
+  Vue.use(RadioGroup)
   Vue.use(Dropdown)
   Vue.use(DropdownMenu)
   Vue.use(DropdownItem)

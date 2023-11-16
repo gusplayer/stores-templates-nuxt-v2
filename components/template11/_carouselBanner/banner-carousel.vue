@@ -4,50 +4,73 @@
     :style="[
       settingGeneral,
       {
-        '--font-style-1':
-          this.settingGeneral && this.settingGeneral.fount_1
-            ? this.settingGeneral.fount_1
-            : 'Roboto',
+        '--font-style-1': settingGeneral?.fount_1 ?? 'Roboto',
       },
     ]"
   >
     <div class="content-txt">
       <p
+        v-if="banner.pretitle"
         class="txt-top"
         :style="`color: ${banner.colorPretitle};`"
-        v-if="banner.pretitle"
       >
         {{ banner.pretitle.replace(/&nbsp;/g, ' ') }}
       </p>
-      <div class="separator" :style="`background: ${banner.color_border};`" />
+      <div
+        class="separator"
+        :style="`background: ${banner.color_border};`"
+      ></div>
       <p
+        v-if="banner.title"
         class="txt-bottom"
         :style="`color: ${banner.colorTitle};`"
-        v-if="banner.title"
       >
         {{ banner.title.replace(/&nbsp;/g, ' ') }}
       </p>
     </div>
-    <div class="content-btn" v-if="banner.visbleBtn">
-      <a
-        :href="banner.url_redirect ? banner.url_redirect : ''"
-        rel="noreferrer noopener"
-      >
-        <button
-          class="btn"
-          :style="`background: ${banner.color_background_btn}; color: ${banner.color_text_btn}; margin-top:${banner.marginTopBtn};`"
+    <div v-if="banner.visbleBtn" class="content-btn">
+      <template v-if="isInternalUrl(banner.url_redirect)">
+        <nuxt-link :to="banner.url_redirect ? banner.url_redirect : ''">
+          <p
+            class="btn"
+            :style="`background: ${banner.color_background_btn}; color: ${banner.color_text_btn}; margin-top:${banner.marginTopBtn};`"
+          >
+            {{ $t('home_comprarAhora') }}
+          </p>
+        </nuxt-link>
+      </template>
+      <template v-else>
+        <a
+          :href="banner.url_redirect ? banner.url_redirect : ''"
+          rel="noreferrer noopener"
         >
-          {{ $t('home_comprarAhora') }}
-        </button>
-      </a>
+          <p
+            class="btn"
+            :style="`background: ${banner.color_background_btn}; color: ${banner.color_text_btn}; margin-top:${banner.marginTopBtn};`"
+          >
+            {{ $t('home_comprarAhora') }}
+          </p>
+        </a>
+      </template>
     </div>
   </div>
 </template>
 <script>
 export default {
   props: {
-    banner: Object,
-    settingGeneral: Object,
+    banner: {
+      type: Object,
+      required: true,
+    },
+    settingGeneral: {
+      type: Object,
+      required: true,
+    },
+  },
+  methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
+    },
   },
 }
 </script>
