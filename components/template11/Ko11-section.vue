@@ -10,120 +10,41 @@
     ]"
   >
     <div class="content-wrapper">
-      <a
-        :href="
-          settingKsection.values[0].url_redirect
-            ? settingKsection.values[0].url_redirect
-            : ''
-        "
-        rel="noreferrer noopener"
+      <div
+        v-for="(item, index) in settingKsection.values"
+        :key="index"
+        class="w-full h-full"
       >
-        <div class="wrapper-left">
-          <img
-            v-lazy="
-              idCloudinaryBanner(
-                settingKsection.values[0].url_img_background,
-                'banner'
-              )
-            "
-            class="img-left"
-            alt="imagen-1"
-          />
-          <div
-            class="txt-content"
-            :style="`justify-content: ${settingKsection.values[0].justingText}; align-items: ${settingKsection.values[0].alingText};`"
-          >
-            <p
-              class="txt-top"
-              :style="`color: ${settingKsection.values[0].colorPretitle}; margin-bottom:${settingKsection.values[0].marginbottomPretitle};`"
+        <a
+          :href="item.url_redirect ? item.url_redirect : ''"
+          rel="noreferrer noopener"
+        >
+          <div class="wrapper-items">
+            <img
+              v-lazy="idCloudinaryBanner(item.url_img_background, 'banner')"
+              class="img-item"
+              :alt="`imagen-${index}`"
+            />
+            <div
+              class="txt-content"
+              :style="`justify-content: ${item.justingText}; align-items: ${item.alingText};`"
             >
-              {{ settingKsection.values[0].pretitle.replace(/&nbsp;/g, ' ') }}
-            </p>
-            <p
-              class="txt-bottom"
-              :style="`color: ${settingKsection.values[0].colorTitle}; margin-bottom:${settingKsection.values[0].marginbottomTitle};`"
-            >
-              {{ settingKsection.values[0].title.replace(/&nbsp;/g, ' ') }}
-            </p>
+              <p
+                class="txt-top"
+                :style="`color: ${item.colorPretitle}; margin-bottom:${item.marginbottomPretitle};`"
+              >
+                {{ item.pretitle.replace(/&nbsp;/g, ' ') }}
+              </p>
+              <p
+                class="txt-bottom"
+                :style="`color: ${item.colorTitle}; margin-bottom:${item.marginbottomTitle};`"
+              >
+                {{ item.title.replace(/&nbsp;/g, ' ') }}
+              </p>
+            </div>
           </div>
-        </div>
-      </a>
-      <a
-        :href="
-          settingKsection.values[1].url_redirect
-            ? settingKsection.values[1].url_redirect
-            : ''
-        "
-        rel="noreferrer noopener"
-      >
-        <div class="wrapper-center">
-          <img
-            v-lazy="
-              idCloudinaryBanner(
-                settingKsection.values[1].url_img_background,
-                'banner'
-              )
-            "
-            class="img-center"
-            alt="imagen-2"
-          />
-          <div
-            class="txt-content"
-            :style="`justify-content: ${settingKsection.values[1].justingText}; align-items: ${settingKsection.values[1].alingText};`"
-          >
-            <p
-              class="txt-top"
-              :style="`color: ${settingKsection.values[1].colorPretitle}; margin-bottom:${settingKsection.values[1].marginbottomPretitle};`"
-            >
-              {{ settingKsection.values[1].pretitle.replace(/&nbsp;/g, ' ') }}
-            </p>
-            <p
-              class="txt-bottom"
-              :style="`color: ${settingKsection.values[1].colorTitle}; margin-bottom:${settingKsection.values[1].marginbottomTitle};`"
-            >
-              {{ settingKsection.values[1].title.replace(/&nbsp;/g, ' ') }}
-            </p>
-          </div>
-        </div>
-      </a>
-      <a
-        :href="
-          settingKsection.values[2].url_redirect
-            ? settingKsection.values[2].url_redirect
-            : ''
-        "
-        rel="noreferrer noopener"
-      >
-        <div class="wrapper-right">
-          <img
-            v-lazy="
-              idCloudinaryBanner(
-                settingKsection.values[2].url_img_background,
-                'banner'
-              )
-            "
-            class="img-right"
-            alt="imagen-3"
-          />
-          <div
-            class="txt-content"
-            :style="`justify-content: ${settingKsection.values[2].justingText}; align-items: ${settingKsection.values[2].alingText};`"
-          >
-            <p
-              class="txt-top"
-              :style="`color: ${settingKsection.values[2].colorPretitle}; margin-bottom:${settingKsection.values[2].marginbottomPretitle};`"
-            >
-              {{ settingKsection.values[2].pretitle.replace(/&nbsp;/g, ' ') }}
-            </p>
-            <p
-              class="txt-bottom"
-              :style="`color: ${settingKsection.values[2].colorTitle}; margin-bottom:${settingKsection.values[2].marginbottomTitle};`"
-            >
-              {{ settingKsection.values[2].title.replace(/&nbsp;/g, ' ') }}
-            </p>
-          </div>
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -152,36 +73,22 @@ export default {
 .content-wrapper {
   @apply justify-center items-center;
 }
-.wrapper-left,
-.wrapper-center,
-.wrapper-right {
+
+.wrapper-items {
   @apply w-full h-auto relative flex justify-start cursor-pointer overflow-hidden;
   -webkit-transition: all 600ms ease 0s;
 }
-.img-left,
-.img-center,
-.img-right {
+.img-item {
   @apply w-full object-cover overflow-hidden;
   -webkit-transition: all 600ms ease 0s;
 }
-.wrapper-left:hover .img-left {
+.wrapper-items:hover .img-item {
   @apply relative overflow-hidden;
   -webkit-transition: all 600ms ease 0s;
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
-.wrapper-center:hover .img-center {
-  @apply relative overflow-hidden;
-  -webkit-transition: all 600ms ease 0s;
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
-.wrapper-right:hover .img-right {
-  @apply relative overflow-hidden;
-  -webkit-transition: all 600ms ease 0s;
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
+
 .txt-content {
   padding: 20px 20px 0 20px;
   @apply absolute w-full h-full flex flex-col;

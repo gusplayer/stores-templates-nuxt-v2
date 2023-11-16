@@ -10,13 +10,7 @@
     <picture>
       <source
         media="(max-width: 799px)"
-        :srcset="
-          idCloudinaryBanner(
-            'https://res.cloudinary.com/komerciaacademico/image/upload/v1699387132/template15/bg-1_tzi2i2_qbqx48_yusci6.jpg',
-            'bannerRes',
-            800
-          )
-        "
+        :srcset="idCloudinaryBanner(banner2.imgBg_res, 'bannerRes', 800)"
       />
       <source
         media="(min-width: 800px)"
@@ -53,28 +47,58 @@
           {{ banner2.text }}
         </p>
         <div class="w-full grid grid-cols-2 gap-5">
-          <a
-            :href="banner2.url_redirect_1"
-            :style="{
-              color: banner2.color_text_btn_1,
-              backgroundColor: banner2.color_bg_btn_1,
-              borderRadius: settingGeneral?.radius,
-            }"
-            class="px-20 py-5 md:py-8 text-12 md:text-14 xl:text-16"
-          >
-            {{ banner2.text_btn_1 }}
-          </a>
-          <a
-            :href="banner2.url_redirect_2"
-            :style="{
-              color: banner2.color_text_btn_2,
-              backgroundColor: banner2.color_bg_btn_2,
-              borderRadius: settingGeneral?.radius,
-            }"
-            class="px-20 py-5 md:py-8 text-12 md:text-14 xl:text-16"
-          >
-            {{ banner2.text_btn_2 }}
-          </a>
+          <template v-if="isInternalUrl(banner2.url_redirect_1)">
+            <nuxt-link
+              :to="banner2.url_redirect_1"
+              :style="{
+                color: banner2.color_text_btn_1,
+                backgroundColor: banner2.color_bg_btn_1,
+                borderRadius: settingGeneral?.radius,
+              }"
+              class="px-20 py-5 md:py-8 text-12 md:text-14 xl:text-16"
+            >
+              {{ banner2.text_btn_1 }}
+            </nuxt-link>
+          </template>
+          <template v-else>
+            <a
+              :href="banner2.url_redirect_2"
+              :style="{
+                color: banner2.color_text_btn_1,
+                backgroundColor: banner2.color_bg_btn_1,
+                borderRadius: settingGeneral?.radius,
+              }"
+              class="px-20 py-5 md:py-8 text-12 md:text-14 xl:text-16"
+            >
+              {{ banner2.text_btn_1 }}
+            </a>
+          </template>
+          <template v-if="isInternalUrl(banner2.url_redirect_2)">
+            <nuxt-link
+              :to="banner2.url_redirect_2"
+              :style="{
+                color: banner2.color_text_btn_2,
+                backgroundColor: banner2.color_bg_btn_2,
+                borderRadius: settingGeneral?.radius,
+              }"
+              class="px-20 py-5 md:py-8 text-12 md:text-14 xl:text-16"
+            >
+              {{ banner2.text_btn_2 }}
+            </nuxt-link>
+          </template>
+          <template v-else>
+            <a
+              :href="banner2.url_redirect_2"
+              :style="{
+                color: banner2.color_text_btn_2,
+                backgroundColor: banner2.color_bg_btn_2,
+                borderRadius: settingGeneral?.radius,
+              }"
+              class="px-20 py-5 md:py-8 text-12 md:text-14 xl:text-16"
+            >
+              {{ banner2.text_btn_2 }}
+            </a>
+          </template>
         </div>
       </div>
     </div>
@@ -98,6 +122,11 @@ export default {
     dataStore: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
     },
   },
 }

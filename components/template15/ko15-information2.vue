@@ -39,13 +39,25 @@
         >
           {{ information2.text }}
         </p>
-        <a
-          :href="information2.url_redirect"
-          class="px-20 py-5 md:py-8 mt-25 md:mt-40 mb-20 xl:mb-0 text-12 md:text-14 xl:text-16"
-          :style="`color: ${information2.color_text_btn}; background-color: ${information2.color_bg_btn}; border-radius: ${settingGeneral?.radius};`"
-        >
-          {{ information2.text_btn }}
-        </a>
+        <template v-if="isInternalUrl(information2.url_redirect)">
+          <nuxt-link
+            :to="information2.url_redirect"
+            class="px-20 py-5 md:py-8 mt-25 md:mt-40 mb-20 xl:mb-0 text-12 md:text-14 xl:text-16"
+            :style="`color: ${information2.color_text_btn}; background-color: ${information2.color_bg_btn}; border-radius: ${settingGeneral?.radius};`"
+          >
+            {{ information2.text_btn }}
+          </nuxt-link>
+        </template>
+        <template v-else>
+          <a
+            :href="information2.url_redirect"
+            class="px-20 py-5 md:py-8 mt-25 md:mt-40 mb-20 xl:mb-0 text-12 md:text-14 xl:text-16"
+            :style="`color: ${information2.color_text_btn}; background-color: ${information2.color_bg_btn}; border-radius: ${settingGeneral?.radius};`"
+            rel="noreferrer noopener"
+          >
+            {{ information2.text_btn }}
+          </a>
+        </template>
       </div>
     </div>
   </div>
@@ -68,6 +80,11 @@ export default {
     dataStore: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
     },
   },
 }

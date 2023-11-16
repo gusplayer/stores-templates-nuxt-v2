@@ -35,17 +35,30 @@
               </span>
             </div>
           </div>
-          <button class="content-bttns-shop">
-            <a
-              :href="`${settingKAdvertising.url_redirect}`"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              <span class="content-textbutton-shop">
-                {{ $t('productdetail_btnComprar') }}
-              </span>
-            </a>
-          </button>
+          <div class="content-bttns-shop">
+            <template v-if="isInternalUrl(settingKAdvertising.url_redirect)">
+              <nuxt-link
+                :to="`${settingKAdvertising.url_redirect}`"
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                <span class="content-textbutton-shop">
+                  {{ $t('productdetail_btnComprar') }}
+                </span>
+              </nuxt-link>
+            </template>
+            <template v-else>
+              <a
+                :href="`${settingKAdvertising.url_redirect}`"
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                <span class="content-textbutton-shop">
+                  {{ $t('productdetail_btnComprar') }}
+                </span>
+              </a>
+            </template>
+          </div>
         </div>
       </div>
     </div>
@@ -86,6 +99,9 @@ export default {
     }
   },
   methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
+    },
     setBg() {
       if (this.settingKAdvertising) {
         if (!this.mobileCheck()) {

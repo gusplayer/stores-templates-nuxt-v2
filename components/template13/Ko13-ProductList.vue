@@ -35,13 +35,23 @@
         </div>
       </div>
       <div v-if="productList.visibleBtn" class="btn-products">
-        <a
-          :href="productList.url_redirect ? productList.url_redirect : ''"
-          rel="noreferrer noopener"
-          class="btn"
-        >
-          {{ productList.displayName }}
-        </a>
+        <template v-if="isInternalUrl(productList.url_redirect)">
+          <nuxt-link
+            :to="productList.url_redirect ? productList.url_redirect : ''"
+            class="btn"
+          >
+            {{ productList.displayName }}
+          </nuxt-link>
+        </template>
+        <template v-else>
+          <a
+            :href="productList.url_redirect ? productList.url_redirect : ''"
+            rel="noreferrer noopener"
+            class="btn"
+          >
+            {{ productList.displayName }}
+          </a>
+        </template>
       </div>
     </div>
   </div>
@@ -115,6 +125,9 @@ export default {
     this.currentChange()
   },
   methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
+    },
     async currentChange() {
       const { success, data } = await this.$store.dispatch(
         'products/GET_ALL_PRODUCTS',

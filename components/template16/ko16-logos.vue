@@ -8,22 +8,38 @@
     >
       <div ref="mySwiper" v-swiper:mySwiper="swiperOption" class="w-full">
         <div class="swiper-wrapper w-full">
-          <a
+          <div
             v-for="(item, index) in logos.values"
-            :id="`slide${index + 1}`"
             :key="index"
-            :href="item.url_redirect"
             class="swiper-slide w-full"
-            rel="noreferrer noopener"
           >
-            <img
-              :src="idCloudinary(item.img, 550, 550)"
-              class="h-full w-full remove_bg max-w-[140px] max-h-[140px]"
-              width="140"
-              height="140"
-              :alt="`imágenes logos${index}`"
-            />
-          </a>
+            <template v-if="isInternalUrl(item.url_redirect)">
+              <nuxt-link :to="item.url_redirect" class="w-full">
+                <img
+                  :src="idCloudinary(item.img, 550, 550)"
+                  class="h-full w-full remove_bg max-w-[140px] max-h-[140px]"
+                  width="140"
+                  height="140"
+                  :alt="`imágenes logos${index}`"
+                />
+              </nuxt-link>
+            </template>
+            <template v-else>
+              <a
+                :href="item.url_redirect"
+                class="w-full"
+                rel="noreferrer noopener"
+              >
+                <img
+                  :src="idCloudinary(item.img, 550, 550)"
+                  class="h-full w-full remove_bg max-w-[140px] max-h-[140px]"
+                  width="140"
+                  height="140"
+                  :alt="`imágenes logos${index}`"
+                />
+              </a>
+            </template>
+          </div>
         </div>
       </div>
     </div>
@@ -78,6 +94,11 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
+    },
+  },
+  methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
     },
   },
 }

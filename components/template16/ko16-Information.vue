@@ -45,17 +45,33 @@
             >
               {{ item.text }}
             </p>
-            <a
-              v-if="item.visible_btn"
-              :href="item.url_redirect ? item.url_redirect : ''"
-              class="px-20 py-20 mt-16 md:mt-40 border text-12 md:text-14 xl:text-16"
-              :style="`color: ${item.color_text_btn}; background-color: ${item.color_bg_btn}; border-color: ${item.color_border_btn}; border-radius: ${settingGeneral?.radius};`"
-            >
-              {{ item.text_btn }}
-              <span :style="`color: ${item.color_price_btn};`">
-                {{ item.text_price_btn }}
-              </span>
-            </a>
+            <template v-if="isInternalUrl(item.url_redirect)">
+              <nuxt-link
+                v-if="item.visible_btn"
+                :to="item.url_redirect ? item.url_redirect : ''"
+                class="px-20 py-20 mt-16 md:mt-40 border text-12 md:text-14 xl:text-16"
+                :style="`color: ${item.color_text_btn}; background-color: ${item.color_bg_btn}; border-color: ${item.color_border_btn}; border-radius: ${settingGeneral?.radius};`"
+              >
+                {{ item.text_btn }}
+                <span :style="`color: ${item.color_price_btn};`">
+                  {{ item.text_price_btn }}
+                </span>
+              </nuxt-link>
+            </template>
+            <template v-else>
+              <a
+                v-if="item.visible_btn"
+                :href="item.url_redirect ? item.url_redirect : ''"
+                class="px-20 py-20 mt-16 md:mt-40 border text-12 md:text-14 xl:text-16"
+                :style="`color: ${item.color_text_btn}; background-color: ${item.color_bg_btn}; border-color: ${item.color_border_btn}; border-radius: ${settingGeneral?.radius};`"
+                rel="noreferrer noopener"
+              >
+                {{ item.text_btn }}
+                <span :style="`color: ${item.color_price_btn};`">
+                  {{ item.text_price_btn }}
+                </span>
+              </a>
+            </template>
           </div>
         </div>
       </div>
@@ -98,6 +114,11 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
+    },
+  },
+  methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
     },
   },
 }

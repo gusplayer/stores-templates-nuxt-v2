@@ -13,13 +13,23 @@
       <div class="product-text">
         <div class="product-tittle">
           <p class="tittle">{{ productList.title }}</p>
-          <a
-            v-if="productList.visibleBtn"
-            :href="productList.url_redirect ? productList.url_redirect : ''"
-            rel="noreferrer noopener"
-          >
-            <p class="txt-newProducts">{{ productList.displayName }}</p>
-          </a>
+          <template v-if="isInternalUrl(productList.url_redirect)">
+            <nuxt-link
+              v-if="productList.visibleBtn"
+              :to="productList.url_redirect ? productList.url_redirect : ''"
+            >
+              <p class="txt-newProducts">{{ productList.displayName }}</p>
+            </nuxt-link>
+          </template>
+          <template v-else>
+            <a
+              v-if="productList.visibleBtn"
+              :href="productList.url_redirect ? productList.url_redirect : ''"
+              rel="noreferrer noopener"
+            >
+              <p class="txt-newProducts">{{ productList.displayName }}</p>
+            </a>
+          </template>
         </div>
       </div>
       <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
@@ -115,6 +125,9 @@ export default {
     this.currentChange()
   },
   methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
+    },
     async currentChange() {
       const { success, data } = await this.$store.dispatch(
         'products/GET_ALL_PRODUCTS',

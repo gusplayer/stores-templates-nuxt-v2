@@ -29,17 +29,29 @@
       </p>
     </div>
     <div v-if="banner.visbleBtn" class="content-btn">
-      <a
-        :href="banner.url_redirect ? banner.url_redirect : ''"
-        rel="noreferrer noopener"
-      >
-        <button
-          class="btn"
-          :style="`background: ${banner.color_background_btn}; color: ${banner.color_text_btn}; margin-top:${banner.marginTopBtn};`"
+      <template v-if="isInternalUrl(banner.url_redirect)">
+        <nuxt-link :to="banner.url_redirect ? banner.url_redirect : ''">
+          <p
+            class="btn"
+            :style="`background: ${banner.color_background_btn}; color: ${banner.color_text_btn}; margin-top:${banner.marginTopBtn};`"
+          >
+            {{ $t('home_comprarAhora') }}
+          </p>
+        </nuxt-link>
+      </template>
+      <template v-else>
+        <a
+          :href="banner.url_redirect ? banner.url_redirect : ''"
+          rel="noreferrer noopener"
         >
-          {{ $t('home_comprarAhora') }}
-        </button>
-      </a>
+          <p
+            class="btn"
+            :style="`background: ${banner.color_background_btn}; color: ${banner.color_text_btn}; margin-top:${banner.marginTopBtn};`"
+          >
+            {{ $t('home_comprarAhora') }}
+          </p>
+        </a>
+      </template>
     </div>
   </div>
 </template>
@@ -53,6 +65,11 @@ export default {
     settingGeneral: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
     },
   },
 }

@@ -84,16 +84,34 @@
                   </p>
                 </div>
                 <div v-if="elementBanner.url_redirect" class="banner-button">
-                  <a
-                    :href="`${elementBanner.url_redirect}`"
-                    rel="noreferrer noopener"
-                    class="btn-shop"
-                    :class="elementBanner.url_redirect ? 'cursorPointer' : null"
-                  >
-                    <span class="text-button">
-                      {{ $t('home_comprarAhora') }}
-                    </span>
-                  </a>
+                  <template v-if="isInternalUrl(elementBanner.url_redirect)">
+                    <nuxt-link
+                      :to="`${elementBanner.url_redirect}`"
+                      rel="noreferrer noopener"
+                      class="btn-shop"
+                      :class="
+                        elementBanner.url_redirect ? 'cursorPointer' : null
+                      "
+                    >
+                      <span class="text-button">
+                        {{ $t('home_comprarAhora') }}
+                      </span>
+                    </nuxt-link>
+                  </template>
+                  <template v-else>
+                    <a
+                      :href="`${elementBanner.url_redirect}`"
+                      rel="noreferrer noopener"
+                      class="btn-shop"
+                      :class="
+                        elementBanner.url_redirect ? 'cursorPointer' : null
+                      "
+                    >
+                      <span class="text-button">
+                        {{ $t('home_comprarAhora') }}
+                      </span>
+                    </a>
+                  </template>
                 </div>
               </div>
             </div>
@@ -154,6 +172,9 @@ export default {
     this.autoplayBanner()
   },
   methods: {
+    isInternalUrl(url) {
+      return url.startsWith('/')
+    },
     autoplayBanner() {
       if (this.banner && this.banner.values.length == 1) {
         this.swiperOption.autoplay.delay = 900000000000000000
