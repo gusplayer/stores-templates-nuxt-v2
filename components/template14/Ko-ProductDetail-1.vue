@@ -935,7 +935,7 @@ export default {
       let json = {
         products: [objeto],
         tienda: {
-          id: this.$store.state.tienda.id_tienda,
+          id: this.dataStore.id,
         },
         canal: 'KOMERCIA',
       }

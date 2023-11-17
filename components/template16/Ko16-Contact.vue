@@ -532,7 +532,7 @@ export default {
                   correo: this.email,
                   celular: this.numberphone,
                   comentario: this.comment,
-                  tienda: this.dataStore?.tienda.id_tienda,
+                  tienda: this.dataStore?.id,
                 },
               })
               if (data.status == 200) {
