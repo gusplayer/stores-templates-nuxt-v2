@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="flex items-center justify-center">
-        <div class="mr-10" @click="openSearch">
+        <div v-if="showSearch" class="mr-10" @click="openSearch">
           <search-icon
             class="text-25"
             :style="`color: ${settingByTemplate16[0].header['--color_icon']} ;`"
@@ -147,7 +147,7 @@
         </div>
       </div>
       <KoOrder :data-store="dataStore" />
-      <!-- <KoSearch /> -->
+      <KoSearch :data-store="dataStore" />
       <Ko14MenuLateral
         :data-store="dataStore"
         :setting-by-template="settingByTemplate16[0].listProductsFilter"
@@ -161,7 +161,7 @@ export default {
   name: 'KoHeader11',
   components: {
     KoOrder: () => import('../_order1/order1'),
-    // KoSearch: () => import('../_lateralMenu/_lateralMenu/searchDown14'),
+    KoSearch: () => import('../k13_header/search.vue'),
     Ko14MenuLateral: () =>
       import('../_lateralMenu/_lateralMenu14/_lateralMenu.vue'),
   },
@@ -177,7 +177,7 @@ export default {
   },
   data() {
     return {
-      searchSelect: true,
+      showSearch: true,
       btnSelect: '',
       stateMenu: false,
     }
@@ -196,15 +196,14 @@ export default {
     this.setMenu()
   },
   methods: {
+    showIconSearch() {
+      this.showSearch = this.btnSelect !== '/productos'
+    },
     btnActivate(value) {
       this.btnSelect = value
     },
     openSearch() {
-      // this.searchSelect = false
-      // this.$store.commit('SET_OPEN_SEARCH', true)
-      this.$router.push({
-        path: '/productos',
-      })
+      this.$store.commit('SET_OPEN_SEARCH', true)
     },
     openOrder() {
       this.$store.commit('SET_OPEN_ORDER', true)
@@ -226,6 +225,8 @@ export default {
       }
       const currentRouteName = this.$route.name
       this.btnSelect = routeMappings[currentRouteName] || '/'
+
+      this.showIconSearch()
     },
     scrollLeft() {
       document.getElementById('swiper-slide-categories').scrollLeft -= 300

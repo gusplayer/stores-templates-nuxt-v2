@@ -10,11 +10,11 @@
         :style="[
           {
             '--font-style-1':
-              settingByTemplate9[0]?.setting9General?.fount_1 ?? 'Poppins',
+              settingByTemplate[0]?.setting9General?.fount_1 ?? 'Poppins',
           },
           {
             '--font-style-2':
-              settingByTemplate9[0]?.setting9General?.fount_2 ?? 'Roboto',
+              settingByTemplate[0]?.setting9General?.fount_2 ?? 'Roboto',
           },
         ]"
       >
@@ -34,8 +34,9 @@
         >
           <div class="w-full h-full flex flex-row justify-start items-center">
             <input
-              v-model="search"
+              v-model="searchProduct"
               type="search"
+              required
               class="w-full h-full text-20 md:text-35 border-none"
               :placeholder="$t('home_buscar')"
               @change="getSuggestedProducts"
@@ -63,28 +64,23 @@ export default {
       type: Object,
       required: true,
     },
-    settingByTemplate9: {
+    settingByTemplate: {
       type: Array,
       required: true,
     },
-  },
-  data() {
-    return {
-      search: '',
-      searchProducts: [],
-    }
   },
   computed: {
     ...mapState(['openSearch']),
     ...mapState({
       facebookPixel: (state) => state.analytics_tagmanager,
     }),
-  },
-  watch: {
-    openSearch(value) {
-      if (value === true) {
-        this.getSuggestedProducts()
-      }
+    searchProduct: {
+      get() {
+        return this.$store.state.products.search_product
+      },
+      set(newValue) {
+        this.$store.commit('products/SET_SEARCH_PRODUCT', newValue)
+      },
     },
   },
   methods: {
@@ -94,33 +90,23 @@ export default {
     closeOrder(event) {
       const element = event.target.className
       if (element === 'order') {
-        this.$store.commit('SET_OPEN_SEARCH', false)
+        this.closedSearch()
       }
     },
     async getSuggestedProducts() {
-      const { success, data } = await this.$store.dispatch(
-        'products/GET_ALL_PRODUCTS',
-        {
-          id_tienda: this.dataStore.id,
-          page: 1,
-          limit: 15,
-          name: this.search || '',
-        }
-      )
-      if (success) {
-        this.searchProducts = data.publicProductList
-        this.setInformationFromQuery({ page: 1, name: this.search })
-        this.getSearch(this.search)
-      } else {
-        this.searchProducts = []
-      }
+      this.setInformationFromQuery({ page: 1, name: this.searchProduct })
+      this.getSearch(this.searchProduct)
     },
     async setInformationFromQuery({ page, name }) {
       const query = {}
       if (page !== null && page !== undefined) query.page = page
-      if (name !== null) this.search = name
+      if (name !== null) this.searchProduct = name
       try {
-        await this.$router.push({ path: '', query })
+        this.$router.push({
+          path: '/productos',
+          query: { name: this.searchProduct },
+        })
+        this.closedSearch()
       } catch (error) {
         console.error('Error navigating:', error)
       }

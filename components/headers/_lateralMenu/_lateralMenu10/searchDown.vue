@@ -17,12 +17,12 @@
               </div>
               <input
                 v-model="search"
-                type="search "
+                type="search"
                 :placeholder="$t('home_buscar')"
                 required
                 class="input-search"
-                @change="getSuggestedProducts"
-                @keyup.enter="getSuggestedProducts"
+                @change="setInformationFromQuery"
+                @keyup.enter="setInformationFromQuery"
               />
               <i class="header-search-icon">
                 <svg
