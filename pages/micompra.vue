@@ -21,7 +21,7 @@ export default {
     if (route.query.orden) {
       return axios
         .get(
-          `${store.state.urlKomercia}/api/orden/${store.state.tienda.id_tienda}/${route.query.orden}`,
+          `${store.state.urlKomercia}/api/orden/${this.dataStore.id}/${route.query.orden}`,
           {
             headers: {
               'content-type': 'application/json',
