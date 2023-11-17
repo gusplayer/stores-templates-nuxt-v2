@@ -18,7 +18,7 @@
         <KoOrder :data-store="dataStore" />
         <KoSearch
           :data-store="dataStore"
-          :setting-by-template9="settingByTemplate9"
+          :setting-by-template="settingByTemplate9"
         />
         <KoMenu :data-store="dataStore" class="responsive" />
         <div class="header-item-menu">
@@ -199,14 +199,12 @@ export default {
       this.setHoko()
     },
     $route() {
-      this.showIconSearch()
       this.setMenu()
     },
   },
   mounted() {
     this.setMenu()
     this.setHoko()
-    this.showIconSearch()
     window.addEventListener('scroll', this.handleScroll)
   },
   beforeDestroy() {
@@ -214,7 +212,7 @@ export default {
   },
   methods: {
     showIconSearch() {
-      this.showSearch = this.$route.fullPath === '/'
+      this.showSearch = this.btnSelect !== '/productos'
     },
     setHoko() {
       this.secciones[2].state =
@@ -246,6 +244,8 @@ export default {
       }
       const currentRouteName = this.$route.name
       this.btnSelect = routeMappings[currentRouteName] || '/'
+
+      this.showIconSearch()
     },
     clear() {
       this.$router.push({

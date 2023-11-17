@@ -84,56 +84,34 @@
               </div>
             </div>
             <div class="header-content-items">
-              <div>
-                <div v-if="searchSelect" class="search">
-                  <i class="header-search-icon" @click="openSearch">
-                    <svg
-                      class="search-header"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink"
-                      xmlns:svgjs="http://svgjs.com/svgjs"
-                      version="1.1"
-                      width="20"
-                      height="20"
-                      x="0"
-                      y="0"
-                      viewBox="0 0 512 512"
-                      style="enable-background: new 0 0 512 512"
-                      xml:space="preserve"
-                    >
-                      <title>Search</title>
-                      <g
-                        transform="matrix(-1.8369701987210297e-16,-1,1,-1.8369701987210297e-16,9.536744585147972e-7,511.99998569488525)"
-                      >
-                        <path
-                          d="M447.615,64.386C406.095,22.866,350.892,0,292.175,0s-113.92,22.866-155.439,64.386    C95.217,105.905,72.35,161.108,72.35,219.824c0,53.683,19.124,104.421,54.132,144.458L4.399,486.366    c-5.864,5.864-5.864,15.371,0,21.236C7.331,510.533,11.174,512,15.016,512s7.686-1.466,10.617-4.399l122.084-122.083    c40.037,35.007,90.775,54.132,144.458,54.132c58.718,0,113.919-22.866,155.439-64.386c41.519-41.519,64.385-96.722,64.385-155.439    S489.134,105.905,447.615,64.386z M426.379,354.029c-74.001,74-194.406,74-268.407,0c-74-74-74-194.407,0-268.407    c37.004-37.004,85.596-55.5,134.204-55.5c48.596,0,97.208,18.505,134.204,55.5C500.378,159.621,500.378,280.028,426.379,354.029z"
-                        />
-                      </g>
-                    </svg>
-                  </i>
-                </div>
-                <div v-if="!searchSelect" class="search">
-                  <i class="header-search-icon" @click="closedSearch">
-                    <svg
-                      class="search-header"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      width="25"
-                      height="25"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+              <div v-if="!openSearch && showSearch" class="search">
+                <i class="header-search-icon" @click="stateSearch(true)">
+                  <svg
+                    class="search-header"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xmlns:svgjs="http://svgjs.com/svgjs"
+                    version="1.1"
+                    width="20"
+                    height="20"
+                    x="0"
+                    y="0"
+                    viewBox="0 0 512 512"
+                    style="enable-background: new 0 0 512 512"
+                    xml:space="preserve"
+                  >
+                    <title>Search</title>
+                    <g
+                      transform="matrix(-1.8369701987210297e-16,-1,1,-1.8369701987210297e-16,9.536744585147972e-7,511.99998569488525)"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
+                        d="M447.615,64.386C406.095,22.866,350.892,0,292.175,0s-113.92,22.866-155.439,64.386    C95.217,105.905,72.35,161.108,72.35,219.824c0,53.683,19.124,104.421,54.132,144.458L4.399,486.366    c-5.864,5.864-5.864,15.371,0,21.236C7.331,510.533,11.174,512,15.016,512s7.686-1.466,10.617-4.399l122.084-122.083    c40.037,35.007,90.775,54.132,144.458,54.132c58.718,0,113.919-22.866,155.439-64.386c41.519-41.519,64.385-96.722,64.385-155.439    S489.134,105.905,447.615,64.386z M426.379,354.029c-74.001,74-194.406,74-268.407,0c-74-74-74-194.407,0-268.407    c37.004-37.004,85.596-55.5,134.204-55.5c48.596,0,97.208,18.505,134.204,55.5C500.378,159.621,500.378,280.028,426.379,354.029z"
                       />
-                    </svg>
-                  </i>
-                </div>
+                    </g>
+                  </svg>
+                </i>
               </div>
-              <div v-if="showSearch" class="empty"></div>
+              <div class="empty"></div>
               <div class="header-content-icon" @click="openOrder">
                 <i class="header-content-cart">
                   <svg
@@ -157,7 +135,7 @@
             </div>
           </div>
         </div>
-        <!-- <KoSearch :data-store="dataStore" /> -->
+        <KoSearch :data-store="dataStore" />
         <KoMenu
           :data-store="dataStore"
           :setting-by-template="settingByTemplate13"
@@ -174,7 +152,7 @@ export default {
   components: {
     KoOrder: () => import('../_order1/order1'),
     KoMenu: () => import('../_lateralMenu/_lateralMenu11/openMenuLeft.vue'),
-    // KoSearch: () => import('../_lateralMenu/_lateralMenu10/searchDown.vue'),
+    KoSearch: () => import('./search.vue'),
   },
   props: {
     dataStore: {
@@ -188,14 +166,14 @@ export default {
   },
   data() {
     return {
-      searchSelect: true,
       btnSelect: '',
       search: '',
-      showSearch: false,
+      showSearch: true,
       isNavbarFixed: false,
     }
   },
   computed: {
+    ...mapState(['openSearch']),
     ...mapState({
       FacebookPixel: (state) => state.analytics_tagmanager,
       productsCart: (state) => state.productsCart.length,
@@ -204,10 +182,12 @@ export default {
   watch: {
     $route() {
       this.setMenu()
+      this.stateViewSearch()
     },
   },
   mounted() {
     this.setMenu()
+    this.stateViewSearch()
     window.addEventListener('scroll', this.handleScroll)
   },
   beforeDestroy() {
@@ -217,16 +197,8 @@ export default {
     btnActivate(value) {
       this.btnSelect = value
     },
-    openSearch() {
-      // this.searchSelect = false
-      // this.$store.commit('SET_OPEN_SEARCH', true)
-      this.$router.push({
-        path: '/productos',
-      })
-    },
-    closedSearch() {
-      this.searchSelect = true
-      this.$store.commit('SET_OPEN_SEARCH', false)
+    stateSearch(value) {
+      this.$store.commit('SET_OPEN_SEARCH', value)
     },
     openOrder() {
       this.$store.commit('SET_OPEN_ORDER', true)
@@ -254,6 +226,9 @@ export default {
       }
       const currentRouteName = this.$route.name
       this.btnSelect = routeMappings[currentRouteName] || '/'
+    },
+    stateViewSearch() {
+      this.showSearch = this.btnSelect !== '/productos'
     },
     scrollLeft() {
       document.getElementById('swiper-slide-categories').scrollLeft -= 300

@@ -101,6 +101,7 @@
             </div>
             <div class="item-header">
               <svg
+                v-if="showSearch"
                 class="svg-search"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -145,6 +146,7 @@
         :setting-by-template="settingByTemplate11"
         class="responsive"
       />
+      <KoSearch :data-store="dataStore" />
     </div>
   </div>
 </template>
@@ -155,6 +157,7 @@ export default {
   components: {
     KoOrder: () => import('../_order1/order1'),
     KoMenu: () => import('../_lateralMenu/_lateralMenu11/openMenuLeft.vue'),
+    KoSearch: () => import('../k13_header/search.vue'),
   },
   props: {
     dataStore: {
@@ -189,13 +192,14 @@ export default {
     this.setMenu()
   },
   methods: {
+    showIconSearch() {
+      this.showSearch = this.btnSelect !== '/productos'
+    },
     btnActivate(value) {
       this.btnSelect = value
     },
     openSearch() {
-      this.$router.push({
-        path: '/productos',
-      })
+      this.$store.commit('SET_OPEN_SEARCH', true)
     },
     openOrder() {
       this.$store.commit('SET_OPEN_ORDER', true)
@@ -219,6 +223,8 @@ export default {
       }
       const currentRouteName = this.$route.name
       this.btnSelect = routeMappings[currentRouteName] || '/'
+
+      this.showIconSearch()
     },
     scrollLeft() {
       document.getElementById('swiper-slide-categories').scrollLeft -= 300

@@ -10,17 +10,20 @@
         </div>
         <div class="products-search">
           <div class="search-input-content">
-            <form class="form-search">
+            <div class="form-search">
               <div class="cont-search-up">
                 <p class="txt-search-up">{{ $t('home_buscar') }}</p>
               </div>
               <input
-                type="search "
+                v-model="searchProduct"
+                type="search"
+                required
                 :placeholder="$t('home_buscar')"
-                v-model="search"
                 class="input-search"
+                @change="getSuggestedProducts"
+                @keyup.enter="getSuggestedProducts"
               />
-            </form>
+            </div>
           </div>
           <div class="cont-btn">
             <button class="content-btn" @click="closedSearch">
@@ -34,16 +37,21 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'Ko-SearchWa-8',
-  data() {
-    return {
-      search: '',
-    }
-  },
+  name: 'Ko13Search',
   computed: {
-    openSearch() {
-      return this.$store.state.openSearch
+    ...mapState(['openSearch']),
+    ...mapState({
+      facebookPixel: (state) => state.analytics_tagmanager,
+    }),
+    searchProduct: {
+      get() {
+        return this.$store.state.products.search_product
+      },
+      set(newValue) {
+        this.$store.commit('products/SET_SEARCH_PRODUCT', newValue)
+      },
     },
   },
   methods: {
@@ -52,20 +60,34 @@ export default {
     },
     closeOrder(event) {
       const element = event.target.className
-      if (element === 'order') {
-        this.$store.commit('SET_OPEN_SEARCH', false)
+      if (element === 'order' || element === 'order_content') {
+        this.closedSearch()
       }
     },
-    SearchProduct(search) {
-      this.$store.commit('SET_SEARCH_VALUE', search)
-      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-        window.fbq('track', 'Search', { search_string: search })
+    async getSuggestedProducts() {
+      this.setInformationFromQuery({ page: 1, name: this.searchProduct })
+      this.getSearch(this.searchProduct)
+    },
+    async setInformationFromQuery({ page, name }) {
+      const query = {}
+      if (page !== null && page !== undefined) query.page = page
+      if (name !== null) this.searchProduct = name
+      try {
+        this.$router.push({
+          path: '/productos',
+          query: { name: this.searchProduct },
+        })
+        this.closedSearch()
+      } catch (error) {
+        console.error('Error navigating:', error)
       }
     },
-  },
-  watch: {
-    search(value) {
-      this.SearchProduct(value)
+    getSearch(value) {
+      if (value) {
+        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+          window.fbq('track', 'Search', { search_string: value })
+        }
+      }
     },
   },
 }

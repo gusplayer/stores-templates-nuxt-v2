@@ -252,7 +252,7 @@ export default {
   },
   methods: {
     showIconSearch() {
-      this.showSearch = this.$route.fullPath === '/'
+      this.showSearch = this.btnSelect !== '/productos'
     },
     openSearch() {
       this.$store.commit('SET_OPEN_SEARCH', true)
