@@ -345,6 +345,7 @@ export default {
       this.filters.category = value.nombreCategoriaProducto
       this.nameCategory = value.nombreCategoriaProducto
       this.updateFilters()
+      this.clearFiltersCategory(value.nombreCategoriaProducto)
     },
     // Filtro de subcategoría
     sendSubCategory(value) {
@@ -415,6 +416,7 @@ export default {
         alphabetic: null,
         topSales: null,
       }
+      this.searchProduct = null
       this.sortingFilter = null
       this.selectedSubcategories = []
       this.nameCategory = ''
@@ -427,6 +429,37 @@ export default {
       this.productPromotion = 0
       this.productFreeShipping = 0
       this.$store.commit('SET_STATE_BANNER', true)
+      this.updateFilters()
+    },
+    clearFiltersCategory(value) {
+      this.filters = {
+        page: 1,
+        limit: 12,
+        name: null,
+        category: value,
+        subcategory: null,
+        promotion: null,
+        minPrice: null,
+        maxPrice: null,
+        freeShipping: null,
+        tag: null,
+        variants: null,
+        alphabetic: null,
+        topSales: null,
+      }
+      this.searchProduct = null
+      this.sortingFilter = null
+      this.selectedSubcategories = []
+      this.nameCategory = value
+      this.nameSubCategory = ''
+      this.tagProduct = ''
+      this.previousPage = 1
+      this.minPrice = 0
+      this.maxPrice = 0
+      this.productVariantes = 0
+      this.productPromotion = 0
+      this.productFreeShipping = 0
+      this.$store.commit('SET_STATE_BANNER', false)
       this.updateFilters()
     },
     // Identificar envió gratis

@@ -11,7 +11,7 @@
         class="w-full flex flex-row justify-center items-center shadow-lg z-20 py-16 relative"
       >
         <input
-          v-model="search"
+          v-model="searchProduct"
           type="search"
           :placeholder="$t('header_buscar_producto')"
           class="input-search"
@@ -33,7 +33,7 @@
       <div class="w-full max-w-[1300px] overflow-y-auto z-10">
         <KProducts
           :data-store="dataStore"
-          :search-products="searchProducts"
+          :search-products="ListProducts"
           :setting-card-products="settingCardProducts"
           :setting-general="settingGeneral"
         />
@@ -66,8 +66,7 @@ export default {
   },
   data() {
     return {
-      search: '',
-      searchProducts: [],
+      ListProducts: [],
     }
   },
   computed: {
@@ -77,6 +76,14 @@ export default {
     }),
     logoImg() {
       return this.$store.state.dataStore.logo
+    },
+    searchProduct: {
+      get() {
+        return this.$store.state.products.search_product
+      },
+      set(newValue) {
+        this.$store.commit('products/SET_SEARCH_PRODUCT', newValue)
+      },
     },
   },
   watch: {
@@ -98,15 +105,15 @@ export default {
           id_tienda: this.dataStore.id,
           page: 1,
           limit: 15,
-          name: this.search || '',
+          name: this.searchProduct || '',
         }
       )
       if (success) {
-        this.searchProducts = data.publicProductList
-        this.setInformationFromQuery({ page: 1, name: this.search })
-        this.getSearch(this.search)
+        this.ListProducts = data.publicProductList
+        this.setInformationFromQuery({ page: 1, name: this.searchProduct })
+        this.getSearch(this.searchProduct)
       } else {
-        this.searchProducts = []
+        this.ListProducts = []
       }
     },
     async setInformationFromQuery({ page, name }) {

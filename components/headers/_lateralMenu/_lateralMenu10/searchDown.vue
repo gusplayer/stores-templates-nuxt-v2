@@ -16,7 +16,7 @@
                 <p class="txt-search-up">{{ $t('home_buscar') }}</p>
               </div>
               <input
-                v-model="search"
+                v-model="searchProduct"
                 type="search"
                 :placeholder="$t('home_buscar')"
                 required
@@ -70,16 +70,19 @@ export default {
   props: {
     showMenu: Boolean,
   },
-  data() {
-    return {
-      search: '',
-    }
-  },
   computed: {
     ...mapState(['openSearch']),
     ...mapState({
       facebookPixel: (state) => state.analytics_tagmanager,
     }),
+    searchProduct: {
+      get() {
+        return this.$store.state.products.search_product
+      },
+      set(newValue) {
+        this.$store.commit('products/SET_SEARCH_PRODUCT', newValue)
+      },
+    },
   },
   methods: {
     closedSearch() {
@@ -91,25 +94,30 @@ export default {
         this.$store.commit('SET_OPEN_SEARCH', false)
       }
     },
+    async getSuggestedProducts() {
+      this.setInformationFromQuery({ page: 1, name: this.searchProduct })
+      this.getSearch(this.searchProduct)
+    },
     async setInformationFromQuery({ page, name }) {
       const query = {}
       if (page !== null && page !== undefined) query.page = page
-      if (name !== null) this.search = name
+      if (name !== null) this.searchProduct = name
       try {
-        await this.$router.push({ path: '', query })
+        this.$router.push({
+          path: '/productos',
+          query: { name: this.searchProduct },
+        })
+        this.closedSearch()
       } catch (error) {
         console.error('Error navigating:', error)
       }
     },
-    SearchProduct(search) {
-      this.$store.commit('SET_SEARCH_VALUE', search)
-      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
-        window.fbq('track', 'Search', { search_string: search })
+    getSearch(value) {
+      if (value) {
+        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+          window.fbq('track', 'Search', { search_string: value })
+        }
       }
-      this.$router.push({
-        path: '/productos',
-        query: { search: search },
-      })
     },
   },
 }

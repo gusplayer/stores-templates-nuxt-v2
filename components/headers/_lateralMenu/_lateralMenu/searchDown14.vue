@@ -17,10 +17,12 @@
         class="w-full max-w-[350px] flex flex-col justify-center items-center"
       >
         <input
-          v-model="search"
+          v-model="searchProduct"
           type="search "
           :placeholder="$t('home_buscar')"
           class="w-full border-b border-gray-200 text-black"
+          @change="getSuggestedProducts"
+          @keyup.enter="getSuggestedProducts"
         />
         <button
           class="w-full text-center bg-black text-white-white rounded-8 px-5 py-3 mt-20"
@@ -47,25 +49,49 @@ export default {
     ...mapState({
       facebookPixel: (state) => state.analytics_tagmanager,
     }),
+    searchProduct: {
+      get() {
+        return this.$store.state.products.search_product
+      },
+      set(newValue) {
+        this.$store.commit('products/SET_SEARCH_PRODUCT', newValue)
+      },
+    },
   },
   methods: {
     closedSearch() {
       this.$store.commit('SET_OPEN_SEARCH', false)
     },
-    SearchProduct(search) {
-      this.$store.commit('SET_SEARCH_VALUE', search)
-      if (this.FacebookPixel && this.FacebookPixel.pixel_facebook != null) {
-        window.fbq('track', 'Search', { search_string: search })
+    closeOrder(event) {
+      const element = event.target.className
+      if (element === 'order') {
+        this.closedSearch()
       }
-      this.$router.push({
-        path: '/productos',
-        query: { search: search },
-      })
     },
-  },
-  watch: {
-    search(value) {
-      this.SearchProduct(value)
+    async getSuggestedProducts() {
+      this.setInformationFromQuery({ page: 1, name: this.searchProduct })
+      this.getSearch(this.searchProduct)
+    },
+    async setInformationFromQuery({ page, name }) {
+      const query = {}
+      if (page !== null && page !== undefined) query.page = page
+      if (name !== null) this.searchProduct = name
+      try {
+        this.$router.push({
+          path: '/productos',
+          query: { name: this.searchProduct },
+        })
+        this.closedSearch()
+      } catch (error) {
+        console.error('Error navigating:', error)
+      }
+    },
+    getSearch(value) {
+      if (value) {
+        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+          window.fbq('track', 'Search', { search_string: value })
+        }
+      }
     },
   },
 }

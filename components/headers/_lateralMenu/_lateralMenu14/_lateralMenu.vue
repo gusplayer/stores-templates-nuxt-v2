@@ -161,6 +161,14 @@ export default {
     allTags() {
       return this.dataStore.tags
     },
+    searchProduct: {
+      get() {
+        return this.$store.state.products.search_product
+      },
+      set(newValue) {
+        this.$store.commit('products/SET_SEARCH_PRODUCT', newValue)
+      },
+    },
   },
   methods: {
     closed() {
@@ -184,7 +192,6 @@ export default {
           value.nombreCategoriaProducto
         )
         this.$store.commit('products/SET_SUBCATEGORY_PRODUCTO', null)
-        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
       } else if (type === 'subcategories') {
         this.categorias.filter((item) => {
           if (item.id === value.categoria) {
@@ -201,12 +208,11 @@ export default {
         )
         this.query.subcategory = value.id || null
         this.subCategorySelect = value.id
-        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
       } else {
         this.query.tag = value.id || null
-        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
       }
 
+      this.closed()
       this.setInformationFromQuery(this.query)
     },
     async setInformationFromQuery({ page, name, category, subcategory, tag }) {
@@ -232,6 +238,7 @@ export default {
         subcategory: null,
         tag: null,
       }
+      this.searchProduct = null
       this.categorySelect = ''
       this.subCategorySelect = ''
       this.$router.push({ path: '/productos', query: '' })

@@ -46,6 +46,7 @@
               class="input-slide"
               :placeholder="$t('header_search')"
               @change="sendFilter"
+              @keyup.enter="sendFilter"
             />
           </div>
         </div>
@@ -358,15 +359,9 @@ export default {
   },
   watch: {
     settingByTemplate7() {
-      if (
-        this.settingByTemplate7[0] &&
-        this.settingByTemplate7[0].productListFilter &&
-        this.settingByTemplate7[0].productListFilter.img_background
-      ) {
-        this.setBg(1)
-      } else {
-        this.setBg(2)
-      }
+      this.setBg(
+        this.settingByTemplate7[0]?.productListFilter?.img_background ? 1 : 2
+      )
     },
     previousPage() {
       let timerTimeout = null
@@ -385,11 +380,9 @@ export default {
     ) {
       this.indexShowList = 2
     }
-    if (this.settingByTemplate7[0]?.productListFilter?.img_background) {
-      this.setBg(1)
-    } else {
-      this.setBg(2)
-    }
+    this.setBg(
+      this.settingByTemplate7[0]?.productListFilter?.img_background ? 1 : 2
+    )
   },
   methods: {
     showList(index, state) {
