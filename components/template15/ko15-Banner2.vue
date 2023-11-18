@@ -5,6 +5,8 @@
     class="w-full flex justify-center items-center"
     :style="{
       backgroundColor: banner2['--background_color_1'],
+      '--hover_text_btn': settingGeneral?.hover_text_btn,
+      '--hover_bg_btn': settingGeneral?.hover_bg_btn,
     }"
   >
     <picture>
@@ -55,7 +57,7 @@
                 backgroundColor: banner2.color_bg_btn_1,
                 borderRadius: settingGeneral?.radius,
               }"
-              class="px-20 py-5 md:py-8 text-12 md:text-14 xl:text-16"
+              class="px-20 py-5 md:py-8 text-12 md:text-14 xl:text-16 btnHover"
             >
               {{ banner2.text_btn_1 }}
             </nuxt-link>
@@ -68,7 +70,7 @@
                 backgroundColor: banner2.color_bg_btn_1,
                 borderRadius: settingGeneral?.radius,
               }"
-              class="px-20 py-5 md:py-8 text-12 md:text-14 xl:text-16"
+              class="px-20 py-5 md:py-8 text-12 md:text-14 xl:text-16 btnHover"
             >
               {{ banner2.text_btn_1 }}
             </a>
@@ -81,7 +83,7 @@
                 backgroundColor: banner2.color_bg_btn_2,
                 borderRadius: settingGeneral?.radius,
               }"
-              class="px-20 py-5 md:py-8 text-12 md:text-14 xl:text-16"
+              class="px-20 py-5 md:py-8 text-12 md:text-14 xl:text-16 btnHover"
             >
               {{ banner2.text_btn_2 }}
             </nuxt-link>
@@ -94,7 +96,7 @@
                 backgroundColor: banner2.color_bg_btn_2,
                 borderRadius: settingGeneral?.radius,
               }"
-              class="px-20 py-5 md:py-8 text-12 md:text-14 xl:text-16"
+              class="px-20 py-5 md:py-8 text-12 md:text-14 xl:text-16 btnHover"
             >
               {{ banner2.text_btn_2 }}
             </a>
@@ -131,3 +133,9 @@ export default {
   },
 }
 </script>
+<style scoped>
+.btnHover:hover {
+  background-color: var(--hover_bg_btn) !important;
+  color: var(--hover_text_btn) !important;
+}
+</style>

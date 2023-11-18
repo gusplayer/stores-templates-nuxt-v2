@@ -5,6 +5,9 @@
       {
         '--font-style-1':
           settingByTemplate15[0]?.settingGeneral?.font ?? 'Poppins',
+        '--hover_text_btn':
+          settingByTemplate15[0]?.settingGeneral?.hover_text_btn,
+        '--hover_bg_btn': settingByTemplate15[0]?.settingGeneral?.hover_bg_btn,
       },
     ]"
   >
@@ -361,7 +364,7 @@
               </div>
               <div class="w-full flex items-center justify-center mt-20">
                 <button
-                  class="px-20 py-10"
+                  class="px-20 py-10 btnHover"
                   :style="`color: ${settingByTemplate15[0].contact.color_text_btn_form}; background-color: ${settingByTemplate15[0].contact.color_btn_form}; border-radius: ${settingByTemplate15[0].settingGeneral.radius}`"
                   :class="!stateBtn ? ' cursor-not-allowed' : 'cursor-pointer'"
                   :disabled="stateBtn ? false : true"
@@ -615,5 +618,9 @@ export default {
 }
 .input-text-rectangule::-webkit-scrollbar-thumb:hover {
   background: rgb(138, 138, 138);
+}
+.btnHover:hover {
+  background-color: var(--hover_bg_btn) !important;
+  color: var(--hover_text_btn) !important;
 }
 </style>

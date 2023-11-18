@@ -6,11 +6,10 @@
       {
         '--font-style-1':
           settingByTemplate15[0].settingGeneral?.font ?? 'Poppins',
-      },
-      {
         'background-color': settingByTemplate15[0]?.footer?.visibleImg
           ? settingByTemplate15[0].footer['--background_color_1']
           : '',
+        '--hover_text': settingByTemplate15[0]?.settingGeneral?.hover_text,
       },
     ]"
   >

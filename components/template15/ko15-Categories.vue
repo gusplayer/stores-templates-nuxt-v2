@@ -5,6 +5,7 @@
   >
     <div
       class="w-full max-w-9/5 md:max-w-9/0 h-auto flex flex-col items-center justify-center overflow-hidden"
+      :style="{ '--hover_text': settingGeneral?.hover_text }"
     >
       <p
         class="w-full text-center mb-25 text-25 md:text-30 lg:text-40"
@@ -20,7 +21,7 @@
             :id="`slide${index + 1}`"
             :key="index"
             :href="item.url_redirect"
-            class="swiper-slide w-full"
+            class="swiper-slide w-full wrapper-categories"
             rel="noreferrer noopener"
           >
             <img
@@ -30,7 +31,7 @@
               :style="`border-radius: ${settingGeneral?.radius};`"
             />
             <div
-              class="mt-10 text-center text-16 md:text-20 lg:text-22"
+              class="mt-10 text-center text-16 md:text-20 lg:text-22 textHover"
               :style="`color: ${item.color_title}; font-weight: ${item.fontWeighTitle};`"
             >
               <p>{{ item.title }}</p>
@@ -131,5 +132,8 @@ export default {
 .swiper-button-prev,
 .swiper-button-next {
   color: #ed6436;
+}
+.wrapper-categories:hover .textHover {
+  color: var(--hover_text) !important;
 }
 </style>

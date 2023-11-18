@@ -8,7 +8,13 @@
       ref="mySwiper"
       v-swiper:mySwiper="swiperOption"
       class="w-full justify-center items-center wrapper-banner"
-      :style="banner"
+      :style="[
+        banner,
+        {
+          '--hover_text_btn': settingGeneral?.hover_text_btn,
+          '--hover_bg_btn': settingGeneral?.hover_bg_btn,
+        },
+      ]"
     >
       <div class="z-auto swiper-wrapper">
         <a
@@ -62,7 +68,7 @@
               </p>
               <p
                 v-if="item.visible_btn"
-                class="px-20 py-5 md:py-8 mt-16 md:mt-40 text-12 md:text-14 xl:text-16"
+                class="px-20 py-5 md:py-8 mt-16 md:mt-40 text-12 md:text-14 xl:text-16 btnHover"
                 :style="`color: ${item.color_text_btn}; background-color: ${item.color_bg_btn}; border-radius: ${settingGeneral?.radius};`"
               >
                 {{ item.textBtn }}
@@ -123,5 +129,9 @@ picture {
 .wrapper-banner >>> .swiper-pagination-bullet-active {
   opacity: 1;
   background: black;
+}
+.btnHover:hover {
+  background-color: var(--hover_bg_btn) !important;
+  color: var(--hover_text_btn) !important;
 }
 </style>

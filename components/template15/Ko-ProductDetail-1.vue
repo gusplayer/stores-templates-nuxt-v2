@@ -8,6 +8,10 @@
       {
         '--font-style-1':
           settingByTemplate15[0]?.settingGeneral?.font ?? 'Poppins',
+        '--hover_text_btn':
+          settingByTemplate15[0]?.settingGeneral?.hover_text_btn,
+        '--hover_bg_btn': settingByTemplate15[0]?.settingGeneral?.hover_bg_btn,
+        '--hover_text': settingByTemplate15[0]?.settingGeneral?.hover_text,
       },
     ]"
   >
@@ -968,7 +972,7 @@ export default {
 }
 .btnHover:hover {
   color: var(--hover_text_btn) !important;
-  background-color: var(--hover_Bg_btn) !important;
+  background-color: var(--hover_bg_btn) !important;
 }
 .btn-facebook {
   color: #1877f2;

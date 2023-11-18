@@ -1,6 +1,11 @@
 <template>
   <div
     class="w-full max-w-8/5 md:max-w-7/7 lg:max-w-6/0 flex justify-start lg:justify-end items-center mt-55"
+    :style="{
+      '--hover_text_btn':
+        settingByTemplate15[0]?.settingGeneral?.hover_text_btn,
+      '--hover_bg_btn': settingByTemplate15[0]?.settingGeneral?.hover_bg_btn,
+    }"
   >
     <div
       class="w-full max-w-[600px] grid grid-cols-1 md:grid-cols-2 gap-5 justify-center items-center"
@@ -62,25 +67,23 @@
           </p>
         </div>
         <button
-          class="px-20 py-8 ml-10"
+          class="px-20 py-8 ml-10 btn"
           :style="`background-color: ${settingByTemplate15[0].newsletter.colorBg_Btn};  border-radius: ${settingByTemplate15[0].settingGeneral.radius}`"
           @click="submitNewsletter"
         >
-          <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              version="1.1"
-              :fill="settingByTemplate15[0].newsletter.color_icon"
-              width="20px"
-              height="20px"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z"
-              />
-            </svg>
-          </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            :fill="settingByTemplate15[0].newsletter.color_icon"
+            width="20px"
+            height="20px"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z"
+            />
+          </svg>
         </button>
       </div>
     </div>
@@ -174,9 +177,8 @@ export default {
   color: var(--color_text);
   font-size: 14px;
 }
-.btn {
-  color: var(--color_title);
-  font-size: 18px;
-  @apply pb-10;
+.btn:hover {
+  color: var(--hover_text_btn);
+  background-color: var(--hover_bg_btn);
 }
 </style>

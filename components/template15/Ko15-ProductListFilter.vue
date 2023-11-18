@@ -5,6 +5,9 @@
     :style="[
       settingByTemplate15[0].settingGeneral,
       settingByTemplate15[0].listProductsFilter,
+      {
+        '--hover_text': settingByTemplate15[0].settingGeneral?.hover_text,
+      },
     ]"
   >
     <div class="w-full flex flex-col items-center justify-center">
@@ -421,7 +424,7 @@ export default {
   @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
 }
 .txt-Filter:hover {
-  color: #eb7025;
+  color: var(--hover_text);
 }
 .txt-categorys {
   color: var(--color_categories);
@@ -433,7 +436,7 @@ export default {
   color: var(--color_icon);
 }
 .txt-categorys:hover {
-  color: #eb7025;
+  color: var(--hover_text);
 }
 .pagination {
   font-size: 18px;
@@ -453,16 +456,16 @@ export default {
   background-color: transparent;
 }
 .wrapper_pagination >>> .el-pagination.is-background .btn-next:hover {
-  color: var(--color_pagination);
+  color: var(--hover_text);
 }
 .wrapper_pagination >>> .el-pagination.is-background .btn-prev:hover {
-  color: var(--color_pagination);
+  color: var(--hover_text);
 }
 .wrapper_pagination
   >>> .el-pagination.is-background
   .el-pager
   li:not(.disabled):hover {
-  color: var(--color_pagination);
+  color: var(--hover_text);
 }
 .wrapper_pagination
   >>> .el-pagination.is-background
