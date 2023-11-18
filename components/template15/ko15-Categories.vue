@@ -38,11 +38,11 @@
           </a>
         </div>
         <div
-          v-if="categories.values.length > 1"
+          v-if="categories.values.length > 4"
           class="swiper-button-prev"
         ></div>
         <div
-          v-if="categories.values.length > 1"
+          v-if="categories.values.length > 4"
           class="swiper-button-next"
         ></div>
       </div>

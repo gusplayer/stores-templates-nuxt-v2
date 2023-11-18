@@ -18,7 +18,7 @@
         {{ informationLogos.title }}
       </p>
       <div
-        class="max-w-7xl mlg:w-full grid grid-cols-1 lg:grid-cols-2 mlg:grid-cols-4 gap-5 md:gap-4 items-center justify-center mt-30"
+        class="max-w-7xl mlg:w-full grid grid-cols-1 lg:grid-cols-2 mlg:grid-cols-4 gap-5 md:gap-4 justify-center items-start mt-30"
       >
         <div
           v-for="(items, index) in informationLogos.values"
