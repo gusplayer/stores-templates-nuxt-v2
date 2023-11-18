@@ -5,6 +5,10 @@
   >
     <div
       class="max-w-9/0 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-4 items-center justify-center"
+      :style="{
+        '--hover_text_btn': settingGeneral?.hover_text_btn,
+        '--hover_bg_btn': settingGeneral?.hover_bg_btn,
+      }"
     >
       <a
         v-for="(item, index) in content.values"
@@ -38,7 +42,7 @@
             </p>
             <p
               v-if="item.visible_btn"
-              class="px-20 py-5 md:py-8 mt-20 md:mt-15 lg:mt-30 text-12 md:text-14 xl:text-16"
+              class="px-20 py-5 md:py-8 mt-20 md:mt-15 lg:mt-30 text-12 md:text-14 xl:text-16 btnHover"
               :style="`color: ${item.color_text_btn}; background-color: ${item.color_bg_btn}; border-radius: ${settingGeneral?.radius};`"
             >
               {{ item.text_btn }}
@@ -85,5 +89,9 @@ export default {
   -webkit-transition: all 600ms ease 0s;
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+.btnHover:hover {
+  background-color: var(--hover_bg_btn) !important;
+  color: var(--hover_text_btn) !important;
 }
 </style>

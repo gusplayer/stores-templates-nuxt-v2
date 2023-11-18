@@ -15,6 +15,10 @@
     /> -->
     <div
       class="w-full max-w-9/0 xl:max-w-full h-auto grid grid-cols-1 lg:grid-cols-2 gap-10 overflow-hidden"
+      :style="{
+        '--hover_text_btn': settingGeneral?.hover_text_btn,
+        '--hover_bg_btn': settingGeneral?.hover_bg_btn,
+      }"
     >
       <img
         :src="idCloudinaryBanner(information2.imgLeft, 'banner')"
@@ -42,7 +46,7 @@
         <template v-if="isInternalUrl(information2.url_redirect)">
           <nuxt-link
             :to="information2.url_redirect"
-            class="px-20 py-5 md:py-8 mt-25 md:mt-40 mb-20 xl:mb-0 text-12 md:text-14 xl:text-16"
+            class="px-20 py-5 md:py-8 mt-25 md:mt-40 mb-20 xl:mb-0 text-12 md:text-14 xl:text-16 btnHover"
             :style="`color: ${information2.color_text_btn}; background-color: ${information2.color_bg_btn}; border-radius: ${settingGeneral?.radius};`"
           >
             {{ information2.text_btn }}
@@ -51,7 +55,7 @@
         <template v-else>
           <a
             :href="information2.url_redirect"
-            class="px-20 py-5 md:py-8 mt-25 md:mt-40 mb-20 xl:mb-0 text-12 md:text-14 xl:text-16"
+            class="px-20 py-5 md:py-8 mt-25 md:mt-40 mb-20 xl:mb-0 text-12 md:text-14 xl:text-16 btnHover"
             :style="`color: ${information2.color_text_btn}; background-color: ${information2.color_bg_btn}; border-radius: ${settingGeneral?.radius};`"
             rel="noreferrer noopener"
           >
@@ -89,3 +93,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.btnHover:hover {
+  background-color: var(--hover_bg_btn) !important;
+  color: var(--hover_text_btn) !important;
+}
+</style>

@@ -8,6 +8,7 @@
       {
         '--font-style-1':
           settingByTemplate15[0]?.settingGeneral?.font ?? 'Poppins',
+        '--hover_text': settingByTemplate15[0].settingGeneral?.hover_text,
       },
     ]"
   >
@@ -264,13 +265,14 @@ export default {
 }
 
 .btn-active {
-  box-shadow: inset 0px -48px 0px -44px var(--color_border);
+  color: var(--hover_text) !important;
+  box-shadow: inset 0px -48px 0px -44px var(--hover_text);
 }
 .btn {
   color: var(--color_text);
 }
 .btn:hover {
   color: var(--hover_text);
-  box-shadow: inset 0px -48px 0px -44px var(--color_border);
+  box-shadow: inset 0px -48px 0px -44px var(--hover_text);
 }
 </style>

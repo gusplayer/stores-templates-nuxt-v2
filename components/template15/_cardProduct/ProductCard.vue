@@ -2,7 +2,15 @@
   <div
     id="product-card"
     class="h-full w-full flex flex-col justify-start items-center cursor-pointer relative wrapper_container"
-    :style="[settingGeneral, settingCardProducts]"
+    :style="[
+      settingGeneral,
+      settingCardProducts,
+      {
+        '--hover_text_btn': settingGeneral?.hover_text_btn,
+        '--hover_bg_btn': settingGeneral?.hover_bg_btn,
+        '--hover_text': settingGeneral?.hover_text,
+      },
+    ]"
   >
     <div
       class="relative max-w-full h-full shadow-sm border rounded-5 container"
@@ -123,7 +131,7 @@
           (product.tipo_servicio === null || product.tipo_servicio === '0')
         "
         class="mt-10 px-12 py-8 shadow-lg rounded-full btn"
-        :style="`background-color:${settingCardProducts.color_btn};color:${settingCardProducts.color_icon};`"
+        :style="`background-color:${settingCardProducts.color_btn}; color:${settingCardProducts.color_icon};`"
         @click="addShoppingCart"
       >
         <cart-icon />
@@ -347,8 +355,8 @@ export default {
   transform: translate(-50%, -50%);
 }
 .btn:hover {
-  color: var(--hover_text_btn);
-  background-color: var(--hover_Bg_btn);
+  color: var(--hover_text_btn) !important;
+  background-color: var(--hover_bg_btn) !important;
   @apply transition-all ease-in duration-0.2;
 }
 .icon-shop {
