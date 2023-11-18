@@ -264,7 +264,7 @@ export default {
         element === 'continue_shopping' ||
         element === 'continue_shopping2'
       ) {
-        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
+        this.closed()
       }
     },
     setToQueryFilter(type, value) {
@@ -299,6 +299,7 @@ export default {
         this.query.tag = value.id || null
       }
 
+      this.closed()
       this.setInformationFromQuery(this.query)
     },
     async setInformationFromQuery({ page, category, subcategory, tag }) {

@@ -117,25 +117,23 @@
                     </li>
                   </template>
                   <template v-slot:subcategorias>
-                    <template>
-                      <div
-                        v-for="itemsProperties in itemsTags.tagProperties"
-                        v-show="itemsProperties.status === 1"
-                        :key="itemsProperties.id"
+                    <div
+                      v-for="itemsProperties in itemsTags.tagProperties"
+                      v-show="itemsProperties.status === 1"
+                      :key="itemsProperties.id"
+                    >
+                      <li
+                        class="btn-category"
+                        :class="
+                          itemsProperties.name == tagSelect
+                            ? 'text-subcategoria-active'
+                            : ''
+                        "
+                        @click="setToQueryFilter('tag', itemsProperties)"
                       >
-                        <li
-                          class="btn-category"
-                          :class="
-                            itemsProperties.name == tagSelect
-                              ? 'text-subcategoria-active'
-                              : ''
-                          "
-                          @click="setToQueryFilter('tag', itemsProperties)"
-                        >
-                          {{ itemsProperties.name }}
-                        </li>
-                      </div>
-                    </template>
+                        {{ itemsProperties.name }}
+                      </li>
+                    </div>
                   </template>
                 </BaseAccordion>
               </div>
@@ -260,7 +258,7 @@ export default {
         element === 'continue_shopping' ||
         element === 'continue_shopping2'
       ) {
-        this.$store.commit('SET_OPEN_ORDER_MENU_RIGHT', false)
+        this.closed()
       }
     },
     setToQueryFilter(type, value) {
@@ -298,6 +296,7 @@ export default {
         this.query.tag = value.id || null
       }
 
+      this.closed()
       this.setInformationFromQuery(this.query)
     },
     async setInformationFromQuery({ page, name, category, subcategory, tag }) {

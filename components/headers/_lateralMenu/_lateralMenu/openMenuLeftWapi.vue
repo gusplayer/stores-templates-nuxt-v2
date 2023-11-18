@@ -83,8 +83,8 @@
                   <template v-slot:subcategorias>
                     <div
                       v-for="itemsProperties in itemsTags.tagProperties"
-                      :key="itemsProperties.id"
                       v-show="itemsProperties.status === 1"
+                      :key="itemsProperties.id"
                     >
                       <li
                         class="btn-category"
@@ -158,7 +158,7 @@ export default {
         element === 'leftright' ||
         element === 'rightleft'
       ) {
-        this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
+        this.closed()
       }
     },
     setToQueryFilter(type, value) {
@@ -195,6 +195,8 @@ export default {
         this.query.tag = value.id || null
         this.closed()
       }
+
+      this.closed()
       this.$store.commit('SET_STATE_BANNER', false)
       this.setInformationFromQuery(this.query)
     },

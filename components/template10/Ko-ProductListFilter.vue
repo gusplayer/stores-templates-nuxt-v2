@@ -37,6 +37,7 @@
                 type="search"
                 :placeholder="$t('header_search')"
                 @change="sendFilter"
+                @keyup.enter="sendFilter"
               />
             </el-collapse-item>
             <el-collapse-item
