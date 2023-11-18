@@ -2,7 +2,7 @@
   <div class="w-full flex justify-center items-center py-25 lg:py-40">
     <div class="w-full h-auto grid grid-cols-1 md:grid-cols-2 overflow-hidden">
       <div
-        class="w-full h-full flex flex-col justify-center items-center"
+        class="w-full h-full py-20 flex flex-col justify-center items-center px-10"
         :style="`background-color: ${information['--background_color_1']}`"
       >
         <img
