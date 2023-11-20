@@ -64,7 +64,7 @@
           </template>
           <template v-else>
             <a
-              :href="banner2.url_redirect_2"
+              :href="banner2.url_redirect_1"
               :style="{
                 color: banner2.color_text_btn_1,
                 backgroundColor: banner2.color_bg_btn_1,
