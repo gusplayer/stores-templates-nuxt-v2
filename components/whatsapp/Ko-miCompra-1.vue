@@ -705,7 +705,7 @@ export default {
     setCity() {
       if (this.cities) {
         this.city = this.cities.find(
-          (city) => city.id === this.dataStore.ciudad
+          (city) => city.id === this.dataStore.tiendasInfo.paises.id
         )
       }
     },

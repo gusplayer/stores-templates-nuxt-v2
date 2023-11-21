@@ -128,7 +128,7 @@
           <div class="info-left">
             <p class="title-info-orden">
               Compra dropshipping (Hoko)
-              <i class="el-icon-refresh" @click="getproductHoko" />
+              <i class="el-icon-refresh" @click="getproductHoko"></i>
             </p>
             <div v-if="productDataHoko" class="wrapper-hoko">
               <div>
@@ -843,7 +843,7 @@ export default {
     setCity() {
       if (this.cities) {
         this.city = this.cities.find(
-          (city) => city.id === this.dataStore.ciudad
+          (city) => city.id === this.dataStore.tiendasInfo.paises.id
         )
       }
     },
