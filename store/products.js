@@ -41,6 +41,7 @@ export const actions = {
           variants: params.variants || null,
           storeId: params.id_tienda,
           alphabetic: params.alphabetic,
+          favorite: params.favorite,
           'top-sales': params.topSales,
         },
         headers: {
