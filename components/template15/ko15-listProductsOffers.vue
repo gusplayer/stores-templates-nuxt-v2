@@ -127,7 +127,7 @@ export default {
           limit: 8,
           page: 1,
           // topSales: 1,
-          promotion: 1,
+          favorite: 1,
         }
       )
       if (success) {

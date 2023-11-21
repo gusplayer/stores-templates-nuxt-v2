@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="listProducts.length > 0"
     class="product-content"
     :style="[
       settingGeneral,
@@ -135,6 +136,7 @@ export default {
           id_tienda: this.dataStore.id,
           limit: 8,
           page: 1,
+          favorite: 1,
         }
       )
       if (success) {
