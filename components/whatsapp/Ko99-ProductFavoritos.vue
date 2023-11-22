@@ -112,7 +112,7 @@ export default {
           id_tienda: this.dataStore.id,
           limit: 10,
           page: 1,
-          promotion: 1,
+          favorite: 1,
         }
       )
       if (success) {
