@@ -46,6 +46,7 @@ export const state = () => ({
     },
   },
   settingByTemplate: '',
+  settingByTemplate6: '',
   settingByTemplate7: '',
   settingByTemplate9: '',
   settingByTemplate10: '',
@@ -111,6 +112,8 @@ export const mutations = {
       state.settingByTemplate = value.data
     }
   },
+  SET_CURRENTSETTING06: (state, value) =>
+    setCurrentSetting(state, { ...value, template: '6' }),
   SET_CURRENTSETTING07: (state, value) =>
     setCurrentSetting(state, { ...value, template: '7' }),
   SET_CURRENTSETTING09: (state, value) =>
@@ -995,27 +998,75 @@ function setCurrentSetting(state, { component, setting, template }) {
   }
 }
 
+function obtenerInfoURL(url) {
+  let nombreTienda = ''
+  let esSubdominio = false
+  let esDominio = false
+  let idTienda = ''
+
+  const subdominioMatch = url.match(/\/\/([^\/.:]+)\.komercia\.store/)
+  if (subdominioMatch) {
+    nombreTienda = subdominioMatch[1]
+    esSubdominio = true
+  } else {
+    const idTiendaMatch = url.match(/\/wa\/(\d+)$/)
+    if (idTiendaMatch) {
+      nombreTienda = 'Wapi'
+      idTienda = idTiendaMatch[1]
+    } else {
+      const wapiMatch = url.match(/\/\/(?:www\.)?wapi\.me\/wa\/(\d+)$/)
+      if (wapiMatch) {
+        nombreTienda = 'Wapi'
+        idTienda = wapiMatch[1]
+      } else {
+        const domainParts = url.match(
+          /\/\/(?:www\.)?([^\/.:]+)\.(com\.co?|store|...)/
+        )
+        if (domainParts && domainParts[1] !== 'www') {
+          nombreTienda = domainParts[1]
+          esDominio = true
+        }
+      }
+    }
+  }
+
+  const subdominioParts = url.match(/\/\/([^\/.:]+)\.localhost:3000(?:\/|$)/)
+  if (subdominioParts) {
+    nombreTienda = subdominioParts[1]
+    esSubdominio = true
+    esDominio = false // Asegurar que sea un subdominio
+  }
+
+  if (nombreTienda === 'www') {
+    nombreTienda = ''
+    esDominio = false
+    esSubdominio = false
+  }
+
+  return {
+    nombreTienda,
+    esSubdominio,
+    esDominio,
+    idTienda,
+  }
+}
+
 async function getIdData(state, req, commit) {
-  let full = req.headers.host
-  let parts = full.split('.')
-  let partsID = full.split(':')
-  let subdomain = parts[0]
+  const protocol =
+    req.headers['x-forwarded-proto'] ||
+    (req.connection.encrypted ? 'https' : 'http')
+  const currentURL = `${protocol}://${req.headers.host}${req.url}`
+  const getURL = obtenerInfoURL(currentURL)
   let id = 0
   let template = 0
-  // let webSite = false
   let idWapi = null
+  let subdomain = getURL?.nombreTienda ?? null
 
-  if (
-    parts[0] == 'localhost:3000' ||
-    parts[0] == 'wapi' ||
-    partsID[1] == '3333'
-  ) {
-    let partsWapi = req.url.split('/')
-    let result = partsWapi[2].split('?')
-    idWapi = result[0]
-  } else if (parts[1] === 'komercia' || parts[1] === 'localhost:3000') {
+  if (getURL?.idTienda) {
+    idWapi = getURL.idTienda
+  } else if (getURL?.esSubdominio && getURL?.nombreTienda) {
     const response = await axios.get(
-      `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${subdomain}`
+      `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL.nombreTienda}`
     )
     id = response.data.data.id || response.data.data.storeId
     template = response.data.data.templateNumber || response.data.data.template
@@ -1026,9 +1077,9 @@ async function getIdData(state, req, commit) {
         value: response.data.data.webSiteTemplate,
       })
     }
-  } else {
+  } else if (getURL?.esDominio && getURL?.nombreTienda) {
     const response = await axios.get(
-      `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${parts[1]}&isDomain=1`
+      `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL?.nombreTienda}&isDomain=1`
     )
     id = response.data.data.id || response.data.data.storeId
     template = response.data.data.templateNumber || response.data.data.template

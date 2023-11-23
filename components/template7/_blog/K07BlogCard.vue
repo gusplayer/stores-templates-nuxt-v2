@@ -9,15 +9,13 @@
       },
     ]"
   >
-    <div
+    <nuxt-link
+      :to="{ path: `/blog/` + article.slug, query: { idBlog: article.id } }"
       class="container"
       @mouseover="hover = true"
       @mouseleave="hover = false"
     >
-      <nuxt-link
-        :to="{ path: `/blog/` + article.slug, query: { idBlog: article.id } }"
-        class="contet"
-      >
+      <div class="contet">
         <div class="figure-img">
           <figure class="content-imge">
             <img
@@ -29,11 +27,8 @@
             <div v-else class="empty"></div>
           </figure>
         </div>
-      </nuxt-link>
-      <nuxt-link
-        :to="{ path: `/blog/` + article.slug, query: { idBlog: article.id } }"
-        class="contet"
-      >
+      </div>
+      <div class="contet">
         <div class="overlay-top">
           <div class="text-tittle">
             <p class="txt-day">
@@ -44,7 +39,7 @@
             </p>
           </div>
         </div>
-      </nuxt-link>
+      </div>
       <div class="overlay-bottom">
         <div class="content-bottom-titulo">
           <div class="text-cart">
@@ -52,10 +47,7 @@
           </div>
         </div>
       </div>
-      <nuxt-link
-        :to="{ path: `/blog/` + article.slug, query: { idBlog: article.id } }"
-        class="contet"
-      >
+      <div class="contet">
         <div class="overlay-bottom-autor">
           <div class="content-bottom-autor">
             <div class="text-cart">
@@ -65,8 +57,8 @@
             </div>
           </div>
         </div>
-      </nuxt-link>
-    </div>
+      </div>
+    </nuxt-link>
   </div>
 </template>
 <script>
