@@ -26,7 +26,7 @@
         </div>
         <div
           v-if="
-            dataStore.estado == 0 || !expiredDate(dataStore.fechaExpiracion)
+            dataStore.estado === 0 || !expiredDate(dataStore.fechaExpiracion)
           "
           id="modalNotificacion"
           class="w-full h-screen fixed top-0 flex justify-center items-center z-100"
@@ -157,6 +157,7 @@ export default {
     // Mapeo de las opciones de tipo de letra para cada template
     const tipoLetraPorTemplate = {
       5: this.settingByTemplate?.settings?.tipo_letra ?? 'Roboto',
+      6: this.settingByTemplate6?.settings?.tipo_letra ?? 'Poppins',
       7: {
         1: this.settingByTemplate7?.settingGeneral?.fount_1 ?? 'David Libre',
         2: this.settingByTemplate7?.settingGeneral?.fount_2 ?? 'Great Vibes',
@@ -333,6 +334,7 @@ export default {
         {
           href:
             this.template == 5 ||
+            this.template == 6 ||
             this.template == 7 ||
             this.template == 9 ||
             this.template == 10 ||

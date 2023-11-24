@@ -512,7 +512,7 @@ export default {
     productPrice() {
       if (this.product.con_variante) {
         const variants = this.product.variantes
-        if (variants && variants.combinaciones.length > 0) {
+        if (variants && variants.combinaciones.length) {
           const prices = JSON.parse(variants.combinaciones[0].combinaciones)
             .filter((item) => item.precio && item.estado)
             .map((item) => item.precio)
