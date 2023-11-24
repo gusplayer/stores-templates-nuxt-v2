@@ -173,8 +173,11 @@
         v-if="product.tag_promocion == 1 && product.promocion_valor"
         class="precio"
       >
-        <div v-if="product.precio" class="content-text-price">
-          <div v-if="estadoCart && minPrice != maxPrice" class="wrapper-price">
+        <div
+          v-if="product.precio || (maxPrice && minPrice)"
+          class="content-text-price"
+        >
+          <div v-if="estadoCart && !equalsPrice" class="wrapper-price">
             <div class="content-price">
               <div
                 v-if="product.precio > 0 || product.precio"
@@ -207,10 +210,7 @@
               </div>
             </div>
             <div class="content-price">
-              <div
-                v-if="product.precio > 0 || product.precio"
-                class="text-price"
-              >
+              <div v-if="minPrice > 0" class="text-price">
                 {{
                   minPrice
                     | currency(
@@ -220,10 +220,7 @@
                 }}
               </div>
               <p class="separator-price">-</p>
-              <div
-                v-if="product.precio > 0 || product.precio"
-                class="text-price"
-              >
+              <div v-if="maxPrice > 0" class="text-price">
                 {{
                   maxPrice
                     | currency(
@@ -265,9 +262,12 @@
         <div v-else class="h-27"></div>
       </div>
       <div v-else class="precio">
-        <div v-if="product.precio" class="content-text-price">
-          <div v-if="estadoCart && minPrice != maxPrice" class="content-price">
-            <div v-if="product.precio > 0 || product.precio" class="text-price">
+        <div
+          v-if="product.precio || (maxPrice && minPrice)"
+          class="content-text-price"
+        >
+          <div v-if="estadoCart && !equalsPrice" class="content-price">
+            <div v-if="minPrice > 0" class="text-price">
               {{
                 minPrice
                   | currency(
@@ -277,7 +277,7 @@
               }}
             </div>
             <p class="separator-price">-</p>
-            <div v-if="product.precio > 0 || product.precio" class="text-price">
+            <div v-if="maxPrice > 0" class="text-price">
               {{
                 maxPrice
                   | currency(
@@ -339,6 +339,7 @@ export default {
       salesData: null,
       spent: false,
       active: true,
+      equalsPrice: false,
     }
   },
   computed: {
@@ -453,7 +454,7 @@ export default {
     productPrice() {
       if (this.product.con_variante) {
         const variants = this.product.variantes
-        if (variants && variants.combinaciones.length > 0) {
+        if (variants && variants.combinaciones.length) {
           const prices = JSON.parse(variants.combinaciones[0].combinaciones)
             .filter((item) => item.precio && item.estado)
             .map((item) => item.precio)
@@ -470,7 +471,7 @@ export default {
       this.productVariants = false
       this.minPrice = this.product.precio || 0
       this.maxPrice = this.product.precio || 0
-      this.equalsPrice = true
+      this.equalsPrice = false
     },
   },
 }
