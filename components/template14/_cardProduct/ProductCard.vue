@@ -42,8 +42,8 @@
         {{ product.nombre }}
       </nuxt-link>
       <div class="mt-10">
-        <div v-if="estadoCart && equalsPrice && minPrice">
-          <p class="text-price">
+        <div v-if="estadoCart && equalsPrice">
+          <p v-if="minPrice > 0" class="text-price">
             {{
               minPrice
                 | currency(
@@ -53,11 +53,8 @@
             }}
           </p>
         </div>
-        <div
-          v-else-if="estadoCart && minPrice && maxPrice && !equalsPrice"
-          class="content-price"
-        >
-          <div class="text-price">
+        <div v-else-if="estadoCart && !equalsPrice" class="content-price">
+          <div v-if="minPrice > 0" class="text-price">
             {{
               minPrice
                 | currency(
@@ -66,8 +63,8 @@
                 )
             }}
           </div>
-          <p class="separator-price">-</p>
-          <div class="text-price">
+          <p v-if="maxPrice > 0" class="separator-price">-</p>
+          <div v-if="maxPrice > 0" class="text-price">
             {{
               maxPrice
                 | currency(
@@ -271,7 +268,7 @@ export default {
     productPrice() {
       if (this.product.con_variante) {
         const variants = this.product.variantes
-        if (variants && variants.combinaciones.length) {
+        if (variants && variants.combinaciones.length > 0) {
           const prices = JSON.parse(variants.combinaciones[0].combinaciones)
             .filter((item) => item.precio && item.estado)
             .map((item) => item.precio)

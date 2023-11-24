@@ -43,20 +43,10 @@
             <p v-if="product.marca" class="card-text-movil">
               {{ product.marca }}
             </p>
-            <div v-if="product.precio" class="content-text-price-movil-cart">
+            <div class="content-text-price-movil-cart">
               <div class="wrapper-price">
-                <!-- <div> -->
-                <!-- <p class="card-price-1-movil" v-if="product.precio > 0">
-                  $ {{ product.precio }}
-                  </p>-->
-                <div
-                  v-if="estadoCart && minPrice != maxPrice"
-                  class="content-price"
-                >
-                  <p
-                    v-if="product.precio > 0 || product.precio"
-                    class="card-price-2"
-                  >
+                <div v-if="estadoCart && equalsPrice" class="content-price">
+                  <p v-if="minPrice > 0" class="card-price-2">
                     {{
                       minPrice
                         | currency(
@@ -65,11 +55,22 @@
                         )
                     }}
                   </p>
-                  <p class="separator-price">-</p>
-                  <p
-                    v-if="product.precio > 0 || product.precio"
-                    class="card-price-2"
-                  >
+                </div>
+                <div
+                  v-else-if="estadoCart && !equalsPrice"
+                  class="content-price"
+                >
+                  <p v-if="minPrice > 0" class="card-price-2">
+                    {{
+                      minPrice
+                        | currency(
+                          dataStore.tiendasInfo.paises.codigo,
+                          dataStore.tiendasInfo.moneda
+                        )
+                    }}
+                  </p>
+                  <p v-if="maxPrice > 0" class="separator-price">-</p>
+                  <p v-if="maxPrice > 0" class="card-price-2">
                     {{
                       maxPrice
                         | currency(
@@ -80,7 +81,10 @@
                   </p>
                 </div>
                 <div v-else>
-                  <p v-if="product.precio > 0" class="card-price-2">
+                  <p
+                    v-if="product.precio > 0 || product.precio"
+                    class="card-price-2"
+                  >
                     {{
                       product.precio
                         | currency(
@@ -197,6 +201,7 @@ export default {
       salesData: null,
       spent: false,
       active: true,
+      equalsPrice: false,
     }
   },
   computed: {
@@ -317,7 +322,7 @@ export default {
     productPrice() {
       if (this.product.con_variante) {
         const variants = this.product.variantes
-        if (variants && variants.combinaciones.length) {
+        if (variants && variants.combinaciones.length > 0) {
           const prices = JSON.parse(variants.combinaciones[0].combinaciones)
             .filter((item) => item.precio && item.estado)
             .map((item) => item.precio)

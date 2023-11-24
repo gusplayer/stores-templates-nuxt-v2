@@ -59,11 +59,8 @@
             >
               <p>{{ product.promocion_valor }}% OFF</p>
             </div>
-            <div
-              v-if="estadoCart && equalsPrice && minPrice"
-              class="item-price-product"
-            >
-              <p class="txt-product-price">
+            <div v-if="estadoCart && equalsPrice" class="item-price-product">
+              <p v-if="minPrice > 0" class="txt-product-price">
                 {{
                   minPrice
                     | currency(
@@ -74,10 +71,10 @@
               </p>
             </div>
             <div
-              v-else-if="estadoCart && minPrice && maxPrice && !equalsPrice"
+              v-else-if="estadoCart && !equalsPrice"
               class="item-price-product"
             >
-              <p class="txt-product-price">
+              <p v-if="minPrice > 0" class="txt-product-price">
                 {{
                   minPrice
                     | currency(
@@ -86,8 +83,8 @@
                     )
                 }}
               </p>
-              <p class="separator-price">-</p>
-              <p class="txt-product-price">
+              <p v-if="maxPrice > 0" class="separator-price">-</p>
+              <p v-if="maxPrice > 0" class="txt-product-price">
                 {{
                   maxPrice
                     | currency(
@@ -346,7 +343,7 @@ export default {
     productPrice() {
       if (this.product.con_variante) {
         const variants = this.product.variantes
-        if (variants && variants.combinaciones.length) {
+        if (variants && variants.combinaciones.length > 0) {
           const prices = JSON.parse(variants.combinaciones[0].combinaciones)
             .filter((item) => item.precio && item.estado)
             .map((item) => item.precio)
