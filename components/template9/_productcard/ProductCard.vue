@@ -196,7 +196,7 @@
                   )
               }}
             </div>
-            <p class="separator-price">-</p>
+            <p v-if="maxPrice > 0" class="separator-price">-</p>
             <div v-if="maxPrice > 0" class="text-price">
               {{
                 maxPrice
@@ -373,7 +373,7 @@ export default {
     productPrice() {
       if (this.product.con_variante) {
         const variants = this.product.variantes
-        if (variants && variants.combinaciones.length) {
+        if (variants && variants.combinaciones.length > 0) {
           const prices = JSON.parse(variants.combinaciones[0].combinaciones)
             .filter((item) => item.precio && item.estado)
             .map((item) => item.precio)

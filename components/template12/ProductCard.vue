@@ -12,24 +12,15 @@
       "
     >
       <img
-        v-if="!soldOut"
         v-lazy="idCloudinary(product.foto_cloudinary, 150, 150)"
         role="presentation"
         class="product-image"
         alt="Product Img"
-        :class="
-          settingByTemplate12.roundedImages ? 'img_rounded' : 'img_normal'
-        "
-      />
-      <img
-        v-if="soldOut"
-        v-lazy="product.foto_cloudinary"
-        role="presentation"
-        class="product-image product-image-soldOut"
-        alt="Product Img soldOut"
-        :class="
-          settingByTemplate12.roundedImages ? 'img_rounded' : 'img_normal'
-        "
+        :class="{
+          'product-image-soldOut': soldOut,
+          img_rounded: settingByTemplate12.roundedImages,
+          img_normal: !settingByTemplate12.roundedImages,
+        }"
       />
     </div>
     <div class="wrapper-text">
@@ -61,7 +52,7 @@
     </div>
     <div class="wrapper-price">
       <span
-        v-if="estadoCart && equalsPrice && minPrice"
+        v-if="estadoCart && equalsPrice && minPrice > 0"
         class="font-semibold"
         :style="`color:${settingByTemplate12.priceColor};`"
       >
@@ -74,10 +65,11 @@
         }}
       </span>
       <div
-        v-else-if="estadoCart && minPrice && maxPrice && !equalsPrice"
+        v-else-if="estadoCart && !equalsPrice"
         class="flex flex-row items-center"
       >
         <div
+          v-if="minPrice > 0"
           class="font-semibold"
           :style="`color:${settingByTemplate12.priceColor};`"
         >
@@ -90,12 +82,14 @@
           }}
         </div>
         <p
+          v-if="maxPrice > 0"
           class="font-semibold px-5"
           :style="`color:${settingByTemplate12.priceColor};`"
         >
           -
         </p>
         <div
+          v-if="maxPrice > 0"
           class="font-semibold"
           :style="`color:${settingByTemplate12.priceColor};`"
         >
@@ -108,7 +102,6 @@
           }}
         </div>
       </div>
-
       <div v-else>
         <span
           v-if="product.precio > 0 || product.precio"
@@ -161,6 +154,7 @@ export default {
       salesData: null,
       spent: false,
       active: true,
+      equalsPrice: false,
     }
   },
   computed: {
@@ -280,7 +274,7 @@ export default {
     productPrice() {
       if (this.product.con_variante) {
         const variants = this.product.variantes
-        if (variants && variants.combinaciones.length) {
+        if (variants && variants.combinaciones.length > 0) {
           const prices = JSON.parse(variants.combinaciones[0].combinaciones)
             .filter((item) => item.precio && item.estado)
             .map((item) => item.precio)
