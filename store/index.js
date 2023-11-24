@@ -1009,38 +1009,48 @@ function obtenerInfoURL(url) {
     nombreTienda = subdominioMatch[1]
     esSubdominio = true
   } else {
-    const idTiendaMatch = url.match(/\/wa\/(\d+)$/)
+    const idTiendaMatch = url.match(/\/wa\/(\d+)\/?$/)
     if (idTiendaMatch) {
       nombreTienda = 'Wapi'
       idTienda = idTiendaMatch[1]
+      esSubdominio = false
+      esDominio = false
     } else {
-      const wapiMatch = url.match(/\/\/(?:www\.)?wapi\.me\/wa\/(\d+)$/)
+      const wapiMatch = url.match(/\/\/(?:www\.)?wapi\.me\/wa\/(\d+)\/?$/)
       if (wapiMatch) {
         nombreTienda = 'Wapi'
         idTienda = wapiMatch[1]
+        esSubdominio = false
+        esDominio = false
       } else {
-        const domainParts = url.match(
-          /\/\/(?:www\.)?([^\/.:]+)\.(com\.co?|store|...)/
+        const localhostWapiMatch = url.match(
+          /\/\/(?:www\.)?localhost:3000\/wa\/(\d+)\/?$/
         )
-        if (domainParts && domainParts[1] !== 'www') {
-          nombreTienda = domainParts[1]
-          esDominio = true
+        if (localhostWapiMatch) {
+          nombreTienda = 'Wapi'
+          idTienda = localhostWapiMatch[1]
+          esSubdominio = false
+          esDominio = false
+        } else {
+          const subdominioParts = url.match(
+            /\/\/([^\/.:]+)\.localhost:3000\/?$/
+          )
+          if (subdominioParts) {
+            nombreTienda = subdominioParts[1]
+            esSubdominio = true
+            esDominio = false
+          } else {
+            const domainParts = url.match(
+              /\/\/(?:www\.)?([^\/.:]+)\.(com\.co?|store|...)/
+            )
+            if (domainParts && domainParts[1] !== 'www') {
+              nombreTienda = domainParts[1]
+              esDominio = true
+            }
+          }
         }
       }
     }
-  }
-
-  const subdominioParts = url.match(/\/\/([^\/.:]+)\.localhost:3000(?:\/|$)/)
-  if (subdominioParts) {
-    nombreTienda = subdominioParts[1]
-    esSubdominio = true
-    esDominio = false // Asegurar que sea un subdominio
-  }
-
-  if (nombreTienda === 'www') {
-    nombreTienda = ''
-    esDominio = false
-    esSubdominio = false
   }
 
   return {
@@ -1057,6 +1067,7 @@ async function getIdData(state, req, commit) {
     (req.connection.encrypted ? 'https' : 'http')
   const currentURL = `${protocol}://${req.headers.host}${req.url}`
   const getURL = obtenerInfoURL(currentURL)
+  console.log(getURL)
   let id = 0
   let template = 0
   let idWapi = null
