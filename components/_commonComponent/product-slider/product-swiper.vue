@@ -164,10 +164,5 @@ export default {
       return productListComponent
     },
   },
-  methods: {
-    changeSlide() {
-      this.swiper.slidePrev(700, false)
-    },
-  },
 }
 </script>

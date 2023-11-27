@@ -374,7 +374,7 @@ export default {
   @apply w-auto h-15 flex justify-center items-center rounded-full -mt-20 -ml-8;
 }
 .num-items {
-  color: var(--color_tex);
+  color: var(--background_color_1);
   font-size: 10px;
   font-family: var(--font-style-1) !important;
   @apply pt-1 px-4 leading-12 tracking-0 font-semibold;

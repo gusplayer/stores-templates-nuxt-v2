@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="listProducts.length > 0"
     class="product-content"
     :style="[
       settingGeneral,
@@ -15,23 +16,20 @@
           <span class="tittle">{{ productList.title }}</span>
         </div>
       </div>
-      <div ref="mySwiper" v-swiper:mySwiper="swiperOption">
-        <div v-if="listProducts.length > 0" class="swiper-wrapper pb-10">
+      <div ref="mySwiper" v-swiper:mySwiper="swiperOption" class="w-full">
+        <div class="swiper-wrapper w-full pb-10">
           <div
             v-for="product in listProducts"
             :key="product.id"
-            class="swiper-slide h-full ml-20"
+            class="swiper-slide w-full h-full ml-20"
           >
             <KoProductCard
               :product="product"
               :setting-card-products="cardProduct"
               :setting-general="settingGeneral"
-              class="giftLoad h-full"
+              class="giftLoad w-full h-full"
             />
           </div>
-        </div>
-        <div v-else class="content-products-empty">
-          <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
       </div>
       <div v-if="productList.visibleBtn" class="btn-products">
@@ -86,25 +84,36 @@ export default {
       listProducts: [],
       swiperOption: {
         direction: 'horizontal',
+        // pagination: {
+        //   el: '.swiper-pagination',
+        // },
         setWrapperSize: true,
         paginationClickable: true,
         slidesPerView: 4,
-        spaceBetween: 20,
+        spaceBetween: 22,
         grabCursor: true,
         autoplay: {
           delay: 3000,
           disableOnInteraction: false,
         },
         breakpoints: {
-          1024: {
+          1440: {
             slidesPerView: 4,
+            spaceBetween: 22,
+          },
+          1024: {
+            slidesPerView: 3,
             spaceBetween: 20,
           },
           768: {
-            slidesPerView: 3,
+            slidesPerView: 2,
             spaceBetween: 10,
           },
-          500: {
+          425: {
+            slidesPerView: 2,
+            spaceBetween: 15,
+          },
+          375: {
             slidesPerView: 2,
             spaceBetween: 10,
           },
@@ -113,6 +122,10 @@ export default {
             spaceBetween: 5,
           },
         },
+        // navigation: {
+        //   nextEl: '.next',
+        //   prevEl: '.prev',
+        // },
       },
     }
   },
