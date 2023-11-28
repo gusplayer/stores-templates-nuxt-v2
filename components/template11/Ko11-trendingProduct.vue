@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="listProducts.length > 0"
     class="product-content"
     :style="[
       settingKtrending,
@@ -72,30 +73,49 @@ export default {
     return {
       listProducts: [],
       swiperOption: {
-        slidesPerView: '',
-        spaceBetween: '',
+        direction: 'horizontal',
+        // pagination: {
+        //   el: '.swiper-pagination',
+        // },
+        setWrapperSize: true,
+        paginationClickable: true,
+        slidesPerView: 4,
+        spaceBetween: 22,
+        grabCursor: true,
         autoplay: {
-          delay: 400000000,
+          delay: 3000,
           disableOnInteraction: false,
         },
         breakpoints: {
-          1024: {
+          1440: {
             slidesPerView: 4,
-            spaceBetween: 40,
+            spaceBetween: 22,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 20,
           },
           768: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-          640: {
             slidesPerView: 2,
             spaceBetween: 10,
           },
           425: {
             slidesPerView: 2,
+            spaceBetween: 15,
+          },
+          375: {
+            slidesPerView: 2,
             spaceBetween: 10,
           },
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 5,
+          },
         },
+        // navigation: {
+        //   nextEl: '.next',
+        //   prevEl: '.prev',
+        // },
       },
     }
   },
