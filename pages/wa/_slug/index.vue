@@ -5,7 +5,7 @@
   >
     <waTemplate />
     <div
-      v-if="dataStore.estado == 0 || !expiredDate(dataStore.fechaExpiracion)"
+      v-if="dataStore.estado === 0 || !expiredDate(dataStore.fechaExpiracion)"
       id="modalNotification"
       class="w-full h-screen fixed top-0 flex justify-center items-center"
       style="z-index: 9998"

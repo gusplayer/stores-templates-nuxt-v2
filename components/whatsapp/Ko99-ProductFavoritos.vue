@@ -54,17 +54,21 @@ export default {
     return {
       listProducts: [],
       swiperOption: {
-        slidesPerView: '',
-        spaceBetween: '',
+        direction: 'horizontal',
+        setWrapperSize: true,
+        paginationClickable: true,
+        slidesPerView: 3,
+        spaceBetween: 20,
+        grabCursor: true,
         autoplay: {
-          delay: 4000,
+          delay: 3000,
           disableOnInteraction: false,
         },
         breakpoints: {
-          // 1024: {
-          //   slidesPerView: 3,
-          //   spaceBetween: 40,
-          // },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
           768: {
             slidesPerView: 2,
             spaceBetween: 20,

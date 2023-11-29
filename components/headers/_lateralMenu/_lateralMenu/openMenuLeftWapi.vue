@@ -284,9 +284,8 @@ export default {
   list-style: none;
 }
 .order_header {
-  height: 80px;
-  max-height: 80px;
-  @apply relative flex flex-row justify-between items-center px-10;
+  max-height: 100px;
+  @apply h-full relative flex flex-row justify-between items-center px-10 mb-1;
   border-bottom: 1px solid rgba(129, 129, 129, 0.2);
 }
 .header-content-logo {
@@ -298,7 +297,7 @@ export default {
   width: 100%;
 }
 .header-logo {
-  max-height: 60px;
+  max-width: 100px;
   object-fit: contain;
   object-position: left;
 }
@@ -349,7 +348,7 @@ export default {
   background-color: #2c2930;
 }
 .content-lateral-menu {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply w-full h-full flex flex-col justify-center items-center overflow-y-auto;
 }
 .content-btns-lateral-menu {
   @apply w-full flex flex-row justify-center items-center;
@@ -391,15 +390,11 @@ export default {
   background-color: #2c2930;
   color: #fff;
 }
-.conten-Menu,
+
 .content-Categorys {
-  margin-top: 20px;
-  @apply w-full flex flex-col justify-start items-center;
+  @apply w-full h-full flex flex-col justify-start items-center  py-20;
 }
-.content-Categorys {
-  max-height: 670px;
-  overflow-y: scroll;
-}
+
 .collapse-category {
   @apply w-full;
 }

@@ -29,9 +29,9 @@
           </div>
           <div class="flex flex-row justify-end items-start">
             <search-icon class="icon-s" @click="openSearch" />
-            <div class="flex md:hidden">
-              <menu-icon class="icon-s" @click="openMenuLateral" />
-            </div>
+            <!-- <div class="flex md:hidden"> -->
+            <menu-icon class="icon-s" @click="openMenuLateral" />
+            <!-- </div> -->
           </div>
         </div>
         <KoSearch

@@ -710,11 +710,14 @@ export default {
         this.$store.state.productsCart.push(product)
       }
       this.$store.commit('UPDATE_CONTENT_CART')
-      if (this.stateWapiME) {
-        this.$router.push(`/wa/${this.dataStore.id}`)
-      } else {
-        this.$router.push(`/`)
+      if (this.dataStore.id != 7454) {
+        if (this.stateWapiME) {
+          this.$router.push(`/wa/${this.dataStore.id}`)
+        } else {
+          this.$router.push(`/`)
+        }
       }
+
       // this.$store.commit('SET_OPEN_ORDER', true) = true
       // this.$store.state.orderComponent = true
       this.$store.dispatch('SEND_ADD_TO_CART', 1)
