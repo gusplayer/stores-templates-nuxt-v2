@@ -463,7 +463,7 @@
                   <nuxt-link
                     v-if="!stateOrderWapi"
                     class="conten-btn"
-                    to="/"
+                    :to="setUrlCloseOrder"
                     @click="closeOrder"
                   >
                     <p class="continue_shopping2">
@@ -503,7 +503,11 @@
               </p>
             </div>
             <div>
-              <nuxt-link class="conten-btn" to="/" @click="closeOrder">
+              <nuxt-link
+                class="conten-btn"
+                :to="setUrlCloseOrder"
+                @click="closeOrder"
+              >
                 <p class="continue_shopping2">
                   {{ $t('footer_seguirCompra') }}
                 </p>
@@ -955,6 +959,16 @@ export default {
       return this.checkoutWhatsApp?.configuration
         ? JSON.parse(this.checkoutWhatsApp.configuration)
         : null
+    },
+    setUrlCloseOrder() {
+      if (this.dataStore.id === 7454) {
+        return this.$route.fullPath
+      } else {
+        const isTemplateFiveOrTwelve =
+          this.dataStore.template === 5 || this.dataStore.template === 12
+
+        return isTemplateFiveOrTwelve ? '/' : '/productos'
+      }
     },
   },
   watch: {
