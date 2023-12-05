@@ -43,6 +43,7 @@ export const actions = {
           alphabetic: params.alphabetic,
           favorite: params.favorite,
           'top-sales': params.topSales,
+          price: params.price,
         },
         headers: {
           KOMERCIA_PUBLIC_ROUTES_KEY: rootState.routerKey,

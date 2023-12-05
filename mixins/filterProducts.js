@@ -50,6 +50,18 @@ export default {
           type: 'alphabetic',
           label: 'home_alphabeticDesc',
         },
+        {
+          id: 7,
+          value: 'ASC',
+          type: 'price',
+          label: 'home_priceAsc',
+        },
+        {
+          id: 8,
+          value: 'DESC',
+          type: 'price',
+          label: 'home_priceDesc',
+        },
       ],
       filters: {
         page: 1,
@@ -64,6 +76,7 @@ export default {
         tag: null,
         variants: null,
         alphabetic: 'ASC',
+        price: 'ASC',
         topSales: null,
       },
       query: {
@@ -78,6 +91,7 @@ export default {
         tag: null,
         variants: null,
         alphabetic: null,
+        price: null,
         topSales: null,
       },
     }
@@ -156,6 +170,7 @@ export default {
       tag,
       variants,
       alphabetic,
+      price,
       topSales,
     }) {
       const id_tienda = this.dataStore.id
@@ -177,6 +192,7 @@ export default {
             tag,
             variants,
             alphabetic,
+            price,
             topSales,
           }
         )
@@ -213,6 +229,7 @@ export default {
       tag,
       variants,
       alphabetic,
+      price,
       topSales,
     }) {
       const query = {}
@@ -228,6 +245,7 @@ export default {
       if (tag !== null) query.tag = tag
       if (variants !== null) query.variants = variants
       if (alphabetic !== null) query.alphabetic = alphabetic
+      if (price !== null) query.price = price
       if (topSales !== null) query.topSales = topSales
 
       try {
@@ -251,6 +269,7 @@ export default {
       this.filters.tag = query.tag || null
       this.filters.variants = query.variants || null
       this.filters.alphabetic = query.alphabetic || null
+      this.filters.price = query.price || null
       this.filters.topSales = query.topSales || null
 
       this.currentChange(this.filters)
@@ -292,8 +311,24 @@ export default {
             label: 'home_alphabeticAsc',
           }
           if (value === 'DESC') {
+            this.sortingFilter.id = 6
             this.sortingFilter.value = 'DESC'
+            this.sortingFilter.type = 'alphabetic'
             this.sortingFilter.label = 'home_alphabeticDesc'
+          }
+        },
+        price: (value) => {
+          this.sortingFilter = {
+            id: 7,
+            value: 'ASC',
+            type: 'price',
+            label: 'home_priceAsc',
+          }
+          if (value === 'DESC') {
+            this.sortingFilter.id = 8
+            this.sortingFilter.value = 'DESC'
+            this.sortingFilter.type = 'price'
+            this.sortingFilter.label = 'home_priceDesc'
           }
         },
         topSales: () => {
@@ -333,6 +368,7 @@ export default {
       this.query.tag = this.filters.tag || null
       this.query.variants = this.filters.variants || null
       this.query.alphabetic = this.filters.alphabetic || null
+      this.query.price = this.filters.price || null
       this.query.topSales = this.filters.topSales || null
 
       this.setInformationFromQuery(this.query)
@@ -370,6 +406,7 @@ export default {
         variants: 'variants',
         topSales: 'topSales',
         alphabetic: 'alphabetic',
+        price: 'price',
       }
       const filterKey = filterMapping[value.type]
       this.filters[filterKey] = value.value || null
@@ -390,12 +427,14 @@ export default {
       this.filters.freeShipping = null
       this.filters.variants = null
       this.filters.alphabetic = null
+      this.filters.price = null
       this.filters.topSales = null
       this.filters.promotion = null
 
       this.query.freeShipping = null
       this.query.variants = null
       this.query.alphabetic = null
+      this.query.price = null
       this.query.topSales = null
       this.query.promotion = null
     },
@@ -414,6 +453,7 @@ export default {
         tag: null,
         variants: null,
         alphabetic: null,
+        price: null,
         topSales: null,
       }
       this.searchProduct = null
@@ -445,6 +485,7 @@ export default {
         tag: null,
         variants: null,
         alphabetic: null,
+        price: null,
         topSales: null,
       }
       this.searchProduct = null

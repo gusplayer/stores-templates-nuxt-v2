@@ -13,25 +13,57 @@
                 class="txt-category"
                 @click="breadcrumbsClear(1)"
               >
-                <span class="font-normal pr-4">/</span>{{ nameCategory }}
+                <span class="font-normal px-4">/</span>{{ nameCategory }}
               </button>
               <button
                 v-if="nameSubCategory"
                 class="txt-category"
                 @click="breadcrumbsClear(2)"
               >
-                <span class="font-normal pr-4">/</span>{{ nameSubCategory }}
+                <span class="font-normal px-4">/</span>{{ nameSubCategory }}
               </button>
               <p v-if="tagProduct" class="txt-category">
-                <span class="font-normal pr-4">/</span>{{ tagProduct }}
+                <span class="font-normal px-4">/</span>{{ tagProduct }}
               </p>
             </div>
           </div>
-          <div class="flex flex-row justify-end items-start">
-            <search-icon class="icon-s" @click="openSearch" />
-            <!-- <div class="flex md:hidden"> -->
+          <div class="w-full flex flex-row justify-end items-center">
+            <el-dropdown
+              class="w-full flex justify-end items-center mt-2"
+              :hide-on-click="false"
+              @command="sendOrder"
+            >
+              <span
+                class="el-dropdown-link txt-color justify-center items-center"
+              >
+                Ordenar por:
+                <span
+                  v-if="sortingFilter?.label"
+                  class="font-normal text-11 ml-5 text-black"
+                  @click="clearOrder"
+                >
+                  {{ $t(sortingFilter.label) }}
+                </span>
+                <i class="el-icon-arrow-down el-icon--right leading-21"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item
+                  v-for="items in listOrderFilter"
+                  v-show="!stateShipping"
+                  :key="items.id"
+                  :command="items"
+                  :class="
+                    sortingFilter?.id === items.id
+                      ? 'bg-black text-white-white'
+                      : ''
+                  "
+                >
+                  {{ $t(items.label) }}
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <search-icon class="icon-s mx-5" @click="openSearch" />
             <menu-icon class="icon-s" @click="openMenuLateral" />
-            <!-- </div> -->
           </div>
         </div>
         <KoSearch

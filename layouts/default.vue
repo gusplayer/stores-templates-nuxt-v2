@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="dataStore">
+    <div v-if="dataStore && !storeError">
       <div v-if="stateModalPwd">
         <component :is="headerTemplate" v-bind="componentsProps" />
         <nuxt />
@@ -11,7 +11,7 @@
           :value-wa="false"
         />
         <div
-          v-if="dataStore.redes.whatsapp"
+          v-if="dataStore?.redes?.whatsapp"
           class="wrapper-whatsapp"
           @click="redirectWhatsApp()"
         >
@@ -149,7 +149,7 @@ export default {
     let FacebookPixel1 =
       this.analytics_tagmanager?.facebook_pixel_metatag_1 ?? ''
     let googleMerchants = this.analytics_tagmanager?.google_merchant ?? ''
-    let geolocation = this.geolocalizacion
+    let geolocation = this.geolocalizacion ?? ''
     let description =
       tienda?.tiendasInfo?.descripcion?.replace(/<[^>]*>?/g, '') ?? ''
     let tipo_letra, tipo_letra2, tipo_letra3
@@ -221,7 +221,8 @@ export default {
           hid: 'url',
           name: 'url',
           content:
-            tienda?.dominio ?? `https://${tienda.subdominio}.komercia.co`,
+            tienda?.dominio ??
+            `https://${tienda?.subdominio ?? ''}.komercia.co`,
         },
         { hid: 'language', name: 'language', content: 'ES' },
         { hid: 'author', name: 'author', content: 'Komercia' },
@@ -242,23 +243,24 @@ export default {
         {
           hid: 'og:title',
           name: 'og:title',
-          content: tienda?.nombre ?? 'Tienda',
+          content: tienda?.nombre ?? 'Tienda Komercia',
         },
         {
           hid: 'og:type',
           name: 'og:type',
-          content: `Tienda online ${tienda.nombre}`,
+          content: `Tienda online ${tienda?.nombre ?? 'Tienda Komercia'}`,
         },
         {
           hid: 'og:url',
           name: 'og:url',
           content:
-            tienda?.dominio ?? `https://${tienda.subdominio}.komercia.co`,
+            tienda?.dominio ??
+            `https://${tienda?.subdominio ?? ''}.komercia.co`,
         },
         {
           hid: 'og:image',
           name: 'og:image',
-          content: `${this.$store.state.urlKomercia}/logos/${tienda.logo}`,
+          content: `${this.$store.state.urlKomercia}/logos/${tienda?.logo}`,
         },
         {
           hid: 'og:site_name',
@@ -273,12 +275,12 @@ export default {
         {
           hid: 'og:email',
           name: 'og:email',
-          content: tienda.tiendasInfo.emailTienda,
+          content: tienda?.tiendasInfo?.emailTienda ?? '',
         },
         {
           hid: 'og:phone_number',
           name: 'og:phone_number',
-          content: `${tienda.tiendasInfo.telefono}`,
+          content: tienda?.tiendasInfo?.telefono ?? '',
         },
         {
           hid: 'og:latitude',
@@ -329,7 +331,7 @@ export default {
         {
           rel: 'icon',
           type: 'image/x-icon',
-          href: `${this.$store.state.urlKomercia}/logos/${tienda.logo}`,
+          href: `${this.$store.state.urlKomercia}/logos/${tienda?.logo}`,
         },
         {
           href:
@@ -370,6 +372,7 @@ export default {
     ...mapState([
       'template',
       'dataStore',
+      'storeError',
       // 'dataCookies',
       'settingBase',
       'geolocalizacion',
@@ -507,7 +510,7 @@ export default {
     },
   },
   beforeMount() {
-    if (this.dataStore.tiendasInfo.dominio) {
+    if (this.dataStore?.tiendasInfo?.dominio) {
       caches.keys().then(function (names) {
         for (let name of names) caches.delete(name)
       })
