@@ -94,6 +94,7 @@ export const state = () => ({
   stateModalPwd: true,
   formOrdenWhatsAPP: false,
   tempInfo: '',
+  storeError: false,
   // listArticulos: [],
   // token:
   //   'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjI3MmU0ZDc1NmM2NDFjMGM5N2VlMTQzYjc1OTg3NDg1MDI3YzVjYzhhZDNiNTdjMTM1ZjFhNDY2MGIzMTExODMwMWIxYTcxYTk0MGRjYTcyIn0.eyJhdWQiOiIyIiwianRpIjoiMjcyZTRkNzU2YzY0MWMwYzk3ZWUxNDNiNzU5ODc0ODUwMjdjNWNjOGFkM2I1N2MxMzVmMWE0NjYwYjMxMTE4MzAxYjFhNzFhOTQwZGNhNzIiLCJpYXQiOjE1OTA1MTMyNTMsIm5iZiI6MTU5MDUxMzI1MywiZXhwIjoxNTkzMTA1MjUzLCJzdWIiOiIzNDgwIiwic2NvcGVzIjpbXX0.qbFxfGqpayFbPSXy01sygMXWq4fLTqLXpjeksrdT-Pxo9k129iWxFi3XnJ6uYh7LE6frYUMJNiETa3CWA5CJ2ebQk2UGx310sZl5H0Io1oz5KicwJUpq2OgwNLkjg0d_VcvRJTO5aT2gmnwPJbMuz_Y3OHbgFO5zCb2u1SqDSepnxEFl83iR-BKiJ7vESeZlUcHT-xR1SQQClmj4PnLhCeV5MRYFS-ui-TmImheJe8SoQLs-ly9cRTk1u-GYrLskL3yI0z9aOKi6UNXUoe4y8Ji3p8odfJk5ZinX7koXWrPqiBqp15Q2oE763gCnGPQeWE-Tz7QLJJSGeVGHe5xKawjGLRIK57MNG5QttFT5nYpwh1zQZ3jqY2v5JFM2wrLzOUOcAtvR48bFxBe-ea3NkBuLo7V0mJGjpng1rdeCPBV2NwQQTPqmgSAUrFZvX81T5cLfyNmyUVRmJnojelLoiKaaU2ASEBOGt1GFmtw5tbgeXjrFBlPzoWUCRKZyq9qdJyeKbTZbaTD7rewvGZCh9iyjt_Mey3l5-2CJE_csIInAEkFc9i07HrSFuv8pmVrfy1LEDoJwoik5pv39WlIrXtD8bc5maJ-smX8JDeAMMfFhNmjtcbWt1qDaiJYApVDSGPNe5Rw6Uu_bOWyPkKQjXPwbcOSRJT_OihlnCfe1z6M',
@@ -348,15 +349,16 @@ export const actions = {
     } else {
       await handleKomercia(id, template, commit, dispatch)
     }
-
-    await handleDataStore(state, commit)
+    if (!state.storeError) {
+      await handleDataStore(state, commit)
+    }
 
     const param = {
       url: req.headers.host,
       parts: req.headers.host.split('.'),
       subdomain,
       id,
-      dataStore: state.dataStore ? state.dataStore : null,
+      dataStore: state.dataStore ? state.dataStore : 'No se encontro la tienda',
     }
     commit('SET_INFO', param)
   },
@@ -1009,14 +1011,14 @@ function obtenerInfoURL(url) {
     nombreTienda = subdominioMatch[1]
     esSubdominio = true
   } else {
-    const idTiendaMatch = url.match(/\/wa\/(\d+)\/?$/)
+    const idTiendaMatch = url.match(/\/wa\/(\d+)\/?/)
     if (idTiendaMatch) {
       nombreTienda = 'Wapi'
       idTienda = idTiendaMatch[1]
       esSubdominio = false
       esDominio = false
     } else {
-      const wapiMatch = url.match(/\/\/(?:www\.)?wapi\.me\/wa\/(\d+)\/?$/)
+      const wapiMatch = url.match(/\/\/(?:www\.)?wapi\.me\/wa\/(\d+)\/?/)
       if (wapiMatch) {
         nombreTienda = 'Wapi'
         idTienda = wapiMatch[1]
@@ -1024,7 +1026,7 @@ function obtenerInfoURL(url) {
         esDominio = false
       } else {
         const localhostWapiMatch = url.match(
-          /\/\/(?:www\.)?localhost:3000\/wa\/(\d+)\/?$/
+          /\/\/(?:www\.)?localhost:3000\/wa\/(\d+)\/?/
         )
         if (localhostWapiMatch) {
           nombreTienda = 'Wapi'
@@ -1032,9 +1034,7 @@ function obtenerInfoURL(url) {
           esSubdominio = false
           esDominio = false
         } else {
-          const subdominioParts = url.match(
-            /\/\/([^\/.:]+)\.localhost:3000\/?$/
-          )
+          const subdominioParts = url.match(/\/\/([^\/.:]+)\.localhost:3000\/?/)
           if (subdominioParts) {
             nombreTienda = subdominioParts[1]
             esSubdominio = true
@@ -1053,6 +1053,12 @@ function obtenerInfoURL(url) {
     }
   }
 
+  // Nueva validación para capturar el ID de wapi con parámetros adicionales en la URL
+  const wapiWithParamsMatch = url.match(/(\/wa\/\d+)(\S*)/)
+  if (wapiWithParamsMatch) {
+    idTienda = wapiWithParamsMatch[1].split('/').pop()
+  }
+
   return {
     nombreTienda,
     esSubdominio,
@@ -1067,7 +1073,7 @@ async function getIdData(state, req, commit) {
     (req.connection.encrypted ? 'https' : 'http')
   const currentURL = `${protocol}://${req.headers.host}${req.url}`
   const getURL = obtenerInfoURL(currentURL)
-  console.log(getURL)
+  // console.log(getURL)
   let id = 0
   let template = 0
   let idWapi = null
@@ -1075,6 +1081,7 @@ async function getIdData(state, req, commit) {
 
   if (getURL?.idTienda) {
     idWapi = getURL.idTienda
+    template = 99
   } else if (getURL?.esSubdominio && getURL?.nombreTienda) {
     const response = await axios.get(
       `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL.nombreTienda}`
@@ -1100,6 +1107,15 @@ async function getIdData(state, req, commit) {
         value: response.data.data.webSiteTemplate,
       })
     }
+  }
+  if (
+    getURL.nombreTienda === '' &&
+    template === 0 &&
+    (id === 0 || idWapi === null)
+  ) {
+    state.storeError = true
+  } else {
+    state.storeError = false
   }
   return { subdomain, id, template, idWapi }
 }

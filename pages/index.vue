@@ -7,6 +7,7 @@ export default {
   name: 'PageIndex',
   components: {
     KoTemplate5: () => import('./template5/index'),
+    KoTemplate6: () => import('./template6/index'),
     KoTemplate7: () => import('./template7/index'),
     KoTemplate8: () => import('./template8/index'),
     KoTemplate9: () => import('./template9/index'),
@@ -23,6 +24,7 @@ export default {
     return {
       componentMapping: {
         5: 'KoTemplate5',
+        6: 'KoTemplate6',
         7: 'KoTemplate7',
         9: 'KoTemplate9',
         10: 'KoTemplate10',
