@@ -182,7 +182,7 @@ export default {
         'products/GET_ALL_PRODUCTS',
         {
           id_tienda: this.dataStore.id,
-          limit: 8,
+          limit: 20,
           page: 1,
           topSales: 1,
         }
