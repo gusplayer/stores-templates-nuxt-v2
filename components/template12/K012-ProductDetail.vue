@@ -276,6 +276,10 @@ export default {
         desc: '',
       },
       activeZoom: true,
+      userDropshipping: {
+        userId: '',
+        userName: '',
+      },
     }
   },
   computed: {
@@ -378,6 +382,14 @@ export default {
     this.$store.state.beforeCombination = []
     if (this.envios?.valores) {
       this.setOptionShipping()
+    }
+    if (
+      this.$route.query &&
+      this.$route.query.userId &&
+      this.$route.query.userName
+    ) {
+      this.userDropshipping.userId = this.$route.query.userId
+      this.userDropshipping.userName = this.$route.query.userName
     }
   },
   methods: {
@@ -558,6 +570,7 @@ export default {
           this.salesData && this.salesData.combinacion
             ? this.salesData.combinacion
             : undefined,
+        dropshipping: this.userDropshipping.userId,
       }
       let json = {
         products: [objeto],
