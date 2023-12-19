@@ -1,12 +1,12 @@
 <template>
   <div
     v-if="product"
-    class="wrapper_card product_container"
+    class="relative w-full flex justify-start items-start flex-nowrap bg-transparent cursor-pointer mb-20 px-10 md:px-5 product_container"
     @mouseenter="() => (isHover = true)"
     @mouseleave="() => (isHover = false)"
   >
     <div
-      class="content-img-prodcut"
+      class="w-full max-w-[80px] max-h-[80px] flex justify-center items-cente"
       :class="
         settingByTemplate12.responsiveImages ? 'img_visileRes' : 'img_normal'
       "
@@ -14,7 +14,7 @@
       <img
         v-lazy="idCloudinary(product.foto_cloudinary, 150, 150)"
         role="presentation"
-        class="product-image"
+        class="w-full object-cover object-center"
         alt="Product Img"
         :class="{
           'product-image-soldOut': soldOut,
@@ -23,7 +23,7 @@
         }"
       />
     </div>
-    <div class="wrapper-text">
+    <div class="w-full flex flex-col ml-15">
       <div class="product_header mb-1">
         <h3
           v-if="product.nombre"
@@ -50,9 +50,9 @@
         </p>
       </div>
     </div>
-    <div class="wrapper-price">
+    <div class="w-full flex justify-end">
       <span
-        v-if="estadoCart && equalsPrice && minPrice > 0"
+        v-if="equalsPrice && minPrice > 0"
         class="font-semibold"
         :style="`color:${settingByTemplate12.priceColor};`"
       >
@@ -64,10 +64,7 @@
             )
         }}
       </span>
-      <div
-        v-else-if="estadoCart && !equalsPrice"
-        class="flex flex-row items-center"
-      >
+      <div v-else-if="!equalsPrice" class="flex flex-row items-center">
         <div
           v-if="minPrice > 0"
           class="font-semibold"
@@ -298,42 +295,11 @@ export default {
 </script>
 
 <style scoped>
-.wrapper_card {
-  margin-bottom: 25px;
-  width: 100%;
-  /* max-width: 460px; */
-  @apply relative flex items-start flex-nowrap bg-transparent cursor-pointer;
-}
-.wrapper_card > div:nth-child(1) {
-  max-width: 100px;
-}
-.wrapper_card > div:nth-child(3) {
-  max-width: 130px;
-}
-.product_container .content-img-prodcut > img,
-.product_container .product_header,
-.product_container .product_description,
-.product_container .wrapper-price > span {
+.product_container {
   transition: all 220ms ease-in-out;
 }
-.product_container:hover .content-img-prodcut > img,
-.product_container:hover .product_header,
-.product_container:hover .product_description,
-.product_container:hover .wrapper-price > span {
+.product_container:hover {
   transform: translateX(0.4rem);
-}
-.content-img-prodcut {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.product-image {
-  max-width: 80px;
-  max-height: 80px;
-  object-fit: cover;
-  margin-right: 10px;
-  object-position: center;
 }
 .img_rounded {
   border-radius: 100%;
@@ -344,14 +310,6 @@ export default {
 .product-image-soldOut {
   filter: grayscale(100%);
 }
-.wrapper-price {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-}
-.wrapper-text {
-  @apply w-full flex-col;
-}
 .img_visileRes {
   display: flex;
 }
@@ -359,42 +317,19 @@ export default {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-@media (max-width: 768px) {
-  .wrapper_card {
-    @apply justify-start;
-  }
+  -webkit-line-clamp: 3;
 }
 @media (max-width: 450px) {
   .wrapper-text {
     max-width: 160px;
     margin-right: 3px;
   }
-  .wrapper_card {
-    align-items: flex-start;
-  }
-  .wrapper_card > div:nth-child(1) {
-    max-width: 80px;
-    margin-right: 10px;
-  }
-  .wrapper_card > div:nth-child(3) {
-    max-width: 100px;
-  }
-  .product-image {
-    max-width: 70px;
-    max-height: 70px;
-  }
+
   .img_visileRes {
     display: none;
   }
   .img_normal {
     display: flex;
-  }
-}
-@media (max-width: 320px) {
-  .wrapper-text {
-    max-width: 120px;
   }
 }
 </style>

@@ -38,7 +38,7 @@
                   {{ subcategories.nombreSubcategoria }}
                 </h3>
               </div>
-              <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div
                   v-for="producto in getProductos(subcategories.id)"
                   :key="producto.id"
@@ -53,7 +53,7 @@
               </div>
             </template>
           </div>
-          <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-5">
             <div
               v-for="producto in getProductosSinSubcategories(
                 category.nombreCategoriaProducto
@@ -71,7 +71,7 @@
         </template>
       </div>
       <div class="w-full py-10"></div>
-      <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-5">
         <div
           v-for="producto in getProductosSinCategory"
           :key="producto.id"
@@ -182,7 +182,7 @@ export default {
         'products/GET_ALL_PRODUCTS',
         {
           id_tienda: this.dataStore.id,
-          limit: 20,
+          limit: 50,
           page: 1,
           topSales: 1,
         }
