@@ -30,7 +30,7 @@ export default {
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        settingK05Contact: this.settingByTemplate?.settings ?? this.settingBase,
+        settingK05Blog: this.settingByTemplate?.settings ?? this.settingBase,
       }
     },
   },
