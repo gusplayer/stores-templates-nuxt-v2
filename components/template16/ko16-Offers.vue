@@ -61,7 +61,7 @@
                   </div>
                 </div>
               </div>
-              <div class="swiper-pagination" slot="pagination"></div>
+              <!-- <div class="swiper-pagination" slot="pagination"></div> -->
             </div>
           </div>
         </div>
@@ -102,9 +102,13 @@ export default {
       swiperOption: {
         slidesPerView: 1,
         spaceBetween: 10,
-        pagination: {
-          el: '.swiper-pagination',
+        autoplay: {
+          delay: 8000,
+          disableOnInteraction: false,
         },
+        // pagination: {
+        //   el: '.swiper-pagination',
+        // },
       },
     }
   },
