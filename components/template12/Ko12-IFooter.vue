@@ -35,6 +35,26 @@
         </a>
       </div>
     </div>
+    <div class="w-full flex flex-row justify-center items-center mb-15">
+      <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
+        <nuxt-link
+          v-if="item.path"
+          :to="item.path"
+          class="text-secciones"
+          :style="`color:${settingByTemplate12.footerText};`"
+        >
+          {{ $t(`${item.name}`) }}
+        </nuxt-link>
+        <nuxt-link
+          v-if="item.href && stateListBLogs > 0"
+          :to="item.href"
+          class="text-secciones"
+          :style="`color:${settingByTemplate12.footerText};`"
+        >
+          {{ $t(`${item.name}`) }}
+        </nuxt-link>
+      </div>
+    </div>
     <button
       v-if="storePolicies"
       class="text-politics"
@@ -91,6 +111,24 @@ export default {
   mixins: [settingsProps],
   data() {
     return {
+      secciones: [
+        {
+          name: 'footer_inicio',
+          path: '/',
+        },
+        {
+          name: 'footer_contacto',
+          path: '/contacto',
+        },
+        {
+          name: 'header_blog',
+          href: '/blog',
+        },
+        {
+          name: 'footer_micompra',
+          path: '/micompra',
+        },
+      ],
       links: [
         {
           nombre: 'Facebook',
@@ -122,10 +160,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['storePolicies']),
-    showModal() {
-      return this.$store.state.modalpolitics05
-    },
+    ...mapState(['stateListBLogs', 'storePolicies']),
+    ...mapState({
+      showModal: (state) => state.modalpolitics05,
+    }),
   },
   watch: {
     settingByTemplate12() {
@@ -203,6 +241,19 @@ export default {
   font-weight: 400;
   max-width: 380px;
 }
+
+.text-secciones {
+  font-size: 16px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.4;
+  letter-spacing: normal;
+  margin-right: 10px;
+  /* text-align: center; */
+}
+.text-secciones:hover {
+  color: var(--color_hover_text);
+}
 .text-politics {
   text-align: center;
   font-weight: 400;
@@ -218,7 +269,7 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 15px 0 40px;
+  padding: 15px 0 20px;
 }
 .icon {
   margin-right: 10px;
