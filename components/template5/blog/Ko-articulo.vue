@@ -1,7 +1,6 @@
 <template>
   <div
-    class="w-full flex flex-col justify-start items-center bg-white-white"
-    style="min-height: calc(72vh)"
+    class="w-full min-h-screen flex flex-col justify-start items-center bg-white-white"
   >
     <div v-if="dataArticle" class="container-article">
       <div class="content-blog">

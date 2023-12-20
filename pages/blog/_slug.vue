@@ -29,6 +29,7 @@ export default {
         9: 'K09Article',
         10: 'K10Article',
         11: 'K11Article',
+        12: 'K05Article',
         13: 'K13Article',
         14: 'K13Article',
         15: 'K13Article',
