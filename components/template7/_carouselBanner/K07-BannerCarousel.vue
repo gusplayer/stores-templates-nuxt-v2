@@ -5,7 +5,7 @@
       v-swiper:mySwiper="swiperOption"
       class="w-full justify-center items-center wrapper-banner"
     >
-      <div class="z-auto swiper-wrapper">
+      <div class="z-auto swiper-wrapper w-full">
         <div
           v-for="(banner, index) in settingKCarousel.values"
           :key="index"
@@ -14,6 +14,7 @@
         >
           <template v-if="isInternalUrl(banner.url_redirect)">
             <nuxt-link
+              class="w-full flex justify-center items-center"
               :to="`${banner?.url_redirect ? banner.url_redirect : ''}`"
             >
               <picture>
@@ -48,7 +49,7 @@
                 />
               </picture>
               <KObanner
-                class="absolute top-0"
+                class="absolute bottom-0"
                 :banner="banner"
                 :setting-k-carousel="settingKCarousel"
                 :setting-general="settingGeneral"
@@ -57,6 +58,7 @@
           </template>
           <template v-else>
             <a
+              class="w-full flex justify-center items-center"
               :href="`${banner?.url_redirect ? banner.url_redirect : ''}`"
               rel="noreferrer noopener"
             >
@@ -92,7 +94,7 @@
                 />
               </picture>
               <KObanner
-                class="absolute top-0"
+                class="absolute bottom-0"
                 :banner="banner"
                 :setting-k-carousel="settingKCarousel"
                 :setting-general="settingGeneral"

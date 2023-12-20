@@ -365,12 +365,10 @@ export const actions = {
   GET_SERVER_PATH({ commit }, value) {
     commit('SET_SERVER_PATH', value)
   },
-  // Cambiar ruta por la de Daniel y agregar las otras que hacen falta
   async GET_DATA_TIENDA_BY_ID({ state, commit, dispatch }, idTienda) {
     try {
       const { data } = await axios({
         method: 'GET',
-        // url: `${state.urlTemplate}/api/tienda/${idTienda}`,
         url: `${state.urlAWSsettings}/api/v1/stores/info/${idTienda}`,
         headers: {
           KOMERCIA_PUBLIC_ROUTES_KEY: state.routerKey,
@@ -378,6 +376,7 @@ export const actions = {
       })
       if (data) {
         await Promise.all([
+          dispatch('SET_INCREMENT_STORE_VIEW', data.data.id),
           dispatch('GET_ANALYTICS_TAGMANAGER', data.data.id),
           dispatch('GET_CATEGORIES', data.data.id),
           dispatch('GET_SUBCATEGORIES', data.data.id),
@@ -401,6 +400,28 @@ export const actions = {
   },
   GET_DATA({ commit }) {
     commit('SET_DATA')
+  },
+  async SET_INCREMENT_STORE_VIEW({ state }, idTienda) {
+    try {
+      // const { data } =
+      await axios({
+        method: 'POST',
+        url: `${state.urlAWSsettings}/api/v1/templates/websites/views/${idTienda}`,
+        headers: {
+          KOMERCIA_PUBLIC_ROUTES_KEY: state.routerKey,
+        },
+      })
+      // if (data) {
+      //   console.log(data)
+      // }
+    } catch (err) {
+      console.log(
+        'Data increment store view',
+        err.response.data,
+        'status',
+        err.response.status
+      )
+    }
   },
   async GET_CATEGORIES({ commit, state }, idTienda) {
     try {
