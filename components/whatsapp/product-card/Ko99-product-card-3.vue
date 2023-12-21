@@ -3,7 +3,7 @@
     <div class="content-itemsCard">
       <nuxt-link
         id="product-card"
-        class="content-img-prodcut relative"
+        class="w-full h-full flex flex-col justify-center items-center rounded-9 border bg-[#f9f9f9] overflow-hidden relative"
         :to="{
           path: `/wa/${dataStore.id}/productos/` + product.slug,
         }"
@@ -17,8 +17,11 @@
           width="265"
           height="265"
           loading="lazy"
-          class="product-image"
-          :class="!soldOut ? '' : 'grayscale'"
+          :class="[
+            'w-full h-full object-cover object-center overflow-hidden',
+            !soldOut ? '' : 'grayscale',
+            product.foto_cloudinary === 'sin_foto.jpeg' ? ' h-full w-full' : '',
+          ]"
           alt="Product Img"
         />
         <div v-if="product.tag_promocion == 1 && product.promocion_valor">
@@ -483,13 +486,6 @@ export default {
 @screen sm {
   .content-itemsCard {
     @apply w-full flex flex-row gap-4 justify-center items-start;
-  }
-  .content-img-prodcut {
-    background-color: #f9f9f9;
-    @apply w-full h-full flex flex-col justify-center items-center rounded-9 border overflow-hidden;
-  }
-  .product-image {
-    @apply w-full h-full object-cover object-center;
   }
   .content-right-data {
     padding: 5px 0;

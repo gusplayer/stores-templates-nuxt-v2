@@ -10,12 +10,16 @@
         {{ $t('home_destacados') }}
       </p>
     </div>
-    <div ref="mySwiper" v-swiper:mySwiper="swiperOption" class="max-w-9/5">
-      <div class="swiper-wrapper pb-10">
+    <div
+      ref="mySwiper"
+      v-swiper:mySwiper="swiperOption"
+      class="max-w-9/5 w-full pb-10"
+    >
+      <div class="swiper-wrapper w-full">
         <div
           v-for="product in listProducts"
           :key="product.id"
-          class="swiper-slide h-full w-full"
+          class="swiper-slide w-full"
           :class="
             settingByTemplate?.estilo_productos === 2 ? 'max-w-[269px]' : ''
           "

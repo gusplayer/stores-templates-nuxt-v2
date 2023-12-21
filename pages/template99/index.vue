@@ -11,11 +11,11 @@
         id="KHeaderX"
         v-bind="componentsProps"
       />
-      <KProductFavoritos
+      <!-- <KProductFavoritos
         v-if="stateBanner"
         v-bind="componentsProps"
         style="margin-bottom: 10px"
-      />
+      /> -->
       <component :is="indexList" id="KListX" v-bind="componentsProps" />
       <KFooterWaLogo id="KfooterX" v-bind="componentsProps" />
       <KFooterWa id="KfooterX" v-bind="componentsProps" />
@@ -46,8 +46,8 @@ export default {
     KCategory04: () =>
       import('@/components/whatsapp/categorys_img/ko-categorys-img.vue'),
     // Product list
-    KProductFavoritos: () =>
-      import('@/components/whatsapp/Ko99-ProductFavoritos.vue'),
+    // KProductFavoritos: () =>
+    //   import('@/components/whatsapp/Ko99-ProductFavoritos.vue'),
     KProductList: () =>
       import('@/components/whatsapp/template1/Ko-ProductList-wa.vue'),
     KProductList2: () =>
