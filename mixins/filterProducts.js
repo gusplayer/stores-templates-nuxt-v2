@@ -490,7 +490,7 @@ export default {
       }
       this.searchProduct = null
       this.sortingFilter = null
-      this.selectedSubcategories = []
+      // this.selectedSubcategories = []
       this.nameCategory = value
       this.nameSubCategory = ''
       this.tagProduct = ''
