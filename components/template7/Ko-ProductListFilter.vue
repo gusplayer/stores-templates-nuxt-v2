@@ -26,9 +26,11 @@
         </p>
       </div>
     </div>
-    <div class="content-shop-items">
+    <div
+      class="w-9/5 lg:w-9/3 flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:items-start"
+    >
       <div
-        class="sm:hidden w-full max-w-[270px] mr-24 sticky top-[128px] md:flex flex-col justify-between items-start"
+        class="w-full max-w-[270px] mr-24 sticky top-[128px] sm:hidden lg:flex flex-col justify-between items-start"
       >
         <div class="w-full flex flex-col justify-start items-center">
           <p class="txt-tittles cursor-pointer" @click="clearFilters">
@@ -360,7 +362,9 @@ export default {
   watch: {
     settingByTemplate7() {
       this.setBg(
-        this.settingByTemplate7[0]?.productListFilter?.img_background ? 1 : 2
+        this.settingByTemplate7[0]?.productListFilter?.img_background
+          ? true
+          : false
       )
     },
     previousPage() {
@@ -381,7 +385,9 @@ export default {
       this.indexShowList = 2
     }
     this.setBg(
-      this.settingByTemplate7[0]?.productListFilter?.img_background ? 1 : 2
+      this.settingByTemplate7[0]?.productListFilter?.img_background
+        ? true
+        : false
     )
   },
   methods: {
@@ -584,9 +590,6 @@ export default {
   .tittle-banner-shop {
     @apply my-6;
   }
-  .content-shop-items {
-    @apply w-9/5 flex flex-col justify-center items-center;
-  }
 }
 
 @screen mlg {
@@ -598,9 +601,6 @@ export default {
   }
   .tittle-banner-shop {
     @apply my-6;
-  }
-  .content-shop-items {
-    @apply w-9/3 flex flex-row justify-start items-start;
   }
 }
 @media (min-width: 1192px) {
