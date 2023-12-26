@@ -43,7 +43,7 @@
         </div>
         <div v-else class="w-full h-[240px]"></div>
         <div
-          class="absolute top-2/5 lg:top-3/0 mlg:top-4/0 left-4/7 flex flex-col items-center"
+          class="w-full h-full absolute flex flex-col justify-center items-center"
         >
           <p
             class="font-bold text-30 mb-10"

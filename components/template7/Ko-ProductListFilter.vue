@@ -54,9 +54,7 @@
         />
       </picture>
       <div v-else class="w-full h-full max-h-[420px]"></div>
-      <div
-        class="absolute top-2/5 lg:top-3/0 mlg:top-4/0 left-4/7 flex justify-center items-center"
-      >
+      <div class="w-full h-full absolute flex justify-center items-center">
         <p class="btn-tittle-shop">
           {{ settingByTemplate7[0].productListFilter.title }}
         </p>
