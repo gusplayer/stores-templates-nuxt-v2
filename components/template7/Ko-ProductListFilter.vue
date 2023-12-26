@@ -19,8 +19,44 @@
       `background-color: ${settingByTemplate7[0].productListFilter['--background_color_1']}`,
     ]"
   >
-    <div id="BgProductlistF" class="content-banner-shop">
-      <div class="tittle-banner-shop">
+    <div
+      class="w-full h-full max-h-[420px] relative box-content hidden md:flex"
+    >
+      <picture v-if="settingByTemplate7[0].productListFilter.img_background">
+        <source
+          media="(max-width: 799px)"
+          :srcset="
+            idCloudinaryBanner(
+              settingByTemplate7[0].productListFilter.url_img,
+              'bannerRes',
+              400
+            )
+          "
+        />
+        <source
+          media="(min-width: 800px)"
+          :srcset="
+            idCloudinaryBanner(
+              settingByTemplate7[0].productListFilter.url_img,
+              'banner'
+            )
+          "
+        />
+        <img
+          v-lazy="
+            idCloudinaryBanner(
+              settingByTemplate7[0].productListFilter.url_img,
+              'banner'
+            )
+          "
+          alt="imgFilterProduct"
+          class="object-cover h-full w-full"
+        />
+      </picture>
+      <div v-else class="w-full h-full max-h-[420px]"></div>
+      <div
+        class="absolute top-2/5 lg:top-3/0 mlg:top-4/0 left-4/7 flex justify-center items-center"
+      >
         <p class="btn-tittle-shop">
           {{ settingByTemplate7[0].productListFilter.title }}
         </p>
@@ -338,7 +374,7 @@
 <script>
 import mobileCheck from '@/mixins/mobileCheck'
 import filters from '@/mixins/filterProducts'
-
+import idCloudinaryBanner from '@/mixins/idCloudinary'
 export default {
   name: 'K07ProductListFilter',
   components: {
@@ -346,7 +382,7 @@ export default {
     KoProductCardFilerList: () =>
       import('./_productcard/ProductCardFilterList.vue'),
   },
-  mixins: [mobileCheck, filters],
+  mixins: [mobileCheck, filters, idCloudinaryBanner],
   props: {
     settingByTemplate7: {
       type: Array,
@@ -360,13 +396,6 @@ export default {
     }
   },
   watch: {
-    settingByTemplate7() {
-      this.setBg(
-        this.settingByTemplate7[0]?.productListFilter?.img_background
-          ? true
-          : false
-      )
-    },
     previousPage() {
       let timerTimeout = null
       // eslint-disable-next-line no-unused-vars
@@ -384,32 +413,11 @@ export default {
     ) {
       this.indexShowList = 2
     }
-    this.setBg(
-      this.settingByTemplate7[0]?.productListFilter?.img_background
-        ? true
-        : false
-    )
   },
   methods: {
     showList(index, state) {
       this.indexShowList = index
       this.showInList = state
-    },
-    setBg(value) {
-      if (this.settingByTemplate7) {
-        if (!this.mobileCheck()) {
-          var imagen = document.getElementById('BgProductlistF')
-          if (value == 1) {
-            if (this.settingByTemplate7[0].productListFilter.url_img) {
-              imagen.style.backgroundImage = `url(${this.settingByTemplate7[0].productListFilter.url_img})`
-            } else {
-              imagen.style.backgroundImage = `url(https://res.cloudinary.com/brahyanr10/image/upload/v1611623008/Komercia/Shop/flowers-shoppage_jwuds4.jpg)`
-            }
-          } else if (value == 2) {
-            imagen.style.backgroundImage = ''
-          }
-        }
-      }
     },
     scrollCategories(value) {
       if (value == 1) {
@@ -430,6 +438,9 @@ export default {
 </script>
 
 <style scoped>
+picture {
+  width: 100%;
+}
 .btn-scroll {
   @apply w-full flex justify-center items-center cursor-pointer;
 }
