@@ -1,5 +1,5 @@
 <template>
-  <div
+  <footer
     :style="[
       settingByTemplate16[0].footer,
       settingByTemplate16[0].settingGeneral,
@@ -238,7 +238,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </footer>
 </template>
 <script>
 import { mapState } from 'vuex'

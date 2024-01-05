@@ -1,5 +1,5 @@
 <template>
-  <div
+  <main
     :style="[
       {
         '--font-style-1': settingByTemplate6?.settingGeneral?.font ?? 'Poppins',
@@ -12,7 +12,7 @@
     <K06-information id="kInformationX" v-bind="componentsProps" />
     <K06-information-logos id="kLogosX" v-bind="componentsProps" />
     <K010-button-car />
-  </div>
+  </main>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
   <client-only>
-    <div
+    <footer
       :class="cantidadProductos > 0 ? 'content-footer' : 'content-footer-none'"
     >
       <footer class="content-items-footer">
@@ -43,7 +43,7 @@
           </p>
         </div>
       </footer>
-    </div>
+    </footer>
   </client-only>
 </template>
 <script>

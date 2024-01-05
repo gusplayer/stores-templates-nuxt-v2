@@ -1,5 +1,5 @@
 <template>
-  <div
+  <header
     v-if="settingByTemplate14"
     id="navbar"
     class="w-full max-h-[120px] md:max-h-10/0 flex justify-center items-center sticky top-0 px-10 wrapper-header"
@@ -162,7 +162,7 @@
         </div>
       </el-drawer>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>

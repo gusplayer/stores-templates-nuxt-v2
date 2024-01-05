@@ -1,5 +1,5 @@
 <template>
-  <div
+  <header
     v-if="settingByTemplate10"
     id="navbar"
     class="header-container"
@@ -143,7 +143,7 @@
         <KoSearch :data-store="dataStore" />
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div
+  <header
     v-if="settingByTemplate7 && settingByTemplate7[0].setting7Header"
     id="navbar"
     class="header-container"
@@ -107,7 +107,7 @@
         <KoMenu :data-store="dataStore" class="responsive" />
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>

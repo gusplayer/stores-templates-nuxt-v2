@@ -1,5 +1,5 @@
 <template>
-  <div class="content-productoList">
+  <main class="content-productoList">
     <div class="content-item-productList">
       <div class="content-items-product">
         <div class="content-categories">
@@ -102,7 +102,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 <script>
 import filters from '@/mixins/filterProducts'

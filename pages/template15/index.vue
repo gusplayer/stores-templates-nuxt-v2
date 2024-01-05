@@ -1,5 +1,5 @@
 <template>
-  <div
+  <main
     v-if="settingByTemplate15"
     :style="[
       {
@@ -59,7 +59,7 @@
       id="kLogosX"
       v-bind="componentsProps"
     />
-  </div>
+  </main>
 </template>
 
 <script>

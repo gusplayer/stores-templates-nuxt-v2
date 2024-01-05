@@ -1,5 +1,5 @@
 <template>
-  <div
+  <main
     v-if="settingByTemplate16"
     :style="[
       {
@@ -54,7 +54,7 @@
       id="K16_informationStore"
       v-bind="componentsProps"
     />
-  </div>
+  </main>
 </template>
 
 <script>

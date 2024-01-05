@@ -1,5 +1,5 @@
 <template>
-  <div
+  <main
     v-if="settingByTemplate10"
     :style="[
       {
@@ -40,7 +40,7 @@
       id="KBlogX"
       v-bind="componentsProps"
     />
-  </div>
+  </main>
 </template>
 <script>
 import { mapState } from 'vuex'

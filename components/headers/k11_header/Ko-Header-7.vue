@@ -1,5 +1,5 @@
 <template>
-  <div
+  <header
     v-if="settingByTemplate11"
     class="content-header"
     :style="[
@@ -148,7 +148,7 @@
       />
       <KoSearch :data-store="dataStore" />
     </div>
-  </div>
+  </header>
 </template>
 <script>
 import { mapState } from 'vuex'

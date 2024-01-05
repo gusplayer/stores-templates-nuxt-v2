@@ -1,5 +1,5 @@
 <template>
-  <div
+  <header
     v-if="settingByTemplate13"
     id="navbar"
     class="header-container"
@@ -141,7 +141,7 @@
         />
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>

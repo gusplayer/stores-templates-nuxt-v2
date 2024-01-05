@@ -1,5 +1,5 @@
 <template>
-  <div
+  <footer
     v-if="settingByTemplate7 && settingByTemplate7[0].setting7Footer"
     :style="[
       settingByTemplate7[0].setting7Footer,
@@ -88,7 +88,7 @@
         <KoTermsConditions :store-policies="storePolicies" />
       </div>
     </div>
-  </div>
+  </footer>
 </template>
 
 <script>
