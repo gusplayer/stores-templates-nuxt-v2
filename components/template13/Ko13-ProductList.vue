@@ -16,12 +16,16 @@
           <span class="tittle">{{ productList.title }}</span>
         </div>
       </div>
-      <div ref="mySwiper" v-swiper:mySwiper="swiperOption" class="w-full">
-        <div class="swiper-wrapper w-full pb-10">
+      <div
+        ref="mySwiper"
+        v-swiper:mySwiper="swiperOptions"
+        class="w-full relative"
+      >
+        <div class="swiper-wrapper w-full">
           <div
             v-for="product in listProducts"
             :key="product.id"
-            class="swiper-slide w-full h-full ml-20"
+            class="swiper-slide w-full h-full"
           >
             <KoProductCard
               :product="product"
@@ -32,7 +36,7 @@
           </div>
         </div>
       </div>
-      <div v-if="productList.visibleBtn" class="btn-products">
+      <div v-if="productList.visibleBtn" class="btn-products pt-10">
         <template v-if="isInternalUrl(productList.url_redirect)">
           <nuxt-link
             :to="productList.url_redirect ? productList.url_redirect : ''"
@@ -82,50 +86,37 @@ export default {
   data() {
     return {
       listProducts: [],
-      swiperOption: {
+      swiperOptions: {
+        slidesPerView: '',
+        spaceBetween: '',
         direction: 'horizontal',
-        // pagination: {
-        //   el: '.swiper-pagination',
-        // },
         setWrapperSize: true,
         paginationClickable: true,
-        slidesPerView: 4,
-        spaceBetween: 22,
         grabCursor: true,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-        },
         breakpoints: {
-          1440: {
-            slidesPerView: 4,
-            spaceBetween: 22,
-          },
           1024: {
-            slidesPerView: 3,
-            spaceBetween: 20,
+            slidesPerView: 4,
+            spaceBetween: 30,
           },
           768: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+            spaceBetween: 20,
+          },
+          640: {
             slidesPerView: 2,
+            slidesPerGroup: 2,
             spaceBetween: 10,
           },
           425: {
-            slidesPerView: 2,
-            spaceBetween: 15,
-          },
-          375: {
             slidesPerView: 2,
             spaceBetween: 10,
           },
           320: {
             slidesPerView: 1,
-            spaceBetween: 5,
+            spaceBetween: 10,
           },
         },
-        // navigation: {
-        //   nextEl: '.next',
-        //   prevEl: '.prev',
-        // },
       },
     }
   },

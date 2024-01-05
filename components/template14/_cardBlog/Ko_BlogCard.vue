@@ -7,10 +7,10 @@
     <div class="relative h-full rounded-5 wrapper-img">
       <img
         v-if="article.imagen_principal_url"
-        v-lazy="idCloudinary(article.imagen_principal_url, 400, 400)"
-        class="rounded-5 w-full h-full effect-img max-h-[250px]"
+        v-lazy="idCloudinary(article.imagen_principal_url, 850, 850)"
+        class="rounded-5 w-full h-full effect-img max-h-[300px]"
         width="406"
-        height="250"
+        height="300"
         alt="right-banner"
       />
       <div v-else class="w-full h-full bg-slate-200"></div>

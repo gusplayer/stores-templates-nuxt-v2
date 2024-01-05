@@ -79,40 +79,30 @@ export default {
     return {
       listProducts: [],
       swiperOptions: {
+        slidesPerView: '',
+        spaceBetween: '',
         direction: 'horizontal',
         setWrapperSize: true,
         paginationClickable: true,
-        slidesPerView: 4,
-        spaceBetween: 26,
         grabCursor: true,
         breakpoints: {
-          1250: {
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 40,
+          },
+          768: {
             slidesPerView: 3,
-            spaceBetween: 35,
+            slidesPerGroup: 3,
+            spaceBetween: 30,
           },
-          1060: {
-            slidesPerView: 3,
-            spaceBetween: 50,
-          },
-          1000: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-          990: {
+          640: {
             slidesPerView: 2,
-            spaceBetween: 20,
+            slidesPerGroup: 2,
+            spaceBetween: 10,
           },
-          790: {
+          425: {
             slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          770: {
-            slidesPerView: 2,
-            spaceBetween: 15,
-          },
-          375: {
-            slidesPerView: 2,
-            spaceBetween: 20,
+            spaceBetween: 10,
           },
           320: {
             slidesPerView: 1,
