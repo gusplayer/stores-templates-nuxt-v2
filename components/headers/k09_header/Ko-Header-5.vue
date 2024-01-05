@@ -2,8 +2,7 @@
   <div
     v-if="settingByTemplate9"
     id="navbar"
-    class="header-container"
-    :class="isNavbarFixed ? 'fixed' : 'static'"
+    class="sticky top-0 z-10 w-full flex flex-col justify-center items-center transition-all ease-in-out duration-0.5 header-container"
     :style="[
       settingByTemplate9[0].setting9Header,
       settingByTemplate9[0].setting9General,
@@ -158,7 +157,6 @@ export default {
     return {
       showSearch: false,
       btnSelect: '',
-      isNavbarFixed: false,
       secciones: [
         {
           name: 'header_inicio',
@@ -205,10 +203,6 @@ export default {
   mounted() {
     this.setMenu()
     this.setHoko()
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
     showIconSearch() {
@@ -252,15 +246,6 @@ export default {
         path: '/',
       })
     },
-    handleScroll() {
-      const navbar = document.getElementById('navbar')
-
-      if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
-        this.isNavbarFixed = true
-      } else {
-        this.isNavbarFixed = false
-      }
-    },
   },
 }
 </script>
@@ -269,8 +254,6 @@ export default {
 .header-container {
   border-bottom: 1px solid var(--background_color_1);
   background: var(--background_color_1);
-  /* position: static; */
-  @apply w-full flex flex-col justify-center items-center top-0 z-10 transition-all ease-in-out duration-0.5;
 }
 .wrapper-header {
   background: var(--background_color_1);
@@ -443,9 +426,6 @@ export default {
 @screen sm {
   .header {
     @apply w-full px-16;
-  }
-  .header-container {
-    @apply w-full;
   }
   .header-content-buttons {
     @apply hidden;

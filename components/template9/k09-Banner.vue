@@ -24,7 +24,7 @@
             <picture v-if="dataStore.id === 889">
               <source
                 media="(max-width: 799px)"
-                srcset="../../assets/img/perfecta/banner1.webp"
+                srcset="../../assets/img/perfecta/banner_movile.webp"
               />
               <source
                 media="(min-width: 800px)"

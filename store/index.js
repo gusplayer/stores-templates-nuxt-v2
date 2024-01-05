@@ -403,7 +403,6 @@ export const actions = {
   },
   async SET_INCREMENT_STORE_VIEW({ state }, idTienda) {
     try {
-      // const { data } =
       await axios({
         method: 'POST',
         url: `${state.urlAWSsettings}/api/v1/templates/websites/views/${idTienda}`,
@@ -411,9 +410,6 @@ export const actions = {
           KOMERCIA_PUBLIC_ROUTES_KEY: state.routerKey,
         },
       })
-      // if (data) {
-      //   console.log(data)
-      // }
     } catch (err) {
       console.log(
         'Data increment store view',
@@ -1109,8 +1105,7 @@ async function getIdData(state, req, commit) {
     )
     id = response.data.data.id || response.data.data.storeId
     template = response.data.data.templateNumber || response.data.data.template
-
-    if (template === 15) {
+    if (template === 15 || template === 6) {
       commit(`SET_SETTINGS_BY_TEMPLATE`, {
         templateNumber: template,
         value: response.data.data.webSiteTemplate,
@@ -1122,7 +1117,7 @@ async function getIdData(state, req, commit) {
     )
     id = response.data.data.id || response.data.data.storeId
     template = response.data.data.templateNumber || response.data.data.template
-    if (template === 15) {
+    if (template === 15 || template === 6) {
       commit(`SET_SETTINGS_BY_TEMPLATE`, {
         templateNumber: template,
         value: response.data.data.webSiteTemplate,

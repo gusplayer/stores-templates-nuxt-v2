@@ -1,52 +1,86 @@
 <template>
-  <div class="bg-white mb-20">
+  <div
+    v-if="information"
+    class="mb-20"
+    :style="{
+      backgroundColor: information?.bg_color || 'white',
+    }"
+  >
     <div
       class="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8"
     >
       <div class="mx-auto max-w-3xl text-center">
-        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Protect your device
+        <h2
+          v-if="information.title"
+          class="text-3xl font-bold tracking-tight sm:text-4xl"
+          :style="{
+            color: information?.color_title || '#111827',
+          }"
+        >
+          {{ information.title }}
         </h2>
-        <p class="mt-4 text-gray-500">
-          As a digital creative, your laptop or tablet is at the center of your
-          work. Keep your device safe with a fabric sleeve that matches in
-          quality and looks.
+        <p
+          v-if="information.description"
+          class="mt-10"
+          :style="{
+            color: information?.color_description || '#6b7280',
+          }"
+        >
+          {{ information.description }}
         </p>
       </div>
 
-      <div class="mt-16 space-y-16">
+      <div v-if="information?.values?.length > 0" class="mt-50 space-y-16">
         <div
-          v-for="(feature, featureIdx) in features"
-          :key="feature.name"
+          v-for="(items, index) in information.values"
+          :key="index"
           class="flex flex-col-reverse lg:grid lg:grid-cols-12 lg:items-center lg:gap-x-8"
         >
           <div
             :class="[
-              featureIdx % 2 === 0
+              index % 2 === 0
                 ? 'lg:col-start-1'
                 : 'lg:col-start-8 xl:col-start-9',
               'mt-6 lg:col-span-5 lg:row-start-1 lg:mt-0 xl:col-span-4',
             ]"
           >
-            <h3 class="text-lg font-medium text-gray-900">
-              {{ feature.name }}
+            <h3
+              v-if="items?.title"
+              class="text-lg font-medium"
+              :style="{
+                color: items?.color_title || '#111827',
+              }"
+            >
+              {{ items.title }}
             </h3>
-            <p class="mt-2 text-sm text-gray-500">{{ feature.description }}</p>
+            <p
+              v-if="items?.description"
+              class="mt-10 text-sm"
+              :style="{
+                color: items?.color_description || '#6b7280',
+              }"
+            >
+              {{ items.description }}
+            </p>
           </div>
           <div
             :class="[
-              featureIdx % 2 === 0
+              index % 2 === 0
                 ? 'lg:col-start-6 xl:col-start-5'
                 : 'lg:col-start-1',
               'flex-auto lg:col-span-7 lg:row-start-1 xl:col-span-8',
             ]"
           >
             <div
-              class="aspect-h-2 aspect-w-5 overflow-hidden rounded-lg bg-gray-100"
+              v-if="items?.img"
+              class="aspect-h-2 aspect-w-5 overflow-hidden rounded-lg"
+              :style="{
+                backgroundColor: items?.bg_img || '#e5e7eb',
+              }"
             >
               <img
-                :src="feature.imageSrc"
-                :alt="feature.imageAlt"
+                :src="items.img"
+                :alt="items.title"
                 class="object-cover object-center"
               />
             </div>
@@ -58,6 +92,22 @@
 </template>
 
 <script>
+import idCloudinary from '@/mixins/idCloudinary'
+export default {
+  mixins: [idCloudinary],
+  props: {
+    information: {
+      type: Object,
+      required: true,
+    },
+    settingsGeneral: {
+      type: Object,
+      required: true,
+    },
+  },
+}
+</script>
+<!-- <script>
 export default {
   data() {
     return {
@@ -83,4 +133,4 @@ export default {
     }
   },
 }
-</script>
+</script> -->

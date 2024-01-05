@@ -13,22 +13,28 @@
       },
     ]"
   >
-    <div class="banner">
-      <div class="content-items-banner">
-        <div class="banner-content-items">
-          <div class="text-tittle">
+    <div
+      class="h-full w-full grid grid-cols-1 md:grid-cols-2 gap-6 justify-center items-center max-w-[1300px]"
+    >
+      <div class="w-full h-full flex justify-center items-center">
+        <div
+          class="w-full h-full max-w-[420px] flex flex-col justify-center items-center"
+        >
+          <div
+            class="flex justify-center items-center text-center leading-tight"
+          >
             <span class="banner-text-tittle">
               {{ banner.tittle }}
             </span>
           </div>
-          <div class="text-subtittle">
+          <div class="flex justify-center items-center text-center break-all">
             <span class="banner-text-subtittle">
               {{ banner.description }}
             </span>
           </div>
         </div>
       </div>
-      <div class="content-items-banner">
+      <div class="w-full h-full flex justify-center items-end">
         <div v-if="banner.url_img_right" class="banner-img">
           <img
             class="img-girl"
@@ -63,47 +69,22 @@ export default {
 
 <style scoped>
 .wrapper-banner {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply w-full h-full flex flex-col justify-center items-center;
 }
 .banner {
-  display: grid;
-  flex-direction: column;
   padding-top: 100px;
-  width: 100%;
-  grid-gap: 1.5rem;
-  gap: 1.5rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  max-width: 1300px;
 }
-.content-items-banner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.banner-content-items {
-  max-width: 420px;
-  @apply w-full flex flex-col justify-center items-center;
-}
+
 .banner-img {
-  max-width: 570px;
-  @apply flex w-full justify-center items-center;
+  @apply flex w-full max-w-[570px] justify-center items-center;
 }
 .img-girl {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-.text-tittle {
-  @apply flex justify-center items-center text-center leading-tight;
+  @apply w-full h-full object-cover object-center;
 }
 .banner-text-tittle {
   font-size: 64px;
   color: var(--color_text);
   font-family: var(--font-style-2) !important;
-}
-.text-subtittle {
-  @apply flex justify-center items-center text-center break-all;
 }
 .banner-text-subtittle {
   font-size: 18px;
@@ -158,7 +139,7 @@ export default {
 }
 @media (max-width: 950px) {
   .wrapper-banner {
-    display: none;
+    @apply hidden;
   }
 }
 </style>
