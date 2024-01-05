@@ -13,7 +13,7 @@
           <div class="content-imge">
             <img
               v-if="article.imagen_principal_url"
-              v-lazy="idCloudinary(article.imagen_principal_url, 400, 400)"
+              v-lazy="idCloudinary(article.imagen_principal_url, 550, 550)"
               class="images"
               alt="right-banner"
             />

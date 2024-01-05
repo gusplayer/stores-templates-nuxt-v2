@@ -1,5 +1,11 @@
 <template>
-  <div class="bg-white mb-20">
+  <div
+    v-if="banner"
+    class="mb-20"
+    :style="{
+      backgroundColor: banner?.bg_color || 'white',
+    }"
+  >
     <div
       class="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8"
     >
@@ -7,55 +13,77 @@
         class="grid grid-cols-1 items-center gap-x-8 gap-y-16 lg:grid-cols-2"
       >
         <div>
-          <div class="border-b border-gray-200 pb-10">
-            <h2 class="font-medium text-gray-500">Machined Kettle</h2>
-            <p
-              class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+          <div
+            class="border-b pb-10"
+            :style="{
+              borderColor: banner?.color_border || '#e5e7eb',
+            }"
+          >
+            <h2
+              v-if="banner.subTitle"
+              class="font-medium"
+              :style="{
+                color: banner?.color_subTitle || '#6b7280',
+              }"
             >
-              Elegant simplicity
+              {{ banner.subTitle }}
+            </h2>
+            <p
+              v-if="banner.title"
+              class="mt-2 text-3xl font-bold tracking-tight sm:text-4xl"
+              :style="{
+                color: banner?.color_title_main || '#111827',
+              }"
+            >
+              {{ banner.title }}
             </p>
           </div>
-
-          <dl class="mt-10 space-y-10">
-            <div v-for="feature in features" :key="feature.name">
-              <dt class="text-sm font-medium text-gray-900">
-                {{ feature.name }}
+          <dl v-if="banner?.values?.length > 0" class="mt-20 space-y-10">
+            <div v-for="(items, index) in banner.values" :key="index">
+              <dt
+                v-if="items?.title"
+                class="text-sm font-medium"
+                :style="{
+                  color: banner?.color_title || '#111827',
+                }"
+              >
+                {{ items.title }}
               </dt>
-              <dd class="mt-3 text-sm text-gray-500">
-                {{ feature.description }}
+              <dd
+                v-if="items?.description"
+                class="mt-3 text-sm"
+                :style="{
+                  color: banner?.color_description || '#6b7280',
+                }"
+              >
+                {{ items.description }}
               </dd>
             </div>
           </dl>
         </div>
 
         <div>
-          <div
-            class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100"
-          >
+          <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
             <img
               src="https://tailwindui.com/img/ecommerce-images/product-feature-09-main-detail.jpg"
-              alt="Black kettle with long pour spot and angled body on marble counter next to coffee mug and pour-over system."
+              alt="banner1"
               class="h-full w-full object-cover object-center"
             />
           </div>
           <div
             class="mt-4 grid grid-cols-2 gap-4 sm:mt-6 sm:gap-6 lg:mt-8 lg:gap-8"
           >
-            <div
-              class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100"
-            >
+            <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
               <img
                 src="https://tailwindui.com/img/ecommerce-images/product-feature-09-detail-01.jpg"
-                alt="Detail of temperature setting button on kettle bass with digital degree readout."
+                alt="banner2"
                 class="h-full w-full object-cover object-center"
               />
             </div>
-            <div
-              class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100"
-            >
+            <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
               <img
                 src="https://tailwindui.com/img/ecommerce-images/product-feature-09-detail-02.jpg"
-                alt="Kettle spout pouring boiling water into coffee grounds in pour-over mug."
+                alt="banner3"
                 class="h-full w-full object-cover object-center"
               />
             </div>
@@ -67,32 +95,18 @@
 </template>
 
 <script>
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
-  data() {
-    return {
-      features: [
-        {
-          name: 'Sleek design',
-          description:
-            'The machined kettle has a smooth black finish and contemporary shape that stands apart from most plastic appliances.',
-        },
-        {
-          name: 'Comfort handle',
-          description:
-            'Shaped for steady pours and insulated to prevent burns.',
-        },
-        {
-          name: 'One-button control',
-          description:
-            'The one button control has a digital readout for setting temperature and turning the kettle on and off.',
-        },
-        {
-          name: 'Long spout',
-          description:
-            "Designed specifically for controlled pour-overs that don't slash or sputter.",
-        },
-      ],
-    }
+  mixins: [idCloudinary],
+  props: {
+    banner: {
+      type: Object,
+      required: true,
+    },
+    settingsGeneral: {
+      type: Object,
+      required: true,
+    },
   },
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div
+  <footer
     ref="background"
     class="wrapper-footer w-full flex justify-center items-center"
     :style="[
@@ -173,7 +173,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </footer>
 </template>
 <script>
 import { mapState } from 'vuex'

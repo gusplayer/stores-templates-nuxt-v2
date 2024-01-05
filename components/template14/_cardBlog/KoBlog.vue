@@ -22,7 +22,7 @@
       </div>
       <div class="w-full flex flex-col justify-center items-center mt-30">
         <div
-          class="w-full h-full mb-40 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mlg:gap-8 justify-center items-center box-border"
+          class="w-full h-full mb-40 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mlg:gap-8 justify-center items-center box-border"
         >
           <div
             v-for="article in listBlogs"

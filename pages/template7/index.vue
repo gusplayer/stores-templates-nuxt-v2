@@ -1,5 +1,5 @@
 <template>
-  <div
+  <main
     v-if="settingByTemplate7"
     :style="[
       {
@@ -61,7 +61,7 @@
       id="KWrapperX"
       v-bind="componentsProps"
     />
-  </div>
+  </main>
 </template>
 
 <script>

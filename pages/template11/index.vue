@@ -1,5 +1,5 @@
 <template>
-  <div v-if="settingByTemplate11">
+  <main v-if="settingByTemplate11">
     <K011-carousel
       v-if="settingByTemplate11?.banner?.visible"
       id="kCarouselX"
@@ -40,7 +40,7 @@
       id="kBlogX"
       v-bind="componentsProps"
     />
-  </div>
+  </main>
 </template>
 <script>
 import { mapState } from 'vuex'

@@ -1,5 +1,5 @@
 <template>
-  <div
+  <main
     class="w-full flex justify-center items-center bg-white-white pt-5 box-border"
   >
     <div class="w-full flex flex-col justify-center px-20 pb-30">
@@ -75,7 +75,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>

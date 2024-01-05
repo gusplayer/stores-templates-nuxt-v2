@@ -1,5 +1,5 @@
 <template>
-  <div
+  <footer
     class="w-full flex justify-center items-center"
     :class="valueWa ? 'max-w-[900px]' : ''"
     style="background-color: rgb(24, 24, 24)"
@@ -45,7 +45,7 @@
       </div>
       <KoLanguage />
     </div>
-  </div>
+  </footer>
 </template>
 
 <script>

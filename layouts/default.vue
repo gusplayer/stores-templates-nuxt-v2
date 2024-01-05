@@ -89,6 +89,8 @@ export default {
       import('@/components/headers/k15_header/Ko-Header-10.vue'),
     KoHeader11: () =>
       import('@/components/headers/k16_header/Ko-Header-11.vue'),
+    KoHeader12: () =>
+      import('@/components/headers/k06_header/Ko06-Header-12.vue'),
     // FOOTER
     KoFooter1: () => import('@/components/footers/k05_footer/Ko-Footer-1.vue'),
     // KoFooter2: () => import('@/components/footers/footer2/Ko-Footer-2.vue'),
@@ -102,6 +104,8 @@ export default {
       import('@/components/footers/k15_footer/Ko-Footer-10.vue'),
     KoFooter11: () =>
       import('@/components/footers/k16_footer/Ko-Footer-11.vue'),
+    KoFooter12: () =>
+      import('@/components/footers/k06_footer/Ko06-Footer-12.vue'),
     // OTROS
     KoFooterCountry: () =>
       import('@/components/footers/k_country/Ko-Footer-Country.vue'),
@@ -116,7 +120,7 @@ export default {
       headerComponentMap: {
         3: 'KoHeader1',
         5: 'KoHeader1',
-        // 6: 'KoHeader1',
+        6: 'KoHeader12',
         7: 'KoHeader4',
         // 8: 'KoHeader1',
         9: 'KoHeader5',
@@ -130,7 +134,7 @@ export default {
       footerComponentMap: {
         3: 'KoFooter1',
         5: 'KoFooter1',
-        // 6: 'KoFooter1',
+        6: 'KoFooter12',
         7: 'KoFooter4',
         // 8: 'KoFooter1',
         9: 'KoFooter5',
@@ -377,6 +381,7 @@ export default {
       'settingBase',
       'geolocalizacion',
       'settingByTemplate',
+      'settingByTemplate6',
       'settingByTemplate7',
       'settingByTemplate9',
       'settingByTemplate10',
@@ -402,6 +407,16 @@ export default {
       return {
         dataStore: this.dataStore,
         settingByTemplate: this.settingByTemplate?.settings ?? this.settingBase,
+        settingByTemplate6: this.settingByTemplate6
+          ? [
+              {
+                setting6Header: this.settingByTemplate6?.header ?? null,
+                setting6Footer: this.settingByTemplate6?.footer ?? null,
+                setting6General:
+                  this.settingByTemplate6?.settingsGeneral ?? null,
+              },
+            ]
+          : null,
         settingByTemplate7: this.settingByTemplate7
           ? [
               {

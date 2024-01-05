@@ -1,5 +1,5 @@
 <template>
-  <div
+  <footer
     v-if="settingByTemplate9 && settingByTemplate9[0].setting9Footer"
     ref="background"
     class="footer-container"
@@ -77,7 +77,7 @@
         <KoTermsConditions :store-policies="storePolicies" />
       </div>
     </div>
-  </div>
+  </footer>
 </template>
 
 <script>

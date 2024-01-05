@@ -1,5 +1,5 @@
 <template>
-  <div
+  <main
     :style="[
       {
         '--font-style-1': settingByTemplate6?.settingGeneral?.font ?? 'Poppins',
@@ -7,11 +7,12 @@
     ]"
   >
     <K06-banner id="kBannerX" v-bind="componentsProps" />
-    <K06-Product-features id="kBannerX" v-bind="componentsProps" />
-    <K06-product-overviews id="kBannerX" v-bind="componentsProps" />
-    <K06-information id="kBannerX" v-bind="componentsProps" />
-    <K06-related-products id="kBannerX" v-bind="componentsProps" />
-  </div>
+    <K06-Product-features id="kFeacturesX" v-bind="componentsProps" />
+    <K06-product-overviews id="kOverviewsX" v-bind="componentsProps" />
+    <K06-information id="kInformationX" v-bind="componentsProps" />
+    <K06-information-logos id="kLogosX" v-bind="componentsProps" />
+    <K010-button-car />
+  </main>
 </template>
 
 <script>
@@ -25,8 +26,9 @@ export default {
       import('@/components/template6/k06-product-features.vue'),
     K06ProductOverviews: () =>
       import('@/components/template6/k06-product-overviews.vue'),
-    K06RelatedProducts: () =>
-      import('@/components/template6/k06-related-products.vue'),
+    K06InformationLogos: () =>
+      import('@/components/template6/k06-information-logos.vue'),
+    K010ButtonCar: () => import('@/components/template10/Ko10-buttonCar.vue'),
   },
   layout: 'default',
   computed: {
@@ -34,8 +36,12 @@ export default {
     componentsProps() {
       return {
         dataStore: this.dataStore,
-        // settingGeneral: this.settingByTemplate6?.settingGeneral ?? null,
-        // settingKCarousel: this.settingByTemplate6?.banner ?? null,
+        settingsGeneral: this.settingByTemplate6?.settingsGeneral ?? null,
+        banner: this.settingByTemplate6?.banner ?? null,
+        information: this.settingByTemplate6?.information ?? null,
+        informationLogos: this.settingByTemplate6?.informationLogos ?? null,
+        productFeatures: this.settingByTemplate6?.productFeatures ?? null,
+        productOverviews: this.settingByTemplate6?.productOverviews ?? null,
       }
     },
   },
@@ -64,7 +70,7 @@ export default {
           e.data.template == 6
         ) {
           switch (e.data.componentToEdit) {
-            case 'settingGeneral':
+            case 'settingsGeneral':
               this.moverseA('kBannerX')
               break
             case 'header':
@@ -76,29 +82,17 @@ export default {
             case 'banner':
               this.moverseA('kBannerX')
               break
-
-            case 'detailsProduct':
-              // eslint-disable-next-line no-case-declarations
-              const { success, data } = await this.currentChange()
-              if ((success, data.length > 0)) {
-                this.$router.push({
-                  path: '/productos/' + data[0].slug,
-                })
-              } else {
-                this.$router.push({
-                  path: '/productos',
-                })
-              }
+            case 'information':
+              this.moverseA('kInformationX')
               break
-            case 'productListFilter':
-              this.$router.push({
-                path: '/productos',
-              })
+            case 'productFeatures':
+              this.moverseA('kFeacturesX')
               break
-            case 'contact':
-              this.$router.push({
-                path: '/contacto',
-              })
+            case 'productOverviews':
+              this.moverseA('kOverviewsX')
+              break
+            case 'informationLogos':
+              this.moverseA('kLogosX')
               break
           }
         } else {
@@ -112,19 +106,6 @@ export default {
     },
     moverseA(idDelElemento) {
       location.hash = '#' + idDelElemento
-    },
-    async currentChange() {
-      const { success, data } = await this.$store.dispatch(
-        'products/GET_ALL_PRODUCTS',
-        {
-          id_tienda: this.dataStore.id,
-          limit: 1,
-          page: 1,
-        }
-      )
-      if (success) {
-        return { success: true, data: data.publicProductList }
-      }
     },
   },
 }

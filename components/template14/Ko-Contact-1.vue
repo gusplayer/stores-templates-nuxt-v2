@@ -66,9 +66,10 @@
         </div>
       </div>
       <div class="w-full grid grid-cols-1 md:grid-cols-2 justify-start">
-        <div v-if="geolocalizacion.length">
+        <div class="w-full">
           <!-- <p class="contact-text-sub">{{ $t('contact_vistaTienda') }}</p> -->
           <el-carousel
+            v-if="geolocalizacion.length"
             :interval="5000"
             arrow="always"
             height="600px"

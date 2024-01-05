@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-footer">
+  <footer class="wrapper-footer">
     <div class="contenedor">
       <div class="content-items-iconos">
         <div
@@ -91,7 +91,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </footer>
 </template>
 
 <script>

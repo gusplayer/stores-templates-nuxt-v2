@@ -1,5 +1,5 @@
 <template>
-  <div
+  <main
     v-if="settingByTemplate9"
     :style="[
       {
@@ -50,7 +50,7 @@
       id="KNewsX"
       v-bind="componentsProps"
     />
-  </div>
+  </main>
 </template>
 
 <script>

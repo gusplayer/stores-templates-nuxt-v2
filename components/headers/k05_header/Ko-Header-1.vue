@@ -1,5 +1,5 @@
 <template>
-  <div
+  <header
     class="header-container"
     :style="[
       settingByTemplate,
@@ -161,7 +161,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>

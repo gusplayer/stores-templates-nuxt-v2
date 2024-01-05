@@ -1,5 +1,5 @@
 <template>
-  <div
+  <footer
     v-if="settingByTemplate13"
     ref="background"
     class="wrapper-footer"
@@ -97,7 +97,7 @@
     <div v-if="showModal && storePolicies" class="modal">
       <KoTermsConditions :store-policies="storePolicies" />
     </div>
-  </div>
+  </footer>
 </template>
 
 <script>

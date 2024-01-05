@@ -1,5 +1,5 @@
 <template>
-  <div
+  <main
     v-if="settingByTemplate13"
     :style="[
       {
@@ -34,7 +34,7 @@
       id="kNewsLetterX"
       v-bind="componentsProps"
     />
-  </div>
+  </main>
 </template>
 
 <script>

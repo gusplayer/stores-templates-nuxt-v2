@@ -1,9 +1,8 @@
 <template>
-  <div
+  <header
     v-if="settingByTemplate10"
     id="navbar"
     class="header-container"
-    :class="isNavbarFixed ? 'fixed' : 'static'"
     :style="[
       settingByTemplate10[0].setting10Header,
       settingByTemplate10[0].setting10General,
@@ -144,7 +143,7 @@
         <KoSearch :data-store="dataStore" />
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -171,7 +170,6 @@ export default {
     return {
       btnSelect: '',
       showSearch: false,
-      isNavbarFixed: false,
     }
   },
   computed: {
@@ -187,11 +185,6 @@ export default {
   },
   mounted() {
     this.setMenu()
-
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
     showIconSearch() {
@@ -237,15 +230,6 @@ export default {
     scrollRight() {
       document.getElementById('swiper-slide-categories').scrollLeft += 300
     },
-    handleScroll() {
-      const navbar = document.getElementById('navbar')
-
-      if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
-        this.isNavbarFixed = true
-      } else {
-        this.isNavbarFixed = false
-      }
-    },
   },
 }
 </script>
@@ -279,7 +263,7 @@ export default {
 .header-container {
   border-bottom: 1px solid var(--background_color_1);
   /* position: static; */
-  @apply w-full flex flex-col justify-center items-center top-0 z-10 transition-all ease-in-out duration-0.5;
+  @apply sticky top-0 z-10 w-full flex flex-col justify-center items-center transition-all ease-in-out duration-0.5;
 }
 .wrapper-header {
   padding-top: var(--padding_logo);

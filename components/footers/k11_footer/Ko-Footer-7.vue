@@ -1,5 +1,5 @@
 <template>
-  <div
+  <footer
     v-if="settingByTemplate11"
     ref="background"
     class="wrapper-footer"
@@ -157,7 +157,7 @@
         <KoTermsConditions :store-policies="storePolicies" />
       </div>
     </div>
-  </div>
+  </footer>
 </template>
 <script>
 import { mapState } from 'vuex'

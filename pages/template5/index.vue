@@ -1,5 +1,5 @@
 <template>
-  <div
+  <main
     :style="[
       settingByTemplate?.settings ?? settingBase,
       {
@@ -18,7 +18,7 @@
     <K05-productListHome id="KProductX" />
     <K05-bannerFooter id="KFooterX" />
     <K05-newsletter :data-store="dataStore" />
-  </div>
+  </main>
 </template>
 
 <script>

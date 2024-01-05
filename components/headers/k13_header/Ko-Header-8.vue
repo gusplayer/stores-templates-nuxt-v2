@@ -1,9 +1,8 @@
 <template>
-  <div
+  <header
     v-if="settingByTemplate13"
     id="navbar"
     class="header-container"
-    :class="isNavbarFixed ? 'fixed' : 'static'"
     :style="[
       settingByTemplate13[0].setting13Header,
       settingByTemplate13[0].setting13General,
@@ -142,7 +141,7 @@
         />
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -169,7 +168,6 @@ export default {
       btnSelect: '',
       search: '',
       showSearch: true,
-      isNavbarFixed: false,
     }
   },
   computed: {
@@ -188,10 +186,6 @@ export default {
   mounted() {
     this.setMenu()
     this.stateViewSearch()
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
     btnActivate(value) {
@@ -236,15 +230,6 @@ export default {
     scrollRight() {
       document.getElementById('swiper-slide-categories').scrollLeft += 300
     },
-    handleScroll() {
-      const navbar = document.getElementById('navbar')
-
-      if (window.pageYOffset > 0 && screen.width > 725 && navbar) {
-        this.isNavbarFixed = true
-      } else {
-        this.isNavbarFixed = false
-      }
-    },
   },
 }
 </script>
@@ -276,7 +261,7 @@ export default {
   max-width: 850px;
 }
 .header-container {
-  @apply w-full flex flex-col justify-center items-center top-0 z-10 transition-all ease-in-out duration-0.5;
+  @apply sticky top-0 z-10 w-full flex flex-col justify-center items-center transition-all ease-in-out duration-0.5;
 }
 .wrapper-header {
   padding-top: var(--padding_logo);
