@@ -29,21 +29,22 @@
         </div>
       </div>
       <div class="product-content">
-        <div class="left">
-          <div class="main-images">
-            <productSlide
-              class="w-auto h-auto object-cover overflow-hidden"
-              :photos="data.productosFotos"
-              :photo="data.fotoCloudinary"
-              :idYoutube="idYoutube"
-            />
-          </div>
+        <div class="w-full flex justify-center items-center">
+          <productSlide
+            class="w-full h-full"
+            :photos="data.productosFotos"
+            :photo="data.fotoCloudinary"
+            :idYoutube="idYoutube"
+          />
         </div>
         <div class="right">
           <div class="content-items-right">
             <div class="content-name">
               <p class="text-name">{{ data.nombre }}</p>
             </div>
+            <!-- <p v-if="data.productosInfo.marca" class="txt-subtext">
+              {{ data.productosInfo.marca }}
+            </p> -->
             <div class="content-networks">
               <a
                 v-if="dataStore.redes.facebook != null"
@@ -242,7 +243,7 @@
                 <div class="txt-tittle-quantity">
                   {{ $t('productdetail_informacion') }}
                 </div>
-                <p class="txt-quantity">
+                <p class="txt-subtext">
                   {{ data.productosInfo.descripcionCorta }}
                 </p>
               </div>
@@ -253,7 +254,7 @@
                 <div class="txt-tittle-quantity">
                   {{ $t('productdetail_categoria') }}
                 </div>
-                <p class="txt-quantity">
+                <p class="txt-subtext">
                   {{ data.categoriaProducto2.nombreCategoriaProducto }}
                 </p>
               </div>
@@ -264,7 +265,7 @@
                 <div class="txt-tittle-quantity">
                   {{ $t('home_subcategory') }}
                 </div>
-                <p class="txt-quantity">
+                <p class="txt-subtext">
                   {{ data.subcategoria2.nombreSubcategoria }}
                 </p>
               </div>
@@ -275,9 +276,76 @@
                 <div class="txt-tittle-quantity">
                   {{ $t('productdetail_garantia') }}
                 </div>
-                <p class="txt-quantity">
+                <p class="txt-subtext">
                   {{ data.productosInfo.garantia }}
                 </p>
+              </div>
+              <p
+                v-if="
+                  (data.productosInfo.largo != 0 &&
+                    data.productosInfo.largo != null) ||
+                  (data.productosInfo.largo != 0 &&
+                    data.productosInfo.largo != null) ||
+                  (data.productosInfo.alto != 0 &&
+                    data.productosInfo.alto != null) ||
+                  (data.productosInfo.peso > 0 &&
+                    data.productosInfo.peso != null)
+                "
+                class="txt-tittle-quantity"
+              >
+                <strong>{{ $t('productdetail_dimensiones') }}</strong>
+              </p>
+              <div
+                class="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-0"
+              >
+                <div
+                  v-if="
+                    data.productosInfo.largo != 0 &&
+                    data.productosInfo.largo != null
+                  "
+                  class="flex flex-col items-start"
+                >
+                  <p class="txt-tittle-quantity">
+                    {{ $t('productdetail_largo') }}:
+                  </p>
+                  <p class="txt-subtext">{{ data.productosInfo.largo }} cm</p>
+                </div>
+                <div
+                  v-if="
+                    data.productosInfo.ancho != 0 &&
+                    data.productosInfo.ancho != null
+                  "
+                  class="flex flex-col items-start"
+                >
+                  <p class="txt-tittle-quantity">
+                    {{ $t('productdetail_ancho') }}:
+                  </p>
+                  <p class="txt-subtext">{{ data.productosInfo.ancho }} cm</p>
+                </div>
+                <div
+                  v-if="
+                    data.productosInfo.alto != 0 &&
+                    data.productosInfo.alto != null
+                  "
+                  class="flex flex-col items-start"
+                >
+                  <p class="txt-tittle-quantity">
+                    {{ $t('productdetail_alto') }}:
+                  </p>
+                  <p class="txt-subtext">{{ data.productosInfo.alto }} cm</p>
+                </div>
+                <div
+                  v-if="
+                    data.productosInfo.peso > 0 &&
+                    data.productosInfo.peso != null
+                  "
+                  class="flex flex-col items-start"
+                >
+                  <p class="txt-tittle-quantity">
+                    {{ $t('productdetail_Peso') }}:
+                  </p>
+                  <p class="txt-subtext">{{ data.productosInfo.peso }} Kg</p>
+                </div>
               </div>
               <div
                 v-if="userDropshipping.userName"
@@ -286,7 +354,7 @@
                 <p class="text-variant" style="margin-right: 10px">
                   {{ $t('productdetail_dropshipping') }}
                 </p>
-                <p class="txt-quantity">
+                <p class="txt-subtext">
                   {{ userDropshipping.userName }}
                 </p>
               </div>
@@ -301,7 +369,7 @@
                     Cantidad:
                   </div>
                   <div class="box-quantity">
-                    <p class="txt-quantity">{{ quantityValue }}</p>
+                    <p class="txt-subtext">{{ quantityValue }}</p>
                   </div>
                   <div class="box-quantity-btns">
                     <div class="btn-quantity btn1" @click="addQuantity()">
@@ -931,16 +999,8 @@ export default {
 .product-content {
   @apply w-full flex;
 }
-.left {
-  @apply w-full flex flex-col justify-center items-center;
-}
 .content-variant {
   @apply w-auto flex flex-col justify-center items-start mb-8;
-}
-.aditional-images,
-.main-images,
-.youtuve-video {
-  @apply w-full flex justify-center items-center;
 }
 .content-price,
 .right {
@@ -966,6 +1026,12 @@ export default {
   color: var(--color_subtext);
   min-width: 70px;
   @apply w-auto font-bold mr-10;
+}
+.txt-subtext {
+  font-size: 16px;
+  color: var(--color_subtext);
+
+  @apply w-auto;
 }
 .box-quantity {
   color: var(--color_subtext);
@@ -1243,7 +1309,7 @@ export default {
     @apply w-9/5;
   }
   .product-content {
-    @apply w-9/5 grid grid-cols-2 gap-4 justify-start items-start mt-30;
+    @apply w-9/5 grid grid-cols-2 gap-x-4 justify-start items-start mt-30;
   }
   /* .right {
     @apply mt-40;
@@ -1271,7 +1337,7 @@ export default {
     width: 100%;
   }
   .product-content {
-    @apply gap-16;
+    @apply gap-x-16;
   }
   .content-direction-btns {
     @apply flex flex-col;

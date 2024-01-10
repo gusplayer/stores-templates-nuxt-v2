@@ -140,6 +140,7 @@ export default {
   align-items: center;
   background: var(--background_color_2);
   box-sizing: border-box;
+  padding-top: 20px;
 }
 .container-productlist {
   width: 100%;

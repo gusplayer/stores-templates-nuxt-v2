@@ -185,6 +185,70 @@
                 {{ data.productosInfo.descripcionCorta }}
               </p>
             </div>
+            <p
+              v-if="
+                (data.productosInfo.largo != 0 &&
+                  data.productosInfo.largo != null) ||
+                (data.productosInfo.largo != 0 &&
+                  data.productosInfo.largo != null) ||
+                (data.productosInfo.alto != 0 &&
+                  data.productosInfo.alto != null) ||
+                (data.productosInfo.peso > 0 && data.productosInfo.peso != null)
+              "
+              class="text-marca font-bold"
+            >
+              <strong>{{ $t('productdetail_dimensiones') }}</strong>
+            </p>
+            <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-0">
+              <div
+                v-if="
+                  data.productosInfo.largo != 0 &&
+                  data.productosInfo.largo != null
+                "
+                class="w-full flex flex-row items-center my-8"
+              >
+                <p class="text-marca font-bold mr-10">
+                  {{ $t('productdetail_largo') }}:
+                </p>
+                <p class="text-marca">{{ data.productosInfo.largo }} cm</p>
+              </div>
+              <div
+                v-if="
+                  data.productosInfo.ancho != 0 &&
+                  data.productosInfo.ancho != null
+                "
+                class="w-full flex flex-row items-center my-8"
+              >
+                <p class="text-marca font-bold mr-10">
+                  {{ $t('productdetail_ancho') }}:
+                </p>
+                <p class="text-marca">{{ data.productosInfo.ancho }} cm</p>
+              </div>
+              <div
+                v-if="
+                  data.productosInfo.alto != 0 &&
+                  data.productosInfo.alto != null
+                "
+                class="w-full flex flex-row items-center my-8"
+              >
+                <p class="text-marca font-bold mr-10">
+                  {{ $t('productdetail_alto') }}:
+                </p>
+                <p class="text-marca">{{ data.productosInfo.alto }} cm</p>
+              </div>
+              <div
+                v-if="
+                  data.productosInfo.peso > 0 && data.productosInfo.peso != null
+                "
+                class="w-full flex flex-row items-center my-8"
+              >
+                <p class="text-marca font-bold mr-10">
+                  {{ $t('productdetail_Peso') }}:
+                </p>
+                <p class="text-marca">{{ data.productosInfo.peso }} Kg</p>
+              </div>
+            </div>
+
             <div
               v-if="userDropshipping.userName"
               class="w-full flex flex-row items-center my-8"

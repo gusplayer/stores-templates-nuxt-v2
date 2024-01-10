@@ -185,6 +185,21 @@
                 {{ $t('footer_tarifaPrecio') }}
               </p>
             </div>
+            <div
+              v-if="data.productosInfo.descripcionCorta"
+              class="content-stock"
+            >
+              <p class="stock-text-1">{{ $t('productdetail_informacion') }}:</p>
+              <p class="stock-text-2">
+                {{ data.productosInfo.descripcionCorta }}
+              </p>
+            </div>
+            <div v-if="data.productosInfo.garantia" class="content-stock">
+              <p class="stock-text-1">{{ $t('productdetail_garantia') }}:</p>
+              <p class="stock-text-2">
+                {{ data.productosInfo.garantia }}
+              </p>
+            </div>
             <div v-if="data.categoriaProducto > 0" class="content-stock">
               <p class="stock-text-1">{{ $t('productdetail_categoria') }}:</p>
               <p class="stock-text-2">
@@ -197,21 +212,62 @@
                 {{ data.subcategoria2.nombreSubcategoria }}
               </p>
             </div>
-            <div v-if="data.productosInfo.garantia" class="content-stock">
-              <p class="stock-text-1">{{ $t('productdetail_garantia') }}:</p>
-              <p class="stock-text-2">
-                {{ data.productosInfo.garantia }}
-              </p>
-            </div>
             <div
-              v-if="data.productosInfo.descripcionCorta"
+              v-if="
+                (data.productosInfo.largo != 0 &&
+                  data.productosInfo.largo != null) ||
+                (data.productosInfo.largo != 0 &&
+                  data.productosInfo.largo != null) ||
+                (data.productosInfo.alto != 0 &&
+                  data.productosInfo.alto != null) ||
+                (data.productosInfo.peso > 0 && data.productosInfo.peso != null)
+              "
               class="content-stock"
             >
-              <p class="stock-text-1">{{ $t('productdetail_informacion') }}:</p>
-              <p class="stock-text-2">
-                {{ data.productosInfo.descripcionCorta }}
-              </p>
+              <p class="stock-text-1">{{ $t('productdetail_dimensiones') }}</p>
             </div>
+            <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-0">
+              <div
+                v-if="
+                  data.productosInfo.largo != 0 &&
+                  data.productosInfo.largo != null
+                "
+                class="content-stock"
+              >
+                <p class="stock-text-1">{{ $t('productdetail_largo') }}:</p>
+                <p class="stock-text-2">{{ data.productosInfo.largo }} cm</p>
+              </div>
+              <div
+                v-if="
+                  data.productosInfo.ancho != 0 &&
+                  data.productosInfo.ancho != null
+                "
+                class="content-stock"
+              >
+                <p class="stock-text-1">{{ $t('productdetail_ancho') }}:</p>
+                <p class="stock-text-2">{{ data.productosInfo.ancho }} cm</p>
+              </div>
+              <div
+                v-if="
+                  data.productosInfo.alto != 0 &&
+                  data.productosInfo.alto != null
+                "
+                class="content-stock"
+              >
+                <p class="stock-text-1">{{ $t('productdetail_alto') }}:</p>
+                <p class="stock-text-2">{{ data.productosInfo.alto }} cm</p>
+              </div>
+              <div
+                v-if="
+                  data.productosInfo.peso > 0 && data.productosInfo.peso != null
+                "
+                class="content-stock"
+              >
+                <p class="stock-text-1">{{ $t('productdetail_Peso') }}:</p>
+                <p class="stock-text-2">{{ data.productosInfo.peso }} Kg</p>
+              </div>
+            </div>
+
             <!-- <div class="empty"></div> -->
             <div
               v-if="data.conVariante === 1 && variantes"

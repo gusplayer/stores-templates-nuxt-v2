@@ -149,7 +149,7 @@
           </div>
           <div class="w-full h-full flex flex-col justify-center items-center">
             <div
-              class="w-full grid grid-cols-2 md:grid-cols-3 gap-4 justify-center items-center text-center"
+              class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-center items-center text-center"
             >
               <div
                 v-for="product in listProducts"

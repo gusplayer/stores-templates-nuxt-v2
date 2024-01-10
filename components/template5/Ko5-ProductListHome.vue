@@ -125,6 +125,7 @@ export default {
   width: 100%;
   background: var(--background_color_2);
   box-sizing: border-box;
+  padding-top: 30px;
 }
 .container-productlist {
   display: flex;

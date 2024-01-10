@@ -432,7 +432,110 @@
                   {{ data.productosInfo.garantia }}
                 </p>
               </div>
-
+              <div
+                v-if="
+                  (data.productosInfo.largo != 0 &&
+                    data.productosInfo.largo != null) ||
+                  (data.productosInfo.largo != 0 &&
+                    data.productosInfo.largo != null) ||
+                  (data.productosInfo.alto != 0 &&
+                    data.productosInfo.alto != null) ||
+                  (data.productosInfo.peso > 0 &&
+                    data.productosInfo.peso != null)
+                "
+                class="flex justify-start items-center mb-10"
+              >
+                <p
+                  class="text-16 font-bold mr-10"
+                  :style="`color:${settingByTemplate15[0].detailsProducts.color_text};`"
+                >
+                  {{ $t('productdetail_dimensiones') }}
+                </p>
+              </div>
+              <div
+                class="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-0"
+              >
+                <div
+                  v-if="
+                    data.productosInfo.largo != 0 &&
+                    data.productosInfo.largo != null
+                  "
+                  class="flex flex-row justify-start items-center mb-10"
+                >
+                  <p
+                    class="text-16 font-bold mr-10"
+                    :style="`color:${settingByTemplate15[0].detailsProducts.color_text};`"
+                  >
+                    {{ $t('productdetail_largo') }}:
+                  </p>
+                  <p
+                    class="text-14"
+                    :style="`color:${settingByTemplate15[0].detailsProducts.color_subtext};`"
+                  >
+                    {{ data.productosInfo.largo }} cm
+                  </p>
+                </div>
+                <div
+                  v-if="
+                    data.productosInfo.ancho != 0 &&
+                    data.productosInfo.ancho != null
+                  "
+                  class="flex flex-row justify-start items-center mb-10"
+                >
+                  <p
+                    class="text-16 font-bold mr-10"
+                    :style="`color:${settingByTemplate15[0].detailsProducts.color_text};`"
+                  >
+                    {{ $t('productdetail_ancho') }}:
+                  </p>
+                  <p
+                    class="text-14"
+                    :style="`color:${settingByTemplate15[0].detailsProducts.color_subtext};`"
+                  >
+                    {{ data.productosInfo.ancho }} cm
+                  </p>
+                </div>
+                <div
+                  v-if="
+                    data.productosInfo.alto != 0 &&
+                    data.productosInfo.alto != null
+                  "
+                  class="flex flex-row justify-start items-center mb-10"
+                >
+                  <p
+                    class="text-16 font-bold mr-10"
+                    :style="`color:${settingByTemplate15[0].detailsProducts.color_text};`"
+                  >
+                    {{ $t('productdetail_alto') }}:
+                  </p>
+                  <p
+                    class="text-14"
+                    :style="`color:${settingByTemplate15[0].detailsProducts.color_subtext};`"
+                  >
+                    {{ data.productosInfo.alto }} cm
+                  </p>
+                </div>
+                <div
+                  v-if="
+                    data.productosInfo.peso != 0 &&
+                    data.productosInfo.peso != null
+                  "
+                  class="flex flex-row justify-start items-center mb-10"
+                >
+                  <p
+                    class="text-16 font-bold mr-10"
+                    :style="`color:${settingByTemplate15[0].detailsProducts.color_text};`"
+                  >
+                    {{ $t('productdetail_Peso') }}:
+                  </p>
+                  <p
+                    class="text-14"
+                    :style="`color:${settingByTemplate15[0].detailsProducts.color_subtext};`"
+                  >
+                    {{ data.productosInfo.peso }} cm
+                  </p>
+                </div>
+              </div>
               <div
                 v-if="data.envioGratis == 1 || envio.titulo == 'Envío gratis'"
                 class="flex flex-row justify-start items-center mb-10"

@@ -65,7 +65,7 @@ export default {
       ],
       filters: {
         page: 1,
-        limit: 12,
+        limit: 21,
         name: null,
         category: null,
         subcategory: null,
@@ -207,7 +207,7 @@ export default {
         } else {
           this.listProducts = []
           this.previousPage = 1
-          this.filters.limit = 12
+          this.filters.limit = 21
           this.totalProducts = 0
           this.minPrice = 0
           this.maxPrice = 0
@@ -442,7 +442,7 @@ export default {
     clearFilters() {
       this.filters = {
         page: 1,
-        limit: 12,
+        limit: 21,
         name: null,
         category: null,
         subcategory: null,
@@ -474,7 +474,7 @@ export default {
     clearFiltersCategory(value) {
       this.filters = {
         page: 1,
-        limit: 12,
+        limit: 21,
         name: null,
         category: value,
         subcategory: null,

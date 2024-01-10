@@ -254,6 +254,9 @@
               </div>
             </div>
             <div class="item-info-product">
+              <div v-if="salesData.unidades > 0" class="content_buy_action">
+                <p class="text-unidades">{{ $t('productdetail_stock') }}</p>
+              </div>
               <div
                 v-if="data.productosInfo.garantia"
                 class="content_buy_action"
@@ -265,9 +268,6 @@
                   {{ data.productosInfo.garantia }}
                 </span>
               </div>
-              <div v-if="salesData.unidades > 0" class="content_buy_action">
-                <p class="text-unidades">{{ $t('productdetail_stock') }}</p>
-              </div>
               <div
                 v-if="userDropshipping.userName"
                 class="w-full flex flex-row items-center my-10"
@@ -275,7 +275,7 @@
                 <p class="text-variant" style="margin-right: 10px">
                   {{ $t('productdetail_dropshipping') }}
                 </p>
-                <p class="text-marca">
+                <p class="text-garantia">
                   {{ userDropshipping.userName }}
                 </p>
               </div>
@@ -286,7 +286,7 @@
                 <p class="text-unidades">
                   {{ $t('productdetail_categoria') }}:
                 </p>
-                <p class="text-variant">
+                <p class="text-garantia">
                   {{ data.categoriaProducto2.nombreCategoriaProducto }}
                 </p>
               </div>
@@ -295,9 +295,68 @@
                 class="flex flex-row items-center mt-15"
               >
                 <p class="text-unidades">{{ $t('home_subcategory') }}:</p>
-                <p class="text-variant">
+                <p class="text-garantia">
                   {{ data.subcategoria2.nombreSubcategoria }}
                 </p>
+              </div>
+              <p
+                v-if="
+                  (data.productosInfo.largo != 0 &&
+                    data.productosInfo.largo != null) ||
+                  (data.productosInfo.largo != 0 &&
+                    data.productosInfo.largo != null) ||
+                  (data.productosInfo.alto != 0 &&
+                    data.productosInfo.alto != null) ||
+                  (data.productosInfo.peso > 0 &&
+                    data.productosInfo.peso != null)
+                "
+                class="text-unidades mt-10"
+              >
+                <strong>{{ $t('productdetail_dimensiones') }}</strong>
+              </p>
+              <div
+                class="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-0"
+              >
+                <div
+                  v-if="
+                    data.productosInfo.largo != 0 &&
+                    data.productosInfo.largo != null
+                  "
+                  class="flex flex-row items-center mt-15"
+                >
+                  <p class="text-unidades">{{ $t('productdetail_largo') }}:</p>
+                  <p class="text-garantia">{{ data.productosInfo.largo }} cm</p>
+                </div>
+                <div
+                  v-if="
+                    data.productosInfo.ancho != 0 &&
+                    data.productosInfo.ancho != null
+                  "
+                  class="flex flex-row items-center mt-15"
+                >
+                  <p class="text-unidades">{{ $t('productdetail_ancho') }}:</p>
+                  <p class="text-garantia">{{ data.productosInfo.ancho }} cm</p>
+                </div>
+                <div
+                  v-if="
+                    data.productosInfo.alto != 0 &&
+                    data.productosInfo.alto != null
+                  "
+                  class="flex flex-row items-center mt-15"
+                >
+                  <p class="text-unidades">{{ $t('productdetail_alto') }}:</p>
+                  <p class="text-garantia">{{ data.productosInfo.alto }} cm</p>
+                </div>
+                <div
+                  v-if="
+                    data.productosInfo.peso > 0 &&
+                    data.productosInfo.peso != null
+                  "
+                  class="flex flex-row items-center mt-15"
+                >
+                  <p class="text-unidades">{{ $t('productdetail_Peso') }}:</p>
+                  <p class="text-garantia">{{ data.productosInfo.peso }} Kg</p>
+                </div>
               </div>
               <div class="flex flex-row items-center mt-15">
                 <p class="text-unidades">
@@ -972,15 +1031,16 @@ i.close {
   font-weight: bold;
   /* color: var(--color_subtext); */
   color: rgba(21, 20, 57, 0.541);
-  margin-top: 5px;
+  margin-right: 10px;
+  /* margin-top: 5px; */
 }
 .text-garantia {
   font-size: 14px;
   font-weight: bold;
   /* color: var(--color_text); */
   color: #000000;
-  margin-top: 5px;
-  margin-left: 5px;
+  /* margin-top: 5px; */
+  /* margin-left: 5px; */
 }
 .content_buy_action {
   display: flex;
