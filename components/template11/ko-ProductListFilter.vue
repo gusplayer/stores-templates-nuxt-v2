@@ -251,8 +251,8 @@
           </div>
           <div class="w-full h-full flex flex-col justify-center items-center">
             <div
-              class="w-full justify-start items-start text-center grid grid-cols-2 gap-4"
-              :class="`md:grid-cols-${indexShowList}`"
+              class="w-full justify-start items-start text-center grid gap-4"
+              :class="`grid-cols-1 md:grid-cols-${indexShowList}`"
             >
               <div
                 v-for="product in listProducts"

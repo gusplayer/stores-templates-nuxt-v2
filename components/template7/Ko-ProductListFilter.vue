@@ -19,9 +19,7 @@
       `background-color: ${settingByTemplate7[0].productListFilter['--background_color_1']}`,
     ]"
   >
-    <div
-      class="w-full h-full max-h-[420px] relative box-content hidden md:flex"
-    >
+    <div class="w-full h-full max-h-[420px] relative box-content flex">
       <picture v-if="settingByTemplate7[0].productListFilter.img_background">
         <source
           media="(max-width: 799px)"
@@ -61,7 +59,7 @@
       </div>
     </div>
     <div
-      class="w-9/5 lg:w-9/3 flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:items-start"
+      class="w-full max-w-[1300px] px-10 md:px-0 flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:items-start"
     >
       <div
         class="w-full max-w-[270px] mr-24 sticky top-[128px] sm:hidden lg:flex flex-col justify-between items-start"
