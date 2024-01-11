@@ -151,12 +151,22 @@
           <div class="w-full flex flex-col justify-start items-start">
             <div class="flex flex-row justify-start items-center mb-1">
               <p
-                v-if="!spent && salesData.unidades > 0"
+                v-if="
+                  salesData.estado &&
+                  salesData.unidades > 0 &&
+                  salesData.precio > 0
+                "
                 class="text-14 font-bold text-green-500"
               >
                 {{ $t('productdetail_stock') }}
               </p>
               <p v-else class="text-14 font-bold text-red-500">
+                {{ $t('productdetail_Notstock') }}
+              </p>
+              <p
+                v-if="spent && salesData.unidades == 0"
+                class="ml-5 text-14 font-bold text-red-500"
+              >
                 {{ $t('productdetail_productoAgotado') }}
               </p>
             </div>
@@ -506,14 +516,7 @@
                 </svg>
                 {{ getAddToCartButtonLabel }}
               </button>
-              <button
-                v-else-if="!salesData.estado"
-                disabled
-                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5"
-                :style="`background-color: ${settingByTemplate16[0].detailsProducts.color_bg_btn}; color: ${settingByTemplate16[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate16[0].settingsGeneral.radius};`"
-              >
-                {{ $t('productdetail_btnANodisponible') }}
-              </button>
+
               <button
                 v-else-if="shouldShowBuyButton"
                 id="AddToCartTag"
@@ -542,6 +545,14 @@
                 :style="`background-color: ${settingByTemplate16[0].detailsProducts.color_bg_btn}; color: ${settingByTemplate16[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate16[0].settingsGeneral.radius};`"
               >
                 {{ $t('home_cardAgotado') }}
+              </button>
+              <button
+                v-else-if="!salesData.estado || salesData.precio === 0"
+                disabled
+                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5"
+                :style="`background-color: ${settingByTemplate16[0].detailsProducts.color_bg_btn}; color: ${settingByTemplate16[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate16[0].settingsGeneral.radius};`"
+              >
+                {{ $t('productdetail_btnANodisponible') }}
               </button>
             </div>
             <div class="w-full flex flex-row items-center mb-10">
@@ -695,6 +706,7 @@ export default {
       return (
         !this.spent &&
         this.salesData.estado &&
+        this.salesData.precio > 0 &&
         (this.data.productosInfo.tipoServicio == null ||
           this.data.productosInfo.tipoServicio == '0')
       )

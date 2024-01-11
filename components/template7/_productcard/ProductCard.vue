@@ -156,8 +156,10 @@
           </svg>
         </div>
       </div>
-      <div
+
+      <button
         v-if="
+          product.precio > 0 &&
           !estadoCart &&
           !soldOut &&
           !spent &&
@@ -183,7 +185,8 @@
             <cart-icon class="icon" />
           </div>
         </div>
-      </div>
+      </button>
+
       <div v-else class="overlay-bottom">
         <div class="cart-shop-mobile">
           <svg

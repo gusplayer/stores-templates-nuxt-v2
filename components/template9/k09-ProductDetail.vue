@@ -119,8 +119,18 @@
                     )
                 }}
               </p>
-              <p v-if="salesData.unidades > 0" class="text-stock">
+              <p
+                v-if="
+                  salesData.estado &&
+                  salesData.unidades > 0 &&
+                  salesData.precio > 0
+                "
+                class="text-stock text-green-600"
+              >
                 {{ $t('productdetail_stock') }}
+              </p>
+              <p v-else class="text-stock text-red-600">
+                {{ $t('productdetail_Notstock') }}
               </p>
             </div>
             <div
@@ -307,9 +317,6 @@
                   </svg>
                   {{ getAddToCartButtonLabel }}
                 </button>
-                <button v-else-if="!salesData.estado" disabled class="btn">
-                  {{ $t('productdetail_btnANodisponible') }}
-                </button>
                 <button
                   v-else-if="shouldShowBuyButton"
                   id="AddToCartTag"
@@ -332,6 +339,13 @@
                 </button>
                 <button v-else-if="spent" disabled class="btn-disabled">
                   {{ $t('home_cardAgotado') }}
+                </button>
+                <button
+                  v-else-if="!salesData.estado || salesData.precio === 0"
+                  disabled
+                  class="btn"
+                >
+                  {{ $t('productdetail_btnANodisponible') }}
                 </button>
               </div>
             </div>
@@ -498,6 +512,7 @@ export default {
       return (
         !this.spent &&
         this.salesData.estado &&
+        this.salesData.precio > 0 &&
         (this.data.productosInfo.tipoServicio == null ||
           this.data.productosInfo.tipoServicio == '0')
       )
@@ -1109,7 +1124,7 @@ export default {
   .text-stock {
     /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
     font-family: var(--font-style-2);
-    color: #92bb35;
+    /* color: #92bb35; */
     font-size: 14px;
     font-weight: 600;
     /* line-height: 1.42857143;

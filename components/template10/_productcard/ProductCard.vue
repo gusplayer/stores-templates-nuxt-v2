@@ -206,61 +206,59 @@
         </div>
         <!-- <div v-else class="h-20"></div> -->
       </div>
-      <div class="content-btn">
-        <button
-          v-if="
-            !estadoCart &&
-            !soldOut &&
-            !spent &&
-            (product.tipo_servicio == null || product.tipo_servicio == '0')
-          "
-          class="btn"
-          @click="addShoppingCart"
+
+      <button
+        v-if="
+          product.precio > 0 &&
+          !estadoCart &&
+          !soldOut &&
+          !spent &&
+          (product.tipo_servicio == null || product.tipo_servicio == '0')
+        "
+        class="btn btn-content"
+        @click="addShoppingCart"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          fill="currentColor"
+          class="icon-shop"
+          viewBox="0 0 16 16"
         >
-          <div class="btn-content">
-            <i class="header-content-cart">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                fill="currentColor"
-                class="icon-shop"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
-                />
-              </svg>
-            </i>
-            <p class="txt-btn">
-              {{ $t('productdetail_añadiralcarrito') }}
-            </p>
-          </div>
-        </button>
-        <nuxt-link v-else :to="{ path: `/productos/` + product.slug }">
-          <div class="btn">
-            <div class="btn-content">
-              <i class="header-content-cart">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  fill="currentColor"
-                  class="icon-shop"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
-                  />
-                </svg>
-              </i>
-              <p class="txt-btn">
-                {{ $t('home_cardvermas') }}
-              </p>
-            </div>
-          </div>
-        </nuxt-link>
-      </div>
+          <path
+            d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
+          />
+        </svg>
+
+        <p class="txt-btn">
+          {{ $t('productdetail_añadiralcarrito') }}
+        </p>
+      </button>
+      <nuxt-link
+        v-else
+        :to="{ path: `/productos/` + product.slug }"
+        class="w-full"
+      >
+        <div class="btn btn-content">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            fill="currentColor"
+            class="icon-shop"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
+            />
+          </svg>
+
+          <p class="txt-btn">
+            {{ $t('home_cardvermas') }}
+          </p>
+        </div>
+      </nuxt-link>
     </div>
   </div>
 </template>
@@ -549,7 +547,7 @@ export default {
   border-radius: var(--radius_btn);
   background-color: var(--color_background_btn);
   color: var(--color_text_btn);
-  @apply w-auto h-40 px-20 my-20 transition-all ease-in duration-0.2;
+  @apply h-40 px-20 my-20 transition-all ease-in duration-0.2;
 }
 .btn:hover {
   background-color: var(--hover_Bg_btn);

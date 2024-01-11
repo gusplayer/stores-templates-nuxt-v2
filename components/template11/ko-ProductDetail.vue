@@ -182,11 +182,18 @@
             <div class="empty"></div>
             <div class="content-stock">
               <p
-                v-if="salesData.unidades > 0"
+                v-if="
+                  salesData.estado &&
+                  salesData.unidades > 0 &&
+                  salesData.precio > 0
+                "
                 class="text-stock"
                 style="color: #92bb35"
               >
                 {{ $t('productdetail_stock') }}
+              </p>
+              <p v-else class="text-stock" style="color: #ed2353">
+                {{ $t('productdetail_Notstock') }}
               </p>
               <p
                 v-if="spent && salesData.unidades == 0"
@@ -384,13 +391,7 @@
                   </svg>
                   {{ getAddToCartButtonLabel }}
                 </button>
-                <button
-                  v-else-if="!salesData.estado"
-                  disabled
-                  class="btn-disabled"
-                >
-                  {{ $t('productdetail_btnANodisponible') }}
-                </button>
+
                 <button
                   v-else-if="shouldShowBuyButton"
                   id="AddToCartTag"
@@ -414,6 +415,13 @@
                 </button>
                 <button v-else-if="spent" disabled class="btn-disabled">
                   {{ $t('home_cardAgotado') }}
+                </button>
+                <button
+                  v-else-if="!salesData.estado || salesData.precio === 0"
+                  disabled
+                  class="btn-disabled"
+                >
+                  {{ $t('productdetail_btnANodisponible') }}
                 </button>
               </div>
             </div>
@@ -548,6 +556,7 @@ export default {
       return (
         !this.spent &&
         this.salesData.estado &&
+        this.salesData.precio > 0 &&
         (this.data.productosInfo.tipoServicio == null ||
           this.data.productosInfo.tipoServicio == '0')
       )

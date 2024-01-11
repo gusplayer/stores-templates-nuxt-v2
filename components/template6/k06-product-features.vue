@@ -51,7 +51,7 @@
           <div class="mt-6">
             <h3
               v-if="items?.title"
-              class="text-sm font-medium"
+              class="text-sm font-bold"
               :style="{
                 color: items?.color_title || '#111827',
               }"
@@ -70,7 +70,7 @@
           </div>
           <div
             v-if="items?.img"
-            class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg"
+            class="w-full h-full max-w-[280px] max-h-[280px] overflow-hidden rounded-lg"
             :style="{
               backgroundColor: items?.bg_img || '#e5e7eb',
             }"
@@ -78,7 +78,9 @@
             <img
               :src="items.img"
               :alt="items.title"
-              class="object-cover object-center"
+              width="280px"
+              height="280px"
+              class="object-cover object-center w-full h-full"
             />
           </div>
         </div>

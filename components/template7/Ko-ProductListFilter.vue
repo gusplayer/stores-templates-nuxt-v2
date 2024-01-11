@@ -318,7 +318,7 @@
         <div class="w-full flex flex-col items-center justify-center mb-40">
           <div
             class="w-full justify-start items-start text-center grid gap-4"
-            :class="`grid-cols-${indexShowList}`"
+            :class="`grid-cols-1 sm:grid-cols-2 md:grid-cols-${indexShowList}`"
           >
             <div
               v-for="product in listProducts"

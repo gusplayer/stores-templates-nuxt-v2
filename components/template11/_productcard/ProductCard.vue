@@ -535,7 +535,7 @@ export default {
   color: var(--color_title);
   font: inherit;
   font-weight: var(--fontWeighTitle);
-  text-align: left;
+  text-align: center;
   font-size: var(--fontSizeTitle);
   overflow: hidden;
   display: -webkit-box;

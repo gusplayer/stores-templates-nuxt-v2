@@ -107,6 +107,7 @@
       </nuxt-link>
       <button
         v-if="
+          product.precio > 0 &&
           !estadoCart &&
           !soldOut &&
           !spent &&
