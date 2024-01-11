@@ -122,6 +122,7 @@
               <div class="separador-btn"></div>
               <div
                 v-if="
+                  product.precio > 0 &&
                   !estadoCart &&
                   !soldOut &&
                   !spent &&
@@ -229,6 +230,7 @@
             </nuxt-link>
             <div
               v-if="
+                product.precio > 0 &&
                 !estadoCart &&
                 !soldOut &&
                 !spent &&
@@ -241,6 +243,7 @@
           <div v-else class="separator-movil">
             <div
               v-if="
+                product.precio > 0 &&
                 !estadoCart &&
                 !soldOut &&
                 !spent &&

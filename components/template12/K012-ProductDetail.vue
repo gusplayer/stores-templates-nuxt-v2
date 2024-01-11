@@ -188,15 +188,6 @@
               </span>
             </button>
             <button
-              v-else-if="!salesData.estado"
-              class="btn-responsive"
-              disabled
-            >
-              <span>
-                {{ $t('productdetail_btnANodisponible') }}
-              </span>
-            </button>
-            <button
               v-else-if="shouldShowBuyButton"
               id="AddToCartTag"
               ref="color2"
@@ -210,6 +201,15 @@
                 😥 {{ $t('productdetail_productoAgotado') }}
               </p>
             </div>
+            <button
+              v-else-if="!salesData.estado || salesData.precio === 0"
+              class="btn-responsive"
+              disabled
+            >
+              <span>
+                {{ $t('productdetail_btnANodisponible') }}
+              </span>
+            </button>
           </div>
         </div>
       </div>
@@ -302,6 +302,7 @@ export default {
       return (
         !this.spent &&
         this.salesData.estado &&
+        this.salesData.precio > 0 &&
         (this.data.productosInfo.tipoServicio == null ||
           this.data.productosInfo.tipoServicio == '0')
       )

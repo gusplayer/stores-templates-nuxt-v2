@@ -32,10 +32,11 @@
               :style="`border-radius: ${settingGeneral?.radius};`"
             />
             <div
+              v-if="item?.title"
               class="absolute w-full h-full flex justify-center items-center top-0 z-10"
             >
               <p
-                class="px-10 py-15 md:py-8 text-12 md:text-14 w-full max-w-[250px] text-center"
+                class="px-10 py-15 md:py-8 text-14 w-full max-w-[250px] text-center"
                 :style="`color: ${item.color_title}; background-color: ${item.color_bg};  border-radius: ${settingGeneral?.radius};`"
               >
                 {{ item.title }}
@@ -94,11 +95,11 @@ export default {
             spaceBetween: 15,
           },
           425: {
-            slidesPerView: 2,
+            slidesPerView: 1,
             spaceBetween: 15,
           },
           375: {
-            slidesPerView: 2,
+            slidesPerView: 1,
             spaceBetween: 10,
           },
           320: {

@@ -261,10 +261,23 @@
                 </div>
               </div>
             </div>
-            <div v-if="salesData.unidades > 0" class="content_stock">
-              <CheckIcon class="stock-text mr-5" />
-              <p class="stock-text">
+            <div
+              v-if="
+                salesData.estado &&
+                salesData.unidades > 0 &&
+                salesData.precio > 0
+              "
+              class="content_stock"
+            >
+              <CheckIcon class="stock-text mr-5 text-green-600" />
+              <p class="stock-text text-green-600">
                 {{ $t('productdetail_stock') }}
+              </p>
+            </div>
+            <div v-else class="content_stock">
+              <window-close-icon class="stock-text mr-5 text-red-600" />
+              <p class="stock-text text-red-600">
+                {{ $t('productdetail_Notstock') }}
               </p>
             </div>
             <div
@@ -326,9 +339,6 @@
                   </svg>
                   {{ getAddToCartButtonLabel }}
                 </button>
-                <button v-else-if="!salesData.estado" disabled class="btn">
-                  {{ $t('productdetail_btnANodisponible') }}
-                </button>
                 <button
                   v-else-if="shouldShowBuyButton"
                   class="btn"
@@ -348,8 +358,15 @@
                   </svg>
                   {{ getBuyButtonLabel }}
                 </button>
-                <button v-else-if="spent" disabled class="btn-disabled">
+                <button v-else-if="spent" disabled class="btn">
                   {{ $t('home_cardAgotado') }}
+                </button>
+                <button
+                  v-else-if="!salesData.estado || salesData.precio === 0"
+                  disabled
+                  class="btn"
+                >
+                  {{ $t('productdetail_btnANodisponible') }}
                 </button>
               </div>
             </div>
@@ -613,6 +630,7 @@ export default {
       return (
         !this.spent &&
         this.salesData.estado &&
+        this.salesData.precio > 0 &&
         (this.data.productosInfo.tipoServicio == null ||
           this.data.productosInfo.tipoServicio == '0')
       )
@@ -1130,7 +1148,7 @@ export default {
   line-height: 1.2;
   font-family: var(--font-style-3);
   /* font-family: 'Lora' !important; */
-  color: var(--color_title);
+  /* color: var(--color_title); */
 }
 .card-descuento {
   font-size: 12px;

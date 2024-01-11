@@ -65,7 +65,11 @@
         <div>
           <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
             <img
-              src="https://tailwindui.com/img/ecommerce-images/product-feature-09-main-detail.jpg"
+              :src="
+                banner.img_main
+                  ? banner.img_main
+                  : 'https://res.cloudinary.com/komercia-components/image/upload/c_scale,q_auto:best,f_auto/v1598040886/sws8xa8z0oyu252nqxzv.webp'
+              "
               alt="banner1"
               class="h-full w-full object-cover object-center"
             />
@@ -75,14 +79,22 @@
           >
             <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
               <img
-                src="https://tailwindui.com/img/ecommerce-images/product-feature-09-detail-01.jpg"
+                :src="
+                  banner.img_second_1
+                    ? banner.img_second_1
+                    : 'https://res.cloudinary.com/komercia-components/image/upload/c_scale,q_auto:best,f_auto/v1598040886/sws8xa8z0oyu252nqxzv.webp'
+                "
                 alt="banner2"
                 class="h-full w-full object-cover object-center"
               />
             </div>
             <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
               <img
-                src="https://tailwindui.com/img/ecommerce-images/product-feature-09-detail-02.jpg"
+                :src="
+                  banner.img_second_2
+                    ? banner.img_second_2
+                    : 'https://res.cloudinary.com/komercia-components/image/upload/c_scale,q_auto:best,f_auto/v1598040886/sws8xa8z0oyu252nqxzv.webp'
+                "
                 alt="banner3"
                 class="h-full w-full object-cover object-center"
               />

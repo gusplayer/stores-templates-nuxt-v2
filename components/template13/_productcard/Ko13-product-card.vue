@@ -128,6 +128,7 @@
               <div class="separador-btn"></div>
               <div
                 v-if="
+                  product.precio > 0 &&
                   !estadoCart &&
                   !soldOut &&
                   !spent &&

@@ -238,9 +238,6 @@
                 >
                   {{ getAddToCartButtonLabel }}
                 </button>
-                <button v-else-if="!salesData.estado" disabled class="btn">
-                  {{ $t('productdetail_btnANodisponible') }}
-                </button>
                 <button
                   v-else-if="shouldShowBuyButton"
                   class="btn"
@@ -251,11 +248,32 @@
                 <button v-else-if="spent" disabled class="btn-disabled">
                   {{ $t('home_cardAgotado') }}
                 </button>
+                <button
+                  v-else-if="!salesData.estado || salesData.precio === 0"
+                  disabled
+                  class="btn"
+                >
+                  {{ $t('productdetail_btnANodisponible') }}
+                </button>
               </div>
             </div>
             <div class="item-info-product">
-              <div v-if="salesData.unidades > 0" class="content_buy_action">
-                <p class="text-unidades">{{ $t('productdetail_stock') }}</p>
+              <div
+                v-if="
+                  salesData.estado &&
+                  salesData.unidades > 0 &&
+                  salesData.precio > 0
+                "
+                class="content_buy_action"
+              >
+                <p class="text-14 font-bold text-green-600">
+                  {{ $t('productdetail_stock') }}
+                </p>
+              </div>
+              <div v-else class="content_buy_action">
+                <p class="text-14 font-bold text-red-600">
+                  {{ $t('productdetail_Notstock') }}
+                </p>
               </div>
               <div
                 v-if="data.productosInfo.garantia"
@@ -509,6 +527,7 @@ export default {
       return (
         !this.spent &&
         this.salesData.estado &&
+        this.salesData.precio > 0 &&
         (this.data.productosInfo.tipoServicio == null ||
           this.data.productosInfo.tipoServicio == '0')
       )
