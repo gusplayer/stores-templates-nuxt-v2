@@ -47,7 +47,7 @@
       </div>
       <button
         v-if="storePolicies"
-        class="text-politics"
+        class="text-politics pb-10"
         :style="`color:${settingByTemplate6[0].setting6Footer['--color_text']} ;`"
         @click="OpenModalPolitics"
       >
@@ -94,6 +94,10 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  components: {
+    KoTermsConditions: () =>
+      import('@/components/footers/ko-TermsAndConditions.vue'),
+  },
   props: {
     dataStore: {
       type: Object,
@@ -103,10 +107,6 @@ export default {
       type: Array,
       required: true,
     },
-  },
-  components: {
-    KoTermsConditions: () =>
-      import('@/components/footers/ko-TermsAndConditions.vue'),
   },
   data() {
     return {
@@ -148,17 +148,7 @@ export default {
   },
   watch: {
     settingByTemplate6() {
-      if (this.settingByTemplate6[0]?.setting6Footer) {
-        let color =
-          this.settingByTemplate6[0]?.setting6Footer['--background_color_1']
-        let colorArray = color.split(',')
-        let colorInt = parseInt(colorArray[2])
-        if (colorInt > 50) {
-          this.logo = true
-        } else {
-          this.logo = false
-        }
-      }
+      this.setLogo()
     },
     'dataStore.tienda'() {
       this.links[0].link = this.dataStore.redes.facebook
@@ -179,8 +169,7 @@ export default {
     },
     setLogo() {
       if (this.settingByTemplate6[0]?.setting6Footer) {
-        let color =
-          this.settingByTemplate6[0].setting6Footer['--background_color_1']
+        let color = this.settingByTemplate6[0].setting6Footer.bg_color
         let colorArray = color.split(',')
         let colorInt = parseInt(colorArray[2])
         if (colorInt > 50) {

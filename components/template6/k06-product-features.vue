@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="productFeatures"
-    class="mb-20"
+    class="mb-40"
     :style="{
       backgroundColor: productFeatures?.bg_color || 'white',
     }"
@@ -41,7 +41,7 @@
 
       <div
         v-if="productFeatures?.values?.length > 0"
-        class="mt-50 grid grid-cols-1 items-start gap-x-6 gap-y-16 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8 items-start gap-x-6 gap-y-16 mt-30 md:mt-50"
       >
         <div
           v-for="(items, index) in productFeatures.values"
@@ -76,10 +76,10 @@
             }"
           >
             <img
-              :src="items.img"
+              :src="idCloudinary(items.img, 550, 550)"
               :alt="items.title"
-              width="280px"
-              height="280px"
+              width="280"
+              height="280"
               class="object-cover object-center w-full h-full"
             />
           </div>

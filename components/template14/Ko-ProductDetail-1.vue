@@ -487,7 +487,7 @@
               </p>
             </div>
             <div
-              class="fixed md:sticky w-full flex flex-row justify-start items-center left-0 bottom-0 px-6 py-10 md:px-0 md:py-0 bg-gray-100 md:bg-transparent border-t md:border-t-0 z-100 md:z-0"
+              class="fixed md:sticky w-full flex flex-row justify-start items-center left-0 bottom-0 px-6 py-10 md:px-0 md:py-0 bg-gray-100 md:bg-white-white border-t md:border-t-0 z-100 md:z-0"
               :style="`border-color:${settingByTemplate14[0].detailsProducts.color_border};`"
             >
               <div

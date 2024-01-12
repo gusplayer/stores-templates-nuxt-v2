@@ -2,10 +2,12 @@
   <div class="w-full py-10">
     <!-- <h4 class="text-gray-900 font-bold text-14">{{ label }}</h4> -->
     <div
-      class="select relative flex bg-transparent overflow-hidden w-full max-w-[300px] border-2 py-5"
+      class="select relative flex bg-transparent overflow-hidden w-full border-2 py-5"
+      :class="template === 6 ? 'max-w-full' : 'max-w-[300px]'"
       :style="{
         borderColor: detailsProducts.color_border,
-        borderRadius: settingGeneral?.radius ?? 'rounded-4',
+        borderRadius:
+          settingGeneral?.radius ?? settingGeneral?.['--radius'] ?? 'rounded-4',
       }"
     >
       <select
@@ -39,6 +41,10 @@ export default {
     },
     settingGeneral: {
       type: Object,
+      default: null,
+    },
+    template: {
+      type: Number,
       default: null,
     },
   },
