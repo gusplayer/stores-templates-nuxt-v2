@@ -276,7 +276,7 @@
               </button>
             </div>
             <div
-              class="mt-0 pb-10 md:mt-15 md:pb-20 fixed md:sticky w-full flex flex-row justify-center md:justify-start items-center left-0 bottom-0 px-6 pt-10 md:px-0 md:pt-0 bg-gray-200 md:bg-transparent border-t md:border-t-0 z-100 md:z-0 md:border-b border-color"
+              class="mt-0 pb-10 md:mt-15 md:pb-20 fixed md:sticky w-full flex flex-row justify-center md:justify-start items-center left-0 bottom-0 px-6 pt-10 md:px-0 md:pt-0 bg-gray-200 md:bg-white-white border-t md:border-t-0 z-100 md:z-0 md:border-b border-color"
             >
               <div class="content-cart mr-10">
                 <div class="quantity">

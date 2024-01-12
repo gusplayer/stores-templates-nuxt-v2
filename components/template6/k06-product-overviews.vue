@@ -1,178 +1,468 @@
 <template>
-  <div class="bg-white mb-20">
+  <div
+    v-if="data && !loading"
+    class="mb-40"
+    :style="{
+      backgroundColor: productOverviews?.bg_color || 'white',
+    }"
+  >
     <div class="pb-16 pt-6 sm:pb-24">
       <div class="mx-auto mt-8 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <div class="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8">
           <div class="lg:col-span-5 lg:col-start-8">
-            <div class="flex justify-between">
-              <h1 class="text-xl font-medium text-gray-900">
-                {{ product.name }}
-              </h1>
-              <p class="text-xl font-medium text-gray-900">
-                {{ product.price }}
+            <div class="flex flex-col justify-start">
+              <p
+                v-if="data?.productosInfo?.marca"
+                class="text-15 font-medium leading-6"
+                :style="{
+                  color:
+                    productOverviews?.color_subText || 'hsla(240, 2%, 54%, 1)',
+                }"
+              >
+                {{ data.productosInfo.marca }}
               </p>
-            </div>
-            <!-- Reviews -->
-            <div class="mt-4">
-              <h2 class="sr-only">Reviews</h2>
-              <div class="flex items-center">
-                <p class="text-sm text-gray-700">
-                  {{ product.rating }}
-                  <span class="sr-only"> out of 5 stars</span>
+              <h1
+                v-if="data?.nombre"
+                class="text-25"
+                :style="{
+                  color:
+                    productOverviews?.color_title ||
+                    'hsla(220.9090909090909, 39%, 11%, 1)',
+                  fontWeight: productOverviews?.fontWeighTitle || '600',
+                }"
+              >
+                {{ data.nombre }}
+              </h1>
+              <div
+                class="w-full flex flex-row justify-start items-center mb-20"
+              >
+                <p
+                  v-if="salesData?.precio"
+                  class="text-30 font-semibold"
+                  :style="{
+                    color:
+                      productOverviews?.color_price ||
+                      'hsla(21.95744680851064, 98%, 53%, 1)',
+                    fontWeight: productOverviews?.fontWeighPrice || '600',
+                  }"
+                >
+                  {{
+                    salesData.precio
+                      | currency(
+                        dataStore.tiendasInfo.paises.codigo,
+                        dataStore.tiendasInfo.moneda
+                      )
+                  }}
                 </p>
-                <div class="ml-1 flex items-center">
-                  <!-- <StarIcon
-                    v-for="rating in [0, 1, 2, 3, 4]"
-                    :key="rating"
-                    :class="[
-                      product.rating > rating
-                        ? 'text-yellow-400'
-                        : 'text-gray-200',
-                      'h-5 w-5 flex-shrink-0',
-                    ]"
-                    aria-hidden="true"
-                  /> -->
-                </div>
-                <div aria-hidden="true" class="ml-4 text-sm text-gray-300">
-                  ·
-                </div>
-                <div class="ml-4 flex">
-                  <a
-                    href="#"
-                    class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                <div
+                  v-if="
+                    data.productosInfo?.tagPromocion == 1 &&
+                    data.productosInfo?.promocionValor &&
+                    salesData?.precio
+                  "
+                  class="w-full flex flex-row justify-start items-center"
+                >
+                  <p
+                    class="text-14 mx-5 bg-red-500 text-white-white px-3 py-5 rounded-4"
                   >
-                    See all {{ product.reviewCount }} reviews
-                  </a>
+                    {{ data.productosInfo.promocionValor }}% De Descuento
+                  </p>
+                  <p
+                    class="text-25 font-semibold line-through"
+                    :style="{
+                      color:
+                        productOverviews?.color_priceDescount ||
+                        'hsla(21.95744680851064, 98%, 53%, 1)',
+                      fontWeight:
+                        productOverviews?.fontWeighPriceDescount || '500',
+                    }"
+                  >
+                    {{
+                      (data.productosInfo.tagPromocion == 1 &&
+                      data.productosInfo.promocionValor
+                        ? Math.trunc(
+                            salesData.precio /
+                              (1 - data.productosInfo.promocionValor / 100)
+                          )
+                        : 0)
+                        | currency(
+                          dataStore.tiendasInfo.paises.codigo,
+                          dataStore.tiendasInfo.moneda
+                        )
+                    }}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Image gallery -->
           <div
             class="mt-8 lg:col-span-7 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0"
           >
-            <h2 class="sr-only">Images</h2>
-
             <div
               class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 lg:gap-8"
             >
               <img
-                v-for="image in product.images"
-                :key="image.id"
-                :src="image.imageSrc"
-                :alt="image.imageAlt"
-                :class="[
-                  image.primary
-                    ? 'lg:col-span-2 lg:row-span-2'
-                    : 'hidden lg:block',
-                  'rounded-lg',
-                ]"
+                :src="data.fotoCloudinary"
+                :alt="`imagenDetailTemplate6${data.nombre}`"
+                class="rounded-lg lg:col-span-2 lg:row-span-2"
+              />
+              <img
+                v-for="(image, indexPhoto) in data.productosFotos"
+                :key="indexPhoto"
+                :src="image.fotoCloudinary"
+                :alt="`imagenDetailTemplate6${indexPhoto}`"
+                class="hidden lg:block"
               />
             </div>
           </div>
 
           <div class="mt-8 lg:col-span-5">
-            <form>
-              <!-- Color picker -->
-              <div>
-                <h2 class="text-sm font-medium text-gray-900">Color</h2>
-
-                <!-- <RadioGroup v-model="selectedColor" class="mt-2">
-                    <RadioGroupLabel class="sr-only">Choose a color</RadioGroupLabel>
-                    <div class="flex items-center space-x-3">
-                      <RadioGroupOption as="template" v-for="color in product.colors" :key="color.name" :value="color" v-slot="{ active, checked }">
-                        <div :class="[color.selectedColor, active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', 'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none']">
-                          <RadioGroupLabel as="span" class="sr-only">{{ color.name }}</RadioGroupLabel>
-                          <span aria-hidden="true" :class="[color.bgColor, 'h-8 w-8 rounded-full border border-black border-opacity-10']" />
-                        </div>
-                      </RadioGroupOption>
-                    </div>
-                  </RadioGroup> -->
-              </div>
-
-              <!-- Size picker -->
-              <div class="mt-8">
-                <div class="flex items-center justify-between">
-                  <h2 class="text-sm font-medium text-gray-900">Size</h2>
-                  <a
-                    href="#"
-                    class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                    >See sizing chart</a
-                  >
-                </div>
-
-                <!-- <RadioGroup v-model="selectedSize" class="mt-2">
-                    <RadioGroupLabel class="sr-only">Choose a size</RadioGroupLabel>
-                    <div class="grid grid-cols-3 gap-3 sm:grid-cols-6">
-                      <RadioGroupOption as="template" v-for="size in product.sizes" :key="size.name" :value="size" :disabled="!size.inStock" v-slot="{ active, checked }">
-                        <div :class="[size.inStock ? 'cursor-pointer focus:outline-none' : 'cursor-not-allowed opacity-25', active ? 'ring-2 ring-indigo-500 ring-offset-2' : '', checked ? 'border-transparent bg-indigo-600 text-white hover:bg-indigo-700' : 'border-gray-200 bg-white text-gray-900 hover:bg-gray-50', 'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1']">
-                          <RadioGroupLabel as="span">{{ size.name }}</RadioGroupLabel>
-                        </div>
-                      </RadioGroupOption>
-                    </div>
-                  </RadioGroup> -->
-              </div>
-
-              <button
-                type="submit"
-                class="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            <div
+              class="flex flex-wrap gap-x-2 gap-y-1 justify-start items-center mb-10"
+            >
+              <p
+                v-if="
+                  salesData?.estado &&
+                  salesData?.unidades > 0 &&
+                  salesData?.precio > 0
+                "
+                class="text-14 font-bold text-green-500"
               >
-                Add to cart
-              </button>
-            </form>
+                {{ $t('productdetail_stock') }}
+              </p>
 
-            <!-- Product details -->
-            <div class="mt-10">
-              <h2 class="text-sm font-medium text-gray-900">Description</h2>
+              <p v-else class="text-14 font-bold text-red-500">
+                {{ $t('productdetail_Notstock') }}
+              </p>
 
+              <p
+                v-if="spent && salesData.unidades == 0"
+                class="ml-5 text-14 font-bold text-red-500"
+              >
+                {{ $t('productdetail_productoAgotado') }}
+              </p>
+
+              <p
+                v-if="data?.envioGratis == 1 || envio?.titulo == 'Envío gratis'"
+                class="text-14 font-bold text-green-500"
+              >
+                {{ $t('home_cardGratis') }}
+              </p>
+            </div>
+            <div
+              v-if="data?.productosInfo?.descripcionCorta"
+              class="w-full mb-10"
+            >
+              <p
+                class="text-15"
+                :style="`color:${productOverviews.color_subtext};`"
+              >
+                {{ data.productosInfo.descripcionCorta }}
+              </p>
+            </div>
+            <div
+              v-if="data?.categoriaProducto > 0"
+              class="flex flex-row justify-start items-start mb-10"
+            >
+              <p
+                class="text-16 font-bold mr-10"
+                :style="`color:${productOverviews.color_text};`"
+              >
+                {{ $t('productdetail_categoria') }}:
+              </p>
+              <p
+                class="text-14"
+                :style="`color:${productOverviews.color_subtext};`"
+              >
+                {{ data.categoriaProducto2.nombreCategoriaProducto }}
+              </p>
+            </div>
+            <div
+              v-if="data?.subcategoria > 0"
+              class="flex flex-row justify-start items-start mb-10"
+            >
+              <p
+                class="text-16 font-bold mr-10"
+                :style="`color:${productOverviews.color_text};`"
+              >
+                {{ $t('home_subcategory') }}:
+              </p>
+              <p
+                class="text-14"
+                :style="`color:${productOverviews.color_subtext};`"
+              >
+                {{ data.subcategoria2.nombreSubcategoria }}
+              </p>
+            </div>
+            <div
+              v-if="
+                (data?.productosInfo?.largo != 0 &&
+                  data?.productosInfo?.largo != null) ||
+                (data?.productosInfo?.largo != 0 &&
+                  data?.productosInfo?.largo != null) ||
+                (data?.productosInfo?.alto != 0 &&
+                  data?.productosInfo?.alto != null) ||
+                (data?.productosInfo?.peso > 0 &&
+                  data?.productosInfo?.peso != null)
+              "
+              class="flex justify-start items-center mb-10"
+            >
+              <p
+                class="text-16 font-bold mr-10"
+                :style="`color:${productOverviews.color_text};`"
+              >
+                {{ $t('productdetail_dimensiones') }}
+              </p>
+            </div>
+            <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-0">
               <div
-                class="prose prose-sm mt-4 text-gray-500"
-                v-html="product.description"
-              ></div>
+                v-if="
+                  data?.productosInfo?.largo != 0 &&
+                  data?.productosInfo?.largo != null
+                "
+                class="flex flex-row justify-start items-center mb-10"
+              >
+                <p
+                  class="text-16 font-bold mr-10"
+                  :style="`color:${productOverviews.color_text};`"
+                >
+                  {{ $t('productdetail_largo') }}:
+                </p>
+                <p
+                  class="text-14"
+                  :style="`color:${productOverviews.color_subtext};`"
+                >
+                  {{ data.productosInfo.largo }} cm
+                </p>
+              </div>
+              <div
+                v-if="
+                  data?.productosInfo?.ancho != 0 &&
+                  data?.productosInfo?.ancho != null
+                "
+                class="flex flex-row justify-start items-center mb-10"
+              >
+                <p
+                  class="text-16 font-bold mr-10"
+                  :style="`color:${productOverviews.color_text};`"
+                >
+                  {{ $t('productdetail_ancho') }}:
+                </p>
+                <p
+                  class="text-14"
+                  :style="`color:${productOverviews.color_subtext};`"
+                >
+                  {{ data.productosInfo.ancho }} cm
+                </p>
+              </div>
+              <div
+                v-if="
+                  data?.productosInfo?.alto != 0 &&
+                  data?.productosInfo?.alto != null
+                "
+                class="flex flex-row justify-start items-center mb-10"
+              >
+                <p
+                  class="text-16 font-bold mr-10"
+                  :style="`color:${productOverviews.color_text};`"
+                >
+                  {{ $t('productdetail_alto') }}:
+                </p>
+                <p
+                  class="text-14"
+                  :style="`color:${productOverviews.color_subtext};`"
+                >
+                  {{ data.productosInfo.alto }} cm
+                </p>
+              </div>
+              <div
+                v-if="
+                  data?.productosInfo?.peso != 0 &&
+                  data?.productosInfo?.peso != null
+                "
+                class="flex flex-row justify-start items-center mb-10"
+              >
+                <p
+                  class="text-16 font-bold mr-10"
+                  :style="`color:${productOverviews.color_text};`"
+                >
+                  {{ $t('productdetail_Peso') }}:
+                </p>
+                <p
+                  class="text-14"
+                  :style="`color:${productOverviews.color_subtext};`"
+                >
+                  {{ data.productosInfo.peso }} cm
+                </p>
+              </div>
+            </div>
+            <div
+              v-if="data?.productosInfo?.garantia"
+              class="flex flex-row justify-start items-start mb-10"
+            >
+              <p
+                class="text-16 font-bold mr-10"
+                :style="`color:${productOverviews.color_text};`"
+              >
+                {{ $t('productdetail_garantia') }}
+              </p>
+              <p
+                class="text-14"
+                :style="`color:${productOverviews.color_subtext};`"
+              >
+                {{ data.productosInfo.garantia }}
+              </p>
+            </div>
+            <div
+              v-if="userDropshipping.userName"
+              class="w-full flex flex-row items-center mb-30"
+            >
+              <p
+                class="text-16 font-bold mr-10"
+                :style="`color:${productOverviews.color_text};`"
+              >
+                {{ $t('productdetail_dropshipping') }}
+              </p>
+              <p
+                class="text-14"
+                :style="`color:${productOverviews.color_subtext};`"
+              >
+                {{ userDropshipping.userName }}
+              </p>
             </div>
 
-            <div class="mt-8 border-t border-gray-200 pt-8">
-              <h2 class="text-sm font-medium text-gray-900">
-                Fabric &amp; Care
-              </h2>
-
-              <div class="prose prose-sm mt-4 text-gray-500">
-                <ul role="list">
-                  <li v-for="item in product.details" :key="item">
-                    {{ item }}
-                  </li>
-                </ul>
+            <div
+              v-if="data.conVariante === 1 && variantes"
+              class="w-full"
+              :class="userDropshipping.userName ? 'mb-10' : 'mb-20'"
+            >
+              <div
+                v-for="(variant, index) in variantes"
+                :key="index"
+                class="flex flex-col justify-center items-start"
+              >
+                <label
+                  for="variant name"
+                  class="text-16 font-bold"
+                  :style="`color:${productOverviews.color_text};`"
+                >
+                  {{ variant.nombre }}:
+                </label>
+                <SelectGroup
+                  :index="index"
+                  :variantes="variantes"
+                  :details-products="productOverviews"
+                  :setting-general="settingsGeneral"
+                  :template="6"
+                >
+                  <option
+                    v-for="item in variant.valores"
+                    :key="item.option"
+                    :value="item.option"
+                  >
+                    <p
+                      class="text-14"
+                      :style="`color:${productOverviews.color_subtext};`"
+                    >
+                      {{ item.option }}
+                    </p>
+                  </option>
+                </SelectGroup>
               </div>
             </div>
 
-            <!-- Policies -->
-            <section aria-labelledby="policies-heading" class="mt-10">
-              <h2 id="policies-heading" class="sr-only">Our Policies</h2>
-
-              <dl
-                class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2"
+            <div
+              class="fixed md:relative w-full flex flex-row justify-start items-center mb-0 md:mb-20 left-0 bottom-0 px-6 py-10 md:px-0 md:py-0 bg-gray-100 md:bg-transparent border-t md:border-t-0 z-100 md:z-0 transition ease-in-out delay-150"
+            >
+              <div
+                class="flex flex-row justify-center items-center mr-20 border-2"
+                :class="{ disabled: !salesData?.estado }"
+                :style="`border-color:${productOverviews.color_border}; border-radius: ${settingsGeneral['--radius']};`"
               >
-                <div
-                  v-for="policy in policies"
-                  :key="policy.name"
-                  class="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center"
+                <button
+                  class="bg-transparent text-center text-14 px-15"
+                  @click="removeQuantity()"
                 >
-                  <dt class="flex flex-col">
-                    <i
-                      :class="policy.icon"
-                      class="mx-auto text-20 flex-shrink-0 text-gray-400"
-                    ></i>
-                    <span class="mt-4 text-sm font-medium text-gray-900">
-                      {{ policy.name }}
-                    </span>
-                  </dt>
-                  <dd class="mt-1 text-sm text-gray-500">
-                    {{ policy.description }}
-                  </dd>
+                  <menos-icon
+                    class="icon"
+                    :style="`color:${productOverviews.color_icon};`"
+                  />
+                </button>
+                <input
+                  v-model="quantityValue"
+                  name="quantityValue"
+                  class="bg-transparent text-center text-14 py-11 px-10 max-w-[68px] font-bold"
+                  type="text"
+                  onkeypress="return (event.charCode>47 && event.charCode<58)"
+                />
+                <button
+                  class="bg-transparent text-center text-14 px-15"
+                  @click="addQuantity()"
+                >
+                  <mas-icon
+                    class="icon"
+                    :style="`color:${productOverviews.color_icon};`"
+                  />
+                </button>
+                <!-- Anuncio ult unidad -->
+                <div
+                  v-if="maxQuantityValue == quantityValue"
+                  class="absolute py-3 px-5 bg-yellow-300 rounded-4 -bottom-35 w-full max-w-[120px] text-center"
+                >
+                  <span class="text-14 text-black">
+                    {{ $t('cart_ultimaUnidad') }}
+                  </span>
                 </div>
-              </dl>
-            </section>
+              </div>
+              <button
+                v-if="shouldShowAddToCartButton"
+                class="w-full flex justify-center items-center py-11 px-10 rounded-5"
+                :style="`background-color: ${productOverviews.color_btn}; color: ${productOverviews.color_text_btn}; border-radius: ${settingsGeneral['--radius']};`"
+                @click="goToPayments"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="mx-5"
+                  width="18"
+                  height="18"
+                  :fill="productOverviews.color_text_btn"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
+                  />
+                </svg>
+                {{ getBuyButtonLabel }}
+              </button>
+              <button
+                v-else-if="spent"
+                disabled
+                class="w-full flex justify-center items-center py-11 px-10 rounded-5"
+                :style="`background-color: ${productOverviews.color_btn}; color: ${productOverviews.color_text_btn}; border-radius: ${settingsGeneral['--radius']};`"
+              >
+                {{ $t('home_cardAgotado') }}
+              </button>
+              <button
+                v-else-if="!salesData?.estado || salesData?.precio === 0"
+                disabled
+                class="w-full flex justify-center items-center py-11 px-10 rounded-5"
+                :style="`background-color: ${productOverviews.color_btn}; color: ${productOverviews.color_text_btn}; border-radius: ${settingsGeneral['--radius']};`"
+              >
+                {{ $t('productdetail_btnANodisponible') }}
+              </button>
+            </div>
+
+            <div class="w-full mt-10">
+              <OptionTab
+                class="w-full"
+                :data-store="dataStore"
+                :data="data"
+                :envio="envio"
+                :settings-general="settingsGeneral"
+                :product-overviews="productOverviews"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -181,95 +471,398 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import idCloudinary from '@/mixins/idCloudinary'
+import currency from '@/mixins/formatCurrent'
+import mobileCheck from '@/mixins/mobileCheck'
+import { productHeadMixin } from '@/mixins/productHeadMixin'
+
 export default {
+  components: {
+    OptionTab: () => import('./_product-details/OptTab.vue'),
+    SelectGroup: () => import('../_commonComponent/select-group-v2.vue'),
+  },
+  filters: {
+    toLowerCase(value) {
+      return value ? value.toLowerCase() : ''
+    },
+  },
+  mixins: [idCloudinary, currency, mobileCheck, productHeadMixin],
   props: {
     dataStore: {
       type: Object,
       required: true,
     },
-    // settingGeneral: {
-    //   type: Object,
-    //   required: true,
-    // },
+    settingsGeneral: {
+      type: Object,
+      required: true,
+    },
+    productOverviews: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
-      policies: [
-        {
-          name: 'International delivery',
-          icon: 'el-icon-help',
-          description: 'Get your order in 2 years',
+      loading: true,
+      data: {},
+      selectPhotoUrl: '',
+      idYoutube: '',
+      existYoutube: false,
+      maxQuantityValue: 1,
+      quantityValue: 1,
+      productIndexCart: null,
+      warranty: '',
+      productCart: {},
+      salesData: null,
+      spent: false,
+      shippingProduct: '',
+      envio: {
+        titulo: '',
+        desc: '',
+      },
+      activeZoom: true,
+      swiperOption: {
+        direction: 'vertical',
+        slidesPerView: 5,
+        spaceBetween: 10,
+        mousewheel: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
         },
+        navigation: {
+          nextEl: '.swiper-next',
+          prevEl: '.swiper-prev',
+        },
+        breakpoints: {
+          1100: {
+            slidesPerView: 4,
+            spaceBetween: 17,
+          },
+        },
+      },
+      sharing: {
+        url: '',
+        quote: '',
+      },
+      sharingFacebook: '',
+      userDropshipping: {
+        userId: '',
+        userName: '',
+      },
+    }
+  },
+  head() {
+    return this.generateHead()
+  },
+  computed: {
+    ...mapState(['envios']),
+
+    whatsapp() {
+      return this.dataStore.redes.whatsapp
+    },
+    facebookPixel() {
+      return this.$store.state.analytics_tagmanager
+    },
+    swiper() {
+      return this.$refs.mySwiper.swiper
+    },
+    beforeCombination() {
+      return this.$store.state.beforeCombination
+    },
+    // eslint-disable-next-line vue/return-in-computed-property
+    variantes() {
+      if (this.data.conVariante === 1) {
+        return JSON.parse(this.data.productosVariantes[0].variantes)
+      }
+    },
+    shouldShowAddToCartButton() {
+      return !this.spent && this.salesData.estado && this.salesData.precio > 0
+    },
+    getBuyButtonLabel() {
+      return this.$t('productdetail_btnComprar')
+    },
+  },
+  watch: {
+    envios() {
+      this.setOptionShipping()
+    },
+    quantityValue(value) {
+      this.quantityValue =
+        value > this.maxQuantityValue
+          ? this.maxQuantityValue
+          : this.quantityValue
+    },
+    beforeCombination(value) {
+      const combinationSelected = JSON.stringify(value)
+      if (this.data.combinaciones) {
+        if (
+          this.data.combinaciones[0][0].combinaciones !== '[object Object]' &&
+          this.data.conVariante > 0
+        ) {
+          const combinaciones = JSON.parse(
+            this.data.combinaciones[0][0].combinaciones
+          )
+          const result = combinaciones.find(
+            (combinacion) =>
+              JSON.stringify(combinacion.combinacion) == combinationSelected
+          )
+          this.productCart = []
+          this.productIndexCart = null
+          for (const [
+            index,
+            productCart,
+          ] of this.$store.state.productsCart.entries()) {
+            if (
+              this.data.id == productCart.id &&
+              JSON.stringify(productCart.combinacion) ==
+                JSON.stringify(result.combinacion)
+            ) {
+              this.productIndexCart = index
+              this.productCart = productCart
+            }
+          }
+          if (result) {
+            this.spent = false
+            this.maxQuantityValue = parseInt(result.unidades)
+            if (result.unidades == 0) {
+              this.spent = true
+            }
+            if (this.productCart.cantidad) {
+              this.maxQuantityValue =
+                parseInt(result.unidades) - this.productCart.cantidad
+              if (this.maxQuantityValue <= 0) {
+                this.spent = true
+              }
+            }
+            this.salesData = result
+            if (typeof this.salesData.unidades === 'string') {
+              this.salesData.unidades = parseInt(this.salesData.unidades)
+            }
+            this.quantityValue = 1
+          }
+        }
+      }
+    },
+  },
+  mounted() {
+    this.getDataProduct()
+    this.$store.state.beforeCombination = []
+    if (
+      this.$route.query &&
+      this.$route.query.userId &&
+      this.$route.query.userName
+    ) {
+      this.userDropshipping.userId = this.$route.query.userId
+      this.userDropshipping.userName = this.$route.query.userName
+    }
+  },
+  methods: {
+    async getDataProduct() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_DATA_PRODUCT',
         {
-          name: 'Loyalty rewards',
-          icon: 'el-icon-goods',
-          description: "Don't look at other tees",
+          slug: this.productOverviews.slug,
+        }
+      )
+      if (success && data.data) {
+        this.loading = false
+        this.data = data.data
+
+        this.videoYouTube(data.data.productosInfo.video)
+        this.setOptionShipping()
+        this.salesData = {
+          precio: data.data.precio,
+          unidades: data.data.productosInfo.inventario,
+          sku: data.data.productosInfo.sku,
+          estado: true,
+        }
+
+        this.maxQuantityValue = data.data.productosInfo.inventario
+        for (const [
+          index,
+          productCart,
+        ] of this.$store.state.productsCart.entries()) {
+          if (data.data.id == productCart.id) {
+            this.productIndexCart = index
+            this.productCart = productCart
+            this.maxQuantityValue =
+              data.data.productosInfo.inventario - productCart.cantidad
+          }
+        }
+        if (this.salesData.unidades == 0 || this.maxQuantityValue <= 0) {
+          this.spent = true
+        }
+        this.sharing.url = window.location.href
+        this.sharing.quote = `Explora%20el%20producto%20${data.data.nombre}%2C%20te%20van%20a%20encantar.%0ALink%20del%20producto%3A%20${this.sharing.url}`
+        this.sharingFacebook = `https://www.facebook.com/sharer/sharer.php?u=${this.sharing.url}&quote=${this.sharing.quote}`
+        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+          window.fbq('track', 'ViewContent', {
+            content_type: 'product',
+            content_ids: [`${data.data.id}`],
+            contents: [
+              {
+                id: `${data.data.id}`,
+                quantity: this.quantityValue,
+              },
+            ],
+            value: data.data.precio ? this.salesData.precio : 0,
+            currency: this.dataStore.tiendasInfo.moneda,
+            content_name: data.data.nombre,
+            content_category: 'otro',
+          })
+        }
+      }
+    },
+    setOptionShipping() {
+      if (this.data.envioGratis == 1) {
+        this.envio = {
+          titulo: 'Envío gratis',
+          desc: 'Disfruta de este obsequio por parte de la tienda.',
+        }
+      } else {
+        this.data.shippingProduct = this.envios.valores
+        switch (this.data.shippingProduct.envio_metodo) {
+          case 'gratis':
+            this.envio = {
+              titulo: 'Envío gratis',
+              desc: 'Disfruta de este obsequio por parte de la tienda.',
+            }
+            break
+          case 'sinEnvio':
+            this.envio = {
+              titulo: 'Sin envio',
+              desc: 'Tienes que acercarte a la tienda a recoger tu pedido.',
+            }
+            break
+          case 'tarifa_plana':
+            this.envio = {
+              titulo: 'Tarifa plana',
+              desc: `Compra todo lo que quieras en nuestra tienda, el valor del envio siempre sera el mismo: Valor envio $${this.data.shippingProduct.valor}`,
+            }
+            break
+          case 'precio':
+            this.envio = {
+              titulo: 'Tarifa por precio',
+              desc: 'Según la suma del costo de tus productos te cobraran el envio',
+            }
+            break
+          case 'precio_ciudad':
+            this.envio = {
+              titulo: 'Tarifa por ciudad',
+              desc: 'Según la ciudad te cobraran el envio',
+            }
+            break
+          case 'peso':
+            this.envio = {
+              titulo: 'Tarifa por peso',
+              desc: '',
+            }
+            break
+          default:
+        }
+      }
+    },
+    quantity(productCart) {
+      this.quantityValue = productCart.cantidad
+    },
+    addQuantity() {
+      if (this.maxQuantityValue > this.quantityValue) {
+        this.quantityValue++
+        this.data.cantidad = this.quantityValue
+      }
+    },
+    removeQuantity() {
+      if (this.data.cantidad >= 2) {
+        this.quantityValue--
+        this.data.cantidad = this.quantityValue
+      }
+    },
+    videoYouTube(url) {
+      let myregexp =
+        /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
+      let id = ''
+      if (url && url !== '' && url !== 'null') {
+        this.existYoutube = true
+        id = url.match(myregexp)
+        if (id) {
+          this.idYoutube = id[1]
+        }
+      }
+    },
+    goToPayments() {
+      let objeto = {
+        id: this.data.id,
+        cantidad: this.quantityValue,
+        combinacion:
+          this.salesData && this.salesData.combinacion
+            ? this.salesData.combinacion
+            : undefined,
+        dropshipping: this.userDropshipping.userId,
+      }
+      let json = {
+        products: [objeto],
+        tienda: {
+          id: this.dataStore.id,
+        },
+        canal: 'KOMERCIA',
+      }
+      json = JSON.stringify(json)
+      if (json) {
+        this.$store.dispatch('SEND_ADD_TO_CART', 2)
+        location.href = `https://checkout.komercia.co/?params=${json}`
+      }
+    },
+    redirectWP() {
+      let baseUrlMovil = 'https://api.whatsapp.com/send?'
+      let baseUrlPc = 'https://web.whatsapp.com/send?'
+      let urlProduct = window.location.href
+      let text = `Hola 😀, %0AQuiero compartir contigo éste  producto, seguro te va a encantar: ${this.data.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
+      if (this.mobileCheck()) {
+        window.open(`${baseUrlMovil}text=${text}`, '_blank')
+      } else {
+        window.open(`${baseUrlPc}text=${text}`, '_blank')
+      }
+    },
+  },
+  jsonld() {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      productID: this.data?.id || '',
+      name: (this.data?.nombre || '').slice(0, 149),
+      description: (
+        this.data?.productosInfo?.descripcionCorta ||
+        `Producto de la tienda ${this.dataStore.nombre}`
+      ).slice(0, 9998),
+      url: this.sharing?.url || '',
+      image: this.data?.fotoCloudinary || '',
+      brand: this.data?.productosInfo?.marca || '',
+      sku: this.salesData?.unidades || '',
+      offers: [
+        {
+          '@type': 'Offer',
+          price: this.salesData?.precio || '',
+          priceCurrency: this.dataStore.tiendasInfo?.moneda || '',
+          itemCondition: 'https://schema.org/NewCondition',
+          availability:
+            this.salesData?.unidades > 0
+              ? 'https://schema.org/InStock'
+              : 'https://schema.org/OutOfStock',
         },
       ],
-      product: {
-        name: 'Basic Tee',
-        price: '$35',
-        rating: 3.9,
-        reviewCount: 512,
-        href: '#',
-        breadcrumbs: [
-          { id: 1, name: 'Women', href: '#' },
-          { id: 2, name: 'Clothing', href: '#' },
-        ],
-        images: [
-          {
-            id: 1,
-            imageSrc:
-              'https://tailwindui.com/img/ecommerce-images/product-page-01-featured-product-shot.jpg',
-            imageAlt: "Back of women's Basic Tee in black.",
-            primary: true,
-          },
-          {
-            id: 2,
-            imageSrc:
-              'https://tailwindui.com/img/ecommerce-images/product-page-01-product-shot-01.jpg',
-            imageAlt: "Side profile of women's Basic Tee in black.",
-            primary: false,
-          },
-          {
-            id: 3,
-            imageSrc:
-              'https://tailwindui.com/img/ecommerce-images/product-page-01-product-shot-02.jpg',
-            imageAlt: "Front of women's Basic Tee in black.",
-            primary: false,
-          },
-        ],
-        colors: [
-          {
-            name: 'Black',
-            bgColor: 'bg-gray-900',
-            selectedColor: 'ring-gray-900',
-          },
-          {
-            name: 'Heather Grey',
-            bgColor: 'bg-gray-400',
-            selectedColor: 'ring-gray-400',
-          },
-        ],
-        sizes: [
-          { name: 'XXS', inStock: true },
-          { name: 'XS', inStock: true },
-          { name: 'S', inStock: true },
-          { name: 'M', inStock: true },
-          { name: 'L', inStock: true },
-          { name: 'XL', inStock: false },
-        ],
-        description: `
-      <p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.</p>
-      <p>Looking to stock your closet? The Basic tee also comes in a 3-pack or 5-pack at a bundle discount.</p>
-    `,
-        details: [
-          'Only the best materials',
-          'Ethically and locally made',
-          'Pre-washed and pre-shrunk',
-          'Machine wash cold with similar colors',
-        ],
-      },
+      additionalProperty: [
+        {
+          '@type': 'PropertyValue',
+          propertyID: 'item_group_id',
+          value:
+            this.categoriaProducto > 0
+              ? `FB${this.data.categoriaProducto}_${this.data.categoriaProducto2.nombreCategoriaProducto}`
+              : '',
+          status: 'active',
+        },
+      ],
     }
   },
 }

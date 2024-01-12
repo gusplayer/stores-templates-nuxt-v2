@@ -1,6 +1,7 @@
 <template>
+  <!-- sticky top-0 -->
   <header
-    class="sticky top-0 z-10 w-full max-h-[120px] md:max-h-10/0 flex justify-center items-center px-10"
+    class="z-10 w-full max-h-[120px] md:max-h-10/0 flex justify-center items-center px-10"
     :style="[
       settingByTemplate6[0].setting6Header,
       settingByTemplate6[0].setting6General,
@@ -27,7 +28,7 @@
         </div>
       </div>
       <div class="flex flex-row items-center">
-        <button
+        <!-- <button
           class="flex flex-row justify-center items-center cursor-pointer transition-all ease-in duration-0.3"
           @click="openOrder"
         >
@@ -65,15 +66,18 @@
               {{ productsCart }}
             </span>
           </div>
-        </button>
+        </button> -->
       </div>
     </div>
-    <KoOrder :data-store="dataStore" />
+    <!-- <KoOrder :data-store="dataStore" /> -->
   </header>
 </template>
 
 <script>
 export default {
+  // components: {
+  //   KoOrder: () => import('../_order1/order1.vue'),
+  // },
   props: {
     dataStore: {
       type: Object,
@@ -84,23 +88,20 @@ export default {
       required: true,
     },
   },
-  components: {
-    KoOrder: () => import('../_order1/order1.vue'),
-  },
-  computed: {
-    productsCart() {
-      return this.$store.state.productsCart.length
-    },
-  },
+  // computed: {
+  //   productsCart() {
+  //     return this.$store.state.productsCart.length
+  //   },
+  // },
   methods: {
-    openOrder() {
-      this.$gtm.push({
-        event: 'OpenCart',
-        action: 'click',
-      })
-      this.showMenu = false
-      this.$store.commit('SET_OPEN_ORDER', true)
-    },
+    // openOrder() {
+    //   this.$gtm.push({
+    //     event: 'OpenCart',
+    //     action: 'click',
+    //   })
+    //   this.showMenu = false
+    //   this.$store.commit('SET_OPEN_ORDER', true)
+    // },
   },
 }
 </script>

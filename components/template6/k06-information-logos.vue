@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="informationLogos"
-    class="w-full flex justify-center items-center py-35 lg:py-50 px-10 mb-30"
+    class="w-full flex justify-center items-center py-35 lg:py-50 px-10 mb-40"
     :style="{
       backgroundColor: informationLogos['--background_color_1'] || 'white',
     }"

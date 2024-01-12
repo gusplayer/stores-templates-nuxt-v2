@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="banner"
-    class="mb-20"
+    class="mb-40"
     :style="{
       backgroundColor: banner?.bg_color || 'white',
     }"
@@ -42,7 +42,7 @@
             <div v-for="(items, index) in banner.values" :key="index">
               <dt
                 v-if="items?.title"
-                class="text-sm font-medium"
+                class="text-sm font-bold"
                 :style="{
                   color: banner?.color_title || '#111827',
                 }"
@@ -63,39 +63,45 @@
         </div>
 
         <div>
-          <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
+          <div class="max-h-[616px] max-w-[616px] overflow-hidden rounded-lg">
             <img
               :src="
                 banner.img_main
-                  ? banner.img_main
+                  ? idCloudinary(banner.img_main, 850, 850)
                   : 'https://res.cloudinary.com/komercia-components/image/upload/c_scale,q_auto:best,f_auto/v1598040886/sws8xa8z0oyu252nqxzv.webp'
               "
               alt="banner1"
+              width="616"
+              height="616"
               class="h-full w-full object-cover object-center"
             />
           </div>
           <div
             class="mt-4 grid grid-cols-2 gap-4 sm:mt-6 sm:gap-6 lg:mt-8 lg:gap-8"
           >
-            <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
+            <div class="max-h-[292px] max-w-[292px] overflow-hidden rounded-lg">
               <img
                 :src="
                   banner.img_second_1
-                    ? banner.img_second_1
+                    ? idCloudinary(banner.img_second_1, 550, 550)
                     : 'https://res.cloudinary.com/komercia-components/image/upload/c_scale,q_auto:best,f_auto/v1598040886/sws8xa8z0oyu252nqxzv.webp'
                 "
                 alt="banner2"
+                width="292"
+                height="292"
                 class="h-full w-full object-cover object-center"
               />
             </div>
-            <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
+            <div class="max-h-[292px] max-w-[292px] overflow-hidden rounded-lg">
               <img
                 :src="
                   banner.img_second_2
-                    ? banner.img_second_2
+                    ? idCloudinary(banner.img_second_2, 550, 550)
                     : 'https://res.cloudinary.com/komercia-components/image/upload/c_scale,q_auto:best,f_auto/v1598040886/sws8xa8z0oyu252nqxzv.webp'
                 "
                 alt="banner3"
+                width="292"
+                height="292"
                 class="h-full w-full object-cover object-center"
               />
             </div>

@@ -6,12 +6,16 @@
       },
     ]"
   >
-    <K06-banner id="kBannerX" v-bind="componentsProps" />
-    <K06-Product-features id="kFeacturesX" v-bind="componentsProps" />
-    <K06-product-overviews id="kOverviewsX" v-bind="componentsProps" />
-    <K06-information id="kInformationX" v-bind="componentsProps" />
-    <K06-information-logos id="kLogosX" v-bind="componentsProps" />
-    <K010-button-car />
+    <template v-for="(componentKey, index) in sortedComponents">
+      <component
+        :is="componentKey"
+        v-if="settingByTemplate6[componentKey]?.visible"
+        :id="`k${capitalizeFirstLetter(componentKey)}X`"
+        :key="index"
+        v-bind="componentsProps"
+      />
+    </template>
+    <K06-newsletter v-bind="componentsProps" />
   </main>
 </template>
 
@@ -20,15 +24,15 @@ import { mapState } from 'vuex'
 export default {
   name: 'KoTemplate6',
   components: {
-    K06Banner: () => import('@/components/template6/k06-banner.vue'),
-    K06Information: () => import('@/components/template6/k06-information.vue'),
-    K06ProductFeatures: () =>
+    banner: () => import('@/components/template6/k06-banner.vue'),
+    information: () => import('@/components/template6/k06-information.vue'),
+    productFeatures: () =>
       import('@/components/template6/k06-product-features.vue'),
-    K06ProductOverviews: () =>
+    productOverviews: () =>
       import('@/components/template6/k06-product-overviews.vue'),
-    K06InformationLogos: () =>
+    informationLogos: () =>
       import('@/components/template6/k06-information-logos.vue'),
-    K010ButtonCar: () => import('@/components/template10/Ko10-buttonCar.vue'),
+    K06Newsletter: () => import('@/components/template6/Ko6-Newsletter.vue'),
   },
   layout: 'default',
   computed: {
@@ -42,9 +46,19 @@ export default {
         informationLogos: this.settingByTemplate6?.informationLogos ?? null,
         productFeatures: this.settingByTemplate6?.productFeatures ?? null,
         productOverviews: this.settingByTemplate6?.productOverviews ?? null,
+        newsletter: this.settingByTemplate6?.newsletter ?? null,
       }
     },
+    sortedComponents() {
+      const componentsKeys = Object.keys(this.settingByTemplate6)
+      return componentsKeys.sort(
+        (a, b) =>
+          (this.settingByTemplate6[b]?.order || 0) -
+          (this.settingByTemplate6[a]?.order || 0)
+      )
+    },
   },
+
   beforeDestroy() {
     window.removeEventListener('message', this.addEventListenerTemplate)
   },
@@ -53,6 +67,9 @@ export default {
     window.addEventListener('message', this.addEventListenerTemplate)
   },
   methods: {
+    capitalizeFirstLetter(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1)
+    },
     async addEventListenerTemplate(e) {
       if (
         e.origin.includes('https://panel.komercia.co') ||
@@ -71,28 +88,31 @@ export default {
         ) {
           switch (e.data.componentToEdit) {
             case 'settingsGeneral':
-              this.moverseA('kBannerX')
+              this.moverseA('kbannerX')
               break
             case 'header':
-              this.moverseA('kBannerX')
+              this.moverseA('kbannerX')
               break
             case 'footer':
-              this.moverseA('KWrapperX')
+              this.moverseA('KnewsletterX')
               break
             case 'banner':
-              this.moverseA('kBannerX')
+              this.moverseA('kbannerX')
               break
             case 'information':
-              this.moverseA('kInformationX')
+              this.moverseA('kinformationX')
               break
             case 'productFeatures':
-              this.moverseA('kFeacturesX')
+              this.moverseA('kproductFeaturesX')
               break
             case 'productOverviews':
-              this.moverseA('kOverviewsX')
+              this.moverseA('kproductOverviewsX')
               break
             case 'informationLogos':
-              this.moverseA('kLogosX')
+              this.moverseA('kinformationLogosX')
+              break
+            case 'newsletter':
+              this.moverseA('knewsletterX')
               break
           }
         } else {

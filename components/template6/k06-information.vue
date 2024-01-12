@@ -46,7 +46,7 @@
           >
             <h3
               v-if="items?.title"
-              class="text-lg font-medium"
+              class="text-lg font-bold"
               :style="{
                 color: items?.color_title || '#111827',
               }"
@@ -73,14 +73,16 @@
           >
             <div
               v-if="items?.img"
-              class="aspect-h-2 aspect-w-5 overflow-hidden rounded-lg"
+              class="w-full h-full max-w-[832px] max-h-[333px] overflow-hidden rounded-lg"
               :style="{
                 backgroundColor: items?.bg_img || '#e5e7eb',
               }"
             >
               <img
-                :src="items.img"
+                :src="idCloudinary(items.img, 850, 352)"
                 :alt="items.title"
+                width="832"
+                height="333"
                 class="object-cover object-center"
               />
             </div>
