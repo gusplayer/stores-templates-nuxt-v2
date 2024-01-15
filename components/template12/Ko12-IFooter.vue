@@ -219,7 +219,7 @@ export default {
 
 <style scoped>
 .wrapper_footer {
-  padding: 40px 0 10px;
+  padding: 80px 0 10px;
   @apply relative flex flex-col items-center w-full;
 }
 .header-content-logo {
