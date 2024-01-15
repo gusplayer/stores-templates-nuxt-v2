@@ -1,9 +1,11 @@
 <template>
-  <main class="w-full flex justify-center items-center">
+  <main
+    class="w-full flex justify-center items-center"
+    :style="`background:${settingByTemplate12.backgroundColor};`"
+  >
     <div
       v-if="listProducts?.length > 0"
-      class="pt-20 w-full max-w-[940px]"
-      :style="`background:${settingByTemplate12.backgroundColor};`"
+      class="pt-20 w-full max-w-[940px] px-0 md:px-10"
     >
       <div
         v-for="category in categorias"
@@ -20,7 +22,7 @@
           "
         >
           <h2
-            class="text-center font-semibold mb-10 text-2xl md:text-4xl uppercase"
+            class="text-center font-semibold mb-20 text-2xl md:text-4xl uppercase"
             :style="`color:${settingByTemplate12.titleColor};`"
           >
             {{ category.nombreCategoriaProducto }}
@@ -32,7 +34,7 @@
             <template v-if="getProductos(subcategories.id).length > 0">
               <div class="w-full m-auto pt-30 px-10 pb-20">
                 <h3
-                  class="text-22 font-semibold uppercase mb-10"
+                  class="text-22 font-semibold uppercase mb-20"
                   :style="`color:${settingByTemplate12.titleColor};`"
                 >
                   {{ subcategories.nombreSubcategoria }}
