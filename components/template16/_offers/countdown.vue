@@ -40,7 +40,7 @@
     </div>
     <div
       v-else
-      class="mt-30 text-14 md:text-16 xl:text-20 font-semibold"
+      class="mt-30 text-16 xl:text-20 font-semibold"
       :style="`color: ${information.color_text_discount};`"
     >
       <p>Oferta finalizada</p>

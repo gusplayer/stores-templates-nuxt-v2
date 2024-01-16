@@ -25,11 +25,11 @@
           >
             <img
               :src="idCloudinary(item.img, 550, 550)"
-              alt="banner template15"
-              width="405"
-              height="405"
               class="w-full h-full object-cover relative"
               :style="`border-radius: ${settingGeneral?.radius};`"
+              width="405"
+              height="405"
+              alt="banner template15"
             />
             <div
               v-if="item?.title"

@@ -28,14 +28,14 @@
         <div class="flex-1 flex flex-col justify-center items-start">
           <p
             v-if="offers?.title"
-            class="mb-10 max-w-lg md:max-w-xl text-15 md:text-25 lg:text-40 xl:text-45 leading-tight"
+            class="mb-10 max-w-lg md:max-w-xl text-20 md:text-25 lg:text-40 xl:text-45 leading-tight"
             :style="`color: ${offers.color_title}; font-weight: ${offers.fontWeighTitle};`"
           >
             {{ offers.title }}
           </p>
           <p
             v-if="offers?.text"
-            class="max-w-md md:max-w-lg text-14 md:text-18 xl:text-28"
+            class="max-w-md md:max-w-lg text-18 xl:text-28"
             :style="`color: ${offers.color_text}; font-weight: ${offers.fontWeighText};`"
           >
             {{ offers.text }}

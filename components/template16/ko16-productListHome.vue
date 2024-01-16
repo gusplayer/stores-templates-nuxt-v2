@@ -8,13 +8,13 @@
       class="w-full max-w-[1200px] h-auto relative flex flex-col items-center justify-center overflow-hidden mt-20"
     >
       <p
-        class="w-full text-center mb-15 text-25 md:text-28 lg:text-32"
+        class="w-full text-center mb-15"
         :style="`color: ${listProductsHome.color_title}; font-weight: ${listProductsHome.fontWeighTitle}; font-size: ${listProductsHome.fontSizeTitle};`"
       >
         {{ listProductsHome.title }}
       </p>
       <p
-        class="w-full text-center mb-50 text-14"
+        class="w-full text-center mb-50"
         :style="`color: ${listProductsHome.color_text}; font-weight: ${listProductsHome.fontWeighText}; font-size: ${listProductsHome.fontSizeText};`"
       >
         {{ listProductsHome.text }}
