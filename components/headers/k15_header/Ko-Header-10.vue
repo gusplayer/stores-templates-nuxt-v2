@@ -16,9 +16,7 @@
       class="w-full max-w-9/5 md:max-w-9/0 flex justify-between items-center"
     >
       <div class="w-full flex flex-row justify-start items-center">
-        <div
-          class="flex justify-center items-center max-h-[120px] md:max-h-10/0"
-        >
+        <div class="flex justify-center items-center md:max-h-10/0">
           <nuxt-link
             to="/"
             class="w-full flex justify-center items-center"
@@ -128,12 +126,11 @@
           >
             <nuxt-link
               to="/"
-              class="w-full flex justify-center items-start max-h-[120px] md:max-h-10/0"
-              style="max-width: var(--with_logo)"
+              class="w-full flex justify-center items-start md:max-h-10/0"
             >
               <img
                 :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
-                class="w-full object-contain object-left"
+                class="w-full max-h-[120px] object-contain object-left"
                 alt="LogoStore"
                 @click="clear"
               />
