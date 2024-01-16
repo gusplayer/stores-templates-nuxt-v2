@@ -91,60 +91,12 @@
             </span>
           </div>
         </div>
-        <div class="relative">
-          <button class="flex md:hidden ml-10" @click="stateMenu = !stateMenu">
-            <menu-icon
-              class="text-25"
-              :style="`color: ${settingByTemplate16[0].header['--color_icon']} ;`"
-            />
-          </button>
-          <div
-            v-if="stateMenu"
-            class="absolute right-2 top-30 z-20 py-20 px-20 overflow-hidden rounded-6 border"
-            style="background-color: var(--background_color_1)"
-          >
-            <div
-              v-if="settingByTemplate16[0].pages.values"
-              class="w-full h-full flex flex-col justify-start items-end overflow-y-auto"
-            >
-              <div
-                v-for="(item, index) in settingByTemplate16[0].pages.values"
-                :key="`${index}${item.displayName}`"
-              >
-                <nuxt-link
-                  v-if="!item.isExternalLink"
-                  :to="item.url"
-                  class="my-5 block"
-                >
-                  <p
-                    class="w-full px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3"
-                    :class="btnSelect == item.url ? 'btn-active' : ''"
-                    @click="btnActivate(item.url)"
-                  >
-                    {{ item.displayName }}
-                  </p>
-                </nuxt-link>
-                <a
-                  v-else
-                  :href="item.url"
-                  rel="noreferrer noopener"
-                  class="w-full px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3"
-                  :class="btnSelect == item.url ? 'btn-active' : ''"
-                  target="_blank"
-                >
-                  {{ item.displayName }}
-                </a>
-              </div>
-            </div>
-            <div v-else>
-              <p
-                class="w-full px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3"
-              >
-                No tiene paginas agregadas
-              </p>
-            </div>
-          </div>
-        </div>
+        <button class="flex md:hidden ml-10" @click="stateMenu = !stateMenu">
+          <menu-icon
+            class="text-25"
+            :style="`color: ${settingByTemplate16[0].header['--color_icon']} ;`"
+          />
+        </button>
       </div>
       <KoOrder :data-store="dataStore" />
       <KoSearch :data-store="dataStore" />
@@ -152,6 +104,69 @@
         :data-store="dataStore"
         :setting-by-template="settingByTemplate16[0].listProductsFilter"
       />
+      <el-drawer
+        :visible.sync="stateMenu"
+        direction="ttb"
+        :with-header="false"
+        :modal-append-to-body="false"
+        size="35%"
+      >
+        <div class="w-full h-full flex flex-col justify-start pb-20">
+          <div
+            class="w-full flex flex-row justify-between items-center shadow-lg px-10"
+          >
+            <nuxt-link
+              to="/"
+              class="w-full flex justify-center items-start max-h-[120px] md:max-h-10/0"
+              style="max-width: var(--with_logo)"
+            >
+              <img
+                :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+                class="w-full object-contain object-left"
+                alt="LogoStore"
+                @click="clear"
+              />
+            </nuxt-link>
+            <button @click="stateMenu = !stateMenu">
+              <window-close-icon class="text-35 text-gray-800" />
+            </button>
+          </div>
+          <div
+            v-if="settingByTemplate16[0].pages.values"
+            class="w-full h-full max-h-[236px] flex flex-col justify-start items-start overflow-y-auto px-15 pt-30"
+          >
+            <div
+              v-for="(item, index) in settingByTemplate16[0].pages.values"
+              :key="`${index}${item.displayName}`"
+            >
+              <nuxt-link
+                v-if="!item.isExternalLink"
+                :to="item.url"
+                class="my-5 block"
+              >
+                <p
+                  class="px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3"
+                  :class="btnSelect == item.url ? 'btn-active' : ''"
+                  @click="btnActivate(item.url)"
+                >
+                  {{ item.displayName }}
+                </p>
+              </nuxt-link>
+              <a
+                v-else
+                :href="item.url"
+                rel="noreferrer noopener"
+                class="my-5 block"
+                target="_blank"
+              >
+                <p class="btn">
+                  {{ item.displayName }}
+                </p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </el-drawer>
     </div>
   </header>
 </template>

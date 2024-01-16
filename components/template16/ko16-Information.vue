@@ -34,14 +34,14 @@
             <p
               v-if="item?.title"
               class="mb-10 max-w-sm text-22 md:text-30 leading-tight"
-              :style="`color: ${item.color_title}; font-weight: ${item.fontWeighTitle}; font-size: ${item.fontSizeTitle};`"
+              :style="`color: ${item.color_title}; font-weight: ${item.fontWeighTitle}; `"
             >
               {{ item.title }}
             </p>
             <p
               v-if="item?.text"
               class="max-w-sm text-18 md:text-22"
-              :style="`color: ${item.color_text}; font-weight: ${item.fontWeighText}; font-size: ${item.fontSizeText};`"
+              :style="`color: ${item.color_text}; font-weight: ${item.fontWeighText}; `"
             >
               {{ item.text }}
             </p>
@@ -49,7 +49,7 @@
               <nuxt-link
                 v-if="item.visible_btn"
                 :to="item.url_redirect ? item.url_redirect : ''"
-                class="px-20 py-20 mt-16 md:mt-40 border text-12 md:text-14 xl:text-16"
+                class="px-20 py-20 mt-16 md:mt-40 border text-14 xl:text-16"
                 :style="`color: ${item.color_text_btn}; background-color: ${item.color_bg_btn}; border-color: ${item.color_border_btn}; border-radius: ${settingGeneral?.radius};`"
               >
                 {{ item.text_btn }}

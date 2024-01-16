@@ -120,14 +120,31 @@
         direction="ttb"
         :with-header="false"
         :modal-append-to-body="false"
-        size="25%"
+        size="35%"
       >
-        <div
-          class="w-full flex flex-col justify-center items-center h-full py-5"
-        >
+        <div class="w-full h-full flex flex-col justify-start pb-20">
+          <div
+            class="w-full flex flex-row justify-between items-center shadow-lg px-10"
+          >
+            <nuxt-link
+              to="/"
+              class="w-full flex justify-center items-start max-h-[120px] md:max-h-10/0"
+              style="max-width: var(--with_logo)"
+            >
+              <img
+                :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+                class="w-full object-contain object-left"
+                alt="LogoStore"
+                @click="clear"
+              />
+            </nuxt-link>
+            <button @click="stateMenu = !stateMenu">
+              <window-close-icon class="text-35 text-gray-800" />
+            </button>
+          </div>
           <div
             v-if="settingByTemplate15[0]?.pages?.values"
-            class="w-full h-full max-h-[150px] max-w-[300px] flex flex-col justify-center items-center overflow-y-auto py-10"
+            class="w-full h-full max-h-[236px] flex flex-col justify-start items-start overflow-y-auto px-15 pt-30"
           >
             <div
               v-for="(item, index) in settingByTemplate15[0].pages.values"
@@ -159,12 +176,6 @@
               </a>
             </div>
           </div>
-          <button
-            class="w-full max-w-[300px] text-center bg-red-500 text-white-white rounded-8 px-5 py-3 mt-15"
-            @click="stateMenu = !stateMenu"
-          >
-            Cerrar
-          </button>
         </div>
       </el-drawer>
     </div>

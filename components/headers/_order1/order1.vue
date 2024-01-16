@@ -1,10 +1,10 @@
 <template>
   <el-drawer
-    direction="rtl"
-    class="width-drawer"
     :visible.sync="openOrder"
-    :withHeader="false"
-    :modalAppendToBody="false"
+    direction="rtl"
+    :with-header="false"
+    :modal-append-to-body="false"
+    class="width-drawer"
   >
     <!-- <transition name="fade"> -->
     <div @click="closeOrder" class="relative">
