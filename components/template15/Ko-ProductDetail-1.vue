@@ -292,7 +292,8 @@
               </p>
             </div>
             <div
-              class="fixed md:sticky w-full flex flex-row justify-start items-center mb-0 md:mb-20 left-0 bottom-0 px-6 py-10 md:px-0 md:py-0 bg-gray-100 md:bg-white-white border-t md:border-t-0 z-100 md:z-0"
+              class="fixed md:sticky w-full flex flex-row justify-start items-center mb-0 md:mb-20 left-0 bottom-0 px-6 py-10 md:px-0 md:py-0 border-t md:border-t-0 z-100 md:z-0"
+              :style="`background-color: ${settingByTemplate15[0].detailsProducts['--background_color_1']};`"
             >
               <div
                 class="flex flex-row justify-center items-center mr-20 border-2"
@@ -818,6 +819,7 @@ export default {
         this.loading = false
         this.data = data.data
 
+        this.sendAnalyticsStore(data.data.id, 'VIEWED_PRODUCT')
         this.selectedPhoto(data.data.fotoCloudinary)
         this.videoYouTube(data.data.productosInfo.video)
         this.setOptionShipping()
@@ -864,6 +866,13 @@ export default {
           })
         }
       }
+    },
+    async sendAnalyticsStore(value, event) {
+      await this.$store.dispatch('SEND_ANALYTICS_STORE', {
+        storeId: this.dataStore.id,
+        event: event,
+        productId: value,
+      })
     },
     setOptionShipping() {
       if (this.data.envioGratis == 1) {
@@ -949,6 +958,7 @@ export default {
       if (!this.data.cantidad) {
         this.data.cantidad = this.quantityValue
       }
+      this.sendAnalyticsStore(this.data.id, 'ADDED_PRODUCT_TO_CART')
       const product = {
         id: this.data.id,
         precio: this.salesData.precio,
@@ -985,6 +995,7 @@ export default {
       this.$store.dispatch('SEND_ADD_TO_CART', 1)
     },
     goToPayments() {
+      this.sendAnalyticsStore(this.data.id, 'CLICKED_PAY_CART')
       let objeto = {
         id: this.data.id,
         cantidad: this.quantityValue,

@@ -179,6 +179,7 @@ export default {
   methods: {
     setToQueryFilter(type, value) {
       if (type === 'category') {
+        this.sendAnalyticsStore(value.id)
         this.query.subcategory = null
         this.subCategorySelect = null
         this.query.category = value.nombreCategoriaProducto || null
@@ -286,6 +287,13 @@ export default {
       const elementId =
         value === 1 ? 'swiper-slide-categories' : 'swiper-slide-subcategories'
       document.getElementById(elementId).scrollLeft += scrollAmount
+    },
+    async sendAnalyticsStore(value) {
+      await this.$store.dispatch('SEND_ANALYTICS_STORE', {
+        storeId: this.dataStore.id,
+        event: 'CLICKED_CATEGORY',
+        categoryId: value,
+      })
     },
   },
 }

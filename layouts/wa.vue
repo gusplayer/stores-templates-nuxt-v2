@@ -243,6 +243,9 @@ export default {
     if (this.$route.query?.openCart === 'true') {
       this.$store.commit('SET_OPEN_ORDER', true)
     }
+
+    // Envía datos para registrar vistas en la pagina
+    this.sendAnalyticsStore()
   },
   methods: {
     redirectWhatsApp() {
@@ -275,6 +278,12 @@ export default {
         default:
           return `Hola%20vengo%20de%20tu%20tienda%20online%20${nombre}%20y%20me%20gustar%C3%ADa%20recibir%20mas%20informaci%C3%B3n%20%0AURL%3A%20${url}`
       }
+    },
+    async sendAnalyticsStore() {
+      await this.$store.dispatch('SEND_ANALYTICS_STORE', {
+        storeId: this.dataStore.id,
+        event: 'VISITED_PAGE',
+      })
     },
   },
 }

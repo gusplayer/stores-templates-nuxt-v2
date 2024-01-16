@@ -557,6 +557,8 @@ export default {
       this.$store.commit('SET_OPEN_ORDER', true)
     }
 
+    // Envía datos para registrar vistas en la pagina
+    this.sendAnalyticsStore()
     // Agrega un listener de mensajes
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenerTemplate)
@@ -624,6 +626,12 @@ export default {
           }
         }
       }
+    },
+    async sendAnalyticsStore() {
+      await this.$store.dispatch('SEND_ANALYTICS_STORE', {
+        storeId: this.dataStore.id,
+        event: 'VISITED_PAGE',
+      })
     },
   },
 }

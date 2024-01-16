@@ -670,6 +670,7 @@ export default {
         this.loading = false
         this.data = data.data
 
+        this.sendAnalyticsStore(data.data.id, 'VIEWED_PRODUCT')
         this.videoYouTube(data.data.productosInfo.video)
         this.setOptionShipping()
         this.salesData = {
@@ -714,6 +715,13 @@ export default {
           })
         }
       }
+    },
+    async sendAnalyticsStore(value, event) {
+      await this.$store.dispatch('SEND_ANALYTICS_STORE', {
+        storeId: this.dataStore.id,
+        event: event,
+        productId: value,
+      })
     },
     setOptionShipping() {
       if (this.data.envioGratis == 1) {
@@ -792,6 +800,7 @@ export default {
       }
     },
     goToPayments() {
+      this.sendAnalyticsStore(this.data.id, 'CLICKED_PAY_CART')
       let objeto = {
         id: this.data.id,
         cantidad: this.quantityValue,
