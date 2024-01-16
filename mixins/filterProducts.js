@@ -375,12 +375,14 @@ export default {
     },
     // Filtro de categoría
     sendCategory(value) {
+      this.sendAnalyticsStore(value.id)
       this.selectedSubcategories = this.subcategories.filter(
         (item) => item.categoria === value.id
       )
       this.filters.category = value.nombreCategoriaProducto
       this.nameCategory = value.nombreCategoriaProducto
       this.updateFilters()
+
       this.clearFiltersCategory(value.nombreCategoriaProducto)
     },
     // Filtro de subcategoría
@@ -530,6 +532,14 @@ export default {
         this.tagProduct = ''
         this.updateFilters()
       }
+    },
+
+    async sendAnalyticsStore(value) {
+      await this.$store.dispatch('SEND_ANALYTICS_STORE', {
+        storeId: this.dataStore.id,
+        event: 'CLICKED_CATEGORY',
+        categoryId: value,
+      })
     },
     // getSearch(value) {
     //   if (value) {

@@ -114,6 +114,17 @@ export default {
       }, 250)
     },
   },
+  mounted() {
+    this.sendAnalyticsStore()
+  },
+  methods: {
+    async sendAnalyticsStore() {
+      await this.$store.dispatch('SEND_ANALYTICS_STORE', {
+        storeId: this.dataStore.id,
+        event: 'VISITED_PRODUCTS_PAGE',
+      })
+    },
+  },
 }
 </script>
 

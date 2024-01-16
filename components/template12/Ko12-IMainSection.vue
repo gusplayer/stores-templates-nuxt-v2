@@ -151,6 +151,7 @@ export default {
   },
   mounted() {
     this.currentChange()
+    this.sendAnalyticsStore()
   },
   methods: {
     OpenModalProductDetails(value) {
@@ -192,6 +193,12 @@ export default {
       if (success) {
         this.listProducts = data.publicProductList
       }
+    },
+    async sendAnalyticsStore() {
+      await this.$store.dispatch('SEND_ANALYTICS_STORE', {
+        storeId: this.dataStore.id,
+        event: 'VISITED_PRODUCTS_PAGE',
+      })
     },
   },
 }

@@ -163,6 +163,7 @@ export default {
     },
     setToQueryFilter(type, value) {
       if (type === 'category') {
+        this.sendAnalyticsStore(value.id)
         this.query.subcategory = null
         this.subCategorySelect = null
         this.query.tag = null
@@ -235,6 +236,13 @@ export default {
       this.$store.commit('products/SET_TAG_PRODUCT', null)
       this.$store.commit('SET_STATE_BANNER', true)
       this.closed()
+    },
+    async sendAnalyticsStore(value) {
+      await this.$store.dispatch('SEND_ANALYTICS_STORE', {
+        storeId: this.dataStore.id,
+        event: 'CLICKED_CATEGORY',
+        categoryId: value,
+      })
     },
   },
 }

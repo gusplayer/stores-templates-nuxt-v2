@@ -292,6 +292,7 @@ export default {
       if (this.product) {
         this.productIndexCart = null
         this.getDataProduct()
+        this.sendAnalyticsStore(this.product.id)
         if (this.product.id == this.idSlug) {
           let product = {
             id: this.product.id,
@@ -388,6 +389,13 @@ export default {
           )
         }
       }
+    },
+    async sendAnalyticsStore(value) {
+      await this.$store.dispatch('SEND_ANALYTICS_STORE', {
+        storeId: this.dataStore.id,
+        event: 'ADDED_PRODUCT_TO_CART',
+        productId: value,
+      })
     },
   },
 }

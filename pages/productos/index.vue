@@ -130,6 +130,7 @@ export default {
     window.removeEventListener('message', this.addEventListenerTemplate)
   },
   mounted() {
+    this.sendAnalyticsStore()
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenerTemplate)
   },
@@ -179,6 +180,12 @@ export default {
           })
         }
       }
+    },
+    async sendAnalyticsStore() {
+      await this.$store.dispatch('SEND_ANALYTICS_STORE', {
+        storeId: this.$store.state.dataStore.id,
+        event: 'VISITED_PRODUCTS_PAGE',
+      })
     },
   },
 }

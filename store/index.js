@@ -419,6 +419,30 @@ export const actions = {
       )
     }
   },
+  async SEND_ANALYTICS_STORE({ state }, params) {
+    try {
+      await axios({
+        method: 'POST',
+        url: `${state.urlAWSsettings}/api/v1/stores/analytics`,
+        headers: {
+          KOMERCIA_PUBLIC_ROUTES_KEY: state.routerKey,
+        },
+        data: {
+          storeId: params.storeId,
+          event: params.event,
+          productId: params.productId || null,
+          categoryId: params.categoryId || null,
+        },
+      })
+    } catch (err) {
+      console.log(
+        'SEND_ANALYTICS_STORE',
+        err.response.data,
+        'status',
+        err.response.status
+      )
+    }
+  },
   async GET_CATEGORIES({ commit, state }, idTienda) {
     try {
       const { data } = await axios({
@@ -1008,6 +1032,7 @@ export const getters = {
     return null
   },
 }
+
 function setCurrentSetting(state, { component, setting, template }) {
   if (component && setting) {
     // eslint-disable-next-line no-prototype-builtins

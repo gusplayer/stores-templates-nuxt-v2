@@ -631,6 +631,7 @@ export default {
         this.loading = false
         this.data = data.data
 
+        this.sendAnalyticsStore(data.data.id, 'VIEWED_PRODUCT')
         this.setOptionShipping()
         this.getSuggestedProducts()
 
@@ -675,6 +676,13 @@ export default {
           })
         }
       }
+    },
+    async sendAnalyticsStore(value, event) {
+      await this.$store.dispatch('SEND_ANALYTICS_STORE', {
+        storeId: this.dataStore.id,
+        event: event,
+        productId: value,
+      })
     },
     setOptionShipping() {
       if (this.data.envioGratis == 1) {
@@ -744,6 +752,7 @@ export default {
       if (!this.data.cantidad) {
         this.data.cantidad = this.quantityValue
       }
+      this.sendAnalyticsStore(this.data.id, 'ADDED_PRODUCT_TO_CART')
       const product = {
         id: this.data.id,
         precio: this.salesData.precio,
@@ -810,6 +819,7 @@ export default {
     },
     addShoppingCartWhatsApp() {
       if (this.removeItemsCart()) {
+        this.sendAnalyticsStore(this.data.id, 'ADDED_PRODUCT_TO_CART')
         const product = {
           id: this.data.id,
           precio: this.salesData.precio,

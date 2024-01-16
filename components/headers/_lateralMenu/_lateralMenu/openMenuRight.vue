@@ -266,6 +266,7 @@ export default {
         this.query.name = this.query.name || null
         this.getSearch(this.query.name)
       } else if (type === 'category') {
+        this.sendAnalyticsStore(value.id)
         this.query.subcategory = null
         this.subCategorySelect = null
         this.query.tag = null
@@ -336,6 +337,13 @@ export default {
           window.fbq('track', 'Search', { search_string: value })
         }
       }
+    },
+    async sendAnalyticsStore(value) {
+      await this.$store.dispatch('SEND_ANALYTICS_STORE', {
+        storeId: this.dataStore.id,
+        event: 'CLICKED_CATEGORY',
+        categoryId: value,
+      })
     },
   },
 }
