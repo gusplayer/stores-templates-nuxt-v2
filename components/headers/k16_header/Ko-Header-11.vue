@@ -117,12 +117,12 @@
           >
             <nuxt-link
               to="/"
-              class="w-full flex justify-center items-start max-h-[120px] md:max-h-10/0"
+              class="w-full flex justify-center items-start md:max-h-10/0"
               style="max-width: var(--with_logo)"
             >
               <img
                 :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
-                class="w-full object-contain object-left"
+                class="w-full max-h-[120px] object-contain object-left"
                 alt="LogoStore"
                 @click="clear"
               />
