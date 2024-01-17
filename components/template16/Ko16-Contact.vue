@@ -4,7 +4,7 @@
     :style="[
       {
         '--font-style-1':
-          settingByTemplate16[0]?.settingsGeneral?.fount_1 ?? 'Poppins',
+          settingByTemplate16[0]?.settingsGeneral?.font ?? 'Poppins',
       },
     ]"
   >
