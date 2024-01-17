@@ -178,7 +178,7 @@ export default {
       13: this.settingByTemplate13?.settingGeneral?.fount_1 ?? 'Roboto',
       14: this.settingByTemplate14?.settingsGeneral?.fount_1 ?? 'Poppins',
       15: this.settingByTemplate15?.settingGeneral?.font ?? 'Poppins',
-      16: this.settingByTemplate16?.settingsGeneral?.fount_1 ?? 'Poppins',
+      16: this.settingByTemplate16?.settingsGeneral?.font ?? 'Poppins',
     }
 
     // Verifica si el valor para el template actual es un objeto
