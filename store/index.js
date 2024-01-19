@@ -35,7 +35,7 @@ export const state = () => ({
   urlNodeSettings: 'https://node.komercia.co',
   urlTemplate: 'https://templates.komercia.co',
   urlComponents: 'https://components.komercia.co',
-  urlAWSsettings: 'https://tp2qtsmpza.us-east-2.awsapprunner.com',
+  urlAWSsettings: 'https://api.komercia.app',
   routerKey: 'c6979297-txfg-4962-7sag-709c76a71755',
   configAxios: {
     headers: {
