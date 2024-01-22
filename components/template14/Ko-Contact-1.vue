@@ -345,7 +345,7 @@
                   <template slot-scope="{ errors }">
                     <input
                       id="ContactPhone"
-                      v-model="numberphone"
+                      v-model="numberPhone"
                       name="celular"
                       type="number"
                       class="input-text"
@@ -366,7 +366,7 @@
                   :disabled="stateBtn ? false : true"
                   @click="submitContact"
                 >
-                  {{ $t('contact_enviar') }}
+                  {{ stateBtn ? $t('contact_enviar') : $t('footer_pendiente') }}
                 </button>
               </div>
             </div>
@@ -378,7 +378,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { mapState } from 'vuex'
 import idCloudinaryBanner from '@/mixins/idCloudinary'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
@@ -404,7 +403,7 @@ export default {
       positionLocationStore: 0,
       nombre: '',
       email: '',
-      numberphone: '',
+      numberPhone: '',
       comment: '',
       messageFull: '',
       message: {
@@ -476,7 +475,7 @@ export default {
   destroyed() {
     this.nombre = ''
     this.email = ''
-    this.numberphone = ''
+    this.numberPhone = ''
     this.comment = ''
   },
   methods: {
@@ -489,56 +488,51 @@ export default {
         .then(async (response) => {
           this.stateBtn = false
           if (response) {
-            try {
-              const { data } = await axios({
-                method: 'POST',
-                url: `  ${this.$store.state.urlKomerciaV3}/api/contact/message`,
-                data: {
-                  nombre: this.nombre,
-                  correo: this.email,
-                  celular: this.numberphone,
-                  comentario: this.comment,
-                  tienda: this.dataStore.id,
-                },
-              })
-              if (data.status == 200) {
-                this.$message.success({
-                  offset: 150,
-                  message: 'Comentario enviado!',
-                })
-                this.stateBtn = true
-                if (
-                  this.facebookPixel &&
-                  this.facebookPixel.pixel_facebook != null
-                ) {
-                  window.fbq('track', 'Contact', {
-                    name: this.nombre,
-                    description: this.email,
-                  })
-                }
-                this.deleteInputs()
+            const { success } = await this.$store.dispatch(
+              'SEND_MAIL_CONTACT',
+              {
+                toEmail: this.dataStore.tiendasInfo.emailTienda,
+                messsage: this.comment,
+                clientName: this.nombre,
+                storeName: this.dataStore.nombre,
+                clientEmail: this.email,
+                clientPhoneNumber: this.numberPhone,
               }
-            } catch (err) {
-              this.stateBtn = true
-              this.$message.success({
-                offset: 150,
-                message: err.response,
+            )
+            if (success) {
+              if (this.facebookPixel?.pixel_facebook != null) {
+                window.fbq('track', 'Contact', {
+                  name: this.nombre,
+                  description: this.email,
+                })
+              }
+              this.$message({
+                message: 'Correo enviado correctamente!',
+                type: 'success',
               })
+              this.deleteInputs()
+              this.stateBtn = true
+            } else {
+              this.$message({
+                message: 'Error al enviar el correo, problema en el API!',
+                type: 'error',
+              })
+              this.stateBtn = true
             }
           }
         })
         .catch((e) => {
           this.stateBtn = true
-          this.$message.success({
-            offset: 150,
-            message: 'error',
+          this.$message({
+            message: 'Error al enviar el correo, problema en el API!',
+            type: 'error',
           })
         })
     },
     deleteInputs() {
       this.nombre = ''
       this.email = ''
-      this.numberphone = ''
+      this.numberPhone = ''
       this.comment = ''
     },
   },

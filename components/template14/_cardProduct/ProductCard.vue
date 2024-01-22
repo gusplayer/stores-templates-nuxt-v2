@@ -263,7 +263,6 @@ export default {
           this.$store.commit('SET_OPEN_ORDER', true)
           // this.$store.state.orderComponent = true
           this.$store.dispatch('SEND_ADD_TO_CART', 1)
-          this.$message.success('Comentario enviado!')
         }
       }
     },

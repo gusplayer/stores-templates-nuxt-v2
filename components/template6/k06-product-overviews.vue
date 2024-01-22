@@ -698,7 +698,7 @@ export default {
         this.sharing.url = window.location.href
         this.sharing.quote = `Explora%20el%20producto%20${data.data.nombre}%2C%20te%20van%20a%20encantar.%0ALink%20del%20producto%3A%20${this.sharing.url}`
         this.sharingFacebook = `https://www.facebook.com/sharer/sharer.php?u=${this.sharing.url}&quote=${this.sharing.quote}`
-        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+        if (this.facebookPixel?.pixel_facebook != null) {
           window.fbq('track', 'ViewContent', {
             content_type: 'product',
             content_ids: [`${data.data.id}`],
