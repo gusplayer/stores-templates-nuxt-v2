@@ -80,9 +80,10 @@
               <button
                 class="w-full max-w-full md:max-w-[130px] font-bold px-15 mt-5 md:mt-0"
                 :style="`color: ${newsletter.color_text_input};background-color: ${newsletter.color_input};`"
+                :disabled="stateBtn ? false : true"
                 @click="submitNewsletter"
               >
-                {{ $t('newsletter_btn') }}
+                {{ stateBtn ? $t('newsletter_btn') : $t('footer_pendiente') }}
               </button>
             </div>
             <div class="mt-3">
@@ -121,12 +122,12 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'Ko15Newsletter',
   components: {
+    // eslint-disable-next-line vue/no-unused-components
     ValidationObserver,
     ValidationProvider,
   },
@@ -153,6 +154,7 @@ export default {
       register: '',
       checked: false,
       stateChecked: false,
+      stateBtn: true,
     }
   },
   computed: {
@@ -168,34 +170,35 @@ export default {
       if (this.checked) {
         this.$refs.validate
           .validate()
-          .then((response) => {
+          .then(async (response) => {
+            this.stateBtn = false
             if (response.valid) {
-              const json = {
-                email: this.email,
-                tienda: this.dataStore.id,
-              }
-              axios
-                .post(
-                  `${this.$store.state.urlKomercia}/api/tienda/suscriptor`,
-                  json
-                )
-                .then((res) => {
-                  if (
-                    this.facebookPixel &&
-                    this.facebookPixel.pixel_facebook != null
-                  ) {
-                    window.fbq('track', 'Lead', { value: this.email })
-                  }
-                  this.register = 'Tu correo ha sido registrado'
-                  this.$message.success('Comentario enviado!')
-                  this.email = ''
+              const { success } = await this.$store.dispatch(
+                'SEND_SUSCRIPTOR',
+                {
+                  email: this.email,
+                  tienda: this.dataStore.id,
+                }
+              )
+              if (success) {
+                if (this.facebookPixel?.pixel_facebook != null) {
+                  window.fbq('track', 'Lead', { value: this.email })
+                }
+                this.register = 'Tu correo ha sido registrado'
+                this.$message({
+                  message: 'Suscripción enviada!',
+                  type: 'success',
                 })
-                .catch(
-                  (res) => (
-                    (this.register = 'Tu correo ya esta registrado'),
-                    this.$message.error('Tu correo ya esta registrado')
-                  )
-                )
+                this.email = ''
+                this.stateBtn = true
+              } else {
+                this.$message({
+                  message: 'Tu correo ya esta registrado',
+                  type: 'warning',
+                })
+                this.register = 'Tu correo ya esta registrado'
+                this.stateBtn = true
+              }
             }
           })
           .catch((e) => {

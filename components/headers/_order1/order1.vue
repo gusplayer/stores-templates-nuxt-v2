@@ -1606,7 +1606,10 @@ export default {
             })
             .catch(() => {
               this.textConfirmation = 'Error al enviar los datos!'
-              this.$message.error('Error al enviar los datos!')
+              this.$message({
+                message: 'Error al enviar los datos!',
+                type: 'error',
+              })
             })
         }
       })
@@ -1730,7 +1733,7 @@ export default {
           content.push(temp)
         }
       })
-      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+      if (this.facebookPixel?.pixel_facebook != null) {
         window.fbq('track', 'Purchase', {
           content_type: 'product',
           content_ids: array,

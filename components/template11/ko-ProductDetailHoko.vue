@@ -318,13 +318,13 @@ export default {
       if (json) {
         if (this.layourUnicentro) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
-          // if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+          // if (this.facebookPixel?.pixel_facebook != null) {
           //   window.fbq('track', 'InitiateCheckout')
           // }
           // this.$gtm.push({ event: 'InitiateCheckout' })
         } else {
           location.href = `https://checkout.komercia.co/?params=${json}`
-          // if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+          // if (this.facebookPixel?.pixel_facebook != null) {
           //   window.fbq('track', 'InitiateCheckout')
           // }
           // this.$gtm.push({ event: 'InitiateCheckout' })

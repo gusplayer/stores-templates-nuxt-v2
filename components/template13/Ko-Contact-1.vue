@@ -102,12 +102,12 @@
           <validation-provider name="nombre" rules="required">
             <template slot-scope="{ errors }">
               <input
+                id="ContactName"
+                v-model="nombre"
                 name="nombre"
                 type="text"
-                v-model="nombre"
                 class="input-text"
                 :placeholder="$t('contact_nombrePlacer')"
-                id="ContactName"
               />
               <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
             </template>
@@ -116,12 +116,12 @@
           <validation-provider name="email" rules="required|email">
             <template slot-scope="{ errors }">
               <input
+                id="ContactEmail"
+                v-model="email"
                 name="email"
                 type="email"
-                v-model="email"
                 :placeholder="$t('contact_emailPlacer')"
                 class="input-text"
-                id="ContactEmail"
               />
               <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
             </template>
@@ -130,10 +130,10 @@
           <validation-provider name="comentario" rules="required">
             <template slot-scope="{ errors }">
               <textarea
+                v-model="comment"
                 class="input-text-rectangule"
                 name="comentario"
                 :placeholder="$t('contact_mensalePlacer')"
-                v-model="comment"
               ></textarea>
               <span class="text-error" v-show="errors[0]">{{ errors[0] }}</span>
             </template>
@@ -143,12 +143,12 @@
             <validation-provider name="celular" rules="required|numeric">
               <template slot-scope="{ errors }">
                 <input
+                  id="ContactPhone"
+                  v-model="numberPhone"
                   class="input-text"
                   name="celular"
                   type="number"
                   :placeholder="$t('contact_telefonoPlacer')"
-                  v-model="numberphone"
-                  id="ContactPhone"
                 />
                 <span class="text-error" v-show="errors[0]">
                   {{ errors[0] }}
@@ -162,7 +162,7 @@
               :disabled="stateBtn ? false : true"
               @click="submitContact"
             >
-              {{ $t('contact_enviar') }}
+              {{ stateBtn ? $t('contact_enviar') : $t('footer_pendiente') }}
             </button>
           </div>
         </ValidationObserver>
@@ -172,7 +172,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { mapState } from 'vuex'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
@@ -196,7 +195,7 @@ export default {
       stateBtn: true,
       nombre: '',
       email: '',
-      numberphone: '',
+      numberPhone: '',
       comment: '',
       messageFull: '',
       message: {
@@ -267,7 +266,7 @@ export default {
   destroyed() {
     this.nombre = ''
     this.email = ''
-    this.numberphone = ''
+    this.numberPhone = ''
     this.comment = ''
   },
   methods: {
@@ -277,56 +276,51 @@ export default {
         .then(async (response) => {
           this.stateBtn = false
           if (response) {
-            try {
-              const { data } = await axios({
-                method: 'POST',
-                url: `  ${this.$store.state.urlKomerciaV3}/api/contact/message`,
-                data: {
-                  nombre: this.nombre,
-                  correo: this.email,
-                  celular: this.numberphone,
-                  comentario: this.comment,
-                  tienda: this.dataStore.id,
-                },
-              })
-              if (data.status == 200) {
-                this.$message.success({
-                  offset: 150,
-                  message: 'Comentario enviado!',
-                })
-                this.stateBtn = true
-                if (
-                  this.facebookPixel &&
-                  this.facebookPixel.pixel_facebook != null
-                ) {
-                  window.fbq('track', 'Contact', {
-                    name: this.nombre,
-                    description: this.email,
-                  })
-                }
-                this.deleteInputs()
+            const { success } = await this.$store.dispatch(
+              'SEND_MAIL_CONTACT',
+              {
+                toEmail: this.dataStore.tiendasInfo.emailTienda,
+                messsage: this.comment,
+                clientName: this.nombre,
+                storeName: this.dataStore.nombre,
+                clientEmail: this.email,
+                clientPhoneNumber: this.numberPhone,
               }
-            } catch (err) {
-              this.stateBtn = true
-              this.$message.success({
-                offset: 150,
-                message: err.response,
+            )
+            if (success) {
+              if (this.facebookPixel?.pixel_facebook != null) {
+                window.fbq('track', 'Contact', {
+                  name: this.nombre,
+                  description: this.email,
+                })
+              }
+              this.$message({
+                message: 'Error al enviar el correo, problema en el API!',
+                type: 'error',
               })
+              this.deleteInputs()
+              this.stateBtn = true
+            } else {
+              this.$message({
+                message: 'Error al enviar el correo, problema en el API!',
+                type: 'error',
+              })
+              this.stateBtn = true
             }
           }
         })
         .catch((e) => {
           this.stateBtn = true
-          this.$message.success({
-            offset: 150,
-            message: 'error',
+          this.$message({
+            message: 'Error al enviar el correo, problema en el API!',
+            type: 'error',
           })
         })
     },
     deleteInputs() {
       this.nombre = ''
       this.email = ''
-      this.numberphone = ''
+      this.numberPhone = ''
       this.comment = ''
     },
   },

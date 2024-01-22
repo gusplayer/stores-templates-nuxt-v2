@@ -437,7 +437,7 @@ export default {
         if (this.salesData.unidades == 0 || this.maxQuantityValue <= 0) {
           this.spent = true
         }
-        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+        if (this.facebookPixel?.pixel_facebook != null) {
           window.fbq('track', 'ViewContent', {
             content_type: 'product',
             content_ids: [`${data.data.id}`],

@@ -778,6 +778,51 @@ export const actions = {
       return { success: false, data: null }
     }
   },
+  async SEND_MAIL_CONTACT({ state }, params) {
+    try {
+      await axios({
+        method: 'POST',
+        url: `${state.urlAWSsettings}/api/v1/mails/custom-email`,
+        data: {
+          to: params.toEmail,
+          templateId: 'd-57ff9dee8ab14e77bd0b8ce179b6e46e',
+          dynamicTemplateData: {
+            messsage: params.messsage,
+            clientName: params.clientName,
+            storeName: params.storeName,
+            clientEmail: params.clientEmail,
+            clientPhoneNumber: params.clientPhoneNumber,
+          },
+        },
+        headers: {
+          KOMERCIA_PUBLIC_ROUTES_KEY: state.routerKey,
+        },
+      })
+      return { success: true }
+    } catch (err) {
+      console.error('Error al enviar el correo de contacto:', err)
+      return { success: false }
+    }
+  },
+  async SEND_SUSCRIPTOR({ state }, params) {
+    try {
+      const { data } = await axios({
+        method: 'POST',
+        url: `${state.urlKomercia}/api/tienda/suscriptor`,
+        data: {
+          email: params.email,
+          tienda: params.tienda,
+        },
+      })
+      if (data) {
+        return { success: true }
+      }
+    } catch (err) {
+      console.error('ERROR SEND_SUSCRIPTOR', err)
+      return { success: false }
+    }
+  },
+
   GET_SHOPPING_CART({ state, commit, dispatch }) {
     if (localStorage.getItem(`ShoppingCart/${state.dataStore.id}`)) {
       commit(

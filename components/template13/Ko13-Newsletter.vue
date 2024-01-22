@@ -36,8 +36,12 @@
             </span>
           </template>
         </ValidationProvider>
-        <button ref="colorBtn" class="btn" @click="submitNewsletter">
-          {{ $t('newsletter_btn') }}
+        <button
+          class="btn"
+          :disabled="stateBtn ? false : true"
+          @click="submitNewsletter"
+        >
+          {{ stateBtn ? $t('newsletter_btn') : $t('footer_pendiente') }}
         </button>
       </div>
       <div class="w-full flex flex-row justify-center">
@@ -60,11 +64,11 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   name: 'Ko13Newsletter',
   components: {
+    // eslint-disable-next-line vue/no-unused-components
     ValidationObserver,
     ValidationProvider,
   },
@@ -89,6 +93,7 @@ export default {
       register: '',
       checked: false,
       stateChecked: false,
+      stateBtn: true,
     }
   },
   computed: {
@@ -104,34 +109,35 @@ export default {
       if (this.checked) {
         this.$refs.validate
           .validate()
-          .then((response) => {
+          .then(async (response) => {
+            this.stateBtn = false
             if (response.valid) {
-              const json = {
-                email: this.email,
-                tienda: this.dataStore.id,
-              }
-              axios
-                .post(
-                  `${this.$store.state.urlKomercia}/api/tienda/suscriptor`,
-                  json
-                )
-                .then((res) => {
-                  if (
-                    this.facebookPixel &&
-                    this.facebookPixel.pixel_facebook != null
-                  ) {
-                    window.fbq('track', 'Lead', { value: this.email })
-                  }
-                  this.register = 'Tu correo ha sido registrado'
-                  this.$message.success('Comentario enviado!')
-                  this.email = ''
+              const { success } = await this.$store.dispatch(
+                'SEND_SUSCRIPTOR',
+                {
+                  email: this.email,
+                  tienda: this.dataStore.id,
+                }
+              )
+              if (success) {
+                if (this.facebookPixel?.pixel_facebook != null) {
+                  window.fbq('track', 'Lead', { value: this.email })
+                }
+                this.register = 'Tu correo ha sido registrado'
+                this.$message({
+                  message: 'Suscripción enviada!',
+                  type: 'success',
                 })
-                .catch(
-                  (res) => (
-                    (this.register = 'Tu correo ya esta registrado'),
-                    this.$message.error('Tu correo ya esta registrado')
-                  )
-                )
+                this.email = ''
+                this.stateBtn = true
+              } else {
+                this.$message({
+                  message: 'Tu correo ya esta registrado!',
+                  type: 'warning',
+                })
+                this.register = 'Tu correo ya esta registrado'
+                this.stateBtn = true
+              }
             }
           })
           .catch((e) => {

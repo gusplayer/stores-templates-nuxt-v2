@@ -531,7 +531,7 @@ export default {
       }
     },
     configureFacebookPixel() {
-      if (this.facebookPixel && this.facebookPixel.pixel_facebook) {
+      if (this.facebookPixel?.pixel_facebook) {
         this.$fb.setPixelId(this.facebookPixel.pixel_facebook)
         this.$fb.track('PageView')
         this.$fb.enable()
@@ -691,7 +691,7 @@ export default {
           content.push(temp)
         }
       })
-      if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+      if (this.facebookPixel?.pixel_facebook != null) {
         window.fbq('track', 'Purchase', {
           content_type: 'product',
           content_ids: array,
@@ -710,19 +710,21 @@ export default {
       }
     },
     errorMessage() {
-      this.$message.error({
+      this.$message({
         dangerouslyUseHTMLString: true,
         message:
           '<strong>Esta orden no existe</strong><p>El número de la orden o el usuario son incorrectos</p>',
         duration: 4000,
+        type: 'error',
       })
     },
     errorMessageTwo() {
-      this.$message.error({
+      this.$message({
         dangerouslyUseHTMLString: true,
         message:
           '<strong>Esta orden no existe</strong><p>El número de la orden o la cédula son incorrectos</p>',
         duration: 4000,
+        type: 'error',
       })
     },
   },

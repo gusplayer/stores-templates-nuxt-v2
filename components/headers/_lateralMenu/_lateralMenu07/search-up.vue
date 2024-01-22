@@ -128,7 +128,7 @@ export default {
     },
     getSearch(value) {
       if (value) {
-        if (this.facebookPixel && this.facebookPixel.pixel_facebook != null) {
+        if (this.facebookPixel?.pixel_facebook != null) {
           window.fbq('track', 'Search', { search_string: value })
         }
       }
