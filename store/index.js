@@ -786,6 +786,7 @@ export const actions = {
         data: {
           to: params.toEmail,
           templateId: 'd-57ff9dee8ab14e77bd0b8ce179b6e46e',
+          storeId: params.storeId,
           dynamicTemplateData: {
             messsage: params.messsage,
             clientName: params.clientName,

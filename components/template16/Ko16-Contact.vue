@@ -525,6 +525,7 @@ export default {
             const { success } = await this.$store.dispatch(
               'SEND_MAIL_CONTACT',
               {
+                storeId: this.dataStore.id,
                 toEmail: this.dataStore.tiendasInfo.emailTienda,
                 messsage: this.comment,
                 clientName: this.nombre,
