@@ -1009,7 +1009,9 @@ export default {
     this.getCities()
     this.setPlaceholderDep()
     this.$store.dispatch('GET_DESCUENTOS')
-    this.$store.dispatch('GET_SHOPPING_CART')
+    if (this.$route.query?.clearCart != 'true') {
+      this.$store.dispatch('GET_SHOPPING_CART')
+    }
     this.$store.commit('CALCULATE_TOTAL_CART')
     if (this.rangosByCiudad.envio_metodo == 'precio') {
       this.shippingPrecio()
