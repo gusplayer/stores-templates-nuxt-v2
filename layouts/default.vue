@@ -539,12 +539,15 @@ export default {
       this.$fb.enable()
     }
 
-    // Ejecuta las tres dispatches de manera concurrente
+    // Ejecuta las dos dispatches de manera concurrente
     await Promise.all([
       this.$store.dispatch('GET_COOKIES'),
       this.$store.dispatch('GET_COOKIES_PWD'),
-      this.$store.dispatch('GET_SHOPPING_CART'),
+      // this.$store.dispatch('GET_SHOPPING_CART'),
     ])
+    if (this.$route.query?.clearCart != 'true') {
+      this.$store.dispatch('GET_SHOPPING_CART')
+    }
 
     // Borra todos los elementos del carrito y actualiza el contenido si la query 'clearCart' es 'true'
     if (this.$route.query?.clearCart === 'true') {
