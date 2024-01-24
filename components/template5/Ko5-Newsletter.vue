@@ -207,9 +207,9 @@ export default {
   margin-left: 10px;
 }
 .btn {
-  color: var(--color-text-b-tn);
+  color: var(--color_text_btn);
   /* border: solid 2px var(--color_border); */
-  background-color: transparent;
+  background-color: var(--color_background_btn);
   padding: 8px 14px;
   font-size: 14px;
   width: 220px;
