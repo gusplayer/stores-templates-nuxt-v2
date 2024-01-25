@@ -757,7 +757,7 @@ export default {
         canal: 'KOMERCIA',
       })
       this.$store.dispatch('SEND_ADD_TO_CART', 2)
-      this.sendAnalyticsStore(this.data.id, 'CLICKED_PAY_CART')
+      // this.sendAnalyticsStore(this.data.id, 'CLICKED_PAY_CART')
       if (this.layourUnicentro) {
         window.open(`https://checkout.komercia.co/?params=${json}`)
       } else {
