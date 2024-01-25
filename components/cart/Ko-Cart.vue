@@ -696,7 +696,7 @@ export default {
         product.cantidad++
         this.$store.commit('UPDATE_CONTENT_CART')
         this.$store.commit('CALCULATE_TOTAL_CART')
-        this.$store.dispatch('VERIFY_PRODUCTS')
+        // this.$store.dispatch('VERIFY_PRODUCTS')
       }
     },
     removeQuantity(product) {
@@ -704,32 +704,32 @@ export default {
         product.cantidad--
         this.$store.commit('UPDATE_CONTENT_CART')
         this.$store.commit('CALCULATE_TOTAL_CART')
-        this.$store.dispatch('VERIFY_PRODUCTS')
+        // this.$store.dispatch('VERIFY_PRODUCTS')
       }
     },
     deleteItemCart(i) {
       this.$store.commit('DELETEITEMCART', i)
       this.$store.commit('UPDATE_CONTENT_CART')
-      this.$store.dispatch('VERIFY_PRODUCTS')
+      // this.$store.dispatch('VERIFY_PRODUCTS')
     },
-    removeCartItems() {
-      this.remove = false
-      location.reload(true)
-      this.$store.commit('DELETE_ALL_ITEMS_CART')
-      this.$store.commit('UPDATE_CONTENT_CART')
-      this.$store.dispatch('VERIFY_PRODUCTS')
-    },
-    canChangeQuantity(product) {
-      this.$store.commit('DELETE_ALL_ITEMS_CART')
-      this.$store.commit('UPDATE_CONTENT_CART')
-      this.$store.dispatch('VERIFY_PRODUCTS')
-      return product.limitQuantity > product.cantidad
-    },
-    updateCartAndVerify() {
-      this.$store.commit('UPDATE_CONTENT_CART')
-      this.$store.commit('CALCULATE_TOTAL_CART')
-      this.$store.dispatch('VERIFY_PRODUCTS')
-    },
+    // removeCartItems() {
+    //   this.remove = false
+    //   location.reload(true)
+    //   this.$store.commit('DELETE_ALL_ITEMS_CART')
+    //   this.$store.commit('UPDATE_CONTENT_CART')
+    //   this.$store.dispatch('VERIFY_PRODUCTS')
+    // },
+    // canChangeQuantity(product) {
+    //   this.$store.commit('DELETE_ALL_ITEMS_CART')
+    //   this.$store.commit('UPDATE_CONTENT_CART')
+    //   this.$store.dispatch('VERIFY_PRODUCTS')
+    //   return product.limitQuantity > product.cantidad
+    // },
+    // updateCartAndVerify() {
+    //   this.$store.commit('UPDATE_CONTENT_CART')
+    //   this.$store.commit('CALCULATE_TOTAL_CART')
+    //   this.$store.dispatch('VERIFY_PRODUCTS')
+    // },
     GoPayments() {
       if (this.$store.state.productsCart.length === 0) {
         return

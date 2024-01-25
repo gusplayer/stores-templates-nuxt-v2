@@ -839,90 +839,99 @@ export const actions = {
       if (idProducts.length == 1) {
         idProducts = [idProducts]
       }
-      let data = {
-        id_tienda: state.dataStore.id,
-        ids: idProducts,
-      }
-      const response = await axios.post(
-        `${state.urlKomercia}/api/ids/por/productos`,
-        data,
-        state.configAxios
-      )
-      let productServer = response.data.data
-      let merged = []
-      for (let i = 0; i < productServer.length; i++) {
-        merged.push({
-          ...state.productsCart[i],
-          ...productServer[i],
-        })
-      }
-      const productsFinal = merged.map((product) => {
-        if (product.con_variante && product.variantes && product.variantes[0]) {
-          let variantesConSplit =
-            product.variantes[0].combinaciones[0].combinaciones
-          variantesConSplit = variantesConSplit.toString().slice(1, -1)
-          let arrayObtain = JSON.parse('[' + variantesConSplit + ']')
-          let filterCombination = arrayObtain.filter((item) => {
-            if (item.combinacion.toString() == product.combinacion.toString()) {
-              return item
-            }
-          })
-          const newProduct = {
-            cantidad: product.cantidad,
-            combinacion: filterCombination[0].combinacion,
-            envio_gratis: product.envio_gratis,
-            foto_cloudinary: product.foto_cloudinary,
-            id: product.id,
-            limitQuantity: parseInt(filterCombination[0].unidades),
-            nombre: product.nombre,
-            precio: filterCombination[0].precio,
-            promocion_valor: product.promocion_valor,
-            tag_promocion: product.tag_promocion,
-            activo: product.activo,
-            stock_disponible: 1,
-            dropshipping: product.dropshipping,
-          }
-          if (!filterCombination[0].estado) {
-            newProduct.activo = 0
-          }
-          if (filterCombination[0].unidades == 0) {
-            newProduct.activo = 0
-          } else {
-            if (newProduct.cantidad > newProduct.limitQuantity) {
-              newProduct.stock_disponible = 0
-            }
-          }
-          return newProduct
-        } else {
-          const newProduct = {
-            cantidad: product.cantidad,
-            // combinacion: filterCombination[0].combinacion,
-            envio_gratis: product.envio_gratis,
-            foto_cloudinary: product.foto_cloudinary,
-            id: product.id,
-            limitQuantity: product.informacion_producto[0].inventario,
-            nombre: product.nombre,
-            precio: product.precio,
-            promocion_valor: product.promocion_valor,
-            tag_promocion: product.tag_promocion,
-            activo: product.activo,
-            stock_disponible: 1,
-            dropshipping: product.dropshipping,
-          }
-          if (newProduct.cantidad == 0) {
-            newProduct.activo = 0
-          } else {
-            if (newProduct.cantidad > newProduct.limitQuantity) {
-              newProduct.stock_disponible = 0
-            } else if (newProduct.cantidad <= newProduct.limitQuantity) {
-              newProduct.stock_disponible = 1
-            }
-          }
-          return newProduct
-        }
+      const { data } = await axios({
+        method: 'POST',
+        url: `${state.urlKomercia}/api/ids/por/productos`,
+        headers: state.configAxios.headers,
+        data: {
+          id_tienda: state.dataStore.id,
+          ids: idProducts,
+        },
       })
-      commit('SET_SHOPPING_CART', productsFinal)
-      // commit('UPDATE_CONTENT_CART', 1)
+      if (data) {
+        let productServer = data.data
+        let merged = []
+        for (let i = 0; i < productServer.length; i++) {
+          merged.push({
+            ...state.productsCart[i],
+            ...productServer[i],
+          })
+        }
+        const productsFinal = merged.map((product) => {
+          if (
+            product.con_variante &&
+            product.variantes &&
+            product.variantes[0]
+          ) {
+            let variantesConSplit =
+              product.variantes[0].combinaciones[0].combinaciones
+            variantesConSplit = variantesConSplit.toString().slice(1, -1)
+            let arrayObtain = JSON.parse('[' + variantesConSplit + ']')
+            let filterCombination = arrayObtain.filter((item) => {
+              if (
+                item.combinacion.toString() == product.combinacion.toString()
+              ) {
+                return item
+              }
+            })
+            const newProduct = {
+              cantidad: product.cantidad,
+              combinacion: filterCombination[0].combinacion,
+              envio_gratis: product.envio_gratis,
+              foto_cloudinary: product.foto_cloudinary,
+              id: product.id,
+              limitQuantity: parseInt(filterCombination[0].unidades),
+              nombre: product.nombre,
+              precio: filterCombination[0].precio,
+              promocion_valor: product.promocion_valor,
+              tag_promocion: product.tag_promocion,
+              activo: product.activo,
+              stock_disponible: 1,
+              dropshipping: product.dropshipping,
+            }
+            if (!filterCombination[0].estado) {
+              newProduct.activo = 0
+            }
+            if (filterCombination[0].unidades == 0) {
+              newProduct.activo = 0
+            } else {
+              if (newProduct.cantidad > newProduct.limitQuantity) {
+                newProduct.stock_disponible = 0
+              }
+            }
+            return newProduct
+          } else {
+            const newProduct = {
+              cantidad: product.cantidad,
+              // combinacion: filterCombination[0].combinacion,
+              envio_gratis: product.envio_gratis,
+              foto_cloudinary: product.foto_cloudinary,
+              id: product.id,
+              limitQuantity: product.informacion_producto[0].inventario,
+              nombre: product.nombre,
+              precio: product.precio,
+              promocion_valor: product.promocion_valor,
+              tag_promocion: product.tag_promocion,
+              activo: product.activo,
+              stock_disponible: 1,
+              dropshipping: product.dropshipping,
+            }
+            if (newProduct.cantidad == 0) {
+              newProduct.activo = 0
+            } else {
+              if (newProduct.cantidad > newProduct.limitQuantity) {
+                newProduct.stock_disponible = 0
+              } else if (newProduct.cantidad <= newProduct.limitQuantity) {
+                newProduct.stock_disponible = 1
+              }
+            }
+            return newProduct
+          }
+        })
+        commit('SET_SHOPPING_CART', productsFinal)
+        // commit('UPDATE_CONTENT_CART')
+        return { success: true }
+      }
     }
   },
   SEND_ADD_TO_CART({ state, getters }, value) {
