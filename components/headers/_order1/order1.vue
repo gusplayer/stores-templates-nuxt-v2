@@ -1151,7 +1151,7 @@ export default {
       json = JSON.stringify(json)
       if (this.productsCart.length != 0) {
         this.$store.dispatch('SEND_ADD_TO_CART', 2)
-        this.sendAnalyticsStore(this.data.id, 'CLICKED_PAY_CART')
+        // this.sendAnalyticsStore(this.data.id, 'CLICKED_PAY_CART')
         if (this.layoutUniCentro) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
         } else {
@@ -1606,7 +1606,7 @@ export default {
               this.textConfirmation =
                 '¡Información enviada correctamente a la tienda!'
               this.stateBtnConfirmation = true
-              this.sendAnalyticsStore(this.data.id, 'CLICKED_PAY_CART')
+              // this.sendAnalyticsStore(response.data.data.id, 'CLICKED_PAY_CART')
             })
             .catch(() => {
               this.textConfirmation = 'Error al enviar los datos!'
