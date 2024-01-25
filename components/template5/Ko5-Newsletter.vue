@@ -211,6 +211,7 @@ export default {
   /* border: solid 2px var(--color_border); */
   background-color: var(--color_background_btn);
   padding: 8px 14px;
+  border-radius: var(--radius_btn);
   font-size: 14px;
   width: 220px;
   font-weight: bold;
