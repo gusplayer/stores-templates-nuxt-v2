@@ -650,6 +650,9 @@ export default {
         (product) => product.id !== this.data.id
       )
     },
+    // productsCart() {
+    //   return this.$store.state.productsCart
+    // },
   },
   watch: {
     envios() {
@@ -712,6 +715,21 @@ export default {
         }
       }
     },
+    // productsCart() {
+    //   if (this.dataStore.id === 7454) {
+    //     for (const [
+    //       index,
+    //       productCart,
+    //     ] of this.$store.state.productsCart.entries()) {
+    //       if (this.data.id == productCart.id) {
+    //         this.productIndexCart = index
+    //         if (this.salesData?.unidades <= productCart.cantidad) {
+    //           this.spent = true
+    //         }
+    //       }
+    //     }
+    //   }
+    // },
   },
   mounted() {
     this.getDataProduct()
@@ -911,8 +929,18 @@ export default {
         this.$store.state.productsCart.push(product)
       }
       this.$store.commit('UPDATE_CONTENT_CART')
+
       if (this.dataStore.id != 7454) {
         this.$router.push('/productos')
+      } else {
+        for (const [
+          index,
+          productCart,
+        ] of this.$store.state.productsCart.entries()) {
+          if (this.data.id == productCart.id) {
+            this.productIndexCart = index
+          }
+        }
       }
       this.$store.commit('SET_OPEN_ORDER', true)
       // this.$store.state.orderComponent = true
