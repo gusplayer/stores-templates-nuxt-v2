@@ -10,7 +10,7 @@
   >
     <div class="wrapper-header" @click="closeMenuCategory">
       <div class="header">
-        <KoOrder :data-store="dataStore" />
+        <!-- <KoOrder :data-store="dataStore" /> -->
         <KoSearch />
         <KoMenu :data-store="dataStore" class="responsive" />
         <div class="header-content-logo">
@@ -170,7 +170,7 @@ import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'KoHeader1',
   components: {
-    KoOrder: () => import('../_order1/order1'),
+    // KoOrder: () => import('../_order1/order1'),
     KoMenu: () => import('../_lateralMenu/_lateralMenu/openMenuRight'),
     KoSearch: () => import('./search.vue'),
   },

@@ -373,7 +373,7 @@
             </div>
 
             <div
-              class="fixed md:relative w-full flex flex-row justify-start items-center mb-0 md:mb-20 left-0 bottom-0 px-6 py-10 md:px-0 md:py-0 bg-gray-100 md:bg-transparent border-t md:border-t-0 z-100 md:z-0 transition ease-in-out delay-150"
+              class="fixed md:relative w-full flex flex-row justify-start items-center mb-0 md:mb-20 left-0 bottom-0 px-6 py-10 md:px-0 md:py-0 bg-gray-100 md:bg-transparent border-t md:border-t-0 z-10 md:z-0 transition ease-in-out delay-150"
             >
               <div
                 class="flex flex-row justify-center items-center mr-20 border-2"
