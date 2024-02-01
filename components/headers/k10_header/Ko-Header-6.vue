@@ -14,7 +14,7 @@
   >
     <div class="wrapper-header">
       <div class="header">
-        <KoOrder :data-store="dataStore" />
+        <!-- <KoOrder :data-store="dataStore" /> -->
         <div class="header-content-logo">
           <nuxt-link to="/" class="wrapper-logo">
             <img
@@ -151,7 +151,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'KoHeader6',
   components: {
-    KoOrder: () => import('../_order1/order1'),
+    // KoOrder: () => import('../_order1/order1'),
     KoMenu: () => import('../_lateralMenu/_lateralMenu11/openMenuLeft.vue'),
     KoSearch: () => import('../k13_header/search.vue'),
   },

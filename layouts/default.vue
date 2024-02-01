@@ -2,6 +2,7 @@
   <div>
     <div v-if="dataStore && !storeError">
       <div v-if="stateModalPwd">
+        <KoOrder :data-store="dataStore" />
         <component :is="headerTemplate" v-bind="componentsProps" />
         <nuxt />
         <component :is="footerTemplate" v-bind="componentsProps" />
@@ -77,6 +78,8 @@ import mobileCheck from '@/mixins/mobileCheck'
 export default {
   name: 'LayoutDefault',
   components: {
+    // Order
+    KoOrder: () => import('@/components/headers/_order1/order1.vue'),
     // HEADER
     KoHeader1: () => import('@/components/headers/k05_header/Ko-Header-1.vue'),
     KoHeader4: () => import('@/components/headers/k07_header/Ko-Header-4.vue'),

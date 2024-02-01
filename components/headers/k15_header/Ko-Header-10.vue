@@ -1,7 +1,7 @@
 <template>
   <header
     v-if="settingByTemplate15"
-    class="w-full max-h-[120px] md:max-h-10/0 flex justify-center items-center sticky top-0 px-10 wrapper-header"
+    class="w-full max-h-[120px] md:max-h-10/0 flex justify-center items-center sticky top-0 px-10 z-10 wrapper-header"
     :style="[
       settingByTemplate15[0].header,
       settingByTemplate15[0].settingGeneral,
@@ -107,7 +107,7 @@
           />
         </button>
       </div>
-      <KoOrder :data-store="dataStore" />
+      <!-- <KoOrder :data-store="dataStore" /> -->
       <KoSearch :data-store="dataStore" />
       <Ko14MenuLateral
         :data-store="dataStore"
@@ -183,7 +183,7 @@
 export default {
   name: 'KoHeader10',
   components: {
-    KoOrder: () => import('../_order1/order1'),
+    // KoOrder: () => import('../_order1/order1'),
     KoSearch: () => import('../k13_header/search.vue'),
     Ko14MenuLateral: () =>
       import('../_lateralMenu/_lateralMenu14/_lateralMenu.vue'),
@@ -269,7 +269,6 @@ export default {
   padding-top: var(--padding_logo);
   padding-bottom: var(--padding_logo);
   background-color: var(--background_color_1);
-  z-index: 99999999999 !important;
 }
 
 .btn-active {

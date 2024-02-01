@@ -18,7 +18,6 @@
   >
     <div id="headbg" class="wrapper-header">
       <div id="headerid" class="header">
-        <KoOrder :data-store="dataStore" />
         <div class="header-item-menu" @click="openMenuLateral">
           <menu-icon class="header-icon-menu nav-bar" />
           <span class="header-text-menu">{{ $t('header_menu') }}</span>
@@ -115,7 +114,6 @@ import { mapState } from 'vuex'
 export default {
   name: 'KoHeader4',
   components: {
-    KoOrder: () => import('../_order1/order1'),
     KoSearch: () => import('../_lateralMenu/_lateralMenu07/search-up.vue'),
     KoMenu: () => import('../_lateralMenu/_lateralMenu07/openMenuLeft.vue'),
   },

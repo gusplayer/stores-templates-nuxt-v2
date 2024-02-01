@@ -12,9 +12,9 @@
       },
     ]"
   >
+    <!-- <KoOrder :data-store="dataStore" /> -->
     <div class="wrapper-header">
       <div class="header">
-        <KoOrder :data-store="dataStore" />
         <KoSearch
           :data-store="dataStore"
           :setting-by-template="settingByTemplate9"
@@ -138,7 +138,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'KoHeader5',
   components: {
-    KoOrder: () => import('../_order1/order1.vue'),
+    // KoOrder: () => import('../_order1/order1.vue'),
     KoMenu: () => import('../_lateralMenu/_lateralMenu/openMenuLeft.vue'),
     KoSearch: () => import('../_lateralMenu/_lateralMenu/searchDown09.vue'),
   },

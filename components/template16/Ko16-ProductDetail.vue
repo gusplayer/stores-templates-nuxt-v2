@@ -456,7 +456,7 @@
               </p>
             </div>
             <div
-              class="fixed md:sticky w-full flex flex-row justify-start items-center mb-0 md:mb-20 left-0 bottom-0 px-6 py-10 md:px-0 md:py-0 border-t md:border-t-0 z-100 md:z-0"
+              class="fixed md:sticky w-full flex flex-row justify-start items-center mb-0 md:mb-20 left-0 bottom-0 px-6 py-10 md:px-0 md:py-0 border-t md:border-t-0 z-10 md:z-0"
               :style="`background-color: ${settingByTemplate16[0].detailsProducts['--background_color_1']};`"
             >
               <div
