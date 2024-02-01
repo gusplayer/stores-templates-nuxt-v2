@@ -1161,9 +1161,8 @@ export default {
     },
     async sendAnalyticsStore(value, event) {
       await this.$store.dispatch('SEND_ANALYTICS_STORE', {
-        storeId: this.dataStore.id,
+        storeId: value,
         event: event,
-        productId: value,
       })
     },
     async getCities() {
@@ -1557,7 +1556,7 @@ export default {
       }, 9000)
     },
     setOrderWa() {
-      this.$refs.observer.validate().then((response) => {
+      this.$refs.observer.validate().then(async (response) => {
         if (response) {
           this.modalConfirmation = true
           if (
@@ -1606,22 +1605,33 @@ export default {
               ? Number(this.userDropshipping)
               : null,
           }
-          axios
-            .post(`${this.$store.state.urlKomercia}/api/usuario/orden`, params)
-            .then((response) => {
-              this.numberOrder = response.data.data.id
+
+          try {
+            const { data } = await axios({
+              method: 'POST',
+              url: `${this.$store.state.urlKomercia}/api/usuario/orden`,
+              data: params,
+            })
+            if (data) {
+              this.numberOrder = data.data.id
+              await this.$store.dispatch('SEND_NOTIFICATION_ORDER', {
+                orderId: data.data.id,
+                storeId: data.data.tienda,
+                amount: data.data.total,
+                paymentMethod: '7',
+              })
               this.textConfirmation =
                 '¡Información enviada correctamente a la tienda!'
               this.stateBtnConfirmation = true
               this.sendAnalyticsStore(this.dataStore.id, 'CLICKED_PAY_CART')
+            }
+          } catch (err) {
+            this.textConfirmation = 'Error al enviar los datos!'
+            this.$message({
+              message: 'Error al enviar los datos!',
+              type: 'error',
             })
-            .catch(() => {
-              this.textConfirmation = 'Error al enviar los datos!'
-              this.$message({
-                message: 'Error al enviar los datos!',
-                type: 'error',
-              })
-            })
+          }
         }
       })
     },

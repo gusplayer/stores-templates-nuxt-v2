@@ -858,7 +858,7 @@ export default {
         this.$store.commit('SET_STATE_FORM_MODAL_WHATS_APP', true)
       }
     },
-    setOrderWa() {
+    async setOrderWa() {
       let resultShipping
       if (this.rangosByCiudad && this.rangosByCiudad.envio_metodo == 'gratis') {
         resultShipping = 0
@@ -913,21 +913,33 @@ export default {
         total: tempTotal,
         usuario: 30866,
       }
-      axios
-        .post(`${this.$store.state.urlKomercia}/api/usuario/orden`, params)
-        .then((response) => {
-          this.numberOrder = response.data.data.id
+
+      try {
+        const { data } = await axios({
+          method: 'POST',
+          url: `${this.$store.state.urlKomercia}/api/usuario/orden`,
+          data: params,
+        })
+        if (data) {
+          this.numberOrder = data.data.id
+          await this.$store.dispatch('SEND_NOTIFICATION_ORDER', {
+            orderId: data.data.id,
+            storeId: data.data.tienda,
+            amount: data.data.total,
+            paymentMethod: '7',
+          })
           this.textConfirmation =
             '¡Información enviada correctamente a la tienda!'
           this.stateBtnConfirmation = true
+          this.sendAnalyticsStore(this.dataStore.id, 'CLICKED_PAY_CART')
+        }
+      } catch (err) {
+        this.textConfirmation = 'Error al enviar los datos!'
+        this.$message({
+          message: 'Error al enviar el correo!',
+          type: 'error',
         })
-        .catch(() => {
-          this.textConfirmation = 'Error al enviar los datos!'
-          this.$message({
-            message: 'Error al enviar el correo!',
-            type: 'error',
-          })
-        })
+      }
     },
     WPQuotation() {
       let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
