@@ -805,6 +805,29 @@ export const actions = {
       return { success: false }
     }
   },
+  async SEND_NOTIFICATION_ORDER({ state }, params) {
+    try {
+      const { data } = await axios({
+        method: 'POST',
+        url: `${state.urlAWSsettings}/api/v1/hooks/public/notify-order-created`,
+        data: {
+          orderId: params.orderId,
+          storeId: params.storeId,
+          amount: params.amount,
+          paymentMethod: params.paymentMethod,
+        },
+        headers: {
+          KOMERCIA_PUBLIC_ROUTES_KEY: state.routerKey,
+        },
+      })
+      if (data) {
+        return { success: true, dataOrder: data }
+      }
+    } catch (err) {
+      console.log('SEND_NOTIFICATION_ORDER', err.response)
+      return { success: false }
+    }
+  },
   async SEND_SUSCRIPTOR({ state }, params) {
     try {
       const { data } = await axios({
