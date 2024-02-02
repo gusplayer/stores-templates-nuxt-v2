@@ -930,18 +930,19 @@ export default {
       }
       this.$store.commit('UPDATE_CONTENT_CART')
 
-      if (this.dataStore.id != 7454) {
-        this.$router.push('/productos')
-      } else {
-        for (const [
-          index,
-          productCart,
-        ] of this.$store.state.productsCart.entries()) {
-          if (this.data.id == productCart.id) {
-            this.productIndexCart = index
-          }
-        }
-      }
+      // if (this.dataStore.id != 1559) {
+      this.$router.push('/productos')
+      // }
+      // else {
+      //   for (const [
+      //     index,
+      //     productCart,
+      //   ] of this.$store.state.productsCart.entries()) {
+      //     if (this.data.id == productCart.id) {
+      //       this.productIndexCart = index
+      //     }
+      //   }
+      // }
       this.$store.commit('SET_OPEN_ORDER', true)
       // this.$store.state.orderComponent = true
       this.$store.dispatch('SEND_ADD_TO_CART', 1)
