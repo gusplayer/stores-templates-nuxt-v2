@@ -423,7 +423,7 @@ export default {
   border-bottom: 1px solid #000;
 }
 .btn-category {
-  @apply w-full flex font-semibold  tracking-wider py-3 px-20;
+  @apply w-full flex font-semibold  tracking-wider py-3 px-20 cursor-pointer;
   color: #333;
   font-size: 18px;
   font-weight: 600;
@@ -431,7 +431,7 @@ export default {
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
 }
 .btn-category-all {
-  @apply w-full flex font-semibold  tracking-wider py-3 px-20;
+  @apply w-full flex font-semibold  tracking-wider py-3 px-20 cursor-pointer;
   color: #333;
   font-size: 18px;
   font-weight: 600;
