@@ -2,7 +2,7 @@
   <header
     v-if="settingByTemplate9"
     id="navbar"
-    class="sticky top-0 z-10 w-full flex flex-col justify-center items-center transition-all ease-in-out duration-0.5 header-container"
+    class="sticky top-0 z-100 w-full flex flex-col justify-center items-center transition-all ease-in-out duration-0.5 header-container"
     :style="[
       settingByTemplate9[0].setting9Header,
       settingByTemplate9[0].setting9General,

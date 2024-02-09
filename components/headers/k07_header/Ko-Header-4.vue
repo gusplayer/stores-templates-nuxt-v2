@@ -286,7 +286,7 @@ export default {
 <style scoped>
 .header-container {
   transition: all 0.5s ease-in-out;
-  @apply w-full flex flex-col justify-center items-center fixed z-10 top-30;
+  @apply w-full flex flex-col justify-center items-center fixed z-100 top-30;
 }
 .wrapper-header {
   @apply flex flex-col w-full justify-between items-center;

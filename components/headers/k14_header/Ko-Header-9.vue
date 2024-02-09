@@ -2,7 +2,7 @@
   <header
     v-if="settingByTemplate14"
     id="navbar"
-    class="w-full max-h-[120px] md:max-h-10/0 flex justify-center items-center sticky top-0 px-10 z-10 wrapper-header"
+    class="w-full max-h-[120px] md:max-h-10/0 flex justify-center items-center sticky top-0 px-10 z-100 wrapper-header"
     :style="[
       settingByTemplate14[0].setting14Header,
       settingByTemplate14[0].setting14General,
