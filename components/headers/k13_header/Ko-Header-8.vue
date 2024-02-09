@@ -261,7 +261,7 @@ export default {
   max-width: 850px;
 }
 .header-container {
-  @apply sticky top-0 z-10 w-full flex flex-col justify-center items-center transition-all ease-in-out duration-0.5;
+  @apply sticky top-0 z-100 w-full flex flex-col justify-center items-center transition-all ease-in-out duration-0.5;
 }
 .wrapper-header {
   padding-top: var(--padding_logo);

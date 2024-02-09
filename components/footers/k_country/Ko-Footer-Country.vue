@@ -36,7 +36,7 @@
             {{ dataStore.id }}
           </p>
           <p class="text-12 text-white-white ml-5">
-            <strong>TP</strong>: {{ dataStore.template }}
+            <strong>TP</strong>: {{ template }}
           </p>
           <p class="text-12 text-white-white ml-5">
             <strong>HK</strong>: {{ dataHoko.statehoko == 0 ? 'NO' : 'SI' }}
@@ -50,7 +50,7 @@
 
 <script>
 import KoLanguage from '../../k-select-language'
-
+import { mapState } from 'vuex'
 export default {
   name: 'KoFooterFlags',
   components: {
@@ -138,9 +138,7 @@ export default {
     }
   },
   computed: {
-    dataHoko() {
-      return this.$store.state.dataHoko
-    },
+    ...mapState(['template', 'dataHoko']),
     selectOptionCountry() {
       return this.optionsCountry.find(
         (country) => country.id === this.dataStore.tiendasInfo.paises.id
