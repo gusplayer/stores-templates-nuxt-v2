@@ -89,11 +89,11 @@ export default {
         },
       },
     },
-    // splitChunks: {
-    //   layouts: true,
-    //   pages: true,
-    //   commons: true,
-    // },
+    splitChunks: {
+      layouts: true,
+      pages: true,
+      commons: true,
+    },
     babel: {
       plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],
     },
