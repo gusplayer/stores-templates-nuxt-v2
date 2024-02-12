@@ -83,8 +83,10 @@
                   <li></li>
                   <li>Producto</li>
                   <li>Variante</li>
-                  <li>Cantidad</li>
+                  <li class="flex md:hidden">Cant.</li>
+                  <li class="hidden md:flex">Cantidad</li>
                   <li>Valor Unidad</li>
+                  <li>Total</li>
                 </ul>
               </div>
               <div class="tbody">
@@ -750,19 +752,10 @@ export default {
   width: 100%;
 }
 .table-striped .thead ul {
-  width: 100%;
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: repeat(7, 1fr);
-  padding: 10px 0;
-  list-style: none;
+  @apply w-full grid grid-cols-6 gap-x-2 py-[10px] list-none;
 }
 .table-striped .tbody ul {
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: repeat(7, 1fr);
-  padding: 10px 0;
-  list-style: none;
+  @apply grid grid-cols-6 gap-x-2 py-[10px] list-none;
 }
 .table-striped .tbody ul:nth-of-type(odd) {
   background-color: #f9f9f9;

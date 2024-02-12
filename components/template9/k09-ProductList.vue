@@ -16,7 +16,9 @@
       ]"
     >
       <div class="product-text">
-        <span class="tittle">{{ productList.title }}</span>
+        <span class="tittle">
+          {{ productList.title.replace(/&nbsp;/g, ' ') }}
+        </span>
       </div>
       <div class="w-full flex flex-row justify-center items-center mb-40">
         <div class="w-full flex flex-col justify-center items-center">

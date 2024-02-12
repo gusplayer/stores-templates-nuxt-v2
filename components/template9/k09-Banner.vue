@@ -23,6 +23,12 @@
           >
             <picture v-if="dataStore.id === 889">
               <source
+                v-if="index === 0"
+                media="(max-width: 799px)"
+                srcset="../../assets/img/perfecta/banner_movile-1.webp"
+              />
+              <source
+                v-else
                 media="(max-width: 799px)"
                 srcset="../../assets/img/perfecta/banner_movile.webp"
               />

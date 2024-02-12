@@ -11,11 +11,11 @@
       :style="[
         {
           '--font-style-1':
-            this.settingByTemplate9[0]?.settingGeneral?.fount_1 ?? 'Poppins',
+            settingByTemplate9[0]?.settingGeneral?.fount_1 ?? 'Poppins',
         },
         {
           '--font-style-2':
-            this.settingByTemplate9[0]?.settingGeneral?.fount_2 ?? 'Roboto',
+            settingByTemplate9[0]?.settingGeneral?.fount_2 ?? 'Roboto',
         },
       ]"
     >
