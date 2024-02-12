@@ -12,7 +12,7 @@
     <div v-if="blog?.title" class="wrapper-items-content">
       <div class="product-text">
         <div class="product-tittle">
-          <span class="tittle">{{ blog.title }}</span>
+          <span class="tittle">{{ blog.title.replace(/&nbsp;/g, ' ') }}</span>
         </div>
       </div>
     </div>
