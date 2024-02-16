@@ -745,16 +745,16 @@
         <button
           class="continue_shopping_form"
           :style="`background: ${
-            settingByTemplate && settingByTemplate.color_primario
+            settingByTemplate?.color_primario
               ? settingByTemplate.color_primario
               : '#25D366'
           }; color:${
-            settingByTemplate && settingByTemplate.color_secundario
+            settingByTemplate?.color_secundario
               ? settingByTemplate.color_secundario
               : '#FFFFFF'
           };
           border:2px solid ${
-            settingByTemplate && settingByTemplate.color_primario
+            settingByTemplate?.color_primario
               ? settingByTemplate.color_primario
               : '#25D366'
           };          
@@ -781,16 +781,16 @@
           <button
             class="continue_form_confirmation"
             :style="`background: ${
-              settingByTemplate && settingByTemplate.color_primario
+              settingByTemplate?.color_primario
                 ? settingByTemplate.color_primario
                 : '#25D366'
             }; color:${
-              settingByTemplate && settingByTemplate.color_secundario
+              settingByTemplate?.color_secundario
                 ? settingByTemplate.color_secundario
                 : '#FFFFFF'
             };
           border:2px solid ${
-            settingByTemplate && settingByTemplate.color_primario
+            settingByTemplate?.color_primario
               ? settingByTemplate.color_primario
               : '#25D366'
           };          
@@ -1516,14 +1516,12 @@ export default {
         this.quickSale.state &&
         this.quickSale.dataSeller.phone
       ) {
-        if (this.quickSale && this.quickSale.state) {
-          if (this.quickSale.dataSeller.phone.charAt(0) == '+') {
-            let phone_number_whatsapp = this.quickSale.dataSeller.phone.slice(1)
-            if (this.mobileCheck()) {
-              window.location.href = `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`
-            } else {
-              window.location.href = `${baseUrlPc}${phone_number_whatsapp}&text=${text}`
-            }
+        if (this.quickSale.dataSeller.phone.charAt(0) == '+') {
+          let phone_number_whatsapp = this.quickSale.dataSeller.phone.slice(1)
+          if (this.mobileCheck()) {
+            window.location.href = `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`
+          } else {
+            window.location.href = `${baseUrlPc}${phone_number_whatsapp}&text=${text}`
           }
         }
       } else {
@@ -1604,20 +1602,29 @@ export default {
             reseller: this.userDropshipping
               ? Number(this.userDropshipping)
               : null,
+            emailCliente: this.form.email || null,
+            datosTienda: {
+              logo: this.dataStore.logo || null,
+              nombre: this.dataStore.nombre || null,
+              subdominio: this.dataStore.subdominio || null,
+              dominio: this.dataStore.tiendasInfo.dominio || null,
+              email_tienda: this.dataStore.tiendasInfo.emailTienda || null,
+              telefono: this.dataStore.tiendasInfo.telefono || null,
+            },
           }
 
           try {
             const { data } = await axios({
               method: 'POST',
-              url: `${this.$store.state.urlKomercia}/api/usuario/orden`,
+              url: `${this.$store.state.urlAWSsettings}/api/v1/orders`,
               data: params,
             })
             if (data) {
-              this.numberOrder = data.data.id
+              this.numberOrder = data.id
               await this.$store.dispatch('SEND_NOTIFICATION_ORDER', {
-                orderId: data.data.id,
-                storeId: data.data.tienda,
-                amount: data.data.total,
+                orderId: data.id,
+                storeId: data.tienda,
+                amount: data.total,
                 paymentMethod: '7',
               })
               this.textConfirmation =

@@ -69,16 +69,13 @@
               >
                 <BaseAccordion
                   v-if="
-                    itemsTags &&
-                    itemsTags.status === 1 &&
-                    itemsTags.tagProperties.length > 0 &&
-                    itemsTags.visible === 1
+                    itemsTags?.status === 1 &&
+                    itemsTags?.tagProperties.length > 0 &&
+                    itemsTags?.visible === 1
                   "
                 >
                   <template v-slot:categorias>
-                    <li class="btn-category">
-                      {{ itemsTags.name }}
-                    </li>
+                    <li class="btn-category">{{ itemsTags.name }}</li>
                   </template>
                   <template v-slot:subcategorias>
                     <div
@@ -95,7 +92,7 @@
                         "
                         @click="setToQueryFilter('tag', itemsProperties)"
                       >
-                        <p class="txt-sub-li" @click="closed">
+                        <p class="txt-sub-li">
                           {{ itemsProperties.name }}
                         </p>
                       </li>
@@ -162,6 +159,7 @@ export default {
       }
     },
     setToQueryFilter(type, value) {
+      console.log(type, value)
       if (type === 'category') {
         this.sendAnalyticsStore(value.id)
         this.query.subcategory = null
@@ -174,7 +172,6 @@ export default {
           value.nombreCategoriaProducto
         )
         this.$store.commit('products/SET_SUBCATEGORY_PRODUCTO', null)
-        this.closed()
       } else if (type === 'subcategories') {
         this.categorias.filter((item) => {
           if (item.id === value.categoria) {
@@ -191,10 +188,8 @@ export default {
         )
         this.query.subcategory = value.id || null
         this.subCategorySelect = value.id
-        this.closed()
       } else {
         this.query.tag = value.id || null
-        this.closed()
       }
 
       this.closed()
