@@ -1602,29 +1602,30 @@ export default {
             reseller: this.userDropshipping
               ? Number(this.userDropshipping)
               : null,
-            emailCliente: this.form.email || null,
-            datosTienda: {
-              logo: this.dataStore.logo || null,
-              nombre: this.dataStore.nombre || null,
-              subdominio: this.dataStore.subdominio || null,
-              dominio: this.dataStore.tiendasInfo.dominio || null,
-              email_tienda: this.dataStore.tiendasInfo.emailTienda || null,
-              telefono: this.dataStore.tiendasInfo.telefono || null,
-            },
+            // emailCliente: this.form.email || null,
+            // datosTienda: {
+            //   logo: this.dataStore.logo || null,
+            //   nombre: this.dataStore.nombre || null,
+            //   subdominio: this.dataStore.subdominio || null,
+            //   dominio: this.dataStore.tiendasInfo.dominio || null,
+            //   email_tienda: this.dataStore.tiendasInfo.emailTienda || null,
+            //   telefono: this.dataStore.tiendasInfo.telefono || null,
+            // },
           }
 
           try {
             const { data } = await axios({
               method: 'POST',
-              url: `${this.$store.state.urlAWSsettings}/api/v1/orders`,
+              // url: `${this.$store.state.urlAWSsettings}/api/v1/orders`,
+              url: `${this.$store.state.urlKomercia}/api/usuario/orden`,
               data: params,
             })
             if (data) {
-              this.numberOrder = data.id
+              this.numberOrder = data.data.id
               await this.$store.dispatch('SEND_NOTIFICATION_ORDER', {
-                orderId: data.id,
-                storeId: data.tienda,
-                amount: data.total,
+                orderId: data.data.id,
+                storeId: data.data.tienda,
+                amount: data.data.total,
                 paymentMethod: '7',
               })
               this.textConfirmation =
