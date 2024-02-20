@@ -413,9 +413,9 @@ export const actions = {
     } catch (err) {
       console.log(
         'Data increment store view',
-        err.response.data,
+        err?.response?.data,
         'status',
-        err.response.status
+        err?.response?.status
       )
     }
   },
@@ -575,7 +575,6 @@ export const actions = {
         },
       })
       if (data) {
-        console.log(data)
         commit(`SET_SETTINGS_BY_TEMPLATE`, {
           templateNumber: templateStore,
           value: data.data,
@@ -701,7 +700,7 @@ export const actions = {
         }
       }
     } catch (err) {
-      console.log('Data blog tienda', err.response)
+      console.log('Data blog tienda', err?.response)
       return { success: false, data: null }
     }
   },
