@@ -130,7 +130,11 @@
       </div>
       <div class="section">
         <div class="features">
-          <ko-description :data-store="dataStore" :data="data.stock.product" />
+          <ko-description
+            :data-store="dataStore"
+            :data="data.stock.product"
+            :price="salesData"
+          />
         </div>
       </div>
       <div class="responsive-purchase">

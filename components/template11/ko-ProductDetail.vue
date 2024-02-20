@@ -430,7 +430,12 @@
         </div>
       </div>
       <div class="tab">
-        <OptionTab :data-store="dataStore" :data="data" :envio="envio" />
+        <OptionTab
+          :data-store="dataStore"
+          :data="data"
+          :envio="envio"
+          :price="salesData"
+        />
       </div>
       <div class="section-suggesProduct">
         <KoSuggestProduct

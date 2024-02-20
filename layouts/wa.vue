@@ -45,6 +45,7 @@ export default {
   head() {
     let tienda = this.dataStore ?? ''
     let geolocation = this.geolocalizacion ?? ''
+    let addiSlug = this.analytics_tagmanager?.addiAllySlug ?? ''
     let description =
       tienda?.tiendasInfo.descripcion?.replace(/<[^>]*>?/g, '') ?? ''
     let FacebookPixel1 =
@@ -184,6 +185,11 @@ export default {
       script: [
         {
           src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyByh33xchBmphNi10U-eB3oCX9sVVT4fiY',
+        },
+        {
+          src: addiSlug
+            ? 'https://s3.amazonaws.com/widgets.addi.com/bundle.min.js'
+            : '',
         },
       ],
       link: [

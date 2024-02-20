@@ -430,6 +430,7 @@
           :data="data"
           :envio="envio"
           :setting-by-template13="settingByTemplate13"
+          :price="salesData"
         />
       </div>
       <div class="w-full my-20">

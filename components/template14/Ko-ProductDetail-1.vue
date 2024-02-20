@@ -620,6 +620,7 @@
             :data="data"
             :envio="envio"
             :setting-by-template="settingByTemplate14"
+            :price="salesData"
             class="w-full"
           />
         </div>

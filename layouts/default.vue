@@ -153,6 +153,7 @@ export default {
   head() {
     let tienda = this.dataStore ?? ''
     let tidio = this.analytics_tagmanager?.tidio_user ?? ''
+    let addiSlug = this.analytics_tagmanager?.addiAllySlug ?? ''
     let FacebookPixel1 =
       this.analytics_tagmanager?.facebook_pixel_metatag_1 ?? ''
     let googleMerchants = this.analytics_tagmanager?.google_merchant ?? ''
@@ -332,6 +333,11 @@ export default {
         },
         {
           src: tidio ? `https://code.tidio.co/${tidio}.js` : '',
+        },
+        {
+          src: addiSlug
+            ? 'https://s3.amazonaws.com/widgets.addi.com/bundle.min.js'
+            : '',
         },
       ],
       link: [
