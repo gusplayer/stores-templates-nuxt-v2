@@ -209,6 +209,7 @@
                 </selectGroup>
               </div>
             </div>
+
             <div
               class="px-15 py-10 md:px-0 md:py-0 fixed md:sticky w-full flex flex-row md:flex-col gap-x-4 md:gap-0 justify-around md:justify-start items-center md:items-start left-0 bottom-0 bg-gray-100 md:bg-transparent border-t md:border-t-0 border-gray-400 z-10 md:z-0"
             >
@@ -397,7 +398,12 @@
         </div>
       </div>
       <div class="w-full flex border-t border-[rgba(127, 127, 139, 0.342)]">
-        <ko-description :data-store="dataStore" :data="data" :envio="envio" />
+        <ko-description
+          :data-store="dataStore"
+          :data="data"
+          :envio="envio"
+          :price="salesData"
+        />
       </div>
       <div class="w-full z-[1]">
         <KoSuggestProduct

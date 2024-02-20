@@ -356,6 +356,7 @@
                 :data="data"
                 :envio="envio"
                 :setting-by-general="settingByTemplate9[0].setting9General"
+                :price="salesData"
               />
             </div>
             <div class="tab">
@@ -364,6 +365,7 @@
                 :data="data"
                 :envio="envio"
                 :setting-by-general="settingByTemplate9[0].setting9General"
+                :price="salesData"
               />
             </div>
             <div

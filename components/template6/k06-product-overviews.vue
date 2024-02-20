@@ -461,6 +461,7 @@
                 :envio="envio"
                 :settings-general="settingsGeneral"
                 :product-overviews="productOverviews"
+                :price="salesData"
               />
             </div>
           </div>

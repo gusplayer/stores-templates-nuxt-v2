@@ -160,7 +160,11 @@
         </div>
       </div>
       <div class="tab mb-20">
-        <K011-optTabHoko :data-store="dataStore" :data="data.stock.product" />
+        <K011-optTabHoko
+          :data-store="dataStore"
+          :data="data.stock.product"
+          :price="salesData"
+        />
       </div>
     </div>
   </div>

@@ -395,7 +395,7 @@ export const actions = {
         commit('SET_DATA')
       }
     } catch (err) {
-      console.log('Data store', err.response)
+      console.log('Data store', err?.response)
     }
   },
   GET_DATA({ commit }) {
@@ -457,7 +457,7 @@ export const actions = {
         return { success: true, data: data }
       }
     } catch (err) {
-      console.log('Data categories', err.response)
+      console.log('Data categories', err?.response)
     }
   },
   async GET_SUBCATEGORIES({ commit, state }, idTienda) {
@@ -474,7 +474,7 @@ export const actions = {
         return { success: true, data: data }
       }
     } catch (err) {
-      console.log('Data subcategories', err.response)
+      console.log('Data subcategories', err?.response)
     }
   },
   async GET_GEOLOCALIZACION({ commit, state }, idTienda) {
@@ -491,7 +491,7 @@ export const actions = {
         return { success: true, data: data }
       }
     } catch (err) {
-      console.log('Data geolocalizacion', err.response)
+      console.log('Data geolocalizacion', err?.response)
     }
   },
   async GET_STORE_POLICIES({ commit, state }, idTienda) {
@@ -508,7 +508,7 @@ export const actions = {
         return { success: true, data: data }
       }
     } catch (err) {
-      console.log('Data politicas', err.response)
+      console.log('Data politicas', err?.response)
     }
   },
   async GET_WHATS_APP_CHECKOUT({ commit, state }, idTienda) {
@@ -525,7 +525,7 @@ export const actions = {
         return { success: true, data: data }
       }
     } catch (err) {
-      console.log('Data whatsApp checkout', err.response)
+      console.log('Data whatsApp checkout', err?.response)
     }
   },
   async GET_ENTITIES({ commit, state }, idTienda) {
@@ -542,7 +542,7 @@ export const actions = {
         return { success: true, data: data }
       }
     } catch (err) {
-      console.log('Data whatsApp checkout', err.response)
+      console.log('Data whatsApp checkout', err?.response)
     }
   },
   async GET_CITIES({ commit, state }) {
@@ -559,7 +559,7 @@ export const actions = {
         return { success: true, data: data }
       }
     } catch (err) {
-      console.log('Data cities', err.response)
+      console.log('Data cities', err?.response)
     }
   },
   async GET_SETTINGS_BY_TEMPLATE(
@@ -575,13 +575,14 @@ export const actions = {
         },
       })
       if (data) {
+        console.log(data)
         commit(`SET_SETTINGS_BY_TEMPLATE`, {
           templateNumber: templateStore,
           value: data.data,
         })
       }
     } catch (err) {
-      console.log('Data setting Laravel', err.response)
+      console.log('Data setting Laravel', err?.response)
     }
   },
   async GET_SETTINGS_BY_TEMPLATE_NODE(
@@ -600,7 +601,7 @@ export const actions = {
         })
       }
     } catch (err) {
-      console.log('Data setting NODE', err.response)
+      console.log('Data setting NODE', err?.response)
     }
   },
   // async GET_SETTINGS_BY_TEMPLATE_AWS(
@@ -654,7 +655,7 @@ export const actions = {
         commit('SET_ANALITICS_TAGMANAGER', data.data)
       }
     } catch (err) {
-      console.log('Data integraciones', err.response)
+      console.log('Data integraciones', err?.response)
     }
   },
   async GET_DESCUENTOS({ state }) {
@@ -672,7 +673,7 @@ export const actions = {
         })
       }
     } catch (err) {
-      console.log('Data descuentos', err.response)
+      console.log('Data descuentos', err?.response)
     }
   },
   async GET_ARTICLES({ state, commit }, params) {
@@ -717,7 +718,7 @@ export const actions = {
         return { success: true, data: data }
       }
     } catch (err) {
-      console.log('Data articulo tienda', err.response)
+      console.log('Data articulo tienda', err?.response)
       return { success: false, data: null }
     }
   },
@@ -735,7 +736,7 @@ export const actions = {
         console.log('No tiene Hoko registrado')
       }
     } catch (err) {
-      console.log('Data hoko', err.response)
+      console.log('Data hoko', err?.response)
     }
   },
   async GET_PRODUCTSHOKO({ state }, id) {
@@ -754,7 +755,7 @@ export const actions = {
           state.producthoko = data
         }
       } catch (err) {
-        console.log('Listado prodcutos Hoko', err.response)
+        console.log('Listado prodcutos Hoko', err?.response)
       }
     }
   },
@@ -824,7 +825,7 @@ export const actions = {
         return { success: true, dataOrder: data }
       }
     } catch (err) {
-      console.log('SEND_NOTIFICATION_ORDER', err.response)
+      console.log('SEND_NOTIFICATION_ORDER', err?.response)
       return { success: false }
     }
   },
@@ -1000,6 +1001,22 @@ export const actions = {
       } else {
         // console.log('no tiene productos en el carrito')
       }
+    }
+  },
+  // API EXTERNA VERIFICA MONTOS DE ADDI
+  // eslint-disable-next-line no-empty-pattern
+  async VERIFY_AMOUNTS_ADDI({}, params) {
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `https://channels-public-api.addi.com/allies/${params.slug}/config?requestedAmount=${params.amount} `,
+      })
+      if (data) {
+        return { success: true, data: data }
+      }
+    } catch (err) {
+      console.log('CREATE_ORDER_ADDI', err)
+      return { success: false, location: null }
     }
   },
 }

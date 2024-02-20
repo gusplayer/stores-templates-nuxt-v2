@@ -150,10 +150,15 @@
               <OptionAcordion
                 :dataStore="dataStore"
                 :data="data.stock.product"
+                :price="salesData"
               />
             </div>
             <div class="tab">
-              <OptionTab :dataStore="dataStore" :data="data.stock.product" />
+              <OptionTab
+                :dataStore="dataStore"
+                :data="data.stock.product"
+                :price="salesData"
+              />
             </div>
           </div>
         </div>

@@ -57,9 +57,10 @@ export const actions = {
       console.error('Error fetching all products:', error.response)
       return { success: false, data: null }
     }
-    return { success: false, data: null }
+    // return { success: false, data: null }
   },
   async GET_DATA_PRODUCT({ rootState }, params) {
+    // let temp = null
     try {
       const response = await axios({
         method: 'GET',
@@ -68,6 +69,7 @@ export const actions = {
           KOMERCIA_PUBLIC_ROUTES_KEY: rootState.routerKey,
         },
       })
+      // temp = response
       if (response.data) {
         return { success: true, data: response.data }
       }
@@ -75,7 +77,10 @@ export const actions = {
       console.error('Error fetching data products:', error.response)
       return { success: false, data: null }
     }
-    return { success: false, data: null }
+    // finally {
+    //   console.log(temp)
+    // }
+    // return { success: false, data: null }
   },
 }
 

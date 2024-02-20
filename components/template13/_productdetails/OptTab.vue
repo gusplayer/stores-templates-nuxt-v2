@@ -45,7 +45,7 @@
             <h4>{{ $t('productdetail_pagoConvenir') }}</h4>
             <p>{{ $t('productdetail_pagoConvenirMsg') }}</p>
           </div>
-          <div v-if="mediospago.credibanco == 1">
+          <!-- <div v-if="mediospago.credibanco == 1">
             <h4>{{ $t('productdetail_ConsignacionCredibanco') }}</h4>
             <p>
               {{ $t('productdetail_ConsignacionCredibancoMsg') }}
@@ -61,6 +61,18 @@
                 alt="logo Credibanco"
               />
             </a>
+          </div> -->
+          <div v-if="mediospago?.addi == 1 && price?.price">
+            <h4>Addi</h4>
+            <div v-if="stateWidgetAddi" class="mt-20">
+              <addi-widget
+                :price="price.precio"
+                ally-slug="splashjugueteriaypiscinas-ecommerce"
+              />
+            </div>
+            <p v-else>
+              El precio del producto está fuera del rango permitido por ADDI.
+            </p>
           </div>
           <div v-if="mediospago.daviplata == 1">
             <h4>{{ $t('productdetail_Consignaciondaviplata') }}</h4>
@@ -276,6 +288,7 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import extensions from '@/mixins/elemenTiptap.vue'
 import currency from '@/mixins/formatCurrent'
 export default {
@@ -305,15 +318,21 @@ export default {
       type: Array,
       required: true,
     },
+    price: {
+      type: Object,
+      required: true,
+    },
   },
 
   data() {
     return {
+      stateWidgetAddi: false,
       activeNames: ['1'],
       contentDescription: this.data?.productosInfo?.descripcion,
     }
   },
   computed: {
+    ...mapState(['dataAmountsAddi', 'analytics_tagmanager']),
     mediospago() {
       return this.dataStore.medioPagos
     },
@@ -327,10 +346,43 @@ export default {
       return this.$store.state.envios.valores
     },
   },
+  watch: {
+    'price.precio'() {
+      this.getAmountAddi()
+    },
+  },
   mounted() {
+    this.getAmountAddi()
     this.contentDescription
       ? (this.activeNames = ['1'])
       : (this.activeNames = ['2'])
+  },
+  methods: {
+    async getAmountAddi() {
+      if (this.analytics_tagmanager?.addiAllySlug != null) {
+        this.stateWidgetAddi = false
+        const { success, data } = await this.$store.dispatch(
+          'VERIFY_AMOUNTS_ADDI',
+          {
+            slug: 'splashjugueteriaypiscinas-ecommerce',
+            // slug: this.analytics_tagmanager.addiAllySlug,
+            amount: this.price.precio,
+          }
+        )
+        if (success) {
+          if (
+            this.price.precio >= data.minAmount &&
+            this.price.precio <= data.maxAmount
+          ) {
+            this.stateWidgetAddi = true
+          } else {
+            this.stateWidgetAddi = false
+          }
+        } else {
+          this.stateWidgetAddi = false
+        }
+      }
+    },
   },
 }
 </script>
