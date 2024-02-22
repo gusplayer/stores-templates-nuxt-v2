@@ -911,6 +911,7 @@ export const actions = {
               activo: product.activo,
               stock_disponible: 1,
               dropshipping: product.dropshipping,
+              con_variante: product.con_variante,
             }
             if (!filterCombination[0].estado) {
               newProduct.activo = 0
@@ -927,6 +928,7 @@ export const actions = {
             const newProduct = {
               cantidad: product.cantidad,
               // combinacion: filterCombination[0].combinacion,
+              con_variante: 0,
               envio_gratis: product.envio_gratis,
               foto_cloudinary: product.foto_cloudinary,
               id: product.id,
