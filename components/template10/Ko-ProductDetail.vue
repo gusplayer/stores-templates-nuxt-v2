@@ -895,6 +895,7 @@ export default {
         promocion_valor: this.data.productosInfo.promocionValor,
         tag_promocion: this.data.productosInfo.tagPromocion,
         dropshipping: this.userDropshipping.userId,
+        con_variante: this.data.conVariante,
       }
       if (this.salesData) {
         product.limitQuantity = this.salesData.unidades

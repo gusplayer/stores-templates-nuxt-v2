@@ -263,6 +263,7 @@ export default {
             nombre: this.product.nombre,
             combinacion: undefined,
             envio_gratis: this.product.envio_gratis,
+            con_variante: this.product.con_variante,
           }
           if (this.salesData) {
             product.limitQuantity = this.product.stock
