@@ -58,12 +58,12 @@
               />
             </a>
           </li> -->
-          <div v-if="mediospago?.addi == 1 && price?.price">
+          <div v-if="mediospago.addi == 1 && price?.precio">
             <h4>Addi</h4>
             <div v-if="stateWidgetAddi" class="mt-20">
               <addi-widget
                 :price="price.precio"
-                ally-slug="splashjugueteriaypiscinas-ecommerce"
+                :ally-slug="analytics_tagmanager?.addiAllySlug"
               />
             </div>
             <p v-else>
@@ -313,8 +313,8 @@ export default {
         const { success, data } = await this.$store.dispatch(
           'VERIFY_AMOUNTS_ADDI',
           {
-            slug: 'splashjugueteriaypiscinas-ecommerce',
-            // slug: this.analytics_tagmanager.addiAllySlug,
+            // slug: 'splashjugueteriaypiscinas-ecommerce',
+            slug: this.analytics_tagmanager.addiAllySlug,
             amount: this.price.precio,
           }
         )
