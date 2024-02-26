@@ -157,6 +157,11 @@
                 {{ data.productosInfo.promocionValor }}% OFF
               </p>
             </div>
+            <PluginAddi
+              :more-details="false"
+              :status="dataStore.medioPagos.addi"
+              :price="salesData"
+            />
             <div class="content_buy_action">
               <div v-if="data.envioGratis == 1 && salesData.unidades > 0">
                 <div class="transport-icon">
@@ -533,6 +538,7 @@ import { productHeadMixin } from '@/mixins/productHeadMixin'
 export default {
   name: 'K07ProductDetail',
   components: {
+    PluginAddi: () => import('@/components/_commonComponent/addi.vue'),
     SelectGroup: () => import('../_commonComponent/select-group.vue'),
     ProductSlide: () => import('../_commonComponent/product-slide.vue'),
     Zoom: () => import('../_commonComponent/zoom-img.vue'),

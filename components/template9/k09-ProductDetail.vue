@@ -133,6 +133,11 @@
                 {{ $t('productdetail_Notstock') }}
               </p>
             </div>
+            <PluginAddi
+              :more-details="false"
+              :status="dataStore.medioPagos.addi"
+              :price="salesData"
+            />
             <div
               v-if="data.productosInfo.descripcionCorta"
               class="flex flex-col mb-10 items-start"
@@ -411,6 +416,7 @@ import { productHeadMixin } from '@/mixins/productHeadMixin'
 export default {
   name: 'Ko9ProductDetail',
   components: {
+    PluginAddi: () => import('@/components/_commonComponent/addi.vue'),
     Skeleton: () => import('../_commonComponent/skeleton-detail.vue'),
     ProductSlide: () => import('../_commonComponent/product-slide.vue'),
     SelectGroup: () => import('../_commonComponent/select-group.vue'),

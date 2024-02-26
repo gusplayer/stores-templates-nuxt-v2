@@ -249,6 +249,11 @@
                 </p>
               </div>
             </div>
+            <PluginAddi
+              :more-details="false"
+              :status="dataStore.medioPagos.addi"
+              :price="salesData"
+            />
             <div class="w-full flex flex-wrap gap-x-5 gap-y-2 mb-15">
               <div class="flex flex-row justify-start items-center">
                 <p
@@ -644,6 +649,7 @@ import { productHeadMixin } from '@/mixins/productHeadMixin'
 export default {
   name: 'Ko14ProductDetail',
   components: {
+    PluginAddi: () => import('@/components/_commonComponent/addi.vue'),
     Skeleton: () => import('../_commonComponent/skeleton-detail.vue'),
     ProductSlide: () => import('../_commonComponent/product-slide.vue'),
     SelectGroup: () => import('../_commonComponent/select-group-v2.vue'),
