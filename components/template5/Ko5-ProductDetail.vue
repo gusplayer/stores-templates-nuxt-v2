@@ -156,6 +156,11 @@
                 {{ data.productosInfo.promocionValor }}% OFF
               </p>
             </div>
+            <PluginAddi
+              :more-details="false"
+              :status="dataStore.medioPagos.addi"
+              :price="salesData"
+            />
             <div class="content_buy_action">
               <div
                 v-if="envio.titulo == 'Envío gratis'"
@@ -424,6 +429,7 @@ import { productHeadMixin } from '@/mixins/productHeadMixin'
 export default {
   name: 'Ko5ProductDetail',
   components: {
+    PluginAddi: () => import('@/components/_commonComponent/addi.vue'),
     Skeleton: () => import('../_commonComponent/skeleton-detail.vue'),
     SelectGroup: () => import('../_commonComponent/select-group.vue'),
     ProductSlide: () => import('../_commonComponent/product-slide.vue'),

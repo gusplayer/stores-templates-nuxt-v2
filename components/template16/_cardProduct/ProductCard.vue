@@ -38,7 +38,7 @@
       </div>
     </div>
     <div
-      class="w-full h-full flex flex-col justify-between items-center my-6 mx-10 cursor-default box-border"
+      class="w-full h-full flex flex-col justify-between items-center py-6 px-10 cursor-default box-border"
     >
       <nuxt-link :to="{ path: `/productos/` + product.slug }">
         <div class="w-full flex justify-center items-center">

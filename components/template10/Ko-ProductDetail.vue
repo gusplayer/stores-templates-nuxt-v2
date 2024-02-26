@@ -220,6 +220,11 @@
                 {{ $t('footer_tarifaPrecio') }}
               </p>
             </div>
+            <PluginAddi
+              :more-details="false"
+              :status="dataStore.medioPagos.addi"
+              :price="salesData"
+            />
             <!-- Variantes de producto -->
             <div
               v-if="data.conVariante === 1 && variantes"
@@ -482,6 +487,7 @@ import { productHeadMixin } from '@/mixins/productHeadMixin'
 export default {
   name: 'Ko10ProductDetail',
   components: {
+    PluginAddi: () => import('@/components/_commonComponent/addi.vue'),
     Skeleton: () => import('../_commonComponent/skeleton-detail.vue'),
     ProductSlide: () => import('../_commonComponent/product-slide.vue'),
     SelectGroup: () => import('../_commonComponent/select-group.vue'),

@@ -77,6 +77,11 @@
                   {{ data.productosInfo.promocionValor }}% OFF
                 </p>
               </div>
+              <PluginAddi
+                :more-details="false"
+                :status="dataStore.medioPagos.addi"
+                :price="salesData"
+              />
               <div class="content_buy_action">
                 <div
                   v-if="data.envioGratis == 1 || envio.titulo == 'Envío gratis'"
@@ -230,6 +235,7 @@ import mobileCheck from '@/mixins/mobileCheck'
 export default {
   name: 'Ko12ProductDetail',
   components: {
+    PluginAddi: () => import('@/components/_commonComponent/addi.vue'),
     selectGroup: () => import('../_commonComponent/select-group.vue'),
     ProductSlide: () => import('../_commonComponent/product-slide.vue'),
   },

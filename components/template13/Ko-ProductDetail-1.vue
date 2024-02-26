@@ -181,6 +181,16 @@
                 </p>
               </div>
             </div>
+            <div
+              v-if="dataStore.medioPagos.addi === 1"
+              class="w-full flex justify-start"
+            >
+              <PluginAddi
+                :more-details="false"
+                :status="dataStore.medioPagos.addi"
+                :price="salesData"
+              />
+            </div>
             <!-- <div class="empty"></div> -->
             <div class="content-stock">
               <p
@@ -452,6 +462,7 @@ import { productHeadMixin } from '@/mixins/productHeadMixin'
 export default {
   name: 'Ko13ProductDetail',
   components: {
+    PluginAddi: () => import('@/components/_commonComponent/addi.vue'),
     Skeleton: () => import('../_commonComponent/skeleton-detail.vue'),
     ProductSlide: () => import('../_commonComponent/product-slide.vue'),
     SelectGroup: () => import('../_commonComponent/select-group.vue'),

@@ -50,18 +50,11 @@
             />
           </a>
         </li> -->
-        <div v-if="mediospago.addi == 1 && price?.precio">
-          <h4>Addi</h4>
-          <div v-if="stateWidgetAddi" class="mt-20">
-            <addi-widget
-              :price="price.precio"
-              :ally-slug="analytics_tagmanager?.addiAllySlug"
-            />
-          </div>
-          <p v-else>
-            El precio del producto está fuera del rango permitido por ADDI.
-          </p>
-        </div>
+        <PluginAddi
+          :more-details="true"
+          :status="mediospago.addi"
+          :price="price"
+        />
         <li v-if="mediospago.daviplata == 1">
           <h4>{{ $t('productdetail_Consignaciondaviplata') }}</h4>
           <p>
@@ -227,10 +220,12 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
 import extensions from '@/mixins/elemenTiptap.vue'
 import currency from '@/mixins/formatCurrent'
 export default {
+  components: {
+    PluginAddi: () => import('@/components/_commonComponent/addi.vue'),
+  },
   filters: {
     capitalize(value) {
       if (value) {
@@ -261,14 +256,12 @@ export default {
 
   data() {
     return {
-      stateWidgetAddi: false,
       medioEnvio: '',
       envioproducto: '',
       contentDescription: this.data?.info?.descripcion,
     }
   },
   computed: {
-    ...mapState(['dataAmountsAddi', 'analytics_tagmanager']),
     mediospago() {
       return this.dataStore.medioPagos
     },
@@ -285,13 +278,7 @@ export default {
       return this.data.medioEnvio
     },
   },
-  watch: {
-    'price.precio'() {
-      this.getAmountAddi()
-    },
-  },
   mounted() {
-    this.getAmountAddi()
     var acc = document.getElementsByClassName('accordion')
     var i
     for (i = 0; i < acc.length; i++) {
@@ -305,33 +292,6 @@ export default {
         }
       })
     }
-  },
-  methods: {
-    async getAmountAddi() {
-      if (this.analytics_tagmanager?.addiAllySlug != null) {
-        this.stateWidgetAddi = false
-        const { success, data } = await this.$store.dispatch(
-          'VERIFY_AMOUNTS_ADDI',
-          {
-            // slug: 'splashjugueteriaypiscinas-ecommerce',
-            slug: this.analytics_tagmanager.addiAllySlug,
-            amount: this.price.precio,
-          }
-        )
-        if (success) {
-          if (
-            this.price.precio >= data.minAmount &&
-            this.price.precio <= data.maxAmount
-          ) {
-            this.stateWidgetAddi = true
-          } else {
-            this.stateWidgetAddi = false
-          }
-        } else {
-          this.stateWidgetAddi = false
-        }
-      }
-    },
   },
 }
 </script>

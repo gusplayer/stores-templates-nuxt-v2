@@ -222,6 +222,11 @@
                 </p>
               </div>
             </div>
+            <PluginAddi
+              :more-details="false"
+              :status="dataStore.medioPagos.addi"
+              :price="salesData"
+            />
             <div class="w-full flex flex-col mb-10">
               <div
                 v-if="data.categoriaProducto > 0"
@@ -606,8 +611,9 @@ import currency from '@/mixins/formatCurrent'
 import mobileCheck from '@/mixins/mobileCheck'
 import { productHeadMixin } from '@/mixins/productHeadMixin'
 export default {
-  name: 'Ko15ProductDetail',
+  name: 'Ko16ProductDetail',
   components: {
+    PluginAddi: () => import('@/components/_commonComponent/addi.vue'),
     Skeleton: () => import('../_commonComponent/skeleton-detail.vue'),
     ProductSlide: () => import('../_commonComponent/product-slide.vue'),
     KoSuggestProduct: () =>
