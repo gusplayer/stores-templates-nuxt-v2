@@ -81,6 +81,7 @@
                 :more-details="false"
                 :status="dataStore.medioPagos.addi"
                 :price="salesData"
+                :data-store="dataStore"
               />
               <div class="content_buy_action">
                 <div
@@ -611,7 +612,7 @@ export default {
       let baseUrlMovil = 'https://api.whatsapp.com/send?'
       let baseUrlPc = 'https://web.whatsapp.com/send?'
       let urlProduct = window.location.href
-      let text = `Hola 😀, %0AQuiero compartir contigo éste  producto, seguro te va a encantar: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
+      let text = `Hola 😀, %0AQuiero compartir contigo éste  producto, seguro te va a encantar: ${this.data.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
       if (this.mobileCheck()) {
         window.open(`${baseUrlMovil}text=${text}`, '_blank')
       } else {
@@ -622,7 +623,7 @@ export default {
       let baseUrlMovil = 'https://api.whatsapp.com/send?phone='
       let baseUrlPc = 'https://web.whatsapp.com/send?phone='
       let urlProduct = window.location.href
-      let text = `Hola%20%F0%9F%98%80%2C%0AEstoy%20en%20tu%20tienda%20%2A${this.dataStore.nombre}%2A%20y%20quiero%20cotizar%20este%20producto%3A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.data.detalle.nombre}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ALink%3A%20${urlProduct}`
+      let text = `Hola%20%F0%9F%98%80%2C%0AEstoy%20en%20tu%20tienda%20%2A${this.dataStore.nombre}%2A%20y%20quiero%20cotizar%20este%20producto%3A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.data.nombre}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ALink%3A%20${urlProduct}`
       if (this.dataStore.redes.whatsapp.charAt(0) == '+') {
         let phone_number_whatsapp = this.dataStore.redes.whatsapp.slice(1)
         if (this.mobileCheck()) {

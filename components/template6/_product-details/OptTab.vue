@@ -87,6 +87,7 @@
             :more-details="true"
             :status="mediospago.addi"
             :price="price"
+            :data-store="dataStore"
           />
           <div v-if="mediospago.daviplata == 1">
             <h4 :style="`color: ${productOverviews.color_text};`">

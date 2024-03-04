@@ -80,7 +80,12 @@
               />
             </a>
           </li> -->
-          <PluginAddi :status="mediospago.addi" :price="price" />
+          <PluginAddi
+            :more-details="false"
+            :status="mediospago.addi"
+            :price="price"
+            :data-store="dataStore"
+          />
           <li v-if="mediospago.daviplata == 1">
             <h4>{{ $t('productdetail_Consignaciondaviplata') }}</h4>
             <p>

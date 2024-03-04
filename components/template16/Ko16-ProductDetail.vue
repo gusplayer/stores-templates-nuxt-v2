@@ -226,6 +226,7 @@
               :more-details="false"
               :status="dataStore.medioPagos.addi"
               :price="salesData"
+              :data-store="dataStore"
             />
             <div class="w-full flex flex-col mb-10">
               <div
@@ -1034,7 +1035,7 @@ export default {
       let baseUrlMovil = 'https://api.whatsapp.com/send?'
       let baseUrlPc = 'https://web.whatsapp.com/send?'
       let urlProduct = window.location.href
-      let text = `Hola 😀, %0AQuiero compartir contigo éste  producto, seguro te va a encantar: ${this.data.detalle.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
+      let text = `Hola 😀, %0AQuiero compartir contigo éste  producto, seguro te va a encantar: ${this.data.nombre}%0A%0ALink de compra: ${urlProduct}%0A`
       if (this.mobileCheck()) {
         window.open(`${baseUrlMovil}text=${text}`, '_blank')
       } else {
