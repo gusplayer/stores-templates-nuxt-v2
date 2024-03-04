@@ -161,6 +161,7 @@
               :more-details="false"
               :status="dataStore.medioPagos.addi"
               :price="salesData"
+              :data-store="dataStore"
             />
             <div class="content_buy_action">
               <div v-if="data.envioGratis == 1 && salesData.unidades > 0">

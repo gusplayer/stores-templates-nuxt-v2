@@ -62,6 +62,7 @@
             :more-details="true"
             :status="mediospago.addi"
             :price="price"
+            :data-store="dataStore"
           />
           <li v-if="mediospago.daviplata == 1">
             <h4>{{ $t('productdetail_Consignaciondaviplata') }}</h4>

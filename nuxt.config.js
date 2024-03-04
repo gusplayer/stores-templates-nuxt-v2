@@ -89,24 +89,28 @@ export default {
         },
       },
     },
-    splitChunks: {
-      layouts: true,
-      pages: true,
-      commons: true,
-    },
     babel: {
       plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],
     },
     transpile: ['vee-validate/dist/rules'],
     optimizeCSS: true,
     parallel: true,
-    extend(config, ctx) {
-      if (ctx.isDev) {
-        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+    splitChunks: {
+      pages: true,
+      vendor: true,
+      commons: true,
+      runtime: true,
+      layouts: true,
+    },
+    optimization: {
+      splitChunks: {
+        name: false,
+      },
+    },
+    extend(config, { isDev, isClient }) {
+      if (isDev && isClient) {
+        config.devtool = 'source-map'
       }
-      // if (ctx.isDev && ctx.isClient) {
-      //   config.optimization.minimize = true
-      // }
     },
   },
   router: {

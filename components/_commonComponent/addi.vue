@@ -32,6 +32,10 @@ export default {
       type: Boolean,
       required: true,
     },
+    dataStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -51,7 +55,10 @@ export default {
   },
   methods: {
     async getAmountAddi() {
-      if (this.analytics_tagmanager?.addiAllySlug != null) {
+      if (
+        this.analytics_tagmanager?.addiAllySlug != null &&
+        this.dataStore?.medioPagos?.addi === 1
+      ) {
         this.stateWidgetAddi = false
         const { success, data } = await this.$store.dispatch(
           'VERIFY_AMOUNTS_ADDI',

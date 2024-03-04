@@ -160,6 +160,7 @@
               :more-details="false"
               :status="dataStore.medioPagos.addi"
               :price="salesData"
+              :data-store="dataStore"
             />
             <div class="content_buy_action">
               <div

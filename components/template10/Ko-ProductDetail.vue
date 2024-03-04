@@ -224,6 +224,7 @@
               :more-details="false"
               :status="dataStore.medioPagos.addi"
               :price="salesData"
+              :data-store="dataStore"
             />
             <!-- Variantes de producto -->
             <div
