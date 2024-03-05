@@ -1144,7 +1144,9 @@ function obtenerInfoURL(url) {
   let esDominio = false
   let idTienda = ''
 
-  const subdominioMatch = url.match(/\/\/([^\/.:]+)\.komercia\.store/)
+  const subdominioMatch = url.match(
+    /\/\/([^\/.:]+)\.(komercia\.store|komercia\.online)/
+  )
   if (subdominioMatch) {
     nombreTienda = subdominioMatch[1]
     esSubdominio = true
@@ -1211,7 +1213,6 @@ async function getIdData(state, req, commit) {
     (req.connection.encrypted ? 'https' : 'http')
   const currentURL = `${protocol}://${req.headers.host}${req.url}`
   const getURL = obtenerInfoURL(currentURL)
-  // console.log(getURL)
   let id = 0
   let template = 0
   let idWapi = null
@@ -1221,36 +1222,52 @@ async function getIdData(state, req, commit) {
     idWapi = getURL.idTienda
     template = 99
   } else if (getURL?.esSubdominio && getURL?.nombreTienda) {
-    const response = await axios.get(
-      `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL.nombreTienda}`
-    )
-    id = response.data.data.id || response.data.data.storeId
-    template = response.data.data.templateNumber || response.data.data.template
-    if (template === 15 || template === 6) {
-      commit(`SET_SETTINGS_BY_TEMPLATE`, {
-        templateNumber: template,
-        value: response.data.data.webSiteTemplate,
-      })
+    try {
+      const response = await axios.get(
+        `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL.nombreTienda}`
+      )
+
+      id = response.data.data.id || response.data.data.storeId
+      template =
+        response.data.data.templateNumber || response.data.data.template
+      if (template === 15 || template === 6) {
+        commit(`SET_SETTINGS_BY_TEMPLATE`, {
+          templateNumber: template,
+          value: response.data.data.webSiteTemplate,
+        })
+      }
+    } catch (err) {
+      console.log(`No se encontro la tienda ${getURL.nombreTienda}`)
     }
   } else if (getURL?.esDominio && getURL?.nombreTienda) {
-    const response = await axios.get(
-      `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL?.nombreTienda}&isDomain=1`
-    )
-    id = response.data.data.id || response.data.data.storeId
-    template = response.data.data.templateNumber || response.data.data.template
-    if (template === 15 || template === 6) {
-      commit(`SET_SETTINGS_BY_TEMPLATE`, {
-        templateNumber: template,
-        value: response.data.data.webSiteTemplate,
-      })
+    try {
+      const response = await axios.get(
+        `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL?.nombreTienda}&isDomain=1`
+      )
+      id = response.data.data.id || response.data.data.storeId
+      template =
+        response.data.data.templateNumber || response.data.data.template
+      if (template === 15 || template === 6) {
+        commit(`SET_SETTINGS_BY_TEMPLATE`, {
+          templateNumber: template,
+          value: response.data.data.webSiteTemplate,
+        })
+      }
+    } catch (err) {
+      console.log(`No se encontro la tienda ${getURL.nombreTienda}`)
     }
   }
   if (
-    getURL.nombreTienda === '' &&
-    template === 0 &&
-    (id === 0 || idWapi === null)
+    (getURL.nombreTienda === '' &&
+      template === 0 &&
+      (id === 0 || idWapi === null)) ||
+    getURL.nombreTienda === 'komercia' ||
+    (template === 0 && (id === 0 || idWapi === null))
   ) {
     state.storeError = true
+    id = 0
+    template = 0
+    idWapi = null
   } else {
     state.storeError = false
   }
