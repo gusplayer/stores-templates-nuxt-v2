@@ -184,7 +184,7 @@ export default {
 .contenedor {
   width: 100%;
   border-top: 1px solid rgba(213, 213, 213, 0.473);
-  padding: 20px 30px 70px;
+  padding: 20px 30px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;

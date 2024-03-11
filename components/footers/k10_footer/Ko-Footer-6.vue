@@ -275,7 +275,7 @@ export default {
 .footer-container {
   background: var(--background_color_1);
   border-color: var(--color_border);
-  @apply w-full flex flex-col justify-center items-center border-t;
+  @apply w-full flex flex-col justify-center items-center border-t pb-40 md:pb-20;
 }
 .footer-content {
   @apply w-full flex flex-col justify-center items-center;
@@ -288,7 +288,7 @@ export default {
 }
 .madebyKomercia {
   border-color: var(--color_border);
-  @apply w-full flex flex-col justify-center items-center border-t-2;
+  @apply w-full flex flex-col justify-center items-center border-t-2 pt-10;
 }
 .txt-devBy {
   font-size: 14px;
@@ -414,10 +414,6 @@ input:checked ~ .tab-content {
   .content-image {
     max-width: var(--with_logo);
     @apply w-full flex justify-center items-center mb-20;
-  }
-  .madebyKomercia {
-    max-height: 91px;
-    @apply h-91;
   }
 }
 @media (min-width: 425px) {

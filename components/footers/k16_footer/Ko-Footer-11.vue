@@ -11,7 +11,7 @@
   >
     <div
       ref="background"
-      class="w-full h-full flex justify-center items-center bg-no-repeat bg-cover bg-bottom box-content"
+      class="w-full h-full flex justify-center items-center bg-no-repeat bg-cover bg-bottom box-content pb-30 md:pb-0"
       :style="`background-color: ${settingByTemplate16[0].footer['--background_color_1']}`"
     >
       <div class="w-full flex flex-col justify-center items-center">

@@ -196,7 +196,7 @@ export default {
 .footer-container {
   background: var(--background_color_1);
   min-height: 322px;
-  @apply flex flex-col justify-center items-center bg-auto bg-bottom bg-no-repeat;
+  @apply flex flex-col justify-center items-center bg-auto bg-bottom bg-no-repeat pb-30 md:pb-0;
 }
 .footer-content {
   margin-bottom: 10px;

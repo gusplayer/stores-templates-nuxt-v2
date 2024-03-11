@@ -1,5 +1,5 @@
 <template>
-  <component :is="indexTemplate" />
+  <component :is="indexTemplate" class="flex-auto" />
 </template>
 <script>
 import { mapState } from 'vuex'

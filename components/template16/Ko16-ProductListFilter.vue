@@ -352,7 +352,7 @@ export default {
 }
 .product-content {
   background: var(--background_color_1);
-  @apply flex flex-col justify-center items-center w-full pb-80;
+  @apply flex flex-col justify-start items-center w-full pb-80;
 }
 .content-left >>> .el-collapse {
   border-top: 1px solid var(--color_border);

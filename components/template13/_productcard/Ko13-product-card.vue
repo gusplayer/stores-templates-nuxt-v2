@@ -454,9 +454,7 @@ export default {
   @apply w-full flex flex-col items-center relative overflow-hidden;
 }
 .wrapper-image {
-  min-height: 250px;
-  max-height: 300px;
-  @apply w-full flex items-center justify-center relative overflow-hidden;
+  @apply w-full max-w-[200px] md:max-w-full min-h-[250px] max-h-[300px] flex items-center justify-center relative overflow-hidden;
 }
 .product-image {
   @apply overflow-hidden object-cover w-full;

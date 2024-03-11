@@ -1,7 +1,7 @@
 <template>
   <footer
     ref="background"
-    class="wrapper-footer"
+    class="wrapper-footer pb-30 md:pb-20"
     :style="[
       settingByTemplate,
       {
@@ -242,7 +242,6 @@ export default {
   background: var(--background_color_1);
   box-sizing: border-box;
   flex-direction: column;
-  padding-bottom: 10px;
 }
 .contenedor {
   width: 100%;

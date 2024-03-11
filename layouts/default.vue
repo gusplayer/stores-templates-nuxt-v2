@@ -1,16 +1,21 @@
 <template>
   <div>
     <div v-if="dataStore && !storeError">
-      <div v-if="stateModalPwd">
+      <div
+        v-if="stateModalPwd"
+        class="min-h-screen flex flex-col justify-between"
+      >
         <KoOrder :data-store="dataStore" />
         <component :is="headerTemplate" v-bind="componentsProps" />
-        <nuxt />
-        <component :is="footerTemplate" v-bind="componentsProps" />
-        <KoFooterCountry
-          v-if="dataStore.template != 99"
-          :data-store="dataStore"
-          :value-wa="false"
-        />
+        <nuxt class="flex-auto" />
+        <div>
+          <component :is="footerTemplate" v-bind="componentsProps" />
+          <KoFooterCountry
+            v-if="dataStore.template != 99"
+            :data-store="dataStore"
+            :value-wa="false"
+          />
+        </div>
         <div
           v-if="dataStore?.redes?.whatsapp"
           class="wrapper-whatsapp"
@@ -534,11 +539,11 @@ export default {
     },
   },
   beforeMount() {
-    if (this.dataStore?.tiendasInfo?.dominio) {
-      caches.keys().then(function (names) {
-        for (let name of names) caches.delete(name)
-      })
-    }
+    // if (this.dataStore?.tiendasInfo?.dominio) {
+    //   caches.keys().then(function (names) {
+    //     for (let name of names) caches.delete(name)
+    //   })
+    // }
   },
   async mounted() {
     // Configura y habilita el seguimiento de Facebook Pixel si está disponible

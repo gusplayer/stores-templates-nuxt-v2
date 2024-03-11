@@ -148,7 +148,7 @@ export default {
 </script>
 <style scoped>
 .content-productoList {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply w-full flex flex-col justify-start items-center;
 }
 .pagination-medium {
   margin-top: 20px;
