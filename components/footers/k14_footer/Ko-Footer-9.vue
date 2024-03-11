@@ -1,7 +1,7 @@
 <template>
   <footer
     ref="background"
-    class="wrapper-footer w-full flex justify-center items-center"
+    class="wrapper-footer w-full flex justify-center items-center pb-35 md:pb-20"
     :style="[
       settingByTemplate14[0].setting14Footer,
       settingByTemplate14[0].setting14General,
@@ -344,7 +344,7 @@ export default {
     @apply hidden;
   }
   .madebyKomercia {
-    @apply w-full flex flex-col justify-center items-center py-20;
+    @apply w-full flex flex-col justify-center items-center pt-20;
   }
   .txt-devBy {
     font-size: 14px;

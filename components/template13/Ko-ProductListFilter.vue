@@ -201,18 +201,18 @@
           </div>
           <div class="w-full h-full flex flex-col justify-center items-center">
             <div
-              class="w-full justify-start items-start text-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+              class="w-full h-full justify-start items-start text-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
             >
               <div
                 v-for="product in listProducts"
                 :key="product.id"
-                class="w-full h-full flex flex-col justify-center items-center"
+                class="w-full flex flex-col justify-center items-center"
               >
                 <KoProductCardFilter
                   :product="product"
                   :setting-card-products="settingByTemplate13[0].cardProduct"
                   :setting-general="settingByTemplate13[0].settingGeneral"
-                  class="h-full w-full"
+                  class="w-full h-full"
                 />
               </div>
             </div>
@@ -290,7 +290,7 @@ export default {
 }
 .product-content {
   background: var(--background_color_1);
-  @apply flex flex-col justify-center items-center w-full pb-80;
+  @apply min-h-full h-full flex flex-col justify-start items-center w-full;
 }
 .content-banner-shop {
   @apply w-full flex flex-col;

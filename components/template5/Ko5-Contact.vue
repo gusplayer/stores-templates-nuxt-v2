@@ -328,6 +328,7 @@ export default {
 .wrapperCarousel >>> .el-carousel__arrow {
   background-color: var(--color_background_btn);
   color: var(--color_text_btn);
+  z-index: 3 !important;
 }
 .wrapper-contact {
   display: flex;

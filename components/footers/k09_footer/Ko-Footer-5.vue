@@ -183,11 +183,10 @@ export default {
 <style scoped>
 .footer-container {
   background: var(--background_color_1);
-  @apply flex flex-col justify-center items-center;
+  @apply flex flex-col justify-center items-center pb-30 md:pb-20;
 }
 .footer-content {
   @apply flex flex-col justify-center items-center;
-  margin-bottom: 10px;
 }
 .footer-content-items {
   @apply flex flex-col justify-center items-center w-full mb-10 mt-20;

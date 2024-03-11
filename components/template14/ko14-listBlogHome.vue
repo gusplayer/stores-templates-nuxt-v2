@@ -28,7 +28,7 @@
       </div>
       <div
         ref="mySwiper"
-        v-swiper:mySwiper="swiperOptions"
+        v-swiper:mySwiper="swiperOption"
         class="w-full h-full"
       >
         <div class="swiper-wrapper w-full h-full">
@@ -78,7 +78,7 @@ export default {
   data() {
     return {
       listBlogs: [],
-      swiperOptions: {
+      swiperOption: {
         slidesPerView: 3,
         spaceBetween: 30,
         breakpoints: {

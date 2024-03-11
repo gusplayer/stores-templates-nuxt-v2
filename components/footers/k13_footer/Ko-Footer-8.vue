@@ -234,14 +234,8 @@ export default {
 
 <style scoped>
 .wrapper-footer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: var(--background_color_1);
-  box-sizing: border-box;
-  flex-direction: column;
-  padding-bottom: 10px;
+  @apply w-full flex flex-col justify-start items-center box-border pb-30 md:pb-20;
 }
 .contenedor {
   width: 100%;

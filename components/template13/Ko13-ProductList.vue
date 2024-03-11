@@ -18,7 +18,7 @@
       </div>
       <div
         ref="mySwiper"
-        v-swiper:mySwiper="swiperOptions"
+        v-swiper:mySwiper="swiperOption"
         class="w-full relative"
       >
         <div class="swiper-wrapper w-full">
@@ -31,7 +31,7 @@
               :product="product"
               :setting-card-products="cardProduct"
               :setting-general="settingGeneral"
-              class="giftLoad w-full h-full"
+              class="w-full h-full"
             />
           </div>
         </div>
@@ -86,7 +86,7 @@ export default {
   data() {
     return {
       listProducts: [],
-      swiperOptions: {
+      swiperOption: {
         slidesPerView: '',
         spaceBetween: '',
         direction: 'horizontal',
@@ -112,9 +112,13 @@ export default {
             slidesPerView: 2,
             spaceBetween: 10,
           },
+          375: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
           320: {
             slidesPerView: 1,
-            spaceBetween: 10,
+            spaceBetween: 5,
           },
         },
       },
@@ -153,7 +157,7 @@ export default {
 <style scoped>
 .giftLoad,
 .swiper-slide {
-  max-width: 300px;
+  @apply max-w-[200px] md:max-w-[300px];
 }
 .giftLoad:hover {
   @apply shadow-lg;

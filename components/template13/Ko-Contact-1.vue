@@ -335,11 +335,12 @@ export default {
 }
 .wrapper-contact {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   background: var(--background_color_1);
   box-sizing: border-box;
+  background: var(--background_color_1);
 }
 .contact {
   display: flex;

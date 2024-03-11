@@ -343,7 +343,7 @@ export default {
 <style scoped>
 .product-content {
   background: var(--background_color_1);
-  @apply flex flex-col justify-center items-center w-full pt-20 pb-40;
+  @apply flex flex-col justify-start items-center w-full pt-20 pb-40;
 }
 .content-left >>> .el-collapse {
   border-top: 1px solid var(--color_icon);

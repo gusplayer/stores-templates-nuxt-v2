@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="settingByTemplate15"
-    class="w-full pb-80 flex flex-col justify-center items-center product-content"
+    class="w-full pb-80 flex flex-col justify-start items-center product-content"
     :style="[
       settingByTemplate15[0].settingGeneral,
       settingByTemplate15[0].listProductsFilter,

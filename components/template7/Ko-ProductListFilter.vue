@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col justify-center items-center w-full pb-80"
+    class="flex flex-col justify-start items-center w-full pb-80"
     :style="[
       settingByTemplate7[0].productListFilter,
       settingByTemplate7[0].settingGeneral,
