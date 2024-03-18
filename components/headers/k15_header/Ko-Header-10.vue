@@ -94,7 +94,8 @@
             style="background-color: var(--color_border)"
           >
             <span
-              class="pt-1 px-4 text-white-white text-10 leading-12 tracking-0 font-semibold num-items"
+              class="pt-1 px-4 text-10 leading-12 tracking-0 font-semibold"
+              style="color: var(--background_color_1)"
             >
               {{ productsCart }}
             </span>
