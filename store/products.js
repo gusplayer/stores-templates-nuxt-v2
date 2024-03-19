@@ -50,8 +50,10 @@ export const actions = {
         },
       })
 
-      if (response.data) {
+      if (response?.data) {
         return { success: true, data: response.data.data }
+      } else {
+        return { success: false, data: null }
       }
     } catch (error) {
       console.error('Error fetching all products:', error.response)

@@ -49,7 +49,7 @@
           {{ banner2.text }}
         </p>
         <div class="w-full grid grid-cols-2 gap-5">
-          <template v-if="isInternalUrl(banner2.url_redirect_1)">
+          <template v-if="isInternalUrl(banner2.visible_btn_1)">
             <nuxt-link
               :to="banner2.url_redirect_1"
               :style="{
@@ -75,7 +75,7 @@
               {{ banner2.text_btn_1 }}
             </a>
           </template>
-          <template v-if="isInternalUrl(banner2.url_redirect_2)">
+          <template v-if="isInternalUrl(banner2.visible_btn_2)">
             <nuxt-link
               :to="banner2.url_redirect_2"
               :style="{
