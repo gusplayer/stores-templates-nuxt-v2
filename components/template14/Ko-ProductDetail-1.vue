@@ -628,6 +628,7 @@
             :setting-by-template="settingByTemplate14"
             :price="salesData"
             class="w-full"
+            :template="14"
           />
         </div>
         <div class="w-full py-40">

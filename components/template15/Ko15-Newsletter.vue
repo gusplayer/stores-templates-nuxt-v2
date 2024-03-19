@@ -17,23 +17,20 @@
         >
           {{ settingByTemplate15[0].newsletter.title }}
         </p>
-        <p
-          class="text-15"
-          :style="`color: ${settingByTemplate15[0].newsletter.color_text};`"
-        >
+        <p class="text-15">
           {{ settingByTemplate15[0].newsletter.subTitle }}
         </p>
       </div>
       <div
-        class="w-full flex justify-center items-start border-t-2 md:border-t-0 md:border-l-2 pt-20 md:pt-0 md:pl-30"
+        class="w-full flex flex-col justify-center items-start border-t-2 md:border-t-0 md:border-l-2 pt-20 md:pt-0 md:pl-30"
         :style="`border-color: ${settingByTemplate15[0].newsletter.color_border};`"
       >
-        <div class="w-full flex flex-col justify-center items-start">
+        <div class="w-full flex flex-row justify-center items-start">
           <ValidationProvider
             ref="validate"
             name="email"
             rules="required|email"
-            class="px-20 py-8 w-full"
+            class="px-20 py-8 w-full relative"
             :style="`background-color: ${settingByTemplate15[0].newsletter.color_input}; border-radius: ${settingByTemplate15[0].settingGeneral.radius};`"
           >
             <template slot-scope="{ errors }">
@@ -47,45 +44,48 @@
               />
               <span
                 v-show="errors[0] || register"
-                :style="register ? 'color:green' : ''"
+                class="absolute text-11 left-0 w-full -top-22"
+                style="max-width: 250px"
+                :style="customStyle"
               >
                 {{ errorsCheckbox || register }}
               </span>
             </template>
           </ValidationProvider>
-          <div class="flex justify-center mt-6">
-            <input id="checkbox" v-model="checked" type="checkbox" />
-            <p
-              class="ml-6 text-12"
-              :style="`color: ${settingByTemplate15[0].newsletter.color_text};`"
+          <button
+            class="px-20 py-10 ml-10 btn"
+            :style="`background-color: ${settingByTemplate15[0].newsletter.colorBg_Btn};  border-radius: ${settingByTemplate15[0].settingGeneral.radius}`"
+            :disabled="stateBtn ? false : true"
+            @click="submitNewsletter"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              version="1.1"
+              fill="currentColor"
+              :style="`color: ${settingByTemplate15[0].newsletter.color_icon};`"
+              width="20px"
+              height="20px"
+              viewBox="0 0 24 24"
             >
-              {{ $t('newsletter_msg') }}
-            </p>
-          </div>
-          <p v-if="stateCheckBox">
-            Marcar checkbox para poder suscribirse al boletín informativo
+              <path
+                d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="flex justify-center mt-6">
+          <input id="checkbox" v-model="checked" type="checkbox" />
+          <p
+            class="ml-6 text-12"
+            :style="`color: ${settingByTemplate15[0].newsletter.color_text};`"
+          >
+            {{ $t('newsletter_msg') }}
           </p>
         </div>
-        <button
-          class="px-20 py-8 ml-10 btn"
-          :style="`background-color: ${settingByTemplate15[0].newsletter.colorBg_Btn};  border-radius: ${settingByTemplate15[0].settingGeneral.radius}`"
-          :disabled="stateBtn ? false : true"
-          @click="submitNewsletter"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            version="1.1"
-            :fill="settingByTemplate15[0].newsletter.color_icon"
-            width="20px"
-            height="20px"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z"
-            />
-          </svg>
-        </button>
+        <p v-if="stateCheckBox">
+          Marcar checkbox para poder suscribirse al boletín informativo
+        </p>
       </div>
     </div>
   </div>
@@ -118,6 +118,9 @@ export default {
       checked: false,
       stateCheckBox: false,
       stateBtn: true,
+      customStyle: {
+        color: this.settingByTemplate15[0].newsletter.color_text,
+      },
     }
   },
   computed: {
