@@ -148,7 +148,7 @@ export default {
             case 'detailsProduct':
               // eslint-disable-next-line no-case-declarations
               const { success, data } = await this.currentChange()
-              if ((success, data.length > 0)) {
+              if (success && data.length > 0) {
                 this.$router.push({
                   path: '/productos/' + data[0].slug,
                 })

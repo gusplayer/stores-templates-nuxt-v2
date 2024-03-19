@@ -18,10 +18,13 @@
         :href="item?.url_redirect ?? ''"
         rel="noreferrer noopener"
       >
-        <div class="wrapper-items">
+        <div
+          class="wrapper-items"
+          :style="`border-radius: ${settingGeneral?.radius};`"
+        >
           <img
             v-lazy="idCloudinaryBanner(item.img, 'banner')"
-            class="img-item"
+            class="img-item group:"
             :style="`border-radius: ${settingGeneral?.radius};`"
             alt="imagen-1"
           />
