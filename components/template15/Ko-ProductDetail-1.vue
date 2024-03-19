@@ -593,6 +593,7 @@
           :setting-by-template="settingByTemplate15"
           :price="salesData"
           class="w-full"
+          :template="15"
         />
         <div class="w-full py-30">
           <KoSuggestProduct

@@ -592,6 +592,7 @@
           :envio="envio"
           :setting-by-template="settingByTemplate16"
           :price="salesData"
+          :template="16"
         />
 
         <div class="w-full py-30">

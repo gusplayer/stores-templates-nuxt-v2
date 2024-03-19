@@ -2,11 +2,17 @@
   <div
     class="content-opt-tab"
     :style="[
-      settingByTemplate[0].settingsGeneral,
+      template === 14 || template === 16
+        ? settingByTemplate[0].settingsGeneral
+        : settingByTemplate[0].settingGeneral,
       settingByTemplate[0].detailsProducts,
       {
         '--font-style-1':
-          settingByTemplate[0]?.settingsGeneral?.fount_1 ?? 'Poppins',
+          settingByTemplate[0][
+            template === 14 || template === 16
+              ? 'settingsGeneral'
+              : 'settingGeneral'
+          ][template === 14 ? 'fount_1' : 'font'] || 'Poppins',
       },
     ]"
   >
@@ -448,6 +454,10 @@ export default {
     },
     price: {
       type: Object,
+      required: true,
+    },
+    template: {
+      type: Number,
       required: true,
     },
   },
