@@ -287,11 +287,7 @@ export default {
       return this.dataStore.medioPagos
     },
     activeClass() {
-      if (this.data.description == '' || this.data.description == null) {
-        return true
-      } else {
-        return false
-      }
+      return !this.data?.description || this.data?.description == null
     },
     envios() {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties, vue/no-mutating-props

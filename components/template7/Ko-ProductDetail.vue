@@ -7,10 +7,11 @@
       settingByTemplate7[0].card,
       {
         '--font-style-1':
-          settingByTemplate7?.settingGeneral?.fount_1 ?? 'David libre',
+          settingByTemplate7[0].settingGeneral?.fount_1 ?? 'David libre',
       },
       {
-        '--font-style-3': settingByTemplate7?.settingGeneral?.fount_3 ?? 'Lora',
+        '--font-style-3':
+          settingByTemplate7[0].settingGeneral?.fount_3 ?? 'Lora',
       },
     ]"
   >
@@ -745,6 +746,7 @@ export default {
   },
   mounted() {
     this.getDataProduct()
+
     this.$store.state.beforeCombination = []
     if (this.envios?.valores) {
       this.setOptionShipping()
@@ -769,7 +771,6 @@ export default {
       if (success && data.data) {
         this.loading = false
         this.data = data.data
-
         this.sendAnalyticsStore(data.data.id, 'VIEWED_PRODUCT')
         this.selectedPhoto(data.data.fotoCloudinary)
         this.videoYouTube(data.data.productosInfo.video)

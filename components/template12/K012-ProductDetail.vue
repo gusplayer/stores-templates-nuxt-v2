@@ -132,14 +132,14 @@
             </div>
           </div>
         </div>
-        <div v-if="data.productosInfo.descripcion" class="content-description">
+        <div v-if="contentDescription" class="content-description">
           <div class="wrapper-description">
             <h3 class="text-variant">
               {{ $t('productdetail_description') }}
             </h3>
             <div class="editor content-text-desc">
               <el-tiptap
-                v-model="data.productosInfo.descripcion"
+                v-model="contentDescription"
                 :extensions="extensions"
                 :spellcheck="false"
                 :readonly="true"
@@ -266,6 +266,7 @@ export default {
   data() {
     return {
       loading: true,
+      contentDescription: '',
       data: {},
       selectPhotoUrl: '',
       idYoutube: '',
@@ -415,6 +416,7 @@ export default {
         this.loading = false
         this.data = data.data
 
+        this.getDescriptionProduct(data.data.slug)
         this.sendAnalyticsStore(data.data.id, 'VIEWED_PRODUCT')
         this.selectedPhoto(data.data.fotoCloudinary)
         // this.videoYouTube(data.data.productosInfo.video)
@@ -460,6 +462,17 @@ export default {
             content_category: 'otro',
           })
         }
+      }
+    },
+    async getDescriptionProduct(idProduct) {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_DESCRIPTION_PRODUCTO',
+        {
+          slug: idProduct,
+        }
+      )
+      if (success) {
+        this.contentDescription = data?.data
       }
     },
     async sendAnalyticsStore(value, event) {

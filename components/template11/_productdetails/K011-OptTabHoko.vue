@@ -282,10 +282,7 @@ export default {
       return this.dataStore.medioPagos
     },
     activeClass() {
-      return (
-        !this.data.productosInfo.descripcion ||
-        this.data.productosInfo.descripcion == null
-      )
+      return !this.data?.description || this.data?.description == null
     },
     envios() {
       return this.$store.state.envios.valores
