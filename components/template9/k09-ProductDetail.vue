@@ -680,6 +680,7 @@ export default {
         }
       }
     },
+
     async sendAnalyticsStore(value, event) {
       await this.$store.dispatch('SEND_ANALYTICS_STORE', {
         storeId: this.dataStore.id,

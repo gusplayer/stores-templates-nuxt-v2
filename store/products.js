@@ -84,6 +84,27 @@ export const actions = {
     // }
     // return { success: false, data: null }
   },
+  async GET_DESCRIPTION_PRODUCTO({ rootState }, params) {
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        url: `${rootState.urlAWSsettings}/api/v1/products/public/description/${params.slug}`,
+        headers: {
+          KOMERCIA_PUBLIC_ROUTES_KEY: rootState.routerKey,
+        },
+      })
+      if (data) {
+        return { success: true, data }
+      }
+    } catch (error) {
+      console.error('Error fetching data products laravel:', error.response)
+      return { success: false, data: null }
+    }
+    // finally {
+    //   console.log(temp)
+    // }
+    // return { success: false, data: null }
+  },
 }
 
 export const getters = {}

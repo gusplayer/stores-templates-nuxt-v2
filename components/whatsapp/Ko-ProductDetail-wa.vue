@@ -264,7 +264,7 @@
         </div>
       </div>
       <div
-        v-if="data?.productosInfo?.descripcion?.length > 7"
+        v-if="contentDescription"
         class="w-full flex flex-col mt-20 px-15 md:px-0"
       >
         <h3 class="text-marca font-bold mb-5">
@@ -272,7 +272,7 @@
         </h3>
         <div class="editor my-10 text-14 text-[#0f2930]">
           <el-tiptap
-            v-model="data.productosInfo.descripcion"
+            v-model="contentDescription"
             :extensions="extensions"
             :spellcheck="false"
             :readonly="true"
@@ -461,6 +461,7 @@ export default {
   data() {
     return {
       id: this.$route.params.slugProduct,
+      contentDescription: '',
       loading: true,
       data: {},
       selectPhotoUrl: '',
@@ -630,7 +631,7 @@ export default {
       if (success && data.data) {
         this.loading = false
         this.data = data.data
-
+        this.getDescriptionProduct(data.data.slug)
         this.sendAnalyticsStore(data.data.id, 'VIEWED_PRODUCT')
         this.setOptionShipping()
         this.getSuggestedProducts()
@@ -675,6 +676,17 @@ export default {
             content_category: 'otro',
           })
         }
+      }
+    },
+    async getDescriptionProduct(idProduct) {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_DESCRIPTION_PRODUCTO',
+        {
+          slug: idProduct,
+        }
+      )
+      if (success) {
+        this.contentDescription = data?.data
       }
     },
     async sendAnalyticsStore(value, event) {

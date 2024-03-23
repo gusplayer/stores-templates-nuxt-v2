@@ -323,7 +323,7 @@ export default {
   data() {
     return {
       activeNames: ['1'],
-      contentDescription: this.data?.productosInfo?.descripcion,
+      contentDescription: '',
     }
   },
   computed: {
@@ -331,19 +331,30 @@ export default {
       return this.dataStore.medioPagos
     },
     activeClass() {
-      return (
-        !this.data.productosInfo.descripcion ||
-        this.data.productosInfo.descripcion == null
-      )
+      return this.contentDescription == '' || this.contentDescription == null
     },
     envios() {
       return this.$store.state.envios.valores
     },
   },
   mounted() {
+    this.getDescriptionProduct()
     this.contentDescription
       ? (this.activeNames = ['1'])
       : (this.activeNames = ['2'])
+  },
+  methods: {
+    async getDescriptionProduct() {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_DESCRIPTION_PRODUCTO',
+        {
+          slug: this.data.slug,
+        }
+      )
+      if (success) {
+        this.contentDescription = data?.data ?? ''
+      }
+    },
   },
 }
 </script>
