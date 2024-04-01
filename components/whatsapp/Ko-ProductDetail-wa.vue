@@ -1294,9 +1294,12 @@ export default {
   font-size: 14px;
   color: #0f2930;
 }
+.editor {
+  width: 100%;
+}
 .editor >>> .el-tiptap-editor > .el-tiptap-editor__content {
   border: none;
-  padding: 0px;
+  padding: 0px 5px;
   background-color: transparent;
 }
 .editor >>> .el-tiptap-editor__menu-bubble {
@@ -1304,18 +1307,63 @@ export default {
 }
 .editor >>> .el-tiptap-editor__content h1 {
   font-size: 2em;
+  font-family: 'Poppins', sans-serif !important;
 }
 .editor >>> .el-tiptap-editor__content h2 {
   font-size: 1.5em;
+  font-family: 'Poppins', sans-serif !important;
 }
 .editor >>> .el-tiptap-editor__content h3 {
   font-size: 1.17em;
+  font-family: 'Poppins', sans-serif !important;
 }
 .editor >>> .el-tiptap-editor__content h4 {
   font-size: 1.12em;
+  font-family: 'Poppins', sans-serif !important;
 }
 .editor >>> .el-tiptap-editor__content h5 {
   font-size: 0.83em;
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content p {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content span {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content blockquote {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content code {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content ul {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content ol {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content li {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content pre {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content strong {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content em {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content s {
+  font-family: 'Poppins', sans-serif !important;
+}
+.editor >>> .el-tiptap-editor__content .image-view__body__image {
+  cursor: none;
+  pointer-events: none;
+}
+.editor >>> .el-popper.el-tiptap-image-popper {
+  display: none;
 }
 @media (max-width: 685px) {
   .section {

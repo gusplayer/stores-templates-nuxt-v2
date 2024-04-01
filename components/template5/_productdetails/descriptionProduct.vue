@@ -622,9 +622,6 @@ li p {
   .left {
     margin-right: 15px;
     margin-right: 0px;
-    padding-bottom: 0px;
-    flex: 1;
-    /* height: 100%; */
   }
   .left-empty {
     flex: 0;
@@ -653,10 +650,6 @@ li p {
   }
   .description {
     margin-bottom: 0px;
-  }
-  .left {
-    padding-bottom: 10px;
-    flex: 1;
   }
   .right {
     border-left: 0px;
