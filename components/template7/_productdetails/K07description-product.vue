@@ -318,25 +318,10 @@ export default {
   line-height: 1.5;
 }
 .left {
-  flex: 2;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  /* margin-right: 25px; */
-  padding-bottom: 10px;
-  overflow: hidden;
-}
-.left-empty {
-  flex: 2;
-  width: 100%;
-  display: flex;
-  padding-bottom: 10px;
+  @apply w-full flex flex-[2] flex-col justify-start items-center pb-[10px] overflow-hidden;
 }
 .content-tittle-description {
-  margin-top: 20px;
-  @apply w-full justify-start items-start;
+  @apply w-full justify-start items-start mt-[20px];
 }
 .tittle-description {
   color: var(--color_description);
@@ -358,7 +343,6 @@ export default {
   width: 100%;
   flex-direction: column;
   padding-bottom: 10px;
-  /* border-left: 1px solid var(--color_border); */
   border-left: 1px solid var(--color_border);
 }
 .title-section {
@@ -377,24 +361,6 @@ img {
   margin-left: 25px;
   box-sizing: border-box;
   margin-top: 20px;
-}
-.text-desc {
-  color: var(--color_description);
-  /* color: var(--color_subtext); */
-  font-size: 15px;
-  text-transform: uppercase;
-  align-self: flex-start;
-  margin-top: 20px;
-  font-family: var(--font-style-3);
-}
-.content-text-desc {
-  margin-right: 25px;
-  margin-bottom: 20px;
-  min-height: 300px;
-}
-.wrapper-comments {
-  border-top: 1px solid var(--color_border);
-  width: 100%;
 }
 .text-method-payment {
   font-size: 14px;
@@ -421,12 +387,6 @@ li p {
   font-size: 14px;
   font-family: var(--font-style-3);
 }
-.icon {
-  width: 50px;
-  vertical-align: middle;
-  margin-bottom: 10px;
-  align-self: flex-start;
-}
 .content {
   display: flex;
   flex-direction: column;
@@ -436,20 +396,7 @@ li p {
 .payments {
   margin-bottom: 20px;
 }
-.line {
-  /* border-top: 1px solid var(--color_border); */
-  border-top: 1px solid var(--color_border);
-  width: 100%;
-}
-.deliverys {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-.stage {
-  display: flex;
-  border-left: 0;
-  flex: 1;
-}
+
 .logo-pasarela {
   width: 160px !important;
 }
@@ -481,17 +428,6 @@ li p {
 .price {
   margin-top: 10px;
   font-size: 14px;
-}
-.medios-mercadopago {
-  width: 100%;
-  display: block;
-  border-radius: 4px;
-}
-.wrapper-comments-responsive {
-  display: none;
-}
-.line-comments {
-  display: none;
 }
 .cursor_point {
   cursor: pointer;
@@ -597,50 +533,18 @@ li p {
   .left {
     margin-right: 15px;
     margin-right: 0px;
-    padding-bottom: 0px;
-    flex: 1;
     height: 100%;
-  }
-  .left-empty {
-    flex: 0;
-    width: 100%;
-    display: flex;
-    padding-bottom: 10px;
   }
   .right {
     border-left: 0px;
-  }
-  .content-text-desc {
-    border-bottom: 1px solid var(--color_border);
-    padding-bottom: 20px;
-    min-height: 0;
-  }
-  .wrapper-comments-responsive {
-    display: initial;
-  }
-  .wrapper-comments {
-    display: none;
-  }
-  .line-comments {
-    display: initial;
-    border-top: 1px solid var(--color_border);
-    width: 100%;
   }
 }
 @media (max-width: 725px) {
   .description {
     margin-bottom: 0px;
   }
-  .left {
-    padding-bottom: 10px;
-    flex: 1;
-  }
   .right {
     border-left: 0px;
-  }
-  .text-desc {
-    padding-right: 15px;
-    padding-left: 15px;
   }
   .payments {
     /* border-top: 1px solid var(--color_border); */
