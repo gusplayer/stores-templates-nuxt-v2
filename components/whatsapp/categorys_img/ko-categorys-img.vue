@@ -268,6 +268,7 @@ export default {
       this.idCategory = ''
       this.categorySelect = ''
       this.subCategorySelect = ''
+      this.selectedSubcategories = []
       this.$router.push({
         path: `${this.stateWapiME ? `/wa/${this.dataStore.id}` : '/'}`,
         query: '',
