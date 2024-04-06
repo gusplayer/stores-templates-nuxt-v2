@@ -510,15 +510,13 @@
           </div>
         </div>
       </div>
-      <div class="section">
-        <div class="features">
-          <KoDescription
-            :data-store="dataStore"
-            :data="data"
-            :envio="envio"
-            :price="salesData"
-          />
-        </div>
+      <div class="features">
+        <KoDescription
+          :data-store="dataStore"
+          :data="data"
+          :envio="envio"
+          :price="salesData"
+        />
       </div>
       <div class="w-full" style="z-index: 1 !important">
         <KoSuggestProduct

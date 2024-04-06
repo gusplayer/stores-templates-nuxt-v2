@@ -1,11 +1,15 @@
 <template>
-  <div
-    v-if="openSearch"
-    class="fixed top-0 left-0 w-10/0 h-screen flex justify-center items-center bg-black z-auto bg-opacity-50"
+  <el-drawer
+    :visible.sync="openSearch"
+    :before-close="handleClose"
+    direction="btt"
+    :with-header="false"
+    :modal-append-to-body="false"
+    class="width-drawer"
+    size="80%"
   >
     <div
-      class="box-border absolute w-full h-screen flex flex-col items-center bg-white-white overflow-auto pb-10 top-[120px] z-auto"
-      style="animation: dispatch 0.2s linear 1"
+      class="box-border w-full h-screen flex flex-col items-center bg-white-white overflow-auto pb-10"
     >
       <div
         class="w-full flex flex-row justify-center items-center shadow-lg z-20 py-16 relative"
@@ -39,7 +43,7 @@
         />
       </div>
     </div>
-  </div>
+  </el-drawer>
 </template>
 
 <script>
@@ -95,6 +99,10 @@ export default {
   },
   methods: {
     closedSearch() {
+      this.$store.commit('SET_OPEN_SEARCH', false)
+      this.$router.push({ path: '', query: '' })
+    },
+    handleClose() {
       this.$store.commit('SET_OPEN_SEARCH', false)
       this.$router.push({ path: '', query: '' })
     },

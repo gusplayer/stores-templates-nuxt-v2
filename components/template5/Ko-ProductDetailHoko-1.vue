@@ -147,14 +147,13 @@
             <button class="quantity_add" @click="addQuantity()">
               <mas-icon class="icon" />
             </button>
-            <transition name="slide-fade">
-              <div
-                v-show="quantityValue == maxQuantityValue"
-                class="container-alert"
-              >
-                <span class="alert">{{ $t('cart_ultimaUnidad') }}</span>
-              </div>
-            </transition>
+
+            <div
+              v-show="quantityValue == maxQuantityValue"
+              class="container-alert"
+            >
+              <span class="alert">{{ $t('cart_ultimaUnidad') }}</span>
+            </div>
           </div>
           <div style="width: 100%; margin-left: 10px">
             <button

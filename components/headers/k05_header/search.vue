@@ -1,38 +1,44 @@
 <template>
-  <transition name="fade">
-    <div v-if="openSearch" class="order" @click="closeOrder">
-      <div class="order_content">
-        <div class="close-container" @click="closedSearch">
-          <div class="content-close">
-            <div class="leftright"></div>
-            <div class="rightleft"></div>
+  <el-drawer
+    :visible.sync="openSearch"
+    :before-close="closedSearch"
+    direction="ttb"
+    :with-header="false"
+    :modal-append-to-body="false"
+    class="width-drawer"
+    size="200px"
+  >
+    <div class="order_content">
+      <div class="close-container" @click="closedSearch">
+        <div class="content-close">
+          <div class="leftright"></div>
+          <div class="rightleft"></div>
+        </div>
+      </div>
+      <div class="products-search">
+        <div class="search-input-content">
+          <div class="form-search">
+            <div class="cont-search-up">
+              <p class="txt-search-up">{{ $t('home_buscar') }}</p>
+            </div>
+            <input
+              v-model="query.name"
+              type="search "
+              :placeholder="$t('home_buscar')"
+              class="input-search"
+              @change="setToQueryFilter('search')"
+              @keyup.enter="setToQueryFilter('search')"
+            />
           </div>
         </div>
-        <div class="products-search">
-          <div class="search-input-content">
-            <div class="form-search">
-              <div class="cont-search-up">
-                <p class="txt-search-up">{{ $t('home_buscar') }}</p>
-              </div>
-              <input
-                v-model="query.name"
-                type="search "
-                :placeholder="$t('home_buscar')"
-                class="input-search"
-                @change="setToQueryFilter('search')"
-                @keyup.enter="setToQueryFilter('search')"
-              />
-            </div>
-          </div>
-          <div class="cont-btn">
-            <button class="content-btn" @click="closedSearch">
-              <span class="btn-txt">{{ $t('home_buscar') }}</span>
-            </button>
-          </div>
+        <div class="cont-btn">
+          <button class="content-btn" @click="closedSearch">
+            <span class="btn-txt">{{ $t('home_buscar') }}</span>
+          </button>
         </div>
       </div>
     </div>
-  </transition>
+  </el-drawer>
 </template>
 
 <script>
@@ -54,12 +60,6 @@ export default {
   methods: {
     closedSearch() {
       this.$store.commit('SET_OPEN_SEARCH', false)
-    },
-    closeOrder(event) {
-      const element = event.target.className
-      if (element === 'order') {
-        this.$store.commit('SET_OPEN_SEARCH', false)
-      }
     },
     setToQueryFilter(type) {
       if (type === 'search') {
@@ -116,22 +116,7 @@ export default {
 </script>
 
 <style scoped>
-.order {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: flex-end;
-  background-color: rgba(0, 0, 0, 0.185);
-  z-index: 15;
-}
 .order_content {
-  position: absolute;
-  top: 0px;
-  width: 100%;
-  height: 150px;
   background: white;
   display: flex;
   flex-direction: column;
@@ -141,17 +126,9 @@ export default {
   overflow: auto;
   box-sizing: border-box;
   padding-bottom: 10px;
-  animation: dispatch 0.2s linear 1;
   overflow: hidden;
 }
-@keyframes dispatch {
-  0% {
-    top: -300px;
-  }
-  100% {
-    top: 0px;
-  }
-}
+
 .products-search {
   display: flex;
   flex-direction: row;

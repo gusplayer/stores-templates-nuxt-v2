@@ -16,6 +16,13 @@
       },
     ]"
   >
+    <KoMenu :data-store="dataStore" />
+    <KoSearch
+      :data-store="dataStore"
+      :setting-card-products="settingByTemplate7[0].settingKProdutCard"
+      :setting-general="settingByTemplate7[0].setting7General"
+    />
+
     <div id="headbg" class="wrapper-header">
       <div id="headerid" class="header">
         <div class="header-item-menu" @click="openMenuLateral">
@@ -98,12 +105,6 @@
             </div>
           </div>
         </div>
-        <KoSearch
-          :data-store="dataStore"
-          :setting-card-products="settingByTemplate7[0].settingKProdutCard"
-          :setting-general="settingByTemplate7[0].setting7General"
-        />
-        <KoMenu :data-store="dataStore" class="responsive" />
       </div>
     </div>
   </header>

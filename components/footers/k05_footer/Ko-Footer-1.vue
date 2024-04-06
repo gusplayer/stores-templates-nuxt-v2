@@ -1,7 +1,7 @@
 <template>
   <footer
     ref="background"
-    class="wrapper-footer pb-30 md:pb-20"
+    class="wrapper-footer w-full flex flex-col justify-center items-center pb-30 md:pb-20 box-border z-[4]"
     :style="[
       settingByTemplate,
       {
@@ -235,13 +235,7 @@ export default {
 
 <style scoped>
 .wrapper-footer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: var(--background_color_1);
-  box-sizing: border-box;
-  flex-direction: column;
 }
 .contenedor {
   width: 100%;

@@ -1,9 +1,10 @@
 <template>
   <el-drawer
     :visible.sync="openMenuLeft"
+    :before-close="closed"
     direction="rtl"
-    size="100%"
-    :withHeader="false"
+    ize="370px"
+    :with-header="false"
     :modal-append-to-body="false"
   >
     <div

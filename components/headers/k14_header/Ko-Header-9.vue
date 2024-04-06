@@ -12,7 +12,12 @@
       },
     ]"
   >
-    <div id="headbg" class="w-full max-w-7xl flex justify-between items-center">
+    <KoSearch :data-store="dataStore" />
+    <Ko14MenuLateral
+      :data-store="dataStore"
+      :setting-by-template="settingByTemplate14[0].listProductsFilter"
+    />
+    <div class="w-full max-w-7xl flex justify-between items-center">
       <div class="flex justify-center items-center max-h-[120px] md:max-h-10/0">
         <nuxt-link
           to="/"
@@ -104,11 +109,7 @@
         </button>
       </div>
       <!-- <KoOrder :data-store="dataStore" /> -->
-      <KoSearch :data-store="dataStore" />
-      <Ko14MenuLateral
-        :data-store="dataStore"
-        :setting-by-template="settingByTemplate14[0].listProductsFilter"
-      />
+
       <el-drawer
         :visible.sync="stateMenu"
         direction="ttb"
@@ -180,11 +181,9 @@
 export default {
   name: 'KoHeader9',
   components: {
-    // KoOrder: () => import('../_order1/order1'),
-    // KoSearch: () => import('../_lateralMenu/_lateralMenu/searchDown14'),
     Ko14MenuLateral: () =>
       import('../_lateralMenu/_lateralMenu14/_lateralMenu.vue'),
-    KoSearch: () => import('../k13_header/search.vue'),
+    KoSearch: () => import('../_lateralMenu/_lateralMenu/search.vue'),
   },
   props: {
     settingByTemplate14: {
