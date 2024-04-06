@@ -1,190 +1,196 @@
 <template>
-  <transition name="fade">
-    <div v-if="openMenuLeft" class="order" @click="closeOrder">
-      <div class="order_content">
-        <div class="order_header">
-          <div class="header-content-logo">
-            <nuxt-link to="/" class="wrapper-logo" id="tamaño-img">
-              <img
-                v-lazy="
-                  `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
-                "
-                class="header-logo"
-                alt="Logo Img"
-              />
-            </nuxt-link>
-          </div>
-          <div class="close-container" @click="closed">
-            <div class="leftright"></div>
-            <div class="rightleft"></div>
-          </div>
-        </div>
-        <div class="search-content">
-          <div class="search-input-content">
-            <input
-              v-model="query.name"
-              type="text"
-              :placeholder="$t('header_buscar_producto')"
-              class="input-search"
-              @change="setToQueryFilter('search')"
-              @keyup.enter="setToQueryFilter('search')"
-            />
-          </div>
-          <div
-            class="search-icon-content"
-            @click="setToQueryFilter('search', search)"
-          >
-            <svg
-              class="icon-search"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="{2}"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </div>
-        </div>
-        <div class="content-lateral-menu">
-          <div class="content-btns-lateral-menu">
-            <button
-              id="btnfocus"
-              class="btn-lateral-menu-left"
-              @click="selectTag1"
-              :class="selecttag == 1 ? 'show-select-active' : ''"
-            >
-              {{ $t('header_inicio') }}
-            </button>
-            <button
-              v-if="
-                (categorias && categorias.length > 0) ||
-                (allTags && allTags.length > 0)
+  <el-drawer
+    :visible.sync="openMenuLeft"
+    :before-close="closed"
+    direction="ltr"
+    :with-header="false"
+    :modal-append-to-body="false"
+    class="width-drawer"
+    size="370px"
+  >
+    <div class="order_content">
+      <div class="order_header">
+        <div class="header-content-logo">
+          <nuxt-link to="/" class="wrapper-logo" id="tamaño-img">
+            <img
+              v-lazy="
+                `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
               "
-              class="btn-lateral-menu-right"
-              :class="selecttag == 2 ? 'show-select-active' : ''"
-              @click="selectTag2"
+              class="header-logo"
+              alt="Logo Img"
+            />
+          </nuxt-link>
+        </div>
+        <div class="close-container" @click="closed">
+          <div class="leftright"></div>
+          <div class="rightleft"></div>
+        </div>
+      </div>
+      <div class="search-content">
+        <div class="search-input-content">
+          <input
+            v-model="query.name"
+            type="text"
+            :placeholder="$t('header_buscar_producto')"
+            class="input-search"
+            @change="setToQueryFilter('search')"
+            @keyup.enter="setToQueryFilter('search')"
+          />
+        </div>
+        <div
+          class="search-icon-content"
+          @click="setToQueryFilter('search', search)"
+        >
+          <svg
+            class="icon-search"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="{2}"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div class="content-lateral-menu">
+        <div class="content-btns-lateral-menu">
+          <button
+            id="btnfocus"
+            class="btn-lateral-menu-left"
+            @click="selectTag1"
+            :class="selecttag == 1 ? 'show-select-active' : ''"
+          >
+            {{ $t('header_inicio') }}
+          </button>
+          <button
+            v-if="
+              (categorias && categorias.length > 0) ||
+              (allTags && allTags.length > 0)
+            "
+            class="btn-lateral-menu-right"
+            :class="selecttag == 2 ? 'show-select-active' : ''"
+            @click="selectTag2"
+          >
+            {{ $t('header_categorias') }}
+          </button>
+        </div>
+        <div v-if="!focusbtn" class="conten-Menu">
+          <div class="header-content-buttons">
+            <div
+              v-for="(item, index) in settingByTemplate[0].pages.values"
+              :key="`${index}${item.displayName}`"
+              @click="closed"
             >
-              {{ $t('header_categorias') }}
-            </button>
-          </div>
-          <div v-if="!focusbtn" class="conten-Menu">
-            <div class="header-content-buttons">
-              <div
-                v-for="(item, index) in settingByTemplate[0].pages.values"
-                :key="`${index}${item.displayName}`"
-                @click="closed"
+              <nuxt-link v-if="!item.isExternalLink" :to="item.url">
+                <p class="btn">
+                  {{ item.displayName }}
+                </p>
+              </nuxt-link>
+              <a
+                v-else
+                :href="item.url"
+                target="_blank"
+                rel="noreferrer noopener"
               >
-                <nuxt-link v-if="!item.isExternalLink" :to="item.url">
-                  <p class="btn">
-                    {{ item.displayName }}
-                  </p>
-                </nuxt-link>
-                <a
-                  v-else
-                  :href="item.url"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <p class="btn">
-                    {{ item.displayName }}
-                  </p>
-                </a>
-              </div>
+                <p class="btn">
+                  {{ item.displayName }}
+                </p>
+              </a>
             </div>
           </div>
-          <div v-if="focusbtn" class="content-Categorys">
-            <div class="wrapper-category-all">
-              <li @click="clearFilters">
-                <p class="btn-category-all">
-                  {{ $t('header_buscar_limpiar') }}
-                </p>
-              </li>
-              <div v-for="category in categorias" :key="category.id">
-                <BaseAccordion>
-                  <template v-slot:categorias>
+        </div>
+        <div v-if="focusbtn" class="content-Categorys">
+          <div class="wrapper-category-all">
+            <li @click="clearFilters">
+              <p class="btn-category-all">
+                {{ $t('header_buscar_limpiar') }}
+              </p>
+            </li>
+            <div v-for="category in categorias" :key="category.id">
+              <BaseAccordion>
+                <template v-slot:categorias>
+                  <li
+                    class="btn-category"
+                    :class="
+                      category.id == categorySelect
+                        ? 'text-categoria-active'
+                        : ''
+                    "
+                    @click="setToQueryFilter('category', category)"
+                  >
+                    {{ category.nombreCategoriaProducto }}
+                  </li>
+                </template>
+                <template v-slot:subcategorias>
+                  <div v-for="(subcategory, key) in subcategories" :key="key">
+                    <li
+                      v-if="subcategory.categoria == category.id"
+                      class="btn-category"
+                      :class="
+                        subcategory.id == subCategorySelect
+                          ? 'text-subcategoria-active'
+                          : ''
+                      "
+                      @click="setToQueryFilter('subcategories', subcategory)"
+                    >
+                      <p class="txt-sub-li">
+                        {{ subcategory.nombreSubcategoria }}
+                      </p>
+                    </li>
+                  </div>
+                </template>
+              </BaseAccordion>
+            </div>
+            <div
+              v-for="(itemsTags, index) in allTags"
+              v-show="allTags?.length > 0"
+              :key="index"
+            >
+              <BaseAccordion
+                v-if="
+                  itemsTags &&
+                  itemsTags.status === 1 &&
+                  itemsTags.tagProperties.length > 0
+                "
+              >
+                <template v-slot:categorias>
+                  <li class="btn-category">
+                    {{ itemsTags.name }}
+                  </li>
+                </template>
+                <template v-slot:subcategorias>
+                  <div
+                    v-for="itemsProperties in itemsTags.tagProperties"
+                    v-show="itemsProperties.status === 1"
+                    :key="itemsProperties.id"
+                  >
                     <li
                       class="btn-category"
                       :class="
-                        category.id == categorySelect
-                          ? 'text-categoria-active'
+                        itemsProperties.name == tagSelect
+                          ? 'text-subcategoria-active'
                           : ''
                       "
-                      @click="setToQueryFilter('category', category)"
+                      @click="setToQueryFilter('tag', itemsProperties)"
                     >
-                      {{ category.nombreCategoriaProducto }}
+                      <p class="txt-sub-li">
+                        {{ itemsProperties.name }}
+                      </p>
                     </li>
-                  </template>
-                  <template v-slot:subcategorias>
-                    <div v-for="(subcategory, key) in subcategories" :key="key">
-                      <li
-                        v-if="subcategory.categoria == category.id"
-                        class="btn-category"
-                        :class="
-                          subcategory.id == subCategorySelect
-                            ? 'text-subcategoria-active'
-                            : ''
-                        "
-                        @click="setToQueryFilter('subcategories', subcategory)"
-                      >
-                        <p class="txt-sub-li">
-                          {{ subcategory.nombreSubcategoria }}
-                        </p>
-                      </li>
-                    </div>
-                  </template>
-                </BaseAccordion>
-              </div>
-              <div
-                v-for="(itemsTags, index) in allTags"
-                v-show="allTags?.length > 0"
-                :key="index"
-              >
-                <BaseAccordion
-                  v-if="
-                    itemsTags &&
-                    itemsTags.status === 1 &&
-                    itemsTags.tagProperties.length > 0
-                  "
-                >
-                  <template v-slot:categorias>
-                    <li class="btn-category">
-                      {{ itemsTags.name }}
-                    </li>
-                  </template>
-                  <template v-slot:subcategorias>
-                    <div
-                      v-for="itemsProperties in itemsTags.tagProperties"
-                      v-show="itemsProperties.status === 1"
-                      :key="itemsProperties.id"
-                    >
-                      <li
-                        class="btn-category"
-                        :class="
-                          itemsProperties.name == tagSelect
-                            ? 'text-subcategoria-active'
-                            : ''
-                        "
-                        @click="setToQueryFilter('tag', itemsProperties)"
-                      >
-                        <p class="txt-sub-li">
-                          {{ itemsProperties.name }}
-                        </p>
-                      </li>
-                    </div>
-                  </template>
-                </BaseAccordion>
-              </div>
+                  </div>
+                </template>
+              </BaseAccordion>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </transition>
+  </el-drawer>
 </template>
 
 <script>
@@ -302,17 +308,6 @@ export default {
     closed() {
       this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', false)
     },
-    closeOrder(event) {
-      const element = event.target.className
-      if (
-        element === 'order responsive' ||
-        element === 'order_header_close' ||
-        element === 'continue_shopping' ||
-        element === 'continue_shopping2'
-      ) {
-        this.closed()
-      }
-    },
     setToQueryFilter(type, value) {
       if (type === 'search') {
         this.query.name = this.query.name || null
@@ -402,22 +397,7 @@ export default {
 </script>
 
 <style scoped>
-.order {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: flex-end;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 99999;
-  transition: all 0.25s ease;
-}
 .order_content {
-  position: absolute;
-  left: 0px;
-  max-width: 300px;
   width: 100%;
   height: 100%;
   background-color: #fff;
@@ -428,16 +408,7 @@ export default {
   overflow: auto;
   box-sizing: border-box;
   padding-bottom: 10px;
-  animation: dispatch 0.2s linear 1;
   overflow: hidden;
-}
-@keyframes dispatch {
-  0% {
-    left: -300px;
-  }
-  100% {
-    left: 0px;
-  }
 }
 .order_content > div {
   width: 100%;

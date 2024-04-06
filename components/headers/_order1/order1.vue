@@ -5,8 +5,8 @@
     :with-header="false"
     :modal-append-to-body="false"
     class="width-drawer"
+    size="410px"
   >
-    <!-- <transition name="fade"> -->
     <div @click="closeOrder" class="relative">
       <div class="order_content">
         <div class="order_header">
@@ -16,462 +16,454 @@
             <div class="rightleft"></div>
           </div>
         </div>
-        <transition name="slide">
-          <template v-if="productsCart.length">
-            <div class="order--wrapper">
-              <div class="order_products">
-                <ul class="order_products_list">
-                  <li
-                    v-for="(product, index) in productsCart"
-                    :key="index"
-                    class="order_products_list_item"
-                  >
-                    <img
-                      v-lazy="idCloudinary(product.foto_cloudinary, 150, 150)"
-                      alt="Product Img"
-                      class="img_product"
-                    />
-                    <div class="w-full flex flex-col">
-                      <div class="name">
-                        <p class="order-text font-bold">
-                          {{ product.nombre | capitalize }}
-                        </p>
-                        <span v-if="product.precio">
-                          <b class="unidades">
-                            {{ $t('cart_cantidad') }} {{ product.cantidad }}
-                          </b>
-                          <b class="unidades">
-                            X{{
-                              product.precio
-                                | currency(
-                                  dataStore.tiendasInfo.paises.codigo,
-                                  dataStore.tiendasInfo.moneda
-                                )
-                            }}
-                          </b>
-                        </span>
-                        <div
-                          class="w-full flex flex-col justify-center items-start mb-5"
-                        >
-                          <div
-                            class="flex flex-row relative box-border content-quantity"
-                          >
-                            <button
-                              class="bg-transparent quantity_remove"
-                              @click="removeQuantity(product)"
-                            >
-                              <menos-icon class="icon-quantity" />
-                            </button>
-                            <p
-                              class="flex items-center justify-center bg-transparent quantity_value"
-                            >
-                              {{ product.cantidad }}
-                            </p>
-                            <button
-                              class="bg-transparent quantity_add"
-                              @click="addQuantity(product)"
-                            >
-                              <mas-icon class="icon-quantity" />
-                            </button>
-                            <div
-                              v-if="product.limitQuantity == product.cantidad"
-                              class="container-alerta"
-                            >
-                              <span class="alerta">
-                                {{ $t('cart_ultimaUnidad') }}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <div
-                          v-if="product.combinacion"
-                          class="grid grid-flow-col auto-cols-max mb-5"
-                        >
-                          <el-tag
-                            v-for="(
-                              productCombinacion, index2
-                            ) in product.combinacion"
-                            :key="index2"
-                          >
-                            {{ productCombinacion | capitalize }}
-                          </el-tag>
-                        </div>
-                        <el-tag
-                          v-if="product.activo == 0"
-                          type="danger"
-                          style="background-color: rgb(223, 62, 62)"
-                        >
-                          Producto agotado!
-                        </el-tag>
-                        <el-tag
-                          v-if="product.stock_disponible == 0"
-                          type="danger"
-                          style="background-color: rgb(223, 62, 62)"
-                        >
-                          ¡No tiene las unidades disponibles!
-                        </el-tag>
-                      </div>
-                    </div>
-                    <div v-if="product.precio > 0" class="price">
-                      <p>
-                        {{
-                          (product.precio * product.cantidad)
-                            | currency(
-                              dataStore.tiendasInfo.paises.codigo,
-                              dataStore.tiendasInfo.moneda
-                            )
-                        }}
+        <template v-if="productsCart.length">
+          <div class="order--wrapper">
+            <div class="order_products">
+              <ul class="order_products_list">
+                <li
+                  v-for="(product, index) in productsCart"
+                  :key="index"
+                  class="order_products_list_item"
+                >
+                  <img
+                    v-lazy="idCloudinary(product.foto_cloudinary, 150, 150)"
+                    alt="Product Img"
+                    class="img_product"
+                  />
+                  <div class="w-full flex flex-col">
+                    <div class="name">
+                      <p class="order-text font-bold">
+                        {{ product.nombre | capitalize }}
                       </p>
-                    </div>
-                    <div v-else class="price"></div>
-                    <boteBasura-icon
-                      class="icon-delete"
-                      @click="deleteItemCart(index)"
-                    />
-                  </li>
-                </ul>
-              </div>
-              <div class="h-full flex flex-col justify-end">
-                <div class="w-full flex justify-center items-center">
-                  <div
-                    class="w-full flex flex-row justify-center items-center text-center cursor-pointer content-remove-cart"
-                    @click="remove = !remove"
-                  >
-                    <cart-icon class="header-icon-cart" />
-                    <p>
-                      {{ $t('footer_vaciarCarrito') }}
-                    </p>
-                  </div>
-                </div>
-                <div class="order_total">
-                  <span class="order_total_domicile">
-                    <p style="font-weight: bold; font-size: 16px">
-                      {{ $t('footer_costoDomicilio') }}
-                    </p>
-                    <details
-                      v-if="
-                        rangosByCiudad.envio_metodo === 'precio_ciudad' &&
-                        shippingCities.length > 0 &&
-                        !getFreeShipping &&
-                        !FreeShippingCart
-                      "
-                    >
-                      <summary class="text-color">
-                        {{ $t('footer_valorCiudad') }}
-                      </summary>
-                      <section>
-                        <ol class="scroll_cart_summary_items_cities">
-                          <li
-                            v-for="(ciudad, index) in rangosByCiudad.rangos"
-                            :key="ciudad.id"
-                          >
-                            <div v-if="ciudad.price > 0">
-                              <b>
-                                {{
-                                  shippingCities[index].nombre_ciu ===
-                                  'Sin especificar'
-                                    ? 'Resto del país'
-                                    : shippingCities[index].nombre_ciu
-                                }}:
-                              </b>
-                              <p>
-                                {{
-                                  ciudad.price
-                                    | currency(
-                                      dataStore.tiendasInfo.paises.codigo,
-                                      dataStore.tiendasInfo.moneda
-                                    )
-                                }}
-                              </p>
-                            </div>
-                          </li>
-                        </ol>
-                      </section>
-                    </details>
-                    <div
-                      v-else-if="
-                        rangosByCiudad.envio_metodo === 'tarifa_plana' &&
-                        shipping > 0 &&
-                        getFreeShipping &&
-                        !FreeShippingCart
-                      "
-                    >
-                      <li class="text-color list-none">
-                        {{ $t('footer_tarifaPlana') }}
-                        {{
-                          rangosByCiudad.valor
-                            | currency(
-                              dataStore.tiendasInfo.paises.codigo,
-                              dataStore.tiendasInfo.moneda
-                            )
-                        }}
-                      </li>
-                    </div>
-                    <div
-                      v-else-if="
-                        rangosByCiudad.envio_metodo === 'precio' &&
-                        getFreeShipping &&
-                        !FreeShippingCart
-                      "
-                    >
-                      <div v-if="shippingTarifaPrecio > 0">
-                        <p class="text-color">
-                          {{
-                            shippingTarifaPrecio
+                      <span v-if="product.precio">
+                        <b class="unidades">
+                          {{ $t('cart_cantidad') }} {{ product.cantidad }}
+                        </b>
+                        <b class="unidades">
+                          X{{
+                            product.precio
                               | currency(
                                 dataStore.tiendasInfo.paises.codigo,
                                 dataStore.tiendasInfo.moneda
                               )
                           }}
-                        </p>
-                      </div>
-                      <p
-                        v-else-if="shippingTarifaPrecio >= 0"
-                        class="text-color"
+                        </b>
+                      </span>
+                      <div
+                        class="w-full flex flex-col justify-center items-start mb-5"
                       >
-                        {{ $t('footer_tarifaPrecio') }}
-                      </p>
-                      <p v-else class="text-TarifaPrecio">
-                        {{ $t('footer_encioNoconfig') }}
+                        <div
+                          class="flex flex-row relative box-border content-quantity"
+                        >
+                          <button
+                            class="bg-transparent quantity_remove"
+                            @click="removeQuantity(product)"
+                          >
+                            <menos-icon class="icon-quantity" />
+                          </button>
+                          <p
+                            class="flex items-center justify-center bg-transparent quantity_value"
+                          >
+                            {{ product.cantidad }}
+                          </p>
+                          <button
+                            class="bg-transparent quantity_add"
+                            @click="addQuantity(product)"
+                          >
+                            <mas-icon class="icon-quantity" />
+                          </button>
+                          <div
+                            v-if="product.limitQuantity == product.cantidad"
+                            class="container-alerta"
+                          >
+                            <span class="alerta">
+                              {{ $t('cart_ultimaUnidad') }}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        v-if="product.combinacion"
+                        class="grid grid-flow-col auto-cols-max mb-5"
+                      >
+                        <el-tag
+                          v-for="(
+                            productCombinacion, index2
+                          ) in product.combinacion"
+                          :key="index2"
+                        >
+                          {{ productCombinacion | capitalize }}
+                        </el-tag>
+                      </div>
+                      <el-tag
+                        v-if="product.activo == 0"
+                        type="danger"
+                        style="background-color: rgb(223, 62, 62)"
+                      >
+                        Producto agotado!
+                      </el-tag>
+                      <el-tag
+                        v-if="product.stock_disponible == 0"
+                        type="danger"
+                        style="background-color: rgb(223, 62, 62)"
+                      >
+                        ¡No tiene las unidades disponibles!
+                      </el-tag>
+                    </div>
+                  </div>
+                  <div v-if="product.precio > 0" class="price">
+                    <p>
+                      {{
+                        (product.precio * product.cantidad)
+                          | currency(
+                            dataStore.tiendasInfo.paises.codigo,
+                            dataStore.tiendasInfo.moneda
+                          )
+                      }}
+                    </p>
+                  </div>
+                  <div v-else class="price"></div>
+                  <boteBasura-icon
+                    class="icon-delete"
+                    @click="deleteItemCart(index)"
+                  />
+                </li>
+              </ul>
+            </div>
+            <div class="h-full flex flex-col justify-end">
+              <div class="w-full flex justify-center items-center">
+                <div
+                  class="w-full flex flex-row justify-center items-center text-center cursor-pointer content-remove-cart"
+                  @click="remove = !remove"
+                >
+                  <cart-icon class="header-icon-cart" />
+                  <p>
+                    {{ $t('footer_vaciarCarrito') }}
+                  </p>
+                </div>
+              </div>
+              <div class="order_total">
+                <span class="order_total_domicile">
+                  <p style="font-weight: bold; font-size: 16px">
+                    {{ $t('footer_costoDomicilio') }}
+                  </p>
+                  <details
+                    v-if="
+                      rangosByCiudad.envio_metodo === 'precio_ciudad' &&
+                      shippingCities.length > 0 &&
+                      !getFreeShipping &&
+                      !FreeShippingCart
+                    "
+                  >
+                    <summary class="text-color">
+                      {{ $t('footer_valorCiudad') }}
+                    </summary>
+                    <section>
+                      <ol class="scroll_cart_summary_items_cities">
+                        <li
+                          v-for="(ciudad, index) in rangosByCiudad.rangos"
+                          :key="ciudad.id"
+                        >
+                          <div v-if="ciudad.price > 0">
+                            <b>
+                              {{
+                                shippingCities[index].nombre_ciu ===
+                                'Sin especificar'
+                                  ? 'Resto del país'
+                                  : shippingCities[index].nombre_ciu
+                              }}:
+                            </b>
+                            <p>
+                              {{
+                                ciudad.price
+                                  | currency(
+                                    dataStore.tiendasInfo.paises.codigo,
+                                    dataStore.tiendasInfo.moneda
+                                  )
+                              }}
+                            </p>
+                          </div>
+                        </li>
+                      </ol>
+                    </section>
+                  </details>
+                  <div
+                    v-else-if="
+                      rangosByCiudad.envio_metodo === 'tarifa_plana' &&
+                      shipping > 0 &&
+                      getFreeShipping &&
+                      !FreeShippingCart
+                    "
+                  >
+                    <li class="text-color list-none">
+                      {{ $t('footer_tarifaPlana') }}
+                      {{
+                        rangosByCiudad.valor
+                          | currency(
+                            dataStore.tiendasInfo.paises.codigo,
+                            dataStore.tiendasInfo.moneda
+                          )
+                      }}
+                    </li>
+                  </div>
+                  <div
+                    v-else-if="
+                      rangosByCiudad.envio_metodo === 'precio' &&
+                      getFreeShipping &&
+                      !FreeShippingCart
+                    "
+                  >
+                    <div v-if="shippingTarifaPrecio > 0">
+                      <p class="text-color">
+                        {{
+                          shippingTarifaPrecio
+                            | currency(
+                              dataStore.tiendasInfo.paises.codigo,
+                              dataStore.tiendasInfo.moneda
+                            )
+                        }}
                       </p>
                     </div>
-                    <p
-                      v-else-if="
-                        rangosByCiudad.envio_metodo === 'gratis' &&
-                        shippingCities.length <= 0 &&
-                        !getFreeShipping &&
-                        !FreeShippingCart
-                      "
-                      class="without_shipping_cost"
-                    >
-                      {{ $t('footer_encioGratis') }}
-                    </p>
-                    <p
-                      v-else-if="
-                        rangosByCiudad.envio_metodo === 'sintarifa' &&
-                        shippingCities.length <= 0 &&
-                        !getFreeShipping &&
-                        !FreeShippingCart
-                      "
-                      class="without_shipping_cost"
-                    >
-                      {{ $t('footer_enviosPorPagar') }}
-                    </p>
-                    <p
-                      v-else-if="
-                        rangosByCiudad.envio_metodo === 'sinEnvio' &&
-                        shippingCities.length <= 0 &&
-                        !getFreeShipping
-                      "
-                      class="without_shipping_cost"
-                    >
-                      Pasas a recoger tu compra
-                    </p>
-                    <p
-                      v-else-if="FreeShippingCart"
-                      class="without_shipping_cost"
-                    >
+                    <p v-else-if="shippingTarifaPrecio >= 0" class="text-color">
                       {{ $t('footer_tarifaPrecio') }}
                     </p>
-                  </span>
-                  <span v-if="discountDescuentos" class="order_total_net">
-                    <p>{{ $t('footer_descuento') }}</p>
-                    <p>
-                      -
-                      {{
-                        discountDescuentos
-                          | currency(
-                            dataStore.tiendasInfo.paises.codigo,
-                            dataStore.tiendasInfo.moneda
-                          )
-                      }}
+                    <p v-else class="text-TarifaPrecio">
+                      {{ $t('footer_encioNoconfig') }}
                     </p>
-                  </span>
-                  <span class="order_total_net">
-                    <p>{{ $t('cart_subtotal') }}</p>
-                    <p>
-                      {{
-                        totalCart
-                          | currency(
-                            dataStore.tiendasInfo.paises.codigo,
-                            dataStore.tiendasInfo.moneda
-                          )
-                      }}
-                    </p>
-                  </span>
-                  <span class="order_total_net">
-                    <p>{{ $t('footer_totalPagar') }}</p>
-                    <p>
-                      {{
-                        (totalCart +
-                          (shipping ? shipping : 0) +
-                          (shippingTarifaPrecio &&
-                          shippingTarifaPrecio != 'empty' &&
-                          !FreeShippingCart
-                            ? shippingTarifaPrecio
-                            : 0) -
-                          discountDescuentos)
-                          | currency(
-                            dataStore.tiendasInfo.paises.codigo,
-                            dataStore.tiendasInfo.moneda
-                          )
-                      }}
-                    </p>
-                  </span>
-                </div>
-                <div class="content-button">
-                  <!-- no tiene cobertura de pais, compra por whatsApp -->
-                  <div
-                    v-if="
-                      isQuotation() ||
-                      (!countryStore &&
-                        productsCart.length &&
-                        dataStore.estado == 1)
-                    "
-                    class="wrapper-Quotation"
-                  >
-                    <p class="Quotation-message">
-                      {{ $t('footer_contactoMgs') }}
-                    </p>
-                    <button
-                      v-if="
-                        !stateOrderWapi &&
-                        expiredDate(dataStore.fechaExpiracion)
-                      "
-                      class="continue_shopping_whatsapp"
-                      @click="modalBehaviorWhatsApp(true)"
-                    >
-                      <whatsapp-icon class="wp-icon" />
-                      {{ $t('footer_compraWhatsapp') }}
-                    </button>
                   </div>
-                  <!-- rango de domicilio no configurado -->
                   <p
-                    v-if="
-                      productsCart.length &&
-                      shippingTarifaPrecio == 'empty' &&
-                      estadoShippingTarifaPrecio
+                    v-else-if="
+                      rangosByCiudad.envio_metodo === 'gratis' &&
+                      shippingCities.length <= 0 &&
+                      !getFreeShipping &&
+                      !FreeShippingCart
                     "
-                    class="domicilio-message"
+                    class="without_shipping_cost"
                   >
-                    {{ $t('footer_contactoMgs2') }}
+                    {{ $t('footer_encioGratis') }}
                   </p>
-                  <!-- tienda cerrada -->
-                  <p v-if="dataStore.estado == 0" class="Quotation-message">
-                    {{ $t('footer_tiendaCerrada') }}
-                  </p>
-                  <!-- <p class="Quotation-message" v-if="verifyProducts == 0">
-                    {{ $t('cart_limitProductos') }}
-                  </p> -->
-                  <!-- <p class="Quotation-message" v-if="!stateModalPwd">
-                    {{ $t('footer_tiendaPwd') }}
-                  </p> -->
-                  <!-- limite de productos para comprar -->
                   <p
-                    v-if="!IsMinValorTotal() && productsCart.length"
-                    class="Quotation-message"
+                    v-else-if="
+                      rangosByCiudad.envio_metodo === 'sintarifa' &&
+                      shippingCities.length <= 0 &&
+                      !getFreeShipping &&
+                      !FreeShippingCart
+                    "
+                    class="without_shipping_cost"
                   >
-                    {{ $t('cart_minimovalorProductos1') }}
+                    {{ $t('footer_enviosPorPagar') }}
+                  </p>
+                  <p
+                    v-else-if="
+                      rangosByCiudad.envio_metodo === 'sinEnvio' &&
+                      shippingCities.length <= 0 &&
+                      !getFreeShipping
+                    "
+                    class="without_shipping_cost"
+                  >
+                    Pasas a recoger tu compra
+                  </p>
+                  <p v-else-if="FreeShippingCart" class="without_shipping_cost">
+                    {{ $t('footer_tarifaPrecio') }}
+                  </p>
+                </span>
+                <span v-if="discountDescuentos" class="order_total_net">
+                  <p>{{ $t('footer_descuento') }}</p>
+                  <p>
+                    -
                     {{
-                      dataStore.tiendasInfo.valorCompraMinimo
+                      discountDescuentos
                         | currency(
                           dataStore.tiendasInfo.paises.codigo,
                           dataStore.tiendasInfo.moneda
                         )
                     }}
-                    {{ $t('cart_minimovalorProductos2') }}
                   </p>
-                  <!-- ir al checkout -->
+                </span>
+                <span class="order_total_net">
+                  <p>{{ $t('cart_subtotal') }}</p>
+                  <p>
+                    {{
+                      totalCart
+                        | currency(
+                          dataStore.tiendasInfo.paises.codigo,
+                          dataStore.tiendasInfo.moneda
+                        )
+                    }}
+                  </p>
+                </span>
+                <span class="order_total_net">
+                  <p>{{ $t('footer_totalPagar') }}</p>
+                  <p>
+                    {{
+                      (totalCart +
+                        (shipping ? shipping : 0) +
+                        (shippingTarifaPrecio &&
+                        shippingTarifaPrecio != 'empty' &&
+                        !FreeShippingCart
+                          ? shippingTarifaPrecio
+                          : 0) -
+                        discountDescuentos)
+                        | currency(
+                          dataStore.tiendasInfo.paises.codigo,
+                          dataStore.tiendasInfo.moneda
+                        )
+                    }}
+                  </p>
+                </span>
+              </div>
+              <div class="content-button">
+                <!-- no tiene cobertura de pais, compra por whatsApp -->
+                <div
+                  v-if="
+                    isQuotation() ||
+                    (!countryStore &&
+                      productsCart.length &&
+                      dataStore.estado == 1)
+                  "
+                  class="wrapper-Quotation"
+                >
+                  <p class="Quotation-message">
+                    {{ $t('footer_contactoMgs') }}
+                  </p>
                   <button
                     v-if="
-                      !stateOrderWapi &&
-                      productsCart.length &&
-                      !isQuotation() &&
-                      dataStore.estado == 1 &&
-                      !estadoShippingTarifaPrecio &&
-                      countryStore &&
-                      IsMinValorTotal() &&
-                      expiredDate(dataStore.fechaExpiracion)
-                    "
-                    id="InitiateCheckoutTag"
-                    class="continue_shopping"
-                    @click="GoPayments"
-                  >
-                    {{ $t('footer_finalizarCompra') }}
-                  </button>
-                  <!-- ir al checkout whatsApp -->
-                  <button
-                    v-if="
-                      stateOrderWapi &&
-                      productsCart.length &&
-                      !isQuotation() &&
-                      dataStore.estado == 1 &&
-                      !estadoShippingTarifaPrecio &&
-                      countryStore &&
-                      IsMinValorTotal() &&
-                      settingByTemplate.pago_online == 1 &&
-                      expiredDate(dataStore.fechaExpiracion)
-                    "
-                    id="InitiateCheckoutTag"
-                    class="continue_shopping2"
-                    :style="`color: ${
-                      settingByTemplate && settingByTemplate.color_primario
-                        ? settingByTemplate.color_primario
-                        : '#25D366'
-                    }; border:2px solid ${
-                      settingByTemplate && settingByTemplate.color_primario
-                        ? settingByTemplate.color_primario
-                        : '#25D366'
-                    };`"
-                    @click="GoPayments"
-                  >
-                    {{ $t('footer_finalizarCompra') }}
-                  </button>
-                  <!-- Comprar whatsApp -->
-                  <button
-                    v-if="
-                      stateOrderWapi &&
-                      productsCart.length &&
-                      !isQuotation() &&
-                      IsMinValorTotal() &&
-                      dataStore.estado == 1 &&
-                      dataStore.redes.whatsapp &&
-                      expiredDate(dataStore.fechaExpiracion)
+                      !stateOrderWapi && expiredDate(dataStore.fechaExpiracion)
                     "
                     class="continue_shopping_whatsapp"
-                    :style="`background: ${
-                      settingByTemplate && settingByTemplate.color_primario
-                        ? settingByTemplate.color_primario
-                        : '#25D366'
-                    }; color:${
-                      settingByTemplate && settingByTemplate.color_secundario
-                        ? settingByTemplate.color_secundario
-                        : '#FFFFFF'
-                    };
+                    @click="modalBehaviorWhatsApp(true)"
+                  >
+                    <whatsapp-icon class="wp-icon" />
+                    {{ $t('footer_compraWhatsapp') }}
+                  </button>
+                </div>
+                <!-- rango de domicilio no configurado -->
+                <p
+                  v-if="
+                    productsCart.length &&
+                    shippingTarifaPrecio == 'empty' &&
+                    estadoShippingTarifaPrecio
+                  "
+                  class="domicilio-message"
+                >
+                  {{ $t('footer_contactoMgs2') }}
+                </p>
+                <!-- tienda cerrada -->
+                <p v-if="dataStore.estado == 0" class="Quotation-message">
+                  {{ $t('footer_tiendaCerrada') }}
+                </p>
+                <!-- <p class="Quotation-message" v-if="verifyProducts == 0">
+                    {{ $t('cart_limitProductos') }}
+                  </p> -->
+                <!-- <p class="Quotation-message" v-if="!stateModalPwd">
+                    {{ $t('footer_tiendaPwd') }}
+                  </p> -->
+                <!-- limite de productos para comprar -->
+                <p
+                  v-if="!IsMinValorTotal() && productsCart.length"
+                  class="Quotation-message"
+                >
+                  {{ $t('cart_minimovalorProductos1') }}
+                  {{
+                    dataStore.tiendasInfo.valorCompraMinimo
+                      | currency(
+                        dataStore.tiendasInfo.paises.codigo,
+                        dataStore.tiendasInfo.moneda
+                      )
+                  }}
+                  {{ $t('cart_minimovalorProductos2') }}
+                </p>
+                <!-- ir al checkout -->
+                <button
+                  v-if="
+                    !stateOrderWapi &&
+                    productsCart.length &&
+                    !isQuotation() &&
+                    dataStore.estado == 1 &&
+                    !estadoShippingTarifaPrecio &&
+                    countryStore &&
+                    IsMinValorTotal() &&
+                    expiredDate(dataStore.fechaExpiracion)
+                  "
+                  id="InitiateCheckoutTag"
+                  class="continue_shopping"
+                  @click="GoPayments"
+                >
+                  {{ $t('footer_finalizarCompra') }}
+                </button>
+                <!-- ir al checkout whatsApp -->
+                <button
+                  v-if="
+                    stateOrderWapi &&
+                    productsCart.length &&
+                    !isQuotation() &&
+                    dataStore.estado == 1 &&
+                    !estadoShippingTarifaPrecio &&
+                    countryStore &&
+                    IsMinValorTotal() &&
+                    settingByTemplate.pago_online == 1 &&
+                    expiredDate(dataStore.fechaExpiracion)
+                  "
+                  id="InitiateCheckoutTag"
+                  class="continue_shopping2"
+                  :style="`color: ${
+                    settingByTemplate && settingByTemplate.color_primario
+                      ? settingByTemplate.color_primario
+                      : '#25D366'
+                  }; border:2px solid ${
+                    settingByTemplate && settingByTemplate.color_primario
+                      ? settingByTemplate.color_primario
+                      : '#25D366'
+                  };`"
+                  @click="GoPayments"
+                >
+                  {{ $t('footer_finalizarCompra') }}
+                </button>
+                <!-- Comprar whatsApp -->
+                <button
+                  v-if="
+                    stateOrderWapi &&
+                    productsCart.length &&
+                    !isQuotation() &&
+                    IsMinValorTotal() &&
+                    dataStore.estado == 1 &&
+                    dataStore.redes.whatsapp &&
+                    expiredDate(dataStore.fechaExpiracion)
+                  "
+                  class="continue_shopping_whatsapp"
+                  :style="`background: ${
+                    settingByTemplate && settingByTemplate.color_primario
+                      ? settingByTemplate.color_primario
+                      : '#25D366'
+                  }; color:${
+                    settingByTemplate && settingByTemplate.color_secundario
+                      ? settingByTemplate.color_secundario
+                      : '#FFFFFF'
+                  };
                   border:2px solid ${
                     settingByTemplate && settingByTemplate.color_primario
                       ? settingByTemplate.color_primario
                       : '#25D366'
                   };                  
                   `"
-                    @click="modalBehaviorWhatsApp(true)"
-                  >
-                    <whatsapp-icon class="wp-icon" />
-                    {{ $t('footer_pedidoWhatsapp') }}
-                  </button>
-                  <!-- seguir comprando, cerrar order -->
-                  <nuxt-link
-                    v-if="!stateOrderWapi"
-                    class="conten-btn"
-                    :to="setUrlCloseOrder"
-                    @click="closeOrder"
-                  >
-                    <p class="continue_shopping2">
-                      {{ $t('footer_seguirCompra') }}
-                    </p>
-                  </nuxt-link>
-                  <!-- ir al carrito componente -->
-                  <!-- <nuxt-link
+                  @click="modalBehaviorWhatsApp(true)"
+                >
+                  <whatsapp-icon class="wp-icon" />
+                  {{ $t('footer_pedidoWhatsapp') }}
+                </button>
+                <!-- seguir comprando, cerrar order -->
+                <nuxt-link
+                  v-if="!stateOrderWapi"
+                  class="conten-btn"
+                  :to="setUrlCloseOrder"
+                  @click="closeOrder"
+                >
+                  <p class="continue_shopping2">
+                    {{ $t('footer_seguirCompra') }}
+                  </p>
+                </nuxt-link>
+                <!-- ir al carrito componente -->
+                <!-- <nuxt-link
                     to="/cart"
                     class="conten-btn"
                     @click="closeOrder"
@@ -485,34 +477,34 @@
                       {{ $t('footer_irCarrito') }}
                     </button>
                   </nuxt-link> -->
-                </div>
               </div>
             </div>
-          </template>
-          <div v-else class="order--wrapper">
-            <div class="w-full flex flex-col justify-center items-center">
-              <img
-                src="../../../assets/img/icono_cesta.png"
-                style="width: 220px"
-                class="object-cover object-bottom"
-                alt="Product img"
-              />
-              <p class="text-empty">{{ $t('footer_carritoVacio2') }}</p>
-              <p class="text-empty2">
-                {{ $t('footer_carritoVacio3') }}
+          </div>
+        </template>
+        <div v-else class="order--wrapper">
+          <div class="w-full flex flex-col justify-center items-center">
+            <img
+              src="../../../assets/img/icono_cesta.png"
+              style="width: 220px"
+              class="object-cover object-bottom"
+              alt="Product img"
+            />
+            <p class="text-empty">{{ $t('footer_carritoVacio2') }}</p>
+            <p class="text-empty2">
+              {{ $t('footer_carritoVacio3') }}
+            </p>
+          </div>
+          <div>
+            <nuxt-link
+              class="conten-btn"
+              :to="setUrlCloseOrder"
+              @click="closeOrder"
+            >
+              <p class="continue_shopping2">
+                {{ $t('footer_seguirCompra') }}
               </p>
-            </div>
-            <div>
-              <nuxt-link
-                class="conten-btn"
-                :to="setUrlCloseOrder"
-                @click="closeOrder"
-              >
-                <p class="continue_shopping2">
-                  {{ $t('footer_seguirCompra') }}
-                </p>
-              </nuxt-link>
-              <!-- <nuxt-link
+            </nuxt-link>
+            <!-- <nuxt-link
                 to="/cart"
                 class="conten-btn"
                 @click="closeOrder"
@@ -522,9 +514,8 @@
                   {{ $t('footer_irCarrito') }}
                 </button>
               </nuxt-link> -->
-            </div>
           </div>
-        </transition>
+        </div>
       </div>
       <div v-if="remove" class="wrapper-items-remove">
         <div class="content-items-remove">
@@ -826,7 +817,6 @@
         </div>
       </div>
     </div>
-    <!-- </transition> -->
   </el-drawer>
 </template>
 

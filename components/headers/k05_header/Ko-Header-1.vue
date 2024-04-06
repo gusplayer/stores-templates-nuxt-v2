@@ -8,11 +8,11 @@
       },
     ]"
   >
+    <KoSearch />
+    <KoMenu :data-store="dataStore" class="responsive" />
     <div class="wrapper-header" @click="closeMenuCategory">
       <div class="header">
         <!-- <KoOrder :data-store="dataStore" /> -->
-        <KoSearch />
-        <KoMenu :data-store="dataStore" class="responsive" />
         <div class="header-content-logo">
           <nuxt-link to="/" class="wrapper-logo">
             <img

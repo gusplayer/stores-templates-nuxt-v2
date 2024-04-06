@@ -1,31 +1,43 @@
 <template>
   <el-drawer
     :visible.sync="openSearch"
+    :before-close="closedSearch"
     direction="ttb"
-    :withHeader="false"
+    :with-header="false"
     :modal-append-to-body="false"
-    size="20%"
+    class="width-drawer"
+    size="180px"
   >
-    <div class="w-full px-20 flex justify-end my-15">
-      <window-close-icon
-        class="text-25 text-red-500 hover:text-red-800"
-        @click="closedSearch"
-      />
-    </div>
-    <div class="w-full flex flex-col justify-center items-center">
+    <div
+      class="w-full h-full bg-white-white flex justify-center items-end box-border overflow-hidden"
+    >
       <div
-        class="w-full max-w-[350px] flex flex-col justify-center items-center"
+        class="absolute right-20 top-20 w-30 h-30 cursor-pointer flex justify-center items-center group"
+        @click="closedSearch"
       >
-        <input
-          v-model="searchProduct"
-          type="search "
-          :placeholder="$t('home_buscar')"
-          class="w-full border-b border-gray-200 text-black"
-          @change="getSuggestedProducts"
-          @keyup.enter="getSuggestedProducts"
-        />
+        <div
+          class="h-4 w-30 absolute bg-black rounded-2 transform -rotate-45 transition-all ease-in duration-200 group-hover:rotate-0"
+        ></div>
+        <div
+          class="h-4 w-30 absolute bg-black rounded-2 transform rotate-45 transition-all ease-in duration-200 group-hover:rotate-0"
+        ></div>
+      </div>
+      <div
+        class="w-full max-w-[1300px] flex flex-col md:flex-row justify-center items-center pt-20 pb-30 px-30"
+      >
+        <div class="w-full h-full flex flex-row justify-start items-center">
+          <input
+            v-model="searchProduct"
+            type="search"
+            required
+            class="w-full h-full text-20 md:text-35 border-none"
+            :placeholder="$t('home_buscar')"
+            @change="getSuggestedProducts"
+            @keyup.enter="getSuggestedProducts"
+          />
+        </div>
         <button
-          class="w-full text-center bg-black text-white-white rounded-8 px-5 py-3 mt-20"
+          class="bg-[#2c2930] hover:bg-[#1c1a1f] px-10 py-5 text-center text-white-white text-20 md:text-35 w-full md:w-[145px] mt-10 md:mt-0"
           @click="closedSearch"
         >
           {{ $t('home_vamos') }}
@@ -38,12 +50,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  name: 'Ko14Search',
-  data() {
-    return {
-      search: '',
-    }
-  },
+  name: 'Ko13Search',
   computed: {
     ...mapState(['openSearch']),
     ...mapState({
@@ -61,12 +68,6 @@ export default {
   methods: {
     closedSearch() {
       this.$store.commit('SET_OPEN_SEARCH', false)
-    },
-    closeOrder(event) {
-      const element = event.target.className
-      if (element === 'order') {
-        this.closedSearch()
-      }
     },
     async getSuggestedProducts() {
       this.setInformationFromQuery({ page: 1, name: this.searchProduct })
@@ -96,3 +97,13 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+* {
+  font-family: var(--font-style-1) !important;
+}
+
+::-webkit-input-placeholder {
+  @apply text-left text-20 md:text-35 text-[#2c2930];
+}
+</style>

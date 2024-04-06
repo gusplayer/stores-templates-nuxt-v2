@@ -216,9 +216,7 @@
               </div>
             </div>
 
-            <div
-              class="px-15 py-10 md:px-0 md:py-0 fixed md:sticky w-full flex flex-row md:flex-col gap-x-4 md:gap-0 justify-around md:justify-start items-center md:items-start left-0 bottom-0 bg-gray-100 md:bg-transparent border-t md:border-t-0 border-gray-400 z-10 md:z-0"
-            >
+            <div class="sticky w-full flex flex-col justify-start items-start">
               <div class="quantity">
                 <p class="text-quantity hidden md:flex">
                   {{ $t('cart_cantidad') }}
@@ -411,7 +409,7 @@
           :price="salesData"
         />
       </div>
-      <div class="w-full z-[1]">
+      <div class="w-full" style="z-index: 1 !important">
         <KoSuggestProduct
           v-if="filterSuggestedProducts?.length > 0"
           :suggested-products="filterSuggestedProducts"
@@ -806,7 +804,7 @@ export default {
       if (this.salesData) {
         product.limitQuantity = this.salesData.unidades
       } else {
-        product.limitQuantity = this.data.info.inventario
+        product.limitQuantity = this.data.productosInfo.inventario
       }
       if (typeof this.productIndexCart === 'number') {
         const mutableProduct =

@@ -11,6 +11,11 @@
       },
     ]"
   >
+    <KoMenu
+      :data-store="dataStore"
+      :setting-by-template="settingByTemplate11"
+    />
+    <KoSearch :data-store="dataStore" />
     <div class="content-header">
       <div class="content-items-header">
         <div class="item-logo">
@@ -140,13 +145,6 @@
           </div>
         </div>
       </div>
-      <!-- <KoOrder :data-store="dataStore" /> -->
-      <KoMenu
-        :data-store="dataStore"
-        :setting-by-template="settingByTemplate11"
-        class="responsive"
-      />
-      <KoSearch :data-store="dataStore" />
     </div>
   </header>
 </template>
@@ -155,9 +153,8 @@ import { mapState } from 'vuex'
 export default {
   name: 'KoHeader7',
   components: {
-    // KoOrder: () => import('../_order1/order1'),
     KoMenu: () => import('../_lateralMenu/_lateralMenu11/openMenuLeft.vue'),
-    KoSearch: () => import('../k13_header/search.vue'),
+    KoSearch: () => import('../_lateralMenu/_lateralMenu/search.vue'),
   },
   props: {
     dataStore: {

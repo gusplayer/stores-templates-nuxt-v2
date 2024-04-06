@@ -308,14 +308,12 @@
             <button class="quantity_add" @click="addQuantity">
               <mas-icon class="icon" />
             </button>
-            <transition name="slide-fade">
-              <div
-                v-show="quantityValue == maxQuantityValue"
-                class="container-alert"
-              >
-                <span class="alert">{{ $t('cart_ultimaUnidad') }}</span>
-              </div>
-            </transition>
+            <div
+              v-show="quantityValue == maxQuantityValue"
+              class="container-alert"
+            >
+              <span class="alert">{{ $t('cart_ultimaUnidad') }}</span>
+            </div>
           </div>
           <button
             v-if="data.productosInfo.dealerWhatsapp === '1'"

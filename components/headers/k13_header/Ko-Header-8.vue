@@ -12,10 +12,13 @@
       },
     ]"
   >
-    <div id="headbg" class="wrapper-header">
-      <div id="headerid" class="header">
-        <!-- <KoOrder :data-store="dataStore" /> -->
-
+    <KoSearch :data-store="dataStore" />
+    <KoMenu
+      :data-store="dataStore"
+      :setting-by-template="settingByTemplate13"
+    />
+    <div class="wrapper-header">
+      <div class="header">
         <div class="header-content-logo">
           <nuxt-link to="/" class="wrapper-logo">
             <img
@@ -134,11 +137,6 @@
             </div>
           </div>
         </div>
-        <KoSearch :data-store="dataStore" />
-        <KoMenu
-          :data-store="dataStore"
-          :setting-by-template="settingByTemplate13"
-        />
       </div>
     </div>
   </header>
@@ -149,9 +147,8 @@ import { mapState } from 'vuex'
 export default {
   name: 'KoHeader8',
   components: {
-    // KoOrder: () => import('../_order1/order1'),
     KoMenu: () => import('../_lateralMenu/_lateralMenu11/openMenuLeft.vue'),
-    KoSearch: () => import('./search.vue'),
+    KoSearch: () => import('../_lateralMenu/_lateralMenu/search.vue'),
   },
   props: {
     dataStore: {
