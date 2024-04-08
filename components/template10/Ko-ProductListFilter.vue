@@ -359,7 +359,6 @@ export default {
         scrollTimeout = null
         window.scrollTo({
           top: 0,
-          behavior: 'smooth',
         })
       }, 250)
     },
