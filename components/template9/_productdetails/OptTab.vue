@@ -365,10 +365,10 @@ h3 {
   font-weight: 600;
   text-transform: uppercase;
   align-self: flex-start;
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-2);
 }
 h4 {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-2);
   color: #2c2930;
   font-size: 15px;
   font-weight: 600;
@@ -381,7 +381,7 @@ h4 {
   margin-bottom: 5px;
 }
 li p {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-2);
   color: #333;
   font-size: 14px;
   font-weight: 400;
@@ -389,7 +389,7 @@ li p {
   margin-bottom: 15px;
 }
 .description-method {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-style-2);
   color: #333;
   font-size: 14px;
   font-weight: 400;

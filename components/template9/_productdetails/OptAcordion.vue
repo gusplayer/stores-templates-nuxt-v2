@@ -343,41 +343,6 @@ export default {
   font-size: 15px;
   font-weight: bold;
 }
-
-h3 {
-  color: #2c2930;
-  font-size: 15px;
-  font-weight: 600;
-  text-transform: uppercase;
-  align-self: flex-start;
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
-}
-h4 {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
-  color: #2c2930;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.42857143;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  margin-bottom: 5px;
-}
-li p {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
-  color: #333;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.4;
-  margin-bottom: 15px;
-}
-img {
-  max-width: 320px;
-  width: 50%;
-  margin-top: 15px;
-}
 .editor {
   width: 100%;
 }
@@ -391,56 +356,56 @@ img {
 }
 .editor >>> .el-tiptap-editor__content h1 {
   font-size: 2em;
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content h2 {
   font-size: 1.5em;
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content h3 {
   font-size: 1.17em;
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content h4 {
   font-size: 1.12em;
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content h5 {
   font-size: 0.83em;
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content p {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content span {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content blockquote {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content code {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content ul {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content ol {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content li {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content pre {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content strong {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content em {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content s {
-  font-family: var(--font-style-2);
+  font-family: var(--font-style-1);
 }
 .editor >>> .el-tiptap-editor__content .image-view__body__image {
   cursor: none;

@@ -1,17 +1,17 @@
 <template>
   <div v-if="status == 1 && price?.precio">
-    <h4 v-if="moreDetails">Addi</h4>
+    <h4 v-if="moreDetails" class="font-semibold">Addi</h4>
     <div v-if="stateWidgetAddi" class="mt-20">
       <addi-widget
         :price="price.precio"
         :ally-slug="analytics_tagmanager?.addiAllySlug"
       />
     </div>
-    <p v-else>
-      <span v-if="moreDetails">
+    <template v-else>
+      <p v-if="moreDetails" class="text-addi">
         El precio del producto está fuera del rango permitido por ADDI.
-      </span>
-    </p>
+      </p>
+    </template>
   </div>
 </template>
 
@@ -85,3 +85,13 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.text-addi {
+  color: #333;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+</style>
