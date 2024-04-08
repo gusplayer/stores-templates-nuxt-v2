@@ -29,16 +29,24 @@
         </p>
         <ul>
           <li v-if="mediospago.consignacion == 1">
-            <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
-            <p>{{ $t('productdetail_consignacionBancariaMsg') }}</p>
+            <h4 class="title-payment">
+              {{ $t('productdetail_consignacionBancaria') }}
+            </h4>
+            <p class="text-payment">
+              {{ $t('productdetail_consignacionBancariaMsg') }}
+            </p>
           </li>
           <li v-if="mediospago.contraentrega == 1">
-            <h4>{{ $t('productdetail_PagoContra') }}</h4>
-            <p>{{ $t('productdetail_PagoContraMsg') }}</p>
+            <h4 class="title-payment">{{ $t('productdetail_PagoContra') }}</h4>
+            <p class="text-payment">{{ $t('productdetail_PagoContraMsg') }}</p>
           </li>
           <li v-if="mediospago.convenir == 1">
-            <h4>{{ $t('productdetail_pagoConvenir') }}</h4>
-            <p>{{ $t('productdetail_pagoConvenirMsg') }}</p>
+            <h4 class="title-payment">
+              {{ $t('productdetail_pagoConvenir') }}
+            </h4>
+            <p class="text-payment">
+              {{ $t('productdetail_pagoConvenirMsg') }}
+            </p>
           </li>
           <!-- <li v-if="mediospago.credibanco == 1">
             <h4>{{ $t('productdetail_ConsignacionCredibanco') }}</h4>
@@ -65,8 +73,10 @@
             :data-store="dataStore"
           />
           <li v-if="mediospago.daviplata == 1">
-            <h4>{{ $t('productdetail_Consignaciondaviplata') }}</h4>
-            <p>
+            <h4 class="title-payment">
+              {{ $t('productdetail_Consignaciondaviplata') }}
+            </h4>
+            <p class="text-payment">
               {{ $t('productdetail_ConsignaciondaviplataMsg') }}
             </p>
             <img
@@ -76,8 +86,12 @@
             />
           </li>
           <li v-if="mediospago.efecty == 1">
-            <h4>{{ $t('productdetail_ConsignacionEfecty') }}</h4>
-            <p>{{ $t('productdetail_ConsignacionEfectyMsg') }}</p>
+            <h4 class="title-payment">
+              {{ $t('productdetail_ConsignacionEfecty') }}
+            </h4>
+            <p class="text-payment">
+              {{ $t('productdetail_ConsignacionEfectyMsg') }}
+            </p>
             <a
               href="https://www.efecty.com.co/web/"
               target="_blank"
@@ -92,8 +106,10 @@
             </a>
           </li>
           <li v-if="mediospago.mercado_pago == 1">
-            <h4>{{ $t('productdetail_PasarelaMercado') }}</h4>
-            <p>
+            <h4 class="title-payment">
+              {{ $t('productdetail_PasarelaMercado') }}
+            </h4>
+            <p class="text-payment">
               {{ $t('productdetail_PasarelaMercadoMsg') }}
             </p>
             <a
@@ -110,8 +126,10 @@
             </a>
           </li>
           <li v-if="mediospago.nequi == 1">
-            <h4>{{ $t('productdetail_Consignacionnequi') }}</h4>
-            <p>
+            <h4 class="title-payment">
+              {{ $t('productdetail_Consignacionnequi') }}
+            </h4>
+            <p class="text-payment">
               {{ $t('productdetail_ConsignacionnequiMsg') }}
             </p>
             <a
@@ -128,8 +146,10 @@
             </a>
           </li>
           <li v-if="mediospago.payco == 1">
-            <h4>{{ $t('productdetail_PasarelaEpayco') }}</h4>
-            <p>
+            <h4 class="title-payment">
+              {{ $t('productdetail_PasarelaEpayco') }}
+            </h4>
+            <p class="text-payment">
               {{ $t('productdetail_PasarelaEpaycoMsg') }}
             </p>
             <img
@@ -139,8 +159,10 @@
             />
           </li>
           <li v-if="mediospago.payu == 1">
-            <h4>{{ $t('productdetail_PasarelaPayu') }}</h4>
-            <p>
+            <h4 class="title-payment">
+              {{ $t('productdetail_PasarelaPayu') }}
+            </h4>
+            <p class="text-payment">
               {{ $t('productdetail_PasarelaPayuMsg') }}
             </p>
             <a
@@ -157,8 +179,10 @@
             </a>
           </li>
           <li v-if="mediospago.wompi == 1">
-            <h4>{{ $t('productdetail_Consignacionwompi') }}</h4>
-            <p>
+            <h4 class="title-payment">
+              {{ $t('productdetail_Consignacionwompi') }}
+            </h4>
+            <p class="text-payment">
               {{ $t('productdetail_PasarelaPayuMsg') }}
             </p>
             <a
@@ -170,6 +194,63 @@
                 class="logo-pasarela-wompi"
                 src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335739/Templates%20Modos%20de%20pago/wompi_jxuitu.png"
                 alt="wompi"
+                border="0"
+              />
+            </a>
+          </li>
+          <li v-if="mediospago.wepay4u == 1">
+            <h4 class="title-payment">WePay4U</h4>
+            <p class="text-payment">
+              {{ $t('text_pago_WePay4U') }}
+            </p>
+            <a
+              href="https://wepay4u.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img
+                loading="lazy"
+                class="logo-pasarela-wompi"
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/v1639078440/wePay4u/powered_by_z7sgqp.png"
+                alt="wePay4u"
+                border="0"
+              />
+            </a>
+          </li>
+          <li v-if="mediospago.tu_compra == 1">
+            <h4 class="title-payment">Tucompra</h4>
+            <p class="text-payment">
+              {{ $t('text_pago_Tucompra') }}
+            </p>
+            <a
+              href="https://tucompra.com.co/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img
+                loading="lazy"
+                class="logo-pasarela-wompi"
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/v1645131256/komerica/tucompra_ss0oys.png"
+                alt="tu_compra"
+                border="0"
+              />
+            </a>
+          </li>
+          <li v-if="mediospago.flow == 1">
+            <h4 class="title-payment">Flow</h4>
+            <p class="text-payment">
+              {{ $t('text_pago_flowInfo') }}
+            </p>
+            <a
+              href="https://www.flow.cl/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img
+                loading="lazy"
+                class="logo-pasarela-wompi"
+                src="https://res.cloudinary.com/komerciaacademico/image/upload/v1645131256/komerica/flow_jevnwy.png"
+                alt="flow"
                 border="0"
               />
             </a>
@@ -366,15 +447,8 @@ img {
   font-size: 14px;
   font-family: var(--font-style-3);
 }
-h3 {
-  color: var(--color_description);
-  /* color: var(--color_subtext); */
-  font-size: 15px;
-  text-transform: uppercase;
-  align-self: flex-start;
-  font-family: var(--font-style-3);
-}
-h4 {
+
+.title-payment {
   margin-top: 15px;
   font-weight: bold;
   color: var(--color_description);
@@ -382,7 +456,7 @@ h4 {
   margin-bottom: 5px;
   font-family: var(--font-style-3);
 }
-li p {
+.text-payment {
   line-height: 1.4;
   font-size: 14px;
   font-family: var(--font-style-3);
