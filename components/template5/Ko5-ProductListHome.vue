@@ -106,11 +106,18 @@ export default {
   mixins: [filterProducts],
   watch: {
     previousPage() {
-      let timerTimeout = null
-      // eslint-disable-next-line no-unused-vars
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null
-        window.scrollBy(0, -1500)
+      let scrollTimeout = null
+
+      if (scrollTimeout !== null) {
+        clearTimeout(scrollTimeout)
+      }
+
+      scrollTimeout = setTimeout(() => {
+        scrollTimeout = null
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        })
       }, 250)
     },
   },
