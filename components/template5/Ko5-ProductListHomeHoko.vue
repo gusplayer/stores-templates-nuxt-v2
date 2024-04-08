@@ -92,10 +92,18 @@ export default {
   watch: {
     currentPage() {
       this.$store.commit('SET_PREVIOUS_PAGE', this.currentPage)
-      let timerTimeout = null
-      timerTimeout = setTimeout(() => {
-        timerTimeout = null
-        window.scrollBy(0, -1500)
+      let scrollTimeout = null
+
+      if (scrollTimeout !== null) {
+        clearTimeout(scrollTimeout)
+      }
+
+      scrollTimeout = setTimeout(() => {
+        scrollTimeout = null
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        })
       }, 250)
     },
     previousPage() {
