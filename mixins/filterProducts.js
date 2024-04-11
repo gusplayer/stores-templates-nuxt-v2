@@ -65,7 +65,7 @@ export default {
       ],
       filters: {
         page: 1,
-        limit: 21,
+        limit: 24,
         name: null,
         category: null,
         subcategory: null,
@@ -194,7 +194,7 @@ export default {
             alphabetic,
             price,
             topSales,
-          }
+          },
         )
 
         if (success) {
@@ -207,7 +207,7 @@ export default {
         } else {
           this.listProducts = []
           this.previousPage = 1
-          this.filters.limit = 21
+          this.filters.limit = 24
           this.totalProducts = 0
           this.minPrice = 0
           this.maxPrice = 0
@@ -283,7 +283,7 @@ export default {
         category: (value) => (this.nameCategory = value || null),
         subcategory: (value) => {
           const tempResult = this.subcategories.filter(
-            (item) => item.id === JSON.parse(value)
+            (item) => item.id === JSON.parse(value),
           )
           this.nameSubCategory = tempResult[0]?.nombreSubcategoria
         },
@@ -377,7 +377,7 @@ export default {
     sendCategory(value) {
       this.sendAnalyticsStore(value.id)
       this.selectedSubcategories = this.subcategories.filter(
-        (item) => item.categoria === value.id
+        (item) => item.categoria === value.id,
       )
       this.filters.category = value.nombreCategoriaProducto
       this.nameCategory = value.nombreCategoriaProducto
@@ -444,7 +444,7 @@ export default {
     clearFilters() {
       this.filters = {
         page: 1,
-        limit: 21,
+        limit: 24,
         name: null,
         category: null,
         subcategory: null,
@@ -476,7 +476,7 @@ export default {
     clearFiltersCategory(value) {
       this.filters = {
         page: 1,
-        limit: 21,
+        limit: 24,
         name: null,
         category: value,
         subcategory: null,

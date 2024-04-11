@@ -25,7 +25,9 @@
       <div
         class="w-full max-w-[1300px] flex flex-col md:flex-row justify-center items-center pt-20 pb-30 px-30"
       >
-        <div class="w-full h-full flex flex-row justify-start items-center">
+        <div
+          class="w-full h-full flex flex-row justify-start items-center mr-10"
+        >
           <input
             v-model="searchProduct"
             type="search"
@@ -38,7 +40,7 @@
         </div>
         <button
           class="bg-[#2c2930] hover:bg-[#1c1a1f] px-10 py-5 text-center text-white-white text-20 md:text-35 w-full md:w-[145px] mt-10 md:mt-0"
-          @click="closedSearch"
+          @click="getSuggestedProducts"
         >
           {{ $t('home_vamos') }}
         </button>

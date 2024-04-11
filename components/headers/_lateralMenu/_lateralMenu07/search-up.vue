@@ -24,7 +24,7 @@
         />
         <div
           class="absolute right-10 top-3/0 w-50 h-50 cursor-pointer flex justify-center items-center group"
-          @click="closedSearch"
+          @click="handleClose"
         >
           <div
             class="h-4 w-50 absolute bg-black rounded-2 transform -rotate-45 transition-all ease-in duration-200 group-hover:rotate-0"
@@ -98,10 +98,6 @@ export default {
     },
   },
   methods: {
-    closedSearch() {
-      this.$store.commit('SET_OPEN_SEARCH', false)
-      this.$router.push({ path: '', query: '' })
-    },
     handleClose() {
       this.$store.commit('SET_OPEN_SEARCH', false)
       this.$router.push({ path: '', query: '' })

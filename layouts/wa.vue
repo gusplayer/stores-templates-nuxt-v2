@@ -2,7 +2,7 @@
   <div>
     <div
       v-if="dataStore && !storeError"
-      class="w-full flex justify-center items-center bg-slate-100"
+      class="flex w-full items-center justify-center bg-slate-100"
     >
       <div v-if="stateModalPwd">
         <nuxt />
@@ -298,9 +298,53 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 * {
   font-family: 'Poppins', sans-serif !important;
+  scroll-behavior: smooth;
+  margin: 0px;
+  padding: 0px;
+  outline: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  outline: none !important;
+}
+html {
+  scroll-behavior: smooth;
+}
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+.layout-enter-active,
+.layout-leave-active {
+  transition: opacity 0.5s;
+}
+.layout-enter,
+.layout-leave-to {
+  opacity: 0;
+}
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+::-webkit-scrollbar-button:increment,
+::-webkit-scrollbar-button {
+  display: none;
+}
+::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #797979;
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
 }
 .wrapper-whatsapp {
   position: fixed;

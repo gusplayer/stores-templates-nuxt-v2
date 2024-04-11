@@ -87,47 +87,47 @@ export default {
           this.settingByTemplate,
           'settings',
           'tipo_letra',
-          this.settingBase
+          this.settingBase,
         ),
         settingByTemplate7: this.createNestedSetting(
           this.settingByTemplate7,
           ['settingGeneral', 'detailsProduct', 'card'],
-          null
+          null,
         ),
         settingByTemplate9: this.createNestedSetting(
           this.settingByTemplate9,
           ['cardProduct', 'detailsProduct', 'settingGeneral'],
-          null
+          null,
         ),
         settingByTemplate10: this.createNestedSetting(
           this.settingByTemplate10,
           ['cardProduct', 'detailsProduct', 'settingGeneral'],
-          null
+          null,
         ),
         settingByTemplate11: this.createNestedSetting(
           this.settingByTemplate11,
           ['detailsProduct', 'cardProduct', 'settingGeneral'],
-          null
+          null,
         ),
         settingByTemplate13: this.createNestedSetting(
           this.settingByTemplate13,
           ['detailsProduct', 'cardProduct', 'settingGeneral'],
-          null
+          null,
         ),
         settingByTemplate14: this.createNestedSetting(
           this.settingByTemplate14,
           ['detailsProducts', 'cardProducts', 'settingsGeneral'],
-          null
+          null,
         ),
         settingByTemplate15: this.createNestedSetting(
           this.settingByTemplate15,
           ['detailsProducts', 'cardProducts', 'settingGeneral'],
-          null
+          null,
         ),
         settingByTemplate16: this.createNestedSetting(
           this.settingByTemplate16,
           ['detailsProducts', 'cardProducts', 'settingsGeneral'],
-          null
+          null,
         ),
       }
     },
@@ -144,7 +144,7 @@ export default {
       settingByTemplate,
       property1,
       property2,
-      defaultValue
+      defaultValue,
     ) {
       if (
         settingByTemplate &&
