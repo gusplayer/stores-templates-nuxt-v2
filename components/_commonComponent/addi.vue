@@ -66,7 +66,7 @@ export default {
             // slug: 'splashjugueteriaypiscinas-ecommerce',
             slug: this.analytics_tagmanager.addiAllySlug,
             amount: this.price.precio,
-          }
+          },
         )
         if (success) {
           if (

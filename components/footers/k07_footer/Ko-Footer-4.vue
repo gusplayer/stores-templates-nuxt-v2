@@ -151,7 +151,7 @@ export default {
         !this.settingByTemplate7[0].setting7Footer.img_background
       ) {
         let color = getComputedStyle(this.$refs.background).getPropertyValue(
-          '--background_color_1'
+          '--background_color_1',
         )
         let colorArray = color.split(',')
         let colorInt = parseInt(colorArray[2])
@@ -178,7 +178,7 @@ export default {
     },
     setLogo() {
       let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1'
+        '--background_color_1',
       )
       let colorArray = color.split(',')
       let colorInt = parseInt(colorArray[2])
@@ -196,14 +196,14 @@ export default {
 .footer-container {
   background: var(--background_color_1);
   min-height: 322px;
-  @apply flex flex-col justify-center items-center bg-auto bg-bottom bg-no-repeat pb-30 md:pb-0;
+  @apply flex flex-col items-center justify-center bg-auto bg-bottom bg-no-repeat pb-30 md:pb-0;
 }
 .footer-content {
   margin-bottom: 10px;
-  @apply flex flex-col justify-center items-center;
+  @apply flex flex-col items-center justify-center;
 }
 .footer-content-items {
-  @apply flex flex-col justify-center items-center w-full my-10;
+  @apply my-10 flex w-full flex-col items-center justify-center;
 }
 .footer-logo {
   object-fit: contain;
@@ -211,7 +211,7 @@ export default {
   max-width: var(--with_logo);
 }
 .footer-content-button {
-  @apply w-full flex flex-wrap gap-4 justify-center items-center mt-32;
+  @apply mt-32 flex w-full flex-wrap items-center justify-center gap-4;
 }
 .btn {
   color: var(--color_text);
@@ -233,10 +233,10 @@ export default {
   max-width: 400px;
   border: solid 1px #666;
   background: #666;
-  @apply w-full h-2 opacity-50 my-5;
+  @apply my-5 h-2 w-full opacity-50;
 }
 .madebyKomercia {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .txt-devBy {
   font-size: 14px;
@@ -246,11 +246,11 @@ export default {
   padding-top: 200px;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
-  @apply w-full h-full fixed z-10 left-0 top-0 overflow-auto;
+  @apply fixed left-0 top-0 z-10 h-full w-full overflow-auto;
 }
 @screen sm {
   .footer-content {
-    @apply w-full flex;
+    @apply flex w-full;
   }
   .btn {
     @apply text-sm;

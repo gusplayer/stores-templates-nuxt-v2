@@ -59,15 +59,15 @@
       ></div>
     </div>
     <div
-      class="px-10 py-4 w-full flex justify-between items-center"
+      class="flex w-full items-center justify-between px-10 py-4"
       style="background-color: #222"
     >
       <button @click="goRouter" class="txt-Legal">
         🔗 {{ $t('footer_irPagina') }}
       </button>
       <div class="flex flex-row justify-end">
-        <p class="text-white-white text-14">
-          <span class="font-bold mr-3">Actualizado:</span>
+        <p class="text-14 text-white-white">
+          <span class="mr-3 font-bold">Actualizado:</span>
           {{ dayCreate }}/{{ nameMonth }}/{{ yearUpdate }}
         </p>
       </div>
@@ -155,7 +155,7 @@ export default {
   background-color: #eee;
   transition: 0.4s;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  @apply w-full text-left mb-0 border-none outline-none cursor-pointer border;
+  @apply mb-0 w-full cursor-pointer border border-none text-left outline-none;
 }
 .active,
 .accordion:hover {
@@ -164,16 +164,16 @@ export default {
 .accordion:after {
   content: '\276F';
   color: #222;
-  @apply transition-all ease-in duration-0.2 font-semibold float-right;
+  @apply float-right font-semibold transition-all duration-0.2 ease-in;
 }
 .active:after {
   transform: rotate(90deg);
-  @apply transition-all ease-in duration-0.2;
+  @apply transition-all duration-0.2 ease-in;
 }
 .panel {
   background-color: #fff;
   transition: 0.4s ease-out;
-  @apply w-full max-h-0 justify-start items-center overflow-hidden px-40;
+  @apply max-h-0 w-full items-center justify-start overflow-hidden px-40;
 }
 
 /* Modal Content */
@@ -181,12 +181,14 @@ export default {
   max-height: 600px;
   background-color: #fefefe;
   border: 1px solid #888;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
   animation-duration: 0.4s;
-  @apply relative m-auto p-0 overflow-y-auto;
+  @apply relative m-auto overflow-y-auto p-0;
 }
 
 .modal-content::-webkit-scrollbar {
@@ -240,11 +242,11 @@ export default {
 .modal-header {
   background-color: #222;
   color: white;
-  @apply w-full flex justify-between items-center py-10 px-20 sticky top-0;
+  @apply sticky top-0 flex w-full items-center justify-between px-20 py-10;
 }
 
 .content-items-modal {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .txt-Legal {
   font-size: 16px;
@@ -257,7 +259,7 @@ export default {
   font-size: 16px;
   border-bottom: 1px solid #ccc;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  @apply font-semibold py-10 sticky top-62;
+  @apply sticky top-62 py-10 font-semibold;
 }
 @screen sm {
   .modal-content {

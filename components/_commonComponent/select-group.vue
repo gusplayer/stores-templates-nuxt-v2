@@ -38,7 +38,7 @@ export default {
         this.$store.state.beforeCombination.splice(
           this.index,
           1,
-          variante[0].option
+          variante[0].option,
         )
       }
     },
@@ -46,7 +46,7 @@ export default {
       this.$store.state.beforeCombination.splice(
         this.index,
         1,
-        this.variantes[this.index].valores[0].option
+        this.variantes[this.index].valores[0].option,
       )
     },
   },

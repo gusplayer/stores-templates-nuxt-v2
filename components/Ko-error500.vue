@@ -1,9 +1,9 @@
 <template>
   <div
-    class="w-full flex bg-white-white justify-center items-center box-border"
+    class="box-border flex w-full items-center justify-center bg-white-white"
   >
     <div class="contenedor">
-      <div class="w-full flex justify-center items-center">
+      <div class="flex w-full items-center justify-center">
         <svg
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -655,7 +655,7 @@
       <div class="content-right">
         <div>
           <p class="text-100 font-bold text-black">500</p>
-          <p class="text-22 font-bold text-black px-10">¡OOPS! Error.</p>
+          <p class="px-10 text-22 font-bold text-black">¡OOPS! Error.</p>
           <p class="text-16 text-black">
             Cómo has llegado aquí es un misterio. Pero puedes hacer clic en el
             botón para contactar a un asesor.
@@ -684,10 +684,10 @@ export default {
       const message = `Hola.%0A%0ATengo un problema con mi tienda ${window.location}.`
 
       const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(
-        message
+        message,
       )}`
       const webWhatsappUrl = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
-        message
+        message,
       )}`
 
       if (this.mobileCheck()) {
@@ -703,10 +703,10 @@ export default {
 .contenedor {
   min-height: calc(100vh - 310px);
   padding: 10px 20px;
-  @apply w-full max-w-[1300px] justify-center items-center grid grid-flow-col grid-cols-2;
+  @apply grid w-full max-w-[1300px] grid-flow-col grid-cols-2 items-center justify-center;
 }
 .content-right {
-  @apply w-full flex flex-col justify-center items-start;
+  @apply flex w-full flex-col items-start justify-center;
 }
 .btn-error {
   display: flex;

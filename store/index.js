@@ -1212,8 +1212,8 @@ async function getIdData(state, req, commit) {
     req.headers['x-forwarded-proto'] ||
     (req.connection.encrypted ? 'https' : 'http')
   const currentURL = `${protocol}://${req.headers.host}${req.url}`
-  // const getURL = obtenerInfoURL(currentURL)
-  const getURL = obtenerInfoURL('https://tutiendastikers.komercia.store/')
+  const getURL = obtenerInfoURL(currentURL)
+  // const getURL = obtenerInfoURL('https://tutiendastikers.komercia.store/')
   let id = 0
   let template = 0
   let idWapi = null

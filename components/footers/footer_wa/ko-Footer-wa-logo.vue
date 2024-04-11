@@ -271,6 +271,6 @@ export default {
   padding-top: 50px;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
-  @apply w-full h-full fixed z-10 left-0 overflow-auto top-0;
+  @apply fixed left-0 top-0 z-10 h-full w-full overflow-auto;
 }
 </style>

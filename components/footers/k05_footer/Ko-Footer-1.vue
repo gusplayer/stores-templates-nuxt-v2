@@ -1,7 +1,7 @@
 <template>
   <footer
     ref="background"
-    class="wrapper-footer w-full flex flex-col justify-center items-center pb-30 md:pb-20 box-border z-[4]"
+    class="wrapper-footer z-[4] box-border flex w-full flex-col items-center justify-center pb-30 md:pb-20"
     :style="[
       settingByTemplate,
       {
@@ -214,7 +214,7 @@ export default {
     },
     setLogo() {
       let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1'
+        '--background_color_1',
       )
       let colorArray = color.split(',')
       let colorInt = parseInt(colorArray[2])
@@ -344,7 +344,7 @@ export default {
   padding-top: 200px;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
-  @apply w-full h-full fixed z-10 left-0 top-0 overflow-auto;
+  @apply fixed left-0 top-0 z-10 h-full w-full overflow-auto;
 }
 .wrapper-logo-tablada {
   width: 100%;

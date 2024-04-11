@@ -68,7 +68,7 @@
                           product.precio
                             | currency(
                               dataStore.tiendasInfo.paises.codigo,
-                              dataStore.tiendasInfo.moneda
+                              dataStore.tiendasInfo.moneda,
                             )
                         }}
                       </p>
@@ -128,7 +128,7 @@
                       (product.precio * product.cantidad)
                         | currency(
                           dataStore.tiendasInfo.paises.codigo,
-                          dataStore.tiendasInfo.moneda
+                          dataStore.tiendasInfo.moneda,
                         )
                     }}
                   </p>
@@ -141,7 +141,7 @@
                       (product.precio * product.cantidad)
                         | currency(
                           dataStore.tiendasInfo.paises.codigo,
-                          dataStore.tiendasInfo.moneda
+                          dataStore.tiendasInfo.moneda,
                         )
                     }}
                   </p>
@@ -190,7 +190,7 @@
                   discountDescuentos
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda
+                      dataStore.tiendasInfo.moneda,
                     )
                 }}
               </p>
@@ -231,7 +231,7 @@
                               ciudad.price
                                 | currency(
                                   dataStore.tiendasInfo.paises.codigo,
-                                  dataStore.tiendasInfo.moneda
+                                  dataStore.tiendasInfo.moneda,
                                 )
                             }}
                           </p>
@@ -260,7 +260,7 @@
                         rangosByCiudad.valor
                           | currency(
                             dataStore.tiendasInfo.paises.codigo,
-                            dataStore.tiendasInfo.moneda
+                            dataStore.tiendasInfo.moneda,
                           )
                       }}
                     </p>
@@ -285,7 +285,7 @@
                         shippingTarifaPrecio
                           | currency(
                             dataStore.tiendasInfo.paises.codigo,
-                            dataStore.tiendasInfo.moneda
+                            dataStore.tiendasInfo.moneda,
                           )
                       }}
                     </p>
@@ -308,7 +308,7 @@
                     shipping
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda
+                        dataStore.tiendasInfo.moneda,
                       )
                   }}
                 </p>
@@ -378,7 +378,7 @@
                   totalCart
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda
+                      dataStore.tiendasInfo.moneda,
                     )
                 }}
               </p>
@@ -401,7 +401,7 @@
                       discountDescuentos)
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda
+                        dataStore.tiendasInfo.moneda,
                       )
                   }}
                 </p>
@@ -430,7 +430,7 @@
                   dataStore.tiendasInfo.valorCompraMinimo
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda
+                      dataStore.tiendasInfo.moneda,
                     )
                 }}
                 {{ $t('cart_minimovalorProductos2') }}
@@ -587,7 +587,7 @@ export default {
       if (this.dataStore && this.dataStore.tiendasInfo.paises.pais) {
         const supportedCountries = ['Colombia', 'Chile', 'Perú', 'Panamá']
         return supportedCountries.includes(
-          this.dataStore.tiendasInfo.paises.pais
+          this.dataStore.tiendasInfo.paises.pais,
         )
       }
       return false
@@ -666,7 +666,7 @@ export default {
       if (this.rangosByCiudad.envio_metodo === 'precio') {
         const result = this.rangosByCiudad.rangos.find(
           (rango) =>
-            this.totalCart >= rango.inicial && this.totalCart <= rango.final
+            this.totalCart >= rango.inicial && this.totalCart <= rango.final,
         )
         if (result) {
           this.shippingTarifaPrecio = result.precio
@@ -812,10 +812,10 @@ export default {
         this.shippingDescuento.tipo === 1
           ? this.shippingDescuento.valor
           : this.shippingDescuento &&
-            this.shippingDescuento.valor &&
-            this.shippingDescuento.tipo === 0
-          ? Math.trunc((this.totalCart * this.shippingDescuento.valor) / 100)
-          : 0) +
+              this.shippingDescuento.valor &&
+              this.shippingDescuento.tipo === 0
+            ? Math.trunc((this.totalCart * this.shippingDescuento.valor) / 100)
+            : 0) +
           (this.shippingDescuento2 && this.shippingDescuento2.precio
             ? this.shippingDescuento2.precio
             : 0))
@@ -844,7 +844,7 @@ export default {
 
 <style scoped>
 .content-cart {
-  @apply w-full flex flex-col justify-center items-center pb-48;
+  @apply flex w-full flex-col items-center justify-center pb-48;
 }
 .margintopbytemplate07 {
   @apply pt-100;
@@ -853,10 +853,10 @@ export default {
   @apply pt-30;
 }
 .conten-items-cart {
-  @apply flex flex-col justify-center items-center;
+  @apply flex flex-col items-center justify-center;
 }
 .cart-tittle {
-  @apply w-full flex flex-row justify-center items-center mt-40 mb-15;
+  @apply mb-15 mt-40 flex w-full flex-row items-center justify-center;
 }
 .header-icon-cart {
   font-size: 30px;
@@ -872,10 +872,10 @@ export default {
 }
 .content-right {
   border-color: #efefef;
-  @apply w-full flex flex-col justify-start items-center p-20 border;
+  @apply flex w-full flex-col items-center justify-start border p-20;
 }
 .content-left {
-  @apply w-full flex flex-col justify-center items-start;
+  @apply flex w-full flex-col items-start justify-center;
 }
 .quantity {
   display: flex;
@@ -1008,23 +1008,23 @@ export default {
   @apply shadow-md;
 }
 .content-cart-product {
-  @apply w-full flex-col justify-center items-center;
+  @apply w-full flex-col items-center justify-center;
 }
 .cart-summary-items {
-  @apply w-full flex flex-row justify-between items-center;
+  @apply flex w-full flex-row items-center justify-between;
 }
 .content-txt-summary {
-  @apply w-full flex flex-col justify-center items-start mb-30;
+  @apply mb-30 flex w-full flex-col items-start justify-center;
 }
 .txt-summary {
   font-size: 20px;
   @apply font-semibold;
 }
 .order_total {
-  @apply w-full flex flex-col justify-start items-center;
+  @apply flex w-full flex-col items-center justify-start;
 }
 .order_total_domicile {
-  @apply w-full flex flex-col justify-start items-start;
+  @apply flex w-full flex-col items-start justify-start;
 }
 /* por-precio */
 details {
@@ -1082,34 +1082,34 @@ details[open] summary ~ * {
 }
 /* Tarifa-Plana */
 .content-Plana {
-  @apply w-full flex flex-row justify-between items-center mb-20;
+  @apply mb-20 flex w-full flex-row items-center justify-between;
 }
 .content-list {
-  @apply flex flex-row justify-between items-end;
+  @apply flex flex-row items-end justify-between;
 }
 /* free-delivery */
 .contet-free-delivery {
-  @apply w-full flex flex-row justify-between items-center mb-20;
+  @apply mb-20 flex w-full flex-row items-center justify-between;
 }
 /* btns */
 .content-totalPay {
-  @apply w-full flex flex-row justify-between items-center my-20;
+  @apply my-20 flex w-full flex-row items-center justify-between;
 }
 .txt-total {
   @apply font-semibold;
 }
 .content-btn {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .txt_summary_tittle {
-  @apply w-full flex justify-start items-center;
+  @apply flex w-full items-center justify-start;
 }
 .txt_summary_price {
-  @apply w-auto flex justify-end items-end font-semibold;
+  @apply flex w-auto items-end justify-end font-semibold;
 }
 .line {
   border-color: #666;
-  @apply w-full border-t my-3;
+  @apply my-3 w-full border-t;
 }
 .icon-trash:hover {
   fill: #eb7025;
@@ -1183,32 +1183,32 @@ details[open] summary ~ * {
     @apply w-9/0;
   }
   .content-product-total {
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
   .content-product-bag {
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
   .content-items-product {
     @apply py-20;
   }
   .product {
     border-color: #efefef;
-    @apply w-full grid grid-cols-2 justify-center items-start mb-20 border;
+    @apply mb-20 grid w-full grid-cols-2 items-start justify-center border;
   }
   .product-items {
-    @apply w-full grid grid-cols-1 gap-4 justify-center items-start;
+    @apply grid w-full grid-cols-1 items-start justify-center gap-4;
   }
   .product-quiantity {
-    @apply w-full flex flex-col justify-center items-start;
+    @apply flex w-full flex-col items-start justify-center;
   }
   .product-name {
-    @apply w-full flex flex-row justify-between items-center pr-10;
+    @apply flex w-full flex-row items-center justify-between pr-10;
   }
   .content-box-items {
-    @apply w-full flex flex-row justify-start items-center mt-10;
+    @apply mt-10 flex w-full flex-row items-center justify-start;
   }
   .producto-price-total {
-    @apply w-full flex flex-col justify-center items-start mt-30;
+    @apply mt-30 flex w-full flex-col items-start justify-center;
   }
   .text-name {
     font-size: 16px;
@@ -1230,7 +1230,7 @@ details[open] summary ~ * {
     background-color: #222;
     border-color: #222;
     color: #fff;
-    @apply w-full h-40 flex justify-center items-center font-semibold border-2 rounded-md mb-10 mt-30;
+    @apply mb-10 mt-30 flex h-40 w-full items-center justify-center rounded-md border-2 font-semibold;
   }
   .btn-buy-1:hover {
     background-color: #eb7025;
@@ -1239,7 +1239,7 @@ details[open] summary ~ * {
   .btn-buy-2 {
     border-color: #222;
     color: #222;
-    @apply w-full h-40 flex justify-center items-center font-semibold border-2 rounded-md;
+    @apply flex h-40 w-full items-center justify-center rounded-md border-2 font-semibold;
   }
   .btn-buy-2:hover {
     border-color: #eb7025;
@@ -1257,13 +1257,13 @@ details[open] summary ~ * {
     @apply hidden;
   }
   .content-product-priceIcon {
-    @apply w-full flex flex-row justify-between items-center p-25;
+    @apply flex w-full flex-row items-center justify-between p-25;
   }
   .content_icon-sm {
     @apply hidden;
   }
   .content_icon-md {
-    @apply w-auto flex;
+    @apply flex w-auto;
   }
   .text-name {
     font-size: 20px;
@@ -1280,10 +1280,10 @@ details[open] summary ~ * {
   }
   .content-right {
     top: 160px;
-    @apply w-6/0 sticky mb-40;
+    @apply sticky mb-40 w-6/0;
   }
   .content-product-total {
-    @apply w-full flex flex-row justify-center items-start;
+    @apply flex w-full flex-row items-start justify-center;
   }
 }
 @screen mlg {

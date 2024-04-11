@@ -218,7 +218,7 @@ export default {
     },
     setLogo() {
       let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1'
+        '--background_color_1',
       )
       let colorArray = color.split(',')
       let colorInt = parseInt(colorArray[2])
@@ -235,7 +235,7 @@ export default {
 <style scoped>
 .wrapper-footer {
   background: var(--background_color_1);
-  @apply w-full flex flex-col justify-start items-center box-border pb-30 md:pb-20;
+  @apply box-border flex w-full flex-col items-center justify-start pb-30 md:pb-20;
 }
 .contenedor {
   width: 100%;
@@ -344,7 +344,7 @@ export default {
   padding-top: 200px;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
-  @apply w-full h-full fixed z-10 left-0 top-0 overflow-auto;
+  @apply fixed left-0 top-0 z-10 h-full w-full overflow-auto;
 }
 .wrapper-logo-tablada {
   width: 100%;

@@ -22,19 +22,19 @@
     </div>
     <div
       v-if="suggestedProducts.length > 4"
-      class="absolute z-10 top-4/0 left-0 rounded-[25px] px-4 bg-black cursor-pointer prev"
+      class="prev absolute left-0 top-4/0 z-10 cursor-pointer rounded-[25px] bg-black px-4"
     >
       <FlechaLeft-icon
-        class="w-full flex justify-center items-center text-35 text-white-white hover:text-gray-400"
+        class="flex w-full items-center justify-center text-35 text-white-white hover:text-gray-400"
         style="bottom: 0.1em"
       />
     </div>
     <div
       v-if="suggestedProducts.length > 4"
-      class="absolute z-10 top-4/0 right-0 rounded-[25px] px-4 bg-black cursor-pointer next"
+      class="next absolute right-0 top-4/0 z-10 cursor-pointer rounded-[25px] bg-black px-4"
     >
       <FlechaRight-icon
-        class="w-full flex justify-center items-center text-35 text-white-white hover:text-gray-400"
+        class="flex w-full items-center justify-center text-35 text-white-white hover:text-gray-400"
         style="bottom: 0.1em"
       />
     </div>
