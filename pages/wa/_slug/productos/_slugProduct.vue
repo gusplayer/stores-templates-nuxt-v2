@@ -1,7 +1,7 @@
 <template>
   <div
     id="width"
-    class="w-full flex flex-col justify-center items-center bg-slate-100"
+    class="flex w-full flex-col items-center justify-center bg-slate-100"
   >
     <KoProductDetail class="w-full" />
     <KFooterWaLogo

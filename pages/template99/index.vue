@@ -1,8 +1,8 @@
 <template>
-  <div class="w-full flex flex-col justify-center bg-slate-100 items-center">
+  <div class="flex w-full flex-col items-center justify-center bg-slate-100">
     <div
       v-loading="loading"
-      class="w-full max-w-[900px] shadow-md bg-white-white container-home"
+      class="container-home w-full max-w-[900px] bg-white-white shadow-md"
     >
       <component :is="indexTema" id="KHeaderX" v-bind="componentsProps" />
       <component

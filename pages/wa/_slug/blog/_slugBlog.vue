@@ -1,5 +1,5 @@
 <template>
-  <div id="width" class="w-full flex flex-col justify-center items-center">
+  <div id="width" class="flex w-full flex-col items-center justify-center">
     <KArticleWapi />
   </div>
 </template>

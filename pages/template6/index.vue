@@ -54,7 +54,7 @@ export default {
       return componentsKeys.sort(
         (a, b) =>
           (this.settingByTemplate6[b]?.order || 0) -
-          (this.settingByTemplate6[a]?.order || 0)
+          (this.settingByTemplate6[a]?.order || 0),
       )
     },
   },

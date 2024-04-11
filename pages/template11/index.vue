@@ -193,7 +193,7 @@ export default {
           id_tienda: this.dataStore.id,
           limit: 1,
           page: 1,
-        }
+        },
       )
       if (success) {
         return { success: true, data: data.publicProductList }

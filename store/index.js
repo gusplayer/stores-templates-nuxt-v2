@@ -193,7 +193,7 @@ export const mutations = {
     state.totalCart = 0
     localStorage.setItem(
       `ShoppingCart/${state.dataStore.id}`,
-      JSON.stringify(state.productsCart)
+      JSON.stringify(state.productsCart),
     )
     state.productsCart.forEach((product) => {
       state.totalCart += product.precio * product.cantidad
@@ -332,7 +332,7 @@ export const actions = {
     const { subdomain, id, template, idWapi } = await getIdData(
       state,
       req,
-      commit
+      commit,
     )
     // let idWapi = ''
     // let id = {
@@ -415,7 +415,7 @@ export const actions = {
         'Data increment store view',
         err?.response?.data,
         'status',
-        err?.response?.status
+        err?.response?.status,
       )
     }
   },
@@ -439,7 +439,7 @@ export const actions = {
         'SEND_ANALYTICS_STORE',
         err.response.data,
         'status',
-        err.response.status
+        err.response.status,
       )
     }
   },
@@ -564,7 +564,7 @@ export const actions = {
   },
   async GET_SETTINGS_BY_TEMPLATE(
     { commit, state },
-    { idStore, templateStore }
+    { idStore, templateStore },
   ) {
     try {
       const { data } = await axios({
@@ -586,7 +586,7 @@ export const actions = {
   },
   async GET_SETTINGS_BY_TEMPLATE_NODE(
     { commit, state },
-    { idStore, templateStore }
+    { idStore, templateStore },
   ) {
     try {
       const { data } = await axios({
@@ -851,7 +851,7 @@ export const actions = {
     if (localStorage.getItem(`ShoppingCart/${state.dataStore.id}`)) {
       commit(
         'SET_SHOPPING_CART',
-        JSON.parse(localStorage.getItem(`ShoppingCart/${state.dataStore.id}`))
+        JSON.parse(localStorage.getItem(`ShoppingCart/${state.dataStore.id}`)),
       )
     }
     dispatch('VERIFY_PRODUCTS')
@@ -1029,7 +1029,7 @@ export const getters = {
     return state.productsCart
       ? state.productsCart.reduce(
           (total, product) => total + parseInt(product.cantidad),
-          0
+          0,
         )
       : 0
   },
@@ -1038,7 +1038,7 @@ export const getters = {
     const activeDiscounts = state.listDescuentos
       .filter((element) => element.tipo === 0 && element.estado === 1)
       .filter(
-        (element) => getters.cantidadProductos >= element.cantidad_productos
+        (element) => getters.cantidadProductos >= element.cantidad_productos,
       )
 
     if (activeDiscounts.length > 0) {
@@ -1058,7 +1058,7 @@ export const getters = {
   },
   listaDescuentosPrecio(state) {
     const activeDiscounts = state.listDescuentos.filter(
-      (element) => element.tipo === 1 && element.estado === 1
+      (element) => element.tipo === 1 && element.estado === 1,
     )
 
     let resultDesc = null
@@ -1091,7 +1091,7 @@ export const getters = {
     }
 
     const verifiedProducts = state.productsCart.filter(
-      (product) => product.activo === 1 && product.stock_disponible === 1
+      (product) => product.activo === 1 && product.stock_disponible === 1,
     )
 
     if (verifiedProducts.length === state.productsCart.length) {
@@ -1145,7 +1145,7 @@ function obtenerInfoURL(url) {
   let idTienda = ''
 
   const subdominioMatch = url.match(
-    /\/\/([^\/.:]+)\.(komercia\.store|komercia\.online)/
+    /\/\/([^\/.:]+)\.(komercia\.store|komercia\.online)/,
   )
   if (subdominioMatch) {
     nombreTienda = subdominioMatch[1]
@@ -1166,7 +1166,7 @@ function obtenerInfoURL(url) {
         esDominio = false
       } else {
         const localhostWapiMatch = url.match(
-          /\/\/(?:www\.)?localhost:3000\/wa\/(\d+)\/?/
+          /\/\/(?:www\.)?localhost:3000\/wa\/(\d+)\/?/,
         )
         if (localhostWapiMatch) {
           nombreTienda = 'Wapi'
@@ -1181,7 +1181,7 @@ function obtenerInfoURL(url) {
             esDominio = false
           } else {
             const domainParts = url.match(
-              /\/\/(?:www\.)?([^\/.:]+)\.(com\.co?|store|...)/
+              /\/\/(?:www\.)?([^\/.:]+)\.(com\.co?|store|...)/,
             )
             if (domainParts && domainParts[1] !== 'www') {
               nombreTienda = domainParts[1]
@@ -1212,7 +1212,8 @@ async function getIdData(state, req, commit) {
     req.headers['x-forwarded-proto'] ||
     (req.connection.encrypted ? 'https' : 'http')
   const currentURL = `${protocol}://${req.headers.host}${req.url}`
-  const getURL = obtenerInfoURL(currentURL)
+  // const getURL = obtenerInfoURL(currentURL)
+  const getURL = obtenerInfoURL('https://tutiendastikers.komercia.store/')
   let id = 0
   let template = 0
   let idWapi = null
@@ -1224,7 +1225,7 @@ async function getIdData(state, req, commit) {
   } else if (getURL?.esSubdominio && getURL?.nombreTienda) {
     try {
       const response = await axios.get(
-        `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL.nombreTienda}`
+        `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL.nombreTienda}`,
       )
 
       id = response.data.data.id || response.data.data.storeId
@@ -1242,7 +1243,7 @@ async function getIdData(state, req, commit) {
   } else if (getURL?.esDominio && getURL?.nombreTienda) {
     try {
       const response = await axios.get(
-        `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL?.nombreTienda}&isDomain=1`
+        `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL?.nombreTienda}&isDomain=1`,
       )
       id = response.data.data.id || response.data.data.storeId
       template =

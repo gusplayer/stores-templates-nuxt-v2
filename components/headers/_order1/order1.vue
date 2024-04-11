@@ -10,7 +10,7 @@
   >
     <div class="relative overflow-hidden">
       <div
-        class="box-border flex h-screen w-full flex-col items-center overflow-hidden bg-white-white px-15 pb-10 md:pb-20"
+        class="box-border flex h-dvh w-full flex-col items-center overflow-hidden bg-white-white px-15 pb-10 md:pb-20"
       >
         <div
           class="flex w-full items-center justify-between border-b border-[#ededed] py-15"

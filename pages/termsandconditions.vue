@@ -1,8 +1,8 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <div class="w-full flex flex-col justify-center items-center bg-gray-200">
+  <div class="flex w-full flex-col items-center justify-center bg-gray-200">
     <div
-      class="w-full mx-20 md:mx-0 max-w-[900px] flex flex-row justify-start items-center my-15"
+      class="mx-20 my-15 flex w-full max-w-[900px] flex-row items-center justify-start md:mx-0"
     >
       <nuxt-link to="/" class="text-14">
         {{ $t('header_inicio') }}
@@ -13,16 +13,16 @@
       </p>
     </div>
     <div
-      class="w-full mx-20 md:mx-0 max-w-[900px] pt-30 flex flex-col justify-center items-center shadow-md bg-white-white mb-33"
+      class="mx-20 mb-33 flex w-full max-w-[900px] flex-col items-center justify-center bg-white-white pt-30 shadow-md md:mx-0"
     >
-      <h1 class="text-20 font-bold mb-30">
+      <h1 class="mb-30 text-20 font-bold">
         {{ $t('footer_condicionesLegales') }}
       </h1>
       <div
         v-if="storePolicies?.datos"
-        class="w-full max-w-[900px] mb-15 px-20 md:px-30"
+        class="mb-15 w-full max-w-[900px] px-20 md:px-30"
       >
-        <p class="text-17 font-bold mb-10">
+        <p class="mb-10 text-17 font-bold">
           {{ $t('footer_politicaTratamientos') }}
         </p>
         <div v-html="storePolicies.datos"></div>
@@ -30,9 +30,9 @@
 
       <div
         v-if="storePolicies?.garantia"
-        class="w-full max-w-[900px] mb-15 px-20 md:px-30"
+        class="mb-15 w-full max-w-[900px] px-20 md:px-30"
       >
-        <p class="text-17 font-bold mb-10">
+        <p class="mb-10 text-17 font-bold">
           {{ $t('footer_politicaGarantia') }}
         </p>
         <div v-html="storePolicies.garantia"></div>
@@ -40,9 +40,9 @@
 
       <div
         v-if="storePolicies?.devolucion"
-        class="w-full max-w-[900px] mb-15 px-20 md:px-30"
+        class="mb-15 w-full max-w-[900px] px-20 md:px-30"
       >
-        <p class="text-17 font-bold mb-10">
+        <p class="mb-10 text-17 font-bold">
           {{ $t('footer_politicaDevoluciones') }}
         </p>
         <div v-html="storePolicies.devolucion"></div>
@@ -50,9 +50,9 @@
 
       <div
         v-if="storePolicies?.cambio"
-        class="w-full max-w-[900px] mb-15 px-20 md:px-30"
+        class="mb-15 w-full max-w-[900px] px-20 md:px-30"
       >
-        <p class="text-17 font-bold mb-10">
+        <p class="mb-10 text-17 font-bold">
           {{ $t('footer_politicaCambio') }}
         </p>
         <div v-html="storePolicies.cambio"></div>
@@ -60,16 +60,16 @@
 
       <div
         v-if="storePolicies?.envios"
-        class="w-full max-w-[900px] mb-15 px-30"
+        class="mb-15 w-full max-w-[900px] px-30"
       >
-        <p class="text-17 font-bold mb-10">
+        <p class="mb-10 text-17 font-bold">
           {{ $t('footer_politicaEnvios') }}
         </p>
         <div v-html="storePolicies.envios"></div>
       </div>
 
-      <div v-if="storePolicies?.pagos" class="w-full max-w-[900px] mb-15 px-30">
-        <p class="text-16 font-bold mb-10">
+      <div v-if="storePolicies?.pagos" class="mb-15 w-full max-w-[900px] px-30">
+        <p class="mb-10 text-16 font-bold">
           {{ $t('footer_politicaPagos') }}
         </p>
         <div v-html="storePolicies.pagos"></div>
