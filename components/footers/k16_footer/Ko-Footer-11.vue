@@ -11,16 +11,16 @@
   >
     <div
       ref="background"
-      class="w-full h-full flex justify-center items-center bg-no-repeat bg-cover bg-bottom box-content pb-30 md:pb-0"
+      class="box-content flex h-full w-full items-center justify-center bg-cover bg-bottom bg-no-repeat pb-30 md:pb-0"
       :style="`background-color: ${settingByTemplate16[0].footer['--background_color_1']}`"
     >
-      <div class="w-full flex flex-col justify-center items-center">
+      <div class="flex w-full flex-col items-center justify-center">
         <div
-          class="w-full max-w-9/5 md:max-w-8/5 flex flex-col justify-center items-center pt-40 pb-10 md:pb-49"
+          class="flex w-full max-w-9/5 flex-col items-center justify-center pb-10 pt-40 md:max-w-8/5 md:pb-49"
         >
           <div class="content-items-sm">
             <div class="content-store-sm">
-              <div class="w-full flex justify-center mb-20">
+              <div class="mb-20 flex w-full justify-center">
                 <KoSocialNet
                   :footer-icon="settingByTemplate16[0].footer"
                   :data-store="dataStore"
@@ -28,7 +28,7 @@
               </div>
               <div class="info-store-sm mb-20">
                 <p class="btn">Enlaces</p>
-                <div class="w-full flex flex-wrap gap-x-4 gap-y-3">
+                <div class="flex w-full flex-wrap gap-x-4 gap-y-3">
                   <div
                     v-for="(item, index) in secciones"
                     :key="`${index}${item.name}`"
@@ -81,7 +81,7 @@
               />
               <button
                 v-if="storePolicies"
-                class="txt-number txt text-center w-full"
+                class="txt-number txt w-full text-center"
                 @click="OpenModalPolitics"
               >
                 {{ $t('footer_politicasyterminos') }}
@@ -103,7 +103,7 @@
               </p>
               <div
                 v-if="geolocalizacion.length"
-                class="w-full mb-5 flex flex-row gap-2 items-center"
+                class="mb-5 flex w-full flex-row items-center gap-2"
               >
                 <div class="w-full max-w-[20px]">
                   <svg
@@ -119,13 +119,13 @@
                     />
                   </svg>
                 </div>
-                <p class="w-full txt">
+                <p class="txt w-full">
                   {{ geolocalizacion[0].direccion }}
                 </p>
               </div>
               <div
                 v-if="dataStore.redes.whatsapp"
-                class="mb-20 flex flex-row gap-2 items-center"
+                class="mb-20 flex flex-row items-center gap-2"
               >
                 <div class="w-full max-w-[20px]">
                   <svg
@@ -162,7 +162,7 @@
                     </g>
                   </svg>
                 </div>
-                <p class="w-full txt">
+                <p class="txt w-full">
                   {{ dataStore.redes.whatsapp }}
                 </p>
               </div>
@@ -331,7 +331,7 @@ export default {
     },
     setLogo() {
       let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1'
+        '--background_color_1',
       )
       let colorArray = color.split(',')
       let colorInt = parseInt(colorArray[2])
@@ -353,28 +353,28 @@ export default {
   padding-top: 200px;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
-  @apply w-full h-full fixed z-10 left-0 top-0 overflow-auto;
+  @apply fixed left-0 top-0 z-10 h-full w-full overflow-auto;
 }
 .empty {
   background-color: var(--color_border);
-  @apply w-full h-1 flex flex-col justify-center items-center;
+  @apply flex h-1 w-full flex-col items-center justify-center;
 }
 @screen sm {
   .content-items-sm {
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
   .content-store-sm {
-    @apply w-9/0 flex flex-col justify-center items-start;
+    @apply flex w-9/0 flex-col items-start justify-center;
   }
   .content-direction,
   .content-number,
   .content-email {
-    @apply w-full flex flex-col justify-center items-start;
+    @apply flex w-full flex-col items-start justify-center;
   }
   .info-store-sm,
   .info-legal-sm,
   .info-networks {
-    @apply w-full flex flex-col justify-center items-start;
+    @apply flex w-full flex-col items-start justify-center;
   }
 
   .btn {
@@ -390,13 +390,13 @@ export default {
     color: var(--hover_text);
   }
   .btn-legal {
-    @apply w-full flex flex-col justify-center items-start text-left;
+    @apply flex w-full flex-col items-start justify-center text-left;
   }
   .content-items-lg {
     @apply hidden;
   }
   .madebyKomercia {
-    @apply w-full flex flex-col justify-center items-center py-20;
+    @apply flex w-full flex-col items-center justify-center py-20;
   }
   .txt-devBy {
     font-size: 14px;
@@ -412,14 +412,14 @@ export default {
     @apply hidden;
   }
   .content-items-lg {
-    @apply w-9/0 grid grid-cols-3 gap-4 justify-center items-start;
+    @apply grid w-9/0 grid-cols-3 items-start justify-center gap-4;
   }
   .img-logo {
     max-width: var(--with_logo);
     @apply w-full object-contain;
   }
   .info-btn-footer {
-    @apply w-full flex flex-col justify-center items-start;
+    @apply flex w-full flex-col items-start justify-center;
   }
   .btns {
     color: var(--color_text);

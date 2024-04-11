@@ -43,7 +43,7 @@
       </div>
       <div
         v-if="selectTag === 2"
-        class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 justify-start items-start pb-4"
+        class="grid w-full grid-cols-1 items-start justify-start gap-4 pb-4 md:grid-cols-2"
       >
         <div v-if="mediospago.consignacion == 1">
           <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
@@ -252,7 +252,7 @@
               envios.valor
                 | currency(
                   dataStore.tiendasInfo.paises.codigo,
-                  dataStore.tiendasInfo.moneda
+                  dataStore.tiendasInfo.moneda,
                 )
             }}
           </p>
@@ -345,7 +345,7 @@ export default {
         'products/GET_DESCRIPTION_PRODUCTO',
         {
           slug: this.data.slug,
-        }
+        },
       )
       if (success) {
         this.contentDescription = data?.data ?? ''
@@ -427,7 +427,7 @@ export default {
   display: none;
 }
 .tab {
-  @apply w-auto flex flex-col justify-center items-center px-4 cursor-pointer;
+  @apply flex w-auto cursor-pointer flex-col items-center justify-center px-4;
 }
 h3 {
   color: var(--color_subtext);
@@ -443,7 +443,7 @@ h4 {
   font-size: 15px;
   font-weight: 600;
   line-height: 1.42857143;
-  @apply w-full flex flex-col justify-center items-start mb-5;
+  @apply mb-5 flex w-full flex-col items-start justify-center;
 }
 div p {
   font-family: var(--font-style-1) !important;
@@ -464,25 +464,25 @@ div p {
   margin-bottom: 15px;
 }
 img {
-  @apply py-12 w-full max-w-[250px];
+  @apply w-full max-w-[250px] py-12;
 }
 @screen sm {
   .content-opt-tab {
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
   .content-tab {
     border-color: var(--border);
-    @apply w-full flex flex-col justify-center items-center mt-6;
+    @apply mt-6 flex w-full flex-col items-center justify-center;
   }
   .head-content {
-    @apply w-full grid grid-cols-1 gap-2 justify-center items-center mb-40;
+    @apply mb-40 grid w-full grid-cols-1 items-center justify-center gap-2;
   }
   .tittle {
     color: var(--color_subtext);
     font-size: 14px;
     background-color: transparent;
     font-family: var(--font-style-1) !important;
-    @apply w-full h-40 flex justify-center items-center font-semibold uppercase transition-all ease-in duration-0.2;
+    @apply flex h-40 w-full items-center justify-center font-semibold uppercase transition-all duration-0.2 ease-in;
   }
   .show-select-active {
     background-color: var(--color_gb_tabs);
@@ -493,7 +493,7 @@ img {
 }
 @media (min-width: 425px) {
   .head-content {
-    @apply grid grid-cols-3 mb-40;
+    @apply mb-40 grid grid-cols-3;
   }
   .tittle {
     font-size: 12px;
@@ -502,29 +502,29 @@ img {
 }
 @screen md {
   .content-opt-tab {
-    @apply flex flex-row justify-start items-start border mt-0;
+    @apply mt-0 flex flex-row items-start justify-start border;
   }
   .head-content {
-    @apply w-full flex flex-row justify-start items-start mb-0;
+    @apply mb-0 flex w-full flex-row items-start justify-start;
     border-bottom: 1px solid transparent;
   }
   .head-content {
-    @apply w-6/0 flex flex-col justify-start items-start mb-0 gap-0;
+    @apply mb-0 flex w-6/0 flex-col items-start justify-start gap-0;
   }
   .tab {
-    @apply w-full flex justify-start items-center;
+    @apply flex w-full items-center justify-start;
   }
   .tittle {
     font-size: 14px;
-    @apply w-full h-50 text-center justify-start items-center pl-20;
+    @apply h-50 w-full items-center justify-start pl-20 text-center;
   }
   .content-tab {
     border-color: var(--border);
-    @apply w-full flex flex-row justify-start items-start mt-0 border transition-all ease-in duration-0.2;
+    @apply mt-0 flex w-full flex-row items-start justify-start border transition-all duration-0.2 ease-in;
   }
   .show-select-active {
     background-color: var(--color_gb_tabs);
-    @apply border-l-4 w-full;
+    @apply w-full border-l-4;
   }
   .show-select-active .tittle {
     color: var(--color_text_tabs);

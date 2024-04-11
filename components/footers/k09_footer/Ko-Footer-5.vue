@@ -183,20 +183,20 @@ export default {
 <style scoped>
 .footer-container {
   background: var(--background_color_1);
-  @apply flex flex-col justify-center items-center pb-30 md:pb-20;
+  @apply flex flex-col items-center justify-center pb-30 md:pb-20;
 }
 .footer-content {
-  @apply flex flex-col justify-center items-center;
+  @apply flex flex-col items-center justify-center;
 }
 .footer-content-items {
-  @apply flex flex-col justify-center items-center w-full mb-10 mt-20;
+  @apply mb-10 mt-20 flex w-full flex-col items-center justify-center;
 }
 .footer-logo {
   max-width: var(--with_logo);
   @apply object-contain;
 }
 .footer-content-button {
-  @apply w-full flex flex-wrap gap-4 justify-center items-center mt-32 mb-10;
+  @apply mb-10 mt-32 flex w-full flex-wrap items-center justify-center gap-4;
 }
 .btn {
   transition: all 0.1s ease;
@@ -204,7 +204,7 @@ export default {
   font-family: var(--font-style-1) !important;
   font-size: 14px;
   color: var(--color_text);
-  @apply font-semibold mx-8;
+  @apply mx-8 font-semibold;
 }
 .btn:hover {
   color: #000;
@@ -219,10 +219,10 @@ export default {
   max-width: 400px;
   border: solid 1px var(--color_icon_bg);
   background: var(--color_icon_bg);
-  @apply w-full h-2 my-10;
+  @apply my-10 h-2 w-full;
 }
 .madebyKomercia {
-  @apply w-full flex flex-col justify-center items-center mb-10;
+  @apply mb-10 flex w-full flex-col items-center justify-center;
 }
 .txt-devBy {
   font-size: 14px;
@@ -233,7 +233,7 @@ export default {
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 999;
-  @apply w-full h-full fixed left-0 top-0 overflow-auto;
+  @apply fixed left-0 top-0 h-full w-full overflow-auto;
 }
 @media (max-width: 600px) {
   .separator {
@@ -242,7 +242,7 @@ export default {
 }
 @screen sm {
   .footer-content {
-    @apply w-full flex;
+    @apply flex w-full;
   }
   .btn {
     @apply text-sm;

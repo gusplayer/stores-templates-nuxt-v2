@@ -2,7 +2,7 @@
   <div class="w-full py-10">
     <!-- <h4 class="text-gray-900 font-bold text-14">{{ label }}</h4> -->
     <div
-      class="select relative flex bg-transparent overflow-hidden w-full border-2 py-5"
+      class="select relative flex w-full overflow-hidden border-2 bg-transparent py-5"
       :class="template === 6 ? 'max-w-full' : 'max-w-[300px]'"
       :style="{
         borderColor: detailsProducts.color_border,
@@ -61,7 +61,7 @@ export default {
         this.$store.state.beforeCombination.splice(
           this.index,
           1,
-          variante[0].option
+          variante[0].option,
         )
       }
     },
@@ -69,7 +69,7 @@ export default {
       this.$store.state.beforeCombination.splice(
         this.index,
         1,
-        this.variantes[this.index].valores[0].option
+        this.variantes[this.index].valores[0].option,
       )
     },
   },

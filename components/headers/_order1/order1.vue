@@ -114,18 +114,18 @@
                       {{ productCombinacion | capitalize }}
                     </div>
                   </div>
-                  <div
+                  <span
                     v-if="product.activo == 0"
-                    class="inline-flex items-center rounded-md bg-red-100 px-2 py-1 text-xs font-medium text-red-700"
+                    class="mb-10 max-w-[110px] rounded-md bg-red-100 px-2 py-1 text-center text-xs font-medium text-red-700"
                   >
                     Producto agotado!
-                  </div>
-                  <div
+                  </span>
+                  <span
                     v-if="product.stock_disponible == 0"
-                    class="inline-flex rounded-md bg-red-100 px-2 py-1 text-xs font-medium text-red-700"
+                    class="max-w-[120px] rounded-md bg-red-100 px-2 py-1 text-center text-xs font-medium text-red-700"
                   >
                     ¡Unidades agotadas!
-                  </div>
+                  </span>
                 </div>
 
                 <p

@@ -37,7 +37,7 @@
               totalCart
                 | currency(
                   dataStore.tiendasInfo.paises.codigo,
-                  dataStore.tiendasInfo.moneda
+                  dataStore.tiendasInfo.moneda,
                 )
             }}
           </p>
@@ -84,29 +84,29 @@ export default {
   bottom: 0;
   max-width: 900px;
   height: 60px;
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .content-footer-none {
   display: none;
 }
 @screen sm {
   .content-items-footer {
-    @apply w-full flex flex-row justify-center items-center py-20;
+    @apply flex w-full flex-row items-center justify-center py-20;
   }
   .item-footer {
     flex: 1;
-    @apply w-full flex flex-row justify-center items-center;
+    @apply flex w-full flex-row items-center justify-center;
   }
   .text-items-cart {
     font-size: 12px;
     color: #fff;
     font-family: 'Poppins', sans-serif !important;
-    @apply w-auto flex flex-row justify-center items-center font-semibold;
+    @apply flex w-auto flex-row items-center justify-center font-semibold;
   }
   .button-footer {
     height: 37px;
     width: 130px;
-    @apply flex flex-col justify-center items-center py-7 rounded-md;
+    @apply flex flex-col items-center justify-center rounded-md py-7;
   }
   .button-footer-out {
     width: 161px;
@@ -128,7 +128,7 @@ export default {
   }
   .button-footer {
     height: 40px;
-    @apply w-auto py-8 px-30;
+    @apply w-auto px-30 py-8;
   }
   .button-footer-out {
     width: 280px;

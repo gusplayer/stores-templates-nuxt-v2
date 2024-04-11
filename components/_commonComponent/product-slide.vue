@@ -4,19 +4,19 @@
       <div class="swiper-slide">
         <img
           :src="idCloudinary(photo, 550, 550)"
-          class="w-full h-full object-cover overflow-hidden"
+          class="h-full w-full overflow-hidden object-cover"
           alt="Product img"
         />
       </div>
       <div v-for="itemPhoto in photos" :key="itemPhoto.id" class="swiper-slide">
         <img
           :src="idCloudinary(itemPhoto.fotoCloudinary, 550, 550)"
-          class="w-full h-full object-cover overflow-hidden"
+          class="h-full w-full overflow-hidden object-cover"
           alt="Product img"
         />
       </div>
       <div v-if="idYouTube && idYouTube !== ''" class="swiper-slide">
-        <div class="w-9/9 min-w-[400px] grid items-start gap-1">
+        <div class="grid w-9/9 min-w-[400px] items-start gap-1">
           <button class="youTube__action_back" @click="changeSlide()">
             <i class="material-icons"></i>
           </button>

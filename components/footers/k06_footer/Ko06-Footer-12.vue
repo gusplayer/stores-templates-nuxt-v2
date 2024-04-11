@@ -58,9 +58,9 @@
       </div>
       <div
         v-if="settingByTemplate6[0].setting6Footer.watermark"
-        class="footer_resources w-full text-gray-400 text-center text-sm font-normal"
+        class="footer_resources w-full text-center text-sm font-normal text-gray-400"
       >
-        <hr class="border-t border-gray-200 w-full" />
+        <hr class="w-full border-t border-gray-200" />
         <div class="madebyKomercia">
           <p class="txt-devBy">{{ $t('footer_desarrollado') }}</p>
           <a
@@ -189,7 +189,7 @@ export default {
 }
 .wrapper_footer {
   padding: 40px 0 10px;
-  @apply relative flex flex-col items-center w-full;
+  @apply relative flex w-full flex-col items-center;
 }
 .header-content-logo {
   display: flex;
@@ -230,7 +230,7 @@ export default {
 .modal {
   padding-top: 200px;
   background-color: rgba(0, 0, 0, 0.4);
-  @apply w-full h-full fixed z-10 left-0 top-0 overflow-auto;
+  @apply fixed left-0 top-0 z-10 h-full w-full overflow-auto;
 }
 .content-items-iconos {
   width: 100%;
@@ -250,7 +250,7 @@ export default {
 }
 .madebyKomercia {
   margin-top: 20px;
-  @apply w-full flex flex-col justify-center items-center mb-10;
+  @apply mb-10 flex w-full flex-col items-center justify-center;
 }
 .txt-devBy {
   font-size: 14px;

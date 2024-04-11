@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full max-w-[132px] flex flex-row justify-end items-center">
+  <div class="flex w-full max-w-[132px] flex-row items-center justify-end">
     <el-dropdown>
       <span class="el-dropdown-link" aria-haspopup="list">
         {{ select.label }}

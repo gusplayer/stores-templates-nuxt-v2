@@ -1,11 +1,11 @@
 <template>
   <div
-    class="w-full flex flex-col justify-center items-center box-border pt-30 pb-10 bg-transparent"
+    class="box-border flex w-full flex-col items-center justify-center bg-transparent pb-10 pt-30"
   >
     <div
-      class="w-full max-w-[1300px] px-10 py-10 md:py-20 flex justify-start items-center"
+      class="flex w-full max-w-[1300px] items-center justify-start px-10 py-10 md:py-20"
     >
-      <p class="text-18 font-bold cursor-pointer color-title">
+      <p class="color-title cursor-pointer text-18 font-bold">
         {{ $t('home_destacadosMsg') }}
       </p>
     </div>

@@ -1,14 +1,14 @@
 <template>
   <footer
-    class="w-full flex justify-center items-center"
+    class="flex w-full items-center justify-center"
     :class="valueWa ? 'max-w-[900px]' : ''"
     style="background-color: rgb(24, 24, 24)"
   >
     <div
       v-if="dataStore.tiendasInfo.paises.pais"
-      class="w-full max-w-[1200px] px-20 py-2 flex flex-row justify-between items-center"
+      class="flex w-full max-w-[1200px] flex-row items-center justify-between px-20 py-2"
     >
-      <div class="w-full flex flex-row justify-start items-center">
+      <div class="flex w-full flex-row items-center justify-start">
         <img
           v-if="selectOptionCountry"
           v-lazy="selectOptionCountry.img"
@@ -22,7 +22,7 @@
         >
           {{ dataStore.tiendasInfo.paises.pais }}
         </button>
-        <p v-if="!stateIdStore" class="text-12 text-white-white mx-5">|</p>
+        <p v-if="!stateIdStore" class="mx-5 text-12 text-white-white">|</p>
         <p v-if="!stateIdStore" class="text-12 text-white-white">
           <strong v-if="dataStore.tiendasInfo.moneda == 'PEN'" class="mr-1">
             S/
@@ -31,14 +31,14 @@
           {{ dataStore.tiendasInfo.moneda }}
         </p>
         <div v-if="stateIdStore" class="flex flex-row justify-start">
-          <p class="text-12 text-white-white ml-10">
+          <p class="ml-10 text-12 text-white-white">
             <strong>ID</strong>:
             {{ dataStore.id }}
           </p>
-          <p class="text-12 text-white-white ml-5">
+          <p class="ml-5 text-12 text-white-white">
             <strong>TP</strong>: {{ template }}
           </p>
-          <p class="text-12 text-white-white ml-5">
+          <p class="ml-5 text-12 text-white-white">
             <strong>HK</strong>: {{ dataHoko.statehoko == 0 ? 'NO' : 'SI' }}
           </p>
         </div>
@@ -141,7 +141,7 @@ export default {
     ...mapState(['template', 'dataHoko']),
     selectOptionCountry() {
       return this.optionsCountry.find(
-        (country) => country.id === this.dataStore.tiendasInfo.paises.id
+        (country) => country.id === this.dataStore.tiendasInfo.paises.id,
       )
     },
   },

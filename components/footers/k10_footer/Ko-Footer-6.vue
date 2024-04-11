@@ -257,7 +257,7 @@ export default {
     },
     setLogo() {
       let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1'
+        '--background_color_1',
       )
       let colorArray = color.split(',')
       let colorInt = parseInt(colorArray[2])
@@ -275,20 +275,20 @@ export default {
 .footer-container {
   background: var(--background_color_1);
   border-color: var(--color_border);
-  @apply w-full flex flex-col justify-center items-center border-t pb-40 md:pb-20;
+  @apply flex w-full flex-col items-center justify-center border-t pb-40 md:pb-20;
 }
 .footer-content {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .footer-content-items {
-  @apply w-full grid grid-cols-3 gap-2 justify-center items-center;
+  @apply grid w-full grid-cols-3 items-center justify-center gap-2;
 }
 .footer-content-itemsBtns {
-  @apply w-full grid grid-cols-2 gap-4;
+  @apply grid w-full grid-cols-2 gap-4;
 }
 .madebyKomercia {
   border-color: var(--color_border);
-  @apply w-full flex flex-col justify-center items-center border-t-2 pt-10;
+  @apply flex w-full flex-col items-center justify-center border-t-2 pt-10;
 }
 .txt-devBy {
   font-size: 14px;
@@ -309,14 +309,14 @@ export default {
 .txt-btns {
   font-family: var(--font-style-1) !important;
   font-size: 15px;
-  @apply w-auto mb-5 transition-all ease-in duration-0.2;
+  @apply mb-5 w-auto transition-all duration-0.2 ease-in;
 }
 .txt-btns:hover {
   color: var(--hover_text);
-  @apply transition-all ease-in duration-0.2;
+  @apply transition-all duration-0.2 ease-in;
 }
 .content-Pliticas-Terminos {
-  @apply w-auto flex flex-col justify-start items-center;
+  @apply flex w-auto flex-col items-center justify-start;
 }
 .txt-pol-term {
   color: var(--color_text);
@@ -331,7 +331,7 @@ export default {
   padding-top: 200px;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
-  @apply w-full h-full fixed z-10 left-0 top-0 overflow-auto;
+  @apply fixed left-0 top-0 z-10 h-full w-full overflow-auto;
 }
 input {
   position: absolute;
@@ -384,7 +384,7 @@ input:checked ~ .tab-content {
 }
 @screen sm {
   .img-logo {
-    @apply object-contain object-left w-full;
+    @apply w-full object-contain object-left;
   }
   .footer-content {
     @apply w-9/0;
@@ -397,13 +397,13 @@ input:checked ~ .tab-content {
     @apply hidden;
   }
   .footer-content-tienda {
-    @apply w-full flex flex-col justify-center items-start mt-20 mb-30;
+    @apply mb-30 mt-20 flex w-full flex-col items-start justify-center;
   }
   .footer-acordion-bttns {
-    @apply w-full flex flex-col justify-start items-center mb-20;
+    @apply mb-20 flex w-full flex-col items-center justify-start;
   }
   .footer-content-newsLetters {
-    @apply w-full flex flex-col justify-start items-center;
+    @apply flex w-full flex-col items-center justify-start;
   }
   .txt-direction,
   .txt-number,
@@ -413,18 +413,18 @@ input:checked ~ .tab-content {
   }
   .content-image {
     max-width: var(--with_logo);
-    @apply w-full flex justify-center items-center mb-20;
+    @apply mb-20 flex w-full items-center justify-center;
   }
 }
 @media (min-width: 425px) {
   .content-image {
-    @apply justify-start items-center;
+    @apply items-center justify-start;
   }
 }
 @screen md {
   .container-txt,
   .container-opt {
-    @apply w-full grid grid-cols-2 gap-4 justify-start items-start;
+    @apply grid w-full grid-cols-2 items-start justify-start gap-4;
   }
   .container-txt {
     @apply mt-20;
@@ -436,16 +436,16 @@ input:checked ~ .tab-content {
     @apply mb-20;
   }
   .content-buttons {
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
   .footer-content-items {
-    @apply w-full grid grid-cols-2 gap-4 justify-center items-center;
+    @apply grid w-full grid-cols-2 items-center justify-center gap-4;
   }
   .footer-content-itemsBtns {
-    @apply flex justify-center items-start;
+    @apply flex items-start justify-center;
   }
   .footer-content-newsLetters-hid {
-    @apply w-full flex flex-col justify-start items-center;
+    @apply flex w-full flex-col items-center justify-start;
   }
   .footer-acordion-bttns {
     @apply hidden;
@@ -473,7 +473,7 @@ input:checked ~ .tab-content {
     @apply grid grid-cols-3 gap-4;
   }
   .footer-content-newsLetters {
-    @apply flex mt-40;
+    @apply mt-40 flex;
   }
   .footer-content-newsLetters-hid {
     @apply hidden;

@@ -257,7 +257,7 @@ export default {
     },
     setLogo() {
       let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1'
+        '--background_color_1',
       )
       let colorArray = color.split(',')
       let colorInt = parseInt(colorArray[2])
@@ -274,42 +274,42 @@ export default {
 <style scoped>
 .wrapper-footer {
   background: var(--background_color_1);
-  @apply w-full flex justify-center items-center pb-50 md:pb-20;
+  @apply flex w-full items-center justify-center pb-50 md:pb-20;
 }
 .content-footer {
   background: var(--background_color_1);
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .content-footer-items {
   max-width: 1200px;
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .modal {
   padding-top: 200px;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
-  @apply w-full h-full fixed z-10 left-0 top-0 overflow-auto;
+  @apply fixed left-0 top-0 z-10 h-full w-full overflow-auto;
 }
 .empty {
   background-color: var(--color_border);
-  @apply w-full h-1 flex flex-col justify-center items-center;
+  @apply flex h-1 w-full flex-col items-center justify-center;
 }
 @screen sm {
   .content-items-sm {
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
   .content-store-sm {
-    @apply w-9/0 flex flex-col justify-center items-start;
+    @apply flex w-9/0 flex-col items-start justify-center;
   }
   .content-direction,
   .content-number,
   .content-email {
-    @apply w-full flex flex-col justify-center items-start;
+    @apply flex w-full flex-col items-start justify-center;
   }
   .info-store-sm,
   .info-legal-sm,
   .info-networks {
-    @apply w-full flex flex-col justify-center items-start;
+    @apply flex w-full flex-col items-start justify-center;
   }
 
   .btn {
@@ -327,30 +327,30 @@ export default {
     color: var(--hover_text);
   }
   .btn-legal {
-    @apply w-full flex flex-col justify-center items-start text-left;
+    @apply flex w-full flex-col items-start justify-center text-left;
   }
   .accordion {
     transition: 0.4s;
-    @apply w-full text-left mb-0 border-none outline-none cursor-pointer;
+    @apply mb-0 w-full cursor-pointer border-none text-left outline-none;
   }
   .accordion:after {
     content: '\276F';
     color: #fff;
-    @apply font-bold float-right transition-all ease-in duration-0.2;
+    @apply float-right font-bold transition-all duration-0.2 ease-in;
   }
   .active:after {
     transform: rotate(90deg);
-    @apply transition-all ease-in duration-0.2;
+    @apply transition-all duration-0.2 ease-in;
   }
   .panel {
     transition: 0.4s ease-out;
-    @apply w-full max-h-0 justify-start items-center mb-10 overflow-hidden;
+    @apply mb-10 max-h-0 w-full items-center justify-start overflow-hidden;
   }
   .content-items-lg {
     @apply hidden;
   }
   .madebyKomercia {
-    @apply w-full flex flex-col justify-center items-center pt-20;
+    @apply flex w-full flex-col items-center justify-center pt-20;
   }
   .txt-devBy {
     font-size: 14px;
@@ -366,17 +366,17 @@ export default {
     @apply hidden;
   }
   .content-items-lg {
-    @apply w-9/0 grid grid-cols-3 gap-4 justify-center items-start;
+    @apply grid w-9/0 grid-cols-3 items-start justify-center gap-4;
   }
   .img-logo {
     max-width: var(--with_logo);
     @apply w-full object-contain;
   }
   .content-image {
-    @apply w-full flex flex-col justify-start items-center mb-20;
+    @apply mb-20 flex w-full flex-col items-center justify-start;
   }
   .info-btn-footer {
-    @apply w-full flex flex-col justify-center items-start;
+    @apply flex w-full flex-col items-start justify-center;
   }
   .btns {
     color: var(--color_text);
@@ -393,7 +393,7 @@ export default {
     @apply w-8/0;
   }
   .content-footer-items {
-    @apply pt-40 pb-60;
+    @apply pb-60 pt-40;
   }
 }
 </style>

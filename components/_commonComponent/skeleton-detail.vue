@@ -1,32 +1,32 @@
 <template>
-  <div class="w-full flex flex-col">
-    <div class="w-full flex flex-col md:flex-row mb-20">
+  <div class="flex w-full flex-col">
+    <div class="mb-20 flex w-full flex-col md:flex-row">
       <div class="w-full md:w-5/0">
-        <div class="w-full h-[450px] bg-gray-200 animate-pulse"></div>
+        <div class="h-[450px] w-full animate-pulse bg-gray-200"></div>
       </div>
-      <div class="ml-0 md:ml-30 w-full md:w-5/0 p-4 mt-10 md:mt-0">
-        <div class="w-full h-35 bg-gray-200 animate-pulse mb-20"></div>
-        <div class="w-full h-15 bg-gray-200 animate-pulse"></div>
-        <div class="w-full h-15 bg-gray-200 animate-pulse mt-8"></div>
-        <div class="w-full h-15 bg-gray-200 animate-pulse mt-8"></div>
-        <div class="w-full h-15 bg-gray-200 animate-pulse mt-8"></div>
-        <div class="w-full h-15 bg-gray-200 animate-pulse mt-8"></div>
-        <div class="w-full h-15 bg-gray-200 animate-pulse mt-8"></div>
-        <div class="w-full h-15 bg-gray-200 animate-pulse mt-8"></div>
-        <div class="w-full h-15 bg-gray-200 animate-pulse mt-8"></div>
-        <div class="w-full h-15 bg-gray-200 animate-pulse mt-8"></div>
-        <div class="w-full h-15 bg-gray-200 animate-pulse mt-8"></div>
-        <div class="w-full h-15 bg-gray-200 animate-pulse mt-8"></div>
+      <div class="ml-0 mt-10 w-full p-4 md:ml-30 md:mt-0 md:w-5/0">
+        <div class="mb-20 h-35 w-full animate-pulse bg-gray-200"></div>
+        <div class="h-15 w-full animate-pulse bg-gray-200"></div>
+        <div class="mt-8 h-15 w-full animate-pulse bg-gray-200"></div>
+        <div class="mt-8 h-15 w-full animate-pulse bg-gray-200"></div>
+        <div class="mt-8 h-15 w-full animate-pulse bg-gray-200"></div>
+        <div class="mt-8 h-15 w-full animate-pulse bg-gray-200"></div>
+        <div class="mt-8 h-15 w-full animate-pulse bg-gray-200"></div>
+        <div class="mt-8 h-15 w-full animate-pulse bg-gray-200"></div>
+        <div class="mt-8 h-15 w-full animate-pulse bg-gray-200"></div>
+        <div class="mt-8 h-15 w-full animate-pulse bg-gray-200"></div>
+        <div class="mt-8 h-15 w-full animate-pulse bg-gray-200"></div>
+        <div class="mt-8 h-15 w-full animate-pulse bg-gray-200"></div>
       </div>
     </div>
     <div class="w-full p-4">
-      <div class="w-full h-35 bg-gray-200 animate-pulse mb-20"></div>
-      <div class="w-full h-15 bg-gray-200 animate-pulse"></div>
-      <div class="w-full h-15 bg-gray-200 animate-pulse mt-8"></div>
-      <div class="w-full h-15 bg-gray-200 animate-pulse mt-8"></div>
-      <div class="w-full h-15 bg-gray-200 animate-pulse mt-8"></div>
-      <div class="w-full h-15 bg-gray-200 animate-pulse mt-8"></div>
-      <div class="w-full h-15 bg-gray-200 animate-pulse mt-8"></div>
+      <div class="mb-20 h-35 w-full animate-pulse bg-gray-200"></div>
+      <div class="h-15 w-full animate-pulse bg-gray-200"></div>
+      <div class="mt-8 h-15 w-full animate-pulse bg-gray-200"></div>
+      <div class="mt-8 h-15 w-full animate-pulse bg-gray-200"></div>
+      <div class="mt-8 h-15 w-full animate-pulse bg-gray-200"></div>
+      <div class="mt-8 h-15 w-full animate-pulse bg-gray-200"></div>
+      <div class="mt-8 h-15 w-full animate-pulse bg-gray-200"></div>
     </div>
   </div>
 </template>

@@ -1,9 +1,9 @@
 <template>
   <div
-    class="w-full flex justify-center items-center box-border bg-white-white relative"
+    class="relative box-border flex w-full items-center justify-center bg-white-white"
   >
     <div class="contenedor">
-      <div class="w-full flex justify-center items-center">
+      <div class="flex w-full items-center justify-center">
         <svg
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -660,7 +660,7 @@
           >
             404
           </p>
-          <p class="text-22 font-bold text-black px-10">¡OH! Se ha perdido.</p>
+          <p class="px-10 text-22 font-bold text-black">¡OH! Se ha perdido.</p>
           <p class="text-16 text-black">
             La tienda que busca no existe. Cómo has llegado aquí es un misterio.
             Pero puedes hacer clic en el botón para ir a la página de Komercia o
@@ -712,10 +712,10 @@ export default {
       const message = `Hola.%0A%0ATengo un problema con mi tienda ${window.location}, dice que no existe o no se encuentra.`
 
       const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(
-        message
+        message,
       )}`
       const webWhatsappUrl = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
-        message
+        message,
       )}`
 
       if (this.mobileCheck()) {
@@ -734,10 +734,10 @@ export default {
   padding: 10px 20px;
   justify-content: center;
   align-items: center;
-  @apply w-full grid grid-flow-col grid-cols-2;
+  @apply grid w-full grid-flow-col grid-cols-2;
 }
 .content-right {
-  @apply w-full flex flex-col justify-center items-start;
+  @apply flex w-full flex-col items-start justify-center;
 }
 
 .content-btn {
@@ -762,7 +762,7 @@ export default {
   min-height: 47px;
   max-height: 47px;
   transition: all 200ms ease-in;
-  @apply w-full flex justify-center items-center font-bold text-16 text-white-white;
+  @apply flex w-full items-center justify-center text-16 font-bold text-white-white;
 }
 .btn-komercia:hover {
   background: #623bfc;
@@ -778,7 +778,7 @@ export default {
   fill: #25d366;
   min-height: 47px;
   max-height: 47px;
-  @apply w-full flex flex-row justify-center items-center font-bold text-16;
+  @apply flex w-full flex-row items-center justify-center text-16 font-bold;
 }
 .btn-error:hover {
   color: #4429b4;
