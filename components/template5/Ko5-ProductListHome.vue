@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="flex w-full items-center justify-end">
-          <el-dropdown @command="sendOrder">
+          <el-dropdown @command="sendOrder" trigger="click">
             <span
               class="el-dropdown-link text-categorias items-center justify-center"
             >
