@@ -225,7 +225,7 @@
                 <rect x="7" y="10" width="5" height="2"></rect>
                 <path d="M5,7H0v5h5V7z"></path>
               </svg>
-              <el-dropdown @command="sendOrder">
+              <el-dropdown @command="sendOrder" trigger="click">
                 <span
                   class="el-dropdown-link txt-color items-center justify-center"
                 >

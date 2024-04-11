@@ -31,6 +31,7 @@
             <el-dropdown
               class="mt-2 flex w-full items-center justify-end"
               @command="sendOrder"
+              trigger="click"
             >
               <span
                 class="el-dropdown-link txt-color items-center justify-center"
