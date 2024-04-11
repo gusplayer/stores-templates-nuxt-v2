@@ -114,24 +114,24 @@
             :title="$t('home_fenvio')"
             name="4"
           >
-            <div class="w-full flex flex-row justify-between items-center">
+            <div class="flex w-full flex-row items-center justify-between">
               <input
                 v-model="filters.minPrice"
                 :min="minPrice"
                 :max="maxPrice"
                 placeholder="Mínimo"
-                class="block w-full rounded-4 px-4 py-4 text-gray-900 shadow-sm border border-[#DCDFE6] placeholder:text-gray-400"
+                class="block w-full rounded-4 border border-[#DCDFE6] px-4 py-4 text-gray-900 shadow-sm placeholder:text-gray-400"
                 onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode>96 && event.charCode<105)"
                 @keyup.enter="sendFilter"
                 @change="sendFilter"
               />
-              <span class="px-5 icon-price text-16">-</span>
+              <span class="icon-price px-5 text-16">-</span>
               <input
                 v-model="filters.maxPrice"
                 :min="minPrice"
                 :max="maxPrice"
                 placeholder="Máximo"
-                class="block w-full rounded-4 px-4 py-4 text-gray-900 shadow-sm border border-[#DCDFE6] placeholder:text-gray-400"
+                class="block w-full rounded-4 border border-[#DCDFE6] px-4 py-4 text-gray-900 shadow-sm placeholder:text-gray-400"
                 onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode>96 && event.charCode<105)"
                 @keyup.enter="sendFilter"
                 @change="sendFilter"
@@ -141,43 +141,43 @@
         </el-collapse>
       </div>
       <div class="w-full">
-        <div class="w-full flex flex-col justify-start items-start">
-          <div class="w-full flex flex-row justify-start items-center">
+        <div class="flex w-full flex-col items-start justify-start">
+          <div class="flex w-full flex-row items-center justify-start">
             <p class="txt-color" @click="clearFilters">
               {{ $t('home_catalogo') }}
             </p>
-            <div class="flex flex-row justify-center items-start">
+            <div class="flex flex-row items-start justify-center">
               <p
                 v-if="nameCategory"
                 class="txt-color"
                 @click="breadcrumbsClear(1)"
               >
-                <span class="font-normal pr-4">/</span>{{ nameCategory }}
+                <span class="pr-4 font-normal">/</span>{{ nameCategory }}
               </p>
               <p
                 v-if="nameSubCategory"
                 class="txt-color"
                 @click="breadcrumbsClear(2)"
               >
-                <span class="font-normal pr-4">/</span>{{ nameSubCategory }}
+                <span class="pr-4 font-normal">/</span>{{ nameSubCategory }}
               </p>
               <p v-if="tagProduct" class="txt-color">
-                <span class="font-normal pr-4">/</span>{{ tagProduct }}
+                <span class="pr-4 font-normal">/</span>{{ tagProduct }}
               </p>
             </div>
           </div>
-          <div class="w-full flex justify-start items-start pt-6">
+          <div class="flex w-full items-start justify-start pt-6">
             <p class="btn-tittle-shop">
               {{ $t('header_productos') }}
             </p>
           </div>
         </div>
         <div
-          class="w-full grid grid-cols-2 items-center top-content mb-20 md:mb-30"
+          class="top-content mb-20 grid w-full grid-cols-2 items-center md:mb-30"
         >
-          <div class="w-full flex flex-row gap-x-1 justify-start items-center">
+          <div class="flex w-full flex-row items-center justify-start gap-x-1">
             <svg
-              class="cursor-pointer p-12 show-icon"
+              class="show-icon cursor-pointer p-12"
               :class="indexShowList === 3 ? 'show-icon-active' : ''"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
@@ -193,7 +193,7 @@
               <path d="M12,7H7v5h5V7z"></path>
             </svg>
             <svg
-              class="cursor-pointer p-12 show-icon"
+              class="show-icon cursor-pointer p-12"
               :class="indexShowList === 1 ? 'show-icon-active' : ''"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
@@ -211,10 +211,10 @@
               <path d="M5,7H0v5h5V7z"></path>
             </svg>
           </div>
-          <div class="w-full flex justify-end">
-            <el-dropdown @command="sendOrder" :hide-on-click="false">
+          <div class="flex w-full justify-end">
+            <el-dropdown @command="sendOrder">
               <span
-                class="el-dropdown-link txt-color justify-center items-center"
+                class="el-dropdown-link txt-color items-center justify-center"
               >
                 Ordenar por:
                 <span
@@ -244,22 +244,22 @@
             </el-dropdown>
           </div>
         </div>
-        <div class="w-full h-full flex flex-col justify-center items-center">
+        <div class="flex h-full w-full flex-col items-center justify-center">
           <div
-            class="w-full justify-start items-start text-center grid gap-4"
+            class="grid w-full items-start justify-start gap-4 text-center"
             :class="`grid-cols-1 sm:grid-cols-2 md:grid-cols-${indexShowList}`"
           >
             <div
               v-for="product in listProducts"
               :key="product.id"
-              class="w-full h-full content-products"
+              class="content-products h-full w-full"
             >
               <KoProductCardFilter
                 v-if="!showInList"
                 :product="product"
                 :setting-general="settingByTemplate9[0].settingGeneral"
                 :setting-card-products="settingByTemplate9[0].cardProduct"
-                class="w-full h-full"
+                class="h-full w-full"
               />
               <KoProductCardFilerList
                 v-if="showInList"
@@ -271,15 +271,15 @@
           </div>
           <div
             v-if="listProducts.length === 0"
-            class="w-full h-full flex flex-col justify-center items-center"
+            class="flex h-full w-full flex-col items-center justify-center"
           >
-            <p class="text-center font-bold text-20 txt-products-empty">
+            <p class="txt-products-empty text-center text-20 font-bold">
               {{ $t('home_msgCatalogo') }}
             </p>
           </div>
           <div
             v-if="totalProducts > filters.limit"
-            class="mt-50 bg-transparent text-18 product_pagination"
+            class="product_pagination mt-50 bg-transparent text-18"
           >
             <el-pagination
               background
@@ -349,7 +349,7 @@ export default {
 <style scoped>
 .product-content {
   background: var(--background_color_1);
-  @apply flex flex-col justify-start items-center w-full pt-20 pb-40;
+  @apply flex w-full flex-col items-center justify-start pb-40 pt-20;
 }
 .content-left >>> .el-collapse {
   border-top: 1px solid var(--color_icon);
@@ -372,7 +372,7 @@ export default {
   font-family: var(--font-style-1);
   background: transparent;
   border-bottom: 1px solid var(--color_icon);
-  @apply h-full w-full flex items-center justify-start cursor-pointer py-15;
+  @apply flex h-full w-full cursor-pointer items-center justify-start py-15;
 }
 .content-left >>> .el-collapse-item__header.is-active {
   border-bottom: none;
@@ -390,12 +390,12 @@ export default {
 }
 
 .categorys-list {
-  @apply w-full grid grid-cols-1 gap-4 justify-start items-center;
+  @apply grid w-full grid-cols-1 items-center justify-start gap-4;
   overflow: auto;
   max-height: 300px;
 }
 .subcategory-list {
-  @apply w-full grid grid-cols-1 gap-4 justify-start items-center;
+  @apply grid w-full grid-cols-1 items-center justify-start gap-4;
   overflow: auto;
   max-height: 300px;
 }
@@ -430,20 +430,20 @@ export default {
 .txt-color {
   color: var(--color_subtext);
   font-family: var(--font-style-1) !important;
-  @apply flex flex-row mr-6 font-semibold text-14 cursor-pointer;
+  @apply mr-6 flex cursor-pointer flex-row text-14 font-semibold;
 }
 .textSortingFilter {
   color: var(--color_subtext);
   font-family: var(--font-style-1) !important ;
   transition: all 0.25s ease;
-  @apply font-normal text-11 ml-5;
+  @apply ml-5 text-11 font-normal;
 }
 .txt-Filter {
   color: var(--color_subtext);
   font-size: 15px;
   line-height: 1.3;
   font-family: var(--font-style-1) !important;
-  @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
+  @apply flex w-full cursor-pointer flex-row items-center justify-start pr-1 font-normal transition-all duration-0.2 ease-in;
 }
 .txt-Filter:hover {
   color: #eb7025;
@@ -453,12 +453,12 @@ export default {
   line-height: 1.3;
   font-family: var(--font-style-2);
   transition: all 0.25s ease;
-  @apply w-full flex flex-row justify-start items-center pr-1 font-normal text-15 cursor-pointer;
+  @apply flex w-full cursor-pointer flex-row items-center justify-start pr-1 text-15 font-normal;
 }
 .txt-categorys-active {
   color: var(--hover_text);
   transition: all 0.25s ease;
-  @apply w-full flex flex-row justify-start items-center pr-1 text-14 font-bold cursor-pointer;
+  @apply flex w-full cursor-pointer flex-row items-center justify-start pr-1 text-14 font-bold;
 }
 
 .show-icon {
@@ -531,7 +531,7 @@ export default {
   transition: all 0.25s ease;
 }
 .content-home {
-  @apply w-full flex flex-col justify-start items-start;
+  @apply flex w-full flex-col items-start justify-start;
 }
 .txt-content-home {
   color: var(--color_text);
@@ -557,7 +557,7 @@ export default {
     font-size: 36px;
   }
   .content-shop-items {
-    @apply w-9/5 flex flex-row justify-start items-start;
+    @apply flex w-9/5 flex-row items-start justify-start;
   }
   .content-left {
     display: none;
@@ -575,11 +575,11 @@ export default {
   }
 
   .content-left {
-    @apply mr-20 flex flex-col justify-between items-start;
+    @apply mr-20 flex flex-col items-start justify-between;
     width: 250px;
   }
   .content-shop-items {
-    @apply flex flex-row justify-start items-start mt-40;
+    @apply mt-40 flex flex-row items-start justify-start;
     width: 95vw;
   }
 }

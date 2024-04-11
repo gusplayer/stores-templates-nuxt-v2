@@ -7,39 +7,38 @@
             <button class="txt-catalogo" @click="clearFilters">
               {{ $t('home_catalogo') }}
             </button>
-            <div class="flex flex-row justify-center items-start">
+            <div class="flex flex-row items-start justify-center">
               <button
                 v-if="nameCategory"
                 class="txt-category"
                 @click="breadcrumbsClear(1)"
               >
-                <span class="font-normal px-4">/</span>{{ nameCategory }}
+                <span class="px-4 font-normal">/</span>{{ nameCategory }}
               </button>
               <button
                 v-if="nameSubCategory"
                 class="txt-category"
                 @click="breadcrumbsClear(2)"
               >
-                <span class="font-normal px-4">/</span>{{ nameSubCategory }}
+                <span class="px-4 font-normal">/</span>{{ nameSubCategory }}
               </button>
               <p v-if="tagProduct" class="txt-category">
-                <span class="font-normal px-4">/</span>{{ tagProduct }}
+                <span class="px-4 font-normal">/</span>{{ tagProduct }}
               </p>
             </div>
           </div>
-          <div class="w-full flex flex-row justify-end items-center">
+          <div class="flex w-full flex-row items-center justify-end">
             <el-dropdown
-              class="w-full flex justify-end items-center mt-2"
-              :hide-on-click="false"
+              class="mt-2 flex w-full items-center justify-end"
               @command="sendOrder"
             >
               <span
-                class="el-dropdown-link txt-color justify-center items-center"
+                class="el-dropdown-link txt-color items-center justify-center"
               >
                 Ordenar por:
                 <span
                   v-if="sortingFilter?.label"
-                  class="font-normal text-11 ml-5 text-black"
+                  class="ml-5 text-11 font-normal text-black"
                   @click="clearOrder"
                 >
                   {{ $t(sortingFilter.label) }}
@@ -154,7 +153,7 @@ export default {
 </script>
 <style scoped>
 .content-productoList {
-  @apply w-full flex flex-col justify-start items-center;
+  @apply flex w-full flex-col items-center justify-start;
 }
 .pagination-medium {
   margin-top: 20px;
@@ -213,10 +212,10 @@ export default {
 }
 @screen sm {
   .content-item-productList {
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
   .content-categories {
-    @apply w-full flex flex-row justify-between items-center mb-10;
+    @apply mb-10 flex w-full flex-row items-center justify-between;
   }
   .txt-catalogo {
     color: #3d3d3d;
@@ -231,18 +230,18 @@ export default {
     @apply font-semibold;
   }
   .content-items-product {
-    @apply w-9/5 flex flex-col justify-center items-center;
+    @apply flex w-9/5 flex-col items-center justify-center;
   }
   .content-grid-product {
-    @apply w-full h-full grid grid-cols-1 gap-4 justify-center items-start;
+    @apply grid h-full w-full grid-cols-1 items-start justify-center gap-4;
   }
   .card-product {
-    @apply w-full h-full flex flex-col justify-start items-center;
+    @apply flex h-full w-full flex-col items-center justify-start;
   }
   .content-products-empty {
     padding: 0px 20px;
     min-height: 380px;
-    @apply w-full flex justify-center items-center text-center;
+    @apply flex w-full items-center justify-center text-center;
   }
   .content-products-empty p {
     font-size: 18px;

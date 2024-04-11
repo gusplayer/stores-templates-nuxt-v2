@@ -12,11 +12,11 @@
     ]"
   >
     <div
-      class="w-full flex flex-col items-center py-10"
+      class="flex w-full flex-col items-center py-10"
       :style="`background-color: ${settingByTemplate16[0].listProductsFilter['--background_color_2']}`"
     >
       <div
-        class="w-full max-w-[1300px] flex flex-row items-center justify-start sm:px-10 md:px-20"
+        class="flex w-full max-w-[1300px] flex-row items-center justify-start sm:px-10 md:px-20"
         :style="`color: ${settingByTemplate16[0].listProductsFilter.color_breadCrumbs};`"
       >
         <nuxt-link
@@ -147,24 +147,24 @@
               :title="$t('home_fenvio')"
               name="4"
             >
-              <div class="w-full flex flex-row justify-between items-center">
+              <div class="flex w-full flex-row items-center justify-between">
                 <input
                   v-model="filters.minPrice"
                   :min="minPrice"
                   :max="maxPrice"
                   placeholder="Mínimo"
-                  class="block w-full rounded-4 px-4 py-4 text-gray-900 shadow-sm border border-[#DCDFE6] placeholder:text-gray-400"
+                  class="block w-full rounded-4 border border-[#DCDFE6] px-4 py-4 text-gray-900 shadow-sm placeholder:text-gray-400"
                   onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode>96 && event.charCode<105)"
                   @keyup.enter="sendFilter"
                   @change="sendFilter"
                 />
-                <span class="px-5 icon-price text-16">-</span>
+                <span class="icon-price px-5 text-16">-</span>
                 <input
                   v-model="filters.maxPrice"
                   :min="minPrice"
                   :max="maxPrice"
                   placeholder="Máximo"
-                  class="block w-full rounded-4 px-4 py-4 text-gray-900 shadow-sm border border-[#DCDFE6] placeholder:text-gray-400"
+                  class="block w-full rounded-4 border border-[#DCDFE6] px-4 py-4 text-gray-900 shadow-sm placeholder:text-gray-400"
                   onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode>96 && event.charCode<105)"
                   @keyup.enter="sendFilter"
                   @change="sendFilter"
@@ -174,12 +174,12 @@
           </el-collapse>
         </div>
         <div
-          class="w-full flex flex-col justify-center items-center mt-20 md:mt-0"
+          class="mt-20 flex w-full flex-col items-center justify-center md:mt-0"
         >
-          <div class="w-full flex flex-row justify-between items-start pb-25">
-            <div class="w-full flex flex-col justify-start items-start">
+          <div class="flex w-full flex-row items-start justify-between pb-25">
+            <div class="flex w-full flex-col items-start justify-start">
               <button
-                class="font-semibold uppercase justify-start items-start"
+                class="items-start justify-start font-semibold uppercase"
                 :style="`color: ${settingByTemplate16[0].listProductsFilter['--color_subCategories']};`"
                 @click="clearFilters"
               >
@@ -197,28 +197,27 @@
                 :style="`color: ${settingByTemplate16[0].listProductsFilter['--color_subCategories']};`"
                 @click="breadcrumbsClear(2)"
               >
-                <span class="font-normal pr-4">/</span>{{ nameSubCategory }}
+                <span class="pr-4 font-normal">/</span>{{ nameSubCategory }}
               </button>
               <p
                 v-if="tagProduct"
                 :style="`color: ${settingByTemplate16[0].listProductsFilter['--color_subCategories']};`"
               >
-                <span class="font-normal pr-4">/</span>{{ tagProduct }}
+                <span class="pr-4 font-normal">/</span>{{ tagProduct }}
               </p>
             </div>
-            <div class="w-full flex justify-end items-start gap-x-2">
+            <div class="flex w-full items-start justify-end gap-x-2">
               <el-dropdown
-                class="w-full flex justify-end items-center"
-                :hide-on-click="false"
+                class="flex w-full items-center justify-end"
                 @command="sendOrder"
               >
                 <span
-                  class="el-dropdown-link txt-color justify-center items-center"
+                  class="el-dropdown-link txt-color items-center justify-center"
                 >
                   Ordenar por:
                   <span
                     v-if="sortingFilter?.label"
-                    class="font-normal text-11 ml-5"
+                    class="ml-5 text-11 font-normal"
                     :style="`color: ${settingByTemplate16[0].listProductsFilter['--color_subCategories']};`"
                     @click="clearOrder"
                   >
@@ -251,43 +250,43 @@
               </button>
             </div>
           </div>
-          <div class="w-full h-full flex flex-col justify-center items-center">
+          <div class="flex h-full w-full flex-col items-center justify-center">
             <div
-              class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-center items-center text-center"
+              class="grid w-full grid-cols-1 items-center justify-center gap-4 text-center sm:grid-cols-2 md:grid-cols-3"
             >
               <div
                 v-for="product in listProducts"
                 :key="product.id"
-                class="w-full h-full flex flex-col justify-center items-center"
+                class="flex h-full w-full flex-col items-center justify-center"
               >
                 <Ko15ProductCard
                   :product="product"
                   :setting-card-products="settingByTemplate16[0].cardProducts"
                   :setting-general="settingByTemplate16[0].settingsGeneral"
-                  class="w-full h-full"
+                  class="h-full w-full"
                 />
               </div>
             </div>
             <div
               v-if="listProducts.length == 0"
-              class="w-full h-full flex flex-col justify-center items-center text-center"
+              class="flex h-full w-full flex-col items-center justify-center text-center"
             >
               <nuxt-link to="/productos">
                 <img
                   v-lazy="`${$store.state.urlKomercia}/logos/${dataStore.logo}`"
                   width="150"
-                  class="max-w-[150px] max-h-[150px]"
+                  class="max-h-[150px] max-w-[150px]"
                   alt="LogoStore img"
                   @click="clearFilters"
                 />
               </nuxt-link>
-              <p class="my-15 font-semibold text-20 text-gray-600">
+              <p class="my-15 text-20 font-semibold text-gray-600">
                 {{ $t('home_msgCatalogo') }}
               </p>
             </div>
             <div
               v-if="totalProducts > filters.limit"
-              class="w-full flex justify-center items-center wrapper_pagination mt-20"
+              class="wrapper_pagination mt-20 flex w-full items-center justify-center"
             >
               <el-pagination
                 background
@@ -354,11 +353,11 @@ export default {
 <style scoped>
 .container-product-max-w {
   max-width: 1300px;
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .product-content {
   background: var(--background_color_1);
-  @apply flex flex-col justify-start items-center w-full pb-80;
+  @apply flex w-full flex-col items-center justify-start pb-80;
 }
 .content-left >>> .el-collapse {
   border-top: 1px solid var(--color_border);
@@ -390,20 +389,20 @@ export default {
   color: var(--color_categories);
   font-family: var(--font-style-1) !important;
   background: transparent;
-  @apply w-full h-30 cursor-pointer border-none;
+  @apply h-30 w-full cursor-pointer border-none;
 }
 .categorys-list {
-  @apply w-full grid grid-cols-1 gap-4 justify-start items-center;
+  @apply grid w-full grid-cols-1 items-center justify-start gap-4;
 }
 .subcategory-list {
-  @apply w-full grid grid-cols-1 gap-4 justify-start items-center transition-all ease-in duration-0.2;
+  @apply grid w-full grid-cols-1 items-center justify-start gap-4 transition-all duration-0.2 ease-in;
 }
 .txt-Filter {
   color: var(--color_categories);
   font-size: 15px;
   line-height: 1.3;
   font-family: var(--font-style-1) !important;
-  @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
+  @apply flex w-full cursor-pointer flex-row items-center justify-start pr-1 font-normal transition-all duration-0.2 ease-in;
 }
 .txt-Filter:hover {
   color: #eb7025;
@@ -413,7 +412,7 @@ export default {
   font-size: 15px;
   line-height: 1.3;
   font-family: var(--font-style-1) !important;
-  @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
+  @apply flex w-full cursor-pointer flex-row items-center justify-start pr-1 font-normal transition-all duration-0.2 ease-in;
 }
 .txt-categorys:hover {
   color: #eb7025;
@@ -421,28 +420,28 @@ export default {
 .txt-categorys-active {
   color: #eb7025;
   font-size: 14px;
-  @apply w-full flex flex-row justify-start items-center pr-1 transition-all ease-in duration-0.2 font-semibold cursor-pointer;
+  @apply flex w-full cursor-pointer flex-row items-center justify-start pr-1 font-semibold transition-all duration-0.2 ease-in;
 }
 .txt-categorys:hover .rounded-list {
   background-color: #eb7025;
-  @apply transition-all ease-in duration-0.2;
+  @apply transition-all duration-0.2 ease-in;
 }
 .rounded-list {
   background-color: #e5e5e5;
-  @apply w-10 h-10 rounded-full mr-10 transition-all ease-in duration-0.2;
+  @apply mr-10 h-10 w-10 rounded-full transition-all duration-0.2 ease-in;
 }
 .txt-rounded-list-active {
   background-color: #eb7025;
-  @apply transition-all ease-in duration-0.2;
+  @apply transition-all duration-0.2 ease-in;
 }
 .product-stock {
   color: #333;
   font-size: 14px;
   font-family: var(--font-style-1) !important;
-  @apply mr-6 font-semibold cursor-pointer transition-all ease-in duration-0.2;
+  @apply mr-6 cursor-pointer font-semibold transition-all duration-0.2 ease-in;
 }
 .show {
-  @apply w-full cursor-pointer mt-4;
+  @apply mt-4 w-full cursor-pointer;
 }
 .show-icon {
   fill: var(--color_icon);
@@ -498,20 +497,20 @@ export default {
 }
 @screen sm {
   .content-shop-items {
-    @apply w-full flex flex-row justify-start items-start px-10;
+    @apply flex w-full flex-row items-start justify-start px-10;
   }
   .content-left {
     @apply hidden;
   }
   .content-home {
-    @apply w-full flex flex-col justify-start items-start;
+    @apply flex w-full flex-col items-start justify-start;
   }
   .txt-content-home {
     font-family: var(--font-style-1) !important;
     color: var(--color_subCategories);
     font-size: 16px;
     line-height: 1.1;
-    @apply w-auto py-20 uppercase font-semibold cursor-pointer;
+    @apply w-auto cursor-pointer py-20 font-semibold uppercase;
   }
   .txt-content-home:hover {
     color: #000;
@@ -532,10 +531,10 @@ export default {
     width: 300px;
     top: 163px;
     border-color: var(--color_border);
-    @apply mr-20 px-10 flex flex-col justify-between items-start sticky border;
+    @apply sticky mr-20 flex flex-col items-start justify-between border px-10;
   }
   .content-shop-items {
-    @apply w-full flex flex-row justify-start items-start mt-40;
+    @apply mt-40 flex w-full flex-row items-start justify-start;
   }
 }
 @screen mlg {

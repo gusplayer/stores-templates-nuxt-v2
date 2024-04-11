@@ -140,24 +140,24 @@
               :title="$t('home_fenvio')"
               name="4"
             >
-              <div class="w-full flex flex-row justify-between items-center">
+              <div class="flex w-full flex-row items-center justify-between">
                 <input
                   v-model="filters.minPrice"
                   :min="minPrice"
                   :max="maxPrice"
                   placeholder="Mínimo"
-                  class="block w-full rounded-4 px-4 py-4 text-gray-900 shadow-sm border border-[#DCDFE6] placeholder:text-gray-400"
+                  class="block w-full rounded-4 border border-[#DCDFE6] px-4 py-4 text-gray-900 shadow-sm placeholder:text-gray-400"
                   onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode>96 && event.charCode<105)"
                   @keyup.enter="sendFilter"
                   @change="sendFilter"
                 />
-                <span class="px-5 icon-price text-16">-</span>
+                <span class="icon-price px-5 text-16">-</span>
                 <input
                   v-model="filters.maxPrice"
                   :min="minPrice"
                   :max="maxPrice"
                   placeholder="Máximo"
-                  class="block w-full rounded-4 px-4 py-4 text-gray-900 shadow-sm border border-[#DCDFE6] placeholder:text-gray-400"
+                  class="block w-full rounded-4 border border-[#DCDFE6] px-4 py-4 text-gray-900 shadow-sm placeholder:text-gray-400"
                   onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode>96 && event.charCode<105)"
                   @keyup.enter="sendFilter"
                   @change="sendFilter"
@@ -166,33 +166,33 @@
             </el-collapse-item>
           </el-collapse>
         </div>
-        <div class="w-full flex flex-col justify-center items-center">
-          <div class="w-full flex flex-row justify-between items-center">
-            <div class="w-full flex justify-start items-center">
+        <div class="flex w-full flex-col items-center justify-center">
+          <div class="flex w-full flex-row items-center justify-between">
+            <div class="flex w-full items-center justify-start">
               <p class="txt-content-home" @click="clearFilters">
                 {{ $t('home_catalogo') }}
               </p>
               <p
                 v-if="nameCategory"
-                class="ml-4 txt-color"
+                class="txt-color ml-4"
                 @click="breadcrumbsClear(1)"
               >
-                <span class="font-normal pr-4">/</span>{{ nameCategory }}
+                <span class="pr-4 font-normal">/</span>{{ nameCategory }}
               </p>
               <p
                 v-if="nameSubCategory"
                 class="txt-color"
                 @click="breadcrumbsClear(2)"
               >
-                <span class="font-normal pr-4">/</span>{{ nameSubCategory }}
+                <span class="pr-4 font-normal">/</span>{{ nameSubCategory }}
               </p>
               <p v-if="tagProduct" class="txt-color">
-                <span class="font-normal pr-4">/</span>{{ tagProduct }}
+                <span class="pr-4 font-normal">/</span>{{ tagProduct }}
               </p>
             </div>
-            <div class="w-full flex justify-end gap-x-2 items-center">
+            <div class="flex w-full items-center justify-end gap-x-2">
               <svg
-                class="cursor-pointer p-12 show-icon hidden md:flex"
+                class="show-icon hidden cursor-pointer p-12 md:flex"
                 :class="indexShowList === 3 ? 'show-icon-active' : ''"
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -208,7 +208,7 @@
                 <path d="M12,7H7v5h5V7z"></path>
               </svg>
               <svg
-                class="cursor-pointer p-12 show-icon hidden md:flex"
+                class="show-icon hidden cursor-pointer p-12 md:flex"
                 :class="indexShowList === 1 ? 'show-icon-active' : ''"
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -225,9 +225,9 @@
                 <rect x="7" y="10" width="5" height="2"></rect>
                 <path d="M5,7H0v5h5V7z"></path>
               </svg>
-              <el-dropdown @command="sendOrder" :hide-on-click="false">
+              <el-dropdown @command="sendOrder">
                 <span
-                  class="el-dropdown-link txt-color justify-center items-center"
+                  class="el-dropdown-link txt-color items-center justify-center"
                 >
                   Ordenar por:
                   <span
@@ -257,22 +257,22 @@
               </el-dropdown>
             </div>
           </div>
-          <div class="w-full h-full flex flex-col justify-center items-center">
+          <div class="flex h-full w-full flex-col items-center justify-center">
             <div
-              class="w-full justify-start items-start text-center grid gap-4"
+              class="grid w-full items-start justify-start gap-4 text-center"
               :class="`grid-cols-1 sm:grid-cols-2 md:grid-cols-${indexShowList}`"
             >
               <div
                 v-for="product in listProducts"
                 :key="product.id"
-                class="w-full h-full content-products"
+                class="content-products h-full w-full"
               >
                 <KoProductCardFilter
                   v-if="!showInList"
                   :product="product"
                   :setting-card-products="settingByTemplate10[0].cardProduct"
                   :setting-general="settingByTemplate10[0].settingGeneral"
-                  class="w-full h-full product-list"
+                  class="product-list h-full w-full"
                 />
                 <KoProductCardFilerList
                   v-if="showInList"
@@ -302,7 +302,7 @@
           </div>
           <div
             v-if="totalProducts > filters.limit"
-            class="mt-50 bg-transparent text-18 product_pagination"
+            class="product_pagination mt-50 bg-transparent text-18"
           >
             <el-pagination
               background
@@ -394,11 +394,11 @@ export default {
 <style scoped>
 .container-product-max-w {
   max-width: 1400px;
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .product-content {
   background: var(--background_color_1);
-  @apply flex flex-col justify-start items-center w-full pb-80;
+  @apply flex w-full flex-col items-center justify-start pb-80;
 }
 .content-left >>> .el-collapse {
   border-top: 1px solid var(--border);
@@ -428,7 +428,7 @@ export default {
 }
 .input-slide {
   font-family: var(--font-style-1) !important;
-  @apply w-full h-30 cursor-pointer border-none;
+  @apply h-30 w-full cursor-pointer border-none;
   background: transparent;
   /* border-bottom: 2px solid #2c2930; */
 }
@@ -437,7 +437,7 @@ export default {
   font-size: 15px;
   line-height: 1.3;
   font-family: var(--font-style-1) !important;
-  @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
+  @apply flex w-full cursor-pointer flex-row items-center justify-start pr-1 font-normal transition-all duration-0.2 ease-in;
 }
 .txt-Filter:hover {
   color: #eb7025;
@@ -446,21 +446,21 @@ export default {
   color: #333;
   font-size: 14px;
   font-family: var(--font-style-1) !important;
-  @apply w-full font-semibold cursor-pointer;
+  @apply w-full cursor-pointer font-semibold;
 }
 #statesubcate {
   color: #333;
   font-size: 14px;
   font-family: var(--font-style-1) !important;
-  @apply w-full ml-6 font-semibold cursor-pointer transition-all ease-in duration-0.2;
+  @apply ml-6 w-full cursor-pointer font-semibold transition-all duration-0.2 ease-in;
 }
 .categorys-list {
   max-height: 300px;
-  @apply w-full grid grid-cols-1 gap-4 justify-start items-center overflow-auto;
+  @apply grid w-full grid-cols-1 items-center justify-start gap-4 overflow-auto;
 }
 .subcategory-list {
   max-height: 300px;
-  @apply w-full grid grid-cols-1 gap-4 justify-start items-center overflow-auto;
+  @apply grid w-full grid-cols-1 items-center justify-start gap-4 overflow-auto;
 }
 .categorys-list::-webkit-scrollbar {
   @apply w-3;
@@ -507,7 +507,7 @@ export default {
   font-size: 15px;
   line-height: 1.3;
   font-family: var(--font-style-1) !important;
-  @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
+  @apply flex w-full cursor-pointer flex-row items-center justify-start pr-1 font-normal transition-all duration-0.2 ease-in;
 }
 .txt-categorys:hover {
   color: #eb7025;
@@ -515,25 +515,25 @@ export default {
 .txt-categorys-active {
   color: var(--color_icon);
   font-size: 14px;
-  @apply w-full flex flex-row justify-start items-center pr-1 transition-all ease-in duration-0.2 font-semibold cursor-pointer;
+  @apply flex w-full cursor-pointer flex-row items-center justify-start pr-1 font-semibold transition-all duration-0.2 ease-in;
 }
 .txt-categorys:hover .rounded-list {
   background-color: var(--color_icon);
-  @apply transition-all ease-in duration-0.2;
+  @apply transition-all duration-0.2 ease-in;
 }
 .rounded-list {
   background-color: #e5e5e5;
-  @apply w-10 h-10 rounded-full mr-10 transition-all ease-in duration-0.2;
+  @apply mr-10 h-10 w-10 rounded-full transition-all duration-0.2 ease-in;
 }
 .txt-rounded-list-active {
   background-color: var(--color_icon);
-  @apply transition-all ease-in duration-0.2;
+  @apply transition-all duration-0.2 ease-in;
 }
 .product-stock {
   color: #333;
   font-size: 14px;
   font-family: var(--font-style-1) !important;
-  @apply mr-6 font-semibold cursor-pointer transition-all ease-in duration-0.2;
+  @apply mr-6 cursor-pointer font-semibold transition-all duration-0.2 ease-in;
 }
 
 .show-icon {
@@ -551,39 +551,39 @@ export default {
   fill: var(--hover_text);
 }
 .items-end {
-  @apply w-full flex flex-row justify-start items-center;
+  @apply flex w-full flex-row items-center justify-start;
 }
 .tittle-banner-shop {
-  @apply w-full flex justify-start items-start;
+  @apply flex w-full items-start justify-start;
 }
 .btn-tittle-shop {
   color: var(--color_text);
   font-family: var(--font-style-1) !important;
-  @apply font-semibold uppercase justify-start items-start;
+  @apply items-start justify-start font-semibold uppercase;
 }
 .product-text {
-  @apply flex flex-col justify-center items-center w-full;
+  @apply flex w-full flex-col items-center justify-center;
 }
 
 .product-conten-items {
-  @apply justify-center items-center text-center gap-4;
+  @apply items-center justify-center gap-4 text-center;
 }
 .producto-items-content {
   @apply w-full;
 }
 .content-item {
-  @apply w-full flex flex-row justify-center items-center mb-40;
+  @apply mb-40 flex w-full flex-row items-center justify-center;
 }
 .content-item-productos {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .content-products {
   /* border-bottom: 0.5px solid var(--border); */
-  @apply w-full h-full flex flex-col justify-center items-center;
+  @apply flex h-full w-full flex-col items-center justify-center;
 }
 .content-products-empty {
   min-height: 200px;
-  @apply w-full flex flex-col justify-center items-center text-center;
+  @apply flex w-full flex-col items-center justify-center text-center;
 }
 .txt-products-empty {
   font-size: 20px;
@@ -636,19 +636,19 @@ export default {
   cursor: default;
 }
 .crumb {
-  @apply w-full flex flex-row justify-center items-center;
+  @apply flex w-full flex-row items-center justify-center;
 }
 .separatorCrumb {
   font-size: 9px;
   color: var(--breadCrumbs);
   font-family: var(--font-style-1) !important;
-  @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
+  @apply cursor-pointer pr-6 leading-14 transition-all duration-0.2 ease-in;
 }
 .txt-crumb {
   font-size: 15px;
   color: var(--breadCrumbs);
   font-family: var(--font-style-1) !important;
-  @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
+  @apply cursor-pointer pr-6 leading-14 transition-all duration-0.2 ease-in;
 }
 .s1:hover {
   color: #eb7025;
@@ -659,7 +659,7 @@ export default {
   transition: all 0.25s ease;
 }
 .product-list {
-  @apply w-full h-full;
+  @apply h-full w-full;
 }
 .product-list:hover {
   @apply shadow-lg;
@@ -672,7 +672,7 @@ export default {
 
 @screen sm {
   .content-shop-items {
-    @apply w-9/0 flex flex-row justify-start items-start;
+    @apply flex w-9/0 flex-row items-start justify-start;
   }
   .content-left {
     @apply hidden;
@@ -685,14 +685,14 @@ export default {
     margin-top: 20px;
   }
   .content-home {
-    @apply w-full flex flex-col justify-start items-start;
+    @apply flex w-full flex-col items-start justify-start;
   }
   .txt-content-home {
     font-family: var(--font-style-1) !important;
     color: var(--color_text);
     font-size: 16px;
     line-height: 1.1;
-    @apply w-auto py-20 uppercase font-semibold cursor-pointer;
+    @apply w-auto cursor-pointer py-20 font-semibold uppercase;
   }
   .txt-color {
     color: var(--color_text);
@@ -702,7 +702,7 @@ export default {
     color: var(--color_text);
     font-family: var(--font-style-1) !important ;
     transition: all 0.25s ease;
-    @apply font-normal text-11 ml-5;
+    @apply ml-5 text-11 font-normal;
   }
   .txt-content-home:hover {
     color: #eb7025;
@@ -720,7 +720,7 @@ export default {
   .bannerProduct {
     height: 220px;
     background-color: var(--background_color_2);
-    @apply w-full flex bg-cover bg-center bg-no-repeat justify-items-center items-center;
+    @apply flex w-full items-center justify-items-center bg-cover bg-center bg-no-repeat;
   }
 }
 @screen lg {
@@ -735,7 +735,7 @@ export default {
     @apply flex pb-20;
   }
   .show-number-items {
-    @apply w-full flex justify-end items-center;
+    @apply flex w-full items-center justify-end;
   }
 
   .btn-tittle-shop {
@@ -744,14 +744,14 @@ export default {
 
   .content-left {
     width: 400px;
-    @apply mr-10 flex flex-col justify-between items-start;
+    @apply mr-10 flex flex-col items-start justify-between;
   }
   .content-banner-shop {
     @apply hidden;
   }
 
   .content-shop-items {
-    @apply w-9/5 flex flex-row justify-start items-start mt-40;
+    @apply mt-40 flex w-9/5 flex-row items-start justify-start;
   }
   .hidd {
     @apply hidden;

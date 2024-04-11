@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col justify-start items-center w-full pb-80"
+    class="flex w-full flex-col items-center justify-start pb-80"
     :style="[
       settingByTemplate7[0].productListFilter,
       settingByTemplate7[0].settingGeneral,
@@ -19,7 +19,7 @@
       `background-color: ${settingByTemplate7[0].productListFilter['--background_color_1']}`,
     ]"
   >
-    <div class="w-full h-full max-h-[420px] relative box-content flex">
+    <div class="relative box-content flex h-full max-h-[420px] w-full">
       <picture v-if="settingByTemplate7[0].productListFilter.img_background">
         <source
           media="(max-width: 799px)"
@@ -27,7 +27,7 @@
             idCloudinaryBanner(
               settingByTemplate7[0].productListFilter.url_img,
               'bannerRes',
-              400
+              400,
             )
           "
         />
@@ -36,7 +36,7 @@
           :srcset="
             idCloudinaryBanner(
               settingByTemplate7[0].productListFilter.url_img,
-              'banner'
+              'banner',
             )
           "
         />
@@ -44,32 +44,32 @@
           v-lazy="
             idCloudinaryBanner(
               settingByTemplate7[0].productListFilter.url_img,
-              'banner'
+              'banner',
             )
           "
           alt="imgFilterProduct"
-          class="object-cover h-full w-full"
+          class="h-full w-full object-cover"
         />
       </picture>
-      <div v-else class="w-full h-full max-h-[420px]"></div>
-      <div class="w-full h-full absolute flex justify-center items-center">
+      <div v-else class="h-full max-h-[420px] w-full"></div>
+      <div class="absolute flex h-full w-full items-center justify-center">
         <p class="btn-tittle-shop">
           {{ settingByTemplate7[0].productListFilter.title }}
         </p>
       </div>
     </div>
     <div
-      class="w-full max-w-[1300px] px-10 md:px-0 flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:items-start"
+      class="flex w-full max-w-[1300px] flex-col items-center justify-center px-10 md:px-0 lg:flex-row lg:items-start lg:justify-start"
     >
       <div
-        class="w-full max-w-[270px] mr-24 sticky top-[128px] sm:hidden lg:flex flex-col justify-between items-start"
+        class="sticky top-[128px] mr-24 w-full max-w-[270px] flex-col items-start justify-between sm:hidden lg:flex"
       >
-        <div class="w-full flex flex-col justify-start items-center">
+        <div class="flex w-full flex-col items-center justify-start">
           <p class="txt-tittles cursor-pointer" @click="clearFilters">
             {{ $t('header_buscar_limpiar') }}
           </p>
         </div>
-        <div class="w-full flex flex-col justify-start items-center">
+        <div class="flex w-full flex-col items-center justify-start">
           <p class="txt-tittles">
             {{ $t('header_buscar_producto') }}
           </p>
@@ -86,7 +86,7 @@
         </div>
         <div
           v-if="categorias?.length > 0"
-          class="w-full flex flex-col justify-start items-center"
+          class="flex w-full flex-col items-center justify-start"
         >
           <p class="txt-tittles">
             {{ $t('productdetail_categoria') }}
@@ -126,7 +126,7 @@
         </div>
         <div
           v-if="selectedSubcategories?.length"
-          class="w-full flex flex-col justify-start items-center"
+          class="flex w-full flex-col items-center justify-start"
         >
           <p class="txt-tittles">
             {{ $t('home_subcategory') }}
@@ -198,28 +198,28 @@
             </div>
           </div>
         </div>
-        <div class="w-full flex flex-col justify-start items-center">
+        <div class="flex w-full flex-col items-center justify-start">
           <p class="txt-tittles">
             {{ $t('home_fprecio') }}
           </p>
-          <div class="w-full flex flex-row justify-between items-center">
+          <div class="flex w-full flex-row items-center justify-between">
             <input
               v-model="filters.minPrice"
               :min="minPrice"
               :max="maxPrice"
               placeholder="Mínimo"
-              class="block w-full rounded-4 px-4 py-4 text-gray-900 shadow-sm border border-[#DCDFE6] placeholder:text-gray-400"
+              class="block w-full rounded-4 border border-[#DCDFE6] px-4 py-4 text-gray-900 shadow-sm placeholder:text-gray-400"
               onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode>96 && event.charCode<105)"
               @keyup.enter="sendFilter"
               @change="sendFilter"
             />
-            <span class="px-5 icon-price text-16">-</span>
+            <span class="icon-price px-5 text-16">-</span>
             <input
               v-model="filters.maxPrice"
               :min="minPrice"
               :max="maxPrice"
               placeholder="Máximo"
-              class="block w-full rounded-4 px-4 py-4 text-gray-900 shadow-sm border border-[#DCDFE6] placeholder:text-gray-400"
+              class="block w-full rounded-4 border border-[#DCDFE6] px-4 py-4 text-gray-900 shadow-sm placeholder:text-gray-400"
               onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode>96 && event.charCode<105)"
               @keyup.enter="sendFilter"
               @change="sendFilter"
@@ -228,38 +228,38 @@
         </div>
       </div>
 
-      <div class="w-full flex flex-col">
-        <div class="w-full pb-12 border-b border-[#e8e8e8]">
-          <div class="w-full flex flex-row justify-between items-center mt-20">
-            <div class="w-full flex flex-row justify-start items-center">
+      <div class="flex w-full flex-col">
+        <div class="w-full border-b border-[#e8e8e8] pb-12">
+          <div class="mt-20 flex w-full flex-row items-center justify-between">
+            <div class="flex w-full flex-row items-center justify-start">
               <p class="text-categorias" @click="clearFilters">
                 {{ $t('home_catalogo') }}
               </p>
-              <div class="flex flex-row justify-center items-start">
+              <div class="flex flex-row items-start justify-center">
                 <p
                   v-if="nameCategory"
                   class="text-categorias"
                   @click="breadcrumbsClear(1)"
                 >
-                  <span class="font-normal pr-4">/</span>{{ nameCategory }}
+                  <span class="pr-4 font-normal">/</span>{{ nameCategory }}
                 </p>
                 <p
                   v-if="nameSubCategory"
                   class="text-categorias"
                   @click="breadcrumbsClear(2)"
                 >
-                  <span class="font-normal pr-4">/</span>{{ nameSubCategory }}
+                  <span class="pr-4 font-normal">/</span>{{ nameSubCategory }}
                 </p>
                 <p v-if="tagProduct" class="text-categorias">
-                  <span class="font-normal pr-4">/</span>{{ tagProduct }}
+                  <span class="pr-4 font-normal">/</span>{{ tagProduct }}
                 </p>
               </div>
             </div>
-            <div class="w-full flex flex-row justify-end items-center">
+            <div class="flex w-full flex-row items-center justify-end">
               <div class="mr-16">
-                <el-dropdown @command="sendOrder" :hide-on-click="false">
+                <el-dropdown @command="sendOrder">
                   <span
-                    class="el-dropdown-link text-categorias justify-center items-center"
+                    class="el-dropdown-link text-categorias items-center justify-center"
                   >
                     Ordenar por:
                     <span
@@ -289,7 +289,7 @@
                 </el-dropdown>
               </div>
               <div
-                class="w-auto hidden md:grid grid-cols-4 gap-x-4 justify-center items-center"
+                class="hidden w-auto grid-cols-4 items-center justify-center gap-x-4 md:grid"
               >
                 <IconFormatListBulleted
                   class="show-icon cursor-pointer text-24"
@@ -315,9 +315,9 @@
             </div>
           </div>
         </div>
-        <div class="w-full flex flex-col items-center justify-center mb-40">
+        <div class="mb-40 flex w-full flex-col items-center justify-center">
           <div
-            class="w-full justify-start items-start text-center grid gap-4"
+            class="grid w-full items-start justify-start gap-4 text-center"
             :class="`grid-cols-1 sm:grid-cols-2 md:grid-cols-${indexShowList}`"
           >
             <div
@@ -349,7 +349,7 @@
           </div>
           <div
             v-if="totalProducts > filters.limit"
-            class="mt-50 bg-transparent text-18 product_pagination"
+            class="product_pagination mt-50 bg-transparent text-18"
           >
             <el-pagination
               background
@@ -444,12 +444,12 @@ picture {
   width: 100%;
 }
 .btn-scroll {
-  @apply w-full flex justify-center items-center cursor-pointer;
+  @apply flex w-full cursor-pointer items-center justify-center;
 }
 .btn-scroll-icon {
   color: var(--color_text);
   bottom: 0.125em;
-  @apply w-full flex justify-center items-center text-20;
+  @apply flex w-full items-center justify-center text-20;
 }
 .btn-scroll-icon:hover {
   color: var(--hover_text);
@@ -466,16 +466,16 @@ picture {
 }
 .content-banner-shop {
   background: var(--background_color_1);
-  @apply w-full flex justify-center items-center bg-cover bg-no-repeat;
+  @apply flex w-full items-center justify-center bg-cover bg-no-repeat;
 }
 .itemLeft-range-slide {
-  @apply w-full flex justify-center items-center mb-20;
+  @apply mb-20 flex w-full items-center justify-center;
 }
 .input-slide {
   @apply w-full cursor-pointer;
 }
 .txt-tittles {
-  @apply w-full flex justify-start items-center py-20 text-16 uppercase font-semibold;
+  @apply flex w-full items-center justify-start py-20 text-16 font-semibold uppercase;
   color: var(--color_text);
   transition: all 0.25s ease;
   font-family: var(--font-style-1) !important;
@@ -483,7 +483,7 @@ picture {
 .text-categorias {
   color: var(--color_text);
   font-family: var(--font-style-3) !important;
-  @apply flex flex-row mr-6 font-semibold text-14 cursor-pointer;
+  @apply mr-6 flex cursor-pointer flex-row text-14 font-semibold;
 }
 [class*=' el-icon-'],
 [class^='el-icon-'] {
@@ -494,7 +494,7 @@ picture {
   font-family: var(--font-style-3) !important;
 }
 .categorys-list {
-  @apply w-full max-h-[300px] grid grid-cols-1 gap-4 justify-start items-center overflow-y-auto;
+  @apply grid max-h-[300px] w-full grid-cols-1 items-center justify-start gap-4 overflow-y-auto;
 }
 
 .categorys-list::-webkit-scrollbar {
@@ -512,7 +512,7 @@ picture {
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.401);
 }
 .txt-categorys {
-  @apply w-full flex flex-row justify-start items-center pr-4 text-14 cursor-pointer;
+  @apply flex w-full cursor-pointer flex-row items-center justify-start pr-4 text-14;
   color: var(--color_subtext);
   font-family: var(--font-style-3) !important ;
   transition: all 0.25s ease;
@@ -521,7 +521,7 @@ picture {
   color: var(--color_subtext);
   font-family: var(--font-style-3) !important ;
   transition: all 0.25s ease;
-  @apply font-normal text-11 ml-5;
+  @apply ml-5 text-11 font-normal;
 }
 .show-icon:hover {
   color: var(--hover_text);
@@ -537,7 +537,7 @@ picture {
 }
 
 .tittle-banner-shop {
-  @apply w-full flex flex-wrap justify-center items-center;
+  @apply flex w-full flex-wrap items-center justify-center;
 }
 .btn-tittle-shop {
   color: var(--color_title);
@@ -552,7 +552,7 @@ picture {
   border-bottom: 0.5px solid #f2f2f2;
 }
 .content-products-empty {
-  @apply w-full min-h-[200px] flex flex-col justify-center items-center text-center;
+  @apply flex min-h-[200px] w-full flex-col items-center justify-center text-center;
 }
 .txt-products-empty {
   color: #3f3f3f;
@@ -610,7 +610,7 @@ picture {
     @apply text-78;
   }
   .content-banner-shop {
-    @apply pt-[150px] pb-70 mb-40;
+    @apply mb-40 pb-70 pt-[150px];
   }
   .tittle-banner-shop {
     @apply my-6;
