@@ -114,24 +114,24 @@
               :title="$t('home_fenvio')"
               name="4"
             >
-              <div class="w-full flex flex-row justify-between items-center">
+              <div class="flex w-full flex-row items-center justify-between">
                 <input
                   v-model="filters.minPrice"
                   :min="minPrice"
                   :max="maxPrice"
                   placeholder="Mínimo"
-                  class="block w-full rounded-4 px-4 py-4 text-gray-900 shadow-sm border border-[#DCDFE6] placeholder:text-gray-400"
+                  class="block w-full rounded-4 border border-[#DCDFE6] px-4 py-4 text-gray-900 shadow-sm placeholder:text-gray-400"
                   onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode>96 && event.charCode<105)"
                   @keyup.enter="sendFilter"
                   @change="sendFilter"
                 />
-                <span class="px-5 icon-price text-16">-</span>
+                <span class="icon-price px-5 text-16">-</span>
                 <input
                   v-model="filters.maxPrice"
                   :min="minPrice"
                   :max="maxPrice"
                   placeholder="Máximo"
-                  class="block w-full rounded-4 px-4 py-4 text-gray-900 shadow-sm border border-[#DCDFE6] placeholder:text-gray-400"
+                  class="block w-full rounded-4 border border-[#DCDFE6] px-4 py-4 text-gray-900 shadow-sm placeholder:text-gray-400"
                   onkeypress="return (event.charCode>47 && event.charCode<58) || (event.charCode>96 && event.charCode<105)"
                   @keyup.enter="sendFilter"
                   @change="sendFilter"
@@ -140,37 +140,36 @@
             </el-collapse-item>
           </el-collapse>
         </div>
-        <div class="w-full flex flex-col justify-center items-center">
-          <div class="w-full flex justify-between items-center">
-            <div class="w-full flex justify-start items-center">
+        <div class="flex w-full flex-col items-center justify-center">
+          <div class="flex w-full items-center justify-between">
+            <div class="flex w-full items-center justify-start">
               <button class="txt-content-home" @click="clearFilters">
                 {{ $t('header_productos') }}
               </button>
               <button
                 v-if="nameCategory"
-                class="ml-4 txt-color"
+                class="txt-color ml-4"
                 @click="breadcrumbsClear(1)"
               >
-                <span class="font-normal pr-4">/</span>{{ nameCategory }}
+                <span class="pr-4 font-normal">/</span>{{ nameCategory }}
               </button>
               <button
                 v-if="nameSubCategory"
                 class="txt-color"
                 @click="breadcrumbsClear(2)"
               >
-                <span class="font-normal pr-4">/</span>{{ nameSubCategory }}
+                <span class="pr-4 font-normal">/</span>{{ nameSubCategory }}
               </button>
               <p v-if="tagProduct" class="txt-color">
-                <span class="font-normal pr-4">/</span>{{ tagProduct }}
+                <span class="pr-4 font-normal">/</span>{{ tagProduct }}
               </p>
             </div>
             <el-dropdown
-              class="w-full flex justify-end items-center"
-              :hide-on-click="false"
+              class="flex w-full items-center justify-end"
               @command="sendOrder"
             >
               <span
-                class="el-dropdown-link txt-color justify-center items-center"
+                class="el-dropdown-link txt-color items-center justify-center"
               >
                 Ordenar por:
                 <span
@@ -199,26 +198,26 @@
               </el-dropdown-menu>
             </el-dropdown>
           </div>
-          <div class="w-full h-full flex flex-col justify-center items-center">
+          <div class="flex h-full w-full flex-col items-center justify-center">
             <div
-              class="w-full h-full justify-start items-start text-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+              class="grid h-full w-full grid-cols-1 items-start justify-start gap-4 text-center sm:grid-cols-2 md:grid-cols-3"
             >
               <div
                 v-for="product in listProducts"
                 :key="product.id"
-                class="w-full flex flex-col justify-center items-center"
+                class="flex w-full flex-col items-center justify-center"
               >
                 <KoProductCardFilter
                   :product="product"
                   :setting-card-products="settingByTemplate13[0].cardProduct"
                   :setting-general="settingByTemplate13[0].settingGeneral"
-                  class="w-full h-full"
+                  class="h-full w-full"
                 />
               </div>
             </div>
             <div
               v-if="listProducts.length == 0"
-              class="w-full min-h-[200px] flex flex-col justify-center items-center text-center"
+              class="flex min-h-[200px] w-full flex-col items-center justify-center text-center"
             >
               <img
                 v-lazy="
@@ -231,7 +230,7 @@
             </div>
             <div
               v-if="totalProducts > filters.limit"
-              class="mt-50 bg-transparent text-18 product_pagination"
+              class="product_pagination mt-50 bg-transparent text-18"
             >
               <el-pagination
                 background
@@ -292,17 +291,17 @@ export default {
 <style scoped>
 .container-product-max-w {
   max-width: 1300px;
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .product-content {
   background: var(--background_color_1);
-  @apply min-h-full h-full flex flex-col justify-start items-center w-full;
+  @apply flex h-full min-h-full w-full flex-col items-center justify-start;
 }
 .content-banner-shop {
-  @apply w-full flex flex-col;
+  @apply flex w-full flex-col;
 }
 .content-banner-shop-r {
-  @apply w-full flex flex-col justify-start items-start;
+  @apply flex w-full flex-col items-start justify-start;
 }
 /* .itemLeft-range-slide {
   @apply w-full flex justify-center items-center mb-20;
@@ -346,31 +345,31 @@ export default {
   color: var(--color_subtext);
   font-family: var(--font-style-1) !important;
   background: transparent;
-  @apply w-full h-30 cursor-pointer border-none;
+  @apply h-30 w-full cursor-pointer border-none;
 }
 .value-range-slide {
-  @apply w-full flex flex-row justify-start items-center;
+  @apply flex w-full flex-row items-center justify-start;
 }
 .values-prices {
-  @apply w-8/0 flex flex-row justify-start items-center;
+  @apply flex w-8/0 flex-row items-center justify-start;
 }
 .value-price {
   color: #717171;
   font-size: 14px;
   font-family: var(--font-style-1) !important;
-  @apply w-auto pr-1 cursor-default transition-all ease-in duration-0.2;
+  @apply w-auto cursor-default pr-1 transition-all duration-0.2 ease-in;
 }
 .value-precio-change {
-  @apply w-full flex flex-row justify-start items-center;
+  @apply flex w-full flex-row items-center justify-start;
 }
 .price {
   color: #2d2a2a;
   font-size: 14px;
   font-family: var(--font-style-1) !important;
-  @apply flex flex-row justify-start items-center font-semibold transition-all ease-in duration-0.2 cursor-default;
+  @apply flex cursor-default flex-row items-center justify-start font-semibold transition-all duration-0.2 ease-in;
 }
 .btn-slider {
-  @apply w-3/0 flex justify-center items-center;
+  @apply flex w-3/0 items-center justify-center;
 }
 .btn-items-left {
   background-color: #ededed;
@@ -379,28 +378,28 @@ export default {
   padding: 10px 14px;
   letter-spacing: 0.3px;
   font-family: var(--font-style-1) !important;
-  @apply flex justify-center items-center text-center uppercase font-semibold cursor-pointer transition-all ease-in duration-0.2;
+  @apply flex cursor-pointer items-center justify-center text-center font-semibold uppercase transition-all duration-0.2 ease-in;
 }
 .btn-items-left:hover {
   background-color: #e5e5e5;
 }
 .content-items-categorias {
-  @apply w-full flex flex-col justify-start items-center;
+  @apply flex w-full flex-col items-center justify-start;
 }
 .content-items-categorias-text {
-  @apply w-full flex flex-row;
+  @apply flex w-full flex-row;
 }
 .text-categorias {
   color: #333333;
   font-size: 14px;
   font-family: var(--font-style-1) !important;
-  @apply w-auto flex flex-row mr-6 font-semibold cursor-pointer;
+  @apply mr-6 flex w-auto cursor-pointer flex-row font-semibold;
 }
 .separator-breadCrumbs {
   color: #8e8e8e;
   font-size: 14px;
   font-family: var(--font-style-1) !important;
-  @apply w-auto mr-6 ml-6 cursor-pointer transition-all ease-in duration-0.2;
+  @apply ml-6 mr-6 w-auto cursor-pointer transition-all duration-0.2 ease-in;
 }
 .product-stock-text {
   color: #8e8e8e;
@@ -418,27 +417,27 @@ export default {
   color: #8e8e8e;
   font-size: 14px;
   font-family: var(--font-style-1) !important;
-  @apply w-full flex flex-row mr-6 font-normal cursor-pointer transition-all ease-in duration-0.2;
+  @apply mr-6 flex w-full cursor-pointer flex-row font-normal transition-all duration-0.2 ease-in;
 }
 .top-content {
   font-size: 100%;
-  @apply w-full max-w-full flex justify-between items-center flex-wrap mb-20;
+  @apply mb-20 flex w-full max-w-full flex-wrap items-center justify-between;
 }
 .categorys-list {
-  @apply w-full grid grid-cols-1 gap-4 justify-start items-center;
+  @apply grid w-full grid-cols-1 items-center justify-start gap-4;
 }
 .subcategory-list {
-  @apply w-full grid grid-cols-1 gap-4 justify-start items-center transition-all ease-in duration-0.2;
+  @apply grid w-full grid-cols-1 items-center justify-start gap-4 transition-all duration-0.2 ease-in;
 }
 .content-category-left {
-  @apply w-full flex flex-col justify-start items-center;
+  @apply flex w-full flex-col items-center justify-start;
 }
 .txt-Filter {
   color: var(--color_subtext);
   font-size: 15px;
   line-height: 1.3;
   font-family: var(--font-style-1) !important;
-  @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
+  @apply flex w-full cursor-pointer flex-row items-center justify-start pr-1 font-normal transition-all duration-0.2 ease-in;
 }
 .txt-Filter:hover {
   color: #eb7025;
@@ -448,7 +447,7 @@ export default {
   font-size: 15px;
   line-height: 1.3;
   font-family: var(--font-style-1) !important;
-  @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
+  @apply flex w-full cursor-pointer flex-row items-center justify-start pr-1 font-normal transition-all duration-0.2 ease-in;
 }
 .txt-categorys:hover {
   color: #eb7025;
@@ -456,31 +455,31 @@ export default {
 .txt-categorys-active {
   color: #eb7025;
   font-size: 14px;
-  @apply w-full flex flex-row justify-start items-center pr-1 transition-all ease-in duration-0.2 font-semibold cursor-pointer;
+  @apply flex w-full cursor-pointer flex-row items-center justify-start pr-1 font-semibold transition-all duration-0.2 ease-in;
 }
 .txt-categorys:hover .rounded-list {
   background-color: #eb7025;
-  @apply transition-all ease-in duration-0.2;
+  @apply transition-all duration-0.2 ease-in;
 }
 .rounded-list {
   background-color: #e5e5e5;
-  @apply w-10 h-10 rounded-full mr-10 transition-all ease-in duration-0.2;
+  @apply mr-10 h-10 w-10 rounded-full transition-all duration-0.2 ease-in;
 }
 .txt-rounded-list-active {
   background-color: #eb7025;
-  @apply transition-all ease-in duration-0.2;
+  @apply transition-all duration-0.2 ease-in;
 }
 .product-stock {
   color: #333;
   font-size: 14px;
   font-family: var(--font-style-1) !important;
-  @apply mr-6 font-semibold cursor-pointer transition-all ease-in duration-0.2;
+  @apply mr-6 cursor-pointer font-semibold transition-all duration-0.2 ease-in;
 }
 .show-view-per-list {
-  @apply w-auto justify-center items-center;
+  @apply w-auto items-center justify-center;
 }
 .show {
-  @apply w-full cursor-pointer mt-4;
+  @apply mt-4 w-full cursor-pointer;
 }
 .show-icon {
   fill: var(--color_text);
@@ -498,39 +497,39 @@ export default {
   fill: #000;
 }
 .items-end {
-  @apply w-full flex flex-row justify-start items-center;
+  @apply flex w-full flex-row items-center justify-start;
 }
 .tittle-banner-shop {
-  @apply w-full flex flex-col justify-start items-start;
+  @apply flex w-full flex-col items-start justify-start;
 }
 .btn-tittle-shop {
   color: var(--color_text);
   font-family: var(--font-style-1) !important;
-  @apply font-semibold uppercase justify-start items-start;
+  @apply items-start justify-start font-semibold uppercase;
 }
 .product-text {
-  @apply flex flex-col justify-center items-center w-full;
+  @apply flex w-full flex-col items-center justify-center;
 }
 
 .product-content-items {
-  @apply justify-center items-center text-center gap-4;
+  @apply items-center justify-center gap-4 text-center;
 }
 .producto-items-content {
   @apply w-full;
 }
 .content-item {
-  @apply w-full flex flex-row justify-center items-center mb-40;
+  @apply mb-40 flex w-full flex-row items-center justify-center;
 }
 .content-item-productos {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .content-products {
   /* border-bottom: 0.5px solid #f2f2f2; */
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .content-products-empty {
   min-height: 200px;
-  @apply w-full flex flex-col justify-center items-center text-center;
+  @apply flex w-full flex-col items-center justify-center text-center;
 }
 .txt-products-empty {
   font-size: 20px;
@@ -590,45 +589,45 @@ export default {
 } */
 @screen sm {
   .product-content-items {
-    @apply w-full grid grid-cols-2;
+    @apply grid w-full grid-cols-2;
   }
   .btn-tittle-shop {
     font-size: 16px;
     @apply mb-10;
   }
   .content-shop-items {
-    @apply w-full flex flex-row justify-start items-start px-10;
+    @apply flex w-full flex-row items-start justify-start px-10;
   }
   .content-left {
     @apply hidden;
   }
   .content-right {
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
   .top-content {
     @apply hidden;
   }
   .content-items-categorias-text {
-    @apply justify-center items-center;
+    @apply items-center justify-center;
   }
   .text-categorias-select {
     @apply w-auto;
   }
   .content-banner-shop {
-    @apply justify-start items-start my-8 pl-20;
+    @apply my-8 items-start justify-start pl-20;
   }
   .bannerProduct {
     @apply hidden;
   }
   .content-home {
-    @apply w-full flex flex-col justify-start items-start;
+    @apply flex w-full flex-col items-start justify-start;
   }
   .txt-content-home {
     font-family: var(--font-style-1) !important;
     color: var(--color_text);
     font-size: 16px;
     line-height: 1.1;
-    @apply w-auto py-20 uppercase font-semibold cursor-pointer;
+    @apply w-auto cursor-pointer py-20 font-semibold uppercase;
   }
   .txt-content-home:hover {
     color: #000;
@@ -641,7 +640,7 @@ export default {
     color: var(--color_text);
     font-family: var(--font-style-1) !important ;
     transition: all 0.25s ease;
-    @apply font-normal text-11 ml-5;
+    @apply ml-5 text-11 font-normal;
   }
 }
 @media (min-width: 440px) {
@@ -659,7 +658,7 @@ export default {
   }
   .bannerProduct {
     border-color: var(--color_icon);
-    @apply w-full flex bg-cover bg-center bg-no-repeat justify-items-center items-center py-20 border-b;
+    @apply flex w-full items-center justify-items-center border-b bg-cover bg-center bg-no-repeat py-20;
   }
   .product-content-items {
     @apply grid grid-cols-3;
@@ -673,25 +672,25 @@ export default {
     @apply grid grid-cols-2 gap-8;
   }
   .content-items-categorias-text {
-    @apply justify-start items-center;
+    @apply items-center justify-start;
   }
   .items-end {
     @apply flex pb-20;
   }
   .show-view-per-list {
-    @apply w-auto grid grid-cols-2 gap-0 justify-center items-center;
+    @apply grid w-auto grid-cols-2 items-center justify-center gap-0;
   }
   .btn-tittle-shop {
     font-size: 20px;
   }
   .top-content {
     border-bottom: 1px solid var(--color_icon);
-    @apply flex pt-0 pb-5;
+    @apply flex pb-5 pt-0;
   }
   .content-left {
     width: 300px;
     top: 142px;
-    @apply mr-30 flex flex-col justify-between items-start sticky;
+    @apply sticky mr-30 flex flex-col items-start justify-between;
   }
   .content-banner-shop {
     @apply hidden;
@@ -700,7 +699,7 @@ export default {
     @apply flex pb-40;
   }
   .content-shop-items {
-    @apply w-full flex flex-row justify-start items-start mt-40;
+    @apply mt-40 flex w-full flex-row items-start justify-start;
   }
   .hidd {
     @apply hidden;

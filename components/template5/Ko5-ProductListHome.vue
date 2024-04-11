@@ -3,34 +3,34 @@
     <div class="container-productlist">
       <div class="content-title"></div>
       <div class="content-items-categorias">
-        <div class="w-full flex flex-row justify-start items-start">
+        <div class="flex w-full flex-row items-start justify-start">
           <p class="text-categorias" @click="clearFilters">
             {{ $t('home_catalogo') }}
           </p>
-          <div class="flex flex-row justify-center items-start">
+          <div class="flex flex-row items-start justify-center">
             <p
               v-if="nameCategory"
               class="text-categorias"
               @click="breadcrumbsClear(1)"
             >
-              <span class="font-normal pr-4">/</span>{{ nameCategory }}
+              <span class="pr-4 font-normal">/</span>{{ nameCategory }}
             </p>
             <p
               v-if="nameSubCategory"
               class="text-categorias"
               @click="breadcrumbsClear(2)"
             >
-              <span class="font-normal pr-4">/</span>{{ nameSubCategory }}
+              <span class="pr-4 font-normal">/</span>{{ nameSubCategory }}
             </p>
             <p v-if="tagProduct" class="text-categorias">
-              <span class="font-normal pr-4">/</span>{{ tagProduct }}
+              <span class="pr-4 font-normal">/</span>{{ tagProduct }}
             </p>
           </div>
         </div>
-        <div class="w-full flex justify-end items-center">
-          <el-dropdown @command="sendOrder" :hide-on-click="false">
+        <div class="flex w-full items-center justify-end">
+          <el-dropdown @command="sendOrder">
             <span
-              class="el-dropdown-link text-categorias justify-center items-center"
+              class="el-dropdown-link text-categorias items-center justify-center"
             >
               Ordenar por:
               <span
@@ -78,7 +78,7 @@
 
           <div
             v-if="totalProducts > filters.limit"
-            class="mt-50 bg-transparent text-18 product_pagination"
+            class="product_pagination mt-50 bg-transparent text-18"
           >
             <el-pagination
               background
@@ -229,7 +229,7 @@ export default {
 .textSortingFilter {
   color: var(--color_subtext);
   transition: all 0.25s ease;
-  @apply font-normal text-11 ml-5;
+  @apply ml-5 text-11 font-normal;
 }
 .text-categorias-select {
   background: transparent;
