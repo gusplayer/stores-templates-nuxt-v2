@@ -67,7 +67,7 @@
           class="content-card"
         >
           <client-only>
-            <table class="table table-striped">
+            <table class="table-striped table">
               <div class="thead">
                 <ul>
                   <li></li>
@@ -98,7 +98,7 @@
                   <li v-if="item.variantes" class="variants">
                     <el-tag
                       v-for="(productCombinacion, index2) in JSON.parse(
-                        item.variantes
+                        item.variantes,
                       )"
                       :key="index2"
                     >
@@ -124,7 +124,7 @@
               </div>
             </table>
           </client-only>
-          <div class="w-full flex h-1 bg-gray-900"></div>
+          <div class="flex h-1 w-full bg-gray-900"></div>
         </div>
         <div v-else class="content-info-orden">
           <div class="info-left">
@@ -158,7 +158,7 @@
                       $t(
                         saleStateHoko[
                           productDataHoko.delivery_state.valueOf(str) - 1
-                        ].state
+                        ].state,
                       )
                     }}
                   </el-tag>
@@ -191,7 +191,7 @@
                 <a
                   class="btn_url"
                   :href="`https://hoko.com.co/admin/resources/orders/${parseInt(
-                    orden.mensajes[0].mensaje
+                    orden.mensajes[0].mensaje,
                   )}`"
                   target="_blank"
                 >
@@ -488,23 +488,21 @@
               </el-collapse-item>
               <el-collapse-item :title="$t('mcompra_infoVendedor')" name="2">
                 <div class="content-info-buyer">
-                  <p
-                    v-if="
-                      city && city.departamento && city.departamento.nombre_dep
-                    "
-                    class="city"
-                  >
+                  <p class="city">
                     {{ $t('mcompra_departamento') }}
                     <span class="value-data">
-                      {{ city.departamento.nombre_dep }}
+                      {{
+                        city?.departamento?.nombre_dep
+                          ? city.departamento.nombre_dep
+                          : 'N/A'
+                      }}
                     </span>
                   </p>
                   <p class="city">
                     {{ $t('mcompra_ciudad') }}
-                    <span v-if="city && city.nombre_ciu" class="value-data">
-                      {{ city.nombre_ciu }}
+                    <span class="value-data">
+                      {{ city?.nombre_ciu ? city.nombre_ciu : 'N/A' }}
                     </span>
-                    <span v-else class="value-data">N/A</span>
                   </p>
                   <p class="address">
                     {{ $t('mcompra_direccion') }}
@@ -634,12 +632,12 @@ export default {
     }),
     choicePayment() {
       return this.payments.find(
-        (payment) => payment.id === this.orden.venta.metodo_pago
+        (payment) => payment.id === this.orden.venta.metodo_pago,
       )
     },
     choiceState() {
       return this.statusUpdate.find(
-        (payment) => payment.id === this.orden.venta.estado
+        (payment) => payment.id === this.orden.venta.estado,
       )
     },
   },
@@ -652,7 +650,6 @@ export default {
       }
     },
     cities() {
-      this.setCity()
       this.shippingAddress()
     },
     orden() {
@@ -670,13 +667,17 @@ export default {
     },
   },
   async mounted() {
+    this.routePrev()
     if (this.facebookPixel?.pixel_facebook != null) {
       this.$fb.setPixelId(this.facebookPixel.pixel_facebook)
       this.$fb.track('PageView')
       this.$fb.enable()
     }
-    this.routePrev()
-    this.setCity()
+    const { success } = await this.$store.dispatch('GET_CITIES')
+    if (success) {
+      this.setCity()
+    }
+
     this.clearCart()
     if (this.orden && this.orden.message) {
       this.errorMessage()
@@ -702,7 +703,6 @@ export default {
       }
       this.setUser()
       this.setTransportadora()
-      this.$store.dispatch('GET_CITIES')
     }
   },
   destroyed() {
@@ -754,7 +754,7 @@ export default {
       this.direccion_entrega = JSON.parse(
         this.orden && this.orden.venta && this.orden.venta.direccion_entrega
           ? this.orden.venta.direccion_entrega
-          : null
+          : null,
       )
       if (this.cities && this.direccion_entrega) {
         if (this.direccion_entrega.value) {
@@ -793,14 +793,13 @@ export default {
                     'content-type': 'application/json',
                     'Access-Control-Allow-Origin': '*',
                   },
-                }
+                },
               )
               .then((response) => {
                 if (
                   this.numOrden == response.data.data.venta.id &&
                   this.cedula == response.data.data.venta.usuario.identificacion
                 ) {
-                  this.$emit('update', response.data.data)
                   this.setCity()
                   this.$emit('update', response.data.data)
                 } else {
@@ -845,7 +844,7 @@ export default {
     setCity() {
       if (this.cities) {
         this.city = this.cities.find(
-          (city) => city.id === this.dataStore.tiendasInfo.paises.id
+          (city) => city.id === this.dataStore.ciudad,
         )
       }
     },
@@ -884,10 +883,10 @@ export default {
   width: 100%;
 }
 .table-striped .thead ul {
-  @apply w-full grid grid-cols-6 gap-x-2 py-[10px] list-none;
+  @apply grid w-full list-none grid-cols-6 gap-x-2 py-[10px];
 }
 .table-striped .tbody ul {
-  @apply grid grid-cols-6 gap-x-2 py-[10px] list-none;
+  @apply grid list-none grid-cols-6 gap-x-2 py-[10px];
 }
 .table-striped .tbody ul:nth-of-type(odd) {
   background-color: #f9f9f9;
