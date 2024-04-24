@@ -2,7 +2,7 @@
   <div class="wrapper_micompra">
     <div class="contenedor">
       <div class="wrapper-form">
-        <div class="w-full flex flex-row justify-center items-center">
+        <div class="flex w-full flex-row items-center justify-center">
           <nuxt-link
             :to="{
               path: stateWapiME ? `/wa/${dataStore.id}/blog` : `/`,
@@ -77,7 +77,7 @@
           class="content-card"
         >
           <client-only>
-            <table class="table table-striped">
+            <table class="table-striped table">
               <div class="thead">
                 <ul>
                   <li></li>
@@ -108,7 +108,7 @@
                   <li v-if="item.variantes" class="variants">
                     <el-tag
                       v-for="(productCombinacion, index2) in JSON.parse(
-                        item.variantes
+                        item.variantes,
                       )"
                       :key="index2"
                     >
@@ -134,7 +134,7 @@
               </div>
             </table>
           </client-only>
-          <div class="w-full flex h-1 bg-gray-900"></div>
+          <div class="flex h-1 w-full bg-gray-900"></div>
         </div>
         <div v-if="orden.venta" class="content-info-orden">
           <div class="info-left">
@@ -326,23 +326,21 @@
               </el-collapse-item>
               <el-collapse-item :title="$t('mcompra_infoVendedor')" name="2">
                 <div class="content-info-buyer">
-                  <p
-                    v-if="
-                      city && city.departamento && city.departamento.nombre_dep
-                    "
-                    class="city"
-                  >
+                  <p class="city">
                     {{ $t('mcompra_departamento') }}
                     <span class="value-data">
-                      {{ city.departamento.nombre_dep }}
+                      {{
+                        city?.departamento?.nombre_dep
+                          ? city.departamento.nombre_dep
+                          : 'N/A'
+                      }}
                     </span>
                   </p>
                   <p class="city">
                     {{ $t('mcompra_ciudad') }}
-                    <span v-if="city && city.nombre_ciu" class="value-data">
-                      {{ city.nombre_ciu }}
+                    <span class="value-data">
+                      {{ city?.nombre_ciu ? city.nombre_ciu : 'N/A' }}
                     </span>
-                    <span v-else class="value-data">N/A</span>
                   </p>
                   <p class="address">
                     {{ $t('mcompra_direccion') }}
@@ -474,12 +472,12 @@ export default {
     }),
     choicePayment() {
       return this.payments.find(
-        (payment) => payment.id === this.orden.venta.metodo_pago
+        (payment) => payment.id === this.orden.venta.metodo_pago,
       )
     },
     choiceState() {
       return this.statusUpdate.find(
-        (payment) => payment.id === this.orden.venta.estado
+        (payment) => payment.id === this.orden.venta.estado,
       )
     },
   },
@@ -539,9 +537,12 @@ export default {
         this.$fb.enable()
       }
     },
-    performOtherTasks() {
+    async performOtherTasks() {
       this.routePrev()
-      this.setCity()
+      const { success } = await this.$store.dispatch('GET_CITIES')
+      if (success) {
+        this.setCity()
+      }
       this.clearCart()
       if (this.orden && this.orden.message) {
         this.errorMessage()
@@ -583,7 +584,7 @@ export default {
           ]
 
           this.tempData.state = requiredFields.every(
-            (field) => customerData[field]
+            (field) => customerData[field],
           )
         } else {
           this.tempData.dataCustomer = null
@@ -614,7 +615,7 @@ export default {
       this.direccion_entrega = JSON.parse(
         this.orden && this.orden.venta && this.orden.venta.direccion_entrega
           ? this.orden.venta.direccion_entrega
-          : null
+          : null,
       )
       if (this.cities && this.direccion_entrega) {
         if (this.direccion_entrega.value) {
@@ -653,7 +654,7 @@ export default {
                     'content-type': 'application/json',
                     'Access-Control-Allow-Origin': '*',
                   },
-                }
+                },
               )
               .then((response) => {
                 if (
@@ -661,10 +662,9 @@ export default {
                   this.cedula == response.data.data.venta.usuario.identificacion
                 ) {
                   this.mensajeWa = JSON.parse(
-                    response.data.data.venta.comentario
+                    response.data.data.venta.comentario,
                   )
                   this.$emit('update', response.data.data)
-                  this.setCity()
                 } else {
                   this.$emit('update', {})
                   this.errorMessageTwo()
@@ -707,7 +707,7 @@ export default {
     setCity() {
       if (this.cities) {
         this.city = this.cities.find(
-          (city) => city.id === this.dataStore.tiendasInfo.paises.id
+          (city) => city.id === this.dataStore.ciudad,
         )
       }
     },
@@ -752,10 +752,10 @@ export default {
   width: 100%;
 }
 .table-striped .thead ul {
-  @apply w-full grid grid-cols-6 gap-x-2 py-[10px] list-none;
+  @apply grid w-full list-none grid-cols-6 gap-x-2 py-[10px];
 }
 .table-striped .tbody ul {
-  @apply grid grid-cols-6 gap-x-2 py-[10px] list-none;
+  @apply grid list-none grid-cols-6 gap-x-2 py-[10px];
 }
 .table-striped .tbody ul:nth-of-type(odd) {
   background-color: #f9f9f9;
@@ -806,7 +806,7 @@ table {
   min-height: calc(100vh - 36px);
   background-color: var(--background_color_2);
   box-sizing: border-box;
-  @apply flex w-full h-full justify-center items-center;
+  @apply flex h-full w-full items-center justify-center;
 }
 .contenedor {
   width: 100%;
