@@ -222,8 +222,7 @@ export default {
         }
         if (e && e.data && e.data.checkout) {
           if (e.data.setting) {
-            this.$store.state.dataStore.whatsapp_checkout.configuration =
-              e.data.setting
+            this.$store.state.checkoutWhatsApp.configuration = e.data.setting
           }
           this.$store.commit('SET_OPEN_ORDER', true)
           this.$store.commit('SET_STATE_FORM_MODAL_WHATS_APP', true)
