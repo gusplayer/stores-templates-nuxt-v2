@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full justify-center items-center relative mt-20 md:mt-50"
+    class="relative mt-20 w-full items-center justify-center md:mt-50"
     :style="[offers, `background-color: ${offers['--background_color_1']}`]"
   >
     <picture>
@@ -19,29 +19,29 @@
       />
     </picture>
     <div
-      class="w-full h-full max-w-9/0 flex flex-col justify-center items-end absolute top-0"
+      class="absolute top-0 flex h-full w-full max-w-9/0 flex-col items-end justify-center"
       style="z-index: 20"
     >
       <div
-        class="w-full h-full max-w-lg flex flex-col justify-center items-end"
+        class="flex h-full w-full max-w-lg flex-col items-end justify-center"
       >
-        <div class="flex-1 flex flex-col justify-center items-start">
+        <div class="flex flex-1 flex-col items-start justify-center">
           <p
             v-if="offers?.title"
-            class="mb-10 max-w-lg md:max-w-xl text-20 md:text-25 lg:text-40 xl:text-45 leading-tight"
+            class="mb-10 max-w-lg text-20 leading-tight md:max-w-xl md:text-25 lg:text-40 xl:text-45"
             :style="`color: ${offers.color_title}; font-weight: ${offers.fontWeighTitle};`"
           >
             {{ offers.title }}
           </p>
           <p
             v-if="offers?.text"
-            class="max-w-md md:max-w-lg text-18 xl:text-28"
+            class="max-w-md text-18 md:max-w-lg xl:text-28"
             :style="`color: ${offers.color_text}; font-weight: ${offers.fontWeighText};`"
           >
             {{ offers.text }}
           </p>
 
-          <div class="w-full max-w-[300px] flex justify-start items-start">
+          <div class="flex w-full max-w-[300px] items-start justify-start">
             <div ref="mySwiper" v-swiper:mySwiper="swiperOption">
               <div class="swiper-wrapper">
                 <div
@@ -127,9 +127,9 @@ export default {
             limit: 1,
             page: 1,
             name: value,
-          }
+          },
         )
-        if (success) {
+        if (success && value !== null) {
           this.product = data.publicProductList
         }
       }
