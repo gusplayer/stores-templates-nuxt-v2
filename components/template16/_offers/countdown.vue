@@ -2,7 +2,7 @@
   <div>
     <div v-if="!isFinished" class="mt-30 grid grid-flow-col gap-x-4">
       <div
-        class="py-8 px-3 text-center w-[60px]"
+        class="w-[60px] px-3 py-8 text-center"
         :style="`color: ${information.color_text_discount}; background-color: ${information.color_bg}; border-color: ${information.color_bg_discount}; border-radius: ${settingGeneral?.radius};`"
       >
         <p class="text-18 font-bold">
@@ -11,7 +11,7 @@
         <span class="text-14">días</span>
       </div>
       <div
-        class="py-8 px-3 text-center w-[60px]"
+        class="w-[60px] px-3 py-8 text-center"
         :style="`color: ${information.color_text_discount}; background-color: ${information.color_bg}; border-color: ${information.color_bg_discount}; border-radius: ${settingGeneral?.radius};`"
       >
         <p class="text-18 font-bold">
@@ -20,7 +20,7 @@
         <span class="text-14">horas</span>
       </div>
       <div
-        class="py-8 px-3 text-center w-[60px]"
+        class="w-[60px] px-3 py-8 text-center"
         :style="`color: ${information.color_text_discount}; background-color: ${information.color_bg}; border-color: ${information.color_bg_discount}; border-radius: ${settingGeneral?.radius};`"
       >
         <p class="text-18 font-bold">
@@ -29,7 +29,7 @@
         <span class="text-14">min</span>
       </div>
       <div
-        class="py-8 px-3 text-center w-[60px]"
+        class="w-[60px] px-3 py-8 text-center"
         :style="`color: ${information.color_text_discount}; background-color: ${information.color_bg}; border-color: ${information.color_bg_discount}; border-radius: ${settingGeneral?.radius};`"
       >
         <p class="text-18 font-bold">
@@ -40,19 +40,10 @@
     </div>
     <div
       v-else
-      class="mt-30 text-16 xl:text-20 font-semibold"
+      class="mt-30 text-16 font-semibold xl:text-20"
       :style="`color: ${information.color_text_discount};`"
     >
       <p>Oferta finalizada</p>
-    </div>
-    <div v-if="product && product[0]" class="mt-40">
-      <KoProductCard
-        :product="product[0]"
-        :setting-card-products="cardProducts"
-        :setting-general="settingGeneral"
-        style="max-width: 300px"
-        :style="`border-radius: ${settingGeneral?.radius};`"
-      />
     </div>
   </div>
 </template>
@@ -60,25 +51,12 @@
 <script>
 export default {
   name: 'K0CountDown',
-  components: {
-    KoProductCard: () => import('../_cardProduct/ProductCard.vue'),
-  },
   props: {
     information: {
       type: Object,
       required: true,
     },
-    product: {
-      validator: function (value) {
-        return value === null || Array.isArray(value)
-      },
-      required: true,
-    },
     settingGeneral: {
-      type: Object,
-      required: true,
-    },
-    cardProducts: {
       type: Object,
       required: true,
     },
@@ -142,10 +120,10 @@ export default {
 
       this.countdown.days = Math.floor(timeLeft / (1000 * 60 * 60 * 24))
       this.countdown.hours = Math.floor(
-        (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
       )
       this.countdown.minutes = Math.floor(
-        (timeLeft % (1000 * 60 * 60)) / (1000 * 60)
+        (timeLeft % (1000 * 60 * 60)) / (1000 * 60),
       )
       this.countdown.seconds = Math.floor((timeLeft % (1000 * 60)) / 1000)
     },
