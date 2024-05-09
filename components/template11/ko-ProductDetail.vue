@@ -12,7 +12,7 @@
   >
     <div
       v-if="loading"
-      class="w-full flex max-w-[1300px] flex-col justify-start items-center pt-25 px-10 pb-20 md:pt-50 md:px-30 md:pb-30"
+      class="flex w-full max-w-[1300px] flex-col items-center justify-start px-10 pb-20 pt-25 md:px-30 md:pb-30 md:pt-50"
     >
       <Skeleton />
     </div>
@@ -109,7 +109,7 @@
               ></iframe>
             </div>
             <ProductSlide
-              class="w-full h-full box-border photos_responsive"
+              class="photos_responsive box-border h-full w-full"
               :photos="data.productosFotos"
               :photo="data.fotoCloudinary"
               :id-you-tube="idYoutube"
@@ -123,7 +123,7 @@
           <div class="content-items-right">
             <div
               v-if="data.productosInfo.marca"
-              class="w-full flex justify-start items-center"
+              class="flex w-full items-center justify-start"
             >
               <p class="stock-text-2">
                 {{ data.productosInfo.marca }}
@@ -147,7 +147,7 @@
                   salesData.precio
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda
+                      dataStore.tiendasInfo.moneda,
                     )
                 }}
               </p>
@@ -157,7 +157,7 @@
                   data.productosInfo.promocionValor &&
                   salesData.precio
                 "
-                class="flex flex-row justify-center items-center"
+                class="flex flex-row items-center justify-center"
               >
                 <p class="card-discont">
                   {{ data.productosInfo.promocionValor }}% De Descuento
@@ -168,12 +168,12 @@
                     data.productosInfo.promocionValor
                       ? Math.trunc(
                           salesData.precio /
-                            (1 - data.productosInfo.promocionValor / 100)
+                            (1 - data.productosInfo.promocionValor / 100),
                         )
                       : 0)
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda
+                        dataStore.tiendasInfo.moneda,
                       )
                   }}
                 </p>
@@ -181,7 +181,7 @@
             </div>
             <div
               v-if="dataStore.medioPagos.addi === 1"
-              class="w-full flex justify-start"
+              class="flex w-full justify-start"
             >
               <PluginAddi
                 :more-details="false"
@@ -220,7 +220,7 @@
                 class="text-stock"
                 style="color: #00a650"
               >
-                <TruckIcon class="text-16 mr-5" />
+                <TruckIcon class="mr-5 text-16" />
                 {{ $t('footer_tarifaPrecio') }}
               </p>
             </div>
@@ -252,26 +252,19 @@
               </p>
             </div>
             <div
-              v-if="
-                (data.productosInfo.largo != 0 &&
-                  data.productosInfo.largo != null) ||
-                (data.productosInfo.largo != 0 &&
-                  data.productosInfo.largo != null) ||
-                (data.productosInfo.alto != 0 &&
-                  data.productosInfo.alto != null) ||
-                (data.productosInfo.peso > 0 && data.productosInfo.peso != null)
-              "
-              class="w-full flex justify-start items-center my-6"
+              v-if="validateDimensions"
+              class="my-6 flex w-full items-center justify-start"
             >
               <p class="stock-text-1">
                 {{ $t('productdetail_dimensiones') }}
               </p>
             </div>
-            <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-0">
+            <div class="grid w-full grid-cols-1 gap-x-2 gap-y-0 sm:grid-cols-2">
               <div
                 v-if="
                   data.productosInfo.largo != 0 &&
-                  data.productosInfo.largo != null
+                  data.productosInfo.largo != null &&
+                  data.productosInfo.largo != 'null'
                 "
                 class="content-stock"
               >
@@ -281,7 +274,8 @@
               <div
                 v-if="
                   data.productosInfo.ancho != 0 &&
-                  data.productosInfo.ancho != null
+                  data.productosInfo.ancho != null &&
+                  data.productosInfo.ancho != 'null'
                 "
                 class="content-stock"
               >
@@ -291,7 +285,8 @@
               <div
                 v-if="
                   data.productosInfo.alto != 0 &&
-                  data.productosInfo.alto != null
+                  data.productosInfo.alto != null &&
+                  data.productosInfo.alto != 'null'
                 "
                 class="content-stock"
               >
@@ -300,7 +295,9 @@
               </div>
               <div
                 v-if="
-                  data.productosInfo.peso > 0 && data.productosInfo.peso != null
+                  data.productosInfo.peso > 0 &&
+                  data.productosInfo.peso != null &&
+                  data.productosInfo.peso != 'null'
                 "
                 class="content-stock"
               >
@@ -337,7 +334,7 @@
             </div>
             <div
               v-if="userDropshipping.userName"
-              class="w-full flex flex-row items-center my-8"
+              class="my-8 flex w-full flex-row items-center"
             >
               <p class="text-variant" style="margin-right: 10px">
                 {{ $t('productdetail_dropshipping') }}
@@ -346,7 +343,7 @@
                 {{ userDropshipping.userName }}
               </p>
             </div>
-            <div class="w-full flex flex-row items-center">
+            <div class="flex w-full flex-row items-center">
               <p class="text-variant" style="margin-right: 10px">
                 {{ $t('productdetail_compartir') }}
               </p>
@@ -363,7 +360,7 @@
               </button>
             </div>
             <div
-              class="mt-0 pb-10 md:mt-15 md:pb-20 fixed md:sticky w-full flex gap-x-4 flex-row justify-center md:justify-start items-center left-0 bottom-0 px-6 pt-10 md:px-0 md:pt-0 border-t md:border-t-0 z-10 md:z-0 md:border-b border-color"
+              class="border-color fixed bottom-0 left-0 z-10 mt-0 flex w-full flex-row items-center justify-center gap-x-4 border-t px-6 pb-10 pt-10 md:sticky md:z-0 md:mt-15 md:justify-start md:border-b md:border-t-0 md:px-0 md:pb-20 md:pt-0"
               :style="`background-color: ${settingByTemplate11[0].detailsProduct['--background_color_1']};`"
             >
               <div
@@ -590,7 +587,23 @@ export default {
     },
     filterSuggestedProducts() {
       return this.suggestedProducts.filter(
-        (product) => product.id !== this.data.id
+        (product) => product.id !== this.data.id,
+      )
+    },
+    validateDimensions() {
+      return (
+        (this.data.productosInfo.largo != 0 &&
+          this.data.productosInfo.largo != null &&
+          this.data.productosInfo.largo != 'null') ||
+        (this.data.productosInfo.ancho != 0 &&
+          this.data.productosInfo.ancho != null &&
+          this.data.productosInfo.ancho != 'null') ||
+        (this.data.productosInfo.alto != 0 &&
+          this.data.productosInfo.alto != null &&
+          this.data.productosInfo.alto != 'null') ||
+        (this.data.productosInfo.peso > 0 &&
+          this.data.productosInfo.peso != null &&
+          this.data.productosInfo.peso != 'null')
       )
     },
   },
@@ -617,11 +630,11 @@ export default {
           this.data.conVariante > 0
         ) {
           const combinaciones = JSON.parse(
-            this.data.combinaciones[0][0].combinaciones
+            this.data.combinaciones[0][0].combinaciones,
           )
           const result = combinaciones.find(
             (combinacion) =>
-              JSON.stringify(combinacion.combinacion) == combinationSelected
+              JSON.stringify(combinacion.combinacion) == combinationSelected,
           )
           this.productCart = []
           this.productIndexCart = null
@@ -682,7 +695,7 @@ export default {
         'products/GET_DATA_PRODUCT',
         {
           slug: this.id,
-        }
+        },
       )
       if (success && data.data) {
         this.loading = false
@@ -853,7 +866,7 @@ export default {
         this.$store.state.productsCart.splice(
           this.productIndexCart,
           1,
-          mutableProduct
+          mutableProduct,
         )
       } else {
         this.$store.state.productsCart.push(product)
@@ -912,7 +925,7 @@ export default {
           limit: 12,
           category: this.data.categoriaProducto2.nombreCategoriaProducto,
           // subcategory: this.data.subcategoria,
-        }
+        },
       )
       if (success) {
         this.suggestedProducts = data.publicProductList
@@ -1016,7 +1029,7 @@ export default {
   min-height: 442px;
   max-height: 442px;
   margin-right: 30px;
-  @apply w-full h-full flex relative overflow-hidden;
+  @apply relative flex h-full w-full overflow-hidden;
 }
 .photos_selected {
   display: flex;
@@ -1026,11 +1039,11 @@ export default {
   max-width: 100px;
   min-height: 100px;
   min-width: 100px;
-  @apply w-full h-full;
+  @apply h-full w-full;
 }
 .img-list {
   vertical-align: top;
-  @apply w-full h-full cursor-pointer object-cover rounded-6 mb-10;
+  @apply mb-10 h-full w-full cursor-pointer rounded-6 object-cover;
 }
 .swiper-prev {
   position: absolute;
@@ -1079,69 +1092,69 @@ export default {
 }
 .wrapper-productDetail {
   background: var(--background_color_1);
-  @apply w-full flex justify-center items-center;
+  @apply flex w-full items-center justify-center;
 }
 .container-productDetail-loading {
   height: calc(100vh - 420px);
   max-width: 1200px;
   padding: 50px 30px 30px 30px;
   background: var(--background_color_1);
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .container-productDetail {
   background: var(--background_color_1);
-  @apply w-full h-full flex flex-col justify-center items-center;
+  @apply flex h-full w-full flex-col items-center justify-center;
 }
 .left {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .content-images {
-  @apply w-full grid grid-cols-1 gap-4 justify-center items-center;
+  @apply grid w-full grid-cols-1 items-center justify-center gap-4;
 }
 .content-variant {
-  @apply w-full flex flex-col justify-center items-start mt-30;
+  @apply mt-30 flex w-full flex-col items-start justify-center;
 }
 .content-items-variant {
   margin-bottom: 8px;
-  @apply w-full flex flex-col justify-start items-start;
+  @apply flex w-full flex-col items-start justify-start;
 }
 .aditional-images,
 .main-images,
 .youtuve-video {
-  @apply w-full flex justify-center items-center;
+  @apply flex w-full items-center justify-center;
 }
 .right {
-  @apply w-full flex flex-col justify-start items-start;
+  @apply flex w-full flex-col items-start justify-start;
 }
 .content-category,
 .content-name,
 .content-price,
 .content-addCart {
-  @apply w-full flex flex-row justify-start items-center;
+  @apply flex w-full flex-row items-center justify-start;
 }
 .quantity {
-  @apply flex flex-row justify-center items-center;
+  @apply flex flex-row items-center justify-center;
 }
 .section-suggesProduct {
-  @apply w-full my-40;
+  @apply my-40 w-full;
 }
 .content-quantity-boxes {
-  @apply flex flex-row justify-start items-center;
+  @apply flex flex-row items-center justify-start;
 }
 .box-quantity {
   background-color: transparent;
   border: 1px solid var(--border);
-  @apply w-75 h-50 flex text-center justify-center items-center;
+  @apply flex h-50 w-75 items-center justify-center text-center;
 }
 .box-quantity-btns {
   background-color: var(--color_background_btn);
   border: 1px solid var(--color_background_btn);
-  @apply w-25 h-50 flex flex-col text-center justify-center items-center;
+  @apply flex h-50 w-25 flex-col items-center justify-center text-center;
 }
 .btn-quantity {
   background-color: var(--color_background_btn);
   border-color: var(--color_background_btn);
-  @apply w-25 h-25 flex justify-center items-center border-t border-r;
+  @apply flex h-25 w-25 items-center justify-center border-r border-t;
 }
 
 .card-discont {
@@ -1160,10 +1173,10 @@ export default {
 }
 @screen sm {
   .product-content {
-    @apply w-9/0 flex-col justify-center items-center mt-40;
+    @apply mt-40 w-9/0 flex-col items-center justify-center;
   }
   .content-direction-btns {
-    @apply w-full flex flex-col justify-start items-start;
+    @apply flex w-full flex-col items-start justify-start;
   }
   .video {
     width: 100%;
@@ -1177,24 +1190,24 @@ export default {
     @apply flex;
   }
   .tab {
-    @apply w-9/0 flex mt-40;
+    @apply mt-40 flex w-9/0;
   }
   .content-options {
-    @apply w-full flex flex-col justify-start items-center;
+    @apply flex w-full flex-col items-center justify-start;
   }
   .btn {
     color: var(--color_text_btn);
     background-color: var(--color_background_btn);
     border-radius: var(--radius_btn);
     transition: all 0.15s ease-in;
-    @apply w-full h-54 flex flex-row justify-center items-center;
+    @apply flex h-54 w-full flex-row items-center justify-center;
   }
   .btn-disabled {
     color: var(--color_text_btn);
     background-color: var(--color_background_btn);
     border-radius: var(--radius_btn);
     transition: all 0.15s ease-in;
-    @apply w-full h-54 flex flex-row justify-center items-center;
+    @apply flex h-54 w-full flex-row items-center justify-center;
   }
   .btn:hover .text-addCart {
     background-color: var(--hover_Bg_btn);
@@ -1234,25 +1247,25 @@ export default {
     padding: 0 35px;
     border: none;
     font-size: 21px;
-    @apply w-full flex justify-center items-center text-center font-semibold;
+    @apply flex w-full items-center justify-center text-center font-semibold;
   }
   .text-addCart {
     font-family: var(--font-style-1) !important;
     color: var(--color_text_btn);
     font-size: 12px;
-    @apply font-semibold whitespace-nowrap uppercase;
+    @apply whitespace-nowrap font-semibold uppercase;
   }
   .minicart-icon {
     fill: var(--color_text_btn);
     color: var(--color_text_btn);
-    @apply mr-10 mb-5;
+    @apply mb-5 mr-10;
   }
   .text-variant {
     color: var(--color_subtext);
     font-size: 16px;
     transition: all 0.6s ease-in-out;
     font-family: var(--font-style-1) !important;
-    @apply font-semibold mr-10;
+    @apply mr-10 font-semibold;
   }
   .text-option {
     color: var(--color_subtext);
@@ -1268,27 +1281,27 @@ export default {
     @apply w-9/0;
   }
   .content-items-right {
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
   .empty {
     background-color: var(--border);
     max-width: 1200px;
-    @apply w-full h-1;
+    @apply h-1 w-full;
   }
   .content-stock {
-    @apply w-full flex flex-row justify-start items-center my-8;
+    @apply my-8 flex w-full flex-row items-center justify-start;
   }
   .stock-text-1 {
     color: var(--color_subtext);
     font-size: 16px;
     font-family: var(--font-style-1) !important;
-    @apply font-semibold mr-10;
+    @apply mr-10 font-semibold;
   }
   .stock-text-2 {
     color: var(--color_subtext);
     font-size: 15px;
     font-family: var(--font-style-1) !important;
-    @apply font-normal text-left;
+    @apply text-left font-normal;
   }
 }
 @media (min-width: 425px) {
@@ -1303,22 +1316,22 @@ export default {
 }
 @screen md {
   .banner-detail {
-    @apply w-full flex bg-cover bg-center bg-no-repeat justify-items-center items-center py-20;
+    @apply flex w-full items-center justify-items-center bg-cover bg-center bg-no-repeat py-20;
   }
   .crumb {
-    @apply w-full flex flex-row justify-center items-center;
+    @apply flex w-full flex-row items-center justify-center;
   }
   .separatorCrumb {
     font-size: 9px;
     color: var(--breadCrumbs);
     font-family: var(--font-style-1) !important;
-    @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
+    @apply cursor-pointer pr-6 leading-14 transition-all duration-0.2 ease-in;
   }
   .txt-crumb {
     font-size: 15px;
     color: var(--breadCrumbs);
     font-family: var(--font-style-1) !important;
-    @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
+    @apply cursor-pointer pr-6 leading-14 transition-all duration-0.2 ease-in;
   }
   .s1:hover {
     color: var(--hover_text);
@@ -1339,7 +1352,7 @@ export default {
     @apply w-9/5;
   }
   .product-content {
-    @apply w-9/5 grid grid-cols-2 gap-4 justify-start items-start;
+    @apply grid w-9/5 grid-cols-2 items-start justify-start gap-4;
   }
   .section-suggesProduct {
     @apply w-9/5;

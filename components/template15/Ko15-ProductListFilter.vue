@@ -141,13 +141,13 @@
                   </el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
-              <button class="flex md:hidden">
+              <!-- <button class="flex md:hidden">
                 <filterOutLine-icon
                   class="text-25"
                   :style="`color: ${settingByTemplate15[0].listProductsFilter['--color_icon']};`"
                   @click="openMenuLateral"
                 />
-              </button>
+              </button> -->
             </div>
           </div>
           <div class="flex h-full w-full flex-col items-center justify-center">

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex flex-col justify-center items-center mb-30"
+    class="mb-30 flex w-full flex-col items-center justify-center"
     style="background-color: var(--background_color_1)"
     :style="[
       settingByTemplate15[0].detailsProducts,
@@ -16,11 +16,11 @@
     ]"
   >
     <div
-      class="w-full box-content flex items-center justify-center"
+      class="box-content flex w-full items-center justify-center"
       style="background-color: var(--background_color_2)"
     >
       <div
-        class="w-full max-w-7xl flex flex-row items-center justify-start py-10 px-10 md:px-5"
+        class="flex w-full max-w-7xl flex-row items-center justify-start px-10 py-10 md:px-5"
         :style="`color: ${settingByTemplate15[0].detailsProducts.color_breadCrumbs};`"
       >
         <nuxt-link to="/" class="text-14">
@@ -38,32 +38,32 @@
     </div>
     <div
       v-if="loading"
-      class="w-full flex max-w-[1300px] flex-col justify-start items-center pt-25 px-10 pb-20 md:pt-50 md:px-30 md:pb-30"
+      class="flex w-full max-w-[1300px] flex-col items-center justify-start px-10 pb-20 pt-25 md:px-30 md:pb-30 md:pt-50"
     >
       <Skeleton />
     </div>
     <div
       v-else
-      class="w-full h-full flex justify-center items-center px-10 md:px-5 mt-40 max-w-7xl"
+      class="mt-40 flex h-full w-full max-w-7xl items-center justify-center px-10 md:px-5"
     >
-      <div class="w-full h-full flex flex-col justify-center items-center">
+      <div class="flex h-full w-full flex-col items-center justify-center">
         <div
-          class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 justify-center items-start"
+          class="grid w-full grid-cols-1 items-start justify-center gap-4 md:grid-cols-2"
         >
-          <div class="w-full flex flex-col justify-center items-center">
-            <div class="w-full flex flex-row items-start pb-10">
+          <div class="flex w-full flex-col items-center justify-center">
+            <div class="flex w-full flex-row items-start pb-10">
               <div
-                class="hidden md:flex w-full h-full relative overflow-hidden mr-30 max-w-[110px] max-h-[442px] min-h-[442px]"
+                class="relative mr-30 hidden h-full max-h-[442px] min-h-[442px] w-full max-w-[110px] overflow-hidden md:flex"
               >
                 <div ref="mySwiper" v-swiper:mySwiper="swiperOption">
-                  <div class="swiper-wrapper w-full h-full">
-                    <div class="swiper-slide w-full h-full">
+                  <div class="swiper-wrapper h-full w-full">
+                    <div class="swiper-slide h-full w-full">
                       <div
-                        class="w-full h-full flex flex-col justify-stretch max-h-[100px] max-w-[100px]"
+                        class="flex h-full max-h-[100px] w-full max-w-[100px] flex-col justify-stretch"
                       >
                         <img
                           v-lazy="idCloudinary(data.fotoCloudinary, 150, 150)"
-                          class="w-full h-full cursor-pointer object-cover rounded-6 mb-10 align-top"
+                          class="mb-10 h-full w-full cursor-pointer rounded-6 object-cover align-top"
                           width="100"
                           height="100"
                           alt="Product Img"
@@ -74,31 +74,31 @@
                     <div
                       v-for="(photo, itemsPhoto) in data.productosFotos"
                       :key="itemsPhoto"
-                      class="swiper-slide w-full h-full"
+                      class="swiper-slide h-full w-full"
                     >
                       <div
-                        class="w-full h-full flex flex-col justify-stretch max-h-[100px] max-w-[100px]"
+                        class="flex h-full max-h-[100px] w-full max-w-[100px] flex-col justify-stretch"
                       >
                         <img
                           v-lazy="
                             idCloudinaryQuality(photo.fotoCloudinary, 850, 850)
                           "
-                          class="w-full h-full cursor-pointer object-cover rounded-6 mb-10 align-top"
+                          class="mb-10 h-full w-full cursor-pointer rounded-6 object-cover align-top"
                           alt="Product Img"
                           @click="selectedPhoto(photo.fotoCloudinary)"
                         />
                       </div>
                     </div>
-                    <div class="swiper-slide w-full h-full">
+                    <div class="swiper-slide h-full w-full">
                       <div
-                        class="w-full h-full flex flex-col justify-stretch max-h-[100px] max-w-[100px]"
+                        class="flex h-full max-h-[100px] w-full max-w-[100px] flex-col justify-stretch"
                       >
                         <img
                           v-if="idYoutube"
                           v-lazy="
                             `https://img.youtube.com/vi/${idYoutube}/0.jpg`
                           "
-                          class="w-full h-full cursor-pointer object-cover rounded-6 mb-10 align-top"
+                          class="mb-10 h-full w-full cursor-pointer rounded-6 object-cover align-top"
                           alt="Product video"
                           @mouseover="existYoutube = true"
                         />
@@ -120,15 +120,15 @@
                 </div>
               </div>
               <div
-                class="relative hidden md:flex w-full h-full max-w-[375px] max-h-[375px] mr-10"
+                class="relative mr-10 hidden h-full max-h-[375px] w-full max-w-[375px] md:flex"
               >
                 <div
                   v-if="activeZoom && !existYoutube"
-                  class="w-full h-full max-w-[375px] max-h-[375px] object-contain rounded-10 object-top"
+                  class="h-full max-h-[375px] w-full max-w-[375px] rounded-10 object-contain object-top"
                 >
                   <img
                     v-lazy="idCloudinaryQuality(selectPhotoUrl, 850, 850)"
-                    class="w-full h-full max-w-[375px] max-h-[375px] object-contain rounded-10 object-top"
+                    class="h-full max-h-[375px] w-full max-w-[375px] rounded-10 object-contain object-top"
                     alt="ProductImg grande"
                   />
                 </div>
@@ -137,14 +137,14 @@
                   :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
                   frameborder="0"
                   allowfullscreen
-                  class="w-full h-full max-w-[375px] max-h-[375px] object-contain rounded-10 object-top"
+                  class="h-full max-h-[375px] w-full max-w-[375px] rounded-10 object-contain object-top"
                 ></iframe>
               </div>
               <div
-                class="w-full h-full box-border flex md:hidden justify-start items-center"
+                class="box-border flex h-full w-full items-center justify-start md:hidden"
               >
                 <ProductSlide
-                  class="w-full h-full max-w-[375px]"
+                  class="h-full w-full max-w-[375px]"
                   :photos="data.productosFotos"
                   :photo="data.fotoCloudinary"
                   :id-you-tube="idYoutube"
@@ -152,8 +152,8 @@
               </div>
             </div>
           </div>
-          <div class="w-full flex flex-col justify-start items-start">
-            <div class="flex flex-row justify-start items-center mb-1">
+          <div class="flex w-full flex-col items-start justify-start">
+            <div class="mb-1 flex flex-row items-center justify-start">
               <p
                 v-if="
                   salesData.estado &&
@@ -180,7 +180,7 @@
             >
               {{ data.nombre }}
             </p>
-            <div class="w-full flex flex-row justify-start items-center mb-20">
+            <div class="mb-20 flex w-full flex-row items-center justify-start">
               <p
                 v-if="salesData.precio"
                 :style="`font-size:${settingByTemplate15[0].detailsProducts.fontSizePrice}; font-weight:${settingByTemplate15[0].detailsProducts.fontWeightPrice}; color:${settingByTemplate15[0].detailsProducts.color_price};`"
@@ -189,7 +189,7 @@
                   salesData.precio
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda
+                      dataStore.tiendasInfo.moneda,
                     )
                 }}
               </p>
@@ -199,10 +199,10 @@
                   data.productosInfo.promocionValor &&
                   salesData.precio
                 "
-                class="w-full flex flex-row justify-start items-center"
+                class="flex w-full flex-row items-center justify-start"
               >
                 <p
-                  class="text-12 mx-5 bg-red-500 text-white-white px-3 py-5 rounded-4"
+                  class="mx-5 rounded-4 bg-red-500 px-3 py-5 text-12 text-white-white"
                 >
                   {{ data.productosInfo.promocionValor }}% De Descuento
                 </p>
@@ -215,12 +215,12 @@
                     data.productosInfo.promocionValor
                       ? Math.trunc(
                           salesData.precio /
-                            (1 - data.productosInfo.promocionValor / 100)
+                            (1 - data.productosInfo.promocionValor / 100),
                         )
                       : 0)
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda
+                        dataStore.tiendasInfo.moneda,
                       )
                   }}
                 </p>
@@ -234,7 +234,7 @@
             />
             <div
               v-if="data.productosInfo.descripcionCorta"
-              class="w-full mb-25 pt-10"
+              class="mb-25 w-full pt-10"
             >
               <p
                 class="text-14"
@@ -245,12 +245,12 @@
             </div>
             <div
               v-if="data.conVariante === 1 && variantes"
-              class="w-full mb-15"
+              class="mb-15 w-full"
             >
               <div
                 v-for="(variant, index) in variantes"
                 :key="index"
-                class="flex flex-col justify-center items-start"
+                class="flex flex-col items-start justify-center"
               >
                 <label
                   for="variant name"
@@ -282,10 +282,10 @@
             </div>
             <div
               v-if="userDropshipping.userName"
-              class="w-full flex flex-row items-center mb-10 md:mb-30"
+              class="mb-10 flex w-full flex-row items-center md:mb-30"
             >
               <p
-                class="text-16 font-bold mr-10"
+                class="mr-10 text-16 font-bold"
                 :style="`color:${settingByTemplate15[0].detailsProducts.color_text};`"
               >
                 {{ $t('productdetail_dropshipping') }}
@@ -298,16 +298,16 @@
               </p>
             </div>
             <div
-              class="fixed md:sticky w-full flex flex-row justify-start items-center mb-0 md:mb-20 left-0 bottom-0 px-6 py-10 md:px-0 md:py-0 border-t md:border-t-0 z-10 md:z-0"
+              class="fixed bottom-0 left-0 z-10 mb-0 flex w-full flex-row items-center justify-start border-t px-6 py-10 md:sticky md:z-0 md:mb-20 md:border-t-0 md:px-0 md:py-0"
               :style="`background-color: ${settingByTemplate15[0].detailsProducts['--background_color_1']};`"
             >
               <div
-                class="flex flex-row justify-center items-center mr-20 border-2"
+                class="mr-20 flex flex-row items-center justify-center border-2"
                 :class="{ disabled: !salesData.estado }"
                 :style="`border-color:${settingByTemplate15[0].detailsProducts.color_border}; border-radius: ${settingByTemplate15[0].settingGeneral.radius};`"
               >
                 <button
-                  class="bg-transparent text-center text-14 px-15"
+                  class="bg-transparent px-15 text-center text-14"
                   @click="removeQuantity()"
                 >
                   <menos-icon
@@ -318,12 +318,12 @@
                 <input
                   v-model="quantityValue"
                   name="quantityValue"
-                  class="bg-transparent text-center text-14 py-11 px-10 max-w-[68px] font-bold"
+                  class="max-w-[68px] bg-transparent px-10 py-11 text-center text-14 font-bold"
                   type="text"
                   onkeypress="return (event.charCode>47 && event.charCode<58)"
                 />
                 <button
-                  class="bg-transparent text-center text-14 px-15"
+                  class="bg-transparent px-15 text-center text-14"
                   @click="addQuantity()"
                 >
                   <mas-icon
@@ -334,7 +334,7 @@
                 <!-- Anuncio ult unidad -->
                 <div
                   v-if="maxQuantityValue == quantityValue"
-                  class="absolute py-3 px-5 bg-yellow-300 rounded-4 -bottom-35 w-full max-w-[120px] text-center"
+                  class="absolute -bottom-35 w-full max-w-[120px] rounded-4 bg-yellow-300 px-5 py-3 text-center"
                 >
                   <span class="text-14 text-black">
                     {{ $t('cart_ultimaUnidad') }}
@@ -343,7 +343,7 @@
               </div>
               <button
                 v-if="shouldShowAddToCartButton"
-                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5 btnHover"
+                class="btnHover flex w-full max-w-[300px] items-center justify-center rounded-5 px-10 py-11"
                 :style="`background-color: ${settingByTemplate15[0].detailsProducts.color_btn}; color: ${settingByTemplate15[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate15[0].settingGeneral.radius};`"
                 @click="addToCart"
               >
@@ -363,7 +363,7 @@
               </button>
               <button
                 v-else-if="shouldShowBuyButton"
-                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5 btnHover"
+                class="btnHover flex w-full max-w-[300px] items-center justify-center rounded-5 px-10 py-11"
                 :style="`background-color: ${settingByTemplate15[0].detailsProducts.color_btn}; color: ${settingByTemplate15[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate15[0].settingGeneral.radius};`"
                 @click="goToPayments"
               >
@@ -383,7 +383,7 @@
               <button
                 v-else-if="spent"
                 disabled
-                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5 btnHover"
+                class="btnHover flex w-full max-w-[300px] items-center justify-center rounded-5 px-10 py-11"
                 :style="`background-color: ${settingByTemplate15[0].detailsProducts.color_btn}; color: ${settingByTemplate15[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate15[0].settingGeneral.radius};`"
               >
                 {{ $t('home_cardAgotado') }}
@@ -391,19 +391,19 @@
               <button
                 v-else-if="!salesData.estado || salesData.precio === 0"
                 disabled
-                class="w-full flex justify-center items-center max-w-[300px] py-11 px-10 rounded-5 btnHover"
+                class="btnHover flex w-full max-w-[300px] items-center justify-center rounded-5 px-10 py-11"
                 :style="`background-color: ${settingByTemplate15[0].detailsProducts.color_btn}; color: ${settingByTemplate15[0].detailsProducts.color_text_btn}; border-radius: ${settingByTemplate15[0].settingGeneral.radius};`"
               >
                 {{ $t('productdetail_btnANodisponible') }}
               </button>
             </div>
-            <div class="w-full flex flex-col mb-10">
+            <div class="mb-10 flex w-full flex-col">
               <div
                 v-if="data.categoriaProducto > 0"
-                class="flex flex-row justify-start items-center mb-10"
+                class="mb-10 flex flex-row items-center justify-start"
               >
                 <p
-                  class="text-16 font-bold mr-10"
+                  class="mr-10 text-16 font-bold"
                   :style="`color:${settingByTemplate15[0].detailsProducts.color_text};`"
                 >
                   {{ $t('productdetail_categoria') }}:
@@ -417,10 +417,10 @@
               </div>
               <div
                 v-if="data.subcategoria > 0"
-                class="flex flex-row justify-start items-center mb-10"
+                class="mb-10 flex flex-row items-center justify-start"
               >
                 <p
-                  class="text-16 font-bold mr-10"
+                  class="mr-10 text-16 font-bold"
                   :style="`color:${settingByTemplate15[0].detailsProducts.color_text};`"
                 >
                   {{ $t('home_subcategory') }}:
@@ -434,10 +434,10 @@
               </div>
               <div
                 v-if="data.productosInfo.garantia"
-                class="flex flex-row justify-start items-center mb-10"
+                class="mb-10 flex flex-row items-center justify-start"
               >
                 <p
-                  class="text-16 font-bold mr-10"
+                  class="mr-10 text-16 font-bold"
                   :style="`color:${settingByTemplate15[0].detailsProducts.color_text};`"
                 >
                   {{ $t('productdetail_garantia') }}:
@@ -450,37 +450,29 @@
                 </p>
               </div>
               <div
-                v-if="
-                  (data.productosInfo.largo != 0 &&
-                    data.productosInfo.largo != null) ||
-                  (data.productosInfo.largo != 0 &&
-                    data.productosInfo.largo != null) ||
-                  (data.productosInfo.alto != 0 &&
-                    data.productosInfo.alto != null) ||
-                  (data.productosInfo.peso > 0 &&
-                    data.productosInfo.peso != null)
-                "
-                class="flex justify-start items-center mb-10"
+                v-if="validateDimensions"
+                class="mb-10 flex items-center justify-start"
               >
                 <p
-                  class="text-16 font-bold mr-10"
+                  class="mr-10 text-16 font-bold"
                   :style="`color:${settingByTemplate15[0].detailsProducts.color_text};`"
                 >
                   {{ $t('productdetail_dimensiones') }}
                 </p>
               </div>
               <div
-                class="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-0"
+                class="grid w-full grid-cols-1 gap-x-2 gap-y-0 sm:grid-cols-2"
               >
                 <div
                   v-if="
                     data.productosInfo.largo != 0 &&
-                    data.productosInfo.largo != null
+                    data.productosInfo.largo != null &&
+                    data.productosInfo.largo != 'null'
                   "
-                  class="flex flex-row justify-start items-center mb-10"
+                  class="mb-10 flex flex-row items-center justify-start"
                 >
                   <p
-                    class="text-16 font-bold mr-10"
+                    class="mr-10 text-16 font-bold"
                     :style="`color:${settingByTemplate15[0].detailsProducts.color_text};`"
                   >
                     {{ $t('productdetail_largo') }}:
@@ -495,12 +487,13 @@
                 <div
                   v-if="
                     data.productosInfo.ancho != 0 &&
-                    data.productosInfo.ancho != null
+                    data.productosInfo.ancho != null &&
+                    data.productosInfo.ancho != 'null'
                   "
-                  class="flex flex-row justify-start items-center mb-10"
+                  class="mb-10 flex flex-row items-center justify-start"
                 >
                   <p
-                    class="text-16 font-bold mr-10"
+                    class="mr-10 text-16 font-bold"
                     :style="`color:${settingByTemplate15[0].detailsProducts.color_text};`"
                   >
                     {{ $t('productdetail_ancho') }}:
@@ -515,12 +508,13 @@
                 <div
                   v-if="
                     data.productosInfo.alto != 0 &&
-                    data.productosInfo.alto != null
+                    data.productosInfo.alto != null &&
+                    data.productosInfo.alto != 'null'
                   "
-                  class="flex flex-row justify-start items-center mb-10"
+                  class="mb-10 flex flex-row items-center justify-start"
                 >
                   <p
-                    class="text-16 font-bold mr-10"
+                    class="mr-10 text-16 font-bold"
                     :style="`color:${settingByTemplate15[0].detailsProducts.color_text};`"
                   >
                     {{ $t('productdetail_alto') }}:
@@ -535,12 +529,13 @@
                 <div
                   v-if="
                     data.productosInfo.peso != 0 &&
-                    data.productosInfo.peso != null
+                    data.productosInfo.peso != null &&
+                    data.productosInfo.peso != 'null'
                   "
-                  class="flex flex-row justify-start items-center mb-10"
+                  class="mb-10 flex flex-row items-center justify-start"
                 >
                   <p
-                    class="text-16 font-bold mr-10"
+                    class="mr-10 text-16 font-bold"
                     :style="`color:${settingByTemplate15[0].detailsProducts.color_text};`"
                   >
                     {{ $t('productdetail_Peso') }}:
@@ -555,7 +550,7 @@
               </div>
               <div
                 v-if="data.envioGratis == 1 || envio.titulo == 'Envío gratis'"
-                class="flex flex-row justify-start items-center mb-10"
+                class="mb-10 flex flex-row items-center justify-start"
               >
                 <p
                   class="text-16 font-bold"
@@ -565,9 +560,9 @@
                 </p>
               </div>
             </div>
-            <div class="w-full flex flex-row items-center mb-10">
+            <div class="mb-10 flex w-full flex-row items-center">
               <p
-                class="text-16 font-bold mr-10"
+                class="mr-10 text-16 font-bold"
                 :style="`color:${settingByTemplate15[0].detailsProducts.color_text};`"
               >
                 {{ $t('productdetail_compartir') }}
@@ -732,9 +727,25 @@ export default {
     getBuyButtonLabel() {
       return this.$t('productdetail_btnComprar')
     },
+    validateDimensions() {
+      return (
+        (this.data.productosInfo.largo != 0 &&
+          this.data.productosInfo.largo != null &&
+          this.data.productosInfo.largo != 'null') ||
+        (this.data.productosInfo.ancho != 0 &&
+          this.data.productosInfo.ancho != null &&
+          this.data.productosInfo.ancho != 'null') ||
+        (this.data.productosInfo.alto != 0 &&
+          this.data.productosInfo.alto != null &&
+          this.data.productosInfo.alto != 'null') ||
+        (this.data.productosInfo.peso > 0 &&
+          this.data.productosInfo.peso != null &&
+          this.data.productosInfo.peso != 'null')
+      )
+    },
     filterSuggestedProducts() {
       return this.suggestedProducts.filter(
-        (product) => product.id !== this.data.id
+        (product) => product.id !== this.data.id,
       )
     },
   },
@@ -761,11 +772,11 @@ export default {
           this.data.conVariante > 0
         ) {
           const combinaciones = JSON.parse(
-            this.data.combinaciones[0][0].combinaciones
+            this.data.combinaciones[0][0].combinaciones,
           )
           const result = combinaciones.find(
             (combinacion) =>
-              JSON.stringify(combinacion.combinacion) == combinationSelected
+              JSON.stringify(combinacion.combinacion) == combinationSelected,
           )
           this.productCart = []
           this.productIndexCart = null
@@ -822,7 +833,7 @@ export default {
         'products/GET_DATA_PRODUCT',
         {
           slug: this.id,
-        }
+        },
       )
       if (success && data.data) {
         this.loading = false
@@ -993,7 +1004,7 @@ export default {
         this.$store.state.productsCart.splice(
           this.productIndexCart,
           1,
-          mutableProduct
+          mutableProduct,
         )
       } else {
         this.$store.state.productsCart.push(product)
@@ -1052,7 +1063,7 @@ export default {
           limit: 12,
           category: this.data.categoriaProducto2.nombreCategoriaProducto,
           // subcategory: this.data.subcategoria,
-        }
+        },
       )
       if (success) {
         this.suggestedProducts = data.publicProductList

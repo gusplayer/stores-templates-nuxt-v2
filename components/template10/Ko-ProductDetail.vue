@@ -12,7 +12,7 @@
   >
     <div
       v-if="loading"
-      class="w-full flex max-w-[1300px] flex-col justify-start items-center pt-25 px-10 pb-20 md:pt-50 md:px-30 md:pb-30"
+      class="flex w-full max-w-[1300px] flex-col items-center justify-start px-10 pb-20 pt-25 md:px-30 md:pb-30 md:pt-50"
     >
       <Skeleton />
     </div>
@@ -29,9 +29,9 @@
         </div>
       </div>
       <div class="product-content">
-        <div class="w-full flex justify-center items-center">
+        <div class="flex w-full items-center justify-center">
           <productSlide
-            class="w-full h-full"
+            class="h-full w-full"
             :photos="data.productosFotos"
             :photo="data.fotoCloudinary"
             :idYoutube="idYoutube"
@@ -181,22 +181,22 @@
                   data.productosInfo.promocionValor
                     ? Math.trunc(
                         salesData.precio /
-                          (1 - data.productosInfo.promocionValor / 100)
+                          (1 - data.productosInfo.promocionValor / 100),
                       )
                     : 0)
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda
+                      dataStore.tiendasInfo.moneda,
                     )
                 }}
               </p>
-              <div class="flex flex-row justify-start items-center">
+              <div class="flex flex-row items-center justify-start">
                 <p v-show="salesData.precio" class="text-price">
                   {{
                     salesData.precio
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda
+                        dataStore.tiendasInfo.moneda,
                       )
                   }}
                 </p>
@@ -216,7 +216,7 @@
                 class="text-stock mt-5"
                 style="color: #00a650"
               >
-                <TruckIcon class="text-16 mr-5" />
+                <TruckIcon class="mr-5 text-16" />
                 {{ $t('footer_tarifaPrecio') }}
               </p>
             </div>
@@ -251,7 +251,7 @@
             <div class="content-direction-btns">
               <div
                 v-if="data.productosInfo.descripcionCorta"
-                class="flex flex-col items-start mb-5"
+                class="mb-5 flex flex-col items-start"
               >
                 <div class="txt-tittle-quantity">
                   {{ $t('productdetail_informacion') }}
@@ -262,7 +262,7 @@
               </div>
               <div
                 v-if="data.categoriaProducto > 0"
-                class="flex flex-col items-start mb-5"
+                class="mb-5 flex flex-col items-start"
               >
                 <div class="txt-tittle-quantity">
                   {{ $t('productdetail_categoria') }}
@@ -273,7 +273,7 @@
               </div>
               <div
                 v-if="data.subcategoria > 0"
-                class="flex flex-col items-start mb-5"
+                class="mb-5 flex flex-col items-start"
               >
                 <div class="txt-tittle-quantity">
                   {{ $t('home_subcategory') }}
@@ -284,7 +284,7 @@
               </div>
               <div
                 v-if="data.productosInfo.garantia"
-                class="flex flex-col items-start mb-5"
+                class="mb-5 flex flex-col items-start"
               >
                 <div class="txt-tittle-quantity">
                   {{ $t('productdetail_garantia') }}
@@ -293,28 +293,17 @@
                   {{ data.productosInfo.garantia }}
                 </p>
               </div>
-              <p
-                v-if="
-                  (data.productosInfo.largo != 0 &&
-                    data.productosInfo.largo != null) ||
-                  (data.productosInfo.largo != 0 &&
-                    data.productosInfo.largo != null) ||
-                  (data.productosInfo.alto != 0 &&
-                    data.productosInfo.alto != null) ||
-                  (data.productosInfo.peso > 0 &&
-                    data.productosInfo.peso != null)
-                "
-                class="txt-tittle-quantity"
-              >
+              <p v-if="validateDimensions" class="txt-tittle-quantity">
                 <strong>{{ $t('productdetail_dimensiones') }}</strong>
               </p>
               <div
-                class="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-0"
+                class="grid w-full grid-cols-1 gap-x-2 gap-y-0 sm:grid-cols-2"
               >
                 <div
                   v-if="
                     data.productosInfo.largo != 0 &&
-                    data.productosInfo.largo != null
+                    data.productosInfo.largo != null &&
+                    data.productosInfo.largo != 'null'
                   "
                   class="flex flex-col items-start"
                 >
@@ -326,7 +315,8 @@
                 <div
                   v-if="
                     data.productosInfo.ancho != 0 &&
-                    data.productosInfo.ancho != null
+                    data.productosInfo.ancho != null &&
+                    data.productosInfo.ancho != 'null'
                   "
                   class="flex flex-col items-start"
                 >
@@ -338,7 +328,8 @@
                 <div
                   v-if="
                     data.productosInfo.alto != 0 &&
-                    data.productosInfo.alto != null
+                    data.productosInfo.alto != null &&
+                    data.productosInfo.alto != 'null'
                   "
                   class="flex flex-col items-start"
                 >
@@ -350,7 +341,8 @@
                 <div
                   v-if="
                     data.productosInfo.peso > 0 &&
-                    data.productosInfo.peso != null
+                    data.productosInfo.peso != null &&
+                    data.productosInfo.peso != 'null'
                   "
                   class="flex flex-col items-start"
                 >
@@ -362,7 +354,7 @@
               </div>
               <div
                 v-if="userDropshipping.userName"
-                class="w-full flex flex-row items-center my-8"
+                class="my-8 flex w-full flex-row items-center"
               >
                 <p class="text-variant" style="margin-right: 10px">
                   {{ $t('productdetail_dropshipping') }}
@@ -372,7 +364,7 @@
                 </p>
               </div>
               <div
-                class="mt-0 pb-10 md:mt-15 md:pb-20 fixed md:sticky w-full flex gap-x-4 flex-row justify-center md:justify-start items-center left-0 bottom-0 px-6 pt-10 md:px-0 md:pt-0 border-t md:border-t-0 z-10 md:z-0 md:border-b border-color"
+                class="border-color fixed bottom-0 left-0 z-10 mt-0 flex w-full flex-row items-center justify-center gap-x-4 border-t px-6 pb-10 pt-10 md:sticky md:z-0 md:mt-15 md:justify-start md:border-b md:border-t-0 md:px-0 md:pb-20 md:pt-0"
                 :style="`background-color: ${settingByTemplate10[0].detailsProduct['--background_color_1']};`"
               >
                 <div
@@ -395,7 +387,7 @@
                   </div>
                   <div
                     v-if="maxQuantityValue == quantityValue"
-                    class="absolute -top-32 left-50 w-[130px] border border-yellow-500 bg-yellow-300 rounded-6 px-2 py-3 text-center"
+                    class="absolute -top-32 left-50 w-[130px] rounded-6 border border-yellow-500 bg-yellow-300 px-2 py-3 text-center"
                   >
                     <span class="text-14 text-black">
                       {{ $t('cart_ultimaUnidad') }}
@@ -625,9 +617,25 @@ export default {
     getBuyButtonLabel() {
       return this.$t('productdetail_btnComprar')
     },
+    validateDimensions() {
+      return (
+        (this.data.productosInfo.largo != 0 &&
+          this.data.productosInfo.largo != null &&
+          this.data.productosInfo.largo != 'null') ||
+        (this.data.productosInfo.ancho != 0 &&
+          this.data.productosInfo.ancho != null &&
+          this.data.productosInfo.ancho != 'null') ||
+        (this.data.productosInfo.alto != 0 &&
+          this.data.productosInfo.alto != null &&
+          this.data.productosInfo.alto != 'null') ||
+        (this.data.productosInfo.peso > 0 &&
+          this.data.productosInfo.peso != null &&
+          this.data.productosInfo.peso != 'null')
+      )
+    },
     filterSuggestedProducts() {
       return this.suggestedProducts.filter(
-        (product) => product.id !== this.data.id
+        (product) => product.id !== this.data.id,
       )
     },
   },
@@ -642,7 +650,7 @@ export default {
     },
     settingByTemplate10() {
       this.setBg(
-        this.settingByTemplate10[0]?.detailsProduct?.visible_bg ? 1 : 2
+        this.settingByTemplate10[0]?.detailsProduct?.visible_bg ? 1 : 2,
       )
     },
     'dataStore.tienda'() {
@@ -660,11 +668,11 @@ export default {
           this.data.conVariante > 0
         ) {
           const combinaciones = JSON.parse(
-            this.data.combinaciones[0][0].combinaciones
+            this.data.combinaciones[0][0].combinaciones,
           )
           const result = combinaciones.find(
             (combinacion) =>
-              JSON.stringify(combinacion.combinacion) == combinationSelected
+              JSON.stringify(combinacion.combinacion) == combinationSelected,
           )
           this.productCart = []
           this.productIndexCart = null
@@ -745,7 +753,7 @@ export default {
         'products/GET_DATA_PRODUCT',
         {
           slug: this.id,
-        }
+        },
       )
       if (success && data.data) {
         this.loading = false
@@ -916,7 +924,7 @@ export default {
         this.$store.state.productsCart.splice(
           this.productIndexCart,
           1,
-          mutableProduct
+          mutableProduct,
         )
       } else {
         this.$store.state.productsCart.push(product)
@@ -964,7 +972,7 @@ export default {
           limit: 12,
           category: this.data.categoriaProducto2.nombreCategoriaProducto,
           // subcategory: this.data.subcategoria,
-        }
+        },
       )
       if (success) {
         this.suggestedProducts = data.publicProductList
@@ -1016,7 +1024,7 @@ export default {
 <style scoped>
 .wrapper-productDetail {
   background: var(--background_color_1);
-  @apply w-full flex justify-center items-center;
+  @apply flex w-full items-center justify-center;
   padding-bottom: 40px;
 }
 .container-productDetail-loading {
@@ -1024,41 +1032,41 @@ export default {
   max-width: 1400px;
   padding: 50px 30px 30px 30px;
   background: var(--background_color_1);
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .container-productDetail {
-  @apply w-full h-full flex flex-col justify-center items-center;
+  @apply flex h-full w-full flex-col items-center justify-center;
 }
 .product-content {
-  @apply w-full flex;
+  @apply flex w-full;
 }
 .content-variant {
-  @apply w-auto flex flex-col justify-center items-start mb-8;
+  @apply mb-8 flex w-auto flex-col items-start justify-center;
 }
 .content-price,
 .right {
-  @apply w-full flex flex-col justify-start items-start;
+  @apply flex w-full flex-col items-start justify-start;
 }
 .content-category,
 .content-name,
 .content-addCart {
-  @apply w-full flex flex-row justify-start items-center;
+  @apply flex w-full flex-row items-center justify-start;
 }
 .quantity {
-  @apply flex flex-row justify-center items-center;
+  @apply flex flex-row items-center justify-center;
 }
 .section-suggesProduct {
   background: var(--background_color_1);
-  @apply w-full mt-40;
+  @apply mt-40 w-full;
 }
 .content-quantity-boxes {
-  @apply flex justify-start items-center;
+  @apply flex items-center justify-start;
 }
 .txt-tittle-quantity {
   font-size: 16px;
   color: var(--color_subtext);
   min-width: 70px;
-  @apply w-auto font-bold mr-10;
+  @apply mr-10 w-auto font-bold;
 }
 .txt-subtext {
   font-size: 16px;
@@ -1070,19 +1078,19 @@ export default {
   color: var(--color_subtext);
   background-color: transparent;
   border: 1px solid var(--border);
-  @apply w-75 h-50 flex text-center justify-center items-center;
+  @apply flex h-50 w-75 items-center justify-center text-center;
 }
 .box-quantity-btns {
   color: var(--color_subtext);
   background-color: transparent;
   border: 1px solid var(--border);
-  @apply w-25 h-50 flex flex-col text-center justify-center items-center;
+  @apply flex h-50 w-25 flex-col items-center justify-center text-center;
 }
 .btn-quantity {
   color: var(--color_subtext);
   background-color: transparent;
   border-color: var(--border);
-  @apply w-25 h-25 flex justify-center items-center border-t border-r;
+  @apply flex h-25 w-25 items-center justify-center border-r border-t;
 }
 .material-design-icon > .material-design-icon__svg {
   height: 1em;
@@ -1092,42 +1100,42 @@ export default {
   bottom: 0em;
 }
 .content-networks {
-  @apply w-auto flex flex-row justify-start items-start mb-30;
+  @apply mb-30 flex w-auto flex-row items-start justify-start;
 }
 
 .social-networks {
-  @apply w-auto flex flex-row justify-start items-start mr-20;
+  @apply mr-20 flex w-auto flex-row items-start justify-start;
 }
 .facebook-icon,
 .twitter-icon,
 .instagram-icon,
 .youtube-icon {
   fill: var(--color_icon);
-  @apply transition-all ease-in duration-0.2 cursor-pointer;
+  @apply cursor-pointer transition-all duration-0.2 ease-in;
 }
 .facebook-icon:hover {
   color: #eb7025;
   fill: #eb7025;
   transform: scale(1.5);
-  @apply transition-all ease-in duration-0.2;
+  @apply transition-all duration-0.2 ease-in;
 }
 .twitter-icon:hover {
   color: #eb7025;
   fill: #eb7025;
   transform: scale(1.5);
-  @apply transition-all ease-in duration-0.2;
+  @apply transition-all duration-0.2 ease-in;
 }
 .instagram-icon:hover {
   color: #eb7025;
   fill: #eb7025;
   transform: scale(1.5);
-  @apply transition-all ease-in duration-0.2;
+  @apply transition-all duration-0.2 ease-in;
 }
 .youtube-icon:hover {
   color: #eb7025;
   fill: #eb7025;
   transform: scale(1.5);
-  @apply transition-all ease-in duration-0.2;
+  @apply transition-all duration-0.2 ease-in;
 }
 .card-discont {
   color: var(--color_text_btn);
@@ -1139,10 +1147,10 @@ export default {
 }
 @screen sm {
   .product-content {
-    @apply w-9/0 flex-col justify-center items-center mt-20;
+    @apply mt-20 w-9/0 flex-col items-center justify-center;
   }
   .content-direction-btns {
-    @apply w-full flex flex-col justify-start items-start;
+    @apply flex w-full flex-col items-start justify-start;
   }
   .video {
     width: 100%;
@@ -1156,7 +1164,7 @@ export default {
     @apply flex;
   }
   .tab {
-    @apply w-9/0 flex mt-40;
+    @apply mt-40 flex w-9/0;
   }
   .content-cart {
     width: 100%;
@@ -1179,7 +1187,7 @@ export default {
     margin-top: 20px;
   }
   .content-options {
-    @apply w-full flex flex-col justify-start items-center;
+    @apply flex w-full flex-col items-center justify-start;
   }
   .text-addCart {
     color: var(--color_text_btn);
@@ -1189,13 +1197,13 @@ export default {
     background-color: var(--color_background_btn);
     border-radius: var(--radius_btn);
     transition: all 0.15s ease-in;
-    @apply w-full h-54 flex flex-row justify-center items-center;
+    @apply flex h-54 w-full flex-row items-center justify-center;
   }
   .btn-disabled {
     color: var(--color_text_btn);
     background-color: var(--color_background_btn);
     transition: all 0.15s ease-in;
-    @apply w-full h-54 flex flex-row justify-center items-center;
+    @apply flex h-54 w-full flex-row items-center justify-center;
   }
   .btn:hover {
     background-color: var(--hover_Bg_btn);
@@ -1253,17 +1261,17 @@ export default {
     padding: 0 35px;
     border: none;
     font-size: 21px;
-    @apply w-full flex justify-center items-center text-center font-semibold;
+    @apply flex w-full items-center justify-center text-center font-semibold;
   }
   .text-addCart {
     font-family: var(--font-style-1) !important;
     font-size: 12px;
-    @apply font-semibold whitespace-nowrap uppercase;
+    @apply whitespace-nowrap font-semibold uppercase;
   }
   .minicart-icon {
     fill: var(--color_text_btn);
     color: var(--color_text_btn);
-    @apply mr-10 mb-5;
+    @apply mb-5 mr-10;
   }
   .text-variant {
     color: var(--color_subtext);
@@ -1294,7 +1302,7 @@ export default {
 }
 @media (min-width: 480px) {
   .content-cart {
-    @apply w-4/0 mr-2;
+    @apply mr-2 w-4/0;
   }
   .video {
     height: 250px;
@@ -1304,22 +1312,22 @@ export default {
   .banner-detail {
     height: 220px;
     background-color: var(--background_color_2);
-    @apply w-full flex bg-cover bg-center bg-no-repeat justify-items-center items-center;
+    @apply flex w-full items-center justify-items-center bg-cover bg-center bg-no-repeat;
   }
   .crumb {
-    @apply w-full flex flex-row justify-center items-center;
+    @apply flex w-full flex-row items-center justify-center;
   }
   .separatorCrumb {
     font-size: 9px;
     color: var(--breadCrumbs);
     font-family: var(--font-style-1) !important;
-    @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
+    @apply cursor-pointer pr-6 leading-14 transition-all duration-0.2 ease-in;
   }
   .txt-crumb {
     font-size: 15px;
     color: var(--breadCrumbs);
     font-family: var(--font-style-1) !important;
-    @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
+    @apply cursor-pointer pr-6 leading-14 transition-all duration-0.2 ease-in;
   }
   .s1:hover {
     color: #eb7025;
@@ -1342,7 +1350,7 @@ export default {
     @apply w-9/5;
   }
   .product-content {
-    @apply w-9/5 grid grid-cols-2 gap-x-4 justify-start items-start mt-30;
+    @apply mt-30 grid w-9/5 grid-cols-2 items-start justify-start gap-x-4;
   }
   /* .right {
     @apply mt-40;

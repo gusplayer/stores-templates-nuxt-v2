@@ -2,7 +2,7 @@
   <header
     v-if="settingByTemplate16"
     id="navbar"
-    class="w-full max-h-[120px] md:max-h-10/0 flex justify-center items-center sticky top-0 px-10 z-100 wrapper-header"
+    class="wrapper-header sticky top-0 z-100 flex max-h-[120px] w-full items-center justify-center px-10 md:max-h-10/0"
     :style="[
       settingByTemplate16[0].header,
       settingByTemplate16[0].settingGeneral,
@@ -13,15 +13,16 @@
     ]"
   >
     <KoSearch :data-store="dataStore" />
-    <Ko14MenuLateral
+    <KoMenu
       :data-store="dataStore"
-      :setting-by-template="settingByTemplate16[0].listProductsFilter"
+      :setting-by-template="settingByTemplate16[0]?.listProductsFilter"
+      :page-template="settingByTemplate16[0]?.pages"
     />
-    <div class="w-full max-w-7xl flex justify-between items-center">
-      <div class="flex justify-center items-center max-h-[120px] md:max-h-10/0">
+    <div class="flex w-full max-w-7xl items-center justify-between">
+      <div class="flex max-h-[120px] items-center justify-center md:max-h-10/0">
         <nuxt-link
           to="/"
-          class="w-full flex justify-center items-center"
+          class="flex w-full items-center justify-center"
           style="max-width: var(--with_logo)"
         >
           <img
@@ -35,7 +36,7 @@
       <div
         v-if="settingByTemplate16[0].pages.values"
         id="swiper-slide-categories"
-        class="hidden md:flex flex-row justify-start items-center box-border"
+        class="box-border hidden flex-row items-center justify-start md:flex"
       >
         <div
           v-for="(item, index) in settingByTemplate16[0].pages.values"
@@ -43,7 +44,7 @@
         >
           <nuxt-link v-if="!item.isExternalLink" :to="item.url">
             <p
-              class="mr-20 px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3 btn"
+              class="btn mr-20 px-8 text-16 font-semibold leading-22 transition-all duration-0.3 ease-in"
               :class="btnSelect == item.url ? 'btn-active' : ''"
               @click="btnActivate(item.url)"
             >
@@ -65,18 +66,18 @@
           />
         </div>
         <div
-          class="flex flex-row justify-center items-center cursor-pointer transition-all ease-in duration-0.3"
+          class="flex cursor-pointer flex-row items-center justify-center transition-all duration-0.3 ease-in"
           @click="openOrder"
         >
           <i
-            class="w-36 h-auto flex justify-center items-center relative cursor-pointer"
+            class="relative flex h-auto w-36 cursor-pointer items-center justify-center"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="23"
               height="23"
               :fill="settingByTemplate16[0].header['--color_icon']"
-              class="transition-all ease-in duration-0.2 icon-shop"
+              class="icon-shop transition-all duration-0.2 ease-in"
               viewBox="0 0 16 16"
             >
               <title>Cart</title>
@@ -86,86 +87,23 @@
             </svg>
           </i>
           <div
-            class="w-auto h-15 flex justify-center items-center rounded-full -mt-20 -ml-8"
+            class="-ml-8 -mt-20 flex h-15 w-auto items-center justify-center rounded-full"
             style="background-color: var(--color_border)"
           >
             <span
-              class="pt-1 px-4 text-white-white text-10 leading-12 tracking-0 font-semibold num-items"
+              class="num-items px-4 pt-1 text-10 font-semibold leading-12 tracking-0 text-white-white"
             >
               {{ productsCart }}
             </span>
           </div>
         </div>
-        <button class="flex md:hidden ml-10" @click="stateMenu = !stateMenu">
+        <button class="ml-10 flex md:hidden" @click="openMenuLateral">
           <menu-icon
             class="text-25"
             :style="`color: ${settingByTemplate16[0].header['--color_icon']} ;`"
           />
         </button>
       </div>
-      <el-drawer
-        :visible.sync="stateMenu"
-        direction="ttb"
-        :with-header="false"
-        :modal-append-to-body="false"
-        size="35%"
-      >
-        <div class="w-full h-full flex flex-col justify-start pb-20">
-          <div
-            class="w-full flex flex-row justify-between items-center shadow-lg px-10"
-          >
-            <nuxt-link
-              to="/"
-              class="w-full flex justify-center items-start md:max-h-10/0"
-              style="max-width: var(--with_logo)"
-            >
-              <img
-                :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
-                class="w-full max-h-[120px] object-contain object-left"
-                alt="LogoStore"
-                @click="clear"
-              />
-            </nuxt-link>
-            <button @click="stateMenu = !stateMenu">
-              <window-close-icon class="text-35 text-gray-800" />
-            </button>
-          </div>
-          <div
-            v-if="settingByTemplate16[0].pages.values"
-            class="w-full h-full max-h-[236px] flex flex-col justify-start items-start overflow-y-auto px-15 pt-30"
-          >
-            <div
-              v-for="(item, index) in settingByTemplate16[0].pages.values"
-              :key="`${index}${item.displayName}`"
-            >
-              <nuxt-link
-                v-if="!item.isExternalLink"
-                :to="item.url"
-                class="my-5 block"
-              >
-                <p
-                  class="px-8 text-16 font-semibold leading-22 transition-all ease-in duration-0.3"
-                  :class="btnSelect == item.url ? 'btn-active' : ''"
-                  @click="btnActivate(item.url)"
-                >
-                  {{ item.displayName }}
-                </p>
-              </nuxt-link>
-              <a
-                v-else
-                :href="item.url"
-                rel="noreferrer noopener"
-                class="my-5 block"
-                target="_blank"
-              >
-                <p class="btn">
-                  {{ item.displayName }}
-                </p>
-              </a>
-            </div>
-          </div>
-        </div>
-      </el-drawer>
     </div>
   </header>
 </template>
@@ -174,10 +112,8 @@
 export default {
   name: 'KoHeader11',
   components: {
-    // KoOrder: () => import('../_order1/order1'),
+    KoMenu: () => import('../_lateralMenu/_lateralMenu14/openMenuLeft.vue'),
     KoSearch: () => import('../_lateralMenu/_lateralMenu/search.vue'),
-    Ko14MenuLateral: () =>
-      import('../_lateralMenu/_lateralMenu14/_lateralMenu.vue'),
   },
   props: {
     settingByTemplate16: {
@@ -221,6 +157,9 @@ export default {
     },
     openOrder() {
       this.$store.commit('SET_OPEN_ORDER', true)
+    },
+    openMenuLateral() {
+      this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', true)
     },
     clear() {
       this.$router.push({

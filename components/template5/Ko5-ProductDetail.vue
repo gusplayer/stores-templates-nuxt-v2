@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex justify-center items-center bg-[#efefef]"
+    class="flex w-full items-center justify-center bg-[#efefef]"
     :style="[
       settingByTemplate,
       {
@@ -10,15 +10,15 @@
   >
     <div
       v-if="loading"
-      class="w-full flex max-w-[1300px] flex-col justify-start items-center pt-25 px-10 pb-20 md:pt-50 md:px-30 md:pb-30"
+      class="flex w-full max-w-[1300px] flex-col items-center justify-start px-10 pb-20 pt-25 md:px-30 md:pb-30 md:pt-50"
     >
       <Skeleton />
     </div>
     <div
       v-else
-      class="md:justify-center w-full max-w-[1300px] relative flex flex-col justify-between pt-25 px-10 pb-20 md:pt-50 md:px-30 md:pb-30"
+      class="relative flex w-full max-w-[1300px] flex-col justify-between px-10 pb-20 pt-25 md:justify-center md:px-30 md:pb-30 md:pt-50"
     >
-      <div class="w-full flex flex-col md:flex-row">
+      <div class="flex w-full flex-col md:flex-row">
         <div class="wrapper-left">
           <div ref="mySwiper" v-swiper:mySwiper="swiperOption" class="photos">
             <div class="swiper-wrapper">
@@ -119,12 +119,12 @@
                 data.productosInfo.promocionValor
                   ? Math.trunc(
                       salesData.precio /
-                        (1 - data.productosInfo.promocionValor / 100)
+                        (1 - data.productosInfo.promocionValor / 100),
                     )
                   : 0)
                   | currency(
                     dataStore.tiendasInfo.paises.codigo,
-                    dataStore.tiendasInfo.moneda
+                    dataStore.tiendasInfo.moneda,
                   )
               }}
             </p>
@@ -141,7 +141,7 @@
                   salesData.precio
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda
+                      dataStore.tiendasInfo.moneda,
                     )
                 }}
               </p>
@@ -216,7 +216,7 @@
               </div>
             </div>
 
-            <div class="sticky w-full flex flex-col justify-start items-start">
+            <div class="sticky flex w-full flex-col items-start justify-start">
               <div class="quantity">
                 <p class="text-quantity hidden md:flex">
                   {{ $t('cart_cantidad') }}
@@ -293,7 +293,7 @@
               </div>
               <div
                 v-if="userDropshipping.userName"
-                class="w-full flex flex-row items-center my-10"
+                class="my-10 flex w-full flex-row items-center"
               >
                 <p class="text-variant" style="margin-right: 10px">
                   {{ $t('productdetail_dropshipping') }}
@@ -304,7 +304,7 @@
               </div>
               <div
                 v-if="data.categoriaProducto > 0"
-                class="flex flex-row items-center mt-15"
+                class="mt-15 flex flex-row items-center"
               >
                 <p class="text-unidades">
                   {{ $t('productdetail_categoria') }}:
@@ -315,37 +315,26 @@
               </div>
               <div
                 v-if="data.subcategoria > 0"
-                class="flex flex-row items-center mt-15"
+                class="mt-15 flex flex-row items-center"
               >
                 <p class="text-unidades">{{ $t('home_subcategory') }}:</p>
                 <p class="text-garantia">
                   {{ data.subcategoria2.nombreSubcategoria }}
                 </p>
               </div>
-              <p
-                v-if="
-                  (data.productosInfo.largo != 0 &&
-                    data.productosInfo.largo != null) ||
-                  (data.productosInfo.largo != 0 &&
-                    data.productosInfo.largo != null) ||
-                  (data.productosInfo.alto != 0 &&
-                    data.productosInfo.alto != null) ||
-                  (data.productosInfo.peso > 0 &&
-                    data.productosInfo.peso != null)
-                "
-                class="text-unidades mt-10"
-              >
+              <p v-if="validateDimensions" class="text-unidades mt-10">
                 <strong>{{ $t('productdetail_dimensiones') }}</strong>
               </p>
               <div
-                class="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-0"
+                class="grid w-full grid-cols-1 gap-x-2 gap-y-0 sm:grid-cols-2"
               >
                 <div
                   v-if="
                     data.productosInfo.largo != 0 &&
-                    data.productosInfo.largo != null
+                    data.productosInfo.largo != null &&
+                    data.productosInfo.largo != 'null'
                   "
-                  class="flex flex-row items-center mt-15"
+                  class="mt-15 flex flex-row items-center"
                 >
                   <p class="text-unidades">{{ $t('productdetail_largo') }}:</p>
                   <p class="text-garantia">{{ data.productosInfo.largo }} cm</p>
@@ -353,9 +342,10 @@
                 <div
                   v-if="
                     data.productosInfo.ancho != 0 &&
-                    data.productosInfo.ancho != null
+                    data.productosInfo.ancho != null &&
+                    data.productosInfo.ancho != 'null'
                   "
-                  class="flex flex-row items-center mt-15"
+                  class="mt-15 flex flex-row items-center"
                 >
                   <p class="text-unidades">{{ $t('productdetail_ancho') }}:</p>
                   <p class="text-garantia">{{ data.productosInfo.ancho }} cm</p>
@@ -363,9 +353,10 @@
                 <div
                   v-if="
                     data.productosInfo.alto != 0 &&
-                    data.productosInfo.alto != null
+                    data.productosInfo.alto != null &&
+                    data.productosInfo.alto != 'null'
                   "
-                  class="flex flex-row items-center mt-15"
+                  class="mt-15 flex flex-row items-center"
                 >
                   <p class="text-unidades">{{ $t('productdetail_alto') }}:</p>
                   <p class="text-garantia">{{ data.productosInfo.alto }} cm</p>
@@ -373,15 +364,16 @@
                 <div
                   v-if="
                     data.productosInfo.peso > 0 &&
-                    data.productosInfo.peso != null
+                    data.productosInfo.peso != null &&
+                    data.productosInfo.peso != 'null'
                   "
-                  class="flex flex-row items-center mt-15"
+                  class="mt-15 flex flex-row items-center"
                 >
                   <p class="text-unidades">{{ $t('productdetail_Peso') }}:</p>
                   <p class="text-garantia">{{ data.productosInfo.peso }} Kg</p>
                 </div>
               </div>
-              <div class="flex flex-row items-center mt-15">
+              <div class="mt-15 flex flex-row items-center">
                 <p class="text-unidades">
                   {{ $t('productdetail_compartir') }}
                 </p>
@@ -401,7 +393,7 @@
           </div>
         </div>
       </div>
-      <div class="w-full flex border-t border-[rgba(127, 127, 139, 0.342)]">
+      <div class="border-[rgba(127, 127, 139, 0.342)] flex w-full border-t">
         <ko-description
           :data-store="dataStore"
           :data="data"
@@ -552,9 +544,25 @@ export default {
     getBuyButtonLabel() {
       return this.$t('productdetail_btnComprar')
     },
+    validateDimensions() {
+      return (
+        (this.data.productosInfo.largo != 0 &&
+          this.data.productosInfo.largo != null &&
+          this.data.productosInfo.largo != 'null') ||
+        (this.data.productosInfo.ancho != 0 &&
+          this.data.productosInfo.ancho != null &&
+          this.data.productosInfo.ancho != 'null') ||
+        (this.data.productosInfo.alto != 0 &&
+          this.data.productosInfo.alto != null &&
+          this.data.productosInfo.alto != 'null') ||
+        (this.data.productosInfo.peso > 0 &&
+          this.data.productosInfo.peso != null &&
+          this.data.productosInfo.peso != 'null')
+      )
+    },
     filterSuggestedProducts() {
       return this.suggestedProducts.filter(
-        (product) => product.id !== this.data.id
+        (product) => product.id !== this.data.id,
       )
     },
   },
@@ -576,11 +584,11 @@ export default {
           this.data.conVariante > 0
         ) {
           const combinaciones = JSON.parse(
-            this.data.combinaciones[0][0].combinaciones
+            this.data.combinaciones[0][0].combinaciones,
           )
           const result = combinaciones.find(
             (combinacion) =>
-              JSON.stringify(combinacion.combinacion) == combinationSelected
+              JSON.stringify(combinacion.combinacion) == combinationSelected,
           )
           this.productCart = []
           this.productIndexCart = null
@@ -641,7 +649,7 @@ export default {
         'products/GET_DATA_PRODUCT',
         {
           slug: this.id,
-        }
+        },
       )
       if (success && data.data) {
         this.loading = false
@@ -813,7 +821,7 @@ export default {
         this.$store.state.productsCart.splice(
           this.productIndexCart,
           1,
-          mutableProduct
+          mutableProduct,
         )
       } else {
         this.$store.state.productsCart.push(product)
@@ -868,7 +876,7 @@ export default {
           limit: 12,
           category: this.data.categoriaProducto2.nombreCategoriaProducto,
           // subcategory: this.data.subcategoria,
-        }
+        },
       )
       if (success) {
         this.suggestedProducts = data.publicProductList
@@ -925,7 +933,7 @@ export default {
   flex: 2;
   padding-bottom: 10px;
   /* margin-right: 25px; */
-  @apply w-full flex flex-row;
+  @apply flex w-full flex-row;
 }
 .photos_responsive {
   display: none;
@@ -963,7 +971,7 @@ export default {
 }
 .photos_selected {
   max-height: 100px;
-  @apply w-full flex flex-col justify-items-stretch;
+  @apply flex w-full flex-col justify-items-stretch;
 }
 .img-list {
   cursor: pointer;
