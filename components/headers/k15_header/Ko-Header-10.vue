@@ -39,7 +39,7 @@
         <div
           v-if="settingByTemplate15[0]?.pages?.values"
           id="swiper-slide-categories"
-          class="ml-20 box-border hidden flex-row items-center justify-start md:flex"
+          class="ml-20 box-border hidden flex-row items-center justify-start lg:flex"
         >
           <div
             v-for="(item, index) in settingByTemplate15[0].pages.values"
@@ -107,7 +107,7 @@
             </span>
           </div>
         </div>
-        <button class="ml-10 flex md:hidden" @click="openMenuLateral">
+        <button class="ml-10 flex lg:hidden" @click="openMenuLateral">
           <menu-icon
             class="text-25"
             :style="`color: ${settingByTemplate15[0].header['--color-icon']} ;`"

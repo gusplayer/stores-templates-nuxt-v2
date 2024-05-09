@@ -2,7 +2,7 @@
   <header
     v-if="settingByTemplate16"
     id="navbar"
-    class="wrapper-header sticky top-0 z-100 flex max-h-[120px] w-full items-center justify-center px-10 md:max-h-10/0"
+    class="wrapper-header sticky top-0 z-100 flex w-full items-center justify-center px-10"
     :style="[
       settingByTemplate16[0].header,
       settingByTemplate16[0].settingGeneral,
@@ -27,7 +27,7 @@
         >
           <img
             :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
-            class="w-full object-contain object-left"
+            class="max-h-[120px] w-full object-contain object-left"
             alt="LogoStore"
             @click="clear"
           />
@@ -36,7 +36,7 @@
       <div
         v-if="settingByTemplate16[0].pages.values"
         id="swiper-slide-categories"
-        class="box-border hidden flex-row items-center justify-start md:flex"
+        class="box-border hidden flex-row items-center justify-start lg:flex"
       >
         <div
           v-for="(item, index) in settingByTemplate16[0].pages.values"
@@ -51,10 +51,14 @@
               {{ item.displayName }}
             </p>
           </nuxt-link>
-          <a v-else :href="item.url" rel="noreferrer noopener" target="_blank">
-            <p class="btn">
-              {{ item.displayName }}
-            </p>
+          <a
+            v-else
+            :href="item.url"
+            rel="noreferrer noopener"
+            class="btn mr-20 px-8 text-16 font-semibold leading-22 transition-all duration-0.3 ease-in"
+            target="_blank"
+          >
+            {{ item.displayName }}
           </a>
         </div>
       </div>
@@ -97,7 +101,7 @@
             </span>
           </div>
         </div>
-        <button class="ml-10 flex md:hidden" @click="openMenuLateral">
+        <button class="ml-10 flex lg:hidden" @click="openMenuLateral">
           <menu-icon
             class="text-25"
             :style="`color: ${settingByTemplate16[0].header['--color_icon']} ;`"

@@ -1,11 +1,11 @@
 <template>
   <div
     id="product-card"
-    class="h-full w-full flex flex-col justify-start items-center cursor-pointer relative wrapper_container"
+    class="wrapper_container relative flex h-full w-full cursor-pointer flex-col items-center justify-start"
     :style="[settingGeneral, settingCardProducts]"
   >
     <div
-      class="relative max-w-full h-full shadow-sm border rounded-5 container"
+      class="container relative h-full max-w-full rounded-5 border shadow-sm"
     >
       <nuxt-link :to="{ path: `/productos/` + product.slug }">
         <img
@@ -14,36 +14,36 @@
           height="294"
           loading="lazy"
           :class="!soldOut ? '' : 'grayscale'"
-          class="w-full object-cover overflow-hidden rounded-t-5 max-w-[300px] max-h-[350px]"
+          class="max-h-[350px] w-full max-w-[300px] overflow-hidden rounded-t-5 object-cover"
           alt="Product Img"
         />
       </nuxt-link>
       <p
         v-if="soldOut"
-        class="absolute bottom-54 right-10 text-12 px-2 py-1 rounded-4 bg-red-500 text-white-white"
+        class="absolute bottom-54 right-10 rounded-4 bg-red-500 px-2 py-1 text-12 text-white-white"
       >
         {{ $t('home_cardAgotado') }}
       </p>
       <p
         v-if="!getFreeShipping"
-        class="absolute bottom-30 right-10 text-12 px-2 py-1 rounded-4 bg-green-500 text-white-white"
+        class="absolute bottom-30 right-10 rounded-4 bg-green-500 px-2 py-1 text-12 text-white-white"
       >
         {{ $t('home_cardGratis') }}
       </p>
       <div
         v-if="product.tag_promocion == 1 && product.promocion_valor"
-        class="absolute top-10 left-10 py-1 px-5 text-white-white uppercase text-12 bg-red-500 right-auto rounded-4"
+        class="absolute left-10 right-auto top-10 rounded-4 bg-red-500 px-5 py-1 text-12 uppercase text-white-white"
       >
         <p class="block">{{ product.promocion_valor }}% OFF</p>
       </div>
     </div>
     <div
-      class="w-full h-full flex flex-col justify-between items-center py-6 px-10 cursor-default box-border"
+      class="box-border flex h-full w-full cursor-default flex-col items-center justify-between px-10 py-6"
     >
       <nuxt-link :to="{ path: `/productos/` + product.slug }">
-        <div class="w-full flex justify-center items-center">
+        <div class="flex w-full items-center justify-center">
           <p
-            class="h-full pt-10 transition-all ease-out duration-0.2 text-center min-h-[58px] max-h-[58px] card-title"
+            class="card-title h-full max-h-[58px] min-h-[58px] pt-10 text-center transition-all duration-0.2 ease-out"
           >
             {{ product.nombre }}
           </p>
@@ -56,7 +56,7 @@
               minPrice
                 | currency(
                   dataStore.tiendasInfo.paises.codigo,
-                  dataStore.tiendasInfo.moneda
+                  dataStore.tiendasInfo.moneda,
                 )
             }}
           </p>
@@ -67,7 +67,7 @@
               minPrice
                 | currency(
                   dataStore.tiendasInfo.paises.codigo,
-                  dataStore.tiendasInfo.moneda
+                  dataStore.tiendasInfo.moneda,
                 )
             }}
           </div>
@@ -77,7 +77,7 @@
               maxPrice
                 | currency(
                   dataStore.tiendasInfo.paises.codigo,
-                  dataStore.tiendasInfo.moneda
+                  dataStore.tiendasInfo.moneda,
                 )
             }}
           </div>
@@ -88,7 +88,7 @@
               product.precio
                 | currency(
                   dataStore.tiendasInfo.paises.codigo,
-                  dataStore.tiendasInfo.moneda
+                  dataStore.tiendasInfo.moneda,
                 )
             }}
           </p>
@@ -96,11 +96,11 @@
       </div>
     </div>
     <div
-      class="absolute right-20 top-15 opacity-0 flex flex-col justify-center items-center transition-all ease-in duration-0.3 z-10 wrapper_btn"
+      class="wrapper_btn absolute right-20 top-15 z-10 flex flex-col items-center justify-center opacity-0 transition-all duration-0.3 ease-in"
     >
       <nuxt-link
         :to="{ path: `/productos/` + product.slug }"
-        class="px-12 py-8 shadow-lg rounded-full btn"
+        class="btn rounded-full px-12 py-8 shadow-lg"
         :style="`background-color:${settingCardProducts.color_btn};color:${settingCardProducts.color_icon};`"
       >
         <eye-outline-icon />
@@ -113,17 +113,13 @@
           !spent &&
           (product.tipo_servicio == null || product.tipo_servicio == '0')
         "
-        class="mt-10 px-12 py-8 shadow-lg rounded-full btn"
+        class="btn mt-10 rounded-full px-12 py-8 shadow-lg"
         :style="`background-color:${settingCardProducts.color_btn};color:${settingCardProducts.color_icon};`"
         @click="addShoppingCart"
       >
         <cart-icon />
       </button>
     </div>
-    <!-- <nuxt-link
-      :to="{ path: `/productos/` + product.slug }"
-      class="absolute top-0 w-full h-full backdrop-blur-sm opacity-0 wrapper_blur"
-    /> -->
   </div>
 </template>
 
@@ -180,7 +176,7 @@ export default {
         const arrCombinations = this.product.variantes
         if (arrCombinations && arrCombinations.combinaciones.length) {
           const inventorySum = JSON.parse(
-            arrCombinations.combinaciones[0].combinaciones
+            arrCombinations.combinaciones[0].combinaciones,
           )
             .map((item) => parseInt(item.unidades) || 0)
             .reduce((acc, val) => acc + val, 0)
@@ -200,7 +196,7 @@ export default {
     this.productPrice()
     if (
       this.product.con_variante &&
-      this.product.variantes.variantes !== '[object Object]'
+      this.product.variantes?.variantes !== '[object Object]'
     ) {
       this.estadoCart = true
     }
@@ -262,7 +258,7 @@ export default {
             this.$store.state.productsCart.splice(
               this.productIndexCart,
               1,
-              mutableProduct
+              mutableProduct,
             )
           } else {
             this.$store.state.productsCart.push(product)
@@ -323,7 +319,7 @@ export default {
 }
 .card-title:hover {
   color: var(--hover_text);
-  @apply transition-all ease-out duration-0.2;
+  @apply transition-all duration-0.2 ease-out;
 }
 .separator-price {
   font-size: 20px;
@@ -349,21 +345,21 @@ export default {
 .btn:hover {
   color: var(--hover_text_btn);
   background-color: var(--hover_Bg_btn);
-  @apply transition-all ease-in duration-0.2;
+  @apply transition-all duration-0.2 ease-in;
 }
 .icon-shop {
   fill: var(--color_text_btn);
-  @apply mr-5 mb-5;
+  @apply mb-5 mr-5;
 }
 #product-card:hover .wrapper_btn {
-  @apply transition-all ease-in duration-0.3 opacity-100;
+  @apply opacity-100 transition-all duration-0.3 ease-in;
 }
 #product-card:hover .wrapper_blur {
-  @apply transition-all ease-in duration-0.3 opacity-100;
+  @apply opacity-100 transition-all duration-0.3 ease-in;
 }
 @screen sm {
   .overlay-top {
-    @apply absolute overflow-hidden rounded-md bg-white-white shadow-md transition-all ease-in duration-300;
+    @apply absolute overflow-hidden rounded-md bg-white-white shadow-md transition-all duration-300 ease-in;
     top: 10%;
     right: 0;
     width: 45px;
@@ -393,7 +389,7 @@ export default {
     height: 5%;
   }
   .overlay-sould {
-    @apply flex justify-center items-center rounded-l-lg;
+    @apply flex items-center justify-center rounded-l-lg;
     position: absolute;
     top: 0%;
     left: 60%;
@@ -408,7 +404,7 @@ export default {
     height: 40px;
   }
   .content-price {
-    @apply flex flex-row justify-center items-center w-full;
+    @apply flex w-full flex-row items-center justify-center;
   }
   .separator-price {
     @apply mx-1;
