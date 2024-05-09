@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex justify-center items-center pt-[150px] wrapper-component"
+    class="wrapper-component flex w-full items-center justify-center pt-[150px]"
     :style="[
       settingByTemplate7[0].detailsProduct,
       settingByTemplate7[0].settingGeneral,
@@ -17,15 +17,15 @@
   >
     <div
       v-if="loading"
-      class="w-full flex max-w-[1300px] flex-col justify-start items-center pt-25 px-10 pb-20 md:pt-50 md:px-30 md:pb-30"
+      class="flex w-full max-w-[1300px] flex-col items-center justify-start px-10 pb-20 pt-25 md:px-30 md:pb-30 md:pt-50"
     >
       <Skeleton />
     </div>
     <div
       v-else
-      class="md:justify-center w-full max-w-[1300px] relative flex flex-col justify-between pt-25 px-10 pb-20 md:pt-50 md:px-30 md:pb-30"
+      class="relative flex w-full max-w-[1300px] flex-col justify-between px-10 pb-20 pt-25 md:justify-center md:px-30 md:pb-30 md:pt-50"
     >
-      <div class="w-full flex flex-col md:flex-row">
+      <div class="flex w-full flex-col md:flex-row">
         <div class="wrapper-left">
           <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="photos">
             <div class="swiper-wrapper">
@@ -121,12 +121,12 @@
                 data.productosInfo.promocionValor
                   ? Math.trunc(
                       salesData.precio /
-                        (1 - data.productosInfo.promocionValor / 100)
+                        (1 - data.productosInfo.promocionValor / 100),
                     )
                   : 0)
                   | currency(
                     dataStore.tiendasInfo.paises.codigo,
-                    dataStore.tiendasInfo.moneda
+                    dataStore.tiendasInfo.moneda,
                   )
               }}
             </p>
@@ -143,7 +143,7 @@
                   salesData.precio
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda
+                      dataStore.tiendasInfo.moneda,
                     )
                 }}
               </p>
@@ -167,7 +167,7 @@
             <div class="content_buy_action">
               <div v-if="data.envioGratis == 1 && salesData.unidades > 0">
                 <div class="transport-icon">
-                  <TruckIcon class="text-16 mr-5" style="color: #00a650" />
+                  <TruckIcon class="mr-5 text-16" style="color: #00a650" />
                   <p>{{ $t('footer_tarifaPrecio') }}</p>
                 </div>
               </div>
@@ -307,7 +307,7 @@
               </div>
             </div>
             <div
-              class="mt-0 pb-10 md:mt-15 md:pb-20 fixed md:sticky w-full flex flex-row justify-center md:justify-start items-center left-0 bottom-0 px-6 pt-10 md:px-0 md:pt-0 border-t md:border-t-0 z-10 md:z-0 md:border-b border-color"
+              class="border-color fixed bottom-0 left-0 z-10 mt-0 flex w-full flex-row items-center justify-center border-t px-6 pb-10 pt-10 md:sticky md:z-0 md:mt-15 md:justify-start md:border-b md:border-t-0 md:px-0 md:pb-20 md:pt-0"
               :class="`bg-[${settingByTemplate7[0].detailsProduct['--background_color_1']}]`"
             >
               <div class="quantity">
@@ -320,7 +320,7 @@
                 </button>
                 <div
                   v-if="maxQuantityValue == quantityValue"
-                  class="absolute -top-32 left-3 w-[130px] border border-yellow-500 bg-yellow-300 rounded-6 px-2 py-3 text-center"
+                  class="absolute -top-32 left-3 w-[130px] rounded-6 border border-yellow-500 bg-yellow-300 px-2 py-3 text-center"
                 >
                   <span class="text-14 text-black">
                     {{ $t('cart_ultimaUnidad') }}
@@ -423,30 +423,19 @@
                 </p>
               </div>
 
-              <p
-                v-if="
-                  (data.productosInfo.largo != 0 &&
-                    data.productosInfo.largo != null) ||
-                  (data.productosInfo.largo != 0 &&
-                    data.productosInfo.largo != null) ||
-                  (data.productosInfo.alto != 0 &&
-                    data.productosInfo.alto != null) ||
-                  (data.productosInfo.peso > 0 &&
-                    data.productosInfo.peso != null)
-                "
-                class="category-beffore mt-10"
-              >
+              <p v-if="validateDimensions" class="category-beffore mt-10">
                 <strong>{{ $t('productdetail_dimensiones') }}</strong>
               </p>
               <div
-                class="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-0"
+                class="grid w-full grid-cols-1 gap-x-2 gap-y-0 sm:grid-cols-2"
               >
                 <div
                   v-if="
                     data.productosInfo.largo != 0 &&
-                    data.productosInfo.largo != null
+                    data.productosInfo.largo != null &&
+                    data.productosInfo.largo != 'null'
                   "
-                  class="flex flex-row items-center mt-15"
+                  class="mt-15 flex flex-row items-center"
                 >
                   <p class="category-beffore">
                     {{ $t('productdetail_largo') }}:
@@ -456,9 +445,10 @@
                 <div
                   v-if="
                     data.productosInfo.ancho != 0 &&
-                    data.productosInfo.ancho != null
+                    data.productosInfo.ancho != null &&
+                    data.productosInfo.ancho != 'null'
                   "
-                  class="flex flex-row items-center mt-15"
+                  class="mt-15 flex flex-row items-center"
                 >
                   <p class="category-beffore">
                     {{ $t('productdetail_ancho') }}:
@@ -468,9 +458,10 @@
                 <div
                   v-if="
                     data.productosInfo.alto != 0 &&
-                    data.productosInfo.alto != null
+                    data.productosInfo.alto != null &&
+                    data.productosInfo.alto != 'null'
                   "
-                  class="flex flex-row items-center mt-15"
+                  class="mt-15 flex flex-row items-center"
                 >
                   <p class="category-beffore">
                     {{ $t('productdetail_alto') }}:
@@ -480,9 +471,10 @@
                 <div
                   v-if="
                     data.productosInfo.peso > 0 &&
-                    data.productosInfo.peso != null
+                    data.productosInfo.peso != null &&
+                    data.productosInfo.peso != 'null'
                   "
-                  class="flex flex-row items-center mt-15"
+                  class="mt-15 flex flex-row items-center"
                 >
                   <p class="category-beffore">
                     {{ $t('productdetail_Peso') }}:
@@ -656,9 +648,25 @@ export default {
     getBuyButtonLabel() {
       return this.$t('productdetail_btnComprar')
     },
+    validateDimensions() {
+      return (
+        (this.data.productosInfo.largo != 0 &&
+          this.data.productosInfo.largo != null &&
+          this.data.productosInfo.largo != 'null') ||
+        (this.data.productosInfo.ancho != 0 &&
+          this.data.productosInfo.ancho != null &&
+          this.data.productosInfo.ancho != 'null') ||
+        (this.data.productosInfo.alto != 0 &&
+          this.data.productosInfo.alto != null &&
+          this.data.productosInfo.alto != 'null') ||
+        (this.data.productosInfo.peso > 0 &&
+          this.data.productosInfo.peso != null &&
+          this.data.productosInfo.peso != 'null')
+      )
+    },
     filterSuggestedProducts() {
       return this.suggestedProducts.filter(
-        (product) => product.id !== this.data.id
+        (product) => product.id !== this.data.id,
       )
     },
     // productsCart() {
@@ -683,11 +691,11 @@ export default {
           this.data.conVariante > 0
         ) {
           const combinaciones = JSON.parse(
-            this.data.combinaciones[0][0].combinaciones
+            this.data.combinaciones[0][0].combinaciones,
           )
           const result = combinaciones.find(
             (combinacion) =>
-              JSON.stringify(combinacion.combinacion) == combinationSelected
+              JSON.stringify(combinacion.combinacion) == combinationSelected,
           )
           this.productCart = []
           this.productIndexCart = null
@@ -764,7 +772,7 @@ export default {
         'products/GET_DATA_PRODUCT',
         {
           slug: this.id,
-        }
+        },
       )
       if (success && data.data) {
         this.loading = false
@@ -935,7 +943,7 @@ export default {
         this.$store.state.productsCart.splice(
           this.productIndexCart,
           1,
-          mutableProduct
+          mutableProduct,
         )
       } else {
         this.$store.state.productsCart.push(product)
@@ -1003,7 +1011,7 @@ export default {
           limit: 12,
           category: this.data.categoriaProducto2.nombreCategoriaProducto,
           // subcategory: this.data.subcategoria,
-        }
+        },
       )
       if (success) {
         this.suggestedProducts = data.publicProductList
@@ -1155,7 +1163,7 @@ export default {
 .text-name {
   color: var(--color_title);
   font-family: var(--font-style-1);
-  @apply text-34 leading-tight font-normal mb-20;
+  @apply mb-20 text-34 font-normal leading-tight;
 }
 .text-marca {
   color: var(--color_description);
@@ -1187,7 +1195,7 @@ export default {
   color: var(--color_price);
 }
 .content_stock {
-  @apply flex flex-row justify-start items-center w-full;
+  @apply flex w-full flex-row items-center justify-start;
 }
 .icon-stock {
   fill: var(--color_title);
@@ -1267,7 +1275,7 @@ export default {
 }
 .content_card-info {
   margin-bottom: 10px;
-  @apply w-full flex flex-row justify-start items-end;
+  @apply flex w-full flex-row items-end justify-start;
 }
 .text-card-info-sould {
   color: #ed2353;
@@ -1312,7 +1320,7 @@ export default {
 }
 .category_product {
   margin-top: 15px;
-  @apply flex flex-row justify-start items-center w-full;
+  @apply flex w-full flex-row items-center justify-start;
 }
 .category-beffore {
   font-weight: 600;
@@ -1404,7 +1412,9 @@ export default {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.3px;
-  transition: color 0.25s ease, background-color 0.25s ease;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease;
   @apply flex text-center;
 }
 .btn:hover {

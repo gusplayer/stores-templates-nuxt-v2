@@ -3,17 +3,17 @@
     :visible.sync="openMenuLeft"
     :before-close="closed"
     direction="rtl"
-    ize="370px"
+    size="370px"
     :with-header="false"
     :modal-append-to-body="false"
   >
     <div
-      class="my-20 px-15 flex flex-col justify-between items-start w-full content-left"
+      class="content-left my-20 flex w-full flex-col items-start justify-between px-15"
       :style="[settingByTemplate]"
     >
-      <div class="w-full flex justify-between items-center pb-10">
+      <div class="flex w-full items-center justify-between pb-10">
         <p
-          class="w-auto uppercase font-semibold cursor-pointer text-16 text-gray-800"
+          class="w-auto cursor-pointer text-16 font-semibold uppercase text-gray-800"
           @click="clearFilters"
         >
           {{ $t('header_buscar_limpiar') }}
@@ -39,7 +39,7 @@
           name="2"
         >
           <div
-            class="w-full grid grid-cols-1 gap-4 justify-start items-center transition-all ease-in duration-0.2"
+            class="grid w-full grid-cols-1 items-center justify-start gap-4 transition-all duration-0.2 ease-in"
           >
             <div v-for="(category, index) in categorias" :key="index">
               <div @click="setToQueryFilter('category', category)">
@@ -61,7 +61,7 @@
           name="3"
         >
           <div
-            class="w-full grid grid-cols-1 gap-4 justify-start items-center transition-all ease-in duration-0.2"
+            class="grid w-full grid-cols-1 items-center justify-start gap-4 transition-all duration-0.2 ease-in"
           >
             <div
               v-for="(subcategory, index) in selectedSubcategories"
@@ -97,7 +97,7 @@
             :name="6 + index"
           >
             <div
-              class="w-full grid grid-cols-1 gap-4 justify-start items-center"
+              class="grid w-full grid-cols-1 items-center justify-start gap-4"
             >
               <button
                 v-for="itemsProperties in itemsTags.tagProperties"
@@ -187,11 +187,11 @@ export default {
         this.query.category = value.nombreCategoriaProducto || null
         this.categorySelect = value.id
         this.selectedSubcategories = this.subcategories.filter(
-          (item) => item.categoria === value.id
+          (item) => item.categoria === value.id,
         )
         this.$store.commit(
           'products/SET_CATEGORY_PRODUCTO',
-          value.nombreCategoriaProducto
+          value.nombreCategoriaProducto,
         )
         this.$store.commit('products/SET_SUBCATEGORY_PRODUCTO', null)
       } else if (type === 'subcategories') {
@@ -202,11 +202,11 @@ export default {
         })
         this.$store.commit(
           'products/SET_CATEGORY_PRODUCTO',
-          this.query.category
+          this.query.category,
         )
         this.$store.commit(
           'products/SET_SUBCATEGORY_PRODUCTO',
-          value.nombreSubcategoria || null
+          value.nombreSubcategoria || null,
         )
         this.query.subcategory = value.id || null
         this.subCategorySelect = value.id
@@ -297,7 +297,7 @@ export default {
   color: var(--color_categories);
   font-size: 15px;
   line-height: 1.3;
-  @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
+  @apply flex w-full cursor-pointer flex-row items-center justify-start pr-1 font-normal transition-all duration-0.2 ease-in;
 }
 .txt-Filter:hover {
   color: #eb7025;
@@ -306,7 +306,7 @@ export default {
   color: var(--color_categories);
   font-size: 15px;
   line-height: 1.3;
-  @apply w-full flex flex-row justify-start items-center font-normal cursor-pointer pr-1 transition-all ease-in duration-0.2;
+  @apply flex w-full cursor-pointer flex-row items-center justify-start pr-1 font-normal transition-all duration-0.2 ease-in;
 }
 .txt-categorys:hover {
   color: #eb7025;
@@ -315,6 +315,6 @@ export default {
   font-size: 15px;
   color: var(--color_categories);
   background: transparent;
-  @apply w-full h-30 cursor-pointer border-none;
+  @apply h-30 w-full cursor-pointer border-none;
 }
 </style>

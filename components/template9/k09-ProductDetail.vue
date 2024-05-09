@@ -12,7 +12,7 @@
   >
     <div
       v-if="loading"
-      class="w-full flex max-w-[1300px] flex-col justify-start items-center pt-25 px-10 pb-20 md:pt-50 md:px-30 md:pb-30"
+      class="flex w-full max-w-[1300px] flex-col items-center justify-start px-10 pb-20 pt-25 md:px-30 md:pb-30 md:pt-50"
     >
       <Skeleton />
     </div>
@@ -27,27 +27,27 @@
       <div class="product-content">
         <div class="left">
           <div
-            class="hidden md:grid grid-cols-1 gap-4 justify-center items-center"
+            class="hidden grid-cols-1 items-center justify-center gap-4 md:grid"
           >
-            <div class="w-full flex justify-center items-center">
+            <div class="flex w-full items-center justify-center">
               <img
                 v-lazy="idCloudinaryQuality(data.fotoCloudinary, 850, 850)"
-                class="object-contain overflow-hidden w-auto h-auto"
+                class="h-auto w-auto overflow-hidden object-contain"
                 alt="Product Img"
               />
             </div>
             <div
               v-for="(foto, itemsPhoto) in data.productosFotos"
               :key="itemsPhoto"
-              class="w-full flex justify-center items-center"
+              class="flex w-full items-center justify-center"
             >
               <img
                 v-lazy="idCloudinaryQuality(foto.fotoCloudinary, 850, 850)"
-                class="object-contain overflow-hidden w-auto h-auto"
+                class="h-auto w-auto overflow-hidden object-contain"
                 alt="Product Img"
               />
             </div>
-            <div class="w-full flex justify-center items-center">
+            <div class="flex w-full items-center justify-center">
               <iframe
                 v-show="idYoutube"
                 :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
@@ -58,7 +58,7 @@
             </div>
           </div>
           <div
-            class="flex md:hidden w-full max-w-[400px] max-h-[375px] box-content overflow-hidden mb-10"
+            class="mb-10 box-content flex max-h-[375px] w-full max-w-[400px] overflow-hidden md:hidden"
           >
             <ProductSlide
               :photos="data.productosFotos"
@@ -91,12 +91,12 @@
                   data.productosInfo.promocionValor
                     ? Math.trunc(
                         salesData.precio /
-                          (1 - data.productosInfo.promocionValor / 100)
+                          (1 - data.productosInfo.promocionValor / 100),
                       )
                     : 0)
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda
+                      dataStore.tiendasInfo.moneda,
                     )
                 }}
               </p>
@@ -115,7 +115,7 @@
                   salesData.precio
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda
+                      dataStore.tiendasInfo.moneda,
                     )
                 }}
               </p>
@@ -141,7 +141,7 @@
             />
             <div
               v-if="data.productosInfo.descripcionCorta"
-              class="flex flex-col mb-10 items-start"
+              class="mb-10 flex flex-col items-start"
             >
               <p class="text-variant">{{ $t('productdetail_informacion') }}</p>
               <p class="text-option2">
@@ -150,7 +150,7 @@
             </div>
             <div
               v-if="data.productosInfo.garantia"
-              class="flex flex-col mb-10 items-start"
+              class="mb-10 flex flex-col items-start"
             >
               <p class="text-variant">{{ $t('productdetail_garantia') }}</p>
               <p class="text-option2">
@@ -159,7 +159,7 @@
             </div>
             <div
               v-if="data.categoriaProducto > 0"
-              class="flex flex-col mb-10 items-start"
+              class="mb-10 flex flex-col items-start"
             >
               <p class="text-variant">{{ $t('productdetail_categoria') }}</p>
               <p class="text-option2">
@@ -168,7 +168,7 @@
             </div>
             <div
               v-if="data.subcategoria > 0"
-              class="flex flex-col mb-10 items-start"
+              class="mb-10 flex flex-col items-start"
             >
               <p class="text-variant">{{ $t('home_subcategory') }}</p>
               <p class="text-option2">
@@ -176,27 +176,17 @@
               </p>
             </div>
 
-            <p
-              v-if="
-                (data.productosInfo.largo != 0 &&
-                  data.productosInfo.largo != null) ||
-                (data.productosInfo.largo != 0 &&
-                  data.productosInfo.largo != null) ||
-                (data.productosInfo.alto != 0 &&
-                  data.productosInfo.alto != null) ||
-                (data.productosInfo.peso > 0 && data.productosInfo.peso != null)
-              "
-              class="text-variant mb-10"
-            >
+            <p v-if="validateDimensions" class="text-variant mb-10">
               {{ $t('productdetail_dimensiones') }}
             </p>
-            <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-0">
+            <div class="grid w-full grid-cols-1 gap-x-2 gap-y-0 sm:grid-cols-2">
               <div
                 v-if="
                   data.productosInfo.largo != 0 &&
-                  data.productosInfo.largo != null
+                  data.productosInfo.largo != null &&
+                  data.productosInfo.largo != 'null'
                 "
-                class="flex flex-col mb-10 items-start"
+                class="mb-10 flex flex-col items-start"
               >
                 <p class="text-variant">{{ $t('productdetail_largo') }}:</p>
                 <p class="text-option2">{{ data.productosInfo.largo }} cm</p>
@@ -204,9 +194,10 @@
               <div
                 v-if="
                   data.productosInfo.ancho != 0 &&
-                  data.productosInfo.ancho != null
+                  data.productosInfo.ancho != null &&
+                  data.productosInfo.ancho != 'null'
                 "
-                class="flex flex-col mb-10 items-start"
+                class="mb-10 flex flex-col items-start"
               >
                 <p class="text-variant">{{ $t('productdetail_ancho') }}:</p>
                 <p class="text-option2">{{ data.productosInfo.ancho }} cm</p>
@@ -214,18 +205,21 @@
               <div
                 v-if="
                   data.productosInfo.alto != 0 &&
-                  data.productosInfo.alto != null
+                  data.productosInfo.alto != null &&
+                  data.productosInfo.alto != 'null'
                 "
-                class="flex flex-col mb-10 items-start"
+                class="mb-10 flex flex-col items-start"
               >
                 <p class="text-variant">{{ $t('productdetail_alto') }}:</p>
                 <p class="text-option2">{{ data.productosInfo.alto }} cm</p>
               </div>
               <div
                 v-if="
-                  data.productosInfo.peso > 0 && data.productosInfo.peso != null
+                  data.productosInfo.peso > 0 &&
+                  data.productosInfo.peso != null &&
+                  data.productosInfo.peso != 'null'
                 "
-                class="flex flex-col mb-10 items-start"
+                class="mb-10 flex flex-col items-start"
               >
                 <p class="text-variant">{{ $t('productdetail_Peso') }}:</p>
                 <p class="text-option2">{{ data.productosInfo.peso }} Kg</p>
@@ -256,7 +250,7 @@
             </div>
             <div
               v-if="userDropshipping.userName"
-              class="w-full flex flex-row items-center my-8"
+              class="my-8 flex w-full flex-row items-center"
             >
               <p class="text-variant" style="margin-right: 10px">
                 {{ $t('productdetail_dropshipping') }}
@@ -265,7 +259,7 @@
                 {{ userDropshipping.userName }}
               </p>
             </div>
-            <div class="flex flex-row mb-10 md:mb-20 items-center">
+            <div class="mb-10 flex flex-row items-center md:mb-20">
               <p class="text-variant" style="margin-right: 10px">
                 {{ $t('productdetail_compartir') }}
               </p>
@@ -282,7 +276,7 @@
               </button>
             </div>
             <div
-              class="mt-0 pb-10 md:mt-15 md:pb-20 fixed md:sticky w-full flex flex-row justify-center md:justify-start items-center left-0 bottom-0 px-6 pt-10 md:px-0 md:pt-0 border-t md:border-t-0 z-10 md:z-0 md:border-b border-color"
+              class="border-color fixed bottom-0 left-0 z-10 mt-0 flex w-full flex-row items-center justify-center border-t px-6 pb-10 pt-10 md:sticky md:z-0 md:mt-15 md:justify-start md:border-b md:border-t-0 md:px-0 md:pb-20 md:pt-0"
               :style="`background-color: ${settingByTemplate9[0].detailsProduct['--background_color_1']};`"
             >
               <div class="content-cart mr-10">
@@ -296,7 +290,7 @@
                   </button>
                   <div
                     v-if="maxQuantityValue == quantityValue"
-                    class="absolute -top-32 left-3 w-[130px] border border-yellow-500 bg-yellow-300 rounded-6 px-2 py-3 text-center"
+                    class="absolute -top-32 left-3 w-[130px] rounded-6 border border-yellow-500 bg-yellow-300 px-2 py-3 text-center"
                   >
                     <span class="text-14 text-black">
                       {{ $t('cart_ultimaUnidad') }}
@@ -536,9 +530,25 @@ export default {
     getBuyButtonLabel() {
       return this.$t('productdetail_btnComprar')
     },
+    validateDimensions() {
+      return (
+        (this.data.productosInfo.largo != 0 &&
+          this.data.productosInfo.largo != null &&
+          this.data.productosInfo.largo != 'null') ||
+        (this.data.productosInfo.ancho != 0 &&
+          this.data.productosInfo.ancho != null &&
+          this.data.productosInfo.ancho != 'null') ||
+        (this.data.productosInfo.alto != 0 &&
+          this.data.productosInfo.alto != null &&
+          this.data.productosInfo.alto != 'null') ||
+        (this.data.productosInfo.peso > 0 &&
+          this.data.productosInfo.peso != null &&
+          this.data.productosInfo.peso != 'null')
+      )
+    },
     filterSuggestedProducts() {
       return this.suggestedProducts.filter(
-        (product) => product.id !== this.data.id
+        (product) => product.id !== this.data.id,
       )
     },
   },
@@ -560,11 +570,11 @@ export default {
           this.data.conVariante > 0
         ) {
           const combinaciones = JSON.parse(
-            this.data.combinaciones[0][0].combinaciones
+            this.data.combinaciones[0][0].combinaciones,
           )
           const result = combinaciones.find(
             (combinacion) =>
-              JSON.stringify(combinacion.combinacion) == combinationSelected
+              JSON.stringify(combinacion.combinacion) == combinationSelected,
           )
           this.productCart = []
           this.productIndexCart = null
@@ -625,7 +635,7 @@ export default {
         'products/GET_DATA_PRODUCT',
         {
           slug: this.id,
-        }
+        },
       )
       if (success && data.data) {
         this.loading = false
@@ -798,7 +808,7 @@ export default {
         this.$store.state.productsCart.splice(
           this.productIndexCart,
           1,
-          mutableProduct
+          mutableProduct,
         )
       } else {
         this.$store.state.productsCart.push(product)
@@ -858,7 +868,7 @@ export default {
           limit: 12,
           category: this.data.categoriaProducto2.nombreCategoriaProducto,
           // subcategory: this.data.subcategoria,
-        }
+        },
       )
       if (success) {
         this.suggestedProducts = data.publicProductList
@@ -969,7 +979,7 @@ export default {
   padding: 0 10px;
 }
 .crumb {
-  @apply flex flex-row justify-start items-start my-40;
+  @apply my-40 flex flex-row items-start justify-start;
 }
 .txt-crumb {
   font-family: Arial, sans-serif;
@@ -991,30 +1001,30 @@ export default {
   transition: all 0.25s ease;
 }
 .product-content {
-  @apply w-full flex;
+  @apply flex w-full;
 }
 .left {
-  @apply flex flex-col justify-center items-center;
+  @apply flex flex-col items-center justify-center;
 }
 
 .content-variant {
-  @apply w-auto flex flex-col justify-center items-start mb-20;
+  @apply mb-20 flex w-auto flex-col items-start justify-center;
 }
 
 .right {
-  @apply flex flex-col justify-start items-start;
+  @apply flex flex-col items-start justify-start;
 }
 .content-category,
 .content-name,
 .content-addCart {
-  @apply w-full flex flex-row justify-start items-center;
+  @apply flex w-full flex-row items-center justify-start;
 }
 .content-price {
   align-items: center;
   @apply grid grid-flow-row grid-cols-2 grid-rows-2 gap-0;
 }
 .quantity {
-  @apply flex flex-row justify-center items-center;
+  @apply flex flex-row items-center justify-center;
 }
 .section-suggesProduct {
   width: 100%;
@@ -1023,7 +1033,7 @@ export default {
 
 @screen sm {
   .product-content {
-    @apply flex-col justify-center items-center;
+    @apply flex-col items-center justify-center;
   }
   .left {
     @apply w-9/0;
@@ -1034,7 +1044,7 @@ export default {
   }
 
   .right {
-    @apply w-9/0 mt-4;
+    @apply mt-4 w-9/0;
   }
   .content-name,
   .content-price {
@@ -1070,7 +1080,7 @@ export default {
     margin-top: 20px;
   }
   .content-options {
-    @apply w-full flex flex-col justify-start items-center;
+    @apply flex w-full flex-col items-center justify-start;
   }
   .crumb {
     @apply w-9/0;
@@ -1263,7 +1273,7 @@ export default {
 }
 @screen lg {
   .product-content {
-    @apply w-9/6 flex-row justify-start items-start;
+    @apply w-9/6 flex-row items-start justify-start;
   }
   .crumb {
     @apply w-9/6;
@@ -1272,7 +1282,7 @@ export default {
     height: 300px;
   }
   .left {
-    @apply w-full mr-50;
+    @apply mr-50 w-full;
   }
   .content-options {
     @apply hidden;
