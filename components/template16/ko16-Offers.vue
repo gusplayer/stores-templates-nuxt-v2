@@ -41,7 +41,10 @@
             {{ offers.text }}
           </p>
 
-          <div class="flex w-full max-w-[300px] items-start justify-start">
+          <div
+            v-if="offers?.values?.length > 0"
+            class="flex w-full max-w-[300px] items-start justify-start"
+          >
             <div ref="mySwiper" v-swiper:mySwiper="swiperOption">
               <div class="swiper-wrapper">
                 <div
@@ -51,13 +54,20 @@
                 >
                   <K0CountDown
                     :information="item"
-                    :product="product"
-                    :card-products="cardProducts"
                     :setting-general="settingGeneral"
                     class="h-full w-full"
                   />
-                  <div v-if="index === 0" class="hidden">
-                    {{ setProduct(item.item) }}
+                  <div
+                    v-if="product[index]?.id && product.length > 0"
+                    class="mt-40"
+                  >
+                    <KoProductCard
+                      :product="product[index]"
+                      :setting-card-products="cardProducts"
+                      :setting-general="settingGeneral"
+                      style="max-width: 300px"
+                      :style="`border-radius: ${settingGeneral?.radius};`"
+                    />
                   </div>
                 </div>
               </div>
@@ -76,6 +86,7 @@ export default {
   name: 'Ko16Offers',
   components: {
     K0CountDown: () => import('./_offers/countdown.vue'),
+    KoProductCard: () => import('./_cardProduct/ProductCard.vue'),
   },
   mixins: [idCloudinary],
   props: {
@@ -98,7 +109,7 @@ export default {
   },
   data() {
     return {
-      product: null,
+      product: [],
       swiperOption: {
         slidesPerView: 1,
         spaceBetween: 10,
@@ -117,21 +128,32 @@ export default {
       return this.$refs.mySwiper.swiper
     },
   },
+  mounted() {
+    this.setProduct()
+  },
   methods: {
-    async setProduct(value) {
-      if (!this.product) {
-        const { success, data } = await this.$store.dispatch(
-          'products/GET_ALL_PRODUCTS',
-          {
-            id_tienda: this.dataStore.id,
-            limit: 1,
-            page: 1,
-            name: value,
-          },
-        )
-        if (success && value !== null) {
-          this.product = data.publicProductList
+    async setProduct() {
+      if (this.offers?.values?.length > 0) {
+        for (let i = 0; i < this.offers.values.length; i++) {
+          if (this.offers.values[i].item !== null) {
+            const response = await this.getProducts(this.offers.values[i])
+            this.product.push(response)
+          }
         }
+      }
+    },
+    async getProducts(value) {
+      const { success, data } = await this.$store.dispatch(
+        'products/GET_ALL_PRODUCTS',
+        {
+          id_tienda: this.dataStore.id,
+          limit: 1,
+          page: 1,
+          name: value.item,
+        },
+      )
+      if (success && value.item !== null) {
+        return data.publicProductList[0]
       }
     },
   },
