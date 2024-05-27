@@ -1,18 +1,18 @@
 <template>
-  <div class="w-full h-full flex justify-center items-start overflow-y-auto">
+  <div class="flex h-full w-full items-start justify-center overflow-y-auto">
     <div
       v-if="loading"
-      class="w-full flex max-w-[900px] bg-white-white shadow-md flex-col justify-start items-center pt-25 px-10 pb-20 md:pt-50 md:px-30 md:pb-30"
+      class="flex w-full max-w-[900px] flex-col items-center justify-start bg-white-white px-10 pb-20 pt-25 shadow-md md:px-30 md:pb-30 md:pt-50"
     >
       <Skeleton />
     </div>
     <div
       v-else
-      class="w-full h-full min-h-screen max-w-[900px] flex flex-col justify-start items-center bg-white-white shadow-md relative pt-30 px-10 md:px-30 pb-40 md:pb-10"
+      class="relative flex h-full min-h-screen w-full max-w-[900px] flex-col items-center justify-start bg-white-white px-10 pb-40 pt-30 shadow-md md:px-30 md:pb-10"
     >
       <nuxt-link
         :to="stateWapiME ? `/wa/${dataStore.id}/` : `/`"
-        class="w-full flex flex-row justify-start items-center p-10"
+        class="flex w-full flex-row items-center justify-start p-10"
         :style="`color: ${
           settingByTemplate && settingByTemplate.color_primario
             ? settingByTemplate.color_primario
@@ -60,12 +60,12 @@
                 data.productosInfo.promocionValor
                   ? Math.trunc(
                       salesData.precio /
-                        (1 - data.productosInfo.promocionValor / 100)
+                        (1 - data.productosInfo.promocionValor / 100),
                     )
                   : 0)
                   | currency(
                     dataStore.tiendasInfo.paises.codigo,
-                    dataStore.tiendasInfo.moneda
+                    dataStore.tiendasInfo.moneda,
                   )
               }}
             </p>
@@ -82,7 +82,7 @@
                   salesData.precio
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda
+                      dataStore.tiendasInfo.moneda,
                     )
                 }}
               </p>
@@ -128,9 +128,9 @@
             </div>
             <div
               v-if="data.productosInfo.condicion"
-              class="w-full flex flex-row items-center my-8"
+              class="my-8 flex w-full flex-row items-center"
             >
-              <p class="text-marca font-bold mr-10">
+              <p class="text-marca mr-10 font-bold">
                 {{ $t('productdetail_condicion') }}:
               </p>
               <p class="text-marca">
@@ -143,9 +143,9 @@
             </div>
             <div
               v-if="data.categoriaProducto > 0"
-              class="w-full flex flex-row items-center my-8"
+              class="my-8 flex w-full flex-row items-center"
             >
-              <p class="text-marca font-bold mr-10">
+              <p class="text-marca mr-10 font-bold">
                 {{ $t('productdetail_categoria') }}:
               </p>
               <p class="text-marca">
@@ -154,9 +154,9 @@
             </div>
             <div
               v-if="data.subcategoria > 0"
-              class="w-full flex flex-row items-center my-8"
+              class="my-8 flex w-full flex-row items-center"
             >
-              <p class="text-marca font-bold mr-10">
+              <p class="text-marca mr-10 font-bold">
                 {{ $t('home_subcategory') }}:
               </p>
               <p class="text-marca">
@@ -165,9 +165,9 @@
             </div>
             <div
               v-if="data.productosInfo.garantia"
-              class="w-full flex flex-row items-center my-8"
+              class="my-8 flex w-full flex-row items-center"
             >
-              <p class="text-marca font-bold mr-10">
+              <p class="text-marca mr-10 font-bold">
                 {{ $t('productdetail_garantia') }}:
               </p>
               <p class="text-marca">
@@ -176,7 +176,7 @@
             </div>
             <div
               v-if="data.productosInfo.descripcionCorta"
-              class="w-full flex flex-col items-start my-8"
+              class="my-8 flex w-full flex-col items-start"
             >
               <p class="text-marca font-bold">
                 {{ $t('productdetail_informacion') }}:
@@ -199,15 +199,15 @@
             >
               <strong>{{ $t('productdetail_dimensiones') }}</strong>
             </p>
-            <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-0">
+            <div class="grid w-full grid-cols-1 gap-x-2 gap-y-0 sm:grid-cols-2">
               <div
                 v-if="
                   data.productosInfo.largo != 0 &&
                   data.productosInfo.largo != null
                 "
-                class="w-full flex flex-row items-center my-8"
+                class="my-8 flex w-full flex-row items-center"
               >
-                <p class="text-marca font-bold mr-10">
+                <p class="text-marca mr-10 font-bold">
                   {{ $t('productdetail_largo') }}:
                 </p>
                 <p class="text-marca">{{ data.productosInfo.largo }} cm</p>
@@ -217,9 +217,9 @@
                   data.productosInfo.ancho != 0 &&
                   data.productosInfo.ancho != null
                 "
-                class="w-full flex flex-row items-center my-8"
+                class="my-8 flex w-full flex-row items-center"
               >
-                <p class="text-marca font-bold mr-10">
+                <p class="text-marca mr-10 font-bold">
                   {{ $t('productdetail_ancho') }}:
                 </p>
                 <p class="text-marca">{{ data.productosInfo.ancho }} cm</p>
@@ -229,9 +229,9 @@
                   data.productosInfo.alto != 0 &&
                   data.productosInfo.alto != null
                 "
-                class="w-full flex flex-row items-center my-8"
+                class="my-8 flex w-full flex-row items-center"
               >
-                <p class="text-marca font-bold mr-10">
+                <p class="text-marca mr-10 font-bold">
                   {{ $t('productdetail_alto') }}:
                 </p>
                 <p class="text-marca">{{ data.productosInfo.alto }} cm</p>
@@ -240,9 +240,9 @@
                 v-if="
                   data.productosInfo.peso > 0 && data.productosInfo.peso != null
                 "
-                class="w-full flex flex-row items-center my-8"
+                class="my-8 flex w-full flex-row items-center"
               >
-                <p class="text-marca font-bold mr-10">
+                <p class="text-marca mr-10 font-bold">
                   {{ $t('productdetail_Peso') }}:
                 </p>
                 <p class="text-marca">{{ data.productosInfo.peso }} Kg</p>
@@ -251,7 +251,7 @@
 
             <div
               v-if="userDropshipping.userName"
-              class="w-full flex flex-row items-center my-8"
+              class="my-8 flex w-full flex-row items-center"
             >
               <p class="text-marca" style="margin-right: 10px">
                 <strong>{{ $t('productdetail_dropshipping') }}</strong>
@@ -265,9 +265,9 @@
       </div>
       <div
         v-if="contentDescription"
-        class="w-full flex flex-col mt-20 px-15 md:px-0"
+        class="mt-20 flex w-full flex-col px-15 md:px-0"
       >
-        <h3 class="text-marca font-bold mb-5">
+        <h3 class="text-marca mb-5 font-bold">
           {{ $t('productdetail_description') }}
         </h3>
         <div class="editor my-10 text-14 text-[#0f2930]">
@@ -317,7 +317,7 @@
           </div>
           <button
             v-if="data.productosInfo.dealerWhatsapp === '1'"
-            class="btn-responsive flex justify-center items-center"
+            class="btn-responsive flex items-center justify-center"
             :style="`background: ${
               settingByTemplate?.color_primario
                 ? settingByTemplate.color_primario
@@ -520,7 +520,7 @@ export default {
       ) {
         const tempTotal = this.salesData.precio * this.quantityValue
         const result = this.rangosByCiudad.rangos.find(
-          (rango) => tempTotal >= rango.inicial && tempTotal <= rango.final
+          (rango) => tempTotal >= rango.inicial && tempTotal <= rango.final,
         )
 
         return result ? result.precio : 0
@@ -536,7 +536,7 @@ export default {
     },
     filterSuggestedProducts() {
       return this.suggestedProducts.filter(
-        (product) => product.id !== this.data.id
+        (product) => product.id !== this.data.id,
       )
     },
   },
@@ -560,11 +560,11 @@ export default {
           this.data.conVariante > 0
         ) {
           const combinaciones = JSON.parse(
-            this.data.combinaciones[0][0].combinaciones
+            this.data.combinaciones[0][0].combinaciones,
           )
           const result = combinaciones.find(
             (combinacion) =>
-              JSON.stringify(combinacion.combinacion) == combinationSelected
+              JSON.stringify(combinacion.combinacion) == combinationSelected,
           )
           this.productCart = []
           this.productIndexCart = null
@@ -624,13 +624,14 @@ export default {
         'products/GET_DATA_PRODUCT',
         {
           slug: this.id,
-        }
+        },
       )
       if (success && data.data) {
         this.loading = false
         this.data = data.data
         this.getDescriptionProduct(data.data.slug)
         this.sendAnalyticsStore(data.data.id, 'VIEWED_PRODUCT')
+        this.videoYouTube(data.data.productosInfo.video)
         this.setOptionShipping()
         this.getSuggestedProducts()
 
@@ -681,7 +682,7 @@ export default {
         'products/GET_DESCRIPTION_PRODUCTO',
         {
           slug: idProduct,
-        }
+        },
       )
       if (success) {
         this.contentDescription = data?.data
@@ -693,6 +694,18 @@ export default {
         event: event,
         productId: value,
       })
+    },
+    videoYouTube(url) {
+      let myregexp =
+        /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
+      let id = ''
+      if (url && url !== '' && url !== 'null') {
+        this.validVideo = true
+        id = url.match(myregexp)
+        if (id) {
+          this.idYoutube = id[1]
+        }
+      }
     },
     setOptionShipping() {
       if (this.data.envioGratis == 1) {
@@ -788,7 +801,7 @@ export default {
         this.$store.state.productsCart.splice(
           this.productIndexCart,
           1,
-          mutableProduct
+          mutableProduct,
         )
       } else {
         this.$store.state.productsCart.push(product)
@@ -856,7 +869,7 @@ export default {
           this.$store.state.productsCart.splice(
             this.productIndexCart,
             1,
-            mutableProduct
+            mutableProduct,
           )
         } else {
           this.$store.state.productsCart.push(product)
@@ -963,24 +976,24 @@ export default {
         if (this.mobileCheck()) {
           window.open(
             `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
-            '_blank'
+            '_blank',
           )
         } else {
           window.open(
             `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
-            '_blank'
+            '_blank',
           )
         }
       } else {
         if (this.mobileCheck()) {
           window.open(
             `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`,
-            '_blank'
+            '_blank',
           )
         } else {
           window.open(
             `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`,
-            '_blank'
+            '_blank',
           )
         }
       }
@@ -994,7 +1007,7 @@ export default {
           limit: 12,
           category: this.data.categoriaProducto2.nombreCategoriaProducto,
           // subcategory: this.data.subcategoria,
-        }
+        },
       )
       if (success) {
         this.suggestedProducts = data.publicProductList
@@ -1049,7 +1062,7 @@ export default {
   min-height: calc(100vh - 205px);
   padding: 30px 30px 10px;
   background-color: #fafaf8;
-  @apply w-full relative justify-between items-start flex flex-row;
+  @apply relative flex w-full flex-row items-start justify-between;
 }
 .section {
   width: 100%;
@@ -1174,8 +1187,10 @@ export default {
   padding: 12px 10px;
   position: relative;
   background-color: #fafaf8;
-  box-shadow: 0px 2px 2px rgba(52, 58, 67, 0.1),
-    0px 2px 5px rgba(52, 58, 67, 0.08), 0px 5px 15px rgba(52, 58, 67, 0.08);
+  box-shadow:
+    0px 2px 2px rgba(52, 58, 67, 0.1),
+    0px 2px 5px rgba(52, 58, 67, 0.08),
+    0px 5px 15px rgba(52, 58, 67, 0.08);
 }
 .quantity-resposive {
   display: flex;
@@ -1219,8 +1234,10 @@ export default {
 .btn-responsive {
   border-radius: var(--radius_btn);
   border: none;
-  box-shadow: 0px 0px 2px rgba(52, 58, 67, 0.1),
-    0px 2px 5px rgba(52, 58, 67, 0.08), 0px 5px 15px rgba(52, 58, 67, 0.08);
+  box-shadow:
+    0px 0px 2px rgba(52, 58, 67, 0.1),
+    0px 2px 5px rgba(52, 58, 67, 0.08),
+    0px 5px 15px rgba(52, 58, 67, 0.08);
   padding: 6px 10px;
   width: 100%;
   height: 100%;
@@ -1397,7 +1414,7 @@ export default {
     padding: 0 15px;
   }
   .wrapper-item-skeleton {
-    @apply w-full relative justify-between items-start flex flex-col;
+    @apply relative flex w-full flex-col items-start justify-between;
   }
 }
 </style>

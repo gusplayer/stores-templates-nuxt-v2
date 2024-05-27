@@ -34,7 +34,7 @@
             class="h-full w-full"
             :photos="data.productosFotos"
             :photo="data.fotoCloudinary"
-            :idYoutube="idYoutube"
+            :id-you-tube="idYouTube"
           />
         </div>
         <div class="right">
@@ -525,7 +525,7 @@ export default {
       loading: true,
       data: {},
       selectPhotoUrl: '',
-      idYoutube: '',
+      idYouTube: '',
       existYoutube: false,
       maxQuantityValue: 1,
       quantityValue: 1,
@@ -890,7 +890,7 @@ export default {
         this.validVideo = true
         id = url.match(myregexp)
         if (id) {
-          this.idYoutube = id[1]
+          this.idYouTube = id[1]
         }
       }
     },
