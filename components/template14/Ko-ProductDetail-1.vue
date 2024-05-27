@@ -174,7 +174,7 @@
                   :src="`https://www.youtube.com/embed/${idYoutube}?rel=0&amp;controls=0&amp;showinfo=0`"
                   frameborder="0"
                   allowfullscreen
-                  class="h-full max-h-[375px] w-full max-w-[375px] rounded-10 object-contain object-top"
+                  class="h-full max-h-[375px] min-h-[375px] w-full max-w-[375px] rounded-10 object-contain object-top"
                 ></iframe>
               </div>
               <div
