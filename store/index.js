@@ -1144,59 +1144,72 @@ function obtenerInfoURL(url) {
   let esDominio = false
   let idTienda = ''
 
-  const subdominioMatch = url.match(
-    /\/\/([^\/.:]+)\.(komercia\.store|komercia\.online)/,
-  )
-  if (subdominioMatch) {
-    nombreTienda = subdominioMatch[1]
-    esSubdominio = true
+  // Caso especial para mipueblitoeco.com
+  const specialCasePattern = /^https:\/\/(www\.)?tienda\.mipueblitoeco\.com\/?$/
+  if (specialCasePattern.test(url)) {
+    return {
+      nombreTienda: 'tienda.mipueblitoeco.com',
+      esSubdominio: false,
+      esDominio: true,
+      idTienda: '',
+    }
   } else {
-    const idTiendaMatch = url.match(/\/wa\/(\d+)\/?/)
-    if (idTiendaMatch) {
-      nombreTienda = 'Wapi'
-      idTienda = idTiendaMatch[1]
-      esSubdominio = false
-      esDominio = false
+    const subdominioMatch = url.match(
+      /\/\/([^\/.:]+)\.(komercia\.store|komercia\.online)/,
+    )
+    if (subdominioMatch) {
+      nombreTienda = subdominioMatch[1]
+      esSubdominio = true
     } else {
-      const wapiMatch = url.match(/\/\/(?:www\.)?wapi\.me\/wa\/(\d+)\/?/)
-      if (wapiMatch) {
+      const idTiendaMatch = url.match(/\/wa\/(\d+)\/?/)
+      if (idTiendaMatch) {
         nombreTienda = 'Wapi'
-        idTienda = wapiMatch[1]
+        idTienda = idTiendaMatch[1]
         esSubdominio = false
         esDominio = false
       } else {
-        const localhostWapiMatch = url.match(
-          /\/\/(?:www\.)?localhost:3000\/wa\/(\d+)\/?/,
-        )
-        if (localhostWapiMatch) {
+        const wapiMatch = url.match(/\/\/(?:www\.)?wapi\.me\/wa\/(\d+)\/?/)
+        if (wapiMatch) {
           nombreTienda = 'Wapi'
-          idTienda = localhostWapiMatch[1]
+          idTienda = wapiMatch[1]
           esSubdominio = false
           esDominio = false
         } else {
-          const subdominioParts = url.match(/\/\/([^\/.:]+)\.localhost:3000\/?/)
-          if (subdominioParts) {
-            nombreTienda = subdominioParts[1]
-            esSubdominio = true
+          const localhostWapiMatch = url.match(
+            /\/\/(?:www\.)?localhost:3000\/wa\/(\d+)\/?/,
+          )
+          if (localhostWapiMatch) {
+            nombreTienda = 'Wapi'
+            idTienda = localhostWapiMatch[1]
+            esSubdominio = false
             esDominio = false
           } else {
-            const domainParts = url.match(
-              /\/\/(?:www\.)?([^\/.:]+)\.(com\.co?|store|...)/,
+            const subdominioParts = url.match(
+              /\/\/([^\/.:]+)\.localhost:3000\/?/,
             )
-            if (domainParts && domainParts[1] !== 'www') {
-              nombreTienda = domainParts[1]
-              esDominio = true
+            if (subdominioParts) {
+              nombreTienda = subdominioParts[1]
+              esSubdominio = true
+              esDominio = false
+            } else {
+              const domainParts = url.match(
+                /\/\/(?:www\.)?([^\/.:]+)\.(com\.co?|store|...)/,
+              )
+              if (domainParts && domainParts[1] !== 'www') {
+                nombreTienda = domainParts[1]
+                esDominio = true
+              }
             }
           }
         }
       }
     }
-  }
 
-  // Nueva validación para capturar el ID de wapi con parámetros adicionales en la URL
-  const wapiWithParamsMatch = url.match(/(\/wa\/\d+)(\S*)/)
-  if (wapiWithParamsMatch) {
-    idTienda = wapiWithParamsMatch[1].split('/').pop()
+    // Nueva validación para capturar el ID de wapi con parámetros adicionales en la URL
+    const wapiWithParamsMatch = url.match(/(\/wa\/\d+)(\S*)/)
+    if (wapiWithParamsMatch) {
+      idTienda = wapiWithParamsMatch[1].split('/').pop()
+    }
   }
 
   return {
@@ -1226,7 +1239,6 @@ async function getIdData(state, req, commit) {
       const response = await axios.get(
         `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL.nombreTienda}`,
       )
-
       id = response.data.data.id || response.data.data.storeId
       template =
         response.data.data.templateNumber || response.data.data.template
@@ -1237,7 +1249,7 @@ async function getIdData(state, req, commit) {
         })
       }
     } catch (err) {
-      console.log(`No se encontro la tienda ${getURL.nombreTienda}`)
+      console.log(`No se encontro la tienda ${getURL.nombreTienda} subdominio`)
     }
   } else if (getURL?.esDominio && getURL?.nombreTienda) {
     try {
@@ -1254,7 +1266,7 @@ async function getIdData(state, req, commit) {
         })
       }
     } catch (err) {
-      console.log(`No se encontro la tienda ${getURL.nombreTienda}`)
+      console.log(`No se encontro la tienda ${getURL.nombreTienda} dominio`)
     }
   }
   if (
