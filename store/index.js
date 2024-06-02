@@ -1144,6 +1144,17 @@ function obtenerInfoURL(url) {
   let esDominio = false
   let idTienda = ''
 
+  // Caso especial para mipueblitoeco.com
+  const specialCasePattern = /^https:\/\/(www\.)?tienda\.mipueblitoeco\.com\/?$/
+  if (specialCasePattern.test(url)) {
+    return {
+      nombreTienda: 'tienda.mipueblitoeco.com',
+      esSubdominio: false,
+      esDominio: true,
+      idTienda: '',
+    }
+  }
+
   const subdominioMatch = url.match(
     /\/\/([^\/.:]+)\.(komercia\.store|komercia\.online)/,
   )
@@ -1213,6 +1224,8 @@ async function getIdData(state, req, commit) {
     (req.connection.encrypted ? 'https' : 'http')
   const currentURL = `${protocol}://${req.headers.host}${req.url}`
   const getURL = obtenerInfoURL(currentURL)
+  // const getURL = obtenerInfoURL('https://tienda.mipueblitoeco.com/')
+
   let id = 0
   let template = 0
   let idWapi = null
@@ -1226,7 +1239,6 @@ async function getIdData(state, req, commit) {
       const response = await axios.get(
         `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL.nombreTienda}`,
       )
-
       id = response.data.data.id || response.data.data.storeId
       template =
         response.data.data.templateNumber || response.data.data.template
@@ -1237,7 +1249,7 @@ async function getIdData(state, req, commit) {
         })
       }
     } catch (err) {
-      console.log(`No se encontro la tienda ${getURL.nombreTienda}`)
+      console.log(`No se encontro la tienda ${getURL.nombreTienda} subdominio`)
     }
   } else if (getURL?.esDominio && getURL?.nombreTienda) {
     try {
@@ -1254,7 +1266,7 @@ async function getIdData(state, req, commit) {
         })
       }
     } catch (err) {
-      console.log(`No se encontro la tienda ${getURL.nombreTienda}`)
+      console.log(`No se encontro la tienda ${getURL.nombreTienda} dominio`)
     }
   }
   if (
