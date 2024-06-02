@@ -1153,63 +1153,61 @@ function obtenerInfoURL(url) {
       esDominio: true,
       idTienda: '',
     }
+  }
+
+  const subdominioMatch = url.match(
+    /\/\/([^\/.:]+)\.(komercia\.store|komercia\.online)/,
+  )
+  if (subdominioMatch) {
+    nombreTienda = subdominioMatch[1]
+    esSubdominio = true
   } else {
-    const subdominioMatch = url.match(
-      /\/\/([^\/.:]+)\.(komercia\.store|komercia\.online)/,
-    )
-    if (subdominioMatch) {
-      nombreTienda = subdominioMatch[1]
-      esSubdominio = true
+    const idTiendaMatch = url.match(/\/wa\/(\d+)\/?/)
+    if (idTiendaMatch) {
+      nombreTienda = 'Wapi'
+      idTienda = idTiendaMatch[1]
+      esSubdominio = false
+      esDominio = false
     } else {
-      const idTiendaMatch = url.match(/\/wa\/(\d+)\/?/)
-      if (idTiendaMatch) {
+      const wapiMatch = url.match(/\/\/(?:www\.)?wapi\.me\/wa\/(\d+)\/?/)
+      if (wapiMatch) {
         nombreTienda = 'Wapi'
-        idTienda = idTiendaMatch[1]
+        idTienda = wapiMatch[1]
         esSubdominio = false
         esDominio = false
       } else {
-        const wapiMatch = url.match(/\/\/(?:www\.)?wapi\.me\/wa\/(\d+)\/?/)
-        if (wapiMatch) {
+        const localhostWapiMatch = url.match(
+          /\/\/(?:www\.)?localhost:3000\/wa\/(\d+)\/?/,
+        )
+        if (localhostWapiMatch) {
           nombreTienda = 'Wapi'
-          idTienda = wapiMatch[1]
+          idTienda = localhostWapiMatch[1]
           esSubdominio = false
           esDominio = false
         } else {
-          const localhostWapiMatch = url.match(
-            /\/\/(?:www\.)?localhost:3000\/wa\/(\d+)\/?/,
-          )
-          if (localhostWapiMatch) {
-            nombreTienda = 'Wapi'
-            idTienda = localhostWapiMatch[1]
-            esSubdominio = false
+          const subdominioParts = url.match(/\/\/([^\/.:]+)\.localhost:3000\/?/)
+          if (subdominioParts) {
+            nombreTienda = subdominioParts[1]
+            esSubdominio = true
             esDominio = false
           } else {
-            const subdominioParts = url.match(
-              /\/\/([^\/.:]+)\.localhost:3000\/?/,
+            const domainParts = url.match(
+              /\/\/(?:www\.)?([^\/.:]+)\.(com\.co?|store|...)/,
             )
-            if (subdominioParts) {
-              nombreTienda = subdominioParts[1]
-              esSubdominio = true
-              esDominio = false
-            } else {
-              const domainParts = url.match(
-                /\/\/(?:www\.)?([^\/.:]+)\.(com\.co?|store|...)/,
-              )
-              if (domainParts && domainParts[1] !== 'www') {
-                nombreTienda = domainParts[1]
-                esDominio = true
-              }
+            if (domainParts && domainParts[1] !== 'www') {
+              nombreTienda = domainParts[1]
+              esDominio = true
             }
           }
         }
       }
     }
+  }
 
-    // Nueva validación para capturar el ID de wapi con parámetros adicionales en la URL
-    const wapiWithParamsMatch = url.match(/(\/wa\/\d+)(\S*)/)
-    if (wapiWithParamsMatch) {
-      idTienda = wapiWithParamsMatch[1].split('/').pop()
-    }
+  // Nueva validación para capturar el ID de wapi con parámetros adicionales en la URL
+  const wapiWithParamsMatch = url.match(/(\/wa\/\d+)(\S*)/)
+  if (wapiWithParamsMatch) {
+    idTienda = wapiWithParamsMatch[1].split('/').pop()
   }
 
   return {
@@ -1225,7 +1223,9 @@ async function getIdData(state, req, commit) {
     req.headers['x-forwarded-proto'] ||
     (req.connection.encrypted ? 'https' : 'http')
   const currentURL = `${protocol}://${req.headers.host}${req.url}`
-  const getURL = obtenerInfoURL(currentURL)
+  // const getURL = obtenerInfoURL(currentURL)
+  const getURL = obtenerInfoURL('https://tienda.mipueblitoeco.com/')
+
   let id = 0
   let template = 0
   let idWapi = null
