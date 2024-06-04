@@ -76,7 +76,7 @@
                     minPrice
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda
+                        dataStore.tiendasInfo.moneda,
                       )
                   }}
                 </p>
@@ -87,7 +87,7 @@
                     minPrice
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda
+                        dataStore.tiendasInfo.moneda,
                       )
                   }}
                 </div>
@@ -97,7 +97,7 @@
                     maxPrice
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda
+                        dataStore.tiendasInfo.moneda,
                       )
                   }}
                 </div>
@@ -111,7 +111,7 @@
                     product.precio
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda
+                        dataStore.tiendasInfo.moneda,
                       )
                   }}
                 </p>
@@ -193,7 +193,7 @@
                     minPrice
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda
+                        dataStore.tiendasInfo.moneda,
                       )
                   }}
                 </p>
@@ -204,7 +204,7 @@
                     minPrice
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda
+                        dataStore.tiendasInfo.moneda,
                       )
                   }}
                 </div>
@@ -214,7 +214,7 @@
                     maxPrice
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda
+                        dataStore.tiendasInfo.moneda,
                       )
                   }}
                 </div>
@@ -228,7 +228,7 @@
                     product.precio
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda
+                        dataStore.tiendasInfo.moneda,
                       )
                   }}
                 </p>
@@ -316,7 +316,7 @@ export default {
         const arrCombinations = this.product.variantes
         if (arrCombinations && arrCombinations.combinaciones.length) {
           const inventorySum = JSON.parse(
-            arrCombinations.combinaciones[0].combinaciones
+            arrCombinations.combinaciones[0].combinaciones,
           )
             .map((item) => parseInt(item.unidades) || 0)
             .reduce((acc, val) => acc + val, 0)
@@ -398,7 +398,7 @@ export default {
             this.$store.state.productsCart.splice(
               this.productIndexCart,
               1,
-              mutableProduct
+              mutableProduct,
             )
           } else {
             this.$store.state.productsCart.push(product)
@@ -447,17 +447,17 @@ export default {
 .wrapper-card {
   background: var(--background_color_1);
   border-radius: 5px;
-  @apply w-full flex justify-center items-center shadow box-border;
+  @apply box-border flex w-full items-start justify-center shadow;
 }
 .container-card {
   border-radius: 5px;
-  @apply w-full flex flex-col items-center relative overflow-hidden;
+  @apply relative flex w-full flex-col items-center overflow-hidden;
 }
 .wrapper-image {
-  @apply w-full max-w-[200px] md:max-w-full min-h-[250px] max-h-[300px] flex items-center justify-center relative overflow-hidden;
+  @apply relative flex max-h-[300px] min-h-[250px] w-full max-w-[200px] items-center justify-center overflow-hidden md:max-w-full;
 }
 .product-image {
-  @apply overflow-hidden object-cover w-full;
+  @apply w-full overflow-hidden object-cover;
 }
 .notproduct-image {
   height: 294px;
@@ -466,7 +466,7 @@ export default {
 }
 .product-image-soldOut {
   filter: grayscale(100%);
-  @apply w-full object-cover overflow-hidden;
+  @apply w-full overflow-hidden object-cover;
 }
 .image_overlay {
   position: absolute;
@@ -693,7 +693,7 @@ export default {
   font-size: 13px;
   background: white;
   color: #35dd8d;
-  @apply absolute overflow-hidden rounded-md shadow-md transition-all ease-in duration-300;
+  @apply absolute overflow-hidden rounded-md shadow-md transition-all duration-300 ease-in;
 }
 #product-card:hover .overlay-top {
   width: 67px;

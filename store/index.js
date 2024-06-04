@@ -1148,7 +1148,7 @@ function obtenerInfoURL(url) {
   const specialCasePattern = /^https:\/\/(www\.)?tienda\.mipueblitoeco\.com\/?$/
   if (specialCasePattern.test(url)) {
     return {
-      nombreTienda: 'tienda.mipueblitoeco.com',
+      nombreTienda: 'https://www.tienda.mipueblitoeco.com',
       esSubdominio: false,
       esDominio: true,
       idTienda: '',
@@ -1224,8 +1224,7 @@ async function getIdData(state, req, commit) {
     (req.connection.encrypted ? 'https' : 'http')
   const currentURL = `${protocol}://${req.headers.host}${req.url}`
   const getURL = obtenerInfoURL(currentURL)
-  // const getURL = obtenerInfoURL('https://tienda.mipueblitoeco.com/')
-
+  // const getURL = obtenerInfoURL('https://www.laplazaon.com/')
   let id = 0
   let template = 0
   let idWapi = null
