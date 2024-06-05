@@ -218,13 +218,13 @@ export default {
       'analytics_tagmanager',
     ]),
   },
-  beforeMount() {
-    if (this.dataStore?.tiendasInfo?.dominio) {
-      caches.keys().then(function (names) {
-        for (let name of names) caches.delete(name)
-      })
-    }
-  },
+  // beforeMount() {
+  //   if (this.dataStore?.tiendasInfo?.dominio) {
+  //     caches.keys().then(function (names) {
+  //       for (let name of names) caches.delete(name)
+  //     })
+  //   }
+  // },
   async mounted() {
     // Configura y habilita el seguimiento de Facebook Pixel si está disponible
     if (this.analytics_tagmanager?.pixel_facebook != null) {
