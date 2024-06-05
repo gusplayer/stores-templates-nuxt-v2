@@ -230,10 +230,10 @@ export default {
     @apply flex w-full flex-col items-center justify-center;
   }
   .content-grid-product {
-    @apply grid h-full w-full grid-cols-2 items-start justify-center gap-4;
+    @apply grid w-full grid-cols-2 items-start justify-center gap-4;
   }
   .card-product {
-    @apply flex h-full w-full flex-col items-center justify-start;
+    @apply flex w-full flex-col items-center justify-start;
   }
   .content-products-empty {
     padding: 0px 20px;
