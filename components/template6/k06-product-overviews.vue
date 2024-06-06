@@ -34,7 +34,7 @@
                 {{ data.nombre }}
               </h1>
               <div
-                class="w-full flex flex-row justify-start items-center mb-20"
+                class="mb-20 flex w-full flex-row items-center justify-start"
               >
                 <p
                   v-if="salesData?.precio"
@@ -50,7 +50,7 @@
                     salesData.precio
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda
+                        dataStore.tiendasInfo.moneda,
                       )
                   }}
                 </p>
@@ -60,10 +60,10 @@
                     data.productosInfo?.promocionValor &&
                     salesData?.precio
                   "
-                  class="w-full flex flex-row justify-start items-center"
+                  class="flex w-full flex-row items-center justify-start"
                 >
                   <p
-                    class="text-14 mx-5 bg-red-500 text-white-white px-3 py-5 rounded-4"
+                    class="mx-5 rounded-4 bg-red-500 px-3 py-5 text-14 text-white-white"
                   >
                     {{ data.productosInfo.promocionValor }}% De Descuento
                   </p>
@@ -82,12 +82,12 @@
                       data.productosInfo.promocionValor
                         ? Math.trunc(
                             salesData.precio /
-                              (1 - data.productosInfo.promocionValor / 100)
+                              (1 - data.productosInfo.promocionValor / 100),
                           )
                         : 0)
                         | currency(
                           dataStore.tiendasInfo.paises.codigo,
-                          dataStore.tiendasInfo.moneda
+                          dataStore.tiendasInfo.moneda,
                         )
                     }}
                   </p>
@@ -119,7 +119,7 @@
 
           <div class="mt-8 lg:col-span-5">
             <div
-              class="flex flex-wrap gap-x-2 gap-y-1 justify-start items-center mb-10"
+              class="mb-10 flex flex-wrap items-center justify-start gap-x-2 gap-y-1"
             >
               <p
                 v-if="
@@ -152,7 +152,7 @@
             </div>
             <div
               v-if="data?.productosInfo?.descripcionCorta"
-              class="w-full mb-10"
+              class="mb-10 w-full"
             >
               <p
                 class="text-15"
@@ -163,10 +163,10 @@
             </div>
             <div
               v-if="data?.categoriaProducto > 0"
-              class="flex flex-row justify-start items-start mb-10"
+              class="mb-10 flex flex-row items-start justify-start"
             >
               <p
-                class="text-16 font-bold mr-10"
+                class="mr-10 text-16 font-bold"
                 :style="`color:${productOverviews.color_text};`"
               >
                 {{ $t('productdetail_categoria') }}:
@@ -180,10 +180,10 @@
             </div>
             <div
               v-if="data?.subcategoria > 0"
-              class="flex flex-row justify-start items-start mb-10"
+              class="mb-10 flex flex-row items-start justify-start"
             >
               <p
-                class="text-16 font-bold mr-10"
+                class="mr-10 text-16 font-bold"
                 :style="`color:${productOverviews.color_text};`"
               >
                 {{ $t('home_subcategory') }}:
@@ -206,25 +206,25 @@
                 (data?.productosInfo?.peso > 0 &&
                   data?.productosInfo?.peso != null)
               "
-              class="flex justify-start items-center mb-10"
+              class="mb-10 flex items-center justify-start"
             >
               <p
-                class="text-16 font-bold mr-10"
+                class="mr-10 text-16 font-bold"
                 :style="`color:${productOverviews.color_text};`"
               >
                 {{ $t('productdetail_dimensiones') }}
               </p>
             </div>
-            <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-0">
+            <div class="grid w-full grid-cols-1 gap-x-2 gap-y-0 sm:grid-cols-2">
               <div
                 v-if="
                   data?.productosInfo?.largo != 0 &&
                   data?.productosInfo?.largo != null
                 "
-                class="flex flex-row justify-start items-center mb-10"
+                class="mb-10 flex flex-row items-center justify-start"
               >
                 <p
-                  class="text-16 font-bold mr-10"
+                  class="mr-10 text-16 font-bold"
                   :style="`color:${productOverviews.color_text};`"
                 >
                   {{ $t('productdetail_largo') }}:
@@ -241,10 +241,10 @@
                   data?.productosInfo?.ancho != 0 &&
                   data?.productosInfo?.ancho != null
                 "
-                class="flex flex-row justify-start items-center mb-10"
+                class="mb-10 flex flex-row items-center justify-start"
               >
                 <p
-                  class="text-16 font-bold mr-10"
+                  class="mr-10 text-16 font-bold"
                   :style="`color:${productOverviews.color_text};`"
                 >
                   {{ $t('productdetail_ancho') }}:
@@ -261,10 +261,10 @@
                   data?.productosInfo?.alto != 0 &&
                   data?.productosInfo?.alto != null
                 "
-                class="flex flex-row justify-start items-center mb-10"
+                class="mb-10 flex flex-row items-center justify-start"
               >
                 <p
-                  class="text-16 font-bold mr-10"
+                  class="mr-10 text-16 font-bold"
                   :style="`color:${productOverviews.color_text};`"
                 >
                   {{ $t('productdetail_alto') }}:
@@ -281,10 +281,10 @@
                   data?.productosInfo?.peso != 0 &&
                   data?.productosInfo?.peso != null
                 "
-                class="flex flex-row justify-start items-center mb-10"
+                class="mb-10 flex flex-row items-center justify-start"
               >
                 <p
-                  class="text-16 font-bold mr-10"
+                  class="mr-10 text-16 font-bold"
                   :style="`color:${productOverviews.color_text};`"
                 >
                   {{ $t('productdetail_Peso') }}:
@@ -299,10 +299,10 @@
             </div>
             <div
               v-if="data?.productosInfo?.garantia"
-              class="flex flex-row justify-start items-start mb-10"
+              class="mb-10 flex flex-row items-start justify-start"
             >
               <p
-                class="text-16 font-bold mr-10"
+                class="mr-10 text-16 font-bold"
                 :style="`color:${productOverviews.color_text};`"
               >
                 {{ $t('productdetail_garantia') }}
@@ -316,10 +316,10 @@
             </div>
             <div
               v-if="userDropshipping.userName"
-              class="w-full flex flex-row items-center mb-30"
+              class="mb-30 flex w-full flex-row items-center"
             >
               <p
-                class="text-16 font-bold mr-10"
+                class="mr-10 text-16 font-bold"
                 :style="`color:${productOverviews.color_text};`"
               >
                 {{ $t('productdetail_dropshipping') }}
@@ -340,7 +340,7 @@
               <div
                 v-for="(variant, index) in variantes"
                 :key="index"
-                class="flex flex-col justify-center items-start"
+                class="flex flex-col items-start justify-center"
               >
                 <label
                   for="variant name"
@@ -373,15 +373,15 @@
             </div>
 
             <div
-              class="fixed md:relative w-full flex flex-row justify-start items-center mb-0 md:mb-20 left-0 bottom-0 px-6 py-10 md:px-0 md:py-0 bg-gray-100 md:bg-transparent border-t md:border-t-0 z-10 md:z-0 transition ease-in-out delay-150"
+              class="fixed bottom-0 left-0 z-10 mb-0 flex w-full flex-row items-center justify-start border-t bg-gray-100 px-6 py-10 transition delay-150 ease-in-out md:relative md:z-0 md:mb-20 md:border-t-0 md:bg-transparent md:px-0 md:py-0"
             >
               <div
-                class="flex flex-row justify-center items-center mr-20 border-2"
+                class="mr-20 flex flex-row items-center justify-center border-2"
                 :class="{ disabled: !salesData?.estado }"
                 :style="`border-color:${productOverviews.color_border}; border-radius: ${settingsGeneral['--radius']};`"
               >
                 <button
-                  class="bg-transparent text-center text-14 px-15"
+                  class="bg-transparent px-15 text-center text-14"
                   @click="removeQuantity()"
                 >
                   <menos-icon
@@ -392,12 +392,12 @@
                 <input
                   v-model="quantityValue"
                   name="quantityValue"
-                  class="bg-transparent text-center text-14 py-11 px-10 max-w-[68px] font-bold"
+                  class="max-w-[68px] bg-transparent px-10 py-11 text-center text-14 font-bold"
                   type="text"
                   onkeypress="return (event.charCode>47 && event.charCode<58)"
                 />
                 <button
-                  class="bg-transparent text-center text-14 px-15"
+                  class="bg-transparent px-15 text-center text-14"
                   @click="addQuantity()"
                 >
                   <mas-icon
@@ -408,7 +408,7 @@
                 <!-- Anuncio ult unidad -->
                 <div
                   v-if="maxQuantityValue == quantityValue"
-                  class="absolute py-3 px-5 bg-yellow-300 rounded-4 -bottom-35 w-full max-w-[120px] text-center"
+                  class="absolute -bottom-35 w-full max-w-[120px] rounded-4 bg-yellow-300 px-5 py-3 text-center"
                 >
                   <span class="text-14 text-black">
                     {{ $t('cart_ultimaUnidad') }}
@@ -417,7 +417,7 @@
               </div>
               <button
                 v-if="shouldShowAddToCartButton"
-                class="w-full flex justify-center items-center py-11 px-10 rounded-5"
+                class="flex w-full items-center justify-center rounded-5 px-10 py-11"
                 :style="`background-color: ${productOverviews.color_btn}; color: ${productOverviews.color_text_btn}; border-radius: ${settingsGeneral['--radius']};`"
                 @click="goToPayments"
               >
@@ -438,7 +438,7 @@
               <button
                 v-else-if="spent"
                 disabled
-                class="w-full flex justify-center items-center py-11 px-10 rounded-5"
+                class="flex w-full items-center justify-center rounded-5 px-10 py-11"
                 :style="`background-color: ${productOverviews.color_btn}; color: ${productOverviews.color_text_btn}; border-radius: ${settingsGeneral['--radius']};`"
               >
                 {{ $t('home_cardAgotado') }}
@@ -446,14 +446,14 @@
               <button
                 v-else-if="!salesData?.estado || salesData?.precio === 0"
                 disabled
-                class="w-full flex justify-center items-center py-11 px-10 rounded-5"
+                class="flex w-full items-center justify-center rounded-5 px-10 py-11"
                 :style="`background-color: ${productOverviews.color_btn}; color: ${productOverviews.color_text_btn}; border-radius: ${settingsGeneral['--radius']};`"
               >
                 {{ $t('productdetail_btnANodisponible') }}
               </button>
             </div>
 
-            <div class="w-full mt-10">
+            <div class="mt-10 w-full">
               <OptionTab
                 class="w-full"
                 :data-store="dataStore"
@@ -603,11 +603,11 @@ export default {
           this.data.conVariante > 0
         ) {
           const combinaciones = JSON.parse(
-            this.data.combinaciones[0][0].combinaciones
+            this.data.combinaciones[0][0].combinaciones,
           )
           const result = combinaciones.find(
             (combinacion) =>
-              JSON.stringify(combinacion.combinacion) == combinationSelected
+              JSON.stringify(combinacion.combinacion) == combinationSelected,
           )
           this.productCart = []
           this.productIndexCart = null
@@ -665,7 +665,7 @@ export default {
         'products/GET_DATA_PRODUCT',
         {
           slug: this.productOverviews.slug,
-        }
+        },
       )
       if (success && data.data) {
         this.loading = false
@@ -801,7 +801,6 @@ export default {
       }
     },
     goToPayments() {
-      this.sendAnalyticsStore(this.data.id, 'CLICKED_PAY_CART')
       let objeto = {
         id: this.data.id,
         cantidad: this.quantityValue,

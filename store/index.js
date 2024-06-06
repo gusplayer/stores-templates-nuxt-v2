@@ -443,6 +443,23 @@ export const actions = {
       )
     }
   },
+  async SEND_ANALYTICS_PRODUCTO_PAY({ state }, params) {
+    try {
+      await axios({
+        method: 'POST',
+        url: `${state.urlAWSsettings}/api/v1/stores/analytics/clicked-pay-cart`,
+        data: {
+          storeId: params.storeId,
+          ids: params.ids,
+        },
+        headers: {
+          KOMERCIA_PUBLIC_ROUTES_KEY: state.routerKey,
+        },
+      })
+    } catch (err) {
+      console.log('Error SEND_ANALYTICS_STORE', err)
+    }
+  },
   async GET_CATEGORIES({ commit, state }, idTienda) {
     try {
       const { data } = await axios({

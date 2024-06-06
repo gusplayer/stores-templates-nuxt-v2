@@ -40,12 +40,12 @@
                   data.productosInfo.promocionValor
                     ? Math.trunc(
                         salesData.precio /
-                          (1 - data.productosInfo.promocionValor / 100)
+                          (1 - data.productosInfo.promocionValor / 100),
                       )
                     : 0)
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda
+                      dataStore.tiendasInfo.moneda,
                     )
                 }}
               </p>
@@ -62,7 +62,7 @@
                     salesData.precio
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda
+                        dataStore.tiendasInfo.moneda,
                       )
                   }}
                 </p>
@@ -218,7 +218,7 @@
           </div>
         </div>
       </div>
-      <div v-else class="flex flex-col justify-center w-full items-center">
+      <div v-else class="flex w-full flex-col items-center justify-center">
         <div class="spinner">
           <div class="dot1"></div>
           <div class="dot2"></div>
@@ -341,11 +341,11 @@ export default {
           this.data.conVariante > 0
         ) {
           const combinaciones = JSON.parse(
-            this.data.combinaciones[0][0].combinaciones
+            this.data.combinaciones[0][0].combinaciones,
           )
           const result = combinaciones.find(
             (combinacion) =>
-              JSON.stringify(combinacion.combinacion) == combinationSelected
+              JSON.stringify(combinacion.combinacion) == combinationSelected,
           )
           this.productCart = []
           this.productIndexCart = null
@@ -409,7 +409,7 @@ export default {
         'products/GET_DATA_PRODUCT',
         {
           slug: this.tempData.slug,
-        }
+        },
       )
       if (success && data.data) {
         this.loading = false
@@ -468,7 +468,7 @@ export default {
         'products/GET_DESCRIPTION_PRODUCTO',
         {
           slug: idProduct,
-        }
+        },
       )
       if (success) {
         this.contentDescription = data?.data
@@ -581,7 +581,7 @@ export default {
         this.$store.state.productsCart.splice(
           this.productIndexCart,
           1,
-          mutableProduct
+          mutableProduct,
         )
       } else {
         this.$store.state.productsCart.push(product)
@@ -593,7 +593,6 @@ export default {
       this.$store.dispatch('SEND_ADD_TO_CART', 1)
     },
     goToPayments() {
-      this.sendAnalyticsStore(this.data.id, 'CLICKED_PAY_CART')
       let objeto = {
         id: this.data.id,
         cantidad: this.quantityValue,
@@ -641,24 +640,24 @@ export default {
         if (this.mobileCheck()) {
           window.open(
             `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
-            '_blank'
+            '_blank',
           )
         } else {
           window.open(
             `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
-            '_blank'
+            '_blank',
           )
         }
       } else {
         if (this.mobileCheck()) {
           window.open(
             `${baseUrlMovil}57${this.dataStore.redes.whatsapp}&text=${text}`,
-            '_blank'
+            '_blank',
           )
         } else {
           window.open(
             `${baseUrlPc}57${this.dataStore.redes.whatsapp}&text=${text}`,
-            '_blank'
+            '_blank',
           )
         }
       }
@@ -868,8 +867,10 @@ export default {
 .btn-responsive {
   border-radius: var(--radius_btn);
   border: none;
-  box-shadow: 0px 0px 2px rgba(52, 58, 67, 0.1),
-    0px 2px 5px rgba(52, 58, 67, 0.08), 0px 5px 15px rgba(52, 58, 67, 0.08);
+  box-shadow:
+    0px 0px 2px rgba(52, 58, 67, 0.1),
+    0px 2px 5px rgba(52, 58, 67, 0.08),
+    0px 5px 15px rgba(52, 58, 67, 0.08);
   padding: 6px 10px;
   width: 100%;
   height: 100%;
@@ -1051,13 +1052,15 @@ export default {
   max-height: 600px;
   background-color: #fefefe;
   border: 1px solid #888;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
   animation-duration: 0.4s;
   overflow-y: auto;
-  @apply relative m-auto p-0 rounded-8;
+  @apply relative m-auto rounded-8 p-0;
 }
 .modal-content::-webkit-scrollbar {
   @apply w-10;
@@ -1110,7 +1113,7 @@ export default {
   z-index: 2;
   background-color: #222;
   color: white;
-  @apply w-full flex justify-between items-center py-10 px-20 sticky top-0;
+  @apply sticky top-0 flex w-full items-center justify-between px-20 py-10;
 }
 .txt-Legal {
   font-size: 16px;

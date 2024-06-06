@@ -942,26 +942,28 @@ export default {
       try {
         const { data } = await axios({
           method: 'POST',
-          url: `${this.$store.state.urlKomercia}/api/usuario/orden`,
+          url: `${this.$store.state.urlAWSsettings}/api/v1/orders`,
+          // url: `${this.$store.state.urlKomercia}/api/usuario/orden`,
           data: params,
         })
         if (data) {
-          this.numberOrder = data.data.id
+          this.numberOrder = data.id
           await this.$store.dispatch('SEND_NOTIFICATION_ORDER', {
-            orderId: data.data.id,
-            storeId: data.data.tienda,
-            amount: data.data.total,
+            orderId: data.id,
+            storeId: data.tienda,
+            amount: data.total,
             paymentMethod: '7',
           })
-          this.textConfirmation =
-            '¡Información enviada correctamente a la tienda!'
-          this.stateBtnConfirmation = true
-          this.sendAnalyticsStore(this.dataStore.id, 'CLICKED_PAY_CART')
+
+          const idArray = this.productsCart.map((item) => item.id)
+          this.$store.dispatch('SEND_ANALYTICS_PRODUCTO_PAY', {
+            storeId: data.tienda,
+            ids: idArray,
+          })
         }
       } catch (err) {
-        this.textConfirmation = 'Error al enviar los datos!'
         this.$message({
-          message: 'Error al enviar el correo!',
+          message: 'Error al enviar los datos!',
           type: 'error',
         })
       }

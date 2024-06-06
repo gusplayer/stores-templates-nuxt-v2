@@ -1016,7 +1016,6 @@ export default {
       this.$store.dispatch('SEND_ADD_TO_CART', 1)
     },
     goToPayments() {
-      this.sendAnalyticsStore(this.data.id, 'CLICKED_PAY_CART')
       let objeto = {
         id: this.data.id,
         cantidad: this.quantityValue,
