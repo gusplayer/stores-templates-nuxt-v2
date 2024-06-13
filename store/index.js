@@ -1330,16 +1330,16 @@ async function handleKomercia(id, template, isDataTemplate, commit, dispatch) {
     commit('SET_TEMPLATE_STORE', template)
     await dispatch('GET_DATA_TIENDA_BY_ID', id)
     await dispatch('GET_DATA_HOKO', id)
-
     if (
-      template === 7 ||
-      template === 9 ||
-      template === 10 ||
-      template === 11 ||
-      template === 12 ||
-      template === 13 ||
-      template === 14 ||
-      (template === 16 && !isDataTemplate)
+      (template === 7 ||
+        template === 9 ||
+        template === 10 ||
+        template === 11 ||
+        template === 12 ||
+        template === 13 ||
+        template === 14 ||
+        template === 16) &&
+      !isDataTemplate
     ) {
       await dispatch('GET_SETTINGS_BY_TEMPLATE_NODE', {
         templateStore: template,
@@ -1354,7 +1354,7 @@ async function handleKomercia(id, template, isDataTemplate, commit, dispatch) {
     //     })
     //   }
     // }
-    else if (template === 5 || (template === 99 && !isDataTemplate)) {
+    else if ((template === 5 || template === 99) && !isDataTemplate) {
       await dispatch('GET_SETTINGS_BY_TEMPLATE', {
         templateStore: template,
         idStore: id,
