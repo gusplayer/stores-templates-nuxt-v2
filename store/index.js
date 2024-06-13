@@ -329,7 +329,7 @@ export const actions = {
     }
   },
   async nuxtServerInit({ commit, dispatch, state }, { req }) {
-    const { subdomain, id, template, idWapi } = await getIdData(
+    const { subdomain, id, template, idWapi, isDataTemplate } = await getIdData(
       state,
       req,
       commit,
@@ -345,9 +345,9 @@ export const actions = {
     // }
 
     if (idWapi) {
-      await handleWapi(commit, dispatch, idWapi)
+      await handleWapi(commit, dispatch, idWapi, isDataTemplate)
     } else {
-      await handleKomercia(id, template, commit, dispatch)
+      await handleKomercia(id, template, isDataTemplate, commit, dispatch)
     }
     if (!state.storeError) {
       await handleDataStore(state, commit)
@@ -1245,6 +1245,7 @@ async function getIdData(state, req, commit) {
   let id = 0
   let template = 0
   let idWapi = null
+  let isDataTemplate = null
   let subdomain = getURL?.nombreTienda ?? null
 
   if (getURL?.idTienda) {
@@ -1255,10 +1256,17 @@ async function getIdData(state, req, commit) {
       const response = await axios.get(
         `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL.nombreTienda}`,
       )
+
       id = response.data.data.id || response.data.data.storeId
       template =
         response.data.data.templateNumber || response.data.data.template
-      if (template === 15 || template === 6) {
+
+      if (
+        template === 15 ||
+        template === 6 ||
+        response?.data?.data?.webSiteTemplate
+      ) {
+        isDataTemplate = true
         commit(`SET_SETTINGS_BY_TEMPLATE`, {
           templateNumber: template,
           value: response.data.data.webSiteTemplate,
@@ -1299,23 +1307,25 @@ async function getIdData(state, req, commit) {
   } else {
     state.storeError = false
   }
-  return { subdomain, id, template, idWapi }
+  return { subdomain, id, template, idWapi, isDataTemplate }
 }
 
-async function handleWapi(commit, dispatch, idWapi) {
+async function handleWapi(commit, dispatch, idWapi, isDataTemplate) {
   commit('SET_TEMPLATE_STORE', 99)
 
   // await dispatch('GET_SETTINGS_BY_TEMPLATE_WAPI', idWapi)
-  await dispatch('GET_SETTINGS_BY_TEMPLATE', {
-    templateStore: 99,
-    idStore: idWapi,
-  })
+  if (!isDataTemplate) {
+    await dispatch('GET_SETTINGS_BY_TEMPLATE', {
+      templateStore: 99,
+      idStore: idWapi,
+    })
+  }
   await dispatch('GET_DATA_TIENDA_BY_ID', idWapi)
 
   commit('SET_STATE_WAPIME', true)
 }
 
-async function handleKomercia(id, template, commit, dispatch) {
+async function handleKomercia(id, template, isDataTemplate, commit, dispatch) {
   if (id) {
     commit('SET_TEMPLATE_STORE', template)
     await dispatch('GET_DATA_TIENDA_BY_ID', id)
@@ -1329,7 +1339,7 @@ async function handleKomercia(id, template, commit, dispatch) {
       template === 12 ||
       template === 13 ||
       template === 14 ||
-      template === 16
+      (template === 16 && !isDataTemplate)
     ) {
       await dispatch('GET_SETTINGS_BY_TEMPLATE_NODE', {
         templateStore: template,
@@ -1344,7 +1354,7 @@ async function handleKomercia(id, template, commit, dispatch) {
     //     })
     //   }
     // }
-    else if (template === 5 || template === 99) {
+    else if (template === 5 || (template === 99 && !isDataTemplate)) {
       await dispatch('GET_SETTINGS_BY_TEMPLATE', {
         templateStore: template,
         idStore: id,
