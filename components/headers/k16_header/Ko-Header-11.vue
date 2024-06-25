@@ -8,7 +8,7 @@
       settingByTemplate16[0].settingGeneral,
       {
         '--font-style-1':
-          settingByTemplate16[0]?.settingGeneral?.fount_1 ?? 'Poppins',
+          settingByTemplate16[0]?.settingGeneral?.font ?? 'Poppins',
       },
     ]"
   >
