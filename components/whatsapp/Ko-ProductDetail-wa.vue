@@ -98,6 +98,13 @@
               </p>
             </div>
 
+            <PluginAddi
+              :more-details="false"
+              :status="dataStore.medioPagos.addi"
+              :price="salesData"
+              :data-store="dataStore"
+            />
+
             <div class="flex">
               <p v-if="data.envioGratis == 1" class="card-info-2">
                 {{ $t('home_cardGratis') }}
@@ -440,6 +447,7 @@ import { productHeadMixin } from '@/mixins/productHeadMixin'
 export default {
   name: 'KoProductDetailWa',
   components: {
+    PluginAddi: () => import('@/components/_commonComponent/addi.vue'),
     Skeleton: () => import('../_commonComponent/skeleton-detail.vue'),
     selectGroup: () => import('../_commonComponent/select-group.vue'),
     productSlide: () => import('../_commonComponent/product-slide.vue'),
