@@ -34,6 +34,23 @@
         </div>
       </div>
     </div>
+    <div class="swiper-pagination"></div>
+    <div
+      class="prev absolute left-0 top-4/0 z-10 cursor-pointer rounded-[25px] bg-black px-4"
+    >
+      <FlechaLeft-icon
+        class="flex w-full items-center justify-center text-35 text-white-white hover:text-gray-400"
+        style="bottom: 0em !important"
+      />
+    </div>
+    <div
+      class="next absolute right-0 top-4/0 z-10 cursor-pointer rounded-[25px] bg-black px-4"
+    >
+      <FlechaRight-icon
+        class="flex w-full items-center justify-center text-35 text-white-white hover:text-gray-400"
+        style="bottom: 0em !important"
+      />
+    </div>
   </div>
 </template>
 
@@ -73,6 +90,13 @@ export default {
           delay: 8000,
           disableOnInteraction: false,
         },
+        pagination: {
+          el: '.swiper-pagination',
+        },
+        navigation: {
+          nextEl: '.next',
+          prevEl: '.prev',
+        },
       },
     }
   },
@@ -90,10 +114,10 @@ export default {
 </script>
 
 <style scoped>
-.photos .responsive .swiper-pagination-bullet {
+.photos .swiper-pagination-bullet {
   background-color: rgba(255, 255, 255, 0.5);
 }
-.photos .responsive .swiper-pagination-bullet-active {
+.photos .swiper-pagination-bullet-active {
   background-color: #fff;
 }
 

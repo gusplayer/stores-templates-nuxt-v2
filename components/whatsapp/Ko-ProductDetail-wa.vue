@@ -450,7 +450,9 @@ export default {
     PluginAddi: () => import('@/components/_commonComponent/addi.vue'),
     Skeleton: () => import('../_commonComponent/skeleton-detail.vue'),
     selectGroup: () => import('../_commonComponent/select-group.vue'),
-    productSlide: () => import('../_commonComponent/product-slide.vue'),
+    // productSlide: () => import('../_commonComponent/product-slide.vue'),
+    productSlide: () => import('../_commonComponent/zoom.vue'),
+
     KoOrderWa: () => import('../headers/_order1/order1.vue'),
     KoSuggestProduct: () =>
       import('../_commonComponent/suggestions-producto.vue'),
@@ -1097,6 +1099,7 @@ export default {
 }
 .photos_responsive {
   width: 100%;
+  max-height: 375px;
   display: flex;
   box-sizing: border-box;
   overflow: hidden;
