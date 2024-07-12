@@ -2,7 +2,7 @@
   <div
     ref="mySwiper"
     v-swiper:mySwiper="swiperOption"
-    :class="`max-w-[${widthScreen}px]`"
+    :class="`w-full max-w-[${widthScreen}px]`"
   >
     <div class="swiper-wrapper">
       <div class="swiper-slide">

@@ -6,7 +6,7 @@
         :photo="photo"
         :id-you-tube="idYouTube"
         :width-photo="550"
-        :width-screen="375"
+        :width-screen="400"
       />
     </div>
     <div
