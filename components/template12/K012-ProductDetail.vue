@@ -237,7 +237,7 @@ export default {
   components: {
     PluginAddi: () => import('@/components/_commonComponent/addi.vue'),
     selectGroup: () => import('../_commonComponent/select-group.vue'),
-    ProductSlide: () => import('../_commonComponent/product-slide.vue'),
+    ProductSlide: () => import('../_commonComponent/zoom.vue'),
   },
   filters: {
     toLowerCase(value) {

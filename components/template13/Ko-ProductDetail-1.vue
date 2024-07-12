@@ -96,14 +96,16 @@
                 class="photo_main"
               ></iframe>
             </div>
-            <!-- <div class="photos_responsive"> -->
-            <ProductSlide
-              class="photos_responsive box-border h-full w-full"
-              :photos="data.productosFotos"
-              :photo="data.fotoCloudinary"
-              :id-you-tube="idYoutube"
-            />
-            <!-- </div> -->
+            <div
+              class="box-border flex h-full w-full items-center justify-start md:hidden"
+            >
+              <ProductSlide
+                class="h-full w-full max-w-[375px]"
+                :photos="data.productosFotos"
+                :photo="data.fotoCloudinary"
+                :id-you-tube="idYoutube"
+              />
+            </div>
           </div>
         </div>
         <div class="right">
@@ -459,7 +461,7 @@ export default {
   components: {
     PluginAddi: () => import('@/components/_commonComponent/addi.vue'),
     Skeleton: () => import('../_commonComponent/skeleton-detail.vue'),
-    ProductSlide: () => import('../_commonComponent/product-slide.vue'),
+    ProductSlide: () => import('../_commonComponent/zoom.vue'),
     SelectGroup: () => import('../_commonComponent/select-group.vue'),
     KoSuggestProduct: () =>
       import('../_commonComponent/suggestions-producto.vue'),
@@ -1097,7 +1099,7 @@ export default {
 }
 .container-productDetail {
   background: var(--background_color_1);
-  @apply flex h-full w-full flex-col items-center justify-center;
+  @apply flex h-full w-full flex-col items-center justify-center px-10 md:px-5;
 }
 .left {
   @apply flex w-full flex-col items-center justify-center;
@@ -1208,7 +1210,7 @@ export default {
 }
 @screen sm {
   .product-content {
-    @apply mt-40 w-9/0 flex-col items-center justify-center;
+    @apply mt-40 w-full flex-col items-center justify-center;
   }
   .content-direction-btns {
     @apply flex w-full flex-col items-start justify-start;

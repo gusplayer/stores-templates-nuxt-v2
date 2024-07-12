@@ -612,7 +612,7 @@ export default {
   components: {
     PluginAddi: () => import('@/components/_commonComponent/addi.vue'),
     Skeleton: () => import('../_commonComponent/skeleton-detail.vue'),
-    ProductSlide: () => import('../_commonComponent/product-slide.vue'),
+    ProductSlide: () => import('../_commonComponent/zoom.vue'),
     KoSuggestProduct: () =>
       import('../_commonComponent/suggestions-producto.vue'),
     SelectGroup: () => import('../_commonComponent/select-group-v2.vue'),
