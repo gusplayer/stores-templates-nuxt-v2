@@ -83,12 +83,7 @@ export default {
     }
   },
   computed: {
-    ...mapState([
-      'dataStore',
-      'stateListBLogs',
-      'settingByTemplate16',
-      'dataHoko',
-    ]),
+    ...mapState(['dataStore', 'stateListBLogs', 'settingByTemplate16']),
     componentsProps() {
       return {
         dataStore: this.dataStore,
@@ -105,9 +100,6 @@ export default {
         categories: this.settingByTemplate16?.categories ?? null,
         informationStore: this.settingByTemplate16?.informationStore ?? null,
       }
-    },
-    dataHoko() {
-      return this.$store.state.dataHoko
     },
   },
   beforeDestroy() {

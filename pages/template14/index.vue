@@ -77,12 +77,7 @@ export default {
     }
   },
   computed: {
-    ...mapState([
-      'dataStore',
-      'settingByTemplate14',
-      'dataHoko',
-      'stateListBLogs',
-    ]),
+    ...mapState(['dataStore', 'settingByTemplate14', 'stateListBLogs']),
     componentsProps() {
       return {
         dataStore: this.dataStore,
@@ -98,9 +93,6 @@ export default {
         cardBlog: this.settingByTemplate14?.cardBlog ?? null,
         logos: this.settingByTemplate14?.logos ?? null,
       }
-    },
-    dataHoko() {
-      return this.$store.state.dataHoko
     },
   },
   mounted() {

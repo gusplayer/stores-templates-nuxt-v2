@@ -57,7 +57,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['dataStore', 'settingByTemplate13', 'dataHoko']),
+    ...mapState(['dataStore', 'settingByTemplate13']),
     componentsProps() {
       return {
         dataStore: this.dataStore,
@@ -69,9 +69,6 @@ export default {
         cardProduct: this.settingByTemplate13?.cardProduct ?? null,
         newsletter: this.settingByTemplate13?.newsletter ?? null,
       }
-    },
-    dataHoko() {
-      return this.$store.state.dataHoko
     },
   },
   beforeDestroy() {

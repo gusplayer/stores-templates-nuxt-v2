@@ -90,7 +90,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['dataStore', 'settingByTemplate15', 'dataHoko']),
+    ...mapState(['dataStore', 'settingByTemplate15']),
     componentsProps() {
       return {
         dataStore: this.dataStore,
@@ -108,9 +108,6 @@ export default {
         banner2: this.settingByTemplate15?.banner2 ?? null,
         logos: this.settingByTemplate15?.logos ?? null,
       }
-    },
-    dataHoko() {
-      return this.$store.state.dataHoko
     },
   },
   beforeDestroy() {
