@@ -3,7 +3,7 @@
     <div v-if="dataStore && !storeError">
       <div
         v-if="stateModalPwd"
-        class="min-h-screen flex flex-col justify-between"
+        class="flex min-h-screen flex-col justify-between"
       >
         <KoOrder :data-store="dataStore" />
         <component :is="headerTemplate" v-bind="componentsProps" />
@@ -35,33 +35,33 @@
             dataStore.estado === 0 || !expiredDate(dataStore.fechaExpiracion)
           "
           id="modalNotificacion"
-          class="w-full h-screen fixed top-0 flex justify-center items-center z-100"
+          class="fixed top-0 z-100 flex h-screen w-full items-center justify-center"
         >
           <div
-            class="w-full h-screen top-0 absolute backdrop-blur"
+            class="absolute top-0 h-screen w-full backdrop-blur"
             style="background-color: rgba(0, 0, 0, 0.767)"
           ></div>
           <div
-            class="w-full py-20 px-30 flex flex-col justify-center items-center bg-white-white rounded-10 shadow-md z-100"
+            class="z-100 flex w-full flex-col items-center justify-center rounded-10 bg-white-white px-30 py-20 shadow-md"
             style="max-width: 250px"
           >
             <koTiendaCerrada />
             <p
-              class="mt-15 text-base text-gray-500 text-center"
+              class="mt-15 text-center text-base text-gray-500"
               style="max-width: 220px"
             >
               Disculpa, no podrá realizar compras por el momento,
             </p>
             <p
               v-if="expiredDate(dataStore.fechaExpiracion)"
-              class="font-bold text-17 mt-15"
+              class="mt-15 text-17 font-bold"
               style="color: #ff314d"
             >
               ¿Deseas continuar?
             </p>
             <button
               v-if="expiredDate(dataStore.fechaExpiracion)"
-              class="w-full py-4 mt-15 text-base rounded-10 bg-black text-white-white hover:bg-slate-300 hover:text-black transition ease-in-out delay-75"
+              class="mt-15 w-full rounded-10 bg-black py-4 text-base text-white-white transition delay-75 ease-in-out hover:bg-slate-300 hover:text-black"
               @click="acceptClose()"
             >
               Aceptar
@@ -99,6 +99,8 @@ export default {
       import('@/components/headers/k16_header/Ko-Header-11.vue'),
     KoHeader12: () =>
       import('@/components/headers/k06_header/Ko06-Header-12.vue'),
+    KoHeader13: () =>
+      import('@/components/headers/k17_header/Ko-Header-13.vue'),
     // FOOTER
     KoFooter1: () => import('@/components/footers/k05_footer/Ko-Footer-1.vue'),
     // KoFooter2: () => import('@/components/footers/footer2/Ko-Footer-2.vue'),
@@ -114,6 +116,8 @@ export default {
       import('@/components/footers/k16_footer/Ko-Footer-11.vue'),
     KoFooter12: () =>
       import('@/components/footers/k06_footer/Ko06-Footer-12.vue'),
+    KoFooter13: () =>
+      import('@/components/footers/k17_footer/Ko-Footer-13.vue'),
     // OTROS
     KoFooterCountry: () =>
       import('@/components/footers/k_country/Ko-Footer-Country.vue'),
@@ -138,6 +142,7 @@ export default {
         14: 'KoHeader9',
         15: 'KoHeader10',
         16: 'KoHeader11',
+        17: 'KoHeader13',
       },
       footerComponentMap: {
         3: 'KoFooter1',
@@ -152,6 +157,7 @@ export default {
         14: 'KoFooter9',
         15: 'KoFooter10',
         16: 'KoFooter11',
+        17: 'KoFooter13',
       },
     }
   },
@@ -188,6 +194,7 @@ export default {
       14: this.settingByTemplate14?.settingsGeneral?.fount_1 ?? 'Poppins',
       15: this.settingByTemplate15?.settingGeneral?.font ?? 'Poppins',
       16: this.settingByTemplate16?.settingsGeneral?.font ?? 'Poppins',
+      17: this.settingByTemplate17?.settingsGeneral?.font ?? 'Poppins',
     }
 
     // Verifica si el valor para el template actual es un objeto
@@ -364,6 +371,7 @@ export default {
             this.template == 14 ||
             this.template == 15 ||
             this.template == 16 ||
+            this.template == 17 ||
             this.template == 99
               ? `https://fonts.googleapis.com/css2?family=${tipo_letra}&display=swap`
               : '',

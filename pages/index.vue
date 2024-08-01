@@ -18,6 +18,7 @@ export default {
     KoTemplate14: () => import('./template14/index'),
     KoTemplate15: () => import('./template15/index'),
     KoTemplate16: () => import('./template16/index'),
+    KoTemplate17: () => import('./template17/index'),
     KoTemplateWhatsApp: () => import('./template99/index'),
   },
   data() {
@@ -34,6 +35,7 @@ export default {
         14: 'KoTemplate14',
         15: 'KoTemplate15',
         16: 'KoTemplate16',
+        17: 'KoTemplate17',
         99: 'KoTemplateWhatsApp',
       },
     }

@@ -32,9 +32,10 @@ export const state = () => ({
   accessToken: '',
   urlKomercia: 'https://api2.komercia.co',
   urlKomerciaV3: 'https://api3.komercia.co',
-  urlNodeSettings: 'https://node.komercia.co',
-  urlTemplate: 'https://templates.komercia.co',
-  urlComponents: 'https://components.komercia.co',
+  // urlNodeSettings: 'https://node.komercia.co',
+  urlNodeSettings: 'https://templates.komercia.app',
+  // urlTemplate: 'https://templates.komercia.co',
+  // urlComponents: 'https://components.komercia.co',
   urlAWSsettings: 'https://api.komercia.app',
   routerKey: 'c6979297-txfg-4962-7sag-709c76a71755',
   configAxios: {
