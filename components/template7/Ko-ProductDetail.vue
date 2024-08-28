@@ -307,7 +307,7 @@
               </div>
             </div>
             <div
-              class="border-color fixed bottom-0 left-0 z-10 mt-0 flex w-full flex-row items-center justify-center border-t px-6 pb-10 pt-10 md:sticky md:z-0 md:mt-15 md:justify-start md:border-b md:border-t-0 md:px-0 md:pb-20 md:pt-0"
+              class="border-color max-md:bg-white-white fixed bottom-0 left-0 z-10 mt-0 flex w-full flex-row items-center justify-center border-t px-6 pb-10 pt-10 md:sticky md:z-0 md:mt-15 md:justify-start md:border-b md:border-t-0 md:px-0 md:pb-20 md:pt-0"
               :class="`bg-[${settingByTemplate7[0].detailsProduct['--background_color_1']}]`"
             >
               <div class="quantity">
