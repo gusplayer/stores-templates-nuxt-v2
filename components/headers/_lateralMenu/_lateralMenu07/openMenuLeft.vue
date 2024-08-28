@@ -577,6 +577,12 @@ export default {
   max-height: 670px;
   overflow-y: scroll;
 }
+
+@media (max-width: 768px) {
+  .content-Categorys {
+    max-height: calc(100vh - 220px);
+  }
+}
 .collapse-category {
   @apply w-full;
 }
