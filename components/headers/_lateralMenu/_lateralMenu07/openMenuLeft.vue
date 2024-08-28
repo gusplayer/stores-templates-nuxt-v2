@@ -580,7 +580,7 @@ export default {
 
 @media (max-width: 768px) {
   .content-Categorys {
-    max-height: calc(100vh - 220px);
+    max-height: calc(100vh - 230px);
   }
 }
 .collapse-category {
