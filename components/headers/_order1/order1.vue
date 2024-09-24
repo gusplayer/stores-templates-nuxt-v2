@@ -808,7 +808,51 @@
         v-if="modalConfirmation"
         class="absolute top-0 z-10 flex h-dvh w-full flex-col items-center justify-center bg-[#000005ec]"
       >
-        <p class="flex flex-row items-center text-16 text-white-white">
+        <div
+          v-if="stateBtnConfirmation"
+          class="mb-12 flex items-center justify-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            x="0px"
+            y="0px"
+            width="100"
+            height="100"
+            viewBox="0,0,256,256"
+            class="h-40 w-40"
+          >
+            <g
+              fill="none"
+              fill-rule="nonzero"
+              stroke="none"
+              stroke-width="1"
+              stroke-linecap="butt"
+              stroke-linejoin="miter"
+              stroke-miterlimit="10"
+              stroke-dasharray=""
+              stroke-dashoffset="0"
+              font-family="none"
+              font-weight="none"
+              font-size="none"
+              text-anchor="none"
+              style="mix-blend-mode: normal"
+            >
+              <g transform="scale(5.33333,5.33333)">
+                <path
+                  d="M44,24c0,11.045 -8.955,20 -20,20c-11.045,0 -20,-8.955 -20,-20c0,-11.045 8.955,-20 20,-20c11.045,0 20,8.955 20,20z"
+                  fill="#4caf50"
+                ></path>
+                <path
+                  d="M34.602,14.602l-13.602,13.597l-5.602,-5.598l-2.797,2.797l8.399,8.403l16.398,-16.402z"
+                  fill="#ffffff"
+                ></path>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <p
+          class="flex flex-row items-center justify-center text-center text-18 text-white-white"
+        >
           <svg
             v-if="!stateBtnConfirmation"
             xmlns="http://www.w3.org/2000/svg"
@@ -837,15 +881,24 @@
           v-if="stateBtnConfirmation"
           class="mt-5 flex flex-col items-center justify-center"
         >
-          <h4 class="mb-5 text-center text-18 text-red-500">
-            Es importante enviar la información <br />
-            al whatsApp dueño.
-          </h4>
-          <p class="mt-3 w-9/12 text-center text-15 text-white-white">
-            Si no abre whatsApp escribirle al dueño de la tienda por tu numero
-            de order: {{ numberOrder }}
+          <p class="mt-3 w-9/12 text-center text-18 text-white-white">
+            Tu número de orden es: {{ numberOrder }}
           </p>
-          <button
+
+          <div class="fixed bottom-75 md:bottom-85">
+            <h4 class="text-center text-18 text-white-white">
+              !Haz clic en el siguiente botón <br />
+              para continuar el proceso!
+            </h4>
+
+            <h4
+              class="mt-14 animate-bounce text-center text-6xl text-[#02E5A0]"
+            >
+              &#x2193;
+            </h4>
+          </div>
+
+          <!-- <button
             class="fixed bottom-10 flex w-full max-w-[370px] items-center justify-center rounded-5 py-8 text-16 font-bold md:bottom-20"
             :style="{
               backgroundColor: settingByTemplate?.color_primario ?? '#25D366',
@@ -858,6 +911,17 @@
           >
             <whatsapp-icon class="bottom-4 mr-5 text-24" /> Enviar información
             al WhatsApp
+          </button> -->
+          <button
+            class="fixed bottom-25  flex w-full max-w-[370px] items-center justify-center rounded-5 py-8 text-16 font-bold md:bottom-30"
+            :style="{
+              backgroundColor: '#25D366',
+              color: '#FFFFFF',
+              border: `2px solid ${'#25D366'}`,
+            }"
+            @click="redirectWP"
+          >
+            <whatsapp-icon class="bottom-4 mr-5 text-24" /> Continuar compra
           </button>
         </div>
       </div>
@@ -1676,8 +1740,7 @@ export default {
                 amount: data.total,
                 paymentMethod: '7',
               })
-              this.textConfirmation =
-                '¡Información enviada correctamente a la tienda!'
+              this.textConfirmation = '¡Información enviada a la tienda!'
               this.stateBtnConfirmation = true
               const idArray = this.productsCart.map((item) => item.id)
               this.$store.dispatch('SEND_ANALYTICS_PRODUCTO_PAY', {
