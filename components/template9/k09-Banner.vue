@@ -19,7 +19,7 @@
           <div
             v-for="(elementBanner, index) in banner.values"
             :key="index"
-            class="swiper-slide swiper-slide w-full flex justify-center items-center"
+            class="swiper-slide swiper-slide flex w-full items-center justify-center"
           >
             <picture v-if="dataStore.id === 889">
               <source
@@ -37,7 +37,7 @@
                 :srcset="
                   idCloudinaryBanner(
                     elementBanner['url_img_background'],
-                    'banner'
+                    'banner',
                   )
                 "
               />
@@ -45,24 +45,42 @@
                 v-lazy="
                   idCloudinaryBanner(
                     elementBanner['url_img_background'],
-                    'banner'
+                    'banner',
                   )
                 "
                 class="slide-bgWeb"
                 alt="banner template13"
               />
             </picture>
-            <img
-              v-else
-              class="slide-bgWeb"
-              :src="
-                idCloudinaryBanner(
-                  elementBanner['url_img_background'],
-                  'banner'
-                )
-              "
-              :alt="`img_banner_${index}`"
-            />
+            <template v-else>
+              <a
+                v-if="dataStore.id === 7454"
+                :href="elementBanner.url_redirect"
+                target="_blank"
+              >
+                <img
+                  class="slide-bgWeb"
+                  :src="
+                    idCloudinaryBanner(
+                      elementBanner['url_img_background'],
+                      'banner',
+                    )
+                  "
+                  :alt="`img_banner_${index}`"
+                />
+              </a>
+              <img
+                v-else
+                class="slide-bgWeb"
+                :src="
+                  idCloudinaryBanner(
+                    elementBanner['url_img_background'],
+                    'banner',
+                  )
+                "
+                :alt="`img_banner_${index}`"
+              />
+            </template>
             <div class="banner-content-items-1 absolute">
               <div class="content-items-1">
                 <div class="text-top">
@@ -89,7 +107,10 @@
                     {{ elementBanner.description }}
                   </p>
                 </div>
-                <div v-if="elementBanner.url_redirect" class="banner-button">
+                <div
+                  v-if="elementBanner.url_redirect && dataStore.id !== 7454"
+                  class="banner-button"
+                >
                   <template v-if="isInternalUrl(elementBanner.url_redirect)">
                     <nuxt-link
                       :to="`${elementBanner.url_redirect}`"
@@ -196,11 +217,11 @@ picture {
   width: 100%;
 }
 .contein-carousel {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
   /* margin-top: 72px; */
 }
 .carousel-content {
-  @apply w-full flex justify-center items-center z-auto;
+  @apply z-auto flex w-full items-center justify-center;
 }
 .cursorPointer {
   cursor: pointer;
@@ -248,27 +269,27 @@ picture {
 }
 .slide-bgWeb {
   display: initial;
-  @apply w-full object-center object-cover;
+  @apply w-full object-cover object-center;
 }
 @screen sm {
   /* .swiper-slide-1 {
     @apply flex flex-col justify-center items-center z-auto;
   } */
   .banner-content-items-1 {
-    @apply w-9/0 flex flex-col justify-center items-center;
+    @apply flex w-9/0 flex-col items-center justify-center;
   }
   .content-items-1 {
     @apply w-full;
   }
   .text-top {
-    @apply w-full flex justify-center items-center text-center mb-10;
+    @apply mb-10 flex w-full items-center justify-center text-center;
   }
   .banner-text-top {
     font-size: 10px;
-    @apply font-semibold uppercase flex;
+    @apply flex font-semibold uppercase;
   }
   .text-medium {
-    @apply w-full flex flex-col justify-center items-center text-center mb-10;
+    @apply mb-10 flex w-full flex-col items-center justify-center text-center;
   }
   .banner-text-medium {
     font-size: 18px;
@@ -279,7 +300,7 @@ picture {
     @apply hidden;
   }
   .banner-button {
-    @apply w-full flex flex-col justify-center items-center text-center;
+    @apply flex w-full flex-col items-center justify-center text-center;
   }
   .text-button {
     @apply px-14;
@@ -324,7 +345,7 @@ picture {
     font-size: 40px;
   }
   .text-bottom {
-    @apply w-full flex flex-col justify-center items-center text-center mb-24;
+    @apply mb-24 flex w-full flex-col items-center justify-center text-center;
   }
   .banner-text-bottom {
     font-size: 16px;
@@ -338,7 +359,7 @@ picture {
     @apply flex;
   }
   .banner-button {
-    @apply w-full flex flex-col justify-center items-center text-center;
+    @apply flex w-full flex-col items-center justify-center text-center;
     margin-top: 30px;
   }
 }
@@ -347,22 +368,22 @@ picture {
     @apply justify-center items-center z-auto;
   } */
   .banner-content-items-1 {
-    @apply w-9/8 justify-start items-start;
+    @apply w-9/8 items-start justify-start;
   }
   .content-items-1 {
     @apply w-5/0;
   }
   .text-top {
-    @apply justify-start items-start text-left mb-10;
+    @apply mb-10 items-start justify-start text-left;
   }
   .text-medium {
-    @apply justify-start items-start text-left;
+    @apply items-start justify-start text-left;
   }
   .text-bottom {
-    @apply justify-start items-start text-left mb-0;
+    @apply mb-0 items-start justify-start text-left;
   }
   .banner-button {
-    @apply justify-start items-start text-center;
+    @apply items-start justify-start text-center;
   }
   .banner-text-medium {
     font-size: 72px;
@@ -370,7 +391,7 @@ picture {
 }
 @media (min-width: 1300px) {
   .banner-content-items-1 {
-    @apply justify-start items-start;
+    @apply items-start justify-start;
     width: 1300px;
   }
   .content-items-1 {
