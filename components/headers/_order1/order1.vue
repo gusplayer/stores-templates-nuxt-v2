@@ -283,8 +283,9 @@
                   "
                   class="without_shipping_cost"
                 >
-                  Pasas a recoger tu compra
+                  No aplica
                 </p>
+                
                 <p v-else-if="FreeShippingCart" class="without_shipping_cost">
                   {{ $t('footer_tarifaPrecio') }}
                 </p>
