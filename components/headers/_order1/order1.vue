@@ -19,6 +19,15 @@
             {{ $t('footer_title') }} ({{ cantidadProductos }})
           </h3>
           <div
+            class="flex cursor-pointer items-center justify-center text-14 font-normal text-[#2c2930] underline transition-all duration-300 ease-in-out hover:text-[#a1a1a1]"
+            @click="remove = !remove"
+          >
+            <cart-icon class="mr-5" />
+            <p>
+              {{ $t('footer_vaciarCarrito') }}
+            </p>
+          </div>
+          <!-- <div
             class="group relative flex h-30 w-30 cursor-pointer items-center justify-center"
             @click="closedOrder"
           >
@@ -28,7 +37,7 @@
             <div
               class="absolute h-4 w-30 rotate-45 transform rounded-2 bg-[#2c2930] transition-all duration-200 ease-in group-hover:rotate-0"
             ></div>
-          </div>
+          </div> -->
         </div>
 
         <div
@@ -155,15 +164,26 @@
             class="sp flex w-full flex-col items-end justify-end bg-white-white"
           >
             <div
-              class="my-5 flex w-full cursor-pointer items-center justify-center border-y border-[#ededed] py-8 text-14 font-normal text-[#2c2930] underline transition-all duration-300 ease-in-out hover:text-[#a1a1a1]"
-              @click="remove = !remove"
+              class="my-5 flex w-full cursor-pointer items-center justify-center border-b border-[#ededed] py-8 text-14 font-normal text-[#2c2930]  transition-all duration-300 ease-in-out hover:text-[#a1a1a1]"
             >
-              <cart-icon class="mr-5" />
-              <p>
-                {{ $t('footer_vaciarCarrito') }}
-              </p>
-            </div>
+              <button
+                class="rounded-5 px-8 py-6 text-16 font-bold"
+                :style="{
+                  backgroundColor:
+                    settingByTemplate?.color_primario ?? '#25D366',
+                  color: settingByTemplate?.color_secundario ?? '#FFFFFF',
+                  border: `2px solid ${
+                    settingByTemplate?.color_primario ?? '#25D366'
+                  }`,
+                }"
+                @click="closedOrder"
+              >
 
+                <p>
+                  {{ $t('footer_continue') }}
+                </p>
+              </button>
+            </div>
             <div class="w-full">
               <span class="order_total_domicile">
                 <p style="font-weight: bold; font-size: 16px">
@@ -285,7 +305,7 @@
                 >
                   No aplica
                 </p>
-                
+
                 <p v-else-if="FreeShippingCart" class="without_shipping_cost">
                   {{ $t('footer_tarifaPrecio') }}
                 </p>
