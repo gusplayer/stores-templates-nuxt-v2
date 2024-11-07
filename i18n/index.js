@@ -41,6 +41,7 @@ export default {
     footer_enviar: 'Enviar',
     // OrderCart
     footer_title: 'Tu orden',
+    footer_continue: 'Seguir comprando',
     footer_title2: 'Realizar pedido',
     footer_vaciarCarrito: 'Vaciar carrito de compras',
     footer_costoDomicilio: 'Costo domicilio',
