@@ -1344,9 +1344,10 @@ export default {
           )
         }
       })
+      // agrega %2A y %2A al inicio y al final de la cadena cuando se agrega mas de un producto
       let productString = JSON.stringify(productosCart)
       let productList = productString.replace(/"/g, '')
-      let resultproductList = productList.replace(/,/g, '%0A')
+      let resultproductList = productList.replace(/,/g, '%2A%0A%2A')
       let result = resultproductList.slice(1, -1)
       var text = ''
       if (
