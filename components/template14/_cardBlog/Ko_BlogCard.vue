@@ -8,7 +8,7 @@
       <img
         v-if="article.imagen_principal_url"
         v-lazy="idCloudinary(article.imagen_principal_url, 850, 850)"
-        class="rounded-5 w-full h-full effect-img max-h-[300px]"
+        class="rounded-5 w-full h-full effect-img object-cover max-h-[300px]"
         width="406"
         height="300"
         alt="right-banner"
