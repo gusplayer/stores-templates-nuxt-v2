@@ -577,7 +577,9 @@ export default {
   font-size: 12px;
   box-sizing: border-box;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 0 1px 3px rgb(84 81 81 / 12%), 0 1px 2px rgb(82 82 82 / 24%);
+  box-shadow:
+    0 1px 3px rgb(84 81 81 / 12%),
+    0 1px 2px rgb(82 82 82 / 24%);
   cursor: pointer;
 }
 

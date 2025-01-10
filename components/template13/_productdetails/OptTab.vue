@@ -31,7 +31,7 @@
       </el-collapse-item>
       <el-collapse-item :title="$t('productdetail_opcionesPago')" name="2">
         <div
-          class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 justify-start items-start pb-4"
+          class="grid w-full grid-cols-1 items-start justify-start gap-4 pb-4 md:grid-cols-2"
         >
           <div v-if="mediospago.consignacion == 1">
             <h4>{{ $t('productdetail_consignacionBancaria') }}</h4>
@@ -230,7 +230,7 @@
         :title="$t('productdetail_opinionesEnvio')"
         name="3"
       >
-        <div class="w-full flex flex-col justify-start items-start pb-4">
+        <div class="flex w-full flex-col items-start justify-start pb-4">
           <div v-if="envios.envio_metodo === 'precio_ciudad'">
             <h4>• {{ envios.envio_metodo.replace('_', ' por ') }}</h4>
             <p>
@@ -339,9 +339,6 @@ export default {
   },
   mounted() {
     this.getDescriptionProduct()
-    this.contentDescription
-      ? (this.activeNames = ['1'])
-      : (this.activeNames = ['2'])
   },
   methods: {
     async getDescriptionProduct() {
@@ -354,6 +351,9 @@ export default {
       if (success) {
         this.contentDescription = data?.data ?? ''
       }
+      this.contentDescription
+        ? (this.activeNames = ['1'])
+        : (this.activeNames = ['2'])
     },
   },
 }
@@ -471,7 +471,7 @@ h4 {
   font-size: 15px;
   font-weight: 600;
   line-height: 1.42857143;
-  @apply w-full flex flex-col justify-center items-start mb-5;
+  @apply mb-5 flex w-full flex-col items-start justify-center;
 }
 div p {
   font-family: var(--font-style-1) !important;
@@ -491,17 +491,17 @@ div p {
   margin-bottom: 15px;
 }
 img {
-  @apply py-12 w-full max-w-[250px];
+  @apply w-full max-w-[250px] py-12;
 }
 @screen sm {
   .content-opt-tab {
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
 }
 
 @screen md {
   .content-opt-tab {
-    @apply flex flex-col justify-start items-start mt-0;
+    @apply mt-0 flex flex-col items-start justify-start;
   }
 }
 </style>

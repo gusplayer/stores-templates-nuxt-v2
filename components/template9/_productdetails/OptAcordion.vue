@@ -314,9 +314,6 @@ export default {
   },
   mounted() {
     this.getDescriptionProduct()
-    this.contentDescription
-      ? (this.activeNames = ['1'])
-      : (this.activeNames = ['2'])
   },
   methods: {
     async getDescriptionProduct() {
@@ -329,13 +326,16 @@ export default {
       if (success) {
         this.contentDescription = data?.data ?? ''
       }
+      this.contentDescription
+        ? (this.activeNames = ['1'])
+        : (this.activeNames = ['2'])
     },
   },
 }
 </script>
 <style scoped>
 .content-accordion {
-  @apply w-full flex flex-col justify-items-center items-start mt-40;
+  @apply mt-40 flex w-full flex-col items-start justify-items-center;
 }
 .content-accordion >>> .el-collapse-item__header {
   font-family: var(--font-style-2);
@@ -415,6 +415,6 @@ export default {
   display: none;
 }
 img {
-  @apply py-12 w-full max-w-[250px];
+  @apply w-full max-w-[250px] py-12;
 }
 </style>

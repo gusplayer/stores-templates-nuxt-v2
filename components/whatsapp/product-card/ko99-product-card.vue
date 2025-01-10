@@ -89,8 +89,16 @@
                   )
               }}
             </p>
-            <p v-if="maxPrice > 0" class="separator-price">-</p>
-            <p v-if="maxPrice > 0" class="txt-product-price">
+            <p
+              v-if="maxPrice > 0 && dataStore?.id !== 18265"
+              class="separator-price"
+            >
+              -
+            </p>
+            <p
+              v-if="maxPrice > 0 && dataStore?.id !== 18265"
+              class="txt-product-price"
+            >
               {{
                 maxPrice
                   | currency(
@@ -235,9 +243,9 @@ export default {
       return this.$store.state.envios.valores
     },
     soldOut() {
-      if (this.product.con_variante) {
+      if (this.product?.con_variante) {
         const arrCombinations = this.product.variantes
-        if (arrCombinations && arrCombinations.combinaciones.length) {
+        if (arrCombinations?.combinaciones?.length) {
           const inventorySum = JSON.parse(
             arrCombinations.combinaciones[0].combinaciones
           )
@@ -333,22 +341,35 @@ export default {
       }
     },
     productPrice() {
-      if (this.product.con_variante) {
+      if (this.product?.con_variante) {
         const variants = this.product.variantes
-        if (variants && variants.combinaciones.length > 0) {
-          const prices = JSON.parse(variants.combinaciones[0].combinaciones)
-            .filter((item) => item.precio && item.estado)
-            .map((item) => item.precio)
-          if (prices.length > 0) {
-            this.productVariants = true
-            const sortedPrices = prices.sort((a, b) => a - b)
-            this.minPrice = sortedPrices[0]
-            this.maxPrice = sortedPrices[sortedPrices.length - 1]
-            this.equalsPrice = this.minPrice === this.maxPrice
-            return
+
+        if (variants?.combinaciones?.length > 0) {
+          let parsedCombinations = []
+          try {
+            parsedCombinations = JSON.parse(
+              variants.combinaciones[0].combinaciones
+            )
+          } catch (e) {
+            console.error('Error al parsear combinaciones:', e)
+          }
+
+          if (Array.isArray(parsedCombinations)) {
+            const prices = parsedCombinations
+              .filter((item) => item.precio && item.estado)
+              .map((item) => item.precio)
+            if (prices?.length > 0) {
+              this.productVariants = true
+              const sortedPrices = prices.sort((a, b) => a - b)
+              this.minPrice = sortedPrices[0]
+              this.maxPrice = sortedPrices[sortedPrices.length - 1]
+              this.equalsPrice = this.minPrice === this.maxPrice
+              return
+            }
           }
         }
       }
+
       this.productVariants = false
       this.minPrice = this.product.precio || 0
       this.maxPrice = this.product.precio || 0
@@ -403,7 +424,7 @@ export default {
 </script>
 <style scoped>
 .card_info {
-  @apply flex justify-center items-center font-bold text-10 absolute;
+  @apply absolute flex items-center justify-center text-10 font-bold;
 }
 .card_soldOut {
   background: #e71f77;
@@ -431,7 +452,7 @@ export default {
   font-size: 13px;
   background: white;
   color: #25d366;
-  @apply absolute overflow-hidden rounded-md shadow-md transition-all ease-in duration-300;
+  @apply absolute overflow-hidden rounded-md shadow-md transition-all duration-300 ease-in;
 }
 #product-card:hover .overlay-top {
   width: 67px;
@@ -481,28 +502,28 @@ export default {
   display: none;
 }
 .content-productCard {
-  @apply w-full h-full flex flex-col justify-start items-center;
+  @apply flex h-full w-full flex-col items-center justify-start;
 }
 
 @screen sm {
   .content-items-productCard {
     max-width: 350px;
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
   .content-img-prodcut {
     max-height: 175px;
     max-width: 175px;
     background-color: #f9f9f9;
-    @apply w-full h-full flex flex-col justify-center items-center rounded-9 border overflow-hidden;
+    @apply flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-9 border;
   }
   .product-image {
-    @apply w-full h-full object-cover object-center;
+    @apply h-full w-full object-cover object-center;
   }
   .product-image-soldOut {
     filter: grayscale(100%);
   }
   .content-description-product {
-    @apply w-full grid grid-cols-1 gap-1 justify-center items-center my-10;
+    @apply my-10 grid w-full grid-cols-1 items-center justify-center gap-1;
   }
   .txt-name-product {
     color: #3d3d3d;
@@ -515,37 +536,37 @@ export default {
     @apply w-full text-left font-medium;
   }
   .content-price-product {
-    @apply w-auto flex flex-col justify-center items-center;
+    @apply flex w-auto flex-col items-center justify-center;
   }
   .item-price-product {
-    @apply w-full flex flex-row justify-start items-center gap-1;
+    @apply flex w-full flex-row items-center justify-start gap-1;
   }
   .txt-product-price {
     color: #3d3d3d;
     font-size: 14px;
     font-family: 'Poppins', sans-serif !important;
-    @apply w-auto flex flex-col justify-center items-start font-bold;
+    @apply flex w-auto flex-col items-start justify-center font-bold;
   }
   .content-buttons {
-    @apply w-full flex flex-row justify-between items-center;
+    @apply flex w-full flex-row items-center justify-between;
   }
   .button-left {
     max-height: 34px;
     background-color: #ececec;
-    @apply w-auto flex flex-col justify-center items-center rounded-5 p-8 mr-5 cursor-pointer;
+    @apply mr-5 flex w-auto cursor-pointer flex-col items-center justify-center rounded-5 p-8;
   }
   .svg-img {
     color: black;
-    @apply w-21 h-auto;
+    @apply h-auto w-21;
   }
   .button-right {
     max-height: 34px;
-    @apply w-full flex flex-col justify-center items-center rounded-7 px-12 py-8 cursor-pointer;
+    @apply flex w-full cursor-pointer flex-col items-center justify-center rounded-7 px-12 py-8;
   }
   .txt-btn-right {
     font-size: 14px;
     font-family: 'Poppins', sans-serif !important;
-    @apply w-full flex flex-col justify-center items-center font-semibold;
+    @apply flex w-full flex-col items-center justify-center font-semibold;
   }
 }
 
@@ -557,7 +578,7 @@ export default {
 }
 @media (min-width: 600px) {
   .item-price-product {
-    @apply flex flex-row justify-start items-center;
+    @apply flex flex-row items-center justify-start;
   }
   .txt-name-product {
     font-size: 16px;
@@ -567,10 +588,10 @@ export default {
     font-weight: bold;
   }
   .button-left {
-    @apply p-5 mr-10;
+    @apply mr-10 p-5;
   }
   .svg-img {
-    @apply w-32 h-auto;
+    @apply h-auto w-32;
   }
   .button-right {
     @apply py-8;

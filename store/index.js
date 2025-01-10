@@ -1242,7 +1242,7 @@ async function getIdData(state, req, commit) {
     (req.connection.encrypted ? 'https' : 'http')
   const currentURL = `${protocol}://${req.headers.host}${req.url}`
   const getURL = obtenerInfoURL(currentURL)
-  // const getURL = obtenerInfoURL('https://www.laplazaon.com/')
+  // const getURL = obtenerInfoURL('https://wapi.me/wa/18265/')
   let id = 0
   let template = 0
   let idWapi = null
@@ -1274,7 +1274,7 @@ async function getIdData(state, req, commit) {
         })
       }
     } catch (err) {
-      console.log(`No se encontro la tienda ${getURL.nombreTienda} subdominio`)
+      console.log(`No se encontro la tienda ${getURL.nombreTienda} subdominio, ${err}`)
     }
   } else if (getURL?.esDominio && getURL?.nombreTienda) {
     try {
@@ -1291,7 +1291,7 @@ async function getIdData(state, req, commit) {
         })
       }
     } catch (err) {
-      console.log(`No se encontro la tienda ${getURL.nombreTienda} dominio`)
+      console.log(`No se encontro la tienda ${getURL.nombreTienda} dominio, ${err}`)
     }
   }
   if (

@@ -328,7 +328,6 @@ export default {
   },
   mounted() {
     this.getDescriptionProduct()
-    this.sendIndexTag(this.contentDescription ? 1 : 2)
   },
   methods: {
     sendIndexTag(value) {
@@ -344,6 +343,7 @@ export default {
       if (success) {
         this.contentDescription = data?.data ?? ''
       }
+      this.sendIndexTag(this.contentDescription ? 1 : 2)
     },
   },
 }
@@ -421,11 +421,11 @@ export default {
   display: none;
 }
 .tab {
-  @apply w-auto flex flex-col justify-center items-center px-4 cursor-pointer;
+  @apply flex w-auto cursor-pointer flex-col items-center justify-center px-4;
 }
 
 .item-content {
-  @apply w-full flex flex-col justify-start items-start pb-4;
+  @apply flex w-full flex-col items-start justify-start pb-4;
 }
 .content_product_description {
   color: var(--color_subtext);
@@ -433,7 +433,7 @@ export default {
   font-weight: 400;
   line-height: 1.42857143;
   font-family: var(--font-style-1) !important;
-  @apply w-full flex flex-col justify-center items-start;
+  @apply flex w-full flex-col items-start justify-center;
 }
 .content_product_description {
   color: var(--color_subtext);
@@ -441,7 +441,7 @@ export default {
   font-weight: 400;
   line-height: 1.42857143;
   font-family: var(--font-style-1) !important;
-  @apply w-full flex flex-col justify-center items-start;
+  @apply flex w-full flex-col items-start justify-center;
 }
 h3 {
   color: var(--color_subtext);
@@ -457,7 +457,7 @@ h4 {
   font-size: 15px;
   font-weight: 600;
   line-height: 1.42857143;
-  @apply w-full flex flex-col justify-center items-start mb-5;
+  @apply mb-5 flex w-full flex-col items-start justify-center;
 }
 li p {
   font-family: var(--font-style-1) !important;
@@ -484,21 +484,21 @@ img {
 }
 @screen sm {
   .content-opt-tab {
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
   .content-tab {
     border-color: var(--border);
-    @apply w-full flex flex-col justify-center items-center mt-6;
+    @apply mt-6 flex w-full flex-col items-center justify-center;
   }
   .head-content {
-    @apply w-full grid grid-cols-1 gap-2 justify-center items-center mb-40;
+    @apply mb-40 grid w-full grid-cols-1 items-center justify-center gap-2;
   }
   .tittle {
     color: var(--color_subtext);
     font-size: 14px;
     background-color: transparent;
     font-family: var(--font-style-1) !important;
-    @apply w-full h-40 flex justify-center items-center font-semibold uppercase transition-all ease-in duration-0.2;
+    @apply flex h-40 w-full items-center justify-center font-semibold uppercase transition-all duration-0.2 ease-in;
   }
   .show-select-active {
     background-color: var(--color_gb_tabs);
@@ -509,7 +509,7 @@ img {
 }
 @media (min-width: 425px) {
   .head-content {
-    @apply grid grid-cols-3 mb-40;
+    @apply mb-40 grid grid-cols-3;
   }
   .tittle {
     font-size: 12px;
@@ -518,29 +518,29 @@ img {
 }
 @screen md {
   .content-opt-tab {
-    @apply flex flex-row justify-start items-start border mt-0;
+    @apply mt-0 flex flex-row items-start justify-start border;
   }
   .head-content {
-    @apply w-full flex flex-row justify-start items-start mb-0;
+    @apply mb-0 flex w-full flex-row items-start justify-start;
     border-bottom: 1px solid transparent;
   }
   .head-content {
-    @apply w-6/0 flex flex-col justify-start items-start mb-0 gap-0;
+    @apply mb-0 flex w-6/0 flex-col items-start justify-start gap-0;
   }
   .tab {
-    @apply w-full flex justify-start items-center;
+    @apply flex w-full items-center justify-start;
   }
   .tittle {
     font-size: 14px;
-    @apply w-full h-50 text-center justify-start items-center pl-20;
+    @apply h-50 w-full items-center justify-start pl-20 text-center;
   }
   .content-tab {
     border-color: var(--border);
-    @apply w-full flex flex-row justify-start items-start mt-0 border transition-all ease-in duration-0.2;
+    @apply mt-0 flex w-full flex-row items-start justify-start border transition-all duration-0.2 ease-in;
   }
   .show-select-active {
     background-color: var(--color_gb_tabs);
-    @apply border-l-4 w-full;
+    @apply w-full border-l-4;
   }
   .show-select-active .tittle {
     color: var(--color_text_tabs);

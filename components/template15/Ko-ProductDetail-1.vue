@@ -121,10 +121,13 @@
               </div>
               <div
                 class="relative mr-10 hidden h-full max-h-[375px] w-full max-w-[375px] md:flex"
+                @mouseover="handleMouseOver"
+                @mouseleave="handleMouseLeave"
               >
                 <div
-                  v-if="activeZoom && !existYoutube"
+                  v-if="!existYoutube"
                   class="h-full max-h-[375px] w-full max-w-[375px] rounded-10 object-contain object-top"
+                  @click.prevent="showModal = !showModal"
                 >
                   <img
                     v-lazy="idCloudinaryQuality(selectPhotoUrl, 850, 850)"
@@ -139,6 +142,38 @@
                   allowfullscreen
                   class="h-full max-h-[375px] min-h-[375px] w-full max-w-[375px] rounded-10 object-contain object-top"
                 ></iframe>
+                <div
+                  v-if="isHovering"
+                  class="absolute bottom-6 right-6 z-10 cursor-pointer rounded-md bg-black px-4 py-2 opacity-75 transition-opacity duration-300"
+                  @click.prevent="showModal = !showModal"
+                >
+                  <p class="text-14 text-white-white">
+                    {{ $t('productdetail_click_zoom') }}
+                  </p>
+                </div>
+              </div>
+              <div
+                v-if="showModal"
+                class="fixed left-0 top-0 z-[1000] flex h-full w-full items-center justify-center overflow-auto bg-[#000000de]"
+              >
+                <span
+                  class="absolute right-[35px] top-[20px] cursor-pointer text-[40px] font-bold text-white-white transition hover:text-gray-500 focus:text-gray-500"
+                  @click.prevent="showModal = !showModal"
+                >
+                  &times;
+                </span>
+
+                <div
+                  class="max-h-[90%] max-w-[90%] md:max-h-[80%] md:max-w-[80%]"
+                >
+                  <KoProductSliderOption
+                    :photos="data.productosFotos"
+                    :photo="data.fotoCloudinary"
+                    :id-you-tube="idYoutube"
+                    :width-photo="850"
+                    :width-screen="600"
+                  />
+                </div>
               </div>
               <div
                 class="box-border flex h-full w-full items-center justify-start md:hidden"
@@ -189,7 +224,7 @@
                   salesData.precio
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda,
+                      dataStore.tiendasInfo.moneda
                     )
                 }}
               </p>
@@ -215,12 +250,12 @@
                     data.productosInfo.promocionValor
                       ? Math.trunc(
                           salesData.precio /
-                            (1 - data.productosInfo.promocionValor / 100),
+                            (1 - data.productosInfo.promocionValor / 100)
                         )
                       : 0)
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda,
+                        dataStore.tiendasInfo.moneda
                       )
                   }}
                 </p>
@@ -616,8 +651,9 @@ export default {
     KoSuggestProduct: () =>
       import('../_commonComponent/suggestions-producto.vue'),
     SelectGroup: () => import('../_commonComponent/select-group-v2.vue'),
-
     OptionTab: () => import('../template14/_productdetails/OptTab.vue'),
+    KoProductSliderOption: () =>
+      import('../_commonComponent/product-slide-option.vue'),
   },
   filters: {
     toLowerCase(value) {
@@ -667,11 +703,12 @@ export default {
       spent: false,
       shippingProduct: '',
       suggestedProducts: [],
+      showModal: false,
+      isHovering: false,
       envio: {
         titulo: '',
         desc: '',
       },
-      activeZoom: true,
       swiperOption: {
         direction: 'vertical',
         slidesPerView: 4,
@@ -745,7 +782,7 @@ export default {
     },
     filterSuggestedProducts() {
       return this.suggestedProducts.filter(
-        (product) => product.id !== this.data.id,
+        (product) => product.id !== this.data.id
       )
     },
   },
@@ -772,11 +809,11 @@ export default {
           this.data.conVariante > 0
         ) {
           const combinaciones = JSON.parse(
-            this.data.combinaciones[0][0].combinaciones,
+            this.data.combinaciones[0][0].combinaciones
           )
           const result = combinaciones.find(
             (combinacion) =>
-              JSON.stringify(combinacion.combinacion) == combinationSelected,
+              JSON.stringify(combinacion.combinacion) == combinationSelected
           )
           this.productCart = []
           this.productIndexCart = null
@@ -833,7 +870,7 @@ export default {
         'products/GET_DATA_PRODUCT',
         {
           slug: this.id,
-        },
+        }
       )
       if (success && data.data) {
         this.loading = false
@@ -1004,7 +1041,7 @@ export default {
         this.$store.state.productsCart.splice(
           this.productIndexCart,
           1,
-          mutableProduct,
+          mutableProduct
         )
       } else {
         this.$store.state.productsCart.push(product)
@@ -1062,11 +1099,17 @@ export default {
           limit: 12,
           category: this.data.categoriaProducto2.nombreCategoriaProducto,
           // subcategory: this.data.subcategoria,
-        },
+        }
       )
       if (success) {
         this.suggestedProducts = data.publicProductList
       }
+    },
+    handleMouseOver() {
+      this.isHovering = true
+    },
+    handleMouseLeave() {
+      this.isHovering = false
     },
   },
   jsonld() {
