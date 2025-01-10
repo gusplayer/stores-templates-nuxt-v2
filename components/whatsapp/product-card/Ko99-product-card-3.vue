@@ -3,7 +3,7 @@
     <div class="content-itemsCard">
       <nuxt-link
         id="product-card"
-        class="w-full h-full flex flex-col justify-center items-center rounded-9 border bg-[#f9f9f9] overflow-hidden relative"
+        class="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-9 border bg-[#f9f9f9]"
         :to="{
           path: `/wa/${dataStore.id}/productos/` + product.slug,
         }"
@@ -18,7 +18,7 @@
           height="265"
           loading="lazy"
           :class="[
-            'w-full h-full object-cover object-center overflow-hidden',
+            'h-full w-full overflow-hidden object-cover object-center',
             !soldOut ? '' : 'grayscale',
             product.foto_cloudinary === 'sin_foto.jpeg' ? ' h-full w-full' : '',
           ]"
@@ -416,7 +416,7 @@ export default {
 </script>
 <style scoped>
 .card_info {
-  @apply flex justify-center items-center font-bold text-10;
+  @apply flex items-center justify-center text-10 font-bold;
 }
 .card_soldOut {
   background: #e71f77;
@@ -440,7 +440,7 @@ export default {
   font-size: 13px;
   background: white;
   color: #25d366;
-  @apply absolute overflow-hidden rounded-md shadow-md transition-all ease-in duration-300;
+  @apply absolute overflow-hidden rounded-md shadow-md transition-all duration-300 ease-in;
 }
 #product-card:hover .overlay-top {
   width: 67px;
@@ -490,18 +490,18 @@ export default {
   display: none;
 }
 .content-productCard {
-  @apply w-full h-full flex flex-col justify-start items-center;
+  @apply flex h-full w-full flex-col items-center justify-start;
 }
 @screen sm {
   .content-itemsCard {
-    @apply w-full flex flex-row gap-4 justify-center items-start;
+    @apply flex w-full flex-row items-start justify-center gap-4;
   }
   .content-right-data {
     padding: 5px 0;
-    @apply h-full w-full flex flex-col justify-between items-center box-border;
+    @apply box-border flex h-full w-full flex-col items-center justify-between;
   }
   .content-description-product {
-    @apply w-full h-full flex flex-col gap-1 justify-start items-start mb-10;
+    @apply mb-10 flex h-full w-full flex-col items-start justify-start gap-1;
   }
   .txt-name-product {
     color: #3d3d3d;
@@ -514,38 +514,38 @@ export default {
     @apply w-full text-left font-medium;
   }
   .content-price-product {
-    @apply w-auto flex flex-col justify-center items-start;
+    @apply flex w-auto flex-col items-start justify-center;
   }
   .item-price-product {
-    @apply w-full flex flex-row justify-start items-center gap-1;
+    @apply flex w-full flex-row items-center justify-start gap-1;
   }
   .txt-product-price {
     color: #3d3d3d;
     font-size: 14px;
     font-family: 'Poppins', sans-serif !important;
-    @apply w-auto flex flex-col justify-center items-start font-bold;
+    @apply flex w-auto flex-col items-start justify-center font-bold;
   }
   .content-buttons {
-    @apply w-full flex flex-row justify-end items-end;
+    @apply flex w-full flex-row items-end justify-end;
   }
   .button-left {
     max-height: 34px;
     background-color: #ececec;
-    @apply w-auto flex flex-col justify-center items-center rounded-5 p-8 mr-5 cursor-pointer;
+    @apply mr-5 flex w-auto cursor-pointer flex-col items-center justify-center rounded-5 p-8;
   }
   .svg-img {
     color: black;
-    @apply w-21 h-auto;
+    @apply h-auto w-21;
   }
   .button-right {
     max-height: 34px;
     max-width: 124px;
-    @apply w-full flex flex-col justify-center items-center rounded-7 px-12 py-8 cursor-pointer;
+    @apply flex w-full cursor-pointer flex-col items-center justify-center rounded-7 px-12 py-8;
   }
   .txt-btn-right {
     font-size: 14px;
     font-family: 'Poppins', sans-serif !important;
-    @apply w-full flex flex-col justify-center items-center font-semibold;
+    @apply flex w-full flex-col items-center justify-center font-semibold;
   }
 }
 

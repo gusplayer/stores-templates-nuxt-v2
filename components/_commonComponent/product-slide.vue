@@ -34,6 +34,7 @@
         </div>
       </div>
     </div>
+    <!-- <div class="swiper-pagination"></div> -->
   </div>
 </template>
 
@@ -73,6 +74,13 @@ export default {
           delay: 8000,
           disableOnInteraction: false,
         },
+        // pagination: {
+        //   el: '.swiper-pagination',
+        // },
+        // navigation: {
+        //   nextEl: '.next',
+        //   prevEl: '.prev',
+        // },
       },
     }
   },

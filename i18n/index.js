@@ -343,6 +343,7 @@ export default {
     productdetail_condicion: 'Condición',
     productdetail_condicionNuevo: 'Nuevo',
     productdetail_condicionUsado: 'Usado',
+    productdetail_click_zoom: 'Haz clic para hacer zoom',
   },
   en: {
     // header
@@ -682,6 +683,7 @@ export default {
     productdetail_condicion: 'Condition',
     productdetail_condicionNuevo: 'New',
     productdetail_condicionUsado: 'Used',
+    productdetail_click_zoom: 'Click to zoom',
   },
   pt: {
     // header
@@ -1024,6 +1026,7 @@ export default {
     productdetail_condicion: 'Condição',
     productdetail_condicionNuevo: 'Novo',
     productdetail_condicionUsado: 'Usado',
+    productdetail_click_zoom: 'Clique para ampliar',
   },
   fr: {
     // header
@@ -1354,5 +1357,6 @@ export default {
     productdetail_condicion: 'Condition',
     productdetail_condicionNuevo: 'Nouveau',
     productdetail_condicionUsado: 'Utilisé',
+    productdetail_click_zoom: 'Cliquez pour agrandir',
   },
 }

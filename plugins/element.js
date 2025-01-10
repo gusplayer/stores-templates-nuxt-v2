@@ -20,6 +20,7 @@ import {
   SkeletonItem,
   Tabs,
   TabPane,
+  // Popover,
   // Select,
   // Option,
   // Button,
@@ -59,6 +60,8 @@ export default () => {
 
   Vue.use(Tabs)
   Vue.use(TabPane)
+
+  // Vue.use(Popover)
   Vue.use(Loading.directive)
   Vue.prototype.$message = Message
   // Vue.use(Checkbox)

@@ -1,13 +1,26 @@
 <template>
-  <div>
-    <div class="cursor-pointer" @click.prevent="ShowModal(true)">
-      <KoProductSlider
-        :photos="photos"
-        :photo="photo"
-        :id-you-tube="idYouTube"
-        :width-photo="550"
-        :width-screen="400"
-      />
+  <!-- <el-tooltip
+    class="item"
+    effect="dark"
+    content="Hacer clic para hacer zoom"
+    placement="bottom-end"
+  > -->
+
+  <div
+    class="w-full"
+    @mouseover="handleMouseOver"
+    @mouseleave="handleMouseLeave"
+  >
+    <div class="flex h-full w-full items-center justify-center">
+      <div class="cursor-pointer" @click.prevent="ShowModal(true)">
+        <KoProductSlider
+          :photos="photos"
+          :photo="photo"
+          :id-you-tube="idYouTube"
+          :width-photo="550"
+          :width-screen="400"
+        />
+      </div>
     </div>
     <div
       v-if="showModal"
@@ -30,7 +43,27 @@
         />
       </div>
     </div>
+
+    <div
+      v-if="isHovering && !isMobile"
+      class="absolute bottom-6 right-6 z-10 rounded-md bg-black px-4 py-2 opacity-75 transition-opacity duration-300"
+    >
+      <p class="text-14 text-white-white">
+        {{ $t('productdetail_click_zoom') }}
+      </p>
+    </div>
+
+    <div
+      v-if="isMobile"
+      class="absolute bottom-6 right-6 z-10 rounded-md bg-black px-4 py-2 opacity-75 transition-opacity duration-300"
+    >
+      <p class="text-14 text-white-white">
+        {{ $t('productdetail_click_zoom') }}
+      </p>
+    </div>
   </div>
+
+  <!-- </el-tooltip> -->
 </template>
 
 <script>
@@ -58,11 +91,26 @@ export default {
   data() {
     return {
       showModal: false,
+      isHovering: false,
+      isMobile: false,
     }
+  },
+  mounted() {
+    this.isMobile = window.innerWidth <= 768
   },
   methods: {
     ShowModal(value) {
       this.showModal = value
+    },
+    handleMouseOver() {
+      if (!this.isMobile) {
+        this.isHovering = true
+      }
+    },
+    handleMouseLeave() {
+      if (!this.isMobile) {
+        this.isHovering = false
+      }
     },
   },
 }

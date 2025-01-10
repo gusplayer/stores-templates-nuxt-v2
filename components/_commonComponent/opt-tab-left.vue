@@ -252,7 +252,7 @@
               envios.valor
                 | currency(
                   dataStore.tiendasInfo.paises.codigo,
-                  dataStore.tiendasInfo.moneda,
+                  dataStore.tiendasInfo.moneda
                 )
             }}
           </p>
@@ -334,7 +334,6 @@ export default {
   },
   mounted() {
     this.getDescriptionProduct()
-    this.sendIndexTag(this.contentDescription ? 1 : 2)
   },
   methods: {
     sendIndexTag(value) {
@@ -345,11 +344,12 @@ export default {
         'products/GET_DESCRIPTION_PRODUCTO',
         {
           slug: this.data.slug,
-        },
+        }
       )
       if (success) {
         this.contentDescription = data?.data ?? ''
       }
+      this.sendIndexTag(this.contentDescription ? 1 : 2)
     },
   },
 }

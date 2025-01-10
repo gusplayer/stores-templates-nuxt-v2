@@ -26,12 +26,12 @@
         <div class="wrapper-left">
           <div class="photos_responsive">
             <productSlide
-              :photos="data.productosFotos"
-              :photo="data.fotoCloudinary"
-              :id-you-tube="idYoutube"
-            />
+                :photos="data.productosFotos"
+                :photo="data.fotoCloudinary"
+                :id-you-tube="idYoutube"
+              />
+            </div>     
           </div>
-        </div>
         <div class="wrapper-right">
           <div class="content-right">
             <div class="flex">
