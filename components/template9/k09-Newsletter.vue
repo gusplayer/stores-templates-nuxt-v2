@@ -181,10 +181,10 @@ export default {
 <style scoped>
 .wrapper_newsletter {
   background-color: var(--background_color_1);
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .wrapper-items-content {
-  @apply flex flex-col justify-center items-center;
+  @apply flex flex-col items-center justify-center;
 }
 .content-bttns-shop {
   font-family: var(--font-style-2);
@@ -198,7 +198,8 @@ export default {
   font-weight: 800;
   white-space: nowrap;
   line-height: 18px;
-  @apply mr-2 shadow-md justify-center items-center flex;
+  border-radius: var(--radius_btn);
+  @apply mr-2 flex items-center justify-center shadow-md;
 }
 .content-bttns-shop:hover {
   color: var(--hover_border);
@@ -210,18 +211,18 @@ export default {
   @apply flex flex-col justify-center;
 }
 .conten-input-check {
-  @apply w-full flex flex-col justify-center items-start;
+  @apply flex w-full flex-col items-start justify-center;
 }
 .content-input {
-  @apply w-full flex flex-row justify-start items-center;
+  @apply flex w-full flex-row items-center justify-start;
 }
 .content-input-error {
-  @apply w-full flex justify-start items-center;
+  @apply flex w-full items-center justify-start;
 }
 .input-text {
   color: var(--color_title);
   border-bottom: 3px solid #e0e0e0;
-  @apply flex justify-start items-center;
+  @apply flex items-center justify-start;
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
   font-family: var(--font-style-2);
   padding: 0 25px;
@@ -247,13 +248,13 @@ export default {
   width: auto;
 }
 .content-button {
-  @apply w-auto flex items-start;
+  @apply flex w-auto items-start;
 }
 .content-input-error {
-  @apply w-full flex flex-col justify-start items-center;
+  @apply flex w-full flex-col items-center justify-start;
 }
 .content-checkbox {
-  @apply w-full flex justify-start items-center ml-8 mt-2;
+  @apply ml-8 mt-2 flex w-full items-center justify-start;
 }
 .text-checkbox {
   /* font-family: 'Roboto', Helvetica, Arial, sans-serif !important; */
@@ -266,14 +267,14 @@ export default {
   background-color: #2c2930;
 }
 .product-text {
-  @apply flex flex-col justify-center items-center w-full my-60;
+  @apply my-60 flex w-full flex-col items-center justify-center;
 }
 .product-tittle {
-  @apply flex flex-col justify-center items-center;
+  @apply flex flex-col items-center justify-center;
 }
 .tittle {
   color: var(--color_title);
-  @apply flex flex-col justify-center items-center;
+  @apply flex flex-col items-center justify-center;
   /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
   font-family: var(--font-style-1);
   font-weight: 700;
@@ -285,11 +286,11 @@ export default {
   position: relative;
 }
 .input-icon {
-  @apply w-full flex flex-row;
+  @apply flex w-full flex-row;
 }
 @screen sm {
   .wrapper-items {
-    @apply flex flex-col mb-40;
+    @apply mb-40 flex flex-col;
   }
   .content-checkbox {
     @apply ml-0;

@@ -90,6 +90,22 @@
               }}
             </p>
             <p
+              v-if="
+                dataStore?.id === 18265 &&
+                product?.tag_promocion == 1 &&
+                product?.promocion_valor
+              "
+              class="ml-5 text-sm text-red-500 line-through"
+            >
+              {{
+                Math.trunc(minPrice / (1 - product.promocion_valor / 100))
+                  | currency(
+                    dataStore.tiendasInfo.paises.codigo,
+                    dataStore.tiendasInfo.moneda
+                  )
+              }}
+            </p>
+            <p
               v-if="maxPrice > 0 && dataStore?.id !== 18265"
               class="separator-price"
             >
@@ -112,6 +128,22 @@
             <p v-if="product.precio > 0" class="txt-product-price">
               {{
                 product.precio
+                  | currency(
+                    dataStore.tiendasInfo.paises.codigo,
+                    dataStore.tiendasInfo.moneda
+                  )
+              }}
+            </p>
+            <p
+              v-if="
+                dataStore?.id === 18265 &&
+                product?.tag_promocion == 1 &&
+                product?.promocion_valor
+              "
+              class="ml-5 text-sm text-red-500 line-through"
+            >
+              {{
+                Math.trunc(minPrice / (1 - product.promocion_valor / 100))
                   | currency(
                     dataStore.tiendasInfo.paises.codigo,
                     dataStore.tiendasInfo.moneda

@@ -20,8 +20,8 @@
           {{ productList.title.replace(/&nbsp;/g, ' ') }}
         </span>
       </div>
-      <div class="w-full flex flex-row justify-center items-center mb-40">
-        <div class="w-full flex flex-col justify-center items-center">
+      <div class="mb-40 flex w-full flex-row items-center justify-center">
+        <div class="flex w-full flex-col items-center justify-center">
           <div class="product-content-items">
             <div
               v-for="product in listProducts"
@@ -99,17 +99,17 @@ export default {
 <style scoped>
 .product-content {
   background: var(--background_color_1);
-  @apply flex flex-col justify-center items-center w-full pt-70;
+  @apply flex w-full flex-col items-center justify-center pt-70;
 }
 .producto-items-content {
-  @apply w-full flex flex-col justify-center items-center text-center;
+  @apply flex w-full flex-col items-center justify-center text-center;
 }
 .product-content-items {
-  @apply h-full flex flex-col justify-start items-start;
+  @apply flex h-full flex-col items-start justify-start;
 }
 .product-text {
   max-width: 470px;
-  @apply w-full mb-30 text-center;
+  @apply mb-30 w-full text-center;
 }
 .tittle {
   /* font-family: 'Poppins', Helvetica, Arial, sans-serif !important; */
@@ -123,7 +123,8 @@ export default {
   letter-spacing: 1px;
   transition: all 150ms ease-in;
   font-family: var(--font-style-2);
-  @apply mt-60 py-5 px-8 text-15 font-extrabold;
+  border-radius: var(--radius_btn);
+  @apply mt-60 px-8 py-5 text-15 font-extrabold;
 }
 .btn-products:hover {
   color: #fff;
@@ -142,7 +143,7 @@ export default {
 }
 @media (min-width: 500px) {
   .product-content-items {
-    @apply w-9/0 grid grid-cols-2;
+    @apply grid w-9/0 grid-cols-2;
   }
 }
 @screen lg {

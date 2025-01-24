@@ -12,7 +12,7 @@
       <div class="content-items">
         <a
           :href="`${koffers.values[0].url_redirect}`"
-          class="items-left px-10 pt-15 pb-5 md:px-0 md:pt-0 md:pb-0"
+          class="items-left px-10 pb-5 pt-15 md:px-0 md:pb-0 md:pt-0"
           rel="noreferrer noopener"
         >
           <img
@@ -57,7 +57,7 @@
           </div>
         </a>
         <button
-          class="items-center px-10 pt-5 pb-5 md:px-0 md:pt-0 md:pb-0 relative"
+          class="relative items-center px-10 pb-5 pt-5 md:px-0 md:pb-0 md:pt-0"
           rel="noreferrer noopener"
           @click="sendUrl(koffers.values[1].url_redirect)"
         >
@@ -146,7 +146,7 @@
         <a
           :href="`${koffers.values[2].url_redirect}`"
           rel="noreferrer noopener"
-          class="items-right px-10 pt-5 pb-15 md:px-0 md:pt-0 md:pb-0"
+          class="items-right px-10 pb-15 pt-5 md:px-0 md:pb-0 md:pt-0"
         >
           <img
             v-if="koffers.values[2].url_img_background"
@@ -252,10 +252,10 @@ export default {
   width: 100%;
 }
 .container-offers {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .content-items {
-  @apply w-full justify-center items-center;
+  @apply w-full items-center justify-center;
 }
 .items-left {
   width: 100%;
@@ -294,10 +294,11 @@ export default {
   align-items: center;
   font-weight: 800;
   transition: all 200ms ease-in;
+  border-radius: var(--radius_btn);
   @apply px-14 py-5 text-center;
 }
 .content-txt-left {
-  @apply absolute w-full h-full flex flex-col justify-center items-center;
+  @apply absolute flex h-full w-full flex-col items-center justify-center;
 }
 /* .left {
   margin-left: 40px;
@@ -310,7 +311,7 @@ export default {
   @apply w-full cursor-pointer;
 }
 .image {
-  @apply object-cover w-full;
+  @apply w-full object-cover;
 }
 .items-right {
   width: 100%;
@@ -349,11 +350,12 @@ export default {
   justify-content: center;
   align-items: center;
   font-weight: 800;
+  border-radius: var(--radius_btn);
   transition: all 200ms ease-in;
   @apply px-14 py-5 text-center;
 }
 .content-txt-right {
-  @apply absolute w-full h-full flex flex-col justify-center items-center;
+  @apply absolute flex h-full w-full flex-col items-center justify-center;
 }
 .items-right:hover .btn-right {
   transition: all 200ms ease-in;
@@ -412,7 +414,7 @@ export default {
   }
   .item-button-right,
   .btns-center {
-    @apply w-full flex justify-center items-center mt-10;
+    @apply mt-10 flex w-full items-center justify-center;
   }
 }
 @media (min-width: 425px) {
@@ -426,7 +428,7 @@ export default {
     @apply grid grid-cols-3;
   }
   .mid-content {
-    @apply grid grid-cols-2 justify-center items-center;
+    @apply grid grid-cols-2 items-center justify-center;
   }
   .txt-left {
     font-size: 22px;
@@ -466,7 +468,7 @@ export default {
   }
   .item-button-right,
   .btns-center {
-    @apply w-full flex justify-start items-center mt-10;
+    @apply mt-10 flex w-full items-center justify-start;
   }
 }
 @screen lg {

@@ -37,7 +37,7 @@
                 :srcset="
                   idCloudinaryBanner(
                     elementBanner['url_img_background'],
-                    'banner',
+                    'banner'
                   )
                 "
               />
@@ -45,7 +45,7 @@
                 v-lazy="
                   idCloudinaryBanner(
                     elementBanner['url_img_background'],
-                    'banner',
+                    'banner'
                   )
                 "
                 class="slide-bgWeb"
@@ -63,7 +63,7 @@
                   :src="
                     idCloudinaryBanner(
                       elementBanner['url_img_background'],
-                      'banner',
+                      'banner'
                     )
                   "
                   :alt="`img_banner_${index}`"
@@ -75,7 +75,7 @@
                 :src="
                   idCloudinaryBanner(
                     elementBanner['url_img_background'],
-                    'banner',
+                    'banner'
                   )
                 "
                 :alt="`img_banner_${index}`"

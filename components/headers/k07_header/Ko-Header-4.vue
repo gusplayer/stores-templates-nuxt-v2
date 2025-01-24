@@ -38,6 +38,7 @@
               @click="clear"
             />
           </nuxt-link>
+          <!-- @error="setFallbackImage" -->
         </div>
         <div class="header-content-buttons">
           <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
@@ -130,6 +131,7 @@ export default {
   },
   data() {
     return {
+      errorAttempts: 0,
       showSearch: false,
       btnSelect: '',
       secciones: [
@@ -163,91 +165,14 @@ export default {
       this.setMenu()
       this.showIconSearch()
     },
+    settingByTemplate7() {
+      this.setColorBG()
+    },
   },
   mounted() {
     this.setMenu()
     this.showIconSearch()
-    let colorBg = ''
-    if (this.settingByTemplate7 && this.settingByTemplate7[0].setting7Header) {
-      colorBg =
-        this.settingByTemplate7[0].setting7Header['--background_color_1']
-    } else {
-      colorBg = '#ffffff'
-    }
-    // var prevScrollpos = window.pageYOffset
-    var navbar = document.getElementById('navbar')
-    var header = document.getElementById('headerid')
-    var bghead = document.getElementById('headbg')
-    if (
-      this.settingByTemplate7 &&
-      this.settingByTemplate7[0].setting7Header &&
-      this.settingByTemplate7[0].setting7Header.transparente
-    ) {
-      header.style.backgroundColor = 'transparent'
-      window.onscroll = function () {
-        var currentScrollPos = window.pageYOffset
-        if (currentScrollPos == 0) {
-          if (screen.width >= 300) {
-            header.style.width = '100%'
-            bghead.style.backgroundColor = 'transparent'
-            header.style.backgroundColor = 'transparent'
-            bghead.style.boxShadow = 'transparent'
-            header.style.boxShadow = 'transparent'
-          }
-          if (screen.width >= 1280) {
-            header.style.width = '93%'
-            navbar.style.zIndex = '20'
-            navbar.style.top = '30px'
-          }
-        } else {
-          navbar.style.top = '0px'
-          navbar.style.zIndex = '20'
-          bghead.style.backgroundColor = 'transparent'
-          header.style.backgroundColor = 'transparent'
-          header.style.boxShadow = 'transparent'
-          bghead.style.boxShadow = 'transparent'
-          if (screen.width >= 300) {
-            header.style.width = '100%'
-          }
-          if (screen.width >= 1280) {
-            header.style.width = '93%'
-          }
-        }
-        // prevScrollpos = currentScrollPos
-      }
-    } else {
-      header.style.backgroundColor = colorBg
-      window.onscroll = function () {
-        var currentScrollPos = window.pageYOffset
-        if (currentScrollPos == 0) {
-          if (screen.width >= 300) {
-            header.style.width = '100%'
-            bghead.style.backgroundColor = 'transparent'
-            bghead.style.boxShadow = '0px 0px 0px 0px'
-            header.style.boxShadow =
-              '0px 0px 22px 2px rgba(145, 145, 145, 0.57)'
-          }
-          if (screen.width >= 1280) {
-            header.style.width = '93%'
-            navbar.style.zIndex = '20'
-            navbar.style.top = '30px'
-          }
-        } else {
-          navbar.style.top = '0px'
-          navbar.style.zIndex = '20'
-          bghead.style.backgroundColor = colorBg
-          header.style.boxShadow = '0px 0px 0px 0px'
-          bghead.style.boxShadow = '0px 0px 10px 4px rgba(145,145,145,0.10)'
-          if (screen.width >= 300) {
-            header.style.width = '100%'
-          }
-          if (screen.width >= 1280) {
-            header.style.width = '93%'
-          }
-        }
-        // prevScrollpos = currentScrollPos
-      }
-    }
+    this.setColorBG()
   },
   methods: {
     showIconSearch() {
@@ -280,6 +205,59 @@ export default {
       const currentRouteName = this.$route.name
       this.btnSelect = routeMappings[currentRouteName] || '/'
     },
+    setColorBG() {
+      const defaultColor = '#ffffff'
+      const settings = this.settingByTemplate7[0]?.setting7Header || {}
+      const isTransparent = settings.transparente || false
+      const colorBg = settings['--background_color_1'] || defaultColor
+
+      const navbar = document.getElementById('navbar')
+      const header = document.getElementById('headerid')
+      const bghead = document.getElementById('headbg')
+
+      const applyStyles = (transparent, scrollPos) => {
+        const atTop = scrollPos === 0
+        const screenWidth = screen.width
+
+        if (transparent) {
+          header.style.backgroundColor = 'transparent'
+          bghead.style.backgroundColor = 'transparent'
+          bghead.style.boxShadow = 'transparent'
+          header.style.boxShadow = 'transparent'
+        } else {
+          header.style.backgroundColor = colorBg
+          bghead.style.backgroundColor = atTop ? 'transparent' : colorBg
+          header.style.boxShadow = atTop
+            ? '0px 0px 22px 2px rgba(145, 145, 145, 0.57)'
+            : '0px 0px 0px 0px'
+          bghead.style.boxShadow = atTop
+            ? '0px 0px 0px 0px'
+            : '0px 0px 10px 4px rgba(145,145,145,0.10)'
+        }
+
+        header.style.width = screenWidth >= 1280 ? '93%' : '100%'
+        navbar.style.zIndex = '20'
+        navbar.style.top = atTop && screenWidth >= 1280 ? '30px' : '0px'
+      }
+
+      const onScroll = () => {
+        const currentScrollPos = window.pageYOffset
+        applyStyles(isTransparent, currentScrollPos)
+      }
+
+      applyStyles(isTransparent, window.pageYOffset)
+
+      window.onscroll = onScroll
+    },
+
+    // setFallbackImage(event) {
+    //   if (this.errorAttempts === 0) {
+    //     event.target.src = `${this.$store.state.urlKomercia}/logos/default_logo.png`
+    //     this.errorAttempts++
+    //   } else {
+    //     event.target.src = '../../../assets/img/logo_nuevas_tiendas.png'
+    //   }
+    // },
   },
 }
 </script>
@@ -287,10 +265,10 @@ export default {
 <style scoped>
 .header-container {
   transition: all 0.5s ease-in-out;
-  @apply w-full flex flex-col justify-center items-center fixed z-100 top-30;
+  @apply fixed top-30 z-100 flex w-full flex-col items-center justify-center;
 }
 .wrapper-header {
-  @apply flex flex-col w-full justify-between items-center;
+  @apply flex w-full flex-col items-center justify-between transition-all ease-in-out;
 }
 .header {
   @apply flex w-full justify-between;
@@ -331,7 +309,7 @@ export default {
   font-family: var(--font-style-3) !important;
 }
 .header-content-logo {
-  @apply flex justify-center items-center py-4;
+  @apply flex items-center justify-center py-4;
 }
 .wrapper-logo {
   @apply w-full;
@@ -342,7 +320,7 @@ export default {
   max-width: var(--with_logo);
 }
 .header-content-buttons {
-  @apply w-auto flex flex-wrap gap-6 justify-center items-center;
+  @apply flex w-auto flex-wrap items-center justify-center gap-6;
 }
 .btn-active {
   color: var(--hover_text) !important ;
@@ -359,10 +337,10 @@ export default {
   transition: all 0.25s ease;
 }
 .header-content-items {
-  @apply flex flex-row justify-between items-center;
+  @apply flex flex-row items-center justify-between;
 }
 .header-search-icon {
-  @apply w-24 h-24;
+  @apply h-24 w-24;
 }
 .search-header {
   cursor: pointer;
@@ -380,7 +358,7 @@ export default {
   @apply flex flex-row justify-between;
 }
 .header-content-cart {
-  @apply flex justify-center items-center w-9 h-9 box-border pb-1 ml-5 relative cursor-pointer;
+  @apply relative ml-5 box-border flex h-9 w-9 cursor-pointer items-center justify-center pb-1;
 }
 .icon-shop {
   @apply h-24 w-24;
@@ -392,11 +370,11 @@ export default {
   transition: all 0.25s ease;
 }
 .border-num-items {
-  @apply rounded-full h-16 w-auto flex justify-center items-center text-center -ml-12 -mt-12;
+  @apply -ml-12 -mt-12 flex h-16 w-auto items-center justify-center rounded-full text-center;
   background: var(--color_badge_cart);
 }
 .num-items {
-  @apply text-xs p-5;
+  @apply p-5 text-xs;
   color: white;
 }
 
@@ -414,7 +392,7 @@ export default {
     @apply sr-only;
   }
   .header-content-cart {
-    @apply pb-0 ml-0;
+    @apply ml-0 pb-0;
   }
   .header-text-menu {
     @apply sr-only;
@@ -432,7 +410,7 @@ export default {
 }
 @screen md {
   .header-text-menu {
-    @apply not-sr-only font-semibold text-xs uppercase tracking-widest pl-8;
+    @apply not-sr-only pl-8 text-xs font-semibold uppercase tracking-widest;
   }
 }
 @media (max-width: 768px) {
