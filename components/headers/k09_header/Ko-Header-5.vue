@@ -2,7 +2,7 @@
   <header
     v-if="settingByTemplate9"
     id="navbar"
-    class="sticky top-0 z-100 w-full flex flex-col justify-center items-center transition-all ease-in-out duration-0.5 header-container"
+    class="header-container sticky top-0 z-100 flex w-full flex-col items-center justify-center transition-all duration-0.5 ease-in-out"
     :style="[
       settingByTemplate9[0].setting9Header,
       settingByTemplate9[0].setting9General,
@@ -16,7 +16,7 @@
       :data-store="dataStore"
       :setting-by-template="settingByTemplate9"
     />
-    <KoMenu :data-store="dataStore" />
+    <KoMenu :logo-store="logoStore" :data-store="dataStore" />
     <div class="wrapper-header">
       <div class="header">
         <div class="header-item-menu">
@@ -67,10 +67,11 @@
         <div class="header-content-logo">
           <nuxt-link to="/" class="wrapper-logo">
             <img
-              :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+              loading="lazy"
+              :src="imageUrl"
               class="header-logo"
               alt="Logo Img"
-              @click="clear"
+              @error="setDefaultImage"
             />
           </nuxt-link>
         </div>
@@ -149,6 +150,10 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
 
   data() {
@@ -182,6 +187,7 @@ export default {
           state: true,
         },
       ],
+      fallbackImage: '',
     }
   },
   computed: {
@@ -189,6 +195,16 @@ export default {
     ...mapState({
       productsCart: (state) => state.productsCart.length,
     }),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   watch: {
     dataHoko() {
@@ -244,6 +260,9 @@ export default {
         path: '/',
       })
     },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
   },
 }
 </script>
@@ -255,7 +274,7 @@ export default {
 }
 .wrapper-header {
   background: var(--background_color_1);
-  @apply flex flex-col w-full justify-between items-center z-10 shadow-lg;
+  @apply z-10 flex w-full flex-col items-center justify-between shadow-lg;
 }
 .header {
   background: var(--background_color_1);
@@ -298,17 +317,17 @@ export default {
 .header-content-logo {
   margin-top: var(--padding);
   margin-bottom: var(--padding);
-  @apply flex justify-center items-center;
+  @apply flex items-center justify-center;
 }
 .wrapper-logo {
   max-width: var(--with_logo);
   @apply w-full;
 }
 .header-logo {
-  @apply object-contain object-left w-full;
+  @apply w-full object-contain object-left;
 }
 .header-content-buttons {
-  @apply w-auto flex flex-wrap gap-0 justify-center items-center;
+  @apply flex w-auto flex-wrap items-center justify-center gap-0;
 }
 .btn {
   margin-right: 20px;
@@ -330,11 +349,11 @@ export default {
   border-bottom: 2px solid #000;
 }
 .header-content-items {
-  @apply flex flex-row justify-end items-center;
+  @apply flex flex-row items-center justify-end;
   flex: 1;
 }
 .header-search-icon {
-  @apply flex justify-center items-center;
+  @apply flex items-center justify-center;
 }
 .search-header {
   @apply cursor-pointer;
@@ -371,10 +390,10 @@ export default {
   transition: all 0.25s ease;
 }
 .header-content-icon {
-  @apply flex flex-row justify-center items-center cursor-pointer;
+  @apply flex cursor-pointer flex-row items-center justify-center;
 }
 .header-content-cart {
-  @apply flex justify-center items-center w-36 h-36 box-border pb-4 ml-20 relative cursor-pointer;
+  @apply relative ml-20 box-border flex h-36 w-36 cursor-pointer items-center justify-center pb-4;
 }
 .icon-shop {
   fill: var(--color_icon);
@@ -385,11 +404,11 @@ export default {
   transition: all 0.25s ease;
 }
 .border-num-items {
-  @apply w-auto flex justify-center items-center text-center;
+  @apply flex w-auto items-center justify-center text-center;
   /* background: var(--color_background_btn); */
 }
 .border-num-items-up {
-  @apply w-auto flex justify-center items-center text-center;
+  @apply flex w-auto items-center justify-center text-center;
   /* background: var(--color_background_btn); */
 }
 .num-items {
@@ -429,7 +448,7 @@ export default {
     @apply hidden;
   }
   .header-content-cart {
-    @apply pb-0 ml-0;
+    @apply ml-0 pb-0;
   }
   .header-text-menu {
     @apply hidden;
@@ -438,10 +457,10 @@ export default {
     @apply hidden;
   }
   .header-item-menu {
-    @apply flex flex-row justify-start items-center flex-1;
+    @apply flex flex-1 flex-row items-center justify-start;
   }
   .search-header-left {
-    @apply flex ml-16;
+    @apply ml-16 flex;
   }
   .txt-bag,
   .border-num-items {
@@ -450,7 +469,7 @@ export default {
 }
 @screen md {
   .header-text-menu {
-    @apply flex font-semibold text-xs uppercase tracking-widest pl-8;
+    @apply flex pl-8 text-xs font-semibold uppercase tracking-widest;
   }
 }
 @media (min-width: 640px) {
@@ -476,7 +495,7 @@ export default {
     @apply flex;
   }
   .header-content-buttons {
-    @apply flex justify-start items-center flex-1;
+    @apply flex flex-1 items-center justify-start;
   }
   .header-item-menu {
     @apply hidden;

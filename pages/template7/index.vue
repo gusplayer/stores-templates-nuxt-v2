@@ -88,10 +88,16 @@ export default {
     }
   },
   computed: {
-    ...mapState(['dataStore', 'stateListBLogs', 'settingByTemplate7']),
+    ...mapState([
+      'dataStore',
+      'logoStore',
+      'stateListBLogs',
+      'settingByTemplate7',
+    ]),
     componentsProps() {
       return {
         dataStore: this.dataStore,
+        logoStore: this.logoStore,
         settingGeneral: this.settingByTemplate7?.settingGeneral ?? null,
         settingKCarousel: this.settingByTemplate7?.banner ?? null,
         settingKPromo: this.settingByTemplate7?.content ?? null,
@@ -213,7 +219,7 @@ export default {
           id_tienda: this.dataStore.id,
           limit: 1,
           page: 1,
-        },
+        }
       )
       if (success) {
         return { success: true, data: data.publicProductList }

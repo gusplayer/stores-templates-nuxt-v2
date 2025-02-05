@@ -4,38 +4,38 @@
       :style="{
         '--font-style': settingK05Blog?.tipo_letra ?? 'Roboto',
       }"
-      class="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8"
+      class="relative bg-gray-50 px-4 pb-20 pt-16 sm:px-6 lg:px-8 lg:pb-28 lg:pt-24"
     >
       <div
-        class="max-w-7xl mx-auto content-blog-list"
+        class="content-blog-list mx-auto max-w-7xl"
         style="min-height: calc(59vh)"
       >
         <div
-          class="flex flex-row justify-between items-center px:10 md:px-30 pb-10"
+          class="px:10 flex flex-row items-center justify-between pb-10 md:px-30"
         >
           <h2
-            class="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl"
+            class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl"
           >
             Blog
           </h2>
 
-          <div class="flex flex-row justify-end items-center relative">
+          <div class="relative flex flex-row items-center justify-end">
             <div class="absolute -right-10">
               <search-icon
-                class="text-25 ml-5 cursor-pointer text-gray-600 color-icon"
+                class="color-icon ml-5 cursor-pointer text-25 text-gray-600"
               />
             </div>
             <input
               v-model="filters.title"
               type="search"
-              class="block w-full min-w-[250px] border-0 bg-gray-50 py-1.5 text-gray-900 focus:ring-0 sm:text-sm sm:leading-6 border-b border-gray-900"
+              class="block w-full min-w-[250px] border-0 border-b border-gray-900 bg-gray-50 py-1.5 text-gray-900 focus:ring-0 sm:text-sm sm:leading-6"
               :placeholder="$t('header_search')"
               @keyup.enter="updateFilters"
             />
           </div>
         </div>
         <div
-          class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
+          class="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3"
         >
           <div v-for="article in listBlogs" :key="article.id">
             <KoBlogCard1 :article="article" :setting-blog="settingK05Blog" />
@@ -43,26 +43,26 @@
         </div>
         <div
           v-if="listBlogs?.length === 0"
-          class="w-full flex flex-col justify-center items-center"
+          class="flex w-full flex-col items-center justify-center"
           style="min-height: calc(50vh)"
         >
           <div class="w-full max-w-[180px]">
             <nuxt-link to="/">
               <img
-                v-lazy="
-                  `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
-                "
+                loading="lazy"
+                :src="imageUrl"
                 alt="Logo Img"
+                @error="setDefaultImage"
               />
             </nuxt-link>
           </div>
-          <p class="text-18 opacity-60 font-bold color-text-empty">
+          <p class="color-text-empty text-18 font-bold opacity-60">
             No se encontraron artículos relacionados
           </p>
         </div>
         <div
           v-if="totalBlogs > filters.limit"
-          class="w-full flex items-center justify-center mt-40"
+          class="mt-40 flex w-full items-center justify-center"
         >
           <el-pagination
             background
@@ -96,9 +96,33 @@ export default {
       type: Object,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      fallbackImage: '',
+    }
   },
   computed: {
     ...mapState(['stateListBLogs']),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
+  },
+  methods: {
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
   },
 }
 </script>

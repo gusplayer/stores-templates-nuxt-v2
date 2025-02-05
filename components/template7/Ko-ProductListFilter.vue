@@ -27,7 +27,7 @@
             idCloudinaryBanner(
               settingByTemplate7[0].productListFilter.url_img,
               'bannerRes',
-              400,
+              400
             )
           "
         />
@@ -36,7 +36,7 @@
           :srcset="
             idCloudinaryBanner(
               settingByTemplate7[0].productListFilter.url_img,
-              'banner',
+              'banner'
             )
           "
         />
@@ -44,7 +44,7 @@
           v-lazy="
             idCloudinaryBanner(
               settingByTemplate7[0].productListFilter.url_img,
-              'banner',
+              'banner'
             )
           "
           alt="imgFilterProduct"
@@ -339,9 +339,11 @@
             <div class="header-content-logo">
               <nuxt-link to="/productos" class="wrapper-logo">
                 <img
-                  :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+                  loading="lazy"
+                  :src="imageUrl"
                   class="header-logo"
                   alt="Logo Img"
+                  @error="setDefaultImage"
                 />
               </nuxt-link>
             </div>
@@ -384,12 +386,29 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
       showInList: false,
       indexShowList: 3,
+      fallbackImage: '',
     }
+  },
+  computed: {
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   watch: {
     previousPage() {
@@ -434,6 +453,9 @@ export default {
       } else if (value == 2) {
         document.getElementById('swiper-slide-Subcategories').scrollTop += 300
       }
+    },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
     },
   },
 }

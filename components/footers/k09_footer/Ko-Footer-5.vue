@@ -16,9 +16,11 @@
       <div class="footer-content-items">
         <div class="footer-content-logo">
           <img
-            v-lazy="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+            loading="lazy"
+            :src="imageUrl"
             class="footer-logo"
             alt="logo_tienda"
+            @error="setDefaultImage"
           />
         </div>
         <KoSocialNet
@@ -98,6 +100,10 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
 
   data() {
@@ -125,6 +131,7 @@ export default {
         },
       ],
       logo: true,
+      fallbackImage: '',
     }
   },
   computed: {
@@ -132,6 +139,16 @@ export default {
     ...mapState({
       showModal: (state) => state.modalpolitics05,
     }),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   watch: {
     settingByTemplate9() {
@@ -175,6 +192,9 @@ export default {
           this.logo = false
         }
       }
+    },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
     },
   },
 }

@@ -13,11 +13,11 @@
         <div class="header-content-logo">
           <nuxt-link id="tamaño-img" to="/" class="wrapper-logo">
             <img
-              v-lazy="
-                `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
-              "
+              loading="lazy"
+              :src="imageUrl"
               class="header-logo"
               alt="Logo Img"
+              @error="setDefaultImage"
             />
           </nuxt-link>
         </div>
@@ -164,9 +164,14 @@ export default {
       type: Object,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
+      fallbackImage: '',
       selecttag: 1,
       focusbtn: false,
       categorySelect: '',
@@ -225,11 +230,18 @@ export default {
       facebookPixel: (state) => state.analytics_tagmanager,
       subcategories: (state) => state.subcategorias,
     }),
-    logoImg() {
-      return this.$store.state.dataStore.logo
-    },
     allTags() {
       return this.dataStore.tags
+    },
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
     },
   },
   watch: {
@@ -245,6 +257,9 @@ export default {
     //   this.secciones[2].state =
     //     this.dataHoko && this.dataHoko.statehoko === 1 ? true : false
     // },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
     selectTag1() {
       this.selecttag = 1
       this.focusbtn = false
@@ -435,10 +450,10 @@ export default {
   color: var(--color_hover_text);
 }
 .content-lateral-menu {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .content-btns-lateral-menu {
-  @apply w-full flex flex-row justify-start items-center;
+  @apply flex w-full flex-row items-center justify-start;
 }
 .btn-lateral-menu-right:focus .conten-Menu {
   @apply hidden;
@@ -454,7 +469,9 @@ export default {
   /* text-transform: capitalize; */
   font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
   border-bottom: 3px solid var(--color_text);
 }
 .btn-lateral-menu-right {
@@ -468,7 +485,9 @@ export default {
   /* text-transform: capitalize; */
   font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
   border-bottom: 3px solid var(--color_text);
 }
 .show-select-active {
@@ -478,7 +497,7 @@ export default {
 .conten-Menu,
 .content-Categorys {
   margin-top: 20px;
-  @apply w-9/0 flex flex-col justify-start items-center;
+  @apply flex w-9/0 flex-col items-center justify-start;
 }
 .content-Categorys {
   max-height: 670px;
@@ -488,10 +507,10 @@ export default {
   @apply w-full;
 }
 .header-content-buttons {
-  @apply w-full grid grid-cols-1 justify-start items-center;
+  @apply grid w-full grid-cols-1 items-center justify-start;
 }
 .btn {
-  @apply w-full flex font-semibold tracking-wider py-2 pl-3;
+  @apply flex w-full py-2 pl-3 font-semibold tracking-wider;
   color: var(--color_text);
   font-size: 20px;
   font-weight: 600;

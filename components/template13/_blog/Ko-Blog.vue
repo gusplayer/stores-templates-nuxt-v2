@@ -38,11 +38,11 @@
               <div class="header-content-logo">
                 <nuxt-link to="/" class="wrapper-logo">
                   <img
-                    v-lazy="
-                      `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
-                    "
+                    loading="lazy"
+                    :src="imageUrl"
                     class="header-logo"
                     alt="Logo Img"
+                    @error="setDefaultImage"
                   />
                 </nuxt-link>
               </div>
@@ -87,28 +87,52 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      fallbackImage: '',
+    }
   },
   computed: {
     ...mapState(['stateListBLogs']),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
+  },
+  methods: {
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
   },
 }
 </script>
 <style scoped>
 .content-blog {
   background: #ffffff;
-  @apply w-full flex flex-col justify-center items-center mt-20;
+  @apply mt-20 flex w-full flex-col items-center justify-center;
 }
 .content-art-blog {
-  @apply flex flex-col justify-center items-center z-0;
+  @apply z-0 flex flex-col items-center justify-center;
 }
 .contenedor {
-  @apply w-full flex flex-col justify-center items-center mt-30;
+  @apply mt-30 flex w-full flex-col items-center justify-center;
 }
 .content-item-productos {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .grid-products {
-  @apply grid gap-4 justify-center items-center mb-40;
+  @apply mb-40 grid items-center justify-center gap-4;
   box-sizing: border-box;
 }
 .pagination-medium {
@@ -157,16 +181,16 @@ export default {
   @apply font-semibold;
 }
 .banner-blog {
-  @apply w-full flex flex-row justify-between items-center;
+  @apply flex w-full flex-row items-center justify-between;
 }
 .tittle-banner-blog {
-  @apply w-full flex justify-start items-center;
+  @apply flex w-full items-center justify-start;
 }
 .input-search {
   box-shadow: inset 0px -48px 0px -43px black;
 }
 .content-products-empty {
-  @apply w-full h-full flex flex-col justify-center items-center text-center;
+  @apply flex h-full w-full flex-col items-center justify-center text-center;
 }
 @screen sm {
   .content-art-blog {
@@ -176,10 +200,10 @@ export default {
     @apply w-full grid-cols-1 gap-8;
   }
   .content-products {
-    @apply transition-all ease-in duration-0.2;
+    @apply transition-all duration-0.2 ease-in;
   }
   .content-products:hover {
-    @apply w-full transition-all ease-in duration-0.2;
+    @apply w-full transition-all duration-0.2 ease-in;
     -webkit-box-shadow: 0px 6px 15px 6px #bfbfbf;
     box-shadow: 0px 6px 15px 6px #bfbfbf;
   }
@@ -189,7 +213,7 @@ export default {
 }
 @screen md {
   .grid-products {
-    @apply grid-cols-2 justify-start items-start;
+    @apply grid-cols-2 items-start justify-start;
   }
 }
 @screen lg {

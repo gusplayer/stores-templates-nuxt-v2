@@ -11,9 +11,11 @@
           :style="`max-width:${settingByTemplate12.logoSize};`"
         >
           <img
-            :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+            loading="lazy"
+            :src="imageUrl"
             class="header-logo"
             alt="Logo Img"
+            @error="setDefaultImage"
           />
         </nuxt-link>
       </div>
@@ -58,10 +60,33 @@ export default {
     KoSearch: () => import('../headers/k05_header/search.vue'),
   },
   mixins: [settingsProps],
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       isVariantLogo: false,
+      fallbackImage: '',
     }
+  },
+  computed: {
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   async mounted() {
     window.addEventListener('scroll', await this.handleToggleLogo)
@@ -69,6 +94,7 @@ export default {
   async beforeDestroy() {
     window.removeEventListener('scroll', await this.handleToggleLogo)
   },
+
   methods: {
     async handleToggleLogo() {
       await (this.isVariantLogo = !!(window.scrollY >= 120))
@@ -84,6 +110,9 @@ export default {
     openSearch() {
       this.$store.commit('SET_OPEN_SEARCH', true)
     },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
   },
 }
 </script>
@@ -91,7 +120,7 @@ export default {
 .wrapper-header {
   padding: 0 20px;
   transition: all 200ms ease-in-out;
-  @apply flex fixed justify-between items-center transform-gpu top-0 left-0 w-full z-10;
+  @apply fixed left-0 top-0 z-10 flex w-full transform-gpu items-center justify-between;
 }
 .header-content-logo {
   display: flex;

@@ -52,11 +52,11 @@
               <div class="header-content-logo">
                 <nuxt-link to="/" class="wrapper-logo">
                   <img
-                    v-lazy="
-                      `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
-                    "
+                    loading="lazy"
+                    :src="imageUrl"
                     class="header-logo"
                     alt="Logo Img"
+                    @error="setDefaultImage"
                   />
                 </nuxt-link>
               </div>
@@ -101,28 +101,52 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      fallbackImage: '',
+    }
   },
   computed: {
     ...mapState(['stateListBLogs']),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
+  },
+  methods: {
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
   },
 }
 </script>
 <style scoped>
 .content-blog {
   background: var(--background_color_1);
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .content-art-blog {
-  @apply flex flex-col justify-center items-center z-0;
+  @apply z-0 flex flex-col items-center justify-center;
 }
 .contenedor {
-  @apply w-full flex flex-col justify-center items-center mt-30;
+  @apply mt-30 flex w-full flex-col items-center justify-center;
 }
 .content-item-productos {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .grid-products {
-  @apply grid gap-4 justify-center items-center mb-40;
+  @apply mb-40 grid items-center justify-center gap-4;
   box-sizing: border-box;
 }
 .pagination-medium {
@@ -171,25 +195,25 @@ export default {
   @apply font-semibold;
 }
 .tittle-banner-blog {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .banner-blog {
-  @apply w-full flex flex-row justify-between items-center pt-8 z-10;
+  @apply z-10 flex w-full flex-row items-center justify-between pt-8;
 }
 .crumb {
-  @apply w-full flex flex-row justify-center items-center;
+  @apply flex w-full flex-row items-center justify-center;
 }
 .separatorCrumb {
   font-size: 9px;
   color: #222;
   font-family: var(--font-style-1) !important;
-  @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
+  @apply cursor-pointer pr-6 leading-14 transition-all duration-0.2 ease-in;
 }
 .txt-crumb {
   font-size: 15px;
   color: var(--color_title);
   font-family: var(--font-style-1) !important;
-  @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
+  @apply cursor-pointer pr-6 leading-14 transition-all duration-0.2 ease-in;
 }
 .s1:hover {
   color: var(--color_title);
@@ -202,22 +226,22 @@ export default {
 @screen sm {
   .bannerBlog {
     max-width: 1200px;
-    @apply w-full flex bg-cover bg-center bg-no-repeat justify-items-center items-center py-20 border-b;
+    @apply flex w-full items-center justify-items-center border-b bg-cover bg-center bg-no-repeat py-20;
   }
   .content-art-blog {
     @apply w-9/0;
   }
   .tittle-banner-blog {
-    @apply justify-start items-start mt-20;
+    @apply mt-20 items-start justify-start;
   }
   .grid-products {
     @apply w-full grid-cols-1 gap-8;
   }
   .content-products {
-    @apply transition-all ease-in duration-0.2;
+    @apply transition-all duration-0.2 ease-in;
   }
   .content-products:hover {
-    @apply w-full transition-all ease-in duration-0.2;
+    @apply w-full transition-all duration-0.2 ease-in;
     -webkit-box-shadow: 0px 6px 15px 6px #bfbfbf;
     box-shadow: 0px 6px 15px 6px #bfbfbf;
   }
@@ -225,12 +249,12 @@ export default {
     font-size: 30px;
   }
   .crumb {
-    @apply justify-center items-center;
+    @apply items-center justify-center;
   }
 }
 @screen md {
   .grid-products {
-    @apply grid-cols-2 justify-start items-start;
+    @apply grid-cols-2 items-start justify-start;
   }
 }
 @screen lg {
@@ -240,7 +264,7 @@ export default {
 }
 @media (min-width: 1025px) {
   .tittle-banner-blog {
-    @apply justify-start items-start;
+    @apply items-start justify-start;
   }
 }
 @screen mlg {
@@ -250,7 +274,7 @@ export default {
     @apply w-full gap-8;
   }
   .tittle-banner-blog {
-    @apply w-auto flex flex-row justify-center items-center;
+    @apply flex w-auto flex-row items-center justify-center;
   }
 }
 @media (min-width: 1200px) {

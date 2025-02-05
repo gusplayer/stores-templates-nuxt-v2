@@ -74,9 +74,11 @@
         <div class="content-items-lg">
           <div class="info-btn-footer gap-2">
             <img
+              loading="lazy"
+              :src="imageUrl"
               class="img-logo"
-              :src="`${$store.state.urlKomercia}/logos/${dataStore.logo}`"
               alt="Logo"
+              @error="setDefaultImage"
             />
             <div class="content-direction">
               <p v-if="geolocalizacion?.length" class="txt-direction txt">
@@ -178,6 +180,10 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -204,6 +210,7 @@ export default {
         },
       ],
       logo: null,
+      fallbackImage: '',
     }
   },
   computed: {
@@ -211,6 +218,16 @@ export default {
     ...mapState({
       showModal: (state) => state.modalpolitics05,
     }),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   watch: {
     settingByTemplate11() {
@@ -257,7 +274,7 @@ export default {
     },
     setLogo() {
       let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1',
+        '--background_color_1'
       )
       let colorArray = color.split(',')
       let colorInt = parseInt(colorArray[2])
@@ -266,6 +283,9 @@ export default {
       } else {
         this.logo = false
       }
+    },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
     },
   },
 }

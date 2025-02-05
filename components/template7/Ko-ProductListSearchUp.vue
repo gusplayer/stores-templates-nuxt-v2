@@ -1,15 +1,15 @@
 <template>
   <div
-    class="w-full flex flex-col justify-center items-center mt-50 mb-[120px]"
+    class="mb-[120px] mt-50 flex w-full flex-col items-center justify-center"
   >
     <div
       id="section"
-      class="w-9/0 flex flex-col justify-center items-center text-center"
+      class="flex w-9/0 flex-col items-center justify-center text-center"
     >
-      <div class="flex flex-row items-center justify-between mb-40">
-        <div class="w-full flex flex-col justify-center items-center">
+      <div class="mb-40 flex flex-row items-center justify-between">
+        <div class="flex w-full flex-col items-center justify-center">
           <div
-            class="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-start items-start text-center gap-4"
+            class="grid w-full grid-cols-2 items-start justify-start gap-4 text-center md:grid-cols-3 lg:grid-cols-4"
           >
             <div v-for="product in searchProducts" :key="product.id">
               <KoProductCard
@@ -22,13 +22,15 @@
           </div>
           <div
             v-if="searchProducts.length === 0"
-            class="w-full min-h-[200px] flex flex-col justify-center items-center"
+            class="flex min-h-[200px] w-full flex-col items-center justify-center"
           >
             <nuxt-link to="/productos">
               <img
-                :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+                loading="lazy"
+                :src="imageUrl"
                 class="header-logo"
                 alt="Logo Img"
+                @error="setDefaultImage"
               />
             </nuxt-link>
             <p class="txt-products-empty">{{ $t('home_msgCatalogo') }}</p>
@@ -61,6 +63,32 @@ export default {
     settingCardProducts: {
       type: Object,
       required: true,
+    },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      fallbackImage: '',
+    }
+  },
+  computed: {
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
+  },
+  methods: {
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
     },
   },
 }

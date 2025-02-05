@@ -33,9 +33,10 @@ export default {
   },
   layout: 'default',
   computed: {
-    ...mapState(['dataStore', 'settingByTemplate12']),
+    ...mapState(['dataStore', 'logoStore', 'settingByTemplate12']),
     componentsProps() {
       return {
+        logoStore: this.logoStore,
         dataStore: this.dataStore,
         settingByTemplate12: this.settingByTemplate12
           ? this.settingByTemplate12

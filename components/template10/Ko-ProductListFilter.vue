@@ -290,10 +290,12 @@
               <div class="header-content-logo">
                 <nuxt-link to="/productos" class="wrapper-logo">
                   <img
-                    :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+                    loading="lazy"
+                    :src="imageUrl"
                     class="header-logo"
                     alt="Logo Img"
                     @click="clearFilters"
+                    @error="setDefaultImage"
                   />
                 </nuxt-link>
               </div>
@@ -336,13 +338,30 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
       showInList: false,
       indexShowList: 3,
       activeNames: ['1', '2', '3', '4'],
+      fallbackImage: '',
     }
+  },
+  computed: {
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   watch: {
     settingByTemplate10() {
@@ -386,6 +405,9 @@ export default {
     showList(index, state) {
       this.indexShowList = index
       this.showInList = state
+    },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
     },
   },
 }

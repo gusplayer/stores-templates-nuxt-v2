@@ -9,10 +9,10 @@
     size="80%"
   >
     <div
-      class="box-border w-full h-screen flex flex-col items-center bg-white-white overflow-auto pb-10"
+      class="box-border flex h-screen w-full flex-col items-center overflow-auto bg-white-white pb-10"
     >
       <div
-        class="w-full flex flex-row justify-center items-center shadow-lg z-20 py-16 relative"
+        class="relative z-20 flex w-full flex-row items-center justify-center py-16 shadow-lg"
       >
         <input
           v-model="searchProduct"
@@ -23,18 +23,18 @@
           @keyup.enter="getSuggestedProducts"
         />
         <div
-          class="absolute right-10 top-3/0 w-50 h-50 cursor-pointer flex justify-center items-center group"
+          class="group absolute right-10 top-3/0 flex h-50 w-50 cursor-pointer items-center justify-center"
           @click="handleClose"
         >
           <div
-            class="h-4 w-50 absolute bg-black rounded-2 transform -rotate-45 transition-all ease-in duration-200 group-hover:rotate-0"
+            class="absolute h-4 w-50 -rotate-45 transform rounded-2 bg-black transition-all duration-200 ease-in group-hover:rotate-0"
           ></div>
           <div
-            class="h-4 w-50 absolute bg-black rounded-2 transform rotate-45 transition-all ease-in duration-200 group-hover:rotate-0"
+            class="absolute h-4 w-50 rotate-45 transform rounded-2 bg-black transition-all duration-200 ease-in group-hover:rotate-0"
           ></div>
         </div>
       </div>
-      <div class="w-full max-w-[1300px] overflow-y-auto z-10">
+      <div class="z-10 w-full max-w-[1300px] overflow-y-auto">
         <KProducts
           :data-store="dataStore"
           :search-products="ListProducts"
@@ -78,9 +78,6 @@ export default {
     ...mapState({
       facebookPixel: (state) => state.analytics_tagmanager,
     }),
-    logoImg() {
-      return this.$store.state.dataStore.logo
-    },
     searchProduct: {
       get() {
         return this.$store.state.products.search_product
@@ -143,10 +140,10 @@ export default {
 
 <style scoped>
 .input-search {
-  @apply w-full max-w-[500px] py-16 text-center items-center text-5xl z-10;
+  @apply z-10 w-full max-w-[500px] items-center py-16 text-center text-5xl;
 }
 ::-webkit-input-placeholder {
-  @apply text-gray-textHeader text-center items-center text-5xl;
+  @apply items-center text-center text-5xl text-gray-textHeader;
   font-family: 'Lora' !important;
 }
 input[type='search'] {

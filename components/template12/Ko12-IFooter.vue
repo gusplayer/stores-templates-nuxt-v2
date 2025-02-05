@@ -10,9 +10,11 @@
         :style="`max-width:${settingByTemplate12.logoSize};`"
       >
         <img
-          :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+          loading="lazy"
+          :src="imageUrl"
           class="header-logo"
           alt="Logo Img"
+          @error="setDefaultImage"
         />
       </nuxt-link>
     </div>
@@ -35,7 +37,7 @@
         </a>
       </div>
     </div>
-    <div class="w-full flex flex-row justify-center items-center mb-15">
+    <div class="mb-15 flex w-full flex-row items-center justify-center">
       <div v-for="(item, index) in secciones" :key="`${index}${item.name}`">
         <nuxt-link
           v-if="item.path"
@@ -67,9 +69,9 @@
       <KoTermsConditions :store-policies="storePolicies" />
     </div>
     <div
-      class="footer_resources w-full text-gray-400 text-center text-sm font-normal"
+      class="footer_resources w-full text-center text-sm font-normal text-gray-400"
     >
-      <hr class="border-t border-gray-200 w-full" />
+      <hr class="w-full border-t border-gray-200" />
       <div class="madebyKomercia">
         <p class="txt-devBy">{{ $t('footer_desarrollado') }}</p>
         <a
@@ -109,6 +111,16 @@ export default {
       import('@/components/footers/ko-TermsAndConditions.vue'),
   },
   mixins: [settingsProps],
+  props: {
+    dataStore: {
+      type: Object,
+      required: true,
+    },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       secciones: [
@@ -157,6 +169,7 @@ export default {
         },
       ],
       logo: true,
+      fallbackImage: '',
     }
   },
   computed: {
@@ -164,6 +177,16 @@ export default {
     ...mapState({
       showModal: (state) => state.modalpolitics05,
     }),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   watch: {
     settingByTemplate12() {
@@ -213,6 +236,9 @@ export default {
         }
       }
     },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
   },
 }
 </script>
@@ -220,7 +246,7 @@ export default {
 <style scoped>
 .wrapper_footer {
   padding: 80px 0 10px;
-  @apply relative flex flex-col items-center w-full;
+  @apply relative flex w-full flex-col items-center;
 }
 .header-content-logo {
   display: flex;
@@ -261,7 +287,7 @@ export default {
 .modal {
   padding-top: 200px;
   background-color: rgba(0, 0, 0, 0.4);
-  @apply w-full h-full fixed z-10 left-0 top-0 overflow-auto;
+  @apply fixed left-0 top-0 z-10 h-full w-full overflow-auto;
 }
 .content-items-iconos {
   width: 100%;
@@ -281,7 +307,7 @@ export default {
 }
 .madebyKomercia {
   margin-top: 20px;
-  @apply w-full flex flex-col justify-center items-center mb-10;
+  @apply mb-10 flex w-full flex-col items-center justify-center;
 }
 .txt-devBy {
   font-size: 14px;

@@ -23,9 +23,11 @@
           :style="`max-width:${settingByTemplate6[0].setting6Footer['--with_logo']};`"
         >
           <img
-            :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+            loading="lazy"
+            :src="imageUrl"
             class="header-logo"
             alt="Logo Img"
+            @error="setDefaultImage"
           />
         </nuxt-link>
       </div>
@@ -107,6 +109,10 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -138,6 +144,7 @@ export default {
         },
       ],
       logo: true,
+      fallbackImage: '',
     }
   },
   computed: {
@@ -145,6 +152,16 @@ export default {
     ...mapState({
       showModal: (state) => state.modalpolitics05,
     }),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   watch: {
     settingByTemplate6() {
@@ -178,6 +195,9 @@ export default {
           this.logo = false
         }
       }
+    },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
     },
   },
 }

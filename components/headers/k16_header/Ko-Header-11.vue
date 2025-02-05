@@ -14,6 +14,7 @@
   >
     <KoSearch :data-store="dataStore" />
     <KoMenu
+      :logo-store="logoStore"
       :data-store="dataStore"
       :setting-by-template="settingByTemplate16[0]?.listProductsFilter"
       :page-template="settingByTemplate16[0]?.pages"
@@ -26,10 +27,12 @@
           style="max-width: var(--with_logo)"
         >
           <img
-            :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+            loading="lazy"
+            :src="imageUrl"
             class="max-h-[120px] w-full object-contain object-left"
             alt="LogoStore"
             @click="clear"
+            @error="setDefaultImage"
           />
         </nuxt-link>
       </div>
@@ -128,17 +131,32 @@ export default {
       type: Object,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
       showSearch: true,
       btnSelect: '',
       stateMenu: false,
+      fallbackImage: '',
     }
   },
   computed: {
     productsCart() {
       return this.$store.state.productsCart.length
+    },
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
     },
   },
   watch: {
@@ -190,6 +208,9 @@ export default {
     },
     scrollRight() {
       document.getElementById('swiper-slide-categories').scrollLeft += 300
+    },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
     },
   },
 }

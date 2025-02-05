@@ -12,6 +12,7 @@
     ]"
   >
     <KoMenu
+      :logo-store="logoStore"
       :data-store="dataStore"
       :setting-by-template="settingByTemplate11"
     />
@@ -21,10 +22,12 @@
         <div class="item-logo">
           <nuxt-link to="/">
             <img
-              :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+              loading="lazy"
+              :src="imageUrl"
               class="header-logo"
               alt="Logo-tienda"
               @click="clear"
+              @error="setDefaultImage"
             />
           </nuxt-link>
         </div>
@@ -97,10 +100,11 @@
             <div class="item-logo-md">
               <nuxt-link to="/">
                 <img
-                  :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+                  :src="imageUrl"
                   class="header-logo-md"
                   alt="Logo-tienda"
                   @click="clear"
+                  @error="setDefaultImage"
                 />
               </nuxt-link>
             </div>
@@ -165,6 +169,10 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -172,6 +180,7 @@ export default {
       btnSelect: '',
       search: '',
       showSearch: false,
+      fallbackImage: '',
     }
   },
   computed: {
@@ -179,6 +188,16 @@ export default {
       facebookPixel: (state) => state.analytics_tagmanager,
       productsCart: (state) => state.productsCart.length,
     }),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   watch: {
     $route() {
@@ -229,6 +248,9 @@ export default {
     scrollRight() {
       document.getElementById('swiper-slide-categories').scrollLeft += 300
     },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
   },
 }
 </script>
@@ -260,27 +282,27 @@ export default {
 }
 .content-header {
   background: var(--background_color_1);
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .content-btns {
-  @apply w-auto flex flex-row justify-center items-center;
+  @apply flex w-auto flex-row items-center justify-center;
 }
 .btn {
   color: var(--color_tex);
   font-size: 14px;
   letter-spacing: 0.8px;
   font-family: var(--font-style-1) !important;
-  @apply w-auto font-normal whitespace-nowrap uppercase py-20 px-30;
+  @apply w-auto whitespace-nowrap px-30 py-20 font-normal uppercase;
 }
 .btn:hover {
   color: var(--hover_text);
 }
 .item-header {
-  @apply w-full flex flex-row justify-end items-center flex-1;
+  @apply flex w-full flex-1 flex-row items-center justify-end;
 }
 .input-animated {
   background: transparent;
-  @apply h-45 flex flex-row justify-center items-center;
+  @apply flex h-45 flex-row items-center justify-center;
 }
 .input-animated:hover > .input-text {
   width: 180px;
@@ -309,7 +331,7 @@ export default {
 ::-webkit-input-placeholder {
   color: var(--color_tex);
   font-family: var(--font-style-1) !important;
-  @apply text-left items-center;
+  @apply items-center text-left;
 }
 .svg-search {
   fill: var(--color_icon);
@@ -330,29 +352,29 @@ export default {
   color: var(--hover_text);
 }
 .icon-shop {
-  @apply w-auto flex flex-row justify-center items-center ml-20;
+  @apply ml-20 flex w-auto flex-row items-center justify-center;
 }
 .btn-active {
   color: var(--color_border);
 }
 @screen sm {
   .content-items-header {
-    @apply w-full flex flex-col justify-center items-center py-10;
+    @apply flex w-full flex-col items-center justify-center py-10;
   }
   .content-items-btns {
-    @apply w-full flex flex-row justify-center items-center;
+    @apply flex w-full flex-row items-center justify-center;
   }
   .wrapper-content-btns {
-    @apply w-full flex flex-row justify-between items-center px-20;
+    @apply flex w-full flex-row items-center justify-between px-20;
   }
   .item-logo {
     max-width: var(--with_logo);
     padding-top: var(--padding_logo);
     padding-bottom: var(--padding_logo);
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
   .header-logo {
-    @apply object-contain object-left w-full;
+    @apply w-full object-contain object-left;
   }
   .item-btns,
   .btn-scroll {
@@ -360,10 +382,10 @@ export default {
   }
 
   .item-menu {
-    @apply w-auto flex flex-col justify-center items-start flex-1;
+    @apply flex w-auto flex-1 flex-col items-start justify-center;
   }
   .item-numCart {
-    @apply w-auto h-25 flex justify-center items-center;
+    @apply flex h-25 w-auto items-center justify-center;
   }
   .txt-numCart {
     color: var(--color_icon);
@@ -386,7 +408,7 @@ export default {
     margin-top: var(--padding_logo);
     margin-bottom: var(--padding_logo);
     max-width: var(--with_logo);
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
 }
 @screen lg {
@@ -412,7 +434,7 @@ export default {
   .item-btns {
     overflow-x: auto;
     overflow-y: hidden;
-    @apply w-auto flex flex-row justify-between items-center;
+    @apply flex w-auto flex-row items-center justify-between;
   }
   .item-btns::-webkit-scrollbar {
     width: 0 !important;
@@ -436,7 +458,7 @@ export default {
   }
   .separator {
     background-color: var(--color_border);
-    @apply w-1 h-16 flex justify-center items-center;
+    @apply flex h-16 w-1 items-center justify-center;
   }
 }
 @media (min-width: 1200px) {
