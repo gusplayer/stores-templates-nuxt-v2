@@ -65,6 +65,7 @@ export default {
   computed: {
     ...mapState([
       'dataStore',
+      'logoStore',
       'stateBanner',
       'settingByTemplate',
       'settingBaseWapi',
@@ -140,6 +141,7 @@ export default {
     componentsProps() {
       return {
         dataStore: this.dataStore,
+        logoStore: this.logoStore,
         settingByTemplate:
           this.settingByTemplate &&
           this.settingByTemplate.tema &&

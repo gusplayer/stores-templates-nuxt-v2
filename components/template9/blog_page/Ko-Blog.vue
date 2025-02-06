@@ -34,21 +34,21 @@
         </p>
       </div>
       <div
-        class="w-full flex flex-row justify-between items-center pr-15 md:pr-20"
+        class="flex w-full flex-row items-center justify-between pr-15 md:pr-20"
       >
         <div class="tittle-banner-blog">
           <p class="txt-banner">{{ $t('header_blog') }}</p>
         </div>
-        <div class="flex flex-row justify-end items-center relative">
+        <div class="relative flex flex-row items-center justify-end">
           <div class="absolute -right-10">
             <search-icon
-              class="text-25 ml-5 cursor-pointer text-gray-600 color-icon"
+              class="color-icon ml-5 cursor-pointer text-25 text-gray-600"
             />
           </div>
           <input
             v-model="filters.title"
             type="search"
-            class="block w-full min-w-[250px] border-0 bg-gray-50 py-1.5 text-gray-900 focus:ring-0 sm:text-sm sm:leading-6 border-b border-gray-900"
+            class="block w-full min-w-[250px] border-0 border-b border-gray-900 bg-gray-50 py-1.5 text-gray-900 focus:ring-0 sm:text-sm sm:leading-6"
             :placeholder="$t('header_search')"
             @keyup.enter="updateFilters"
           />
@@ -76,11 +76,11 @@
             <div class="header-content-logo">
               <nuxt-link to="/" class="wrapper-logo">
                 <img
-                  v-lazy="
-                    `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
-                  "
+                  loading="lazy"
+                  :src="imageUrl"
                   class="header-logo"
                   alt="Logo Img"
+                  @error="setDefaultImage"
                 />
               </nuxt-link>
             </div>
@@ -122,9 +122,33 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      fallbackImage: '',
+    }
   },
   computed: {
     ...mapState(['stateListBLogs']),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
+  },
+  methods: {
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
   },
 }
 </script>
@@ -156,7 +180,7 @@ export default {
   flex-direction: column;
 }
 .grid-products {
-  @apply grid gap-4 justify-center items-center;
+  @apply grid items-center justify-center gap-4;
   box-sizing: border-box;
 }
 .pagination-medium {
@@ -206,11 +230,11 @@ export default {
   font-weight: 700;
 }
 .tittle-banner-blog {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .banner-blog {
   padding-top: 20px;
-  @apply w-full flex flex-col justify-center items-start pt-8;
+  @apply flex w-full flex-col items-start justify-center pt-8;
   /* background-color: #efefef; */
 }
 #separator {
@@ -299,7 +323,7 @@ export default {
 }
 
 .crumb {
-  @apply w-full flex flex-row justify-start items-start mt-4;
+  @apply mt-4 flex w-full flex-row items-start justify-start;
 }
 .txt-crumb {
   font-family: Arial, sans-serif;
@@ -335,7 +359,7 @@ export default {
     margin-left: 10px;
   }
   .content-search-blog {
-    @apply w-9/0 justify-center flex;
+    @apply flex w-9/0 justify-center;
   }
   .input-text {
     width: 240px;
@@ -351,7 +375,7 @@ export default {
   }
 
   .crumb {
-    @apply justify-center items-center;
+    @apply items-center justify-center;
   }
 }
 @screen md {
@@ -401,11 +425,11 @@ export default {
     @apply hidden;
   }
   .crumb {
-    @apply justify-start items-start;
+    @apply items-start justify-start;
     padding-left: 40px;
   }
   .tittle-banner-blog {
-    @apply justify-start items-start;
+    @apply items-start justify-start;
     padding-left: 40px;
   }
 }
@@ -414,7 +438,7 @@ export default {
     @apply w-9/6 gap-8;
   }
   .tittle-banner-blog {
-    @apply w-auto flex flex-row justify-center items-center;
+    @apply flex w-auto flex-row items-center justify-center;
   }
   .txt-banner {
     font-size: 48px;

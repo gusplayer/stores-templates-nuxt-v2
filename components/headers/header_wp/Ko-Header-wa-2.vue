@@ -30,14 +30,16 @@
           "
         >
           <img
+            loading="lazy"
+            :src="imageUrl"
             class="logo-img"
             :class="
               settingByTemplate.logo_cuadrado == 1
                 ? `imagen-cuadrado`
                 : `imagen-redondo`
             "
-            :src="`${$store.state.urlKomercia}/logos/${dataStore.logo}`"
             alt="logo-Store"
+            @error="setDefaultImage"
           />
         </nuxt-link>
         <div class="data-item-name">
@@ -99,10 +101,15 @@ export default {
       type: Object,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
       showInfoStore: false,
+      fallbackImage: '',
       links: [
         {
           nombre: 'Facebook',
@@ -139,6 +146,16 @@ export default {
     stateWapiME() {
       return this.$store.state.stateWapiME
     },
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   watch: {
     'dataStore.tienda'() {
@@ -147,6 +164,11 @@ export default {
       this.links[2].link = this.dataStore.redes.instagram
       this.links[3].link = this.dataStore.redes.youtube
       this.links[4].link = this.dataStore.redes.tiktok
+    },
+  },
+  methods: {
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
     },
   },
 }
@@ -159,27 +181,27 @@ export default {
   border-radius: 5px;
 }
 .content-header {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 @screen sm {
   .content-header-items {
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
   .content-banner-items {
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
   .banner-image {
-    @apply w-auto h-auto object-cover object-center;
+    @apply h-auto w-auto object-cover object-center;
   }
   .content-data-store {
     width: 95%;
-    @apply flex flex-col justify-center items-center;
+    @apply flex flex-col items-center justify-center;
   }
   .data-item-logo {
     background: white;
     width: 100px;
     height: 100px;
-    @apply flex flex-col justify-center items-center -mt-60 shadow-md;
+    @apply -mt-60 flex flex-col items-center justify-center shadow-md;
   }
   .logo-img {
     height: 100%;
@@ -189,29 +211,29 @@ export default {
     background: transparent;
   }
   .data-item-name {
-    @apply w-full flex flex-col justify-center items-center my-10;
+    @apply my-10 flex w-full flex-col items-center justify-center;
   }
   .name-store {
     font-size: 18px;
     color: #3d3d3d;
     font-family: 'Poppins', sans-serif !important;
-    @apply w-full flex flex-col justify-center items-center font-semibold;
+    @apply flex w-full flex-col items-center justify-center font-semibold;
   }
   .category-store {
     font-size: 15px;
     color: #3d3d3d;
     font-family: 'Poppins', sans-serif !important;
-    @apply w-full flex flex-col justify-center items-center font-medium;
+    @apply flex w-full flex-col items-center justify-center font-medium;
   }
   .content-seeMore {
     background-color: #eaeaea;
-    @apply w-auto flex flex-row justify-center items-center rounded-full px-5 mb-10 cursor-pointer;
+    @apply mb-10 flex w-auto cursor-pointer flex-row items-center justify-center rounded-full px-5;
   }
   .txt-seeMore {
     font-size: 14px;
     color: #3d3d3d;
     font-family: 'Poppins', sans-serif !important;
-    @apply w-auto flex flex-col justify-center items-center font-medium pl-5;
+    @apply flex w-auto flex-col items-center justify-center pl-5 font-medium;
   }
   .svg-arrow {
     color: #3d3d3d;
@@ -220,13 +242,13 @@ export default {
   }
   .content-infoStore {
     background-color: #eaeaea;
-    @apply w-full flex flex-col justify-center items-start p-15 rounded-9 mb-10;
+    @apply mb-10 flex w-full flex-col items-start justify-center rounded-9 p-15;
   }
   .txt-direccion {
     font-size: 13px;
     color: #3d3d3d;
     font-family: 'Poppins', sans-serif !important;
-    @apply w-auto flex justify-center items-center font-medium;
+    @apply flex w-auto items-center justify-center font-medium;
   }
 }
 @screen md {

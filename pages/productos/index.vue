@@ -56,6 +56,7 @@ export default {
   computed: {
     ...mapState([
       'settingBase',
+      'logoStore',
       'settingByTemplate',
       'settingByTemplate7',
       'settingByTemplate9',
@@ -77,51 +78,52 @@ export default {
     },
     componentsProps() {
       return {
+        logoStore: this.logoStore,
         settingByTemplate: this.createSettingByTemplate(
           this.settingByTemplate,
           'settings',
           'tipo_letra',
-          this.settingBase,
+          this.settingBase
         ),
         settingByTemplate7: this.createNestedSetting(
           this.settingByTemplate7,
           ['settingGeneral', 'productListFilter', 'card'],
-          null,
+          null
         ),
         settingByTemplate9: this.createNestedSetting(
           this.settingByTemplate9,
           ['cardProduct', 'productListFilter', 'settingGeneral'],
-          null,
+          null
         ),
         settingByTemplate10: this.createNestedSetting(
           this.settingByTemplate10,
           ['cardProduct', 'productListFilter', 'settingGeneral'],
-          null,
+          null
         ),
         settingByTemplate11: this.createNestedSetting(
           this.settingByTemplate11,
           ['productList', 'cardProduct', 'settingGeneral'],
-          null,
+          null
         ),
         settingByTemplate13: this.createNestedSetting(
           this.settingByTemplate13,
           ['productListFilter', 'cardProduct', 'settingGeneral'],
-          null,
+          null
         ),
         settingByTemplate14: this.createNestedSetting(
           this.settingByTemplate14,
           ['listProductsFilter', 'cardProducts', 'settingsGeneral'],
-          null,
+          null
         ),
         settingByTemplate15: this.createNestedSetting(
           this.settingByTemplate15,
           ['listProductsFilter', 'cardProducts', 'settingGeneral'],
-          null,
+          null
         ),
         settingByTemplate16: this.createNestedSetting(
           this.settingByTemplate16,
           ['listProductsFilter', 'cardProducts', 'settingsGeneral'],
-          null,
+          null
         ),
       }
     },
@@ -139,7 +141,7 @@ export default {
       settingByTemplate,
       property1,
       property2,
-      defaultValue,
+      defaultValue
     ) {
       if (
         settingByTemplate &&

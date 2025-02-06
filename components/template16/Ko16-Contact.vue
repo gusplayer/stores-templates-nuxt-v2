@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex justify-center items-center mb-30 md:mb-50"
+    class="mb-30 flex w-full items-center justify-center md:mb-50"
     :style="[
       {
         '--font-style-1':
@@ -9,15 +9,15 @@
     ]"
   >
     <div
-      class="w-full h-auto relative flex flex-col items-center justify-center overflow-hidden px-10 md:px-15 lg:px-20"
+      class="relative flex h-auto w-full flex-col items-center justify-center overflow-hidden px-10 md:px-15 lg:px-20"
       :style="`background-color: ${settingByTemplate16[0].contact['--background_color_1']}`"
     >
       <div
-        class="w-full flex flex-col items-center py-10"
+        class="flex w-full flex-col items-center py-10"
         :style="`background-color: ${settingByTemplate16[0].contact['--background_color_2']}`"
       >
         <div
-          class="w-full max-w-6xl flex flex-row items-center justify-start"
+          class="flex w-full max-w-6xl flex-row items-center justify-start"
           :style="`color: ${settingByTemplate16[0].contact.color_breadCrumbs};`"
         >
           <nuxt-link
@@ -42,7 +42,7 @@
         </div>
       </div>
       <p
-        class="w-full max-w-6xl text-25 font-semibold md:mt-30 mt-40 mb-25 text-start"
+        class="mb-25 mt-40 w-full max-w-6xl text-start text-25 font-semibold md:mt-30"
         :style="`color: ${settingByTemplate16[0].contact.color_title};`"
       >
         {{ $t('home_contactenos') }}
@@ -51,25 +51,27 @@
         v-if="geolocalizacion.length"
         ref="mySwiper"
         v-swiper:mySwiper="swiperOption"
-        class="w-full max-w-6xl flex flex-col justify-center"
+        class="flex w-full max-w-6xl flex-col justify-center"
       >
-        <div class="z-auto swiper-wrapper">
+        <div class="swiper-wrapper z-auto">
           <div
             v-for="(item, index) in geolocalizacion"
             :key="index"
-            class="swiper-slide w-full h-full grid grid-cols-1 lg:grid-cols-4 gap-y-5 gap-x-5 lg:gap-x-10 border py-10 md:px-10 lg:px-15 items-center"
+            class="swiper-slide grid h-full w-full grid-cols-1 items-center gap-x-5 gap-y-5 border py-10 md:px-10 lg:grid-cols-4 lg:gap-x-10 lg:px-15"
             :style="`color: ${settingByTemplate16[0].contact.color_title}; border-color: ${settingByTemplate16[0].contact.color_border}; border-radius: ${settingByTemplate16[0].settingsGeneral.radius};`"
           >
-            <nuxt-link to="/" class="w-[120px] flex justify-center items-start">
+            <nuxt-link to="/" class="flex w-[120px] items-start justify-center">
               <img
-                :src="`${$store.state.urlKomercia}/logos/${dataStore.logo}`"
+                loading="lazy"
+                :src="imageUrl"
                 class="w-full object-contain object-left"
                 alt="LogoStore"
+                @error="setDefaultImage"
               />
             </nuxt-link>
             <div
               v-if="geolocalizacion.length"
-              class="h-full flex flex-row justify-start items-start"
+              class="flex h-full flex-row items-start justify-start"
             >
               <div class="w-[50px]">
                 <svg
@@ -85,7 +87,7 @@
                   />
                 </svg>
               </div>
-              <div class="w-full h-full flex flex-col">
+              <div class="flex h-full w-full flex-col">
                 <p class="text-14 font-bold">
                   {{ $t('footer_formDireccion') }}
                 </p>
@@ -100,7 +102,7 @@
                   :href="`https://www.google.com/maps?q=${item.latitud},${item.longitud}&hl=en-gb&t=m&z=15`"
                   target="_blank"
                   rel="noreferrer noopener"
-                  class="px-20 py-10 mt-10 w-[170px]"
+                  class="mt-10 w-[170px] px-20 py-10"
                   :style="`color: ${settingByTemplate16[0].contact.color_text_btn_form}; background-color: ${settingByTemplate16[0].contact.color_btn_form}; border-radius: ${settingByTemplate16[0].settingsGeneral.radius}`"
                 >
                   Ver Google Map
@@ -108,10 +110,10 @@
               </div>
             </div>
 
-            <div class="h-full flex flex-col justify-start items-start">
+            <div class="flex h-full flex-col items-start justify-start">
               <div
                 v-if="dataStore.tiendasInfo.telefono"
-                class="mb-20 flex flex-row gap-2 items-center"
+                class="mb-20 flex flex-row items-center gap-2"
               >
                 <div class="min-w-[50px] max-w-[50px]">
                   <svg
@@ -142,7 +144,7 @@
               </div>
               <div
                 v-if="dataStore.redes.whatsapp"
-                class="flex flex-row gap-2 items-center"
+                class="flex flex-row items-center gap-2"
               >
                 <div class="min-w-[50px] max-w-[50px]">
                   <svg
@@ -191,10 +193,10 @@
               </div>
             </div>
 
-            <div class="h-full flex flex-col justify-start items-start">
+            <div class="flex h-full flex-col items-start justify-start">
               <div
                 v-if="dataStore.tiendasInfo.emailTienda"
-                class="mb-20 flex flex-row gap-2 items-center"
+                class="mb-20 flex flex-row items-center gap-2"
               >
                 <div class="min-w-[50px] max-w-[50px]">
                   <svg
@@ -222,7 +224,7 @@
               </div>
               <div
                 v-if="geolocalizacion.length"
-                class="flex flex-row gap-2 items-center"
+                class="flex flex-row items-center gap-2"
               >
                 <div class="min-w-[50px] max-w-[50px]">
                   <svg
@@ -271,13 +273,13 @@
           </div>
         </div>
       </div>
-      <div class="w-full flex items-center justify-center">
+      <div class="flex w-full items-center justify-center">
         <div
-          class="w-full max-w-6xl flex flex-col my-30 py-35 mx-20 md:mx-0 justify-center"
+          class="mx-20 my-30 flex w-full max-w-6xl flex-col justify-center py-35 md:mx-0"
           :style="`border-radius: ${settingByTemplate16[0].settingsGeneral.radius};`"
         >
           <p
-            class="text-18 font-semibold mb-25 text-start border-b pb-5"
+            class="mb-25 border-b pb-5 text-start text-18 font-semibold"
             :style="`color: ${settingByTemplate16[0].contact.color_title}; border-color: ${settingByTemplate16[0].contact.color_border};`"
           >
             {{ $t('home_contactenos') }}
@@ -285,10 +287,10 @@
           <ValidationObserver
             ref="observer"
             tag="form"
-            class="w-full flex flex-col"
+            class="flex w-full flex-col"
           >
-            <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
-              <div class="w-full flex flex-col">
+            <div class="mb-10 grid w-full grid-cols-1 gap-5 md:grid-cols-2">
+              <div class="flex w-full flex-col">
                 <p
                   class="text-14"
                   :style="`color: ${settingByTemplate16[0].contact.color_text};`"
@@ -306,13 +308,13 @@
                       :style="`color: ${settingByTemplate16[0].contact.color_text_input}; background-color:${settingByTemplate16[0].contact.color_input}; border-color:${settingByTemplate16[0].contact.color_text};`"
                       :placeholder="$t('contact_nombrePlacer')"
                     />
-                    <span v-show="errors[0]" class="text-12 text-red-500 ml-5">
+                    <span v-show="errors[0]" class="ml-5 text-12 text-red-500">
                       {{ errors[0] }}
                     </span>
                   </template>
                 </validation-provider>
               </div>
-              <div class="w-full flex flex-col">
+              <div class="flex w-full flex-col">
                 <P
                   class="text-14"
                   :style="`color: ${settingByTemplate16[0].contact.color_text};`"
@@ -330,14 +332,14 @@
                       :style="`color: ${settingByTemplate16[0].contact.color_text_input}; background-color:${settingByTemplate16[0].contact.color_input}; border-color:${settingByTemplate16[0].contact.color_text};`"
                       :placeholder="$t('contact_emailPlacer')"
                     />
-                    <span v-show="errors[0]" class="text-12 text-red-500 ml-5">
+                    <span v-show="errors[0]" class="ml-5 text-12 text-red-500">
                       {{ errors[0] }}
                     </span>
                   </template>
                 </validation-provider>
               </div>
             </div>
-            <div class="w-full flex flex-col mb-10">
+            <div class="mb-10 flex w-full flex-col">
               <P
                 class="text-14"
                 :style="`color: ${settingByTemplate16[0].contact.color_text};`"
@@ -353,13 +355,13 @@
                     :style="`color: ${settingByTemplate16[0].contact.color_text_input}; background-color:${settingByTemplate16[0].contact.color_input}; border-color:${settingByTemplate16[0].contact.color_text};`"
                     :placeholder="$t('contact_mensalePlacer')"
                   ></textarea>
-                  <span v-show="errors[0]" class="text-12 text-red-500 ml-5">
+                  <span v-show="errors[0]" class="ml-5 text-12 text-red-500">
                     {{ errors[0] }}
                   </span>
                 </template>
               </validation-provider>
             </div>
-            <div class="w-full flex flex-col mb-10">
+            <div class="mb-10 flex w-full flex-col">
               <P
                 class="text-14"
                 :style="`color: ${settingByTemplate16[0].contact.color_text};`"
@@ -378,13 +380,13 @@
                       :style="`color: ${settingByTemplate16[0].contact.color_text_input}; background-color:${settingByTemplate16[0].contact.color_input}; border-color:${settingByTemplate16[0].contact.color_text};`"
                       :placeholder="$t('contact_telefonoPlacer')"
                     />
-                    <span v-show="errors[0]" class="text-12 text-red-500 ml-5">
+                    <span v-show="errors[0]" class="ml-5 text-12 text-red-500">
                       {{ errors[0] }}
                     </span>
                   </template>
                 </validation-provider>
               </div>
-              <div class="w-full flex items-center justify-end mt-20">
+              <div class="mt-20 flex w-full items-center justify-end">
                 <button
                   class="px-20 py-10"
                   :style="`color: ${settingByTemplate16[0].contact.color_text_btn_form}; background-color: ${settingByTemplate16[0].contact.color_btn_form}; border-radius: ${settingByTemplate16[0].settingsGeneral.radius}`"
@@ -421,6 +423,10 @@ export default {
     },
     settingByTemplate16: {
       type: Array,
+      required: true,
+    },
+    logoStore: {
+      type: Object,
       required: true,
     },
   },
@@ -486,6 +492,7 @@ export default {
           disableOnInteraction: false,
         },
       },
+      fallbackImage: '',
     }
   },
   computed: {
@@ -495,6 +502,16 @@ export default {
     }),
     swiper() {
       return this.$refs.mySwiper.swiper
+    },
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
     },
   },
   watch: {
@@ -569,6 +586,9 @@ export default {
       this.email = ''
       this.numberPhone = ''
       this.comment = ''
+    },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
     },
   },
 }

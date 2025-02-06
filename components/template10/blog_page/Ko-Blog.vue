@@ -43,9 +43,11 @@
               <div class="header-content-logo">
                 <nuxt-link to="/" class="wrapper-logo">
                   <img
-                    :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+                    loading="lazy"
+                    :src="imageUrl"
                     class="header-logo"
                     alt="Logo Img"
+                    @error="setDefaultImage"
                   />
                 </nuxt-link>
               </div>
@@ -88,28 +90,47 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   computed: {
     ...mapState(['stateListBLogs']),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
+  },
+  methods: {
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
   },
 }
 </script>
 <style scoped>
 .content-blog {
   background: white;
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .content-art-blog {
-  @apply flex flex-col justify-center items-center;
+  @apply flex flex-col items-center justify-center;
 }
 .contenedor {
-  @apply w-full flex justify-start items-center mt-30;
+  @apply mt-30 flex w-full items-center justify-start;
 }
 .content-item-productos {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .grid-products {
-  @apply grid gap-4 justify-center items-center mb-40;
+  @apply mb-40 grid items-center justify-center gap-4;
   box-sizing: border-box;
 }
 .pagination-medium {
@@ -158,10 +179,10 @@ export default {
   font-weight: 600;
 }
 .tittle-banner-blog {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .banner-blog {
-  @apply w-full flex flex-row justify-between items-center pt-8 z-10;
+  @apply z-10 flex w-full flex-row items-center justify-between pt-8;
   /* background-color: #efefef; */
 }
 #separator {
@@ -175,19 +196,19 @@ export default {
   margin-bottom: 20px;
 }
 .crumb {
-  @apply w-full flex flex-row justify-center items-center;
+  @apply flex w-full flex-row items-center justify-center;
 }
 .separatorCrumb {
   font-size: 9px;
   color: #222;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
+  @apply cursor-pointer pr-6 leading-14 transition-all duration-0.2 ease-in;
 }
 .txt-crumb {
   font-size: 15px;
   color: #222;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  @apply pr-6 leading-14 cursor-pointer transition-all ease-in duration-0.2;
+  @apply cursor-pointer pr-6 leading-14 transition-all duration-0.2 ease-in;
 }
 .s1:hover {
   color: #eb7025;
@@ -210,16 +231,16 @@ export default {
     @apply w-9/0;
   }
   .tittle-banner-blog {
-    @apply flex justify-between items-start;
+    @apply flex items-start justify-between;
   }
   .grid-products {
     @apply w-full grid-cols-1 gap-8;
   }
   .content-products {
-    @apply transition-all ease-in duration-0.2;
+    @apply transition-all duration-0.2 ease-in;
   }
   .content-products:hover {
-    @apply w-full transition-all ease-in duration-0.2;
+    @apply w-full transition-all duration-0.2 ease-in;
     -webkit-box-shadow: 0px 6px 15px 6px #bfbfbf;
     box-shadow: 0px 6px 15px 6px #bfbfbf;
   }
@@ -233,15 +254,15 @@ export default {
     @apply hidden;
   }
   .crumb {
-    @apply justify-center items-center;
+    @apply items-center justify-center;
   }
 }
 @screen md {
   .grid-products {
-    @apply grid-cols-2 justify-start items-start;
+    @apply grid-cols-2 items-start justify-start;
   }
   .bannerBlog {
-    @apply w-full flex bg-cover bg-center bg-no-repeat justify-items-center items-center py-30;
+    @apply flex w-full items-center justify-items-center bg-cover bg-center bg-no-repeat py-30;
   }
   #separator {
     margin-left: 10px;

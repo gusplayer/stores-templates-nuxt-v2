@@ -13,11 +13,11 @@
         <div class="header-content-logo">
           <nuxt-link to="/" class="wrapper-logo">
             <img
-              v-lazy="
-                `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
-              "
+              loading="lazy"
+              :src="imageUrl"
               class="header-logo"
               alt="Logo Img"
+              @error="setDefaultImage"
             />
           </nuxt-link>
         </div>
@@ -172,9 +172,14 @@ export default {
       type: Object,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
+      fallbackImage: '',
       selectTag: 1,
       focusBtn: false,
       categorySelect: '',
@@ -233,6 +238,16 @@ export default {
     }),
     allTags() {
       return this.dataStore.tags
+    },
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
     },
   },
   watch: {
@@ -333,6 +348,9 @@ export default {
         categoryId: value,
       })
     },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
   },
 }
 </script>
@@ -360,7 +378,7 @@ export default {
 .order_header {
   height: 80px;
   max-height: 80px;
-  @apply relative flex flex-row justify-between items-center px-10;
+  @apply relative flex flex-row items-center justify-between px-10;
   border-bottom: 1px solid rgba(129, 129, 129, 0.2);
 }
 .header-content-logo {
@@ -404,29 +422,29 @@ export default {
 .close-container {
   right: 30px;
   max-width: 50px;
-  @apply absolute h-50 cursor-pointer flex justify-center items-center;
+  @apply absolute flex h-50 cursor-pointer items-center justify-center;
 }
 .leftright {
-  @apply h-4 w-30 absolute rounded-2 transform -rotate-45 transition-all ease-in duration-200;
+  @apply absolute h-4 w-30 -rotate-45 transform rounded-2 transition-all duration-200 ease-in;
 }
 .rightleft {
-  @apply h-4 w-30 absolute rounded-2 transform rotate-45 transition-all ease-in duration-200;
+  @apply absolute h-4 w-30 rotate-45 transform rounded-2 transition-all duration-200 ease-in;
 }
 .close-container:hover .leftright {
-  @apply transform rotate-0 bg-black;
+  @apply rotate-0 transform bg-black;
 }
 .close-container:hover .rightleft {
-  @apply transform rotate-0 bg-black;
+  @apply rotate-0 transform bg-black;
 }
 .leftright,
 .rightleft {
   background-color: #2c2930;
 }
 .content-lateral-menu {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .content-btns-lateral-menu {
-  @apply w-full flex flex-row justify-between items-center;
+  @apply flex w-full flex-row items-center justify-between;
 }
 .btn-lateral-menu-right:focus .conten-Menu {
   @apply hidden;
@@ -443,7 +461,9 @@ export default {
   font-size: 14px;
   cursor: pointer;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
   border-bottom: 3px solid #2c2930;
 }
 .btn-lateral-menu-right {
@@ -458,7 +478,9 @@ export default {
   font-size: 14px;
   cursor: pointer;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
   border-bottom: 3px solid #2c2930;
 }
 .show-select-active {
@@ -468,7 +490,7 @@ export default {
 .conten-Menu,
 .content-Categorys {
   margin-top: 20px;
-  @apply w-full flex flex-col justify-start items-center;
+  @apply flex w-full flex-col items-center justify-start;
 }
 .content-Categorys {
   max-height: 670px;
@@ -478,10 +500,10 @@ export default {
   @apply w-full;
 }
 .header-content-buttons {
-  @apply w-full grid grid-cols-1 justify-start items-center;
+  @apply grid w-full grid-cols-1 items-center justify-start;
 }
 .btn {
-  @apply w-full flex font-semibold tracking-wider py-3 px-20;
+  @apply flex w-full px-20 py-3 font-semibold tracking-wider;
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
   color: #333;
   font-size: 18px;
@@ -494,7 +516,7 @@ export default {
   border-bottom: 1px solid #000;
 }
 .btn-category {
-  @apply w-full flex font-semibold  tracking-wider py-3 px-20;
+  @apply flex w-full px-20  py-3 font-semibold tracking-wider;
   color: #333;
   font-size: 18px;
   font-weight: 600;
@@ -502,7 +524,7 @@ export default {
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
 }
 .btn-category-all {
-  @apply w-full flex font-semibold  tracking-wider py-3 px-20;
+  @apply flex w-full px-20  py-3 font-semibold tracking-wider;
   color: #333;
   font-size: 18px;
   font-weight: 600;

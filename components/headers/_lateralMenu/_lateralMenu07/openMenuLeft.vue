@@ -14,11 +14,11 @@
         <div class="header-content-logo">
           <nuxt-link id="tamaño-img" to="/" class="wrapper-logo">
             <img
-              v-lazy="
-                `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
-              "
+              loading="lazy"
+              :src="imageUrl"
               class="header-logo"
               alt="Logo Img"
+              @error="setDefaultImage"
             />
           </nuxt-link>
         </div>
@@ -204,6 +204,10 @@ export default {
       type: Object,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -256,6 +260,7 @@ export default {
         subcategory: null,
         tag: null,
       },
+      fallbackImage: '',
     }
   },
   computed: {
@@ -266,9 +271,6 @@ export default {
       facebookPixel: (state) => state.analytics_tagmanager,
       subcategories: (state) => state.subcategorias,
     }),
-    logoImg() {
-      return this.$store.state.dataStore.logo
-    },
     allTags() {
       return this.dataStore.tags
     },
@@ -279,6 +281,16 @@ export default {
       set(newValue) {
         this.$store.commit('products/SET_SEARCH_PRODUCT', newValue)
       },
+    },
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore?.identifier}`
+      }
     },
   },
   watch: {
@@ -389,6 +401,9 @@ export default {
         categoryId: value,
       })
     },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
   },
 }
 </script>
@@ -482,48 +497,48 @@ export default {
   color: var(--color_hover_text);
 }
 .close-container {
-  @apply relative h-40 cursor-pointer flex justify-center items-center;
+  @apply relative flex h-40 cursor-pointer items-center justify-center;
 }
 .leftright {
-  @apply h-4 w-30 absolute rounded-2 transform -rotate-45 transition-all ease-in duration-200;
+  @apply absolute h-4 w-30 -rotate-45 transform rounded-2 transition-all duration-200 ease-in;
 }
 .rightleft {
-  @apply h-4 w-30 absolute rounded-2 transform rotate-45 transition-all ease-in duration-200;
+  @apply absolute h-4 w-30 rotate-45 transform rounded-2 transition-all duration-200 ease-in;
 }
 .close-container:hover .leftright {
-  @apply transform rotate-0 bg-red-btnhoverHeader;
+  @apply rotate-0 transform bg-red-btnhoverHeader;
 }
 .close-container:hover .rightleft {
-  @apply transform rotate-0 bg-red-btnhoverHeader;
+  @apply rotate-0 transform bg-red-btnhoverHeader;
 }
 .leftright,
 .rightleft {
   @apply bg-gray-textHeader;
 }
 .search-content {
-  @apply flex flex-row w-full items-center shadow-xl py-14;
+  @apply flex w-full flex-row items-center py-14 shadow-xl;
 }
 .search-input-content {
   @apply w-full;
 }
 .input-search {
-  @apply px-10 py-2 w-full;
+  @apply w-full px-10 py-2;
 }
 ::-webkit-input-placeholder {
   font-family: 'Lora' !important;
   @apply text-gray-textHeader;
 }
 .search-icon-content {
-  @apply w-auto h-auto justify-center items-center px-12 cursor-pointer;
+  @apply h-auto w-auto cursor-pointer items-center justify-center px-12;
 }
 .icon-search {
-  @apply w-24 h-24 text-gray-textHeader;
+  @apply h-24 w-24 text-gray-textHeader;
 }
 .content-lateral-menu {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .content-btns-lateral-menu {
-  @apply w-full flex flex-row justify-between items-center;
+  @apply flex w-full flex-row items-center justify-between;
 }
 .btn-lateral-menu-right:focus .conten-Menu {
   @apply hidden;
@@ -540,7 +555,9 @@ export default {
   font-size: 14px;
   cursor: pointer;
   font-family: 'Lora' !important;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
   border-bottom: 1px solid rgba(129, 129, 129, 0.2);
   border-right: 1px solid rgba(129, 129, 129, 0.2);
 }
@@ -556,7 +573,9 @@ export default {
   font-size: 14px;
   cursor: pointer;
   font-family: 'Lora' !important;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
   border-bottom: 1px solid rgba(129, 129, 129, 0.2);
 }
 .show-select-active {
@@ -571,7 +590,7 @@ export default {
 } */
 .conten-Menu,
 .content-Categorys {
-  @apply w-full flex flex-col justify-start items-center;
+  @apply flex w-full flex-col items-center justify-start;
 }
 .content-Categorys {
   max-height: 670px;
@@ -587,23 +606,23 @@ export default {
   @apply w-full;
 }
 .header-content-buttons {
-  @apply w-full grid grid-cols-1 justify-start items-center;
+  @apply grid w-full grid-cols-1 items-center justify-start;
 }
 .btn {
-  @apply w-full flex font-semibold  uppercase tracking-wider py-15 pl-20;
+  @apply flex w-full py-15  pl-20 font-semibold uppercase tracking-wider;
   border-bottom: 1px solid rgba(129, 129, 129, 0.2);
   font-family: 'Lora' !important;
   color: #2d2a2a;
   font-size: 13px;
 }
 .btn-category {
-  @apply w-full flex font-semibold uppercase tracking-wider py-15 pl-20;
+  @apply flex w-full py-15 pl-20 font-semibold uppercase tracking-wider;
   color: #2d2a2a;
   font-size: 13px;
   font-family: 'Lora' !important;
 }
 .btn-category-all {
-  @apply w-full flex font-semibold uppercase tracking-wider py-15 pl-20;
+  @apply flex w-full py-15 pl-20 font-semibold uppercase tracking-wider;
   color: #2d2a2a;
   font-size: 13px;
   font-family: 'Lora' !important;

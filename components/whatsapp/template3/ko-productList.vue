@@ -71,6 +71,7 @@
           :setting-by-template="settingByTemplate"
         />
         <KoMenu
+          :logo-store="logoStore"
           :data-store="dataStore"
           :setting-by-template="settingByTemplate"
         />
@@ -122,6 +123,10 @@ export default {
   mixins: [filters],
   props: {
     settingByTemplate: {
+      type: Object,
+      required: true,
+    },
+    logoStore: {
       type: Object,
       required: true,
     },

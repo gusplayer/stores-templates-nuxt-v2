@@ -24,14 +24,16 @@
               "
             >
               <img
+                loading="lazy"
+                :src="imageUrl"
                 class="logo-img"
                 :class="
                   settingByTemplate.logo_cuadrado == 1
                     ? `imagen-cuadrado`
                     : `imagen-redondo`
                 "
-                :src="`${$store.state.urlKomercia}/logos/${dataStore.logo}`"
                 alt="logo-Store"
+                @error="setDefaultImage"
               />
             </nuxt-link>
             <div class="data-item-name">
@@ -98,11 +100,16 @@ export default {
       type: Object,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
       showInfoStore: false,
       bannerUrl: '',
+      fallbackImage: '',
       links: [
         {
           nombre: 'Facebook',
@@ -139,6 +146,16 @@ export default {
     stateWapiME() {
       return this.$store.state.stateWapiME
     },
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   watch: {
     'dataStore.tienda'() {
@@ -157,11 +174,16 @@ export default {
         'https://www.kellyservices.pl/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcTFlIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c649985d042e87fdb30660e80b7dd19a010450b2/banner-default.jpg'
     }
   },
+  methods: {
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
+  },
 }
 </script>
 <style scoped>
 .content-header {
-  @apply w-full flex flex-col justify-center items-center;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .imagen-redondo {
   border-radius: 100px;
@@ -171,17 +193,17 @@ export default {
 }
 @screen sm {
   .content-header-items {
-    @apply w-full flex flex-col justify-center items-center;
+    @apply flex w-full flex-col items-center justify-center;
   }
   .content-banner-items {
     height: auto;
-    @apply w-9/5 flex flex-col justify-center items-center bg-cover bg-no-repeat bg-center rounded-9 overflow-hidden my-8;
+    @apply my-8 flex w-9/5 flex-col items-center justify-center overflow-hidden rounded-9 bg-cover bg-center bg-no-repeat;
   }
   .content-data-store {
-    @apply w-full h-full flex flex-col justify-center items-center rounded-9 overflow-hidden;
+    @apply flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-9;
   }
   .content-logo-name {
-    @apply w-full flex flex-row justify-center items-center mt-20;
+    @apply mt-20 flex w-full flex-row items-center justify-center;
   }
   .data-item-logo {
     margin-left: 20px;
@@ -189,7 +211,7 @@ export default {
     background: white;
     width: 110px;
     height: 75px;
-    @apply flex flex-col justify-center items-center shadow-md;
+    @apply flex flex-col items-center justify-center shadow-md;
   }
   .logo-img {
     height: 100%;
@@ -199,32 +221,32 @@ export default {
     background: transparent;
   }
   .data-item-name {
-    @apply w-full flex flex-col justify-center items-center my-10;
+    @apply my-10 flex w-full flex-col items-center justify-center;
   }
   .name-store {
     font-size: 15px;
     color: #fff;
     font-family: 'Poppins', sans-serif !important;
-    @apply w-full flex flex-col justify-center items-start font-semibold;
+    @apply flex w-full flex-col items-start justify-center font-semibold;
   }
   .category-store {
     font-size: 12px;
     color: #fff;
     font-family: 'Poppins', sans-serif !important;
-    @apply w-full flex flex-col justify-center items-start font-medium;
+    @apply flex w-full flex-col items-start justify-center font-medium;
   }
   .content-category-data {
-    @apply w-9/5 flex flex-col justify-center items-center;
+    @apply flex w-9/5 flex-col items-center justify-center;
   }
 
   .content-seeMore {
-    @apply w-auto flex flex-row justify-center items-center mb-10 cursor-pointer;
+    @apply mb-10 flex w-auto cursor-pointer flex-row items-center justify-center;
   }
   .txt-seeMore {
     font-size: 13px;
     color: #fff;
     font-family: 'Poppins', sans-serif !important;
-    @apply w-auto flex flex-col justify-center items-center font-medium pl-5;
+    @apply flex w-auto flex-col items-center justify-center pl-5 font-medium;
   }
   .svg-arrow {
     color: white;
@@ -233,13 +255,13 @@ export default {
   }
   .content-infoStore {
     background-color: #eaeaea;
-    @apply w-9/5 flex flex-col justify-center items-start p-15 rounded-9 mb-10;
+    @apply mb-10 flex w-9/5 flex-col items-start justify-center rounded-9 p-15;
   }
   .txt-direccion {
     font-size: 13px;
     color: #3d3d3d;
     font-family: 'Poppins', sans-serif !important;
-    @apply w-auto flex justify-center items-center font-medium;
+    @apply flex w-auto items-center justify-center font-medium;
   }
 }
 @media (min-width: 375px) {
@@ -268,7 +290,7 @@ export default {
     @apply my-18;
   }
   .content-logo-name {
-    @apply mt-0 mb-20;
+    @apply mb-20 mt-0;
   }
   .data-item-logo {
     width: 150px;

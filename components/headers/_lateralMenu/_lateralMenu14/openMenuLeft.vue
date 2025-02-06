@@ -13,11 +13,11 @@
         <div class="header-content-logo">
           <nuxt-link to="/" class="wrapper-logo" id="tamaño-img">
             <img
-              v-lazy="
-                `${this.$store.state.urlKomercia}/logos/${dataStore.logo}`
-              "
+              loading="lazy"
+              :src="imageUrl"
               class="header-logo"
               alt="Logo Img"
+              @error="setDefaultImage"
             />
           </nuxt-link>
         </div>
@@ -213,6 +213,10 @@ export default {
       type: Object,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -264,6 +268,7 @@ export default {
         subcategory: null,
         tag: null,
       },
+      fallbackImage: '',
     }
   },
   computed: {
@@ -283,6 +288,16 @@ export default {
       set(newValue) {
         this.$store.commit('products/SET_SEARCH_PRODUCT', newValue)
       },
+    },
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
     },
   },
   watch: {
@@ -325,7 +340,7 @@ export default {
         this.categorySelect = value.id
         this.$store.commit(
           'products/SET_CATEGORY_PRODUCTO',
-          value.nombreCategoriaProducto,
+          value.nombreCategoriaProducto
         )
         this.$store.commit('products/SET_SUBCATEGORY_PRODUCTO', null)
       } else if (type === 'subcategories') {
@@ -336,11 +351,11 @@ export default {
         })
         this.$store.commit(
           'products/SET_CATEGORY_PRODUCTO',
-          this.query.category,
+          this.query.category
         )
         this.$store.commit(
           'products/SET_SUBCATEGORY_PRODUCTO',
-          value.nombreSubcategoria || null,
+          value.nombreSubcategoria || null
         )
         this.query.subcategory = value.id || null
         this.subCategorySelect = value.id
@@ -395,6 +410,9 @@ export default {
         event: 'CLICKED_CATEGORY',
         categoryId: value,
       })
+    },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
     },
   },
 }

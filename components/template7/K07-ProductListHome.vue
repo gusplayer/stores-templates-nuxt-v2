@@ -49,9 +49,11 @@
             <div class="header-content-logo">
               <nuxt-link to="/productos" class="wrapper-logo">
                 <img
-                  :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+                  loading="lazy"
+                  :src="imageUrl"
                   class="header-logo"
                   alt="Logo Img"
+                  @error="setDefaultImage"
                 />
               </nuxt-link>
             </div>
@@ -90,11 +92,28 @@ export default {
       type: Object,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
       listProducts: [],
+      fallbackImage: '',
     }
+  },
+  computed: {
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore?.identifier}`
+      }
+    },
   },
   mounted() {
     this.currentChange()
@@ -113,6 +132,9 @@ export default {
         this.listProducts = data.publicProductList
       }
     },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
   },
 }
 </script>
@@ -120,16 +142,16 @@ export default {
 <style scoped>
 .product-content {
   background: var(--background_color_1);
-  @apply flex flex-col justify-center items-center w-full py-50;
+  @apply flex w-full flex-col items-center justify-center py-50;
 }
 .separador-blog {
   padding-top: 100px;
 }
 .product-text {
-  @apply flex flex-col justify-center items-center w-full;
+  @apply flex w-full flex-col items-center justify-center;
 }
 .product-conten-items {
-  @apply flex flex-col justify-start items-start mt-30;
+  @apply mt-30 flex flex-col items-start justify-start;
 }
 .product-tittle,
 .product-subtittle,
@@ -138,7 +160,7 @@ export default {
 .subtittle,
 .description,
 .producto-items-content {
-  @apply flex flex-col justify-center items-center text-center;
+  @apply flex flex-col items-center justify-center text-center;
 }
 
 .tittle {

@@ -9,7 +9,11 @@
     ]"
   >
     <KoSearch />
-    <KoMenu :data-store="dataStore" class="responsive" />
+    <KoMenu
+      :logo-store="logoStore"
+      :data-store="dataStore"
+      class="responsive"
+    />
     <div class="wrapper-header" @click="closeMenuCategory">
       <div class="header">
         <!-- <KoOrder :data-store="dataStore" /> -->
@@ -18,10 +22,11 @@
             <img
               loading="lazy"
               width="120"
-              :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+              :src="imageUrl"
               class="header-logo"
               alt="Logo Img"
               @click="clearFilters"
+              @error="setDefaultImage"
             />
           </nuxt-link>
         </div>
@@ -184,6 +189,10 @@ export default {
       type: Object,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -256,6 +265,7 @@ export default {
         subcategory: null,
         tag: null,
       },
+      fallbackImage: '',
     }
   },
   computed: {
@@ -265,6 +275,16 @@ export default {
       productsCart: (state) => state.productsCart.length,
       subcategories: (state) => state.subcategorias,
     }),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   watch: {
     dataHoko() {
@@ -491,6 +511,9 @@ export default {
         event: 'CLICKED_CATEGORY',
         categoryId: value,
       })
+    },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
     },
   },
 }

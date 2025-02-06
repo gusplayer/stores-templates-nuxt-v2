@@ -397,6 +397,7 @@ export default {
   computed: {
     ...mapState([
       'template',
+      'logoStore',
       'dataStore',
       'storeError',
       // 'dataCookies',
@@ -428,6 +429,7 @@ export default {
     componentsProps() {
       return {
         dataStore: this.dataStore,
+        logoStore: this.logoStore,
         settingByTemplate: this.settingByTemplate?.settings ?? this.settingBase,
         settingByTemplate6: this.settingByTemplate6
           ? [

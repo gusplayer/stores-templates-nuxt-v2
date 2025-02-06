@@ -16,8 +16,9 @@
       },
     ]"
   >
-    <KoMenu :data-store="dataStore" />
+    <KoMenu :logo-store="logoStore" :data-store="dataStore" />
     <KoSearch
+      :logo-store="logoStore"
       :data-store="dataStore"
       :setting-card-products="settingByTemplate7[0].settingKProdutCard"
       :setting-general="settingByTemplate7[0].setting7General"
@@ -32,10 +33,12 @@
         <div class="header-content-logo">
           <nuxt-link to="/" class="wrapper-logo">
             <img
-              :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+              loading="lazy"
+              :src="imageUrl"
               class="header-logo"
               alt="Logo Img"
               @click="clear"
+              @error="setDefaultImage"
             />
           </nuxt-link>
           <!-- @error="setFallbackImage" -->
@@ -128,6 +131,10 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -152,6 +159,7 @@ export default {
           href: '/blog',
         },
       ],
+      fallbackImage: '',
     }
   },
   computed: {
@@ -159,6 +167,16 @@ export default {
     ...mapState({
       productsCart: (state) => state.productsCart.length,
     }),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   watch: {
     $route() {
@@ -249,15 +267,9 @@ export default {
 
       window.onscroll = onScroll
     },
-
-    // setFallbackImage(event) {
-    //   if (this.errorAttempts === 0) {
-    //     event.target.src = `${this.$store.state.urlKomercia}/logos/default_logo.png`
-    //     this.errorAttempts++
-    //   } else {
-    //     event.target.src = '../../../assets/img/logo_nuevas_tiendas.png'
-    //   }
-    // },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
   },
 }
 </script>

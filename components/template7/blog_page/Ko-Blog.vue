@@ -135,9 +135,11 @@
             <div class="header-content-logo">
               <nuxt-link to="/" class="wrapper-logo">
                 <img
-                  :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+                  loading="lazy"
+                  :src="imageUrl"
                   class="header-logo"
                   alt="Logo Img"
+                  @error="setDefaultImage"
                 />
               </nuxt-link>
             </div>
@@ -180,9 +182,28 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      fallbackImage: '',
+    }
   },
   computed: {
     ...mapState(['stateListBLogs']),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   methods: {
     setBg() {
@@ -190,6 +211,9 @@ export default {
         var imagen = document.getElementById('BgBannerBlog')
         imagen.style.backgroundImage = `url(${this.settingByTemplate7[0].settingK07Blog.url_img})`
       }
+    },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
     },
   },
 }
@@ -220,7 +244,7 @@ export default {
   flex-direction: column;
 }
 .grid-products {
-  @apply grid gap-4 justify-center items-start;
+  @apply grid items-start justify-center gap-4;
   box-sizing: border-box;
 }
 .content-products-empty {
@@ -284,13 +308,13 @@ export default {
   font-weight: 400;
 }
 .tittle-banner-blog {
-  @apply w-full flex flex-row justify-center items-center my-48;
+  @apply my-48 flex w-full flex-row items-center justify-center;
 }
 .wrapper-banner-blog {
   width: 100%;
 }
 .banner-blog {
-  @apply w-full flex flex-col justify-center items-center bg-cover bg-no-repeat;
+  @apply flex w-full flex-col items-center justify-center bg-cover bg-no-repeat;
   margin-bottom: 40px;
 }
 #separator {
@@ -371,7 +395,7 @@ export default {
   border: none;
 }
 ::-webkit-input-placeholder {
-  @apply text-left items-center;
+  @apply items-center text-left;
   font-size: 16px;
   color: #7f7f7f;
   font-family: var(--font-style-3) !important ;
@@ -498,7 +522,7 @@ export default {
     padding-top: 120px;
   }
   .tittle-banner-blog {
-    @apply w-9/3 flex flex-row justify-center items-center my-48;
+    @apply my-48 flex w-9/3 flex-row items-center justify-center;
   }
   .txt-banner {
     font-size: 78px;

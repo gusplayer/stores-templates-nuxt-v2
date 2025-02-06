@@ -274,11 +274,13 @@
             >
               <nuxt-link to="/productos">
                 <img
-                  v-lazy="`${$store.state.urlKomercia}/logos/${dataStore.logo}`"
+                  loading="lazy"
+                  :src="imageUrl"
                   width="150"
                   class="max-h-[150px] max-w-[150px]"
                   alt="LogoStore img"
                   @click="clearFilters"
+                  @error="setDefaultImage"
                 />
               </nuxt-link>
               <p class="my-15 text-20 font-semibold text-gray-600">
@@ -321,11 +323,28 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
       activeNames: ['1', '2', '3', '4', '5'],
+      fallbackImage: '',
     }
+  },
+  computed: {
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   watch: {
     previousPage() {
@@ -346,6 +365,9 @@ export default {
   methods: {
     openMenuLateral() {
       this.$store.commit('SET_OPEN_ORDER_MENU_LEFT', true)
+    },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
     },
   },
 }

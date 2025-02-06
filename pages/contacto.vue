@@ -50,6 +50,7 @@ export default {
   computed: {
     ...mapState([
       'dataStore',
+      'logoStore',
       'settingBase',
       'settingByTemplate',
       'settingByTemplate7',
@@ -73,46 +74,47 @@ export default {
     componentsProps() {
       return {
         dataStore: this.dataStore,
+        logoStore: this.logoStore,
         settingK05Contact: this.settingByTemplate?.settings ?? this.settingBase,
         settingByTemplate7: this.createSettingByTemplate(
           this.settingByTemplate7,
           'contact',
-          'settingGeneral',
+          'settingGeneral'
         ),
         settingByTemplate9: this.createSettingByTemplate(
           this.settingByTemplate9,
           'contact',
-          'settingGeneral',
+          'settingGeneral'
         ),
         settingByTemplate10: this.createSettingByTemplate(
           this.settingByTemplate10,
           'contact',
-          'settingGeneral',
+          'settingGeneral'
         ),
         settingByTemplate11: this.createSettingByTemplate(
           this.settingByTemplate11,
           'contact',
-          'settingGeneral',
+          'settingGeneral'
         ),
         settingByTemplate13: this.createSettingByTemplate(
           this.settingByTemplate13,
           'contact',
-          'settingGeneral',
+          'settingGeneral'
         ),
         settingByTemplate14: this.createSettingByTemplate(
           this.settingByTemplate14,
           'contact',
-          'settingsGeneral',
+          'settingsGeneral'
         ),
         settingByTemplate15: this.createSettingByTemplate(
           this.settingByTemplate15,
           'contact',
-          'settingGeneral',
+          'settingGeneral'
         ),
         settingByTemplate16: this.createSettingByTemplate(
           this.settingByTemplate16,
           'contact',
-          'settingsGeneral',
+          'settingsGeneral'
         ),
       }
     },

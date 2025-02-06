@@ -16,9 +16,11 @@
         <div class="footer-content-tienda">
           <div class="content-image">
             <img
+              loading="lazy"
+              :src="imageUrl"
               class="img-logo"
-              :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
               alt="Logo"
+              @error="setDefaultImage"
             />
           </div>
           <div v-if="geolocalizacion?.length" class="content-direction">
@@ -196,6 +198,10 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
 
   data() {
@@ -223,6 +229,7 @@ export default {
         },
       ],
       logo: null,
+      fallbackImage: '',
     }
   },
   computed: {
@@ -230,6 +237,16 @@ export default {
     ...mapState({
       showModal: (state) => state.modalpolitics05,
     }),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   watch: {
     settingByTemplate10() {
@@ -257,7 +274,7 @@ export default {
     },
     setLogo() {
       let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1',
+        '--background_color_1'
       )
       let colorArray = color.split(',')
       let colorInt = parseInt(colorArray[2])
@@ -266,6 +283,9 @@ export default {
       } else {
         this.logo = false
       }
+    },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
     },
   },
 }

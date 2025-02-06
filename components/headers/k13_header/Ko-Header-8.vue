@@ -14,6 +14,7 @@
   >
     <KoSearch :data-store="dataStore" />
     <KoMenu
+      :logo-store="logoStore"
       :data-store="dataStore"
       :setting-by-template="settingByTemplate13"
     />
@@ -22,19 +23,21 @@
         <div class="header-content-logo">
           <nuxt-link to="/" class="wrapper-logo">
             <img
-              :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+              loading="lazy"
+              :src="imageUrl"
               class="header-logo"
               alt="Logo Img"
               @click="clear"
+              @error="setDefaultImage"
             />
           </nuxt-link>
         </div>
         <div class="header-content">
-          <div class="w-full flex flex-row justify-end">
+          <div class="flex w-full flex-row justify-end">
             <button class="header-item-menu" @click="openMenuLateral">
               <menu-icon class="header-icon-menu" />
             </button>
-            <div class="flex flex-row mr-20">
+            <div class="mr-20 flex flex-row">
               <div
                 v-if="settingByTemplate13[0].pages.values.length > 6"
                 class="btn-scroll"
@@ -159,12 +162,17 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
       btnSelect: '',
       search: '',
       showSearch: true,
+      fallbackImage: '',
     }
   },
   computed: {
@@ -173,6 +181,16 @@ export default {
       FacebookPixel: (state) => state.analytics_tagmanager,
       productsCart: (state) => state.productsCart.length,
     }),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   watch: {
     $route() {
@@ -227,6 +245,9 @@ export default {
     scrollRight() {
       document.getElementById('swiper-slide-categories').scrollLeft += 300
     },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
   },
 }
 </script>
@@ -258,13 +279,13 @@ export default {
   max-width: 850px;
 }
 .header-container {
-  @apply sticky top-0 z-100 w-full flex flex-col justify-center items-center transition-all ease-in-out duration-0.5;
+  @apply sticky top-0 z-100 flex w-full flex-col items-center justify-center transition-all duration-0.5 ease-in-out;
 }
 .wrapper-header {
   padding-top: var(--padding_logo);
   padding-bottom: var(--padding_logo);
   background-color: var(--background_color_1);
-  @apply flex flex-col w-full justify-between items-center z-10;
+  @apply z-10 flex w-full flex-col items-center justify-between;
 }
 .header {
   background-color: var(--background_color_1);
@@ -276,20 +297,20 @@ export default {
 .header-icon-menu {
   color: var(--color_icon);
   fill: var(--color_icon);
-  @apply w-auto h-30 font-normal;
+  @apply h-30 w-auto font-normal;
 }
 .header-content-logo {
-  @apply flex justify-center items-center py-1;
+  @apply flex items-center justify-center py-1;
 }
 .wrapper-logo {
   max-width: var(--with_logo);
-  @apply w-full flex justify-center items-center;
+  @apply flex w-full items-center justify-center;
 }
 .header-logo {
-  @apply object-contain object-left w-full;
+  @apply w-full object-contain object-left;
 }
 .header-content {
-  @apply w-full flex flex-row justify-center items-center;
+  @apply flex w-full flex-row items-center justify-center;
 }
 .header-content-buttons {
   max-width: 850px !important;
@@ -297,7 +318,7 @@ export default {
   z-index: 1;
   overflow-x: auto;
   overflow-y: hidden;
-  @apply flex flex-row justify-start items-center;
+  @apply flex flex-row items-center justify-start;
 }
 .header-content-buttons::-webkit-scrollbar {
   width: 0 !important;
@@ -310,77 +331,77 @@ export default {
   color: var(--color_tex);
   font-size: 16px;
   font-family: var(--font-style-1) !important;
-  @apply mr-20 px-8 font-semibold leading-22 transition-all ease-in duration-0.3;
+  @apply mr-20 px-8 font-semibold leading-22 transition-all duration-0.3 ease-in;
 }
 .btn:hover {
   color: var(--hover_text);
   box-shadow: inset 0px -48px 0px -44px var(--color_border);
-  @apply transition-all ease-in duration-0.3;
+  @apply transition-all duration-0.3 ease-in;
 }
 .header-content-items {
   z-index: 3;
   background-color: var(--background_color_1);
-  @apply flex flex-row justify-between items-center;
+  @apply flex flex-row items-center justify-between;
 }
 .header-search-icon {
-  @apply w-36 h-auto flex justify-center items-center;
+  @apply flex h-auto w-36 items-center justify-center;
 }
 .search-header {
   /* color: var(--color_icon); */
   fill: var(--color_icon) !important;
-  @apply cursor-pointer transition-all ease-in duration-0.2;
+  @apply cursor-pointer transition-all duration-0.2 ease-in;
 }
 .search-header:hover {
   color: var(--color_border);
-  @apply transition-all ease-in duration-0.2;
+  @apply transition-all duration-0.2 ease-in;
 }
 .empty {
   @apply mx-2;
 }
 .header-content-icon {
-  @apply flex flex-row justify-center items-center cursor-pointer;
+  @apply flex cursor-pointer flex-row items-center justify-center;
 }
 .header-content-cart {
-  @apply w-36 h-auto flex justify-center items-center relative cursor-pointer;
+  @apply relative flex h-auto w-36 cursor-pointer items-center justify-center;
 }
 .icon-shop {
   fill: var(--color_icon);
-  @apply transition-all ease-in duration-0.2;
+  @apply transition-all duration-0.2 ease-in;
 }
 .header-content-icon:hover .icon-shop {
   fill: var(--color_border);
-  @apply transition-all ease-in duration-0.2;
+  @apply transition-all duration-0.2 ease-in;
 }
 .border-num-items {
   background: var(--color_border);
-  @apply w-auto h-15 flex justify-center items-center rounded-full -mt-20 -ml-8;
+  @apply -ml-8 -mt-20 flex h-15 w-auto items-center justify-center rounded-full;
 }
 .num-items {
   color: var(--background_color_1);
   font-size: 10px;
   font-family: var(--font-style-1) !important;
-  @apply pt-1 px-4 leading-12 tracking-0 font-semibold;
+  @apply px-4 pt-1 font-semibold leading-12 tracking-0;
 }
 /* ***** */
 @screen sm {
   .header {
-    @apply w-full flex flex-row justify-center items-center px-10;
+    @apply flex w-full flex-row items-center justify-center px-10;
   }
   .header-container {
     @apply w-full;
   }
   .header-content {
-    @apply w-9/0 flex flex-row justify-between items-center;
+    @apply flex w-9/0 flex-row items-center justify-between;
   }
   .header-content-buttons,
   .btn-scroll {
     @apply hidden;
   }
   .header-content-cart {
-    @apply pb-0 ml-0;
+    @apply ml-0 pb-0;
   }
   .header-item-menu {
-    @apply flex justify-center items-center mr-20;
+    @apply mr-20 flex items-center justify-center;
   }
   .header-icon-menu {
     @apply text-35;
@@ -400,14 +421,14 @@ export default {
 }
 @screen mlg {
   .header {
-    @apply w-9/5 flex flex-row justify-between px-20;
+    @apply flex w-9/5 flex-row justify-between px-20;
   }
   .header-container,
   .wrapper-header {
     /* @apply h-100; */
   }
   .header-content {
-    @apply w-auto h-auto flex flex-row justify-between items-center;
+    @apply flex h-auto w-auto flex-row items-center justify-between;
   }
 }
 @media (max-width: 768px) {

@@ -33,9 +33,11 @@
           "
         >
           <img
-            :src="`${$store.state.urlKomercia}/logos/${dataStore.logo}`"
+            loading="lazy"
+            :src="imageUrl"
             class="header-logo"
             alt="Logo Img"
+            @error="setDefaultImage"
           />
         </nuxt-link>
         <div class="header-content-text">
@@ -79,6 +81,10 @@ export default {
       type: Object,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -109,6 +115,7 @@ export default {
           link: this.dataStore.redes.tiktok,
         },
       ],
+      fallbackImage: '',
     }
   },
   computed: {
@@ -117,6 +124,16 @@ export default {
     },
     stateWapiME() {
       return this.$store.state.stateWapiME
+    },
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
     },
   },
   watch: {
@@ -131,6 +148,9 @@ export default {
   methods: {
     openOrder() {
       this.$store.commit('SET_OPEN_ORDER', true)
+    },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
     },
   },
 }
@@ -186,8 +206,10 @@ export default {
   border: solid 1px white;
   padding: 5px;
   align-items: center;
-  box-shadow: 0 0 2px rgba(92, 100, 111, 0.1),
-    0 5px 10px rgba(134, 143, 155, 0.08), 0 15px 35px rgba(52, 58, 67, 0.08);
+  box-shadow:
+    0 0 2px rgba(92, 100, 111, 0.1),
+    0 5px 10px rgba(134, 143, 155, 0.08),
+    0 15px 35px rgba(52, 58, 67, 0.08);
   /* box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 2px inset, white 0px 0px 0px 3px; */
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   /* border: solid 1px #201d1d; */

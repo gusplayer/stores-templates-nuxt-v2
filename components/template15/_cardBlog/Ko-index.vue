@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex justify-center items-center py-15 lg:py-20 px-10 md:px-0"
+    class="flex w-full items-center justify-center px-10 py-15 md:px-0 lg:py-20"
     style="background-color: var(--background_color_1)"
     :style="[
       settingByTemplate15[0].listBlogHome,
@@ -11,10 +11,10 @@
       },
     ]"
   >
-    <div class="max-w-7xl w-full flex flex-col items-center justify-center">
-      <div class="w-full flex flex-row justify-between items-center">
+    <div class="flex w-full max-w-7xl flex-col items-center justify-center">
+      <div class="flex w-full flex-row items-center justify-between">
         <p
-          class="text-left font-semibold text-30"
+          class="text-left text-30 font-semibold"
           :style="`color: ${settingByTemplate15[0].listBlogHome.color_title_1}; font-weight: ${settingByTemplate15[0].listBlogHome.fontWeighTitle};`"
         >
           {{ settingByTemplate15[0].listBlogHome.title }}
@@ -27,44 +27,46 @@
           @keyup.enter="updateFilters"
         />
       </div>
-      <div class="w-full flex flex-col justify-center items-center mt-30">
+      <div class="mt-30 flex w-full flex-col items-center justify-center">
         <div
-          class="w-full h-full mb-40 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mlg:gap-8 justify-center items-center box-border"
+          class="mb-40 box-border grid h-full w-full grid-cols-1 items-center justify-center gap-4 md:grid-cols-2 lg:grid-cols-3 mlg:gap-8"
         >
           <div
             v-for="article in listBlogs"
             :key="article.id"
-            class="w-full h-full"
+            class="h-full w-full"
           >
             <KoBlogCard
               :article="article"
               :card-blog="settingByTemplate15[0].cardBlog"
               :setting-general="settingByTemplate15[0].settingGeneral"
-              class="giftLoad w-full h-full"
+              class="giftLoad h-full w-full"
             />
           </div>
         </div>
         <div
           v-if="listBlogs?.length === 0"
-          class="w-full h-full flex flex-col justify-center items-center text-center"
+          class="flex h-full w-full flex-col items-center justify-center text-center"
         >
           <nuxt-link to="/" class="wrapper-logo">
             <img
-              v-lazy="`${$store.state.urlKomercia}/logos/${dataStore.logo}`"
+              loading="lazy"
+              :src="imageUrl"
               width="150"
-              class="max-w-[150px] max-h-[150px]"
+              class="max-h-[150px] max-w-[150px]"
               alt="Logo Img"
+              @error="setDefaultImage"
             />
           </nuxt-link>
-          <p class="my-15 font-semibold text-20 text-gray-600">
+          <p class="my-15 text-20 font-semibold text-gray-600">
             No se encontraron artículos relacionados
           </p>
         </div>
-        <div v-if="totalBlogs > filters.limit" class="mt-10 product_pagination">
+        <div v-if="totalBlogs > filters.limit" class="product_pagination mt-10">
           <el-pagination
             background
             layout="prev, pager, next"
-            class="text-18 text-black bg-transparent"
+            class="bg-transparent text-18 text-black"
             :total="totalBlogs"
             :page-size="filters.limit"
             :current-page.sync="filters.page"
@@ -93,9 +95,33 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      fallbackImage: '',
+    }
   },
   computed: {
     ...mapState(['stateListBLogs']),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
+  },
+  methods: {
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
   },
 }
 </script>

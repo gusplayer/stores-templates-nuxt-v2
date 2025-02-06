@@ -49,6 +49,7 @@ export default {
   computed: {
     ...mapState([
       'dataStore',
+      'logoStore',
       'settingBase',
       'settingByTemplate',
       'settingByTemplate7',
@@ -72,6 +73,7 @@ export default {
     componentsProps() {
       return {
         dataStore: this.dataStore,
+        logoStore: this.logoStore,
         settingK05Blog: this.settingByTemplate?.settings ?? this.settingBase,
         settingByTemplate7: this.settingByTemplate7
           ? [

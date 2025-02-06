@@ -85,11 +85,12 @@
       </a>
       <nuxt-link v-if="!showLogo" to="/" class="wrapper-logo-tablada">
         <img
-          v-lazy="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
-          width="120"
           loading="lazy"
+          :src="imageUrl"
+          width="120"
           class="logo-tablada"
           alt="Logo Img"
+          @error="setDefaultImage"
         />
       </nuxt-link>
     </div>
@@ -113,6 +114,10 @@ export default {
       required: true,
     },
     settingByTemplate: {
+      type: Object,
+      required: true,
+    },
+    logoStore: {
       type: Object,
       required: true,
     },
@@ -170,6 +175,7 @@ export default {
           link: this.dataStore.redes.tiktok,
         },
       ],
+      fallbackImage: '',
     }
   },
   computed: {
@@ -177,6 +183,16 @@ export default {
     ...mapState({
       showModal: (state) => state.modalpolitics05,
     }),
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
   },
   watch: {
     'dataStore.tienda'() {
@@ -214,7 +230,7 @@ export default {
     },
     setLogo() {
       let color = getComputedStyle(this.$refs.background).getPropertyValue(
-        '--background_color_1',
+        '--background_color_1'
       )
       let colorArray = color.split(',')
       let colorInt = parseInt(colorArray[2])
@@ -228,6 +244,9 @@ export default {
       this.links.forEach((link, index) => {
         this.links[index].link = this.dataStore.redes[link.nombre.toLowerCase()]
       })
+    },
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
     },
   },
 }

@@ -1,7 +1,7 @@
 <template>
   <!-- sticky top-0 -->
   <header
-    class="z-10 w-full max-h-[120px] md:max-h-10/0 flex justify-center items-center px-10"
+    class="z-10 flex max-h-[120px] w-full items-center justify-center px-10 md:max-h-10/0"
     :style="[
       settingByTemplate6[0].setting6Header,
       settingByTemplate6[0].setting6General,
@@ -14,16 +14,18 @@
       },
     ]"
   >
-    <div class="w-full max-w-7xl flex justify-between items-center">
-      <div class="flex justify-center items-center max-h-[120px] md:max-h-10/0">
+    <div class="flex w-full max-w-7xl items-center justify-between">
+      <div class="flex max-h-[120px] items-center justify-center md:max-h-10/0">
         <div
-          class="w-full flex justify-center items-center"
+          class="flex w-full items-center justify-center"
           :style="`max-width:${settingByTemplate6[0].setting6Header['--with_logo']};`"
         >
           <img
-            :src="`${this.$store.state.urlKomercia}/logos/${dataStore.logo}`"
+            loading="lazy"
+            :src="imageUrl"
             class="w-full object-contain object-left"
             alt="LogoStore"
+            @error="setDefaultImage"
           />
         </div>
       </div>
@@ -87,13 +89,30 @@ export default {
       type: Array,
       required: true,
     },
+    logoStore: {
+      type: Object,
+      required: true,
+    },
   },
-  // computed: {
-  //   productsCart() {
-  //     return this.$store.state.productsCart.length
-  //   },
-  // },
+  computed: {
+    // productsCart() {
+    //   return this.$store.state.productsCart.length
+    // },
+    imageUrl() {
+      if (this.fallbackImage) {
+        return this.fallbackImage
+      }
+      if (this.logoStore?.logoMigrated === 1) {
+        return this.logoStore.logo
+      } else {
+        return `${this.$store.state.urlKomercia}/logos/${this.logoStore.identifier}`
+      }
+    },
+  },
   methods: {
+    setDefaultImage() {
+      this.fallbackImage = require('@/assets/img/logo_nuevas_tiendas.png')
+    },
     // openOrder() {
     //   this.$gtm.push({
     //     event: 'OpenCart',

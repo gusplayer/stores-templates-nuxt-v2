@@ -30,8 +30,8 @@
           <div class="flex w-full flex-row items-center justify-end">
             <el-dropdown
               class="mt-2 flex w-full items-center justify-end"
-              @command="sendOrder"
               trigger="click"
+              @command="sendOrder"
             >
               <span
                 class="el-dropdown-link txt-color items-center justify-center"
@@ -71,6 +71,7 @@
           :setting-by-template="settingByTemplate"
         />
         <KoMenu
+          :logo-store="logoStore"
           :data-store="dataStore"
           :setting-by-template="settingByTemplate"
         />
@@ -117,6 +118,10 @@ export default {
   mixins: [filters],
   props: {
     settingByTemplate: {
+      type: Object,
+      required: true,
+    },
+    logoStore: {
       type: Object,
       required: true,
     },
