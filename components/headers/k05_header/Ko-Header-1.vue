@@ -413,6 +413,7 @@ export default {
         )
         this.query.subcategory = value.id || null
         this.subCategorySelect = value.id
+        
       } else {
         this.query.tag = value.id || null
         this.$store.commit('products/SET_TAG_PRODUCT', value.name || null)
@@ -420,6 +421,7 @@ export default {
 
       this.$store.commit('SET_STATE_BANNER', false)
       this.setInformationFromQuery(this.query)
+      this.showMenu = false
     },
     async setInformationFromQuery({ page, name, category, subcategory, tag }) {
       const query = {}
@@ -479,6 +481,7 @@ export default {
       this.$store.commit('products/SET_SUBCATEGORY_PRODUCTO', null)
       this.$store.commit('products/SET_TAG_PRODUCT', null)
       this.$router.push({ path: '', query: '' })
+      this.showMenu = false
     },
     getSearch(value) {
       if (value) {
