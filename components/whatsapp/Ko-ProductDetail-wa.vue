@@ -26,20 +26,30 @@
         <div class="wrapper-left">
           <div class="photos_responsive">
             <productSlide
-                :photos="data.productosFotos"
-                :photo="data.fotoCloudinary"
-                :id-you-tube="idYoutube"
-              />
-            </div>     
+              :photos="data.productosFotos"
+              :photo="data.fotoCloudinary"
+              :id-you-tube="idYoutube"
+            />
           </div>
+        </div>
         <div class="wrapper-right">
           <div class="content-right">
             <div class="flex">
               <p v-if="salesData.unidades > 0" class="card-info-2">
                 {{ $t('productdetail_stock') }}
               </p>
-              <p v-if="spent && salesData.unidades == 0" class="card-info-1">
+
+              <p
+                v-if="spent && salesData.unidades == 0 && dataStore.id != 18265"
+                class="card-info-1"
+              >
                 {{ $t('productdetail_productoAgotado') }}
+                "😥"
+              </p>
+              <p
+                v-if="spent && salesData.unidades == 0 && dataStore.id == 18265"
+              >
+                {{ $t('productdetail_productoAgotadoTasty') }}
               </p>
             </div>
 
@@ -60,12 +70,12 @@
                 data.productosInfo.promocionValor
                   ? Math.trunc(
                       salesData.precio /
-                        (1 - data.productosInfo.promocionValor / 100),
+                        (1 - data.productosInfo.promocionValor / 100)
                     )
                   : 0)
                   | currency(
                     dataStore.tiendasInfo.paises.codigo,
-                    dataStore.tiendasInfo.moneda,
+                    dataStore.tiendasInfo.moneda
                   )
               }}
             </p>
@@ -82,7 +92,7 @@
                   salesData.precio
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda,
+                      dataStore.tiendasInfo.moneda
                     )
                 }}
               </p>
@@ -418,12 +428,27 @@
               spent &&
               (data.productosInfo.dealerWhatsapp === '0' ||
                 data.productosInfo.dealerWhatsapp === null ||
-                data.productosInfo.dealerWhatsapp === '')
+                data.productosInfo.dealerWhatsapp === '') &&
+              dataStore.id != 18265
             "
             class="wrapper-btn"
           >
             <p class="card-info-1-res">
               😥 {{ $t('productdetail_productoAgotado') }}
+            </p>
+          </div>
+          <div
+            v-else-if="
+              spent &&
+              (data.productosInfo.dealerWhatsapp === '0' ||
+                data.productosInfo.dealerWhatsapp === null ||
+                data.productosInfo.dealerWhatsapp === '') &&
+              dataStore.id == 18265
+            "
+            class="wrapper-btn"
+          >
+            <p class="card-info-1-res">
+              😥 {{ $t('productdetail_productoAgotadoTasty') }}
             </p>
           </div>
         </div>
@@ -439,7 +464,7 @@
 
 <script>
 import axios from 'axios'
-import { mapState } from 'vuex'
+import { mapState, Store } from 'vuex'
 import currency from '@/mixins/formatCurrent'
 import mobileCheck from '@/mixins/mobileCheck'
 import extensions from '@/mixins/elemenTiptap.vue'
@@ -530,7 +555,7 @@ export default {
       ) {
         const tempTotal = this.salesData.precio * this.quantityValue
         const result = this.rangosByCiudad.rangos.find(
-          (rango) => tempTotal >= rango.inicial && tempTotal <= rango.final,
+          (rango) => tempTotal >= rango.inicial && tempTotal <= rango.final
         )
 
         return result ? result.precio : 0
@@ -546,7 +571,7 @@ export default {
     },
     filterSuggestedProducts() {
       return this.suggestedProducts.filter(
-        (product) => product.id !== this.data.id,
+        (product) => product.id !== this.data.id
       )
     },
   },
@@ -570,11 +595,11 @@ export default {
           this.data.conVariante > 0
         ) {
           const combinaciones = JSON.parse(
-            this.data.combinaciones[0][0].combinaciones,
+            this.data.combinaciones[0][0].combinaciones
           )
           const result = combinaciones.find(
             (combinacion) =>
-              JSON.stringify(combinacion.combinacion) == combinationSelected,
+              JSON.stringify(combinacion.combinacion) == combinationSelected
           )
           this.productCart = []
           this.productIndexCart = null
@@ -634,7 +659,7 @@ export default {
         'products/GET_DATA_PRODUCT',
         {
           slug: this.id,
-        },
+        }
       )
       if (success && data.data) {
         this.loading = false
@@ -692,7 +717,7 @@ export default {
         'products/GET_DESCRIPTION_PRODUCTO',
         {
           slug: idProduct,
-        },
+        }
       )
       if (success) {
         this.contentDescription = data?.data
@@ -811,7 +836,7 @@ export default {
         this.$store.state.productsCart.splice(
           this.productIndexCart,
           1,
-          mutableProduct,
+          mutableProduct
         )
       } else {
         this.$store.state.productsCart.push(product)
@@ -879,7 +904,7 @@ export default {
           this.$store.state.productsCart.splice(
             this.productIndexCart,
             1,
-            mutableProduct,
+            mutableProduct
           )
         } else {
           this.$store.state.productsCart.push(product)
@@ -988,24 +1013,24 @@ export default {
         if (this.mobileCheck()) {
           window.open(
             `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
-            '_blank',
+            '_blank'
           )
         } else {
           window.open(
             `${baseUrlPc}${phone_number_whatsapp}&text=${text}`,
-            '_blank',
+            '_blank'
           )
         }
       } else {
         if (this.mobileCheck()) {
           window.open(
             `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`,
-            '_blank',
+            '_blank'
           )
         } else {
           window.open(
             `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`,
-            '_blank',
+            '_blank'
           )
         }
       }
@@ -1019,7 +1044,7 @@ export default {
           limit: 12,
           category: this.data.categoriaProducto2.nombreCategoriaProducto,
           // subcategory: this.data.subcategoria,
-        },
+        }
       )
       if (success) {
         this.suggestedProducts = data.publicProductList
