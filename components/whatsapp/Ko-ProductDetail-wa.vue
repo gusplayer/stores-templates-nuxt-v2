@@ -35,8 +35,17 @@
         <div class="wrapper-right">
           <div class="content-right">
             <div class="flex">
-              <p v-if="salesData.unidades > 0" class="card-info-2">
+              <p
+                v-if="salesData.unidades > 0 && dataStore.id != 18265"
+                class="card-info-2"
+              >
                 {{ $t('productdetail_stock') }}
+              </p>
+              <p
+                v-if="salesData.unidades > 0 && dataStore.id == 18265"
+                class="card-info-2"
+              >
+                {{ $t('productdetail_flavorstock') }}
               </p>
 
               <p
@@ -48,8 +57,9 @@
               </p>
               <p
                 v-if="spent && salesData.unidades == 0 && dataStore.id == 18265"
+                class="card-info-1"
               >
-                {{ $t('productdetail_productoAgotadoTasty') }}
+              {{ $t('productdetail_productoAgotadoTasty') }}😥
               </p>
             </div>
 
