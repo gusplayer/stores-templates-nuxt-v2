@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="cont-btn">
-          <button class="content-btn" @click="closedSearch">
+          <button class="content-btn" @click="setToQueryFilter('search')">
             <span class="btn-txt">{{ $t('home_buscar') }}</span>
           </button>
         </div>
@@ -56,12 +56,16 @@ export default {
     openSearch() {
       return this.$store.state.openSearch
     },
+    dataStore() {
+      return this.$store.state.dataStore
+    },
   },
   methods: {
     closedSearch() {
       this.$store.commit('SET_OPEN_SEARCH', false)
     },
     setToQueryFilter(type) {
+      console.log(this.dataStore)
       if (type === 'search') {
         this.query.name = this.query.name || null
         this.getSearch(this.query.name)
@@ -77,7 +81,6 @@ export default {
 
       try {
         await this.$router.push({
-          path: `/wa/${this.dataStore.id}`,
           query,
         })
       } catch (error) {
@@ -144,17 +147,17 @@ input[type='search'] {
   width: 100%;
 }
 .search-input-content {
-  @apply w-full flex flex-row justify-start items-center z-20;
+  @apply z-20 flex w-full flex-row items-center justify-start;
   font-size: 25px;
   color: #000;
   font-weight: 800;
 }
 .input-search {
   border-bottom: 1px solid black;
-  @apply w-full items-center z-10;
+  @apply z-10 w-full items-center;
 }
 ::-webkit-input-placeholder {
-  @apply text-left items-center;
+  @apply items-center text-left;
   font-size: 25px;
   font-weight: 800;
   color: #000;
@@ -174,7 +177,7 @@ input[type='search'] {
   color: #2c2930;
 }
 .cont-btn {
-  @apply h-full flex flex-col justify-center items-center;
+  @apply flex h-full flex-col items-center justify-center;
 }
 .content-btn {
   display: flex;
@@ -199,37 +202,37 @@ input[type='search'] {
 .close-container {
   width: 100%;
   max-width: 900px;
-  @apply relative h-50 flex justify-end items-center;
+  @apply relative flex h-50 items-center justify-end;
 }
 .leftright {
   background: #000;
-  @apply h-2 w-20 absolute rounded-2 transform -rotate-45 transition-all ease-in-out duration-300;
+  @apply absolute h-2 w-20 -rotate-45 transform rounded-2 transition-all duration-300 ease-in-out;
 }
 .rightleft {
   background: #000;
-  @apply h-2 w-20 absolute rounded-2 transform rotate-45 transition-all ease-in-out duration-300;
+  @apply absolute h-2 w-20 rotate-45 transform rounded-2 transition-all duration-300 ease-in-out;
 }
 .content-close {
-  @apply flex justify-center items-center cursor-pointer;
+  @apply flex cursor-pointer items-center justify-center;
   width: 20px;
   height: 20px;
 }
 .content-close:hover .leftright {
-  @apply transform rotate-0;
+  @apply rotate-0 transform;
 }
 .content-close:hover .rightleft {
-  @apply transform rotate-0;
+  @apply rotate-0 transform;
 }
 @screen sm {
   .products-search {
-    @apply w-full flex flex-col justify-items-center items-center;
+    @apply flex w-full flex-col items-center justify-items-center;
   }
   .search-input-content {
     @apply w-8/0;
   }
   .cont-btn {
     margin-top: 10px;
-    @apply w-8/0 h-auto;
+    @apply h-auto w-8/0;
   }
   .content-btn {
     @apply w-full;
@@ -249,7 +252,7 @@ input[type='search'] {
   }
   .cont-btn {
     margin-top: 0px;
-    @apply w-auto h-auto;
+    @apply h-auto w-auto;
   }
   .content-btn {
     width: 80px;
