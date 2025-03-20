@@ -1097,7 +1097,7 @@ export default {
           id_tienda: this.dataStore.id,
           page: 1,
           limit: 12,
-          category: this.data.categoriaProducto2.nombreCategoriaProducto,
+          // category: this.data.categoriaProducto2.nombreCategoriaProducto,
           // subcategory: this.data.subcategoria,
         }
       )

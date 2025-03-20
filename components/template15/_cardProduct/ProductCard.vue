@@ -344,13 +344,21 @@ export default {
   font-size: 20px;
   color: var(--color_price) !important;
 }
+
+@media screen and (min-width: 768px) {
+  .text-price {
+    font-size: 20px;
+  }
+  
+}
 .text-price {
   color: var(--color_price) !important;
   font-weight: var(--fontWeighPrice);
-  font-size: 20px;
+  font-size: 18px;
   white-space: nowrap;
   text-align: left;
 }
+
 .text-free {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
