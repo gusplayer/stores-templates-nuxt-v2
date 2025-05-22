@@ -68,7 +68,7 @@
                           product.precio
                             | currency(
                               dataStore.tiendasInfo.paises.codigo,
-                              dataStore.tiendasInfo.moneda,
+                              dataStore.tiendasInfo.moneda
                             )
                         }}
                       </p>
@@ -128,7 +128,7 @@
                       (product.precio * product.cantidad)
                         | currency(
                           dataStore.tiendasInfo.paises.codigo,
-                          dataStore.tiendasInfo.moneda,
+                          dataStore.tiendasInfo.moneda
                         )
                     }}
                   </p>
@@ -141,7 +141,7 @@
                       (product.precio * product.cantidad)
                         | currency(
                           dataStore.tiendasInfo.paises.codigo,
-                          dataStore.tiendasInfo.moneda,
+                          dataStore.tiendasInfo.moneda
                         )
                     }}
                   </p>
@@ -190,7 +190,7 @@
                   discountDescuentos
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda,
+                      dataStore.tiendasInfo.moneda
                     )
                 }}
               </p>
@@ -231,7 +231,7 @@
                               ciudad.price
                                 | currency(
                                   dataStore.tiendasInfo.paises.codigo,
-                                  dataStore.tiendasInfo.moneda,
+                                  dataStore.tiendasInfo.moneda
                                 )
                             }}
                           </p>
@@ -260,7 +260,7 @@
                         rangosByCiudad.valor
                           | currency(
                             dataStore.tiendasInfo.paises.codigo,
-                            dataStore.tiendasInfo.moneda,
+                            dataStore.tiendasInfo.moneda
                           )
                       }}
                     </p>
@@ -285,7 +285,7 @@
                         shippingTarifaPrecio
                           | currency(
                             dataStore.tiendasInfo.paises.codigo,
-                            dataStore.tiendasInfo.moneda,
+                            dataStore.tiendasInfo.moneda
                           )
                       }}
                     </p>
@@ -308,7 +308,7 @@
                     shipping
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda,
+                        dataStore.tiendasInfo.moneda
                       )
                   }}
                 </p>
@@ -378,7 +378,7 @@
                   totalCart
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda,
+                      dataStore.tiendasInfo.moneda
                     )
                 }}
               </p>
@@ -401,7 +401,7 @@
                       discountDescuentos)
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda,
+                        dataStore.tiendasInfo.moneda
                       )
                   }}
                 </p>
@@ -430,7 +430,7 @@
                   dataStore.tiendasInfo.valorCompraMinimo
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda,
+                      dataStore.tiendasInfo.moneda
                     )
                 }}
                 {{ $t('cart_minimovalorProductos2') }}
@@ -587,7 +587,7 @@ export default {
       if (this.dataStore && this.dataStore.tiendasInfo.paises.pais) {
         const supportedCountries = ['Colombia', 'Chile', 'Perú', 'Panamá']
         return supportedCountries.includes(
-          this.dataStore.tiendasInfo.paises.pais,
+          this.dataStore.tiendasInfo.paises.pais
         )
       }
       return false
@@ -666,7 +666,7 @@ export default {
       if (this.rangosByCiudad.envio_metodo === 'precio') {
         const result = this.rangosByCiudad.rangos.find(
           (rango) =>
-            this.totalCart >= rango.inicial && this.totalCart <= rango.final,
+            this.totalCart >= rango.inicial && this.totalCart <= rango.final
         )
         if (result) {
           this.shippingTarifaPrecio = result.precio
@@ -757,6 +757,8 @@ export default {
         canal: 'KOMERCIA',
       })
       this.$store.dispatch('SEND_ADD_TO_CART', 2)
+      this.$store.commit('DELETE_ALL_ITEMS_CART')
+      this.$store.commit('UPDATE_CONTENT_CART')
 
       if (this.layourUnicentro) {
         window.open(`https://checkout.komercia.co/?params=${json}`)
