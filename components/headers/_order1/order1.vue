@@ -1254,6 +1254,8 @@ export default {
     GoPayments() {
       let objeto = {}
       objeto = JSON.parse(JSON.stringify(this.productsCart))
+      console.log('objeto', objeto)
+      console.log('Entre a la funcion')
       objeto.map((element) => {
         // DATOS IMPORTANTES A ENVIAR = ID - CANTIDAD - COMBINACION
         if (element.id) {
@@ -1284,6 +1286,7 @@ export default {
       json = JSON.stringify(json)
       if (this.productsCart.length != 0) {
         this.$store.dispatch('SEND_ADD_TO_CART', 2)
+
         this.$store.commit('DELETE_ALL_ITEMS_CART')
         this.$store.commit('UPDATE_CONTENT_CART')
         if (this.layoutUniCentro) {
@@ -1770,6 +1773,8 @@ export default {
                 storeId: data.tienda,
                 ids: idArray,
               })
+              this.$store.commit('DELETE_ALL_ITEMS_CART')
+              this.$store.commit('UPDATE_CONTENT_CART')
             }
           } catch (err) {
             this.textConfirmation = 'Error al enviar los datos!'
