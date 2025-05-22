@@ -75,7 +75,7 @@
                         product.precio
                           | currency(
                             dataStore.tiendasInfo.paises.codigo,
-                            dataStore.tiendasInfo.moneda,
+                            dataStore.tiendasInfo.moneda
                           )
                       }}
                     </b>
@@ -145,7 +145,7 @@
                     (product.precio * product.cantidad)
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda,
+                        dataStore.tiendasInfo.moneda
                       )
                   }}
                 </p>
@@ -164,7 +164,7 @@
             class="sp flex w-full flex-col items-end justify-end bg-white-white"
           >
             <div
-              class="my-5 flex w-full cursor-pointer items-center justify-center border-b border-[#ededed] py-8 text-14 font-normal text-[#2c2930]  transition-all duration-300 ease-in-out hover:text-[#a1a1a1]"
+              class="my-5 flex w-full cursor-pointer items-center justify-center border-b border-[#ededed] py-8 text-14 font-normal text-[#2c2930] transition-all duration-300 ease-in-out hover:text-[#a1a1a1]"
             >
               <button
                 class="rounded-5 px-8 py-6 text-16 font-bold"
@@ -178,7 +178,6 @@
                 }"
                 @click="closedOrder"
               >
-
                 <p>
                   {{ $t('footer_continue') }}
                 </p>
@@ -220,7 +219,7 @@
                               ciudad.price
                                 | currency(
                                   dataStore.tiendasInfo.paises.codigo,
-                                  dataStore.tiendasInfo.moneda,
+                                  dataStore.tiendasInfo.moneda
                                 )
                             }}
                           </p>
@@ -243,7 +242,7 @@
                       rangosByCiudad.valor
                         | currency(
                           dataStore.tiendasInfo.paises.codigo,
-                          dataStore.tiendasInfo.moneda,
+                          dataStore.tiendasInfo.moneda
                         )
                     }}
                   </li>
@@ -261,7 +260,7 @@
                         shippingTarifaPrecio
                           | currency(
                             dataStore.tiendasInfo.paises.codigo,
-                            dataStore.tiendasInfo.moneda,
+                            dataStore.tiendasInfo.moneda
                           )
                       }}
                     </p>
@@ -318,7 +317,7 @@
                     discountDescuentos
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda,
+                        dataStore.tiendasInfo.moneda
                       )
                   }}
                 </p>
@@ -330,7 +329,7 @@
                     totalCart
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda,
+                        dataStore.tiendasInfo.moneda
                       )
                   }}
                 </p>
@@ -349,7 +348,7 @@
                       discountDescuentos)
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda,
+                        dataStore.tiendasInfo.moneda
                       )
                   }}
                 </p>
@@ -410,7 +409,7 @@
                   dataStore.tiendasInfo.valorCompraMinimo
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda,
+                      dataStore.tiendasInfo.moneda
                     )
                 }}
                 {{ $t('cart_minimovalorProductos2') }}
@@ -1087,7 +1086,7 @@ export default {
       if (this.dataStore && this.dataStore.tiendasInfo.paises.pais) {
         const supportedCountries = ['Colombia', 'Chile', 'Perú', 'Panamá']
         return supportedCountries.includes(
-          this.dataStore.tiendasInfo.paises.pais,
+          this.dataStore.tiendasInfo.paises.pais
         )
       }
       return false
@@ -1189,7 +1188,7 @@ export default {
           value2 = parseInt(this.shippingDescuento2.precio)
             ? Math.trunc(
                 (this.totalCart * parseInt(this.shippingDescuento2.precio)) /
-                  100,
+                  100
               )
             : 0
         } else if (this.shippingDescuento2.options == 1) {
@@ -1203,7 +1202,7 @@ export default {
         if (this.rangosByCiudad.envio_metodo == 'precio') {
           let result = this.rangosByCiudad.rangos.find(
             (rango) =>
-              this.totalCart >= rango.inicial && this.totalCart <= rango.final,
+              this.totalCart >= rango.inicial && this.totalCart <= rango.final
           )
           this.shippingTarifaPrecio = result ? result.precio : 'empty'
           this.estadoShippingTarifaPrecio = !result
@@ -1285,6 +1284,8 @@ export default {
       json = JSON.stringify(json)
       if (this.productsCart.length != 0) {
         this.$store.dispatch('SEND_ADD_TO_CART', 2)
+        this.$store.commit('DELETE_ALL_ITEMS_CART')
+        this.$store.commit('UPDATE_CONTENT_CART')
         if (this.layoutUniCentro) {
           window.open(`https://checkout.komercia.co/?params=${json}`)
         } else {
@@ -1334,13 +1335,13 @@ export default {
               element.nombre
             } = Variantes: ${resultcombitList} -> Valor: ${
               this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
-            }${element.cantidad * element.precio}`,
+            }${element.cantidad * element.precio}`
           )
         } else {
           productosCart.push(
             `${element.cantidad} x ${element.nombre} -> Valor: ${
               this.dataStore.tiendasInfo.moneda == 'PEN' ? 'S/' : '$'
-            }${element.cantidad * element.precio}`,
+            }${element.cantidad * element.precio}`
           )
         }
       })
@@ -1359,7 +1360,7 @@ export default {
           text = `Hola%2C%20soy%20${
             this.form.nombre
           }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${encodeURIComponent(
-            this.dataStore.nombre,
+            this.dataStore.nombre
           )}%0ANumero%20de%20orden%3A%20${
             this.numberOrder
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${result}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20${
@@ -1384,17 +1385,17 @@ export default {
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMi%20informaci%C3%B3n%2A%3A%0A%2ANombre%2A%3A%20${
             this.form.nombre
           }%0A%2AIdentificación%2A%3A%20${encodeURIComponent(
-            this.form.phone,
+            this.form.phone
           )}%0A%2AE-mail%2A%3A%20${encodeURIComponent(
-            this.form.email ? this.form.email : '',
+            this.form.email ? this.form.email : ''
           )}%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
-            this.form.ciudad,
+            this.form.ciudad
           )}%0A%2A${encodeURIComponent(
-            this.textCiudad,
+            this.textCiudad
           )}%2A%3A%20${encodeURIComponent(
-            this.form.barrio,
+            this.form.barrio
           )}%0A%2ADirección%2A%3A%20${encodeURIComponent(
-            this.form.dirreccion,
+            this.form.dirreccion
           )}%0A%0A%2Avolver%20a%20la%20tienda%2A%3A%20${
             window.location
           }?clearCart=true`
@@ -1402,7 +1403,7 @@ export default {
           text = `Hello%2C%20I%20am%20${
             this.form.nombre
           }%2C%0AI%20made%20this%20order%20at%20your%20store%20${encodeURIComponent(
-            this.dataStore.nombre,
+            this.dataStore.nombre
           )}%0AOrder%20number%3A%20${
             this.numberOrder
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${result}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADiscount%2A%3A%20${
@@ -1427,15 +1428,15 @@ export default {
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMy%20information%2A%3A%0A%2AName%2A%3A%20${
             this.form.nombre
           }%0A%2AIdentification%2A%3A%20${encodeURIComponent(
-            this.form.phone,
+            this.form.phone
           )}%0A%2AE-mail%2A%3A%20${encodeURIComponent(
-            this.form.email ? this.form.email : '',
+            this.form.email ? this.form.email : ''
           )}%0A%2A${this.textDepartment}%2A%3A%20${
             this.form.ciudad
           }%0A%2A${encodeURIComponent(this.textCiudad)}%2A%3A%20${
             this.form.barrio
           }%0A%2AAddres%2A%3A%20${encodeURIComponent(
-            this.form.dirreccion,
+            this.form.dirreccion
           )}%0A%0A%2Aback%20to%20the%20store%2A%3A%20${
             window.location
           }?clearCart=true`
@@ -1443,7 +1444,7 @@ export default {
           text = `Olá%2C%20aqui%20é%20${
             this.form.nombre
           }%2C%0Afiz%20esse%20pedido%20em%20sua%20loja%20Mustad%20Whatsapp%20${encodeURIComponent(
-            this.dataStore.nombre,
+            this.dataStore.nombre
           )}%0AN%C3%BAmero%20do%20pedido%3A%20${
             this.numberOrder
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${result}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADesconto%2A%3A%20${
@@ -1468,15 +1469,15 @@ export default {
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMy%20Minhas%20informaçãoes%2A%3A%0A%2ANome%2A%3A%20${
             this.form.nombre
           }%0A%2Aidentificação%2A%3A%20${encodeURIComponent(
-            this.form.phone,
+            this.form.phone
           )}%0A%2AE-mail%2A%3A%20${encodeURIComponent(
-            this.form.email ? this.form.email : '',
+            this.form.email ? this.form.email : ''
           )}%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
-            this.form.ciudad,
+            this.form.ciudad
           )}%0A%2A${encodeURIComponent(this.textCiudad)}%2A%3A%20${
             this.form.barrio
           }%0A%2AEndereço%2A%3A%20${encodeURIComponent(
-            this.form.dirreccion,
+            this.form.dirreccion
           )}%0A%0A%2Ade%20volta%20%C3%A0%20loja%2A%3A%20${
             window.location
           }?clearCart=true`
@@ -1484,7 +1485,7 @@ export default {
           text = `Hola%2C%20soy%20${
             this.form.nombre
           }%2C%0Ahice%20este%20pedido%20en%20tu%20tienda%20${encodeURIComponent(
-            this.dataStore.nombre,
+            this.dataStore.nombre
           )}%0ANumero%20de%20orden%3A%20${
             this.numberOrder
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${result}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20${
@@ -1509,17 +1510,17 @@ export default {
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2AMi%20informaci%C3%B3n%2A%3A%0A%2ANombre%2A%3A%20${
             this.form.nombre
           }%0A%2AIdentificación%2A%3A%20${encodeURIComponent(
-            this.form.phone,
+            this.form.phone
           )}%0A%2AE-mail%2A%3A%20${encodeURIComponent(
-            this.form.email ? this.form.email : '',
+            this.form.email ? this.form.email : ''
           )}%0A%2A${this.textDepartment}%2A%3A%20${encodeURIComponent(
-            this.form.ciudad,
+            this.form.ciudad
           )}%0A%2A${encodeURIComponent(
-            this.textCiudad,
+            this.textCiudad
           )}%2A%3A%20${encodeURIComponent(
-            this.form.barrio,
+            this.form.barrio
           )}%0A%2ADirección%2A%3A%20${encodeURIComponent(
-            this.form.dirreccion,
+            this.form.dirreccion
           )}%0A%0A%2Avolver%20a%20la%20tienda%2A%3A%20${
             window.location
           }?clearCart=true`
@@ -1527,7 +1528,7 @@ export default {
       } else {
         if (this.dataStore.tiendasInfo.lenguaje == 'es') {
           text = `Hola%20%F0%9F%91%8B.%0AHice%20este%20pedido%20%F0%9F%93%A6%20en%20tu%20tienda%20${encodeURIComponent(
-            this.dataStore.nombre,
+            this.dataStore.nombre
           )}%0ANumero%20de%20orden%3A%20${
             this.numberOrder
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${result}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20-${
@@ -1556,7 +1557,7 @@ export default {
           }?clearCart=true`
         } else if (this.dataStore.tiendasInfo.lenguaje == 'en') {
           text = `Hello%20%F0%9F%91%8B.%0AI%20placed%20this%20order%20%F0%9F%93%A6%20in%20your%20store.%20${encodeURIComponent(
-            this.dataStore.nombre,
+            this.dataStore.nombre
           )}%0AOrder%20number%3A%20${
             this.numberOrder
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${result}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADiscount%2A%3A%20${
@@ -1585,7 +1586,7 @@ export default {
           }?clearCart=true`
         } else if (this.dataStore.tiendasInfo.lenguaje == 'pt') {
           text = `Ol%C3%A1%20%F0%9F%91%8B.%0AEu%20coloquei%20este%20pedido%20%F0%9F%93%A6%20em%20sua%20loja.%20${encodeURIComponent(
-            this.dataStore.nombre,
+            this.dataStore.nombre
           )}%0AN%C3%BAmero%20do%20pedido%3A%20${
             this.numberOrder
           }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${result}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADesconto%2A%3A%20-${
@@ -1615,7 +1616,7 @@ export default {
         } else {
           if (this.dataStore.tiendasInfo.lenguaje == 'es') {
             text = `Hola%20%F0%9F%91%8B.%0AHice%20este%20pedido%20%F0%9F%93%A6%20en%20tu%20tienda%20${encodeURIComponent(
-              this.dataStore.nombre,
+              this.dataStore.nombre
             )}%0ANumero%20de%20orden%3A%20${
               this.numberOrder
             }%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${result}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.translateDeliveryMethod()}%2A%0A%2ADescuento%2A%3A%20${
@@ -1921,7 +1922,7 @@ export default {
     productsFreeShippingCart() {
       if (this.productsCart) {
         let result = this.productsCart.filter(
-          (rango) => rango.envio_gratis === 1,
+          (rango) => rango.envio_gratis === 1
         )
         this.FreeShippingCart = this.productsCart.length == result.length
       }
