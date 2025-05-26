@@ -1773,8 +1773,6 @@ export default {
                 storeId: data.tienda,
                 ids: idArray,
               })
-              this.$store.commit('DELETE_ALL_ITEMS_CART')
-              this.$store.commit('UPDATE_CONTENT_CART')
             }
           } catch (err) {
             this.textConfirmation = 'Error al enviar los datos!'
