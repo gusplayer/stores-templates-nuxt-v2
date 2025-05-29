@@ -79,7 +79,6 @@ sw.*
 
 # Vim swap files
 *.swp
-package-lock.json
 
 # nuxt.js build output
 .nuxt
