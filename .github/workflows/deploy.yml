@@ -49,7 +49,10 @@ jobs:
       - name: Transfer and deploy
         run: |
           TIMESTAMP=$(date +%Y%m%d%H%M%S)
-          APP_NAME="${{ secrets.APP_NAME || 'komercia-nuxt' }}"
+          APP_NAME="${{ secrets.APP_NAME }}"
+          if [ -z "$APP_NAME" ]; then
+            APP_NAME="komercia-nuxt"
+          fi
 
           scp deployment.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/tmp/
 
@@ -59,8 +62,10 @@ jobs:
             RELEASE_DIR="/root/releases/$TIMESTAMP"
             CURRENT_DIR="/root/current"
             PREVIOUS_DIR=\$(readlink \$CURRENT_DIR 2>/dev/null || echo "")
+            APP_NAME="$APP_NAME"
             
             echo "🚀 Starting deployment..."
+            echo "📱 App name: \$APP_NAME"
             
             mkdir -p \$RELEASE_DIR
             tar -xzf /tmp/deployment.tar.gz -C \$RELEASE_DIR
@@ -71,7 +76,7 @@ jobs:
             
             echo "🔄 Starting rolling restart..."
             
-            pm2 stop \${APP_NAME}-1 \${APP_NAME}-2 2>/dev/null || true
+            pm2 stop "\${APP_NAME}-1" "\${APP_NAME}-2" 2>/dev/null || true
             
             echo "🟢 Starting \${APP_NAME}-1..."
             PORT=3001 pm2 start npm --name "\${APP_NAME}-1" -- start --cwd \$RELEASE_DIR
