@@ -1,81 +1,104 @@
-name: Deploy Nuxt 3 App
+name: Deploy Nuxt 3 App with PM2 Rolling Restart
 
 on:
   push:
     branches:
       - master
-  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
-    environment: production
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'npm'
-          
+
       - name: Install dependencies
         run: npm ci
-        
+
       - name: Build project
         run: npm run build
+
+      - name: Create deployment archive
+        run: |
+          tar --exclude='.git' \
+              --exclude='node_modules' \
+              --exclude='.github' \
+              --exclude='.nuxt' \
+              --exclude='dist' \
+              --exclude='coverage' \
+              --exclude='*.log' \
+              --exclude='.env*' \
+              -czf deployment.tar.gz .
 
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.7.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          
+
       - name: Add server to known hosts
         run: |
           ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
-          
-      - name: Create app directory and copy files to VPS
+
+      - name: Transfer and deploy
         run: |
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "mkdir -p /home/${{ secrets.SERVER_USER }}/app"
-          rsync -avz --delete \
-            --exclude '.git' \
-            --exclude 'node_modules' \
-            --exclude '.github' \
-            --exclude '.nuxt' \
-            ./ ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/home/${{ secrets.SERVER_USER }}/app
+          TIMESTAMP=$(date +%Y%m%d%H%M%S)
+          APP_NAME="${{ secrets.APP_NAME || 'komercia-nuxt' }}"
+
+          scp deployment.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/tmp/
+
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << EOF
+            set -e
             
-      - name: Deploy with Docker
-        run: |
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-            cd /home/${{ secrets.SERVER_USER }}/app
+            RELEASE_DIR="/root/releases/$TIMESTAMP"
+            CURRENT_DIR="/root/current"
+            PREVIOUS_DIR=\$(readlink \$CURRENT_DIR 2>/dev/null || echo "")
             
-            if docker ps | grep -q nuxt_app; then
-              echo "Stopping existing container..."
-              docker stop nuxt_app
+            echo "🚀 Starting deployment..."
+            
+            mkdir -p \$RELEASE_DIR
+            tar -xzf /tmp/deployment.tar.gz -C \$RELEASE_DIR
+            rm /tmp/deployment.tar.gz
+            
+            cd \$RELEASE_DIR
+            npm ci --production
+            
+            echo "🔄 Starting rolling restart..."
+            
+            pm2 stop \${APP_NAME}-1 \${APP_NAME}-2 2>/dev/null || true
+            
+            echo "🟢 Starting \${APP_NAME}-1..."
+            PORT=3001 pm2 start npm --name "\${APP_NAME}-1" -- start --cwd \$RELEASE_DIR
+            
+            sleep 10
+            if ! pm2 describe "\${APP_NAME}-1" | grep -q "online"; then
+                echo "❌ \${APP_NAME}-1 failed to start"
+                exit 1
             fi
             
-            docker build -t ${{ secrets.DOCKER_IMAGE }}:${{ github.sha }} .
-            docker tag ${{ secrets.DOCKER_IMAGE }}:${{ github.sha }} ${{ secrets.DOCKER_IMAGE }}:latest
+            echo "🟢 Starting \${APP_NAME}-2..."
+            PORT=3002 pm2 start npm --name "\${APP_NAME}-2" -- start --cwd \$RELEASE_DIR
             
-            docker rm nuxt_app || true
+            sleep 10
+            if ! pm2 describe "\${APP_NAME}-2" | grep -q "online"; then
+                echo "❌ \${APP_NAME}-2 failed to start"
+                exit 1
+            fi
             
-            docker run -d \
-              --name nuxt_app \
-              --restart unless-stopped \
-              -p 80:3000 \
-              --health-cmd="curl -f http://localhost:3000 || exit 1" \
-              --health-interval=30s \
-              --health-timeout=10s \
-              --health-retries=3 \
-              ${{ secrets.DOCKER_IMAGE }}:latest
-              
-            docker image prune -f
+            rm -f \$CURRENT_DIR
+            ln -sf \$RELEASE_DIR \$CURRENT_DIR
+            
+            cd /root/releases
+            ls -t | tail -n +4 | xargs -r rm -rf
+            
+            pm2 save
+            
+            echo "✅ Deployment completed successfully!"
+            pm2 status
           EOF
-          
-      - name: Verify deployment
-        run: |
-          sleep 30
-          curl -f http://${{ secrets.SERVER_IP }} || exit 1
