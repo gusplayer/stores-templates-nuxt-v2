@@ -79,7 +79,8 @@ jobs:
             pm2 stop "\${APP_NAME}-1" "\${APP_NAME}-2" 2>/dev/null || true
             
             echo "🟢 Starting \${APP_NAME}-1..."
-            PORT=3001 pm2 start npm --name "\${APP_NAME}-1" -- start --cwd \$RELEASE_DIR
+            cd \$RELEASE_DIR
+            PORT=3001 pm2 start npm --name "\${APP_NAME}-1" -- run start
             
             sleep 10
             if ! pm2 describe "\${APP_NAME}-1" | grep -q "online"; then
@@ -88,7 +89,7 @@ jobs:
             fi
             
             echo "🟢 Starting \${APP_NAME}-2..."
-            PORT=3002 pm2 start npm --name "\${APP_NAME}-2" -- start --cwd \$RELEASE_DIR
+            PORT=3002 pm2 start npm --name "\${APP_NAME}-2" -- run start
             
             sleep 10
             if ! pm2 describe "\${APP_NAME}-2" | grep -q "online"; then
