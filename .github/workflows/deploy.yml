@@ -27,7 +27,7 @@ jobs:
         
       - name: Build project
         run: npm run build
-        
+
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.7.0
         with:
@@ -37,8 +37,9 @@ jobs:
         run: |
           ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
           
-      - name: Copy files to VPS
+      - name: Create app directory and copy files to VPS
         run: |
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "mkdir -p /home/${{ secrets.SERVER_USER }}/app"
           rsync -avz --delete \
             --exclude '.git' \
             --exclude 'node_modules' \
