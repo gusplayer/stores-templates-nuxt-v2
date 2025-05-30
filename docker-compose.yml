@@ -1,0 +1,30 @@
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./ssl:/etc/ssl/certs/
+    depends_on:
+      - stores-app
+    restart: unless-stopped
+    networks:
+      - komercia-network
+
+  stores-templates-nuxt-app:
+    image: ghcr.io/komercia2/stores-templates-nuxt:latest
+    expose:
+      - '3000'
+    environment:
+      - NODE_ENV=production
+      - NUXT_HOST=0.0.0.0
+      - NUXT_PORT=3000
+    restart: unless-stopped
+    networks:
+      - komercia-network
+
+networks:
+  komercia-network:
+    driver: bridge
