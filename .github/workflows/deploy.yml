@@ -28,18 +28,16 @@ jobs:
 
       - name: Copy to temp and archive
         run: |
-          mkdir temp-deploy
-          rsync -a --exclude='.git' \
-                   --exclude='node_modules' \
-                   --exclude='.github' \
-                   --exclude='coverage' \
-                   --exclude='*.log' \
-                   --exclude='.env*' \
-                   --exclude='deployment.tar.gz' \
-                   ./ temp-deploy/
-          tar -czf deployment.tar.gz -C temp-deploy .
-          rm -rf temp-deploy
-
+          tar -czf deployment.tar.gz \
+            --exclude='.git' \
+            --exclude='node_modules' \
+            --exclude='.github' \
+            --exclude='coverage' \
+            --exclude='*.log' \
+            --exclude='.env*' \
+            --exclude='deployment.tar.gz' \
+            .
+            
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.7.0
         with:
