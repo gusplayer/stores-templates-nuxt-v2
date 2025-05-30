@@ -121,6 +121,14 @@ jobs:
             sed -i 's|image:.*stores-templates-nuxt.*|image: ${{ needs.build.outputs.image }}|g' docker-compose.yml
           "
 
+      - name: Stop existing containers
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
+            cd ${{ secrets.DEPLOY_PATH }} &&
+            docker-compose down --remove-orphans || true &&
+            docker system prune -f || true
+          "
+
       - name: Pull and deploy with Docker Compose
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
