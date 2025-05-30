@@ -1,9 +1,10 @@
-name: Deploy Nuxt 3 App with PM2 Rolling Restart
+name: Deploy Komercia Stores Templates Nuxt
 
 on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -20,22 +21,20 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm i
 
       - name: Build project
         run: npm run build
 
-      - name: Create deployment archive
+      - name: Archive deployment
         run: |
           tar --exclude='.git' \
               --exclude='node_modules' \
               --exclude='.github' \
-              --exclude='.nuxt' \
-              --exclude='dist' \
               --exclude='coverage' \
               --exclude='*.log' \
               --exclude='.env*' \
-              -czf deployment.tar.gz . || exit 0
+              -czf deployment.tar.gz .
 
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.7.0
@@ -43,67 +42,43 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Add server to known hosts
+        run: ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+
+      - name: Transfer deployment files
         run: |
-          ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+          scp -o StrictHostKeyChecking=no deployment.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_PATH }}/
+          scp -o StrictHostKeyChecking=no ecosystem.config.js ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_PATH }}/
 
-      - name: Transfer and deploy
+      - name: Extract and prepare deployment
         run: |
-          TIMESTAMP=$(date +%Y%m%d%H%M%S)
-          APP_NAME="${{ secrets.APP_NAME }}"
-          if [ -z "$APP_NAME" ]; then
-            APP_NAME="komercia-nuxt"
-          fi
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
+            cd ${{ secrets.DEPLOY_PATH }} &&
+            tar -xzf deployment.tar.gz &&
+            rm deployment.tar.gz &&
+            npm install
+          "
 
-          scp deployment.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/tmp/
+      - name: Create logs directory
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
+            cd ${{ secrets.DEPLOY_PATH }} &&
+            mkdir -p logs
+          "
 
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << EOF
-            set -e
-            
-            RELEASE_DIR="/root/releases/$TIMESTAMP"
-            CURRENT_DIR="/root/current"
-            PREVIOUS_DIR=\$(readlink \$CURRENT_DIR 2>/dev/null || echo "")
-            APP_NAME="$APP_NAME"
-            
-            echo "🚀 Starting deployment..."
-            echo "📱 App name: \$APP_NAME"
-            
-            mkdir -p \$RELEASE_DIR
-            tar -xzf /tmp/deployment.tar.gz -C \$RELEASE_DIR
-            rm /tmp/deployment.tar.gz
-            
-            cd \$RELEASE_DIR
-            npm ci --production
-            
-            echo "🔄 Starting rolling restart..."
-            
-            pm2 stop "\${APP_NAME}-1" "\${APP_NAME}-2" 2>/dev/null || true
-            
-            echo "🟢 Starting \${APP_NAME}-1..."
-            PORT=3001 pm2 start npm --name "\${APP_NAME}-1" -- start --cwd \$RELEASE_DIR
-            
-            sleep 10
-            if ! pm2 describe "\${APP_NAME}-1" | grep -q "online"; then
-                echo "❌ \${APP_NAME}-1 failed to start"
-                exit 1
-            fi
-            
-            echo "🟢 Starting \${APP_NAME}-2..."
-            PORT=3002 pm2 start npm --name "\${APP_NAME}-2" -- start --cwd \$RELEASE_DIR
-            
-            sleep 10
-            if ! pm2 describe "\${APP_NAME}-2" | grep -q "online"; then
-                echo "❌ \${APP_NAME}-2 failed to start"
-                exit 1
-            fi
-            
-            rm -f \$CURRENT_DIR
-            ln -sf \$RELEASE_DIR \$CURRENT_DIR
-            
-            cd /root/releases
-            ls -t | tail -n +4 | xargs -r rm -rf
-            
-            pm2 save
-            
-            echo "✅ Deployment completed successfully!"
-            pm2 status
-          EOF
+      - name: Deploy with PM2
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
+            cd ${{ secrets.DEPLOY_PATH }} &&
+            pm2 reload ecosystem.config.js
+            pm2 start ecosystem.config.js 
+          "
+
+      - name: Clean up
+        run: rm deployment.tar.gz
+
+      - name: Notify deployment success
+        run: echo "Deployment to ${{ secrets.SERVER_IP }} successful!"
+
+      - name: Notify failure
+        if: failure()
+        run: echo "Deployment to ${{ secrets.SERVER_IP }} failed!"
