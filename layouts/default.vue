@@ -583,7 +583,16 @@ export default {
     if (this.$route.query?.openCart === 'true') {
       this.$store.commit('SET_OPEN_ORDER', true)
     }
+    console.log([
+      'dataStore',
+      this.dataStore,
+      'storeError',
+      this.storeError,
+      'template',
+      this.template,
+    ])
 
+    console.log('[LOAD STORE TEMPLATES]')
     // Envía datos para registrar vistas en la pagina
     this.sendAnalyticsStore()
     // Agrega un listener de mensajes
