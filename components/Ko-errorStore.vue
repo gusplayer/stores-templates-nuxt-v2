@@ -660,11 +660,17 @@
           >
             404
           </p>
-          <p class="px-10 text-22 font-bold text-black">¡OH! Se ha perdido.</p>
+          <p class="px-10 text-22 font-bold text-black">
+            ¡UPS! Algo salio mal.
+          </p>
           <p class="text-16 text-black">
-            La tienda que busca no existe. Cómo has llegado aquí es un misterio.
-            Pero puedes hacer clic en el botón para ir a la página de Komercia o
-            hablar con un asesor.
+            Parece que la página que buscas no está disponible en este momento.
+            No te preocupes, puede ser solo un error temporal o estamos haciendo
+            algunos ajustes.
+          </p>
+          <p class="text-16 font-semibold mt-1 text-black">
+            Te invitamos a intentarlo en unos minutos. Si deseas, puedes hacer
+            clic en el botón para regresar al inicio o hablar con un asesor.
           </p>
           <p v-if="stateIdStore && tempInfo">{{ tempInfo }}</p>
         </div>
@@ -712,10 +718,10 @@ export default {
       const message = `Hola.%0A%0ATengo un problema con mi tienda ${window.location}, dice que no existe o no se encuentra.`
 
       const whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(
-        message,
+        message
       )}`
       const webWhatsappUrl = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
-        message,
+        message
       )}`
 
       if (this.mobileCheck()) {

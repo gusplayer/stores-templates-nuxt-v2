@@ -653,10 +653,15 @@
       <div class="content-right">
         <div>
           <p class="title-error">404</p>
-          <p class="subtitle-error">¡OH! Se ha perdido.</p>
+          <p class="subtitle-error">¡UPS! Algo salio mal.</p>
           <p class="description-error">
-            La tienda que busca no existe. Cómo has llegado aquí es un misterio.
-            Pero puedes hacer clic en el botón para ir a la página principal.
+            Parece que la página que buscas no está disponible en este
+            momento.No te preocupes, puede ser solo un error temporal o estamos
+            haciendo algunos ajustes.
+          </p>
+          <p class="mt-1 text-16 font-semibold text-black">
+            Te invitamos a intentarlo en unos minutos. Si deseas, puedes hacer
+            clic en el botón para regresar al inicio o hablar con un asesor.
           </p>
         </div>
         <nuxt-link to="/" class="btn-error">Ir al inicio</nuxt-link>
