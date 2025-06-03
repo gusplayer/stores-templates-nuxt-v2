@@ -112,7 +112,6 @@ jobs:
       - name: Deploy configuration files
         run: |
           scp -o StrictHostKeyChecking=no docker-compose.yml ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_PATH }}/
-          scp -o StrictHostKeyChecking=no nginx.conf ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_PATH }}/
 
       - name: Update image tag in docker-compose
         run: |
