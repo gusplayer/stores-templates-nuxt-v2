@@ -55,7 +55,7 @@
 
     <div
       v-if="isMobile"
-      class="absolute bottom-24 right-6  z-10 rounded-md bg-black px-4 py-2 opacity-75 transition-opacity duration-300"
+      class="absolute bottom-8 right-6  z-10 rounded-md bg-black px-4 py-2 opacity-75 transition-opacity duration-300"
     >
       <p class="text-14 text-white-white">
         {{ $t('productdetail_click_zoom') }}
