@@ -1035,6 +1035,9 @@ export default {
         this.$store.state.openOrder = value
       },
     },
+    isOrderOpen() {
+      return this.$store.state.openOrder // Asegúrate de que el nombre del estado sea correcto
+    },
     formOrdenWhatsAPP: {
       get() {
         return this.$store.state.formOrdenWhatsAPP
@@ -1116,6 +1119,15 @@ export default {
   watch: {
     rangosByCiudad() {
       this.filterCities()
+    },
+    isOrderOpen(newValue) {
+      if (newValue) {
+        // Cuando el modal se abre, añadimos una clase al body
+        document.body.classList.add('body-no-scroll')
+      } else {
+        // Cuando se cierra, la quitamos
+        document.body.classList.remove('body-no-scroll')
+      }
     },
     // cities() {
     //   this.filterCities()
