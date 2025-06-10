@@ -161,6 +161,7 @@ export const mutations = {
     state.productsCart = []
   },
   SET_OPEN_ORDER: (state, value) => {
+    console.log(value)
     state.openOrder = value
   },
   SET_OPEN_SEARCH: (state, value) => {
