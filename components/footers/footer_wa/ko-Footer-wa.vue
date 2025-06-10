@@ -37,7 +37,7 @@
               totalCart
                 | currency(
                   dataStore.tiendasInfo.paises.codigo,
-                  dataStore.tiendasInfo.moneda,
+                  dataStore.tiendasInfo.moneda
                 )
             }}
           </p>
@@ -71,7 +71,16 @@ export default {
   },
   methods: {
     openOrder() {
-      this.$store.commit('SET_OPEN_ORDER', true)
+     try{
+      await this.$store.commit('SET_OPEN_ORDER', true)
+
+     }catch(error) {
+        this.$message({
+          showClose: true,
+          message: error.message || 'Error al abrir el pedido',
+          type: 'error',
+        })
+      }
     },
   },
 }
