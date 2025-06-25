@@ -1018,8 +1018,9 @@ export default {
       let baseUrlPc = 'https://web.whatsapp.com/send?phone='
       let urlProduct = window.location.href
       let text = `Hola%20%F0%9F%98%80%2C%0AEstoy%20en%20tu%20tienda%20%2A${this.dataStore.nombre}%2A%20y%20quiero%20cotizar%20este%20producto%3A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.data.nombre}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ALink%3A%20${urlProduct}`
-      if (this.dataStore.tienda.whatsapp.charAt(0) == '+') {
-        let phone_number_whatsapp = this.dataStore.tienda.whatsapp.slice(1)
+      
+      if (this.dataStore.tiendasInfo.telefono.charAt(0) == '+') {
+        let phone_number_whatsapp = this.dataStore.tiendasInfo.telefono.slice(1)
         if (this.mobileCheck()) {
           window.open(
             `${baseUrlMovil}${phone_number_whatsapp}&text=${text}`,
@@ -1034,12 +1035,12 @@ export default {
       } else {
         if (this.mobileCheck()) {
           window.open(
-            `${baseUrlMovil}57${this.dataStore.tienda.whatsapp}&text=${text}`,
+            `${baseUrlMovil}57${this.dataStore.tiendasInfo.telefono}&text=${text}`,
             '_blank'
           )
         } else {
           window.open(
-            `${baseUrlPc}57${this.dataStore.tienda.whatsapp}&text=${text}`,
+            `${baseUrlPc}57${this.dataStore.tiendasInfo.telefono}&text=${text}`,
             '_blank'
           )
         }
