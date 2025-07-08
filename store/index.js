@@ -34,7 +34,7 @@ export const state = () => ({
   urlKomercia: 'https://api2.komercia.co',
   urlKomerciaV3: 'https://api3.komercia.co',
   // urlNodeSettings: 'https://node.komercia.co',
-  urlNodeSettings: 'https://backend-node-editor-nuxt-production.up.railway.app',
+  urlNodeSettings: 'https://editor.komercia.app',
   // urlTemplate: 'https://templates.komercia.co',
   // urlComponents: 'https://components.komercia.co',
   urlAWSsettings: 'https://api.komercia.app',
