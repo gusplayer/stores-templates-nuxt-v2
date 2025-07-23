@@ -147,7 +147,7 @@
                   salesData.precio
                     | currency(
                       dataStore.tiendasInfo.paises.codigo,
-                      dataStore.tiendasInfo.moneda,
+                      dataStore.tiendasInfo.moneda
                     )
                 }}
               </p>
@@ -168,12 +168,12 @@
                     data.productosInfo.promocionValor
                       ? Math.trunc(
                           salesData.precio /
-                            (1 - data.productosInfo.promocionValor / 100),
+                            (1 - data.productosInfo.promocionValor / 100)
                         )
                       : 0)
                       | currency(
                         dataStore.tiendasInfo.paises.codigo,
-                        dataStore.tiendasInfo.moneda,
+                        dataStore.tiendasInfo.moneda
                       )
                   }}
                 </p>
@@ -583,11 +583,15 @@ export default {
       return this.$t('productdetail_añadiralcarrito')
     },
     getBuyButtonLabel() {
+      console.log('Data Store', this.dataStore)
+      if (this.dataStore.id === 400 || this.dataStore.id === "400") {
+        return this.$t('productdetail_btnAgendar')
+      }
       return this.$t('productdetail_btnComprar')
     },
     filterSuggestedProducts() {
       return this.suggestedProducts.filter(
-        (product) => product.id !== this.data.id,
+        (product) => product.id !== this.data.id
       )
     },
     validateDimensions() {
@@ -630,11 +634,11 @@ export default {
           this.data.conVariante > 0
         ) {
           const combinaciones = JSON.parse(
-            this.data.combinaciones[0][0].combinaciones,
+            this.data.combinaciones[0][0].combinaciones
           )
           const result = combinaciones.find(
             (combinacion) =>
-              JSON.stringify(combinacion.combinacion) == combinationSelected,
+              JSON.stringify(combinacion.combinacion) == combinationSelected
           )
           this.productCart = []
           this.productIndexCart = null
@@ -695,7 +699,7 @@ export default {
         'products/GET_DATA_PRODUCT',
         {
           slug: this.id,
-        },
+        }
       )
       if (success && data.data) {
         this.loading = false
@@ -866,7 +870,7 @@ export default {
         this.$store.state.productsCart.splice(
           this.productIndexCart,
           1,
-          mutableProduct,
+          mutableProduct
         )
       } else {
         this.$store.state.productsCart.push(product)
@@ -924,7 +928,7 @@ export default {
           limit: 12,
           category: this.data.categoriaProducto2.nombreCategoriaProducto,
           // subcategory: this.data.subcategoria,
-        },
+        }
       )
       if (success) {
         this.suggestedProducts = data.publicProductList

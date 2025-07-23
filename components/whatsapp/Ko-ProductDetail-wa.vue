@@ -59,7 +59,7 @@
                 v-if="spent && salesData.unidades == 0 && dataStore.id == 18265"
                 class="card-info-1"
               >
-              {{ $t('productdetail_productoAgotadoTasty') }}😥
+                {{ $t('productdetail_productoAgotadoTasty') }}😥
               </p>
             </div>
 
@@ -358,7 +358,11 @@
           >
             <span>
               <whatsapp-icon class="wp-icon2" />
-              {{ $t('productdetail_btnComprar') }}
+              {{
+                dataStore.id === 400
+                  ? $t('productdetail_btnAgendar')
+                  : $t('productdetail_btnComprar')
+              }}
             </span>
           </button>
           <button
@@ -383,7 +387,11 @@
             @click="addShoppingCart"
           >
             <span>
-              {{ $t('productdetail_btnComprar') }}
+              {{
+                dataStore.id === 400
+                  ? $t('productdetail_btnAgendar')
+                  : $t('productdetail_btnComprar')
+              }}
             </span>
           </button>
           <button
@@ -1018,7 +1026,7 @@ export default {
       let baseUrlPc = 'https://web.whatsapp.com/send?phone='
       let urlProduct = window.location.href
       let text = `Hola%20%F0%9F%98%80%2C%0AEstoy%20en%20tu%20tienda%20%2A${this.dataStore.nombre}%2A%20y%20quiero%20cotizar%20este%20producto%3A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A%2A${this.data.nombre}%2A%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ALink%3A%20${urlProduct}`
-      
+
       if (this.dataStore.tiendasInfo.telefono.charAt(0) == '+') {
         let phone_number_whatsapp = this.dataStore.tiendasInfo.telefono.slice(1)
         if (this.mobileCheck()) {
