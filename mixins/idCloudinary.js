@@ -29,6 +29,10 @@ export default {
       }
     },
     idCloudinaryBanner(url, type, width) {
+      if (!url || typeof url !== 'string') {
+        console.error('La URL proporcionada es inválida:', url)
+        return null // Devuelve un valor predeterminado o maneja el error
+      }
       let fitImage = url.split('/upload/')
       let fitImage2 = url.split('/')
       let fitImage3

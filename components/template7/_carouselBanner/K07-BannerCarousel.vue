@@ -1,20 +1,20 @@
 <template>
-  <div class="w-full justify-center items-center" :style="settingKCarousel">
+  <div class="w-full items-center justify-center" :style="settingKCarousel">
     <div
       ref="mySwiper"
       v-swiper:mySwiper="swiperOption"
-      class="w-full justify-center items-center wrapper-banner"
+      class="wrapper-banner w-full items-center justify-center"
     >
-      <div class="z-auto swiper-wrapper w-full">
+      <div class="swiper-wrapper z-auto w-full">
         <div
           v-for="(banner, index) in settingKCarousel.values"
           :key="index"
-          class="swiper-slide w-full flex justify-center items-center z-10"
+          class="swiper-slide z-10 flex w-full items-center justify-center"
           :class="banner && banner.url_redirect ? 'cursor-pointer' : ''"
         >
           <template v-if="isInternalUrl(banner.url_redirect)">
             <nuxt-link
-              class="w-full flex justify-center items-center"
+              class="flex w-full items-center justify-center"
               :to="`${banner?.url_redirect ? banner.url_redirect : ''}`"
             >
               <picture>
@@ -38,6 +38,7 @@
                   "
                 />
                 <img
+                  v-if="settingKCarousel.values[index].url_img_background"
                   :src="
                     idCloudinaryBanner(
                       settingKCarousel.values[index].url_img_background,
@@ -58,7 +59,7 @@
           </template>
           <template v-else>
             <a
-              class="w-full flex justify-center items-center"
+              class="flex w-full items-center justify-center"
               :href="`${banner?.url_redirect ? banner.url_redirect : ''}`"
               rel="noreferrer noopener"
             >
