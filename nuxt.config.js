@@ -45,6 +45,7 @@ export default {
     { src: '~/plugins/gtm', ssr: false },
     { src: '~/plugins/vueLazyLoad.js', ssr: false },
     { src: '~/plugins/elementTipTap', ssr: false },
+    { src: '~/plugins/chatwoot.js', ssr: false },
   ],
   modules: [
     '@nuxtjs/gtm',
