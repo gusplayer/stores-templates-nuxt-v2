@@ -10,7 +10,7 @@
     "devIp": "cross-env NUXT_HOST=0.0.0.0 NUXT_PORT=3333 nuxt",
     "build": "nuxt build",
     "static": "nuxt build --target static && nuxt export",
-    "start": "nuxt start",
+    "start": "cross-env NODE_OPTIONS='--max-old-space-size=8192' nuxt start",
     "generate": "nuxt generate",
     "deploy": "pm2 start npm --name template-nuxt-dokku -- start"
   },
