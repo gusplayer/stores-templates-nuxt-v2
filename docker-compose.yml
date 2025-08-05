@@ -9,14 +9,14 @@ services:
       - NUXT_PORT=3000
     restart: unless-stopped
     deploy:
-      replicas: 4
+      replicas: 6
       resources:
         limits:
-          cpus: '1'
-          memory: 512M
+          cpus: '0.8'
+          memory: 1G
         reservations:
-          cpus: '0.5'
-          memory: 256M
+          cpus: '0.4'
+          memory: 512M
     networks:
       - komercia-network
 
