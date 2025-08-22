@@ -1,7 +1,7 @@
 export default {
   server: {
-    host: '0.0.0.0',       
-    port: process.env.PORT || 3000
+    host: '0.0.0.0',
+    port: process.env.PORT || 3000,
   },
   head: {
     title: process.env.npm_package_name || '',
@@ -53,6 +53,7 @@ export default {
     'nuxt-facebook-pixel-module',
     ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 }],
   ],
+  serverMiddleware: ['~/serverMiddleware/sitemapMiddleware.js'],
   components: true,
   facebook: {
     pixelId: '671820736795254',
@@ -61,6 +62,7 @@ export default {
   },
   sitemap: {
     gzip: true,
+    path: '/default-sitemap.xml',
     defaults: {
       priority: 1,
       lastmod: new Date(),
