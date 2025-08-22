@@ -53,7 +53,6 @@ export default {
     'nuxt-facebook-pixel-module',
     ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 }],
   ],
-  serverMiddleware: ['~/serverMiddleware/sitemapMiddleware.js'],
   components: true,
   facebook: {
     pixelId: '671820736795254',
