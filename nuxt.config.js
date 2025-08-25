@@ -44,9 +44,7 @@ export default {
   sitemap: {
     path: '/sitemap.xml',
     gzip: true,
-    hostname: process.env.HOST
-      ? `https://${process.env.HOST}`
-      : 'http://localhost:3000',
+    hostname: process.env.HOST || 'https://www.buonavita.com.co',
     defaults: {
       priority: 1,
       lastmod: new Date(),
