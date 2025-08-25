@@ -58,10 +58,12 @@ export default {
   sitemap: {
     path: '/sitemap.xml',
     gzip: true,
-    hostname: process.env.HOST || 'https://www.buonavita.com.co',
+    hostname: process.env.HOST?.startsWith('http')
+      ? process.env.HOST
+      : 'https://www.buonavita.com.co',
     defaults: {
       priority: 1,
-      lastmod: new Date(),
+      lastmod: new Date().toISOString(),
     },
     exclude: [
       '/template10',
@@ -79,24 +81,37 @@ export default {
       '/template99',
       '/unicentro',
     ],
-    routes: async () => {
-      // Define the static routes for the sitemap.
-      const staticUrls = ['/', '/productos', '/contacto', '/micompra', '/blog']
+    routes: [
+      '/',
+      '/blog',
+      '/contacto',
+      '/micompra',
+      '/productos',
 
-      // Define dynamic routes for templates, as indicated by your project's structure.
-      const templateUrls = []
-      for (let i = 1; i <= 20; i++) {
-        templateUrls.push(`/template${i}`)
-      }
+      // Productos estáticos
+      '/productos/bolso-1570-plata-281955',
+      '/productos/bolso-2409-blanco-capuchino-288386',
+      '/productos/bolso-2413-oro-288344',
+      '/productos/bolso-4164-luna-287757',
+      '/productos/bolso-blondi-lila-x-plata-176074',
+      '/productos/sandalia-2353-almendra-x-luna-tejida-283727',
+      '/productos/sandalia-7286-arizona-trigo-x-miel-181693',
+      '/productos/sandalia-tacon-738-verde-185195',
+      '/productos/tenis-buona-vita-blanco-x-piton-italiano-282127',
+      '/productos/tenis-chirimia-negro-282222',
+      '/productos/tenis-dulzaina-rosa-287279',
+      '/productos/tenis-tambor-leopardo-288247',
+      '/productos/zapato-7390-caramelo-x-mono-charol-negro-199086',
+      '/productos/zapato-pds-33-negro-x-capuccino-199092',
+      '/productos/zapato-pds-33-pardo-285551',
+      '/productos/zapato-pds-40-plata-283735',
+      '/productos/zapato-tacon-2530-verde-189536',
+      '/productos/zueco-2822-negro-186757',
+      '/productos/zueco-aleli-oro-193072',
 
-      // Combinar todas las URLs para el sitemap.
-      const allUrls = [...staticUrls, ...templateUrls]
-
-      // Log the generated URLs for debugging purposes
-      console.log('Sitemap URLs:', allUrls)
-
-      return allUrls
-    },
+      // Otras páginas
+      '/termsandconditions',
+    ],
   },
 
   // Component auto-discovery
