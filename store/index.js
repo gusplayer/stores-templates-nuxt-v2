@@ -350,14 +350,20 @@ export const actions = {
         await handleDataStore(state, commit)
       }
 
+      // Añadir una verificación de seguridad para el objeto `dataStore`
+      // y para las propiedades que se usarán en el `head` de Vue-meta.
+      const dataStore = state.dataStore || 'No se encontro la tienda'
+      const description = state.dataStore?.descripcion || ''
+      const title = state.dataStore?.title || ''
+
       const param = {
         url: req.headers.host,
         parts: req.headers.host.split('.'),
         subdomain,
         id,
-        dataStore: state.dataStore
-          ? state.dataStore
-          : 'No se encontro la tienda',
+        dataStore: dataStore,
+        description: description,
+        title: title,
       }
 
       commit('SET_INFO', param)

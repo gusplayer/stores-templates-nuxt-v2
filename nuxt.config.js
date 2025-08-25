@@ -63,26 +63,39 @@ export default {
       priority: 1,
       lastmod: new Date(),
     },
+    exclude: [
+      '/template10',
+      '/template11',
+      '/template12',
+      '/template13',
+      '/template14',
+      '/template15',
+      '/template16',
+      '/template5',
+      '/template6',
+      '/template7',
+      '/template8',
+      '/template9',
+      '/template99',
+      '/unicentro',
+    ],
     routes: async () => {
-      // Define the routes for the sitemap.
-      const urls = [
-        '/',
-        '/productos',
-        '/productos?category=Rebajas',
-        '/productos?category=Bolsos',
-        '/productos?category=Sandalias',
-        '/productos?page=1&category=Zapatos&subcategory=19656',
-        '/productos?page=1&category=Sandalias&subcategory=18814',
-        '/productos?page=1&category=Tenis',
-        '/contacto',
-        '/micompra',
-        '/blog',
-      ]
+      // Define the static routes for the sitemap.
+      const staticUrls = ['/', '/productos', '/contacto', '/micompra', '/blog']
+
+      // Define dynamic routes for templates, as indicated by your project's structure.
+      const templateUrls = []
+      for (let i = 1; i <= 20; i++) {
+        templateUrls.push(`/template${i}`)
+      }
+
+      // Combinar todas las URLs para el sitemap.
+      const allUrls = [...staticUrls, ...templateUrls]
 
       // Log the generated URLs for debugging purposes
-      console.log('Sitemap URLs:', urls)
+      console.log('Sitemap URLs:', allUrls)
 
-      return urls
+      return allUrls
     },
   },
 
