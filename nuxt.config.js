@@ -11,7 +11,11 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: process.env.npm_package_description || '',
+      },
       { name: 'google', content: 'notranslate' },
     ],
   },
@@ -40,57 +44,91 @@ export default {
   sitemap: {
     path: '/sitemap.xml',
     gzip: true,
-    hostname: process.env.HOST ? `https://${process.env.HOST}` : 'http://localhost:3000',
+    hostname: process.env.HOST
+      ? `https://${process.env.HOST}`
+      : 'http://localhost:3000',
     defaults: {
       priority: 1,
       lastmod: new Date(),
     },
     routes: async () => {
-      // Aquí definimos las rutas por host
-      const host = process.env.HOST || 'buonavita.com.co'
+      const host = process.env.VERCEL_URL || 'www.buonavita.com.co'
+      const hostname = host.startsWith('http') ? host : `https://${host}/`
 
-      // Mapa de hosts a rutas
       const hostRoutes = {
         'buonavita.com.co': [
           { url: '/', changefreq: 'daily', priority: 1.0 },
           { url: '/productos', changefreq: 'weekly', priority: 0.8 },
-          { url: '/productos?category=Rebajas', changefreq: 'weekly', priority: 0.8 },
-          { url: '/productos?category=Bolsos', changefreq: 'weekly', priority: 0.8 },
-          { url: '/productos?category=Sandalias', changefreq: 'weekly', priority: 0.8 },
-          { url: '/productos?page=1&category=Zapatos&subcategory=19656', changefreq: 'weekly', priority: 0.8 },
-          { url: '/productos?page=1&category=Sandalias&subcategory=18814', changefreq: 'weekly', priority: 0.8 },
-          { url: '/productos?page=1&category=Tenis', changefreq: 'weekly', priority: 0.8 },
+          {
+            url: '/productos?category=Rebajas',
+            changefreq: 'weekly',
+            priority: 0.8,
+          },
+          {
+            url: '/productos?category=Bolsos',
+            changefreq: 'weekly',
+            priority: 0.8,
+          },
+          {
+            url: '/productos?category=Sandalias',
+            changefreq: 'weekly',
+            priority: 0.8,
+          },
+          {
+            url: '/productos?page=1&category=Zapatos&subcategory=19656',
+            changefreq: 'weekly',
+            priority: 0.8,
+          },
+          {
+            url: '/productos?page=1&category=Sandalias&subcategory=18814',
+            changefreq: 'weekly',
+            priority: 0.8,
+          },
+          {
+            url: '/productos?page=1&category=Tenis',
+            changefreq: 'weekly',
+            priority: 0.8,
+          },
           { url: '/contacto', changefreq: 'monthly', priority: 0.5 },
           { url: '/micompra', changefreq: 'weekly', priority: 0.8 },
           { url: '/blog', changefreq: 'weekly', priority: 0.8 },
         ],
-        'otra-tienda.com.co': [
-          { url: '/', changefreq: 'daily', priority: 1.0 },
-          { url: '/catalogo', changefreq: 'weekly', priority: 0.8 },
-          { url: '/contacto', changefreq: 'monthly', priority: 0.5 },
-        ],
-        // agrega más hosts aquí según necesites
       }
 
-      // Si el host no está en el mapa, devolvemos ruta por defecto
-      const urls = hostRoutes[host] || [
-        { url: '/', changefreq: 'daily', priority: 1.0 }
+      let urls = hostRoutes[host] || [
+        { url: '/', changefreq: 'daily', priority: 1.0 },
       ]
 
-      console.log(`Generando sitemap para host: ${host}`, urls)
+      // codifica query strings
+      urls = urls.map((r) => {
+        const [path, query] = r.url.split('?')
+        return query ? { ...r, url: `${path}?${encodeURIComponent(query)}` } : r
+      })
+
+      console.log(`Sitemap host: ${host}`, urls)
       return urls
-    }
+    },
   },
 
   components: true,
   facebook: { pixelId: '671820736795254', autoPageView: true },
   build: {
-    postcss: { postcssOptions: { plugins: { tailwindcss: {}, autoprefixer: {} } } },
-    babel: { plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]] },
+    postcss: {
+      postcssOptions: { plugins: { tailwindcss: {}, autoprefixer: {} } },
+    },
+    babel: {
+      plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],
+    },
     transpile: ['vee-validate/dist/rules'],
     optimizeCSS: true,
     parallel: true,
-    splitChunks: { pages: true, vendor: true, commons: true, runtime: true, layouts: true },
+    splitChunks: {
+      pages: true,
+      vendor: true,
+      commons: true,
+      runtime: true,
+      layouts: true,
+    },
     optimization: { splitChunks: { name: false } },
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) config.devtool = 'source-map'
