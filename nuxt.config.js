@@ -1,10 +1,14 @@
+// A simple path join utility for use in the build process
 import path from 'path'
 
 export default {
+  // Server configuration
   server: {
     host: '0.0.0.0',
     port: process.env.PORT || 3000,
   },
+
+  // SEO and Head tags for the application
   head: {
     title: process.env.npm_package_name || '',
     htmlAttrs: { lang: 'es' },
@@ -19,8 +23,14 @@ export default {
       { name: 'google', content: 'notranslate' },
     ],
   },
+
+  // Loading indicator configuration
   loading: { color: 'grey', height: '3px' },
+
+  // Global CSS files
   css: ['element-ui/lib/theme-chalk/index.css', '@/assets/css/tailwind.css'],
+
+  // Nuxt plugins to be included in the build
   plugins: [
     '~/plugins/jsonld',
     '~/plugins/element',
@@ -35,12 +45,16 @@ export default {
     { src: '~/plugins/elementTipTap', ssr: false },
     { src: '~/plugins/chatwoot.js', ssr: false },
   ],
+
+  // Nuxt modules to be included in the build
   modules: [
     '@nuxtjs/gtm',
-    '@nuxtjs/sitemap', // activamos el módulo sitemap
+    '@nuxtjs/sitemap', // Activate the sitemap module
     'nuxt-facebook-pixel-module',
     ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 }],
   ],
+
+  // Sitemap module configuration
   sitemap: {
     path: '/sitemap.xml',
     gzip: true,
@@ -50,66 +64,35 @@ export default {
       lastmod: new Date(),
     },
     routes: async () => {
-      const host = process.env.VERCEL_URL || 'www.buonavita.com.co'
-      const hostname = host.startsWith('http') ? host : `https://${host}/`
-
-      const hostRoutes = {
-        'buonavita.com.co': [
-          { url: '/', changefreq: 'daily', priority: 1.0 },
-          { url: '/productos', changefreq: 'weekly', priority: 0.8 },
-          {
-            url: '/productos?category=Rebajas',
-            changefreq: 'weekly',
-            priority: 0.8,
-          },
-          {
-            url: '/productos?category=Bolsos',
-            changefreq: 'weekly',
-            priority: 0.8,
-          },
-          {
-            url: '/productos?category=Sandalias',
-            changefreq: 'weekly',
-            priority: 0.8,
-          },
-          {
-            url: '/productos?page=1&category=Zapatos&subcategory=19656',
-            changefreq: 'weekly',
-            priority: 0.8,
-          },
-          {
-            url: '/productos?page=1&category=Sandalias&subcategory=18814',
-            changefreq: 'weekly',
-            priority: 0.8,
-          },
-          {
-            url: '/productos?page=1&category=Tenis',
-            changefreq: 'weekly',
-            priority: 0.8,
-          },
-          { url: '/contacto', changefreq: 'monthly', priority: 0.5 },
-          { url: '/micompra', changefreq: 'weekly', priority: 0.8 },
-          { url: '/blog', changefreq: 'weekly', priority: 0.8 },
-        ],
-      }
-
-      let urls = hostRoutes[host] || [
-        { url: '/', changefreq: 'daily', priority: 1.0 },
+      // Define the routes for the sitemap.
+      const urls = [
+        '/',
+        '/productos',
+        '/productos?category=Rebajas',
+        '/productos?category=Bolsos',
+        '/productos?category=Sandalias',
+        '/productos?page=1&category=Zapatos&subcategory=19656',
+        '/productos?page=1&category=Sandalias&subcategory=18814',
+        '/productos?page=1&category=Tenis',
+        '/contacto',
+        '/micompra',
+        '/blog',
       ]
 
-      // codifica query strings
-      urls = urls.map((r) => {
-        const [path, query] = r.url.split('?')
-        return query ? { ...r, url: `${path}?${encodeURIComponent(query)}` } : r
-      })
+      // Log the generated URLs for debugging purposes
+      console.log('Sitemap URLs:', urls)
 
-      console.log(`Sitemap host: ${host}`, urls)
       return urls
     },
   },
 
+  // Component auto-discovery
   components: true,
+
+  // Facebook Pixel module configuration
   facebook: { pixelId: '671820736795254', autoPageView: true },
+
+  // Build configuration
   build: {
     postcss: {
       postcssOptions: { plugins: { tailwindcss: {}, autoprefixer: {} } },
@@ -132,5 +115,7 @@ export default {
       if (isDev && isClient) config.devtool = 'source-map'
     },
   },
+
+  // Router configuration
   router: { base: '/' },
 }
