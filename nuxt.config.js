@@ -49,21 +49,17 @@ export default {
   // Nuxt modules to be included in the build
   modules: [
     '@nuxtjs/gtm',
-    '@nuxtjs/sitemap', // Activate the sitemap module
     'nuxt-facebook-pixel-module',
     ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 }],
+    '@nuxtjs/sitemap', // Activate the sitemap module
   ],
 
   // Sitemap module configuration
   sitemap: {
-    path: '/sitemap.xml',
     gzip: true,
-    hostname: process.env.HOST?.startsWith('http')
-      ? process.env.HOST
-      : 'https://www.buonavita.com.co',
     defaults: {
       priority: 1,
-      lastmod: new Date().toISOString(),
+      lastmod: new Date(),
     },
     exclude: [
       '/template10',
@@ -80,37 +76,6 @@ export default {
       '/template9',
       '/template99',
       '/unicentro',
-    ],
-    routes: [
-      '/',
-      '/blog',
-      '/contacto',
-      '/micompra',
-      '/productos',
-
-      // Productos estáticos
-      '/productos/bolso-1570-plata-281955',
-      '/productos/bolso-2409-blanco-capuchino-288386',
-      '/productos/bolso-2413-oro-288344',
-      '/productos/bolso-4164-luna-287757',
-      '/productos/bolso-blondi-lila-x-plata-176074',
-      '/productos/sandalia-2353-almendra-x-luna-tejida-283727',
-      '/productos/sandalia-7286-arizona-trigo-x-miel-181693',
-      '/productos/sandalia-tacon-738-verde-185195',
-      '/productos/tenis-buona-vita-blanco-x-piton-italiano-282127',
-      '/productos/tenis-chirimia-negro-282222',
-      '/productos/tenis-dulzaina-rosa-287279',
-      '/productos/tenis-tambor-leopardo-288247',
-      '/productos/zapato-7390-caramelo-x-mono-charol-negro-199086',
-      '/productos/zapato-pds-33-negro-x-capuccino-199092',
-      '/productos/zapato-pds-33-pardo-285551',
-      '/productos/zapato-pds-40-plata-283735',
-      '/productos/zapato-tacon-2530-verde-189536',
-      '/productos/zueco-2822-negro-186757',
-      '/productos/zueco-aleli-oro-193072',
-
-      // Otras páginas
-      '/termsandconditions',
     ],
   },
 
