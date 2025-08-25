@@ -43,14 +43,16 @@ export default {
   },
   mixins: [mobileCheck],
   head() {
-    let tienda = this.dataStore ?? ''
-    let geolocation = this.geolocalizacion ?? ''
-    let addiSlug = this.analytics_tagmanager?.addiAllySlug ?? ''
-    let description =
-      tienda?.tiendasInfo.descripcion?.replace(/<[^>]*>?/g, '') ?? ''
-    let FacebookPixel1 =
+    const tienda = this.dataStore ?? {}
+    const geolocation = this.geolocalizacion ?? []
+    const addiSlug = this.analytics_tagmanager?.addiAllySlug ?? ''
+    const description =
+      tienda?.tiendasInfo?.descripcion?.replace(/<[^>]*>?/g, '') ??
+      'Tienda Online'
+    const FacebookPixel1 =
       this.analytics_tagmanager?.facebook_pixel_metatag_1 ?? ''
-    let googleMerchants = this.analytics_tagmanager?.google_merchant ?? ''
+    const googleMerchants = this.analytics_tagmanager?.google_merchant ?? ''
+
     return {
       title: tienda.nombre ? tienda.nombre : 'Tienda',
       htmlAttrs: {
