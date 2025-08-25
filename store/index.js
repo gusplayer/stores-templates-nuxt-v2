@@ -335,38 +335,46 @@ export const actions = {
     }
   },
   async nuxtServerInit({ commit, dispatch, state }, { req }) {
-    const { subdomain, id, template, idWapi, isDataTemplate } = await getIdData(
-      state,
-      req,
-      commit
-    )
-    // let idWapi = ''
-    // let id = {
-    //   data: {
-    //     data: {
-    //       id: 14513,
-    //       template: 13,
-    //     },
-    //   },
-    // }
+    // Aseguramos que el objeto 'req' existe antes de usarlo.
+    if (process.server && req && req.headers) {
+      const { subdomain, id, template, idWapi, isDataTemplate } =
+        await getIdData(state, req, commit)
 
-    if (idWapi) {
-      await handleWapi(commit, dispatch, idWapi, isDataTemplate)
+      if (idWapi) {
+        await handleWapi(commit, dispatch, idWapi, isDataTemplate)
+      } else {
+        await handleKomercia(id, template, isDataTemplate, commit, dispatch)
+      }
+
+      if (!state.storeError) {
+        await handleDataStore(state, commit)
+      }
+
+      // Añadir una verificación de seguridad para el objeto `dataStore`
+      // y para las propiedades que se usarán en el `head` de Vue-meta.
+      const dataStore = state.dataStore || 'No se encontro la tienda'
+      const description = state.dataStore?.descripcion || ''
+      const title = state.dataStore?.title || ''
+
+      const param = {
+        url: req.headers.host,
+        parts: req.headers.host.split('.'),
+        subdomain,
+        id,
+        dataStore: dataStore,
+        description: description,
+        title: title,
+      }
+
+      commit('SET_INFO', param)
     } else {
-      await handleKomercia(id, template, isDataTemplate, commit, dispatch)
+      // Manejar el caso del lado del cliente o donde 'req' no está disponible.
+      // Aquí puedes inicializar la tienda con valores predeterminados
+      // para que la aplicación no falle en el lado del cliente.
+      console.error(
+        "The 'req' object is not available. Skipping server-side data initialization."
+      )
     }
-    if (!state.storeError) {
-      await handleDataStore(state, commit)
-    }
-
-    const param = {
-      url: req.headers.host,
-      parts: req.headers.host.split('.'),
-      subdomain,
-      id,
-      dataStore: state.dataStore ? state.dataStore : 'No se encontro la tienda',
-    }
-    commit('SET_INFO', param)
   },
   GET_SERVER_PATH({ commit }, value) {
     commit('SET_SERVER_PATH', value)
