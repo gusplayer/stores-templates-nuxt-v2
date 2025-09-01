@@ -272,6 +272,9 @@ export default {
       this.filters.price = query.price || null
       this.filters.topSales = query.topSales || null
 
+      // Sincroniza el valor de búsqueda con el filtro name de la query
+      this.searchProduct = query.name || null
+
       this.currentChange(this.filters)
       this.setData()
     },
@@ -421,8 +424,10 @@ export default {
     },
     // Cambios de paginado
     changePage(value) {
-      this.previousPage = value
-      this.updateFilters()
+      this.previousPage = value;
+      // Asegura que el filtro de búsqueda y otros filtros se mantengan en la query
+      this.filters.page = value;
+      this.updateFilters();
     },
     // limpiar filtros de ordenamiento de lista
     clearOrder() {
