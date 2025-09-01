@@ -1,32 +1,17 @@
 <template>
-  <el-drawer
-    :visible.sync="openSearch"
-    :before-close="closedSearch"
-    direction="ttb"
-    :with-header="false"
-    :modal-append-to-body="false"
-    class="width-drawer"
-    size="150px"
-  >
+  <el-drawer :visible.sync="openSearch" :before-close="closedSearch" direction="ttb" :with-header="false"
+    :modal-append-to-body="false" class="width-drawer" size="150px">
     <div class="order_content">
       <div class="close-container" @click="closedSearch">
         <div class="content-close">
-          <div
-            class="leftright"
-            :style="`background: ${
-              settingByTemplate && settingByTemplate.color_primario
-                ? settingByTemplate.color_primario
-                : '#25D366'
-            };`"
-          ></div>
-          <div
-            class="rightleft"
-            :style="`background: ${
-              settingByTemplate && settingByTemplate.color_primario
-                ? settingByTemplate.color_primario
-                : '#25D366'
-            };`"
-          ></div>
+          <div class="leftright" :style="`background: ${settingByTemplate && settingByTemplate.color_primario
+            ? settingByTemplate.color_primario
+            : '#25D366'
+            };`"></div>
+          <div class="rightleft" :style="`background: ${settingByTemplate && settingByTemplate.color_primario
+            ? settingByTemplate.color_primario
+            : '#25D366'
+            };`"></div>
         </div>
       </div>
       <div class="products-search">
@@ -35,35 +20,20 @@
             <div class="cont-search-up">
               <p class="txt-search-up">{{ $t('home_buscar') }}</p>
             </div>
-            <input
-              id="myInput"
-              v-model="query.name"
-              type="search "
-              class="input-search"
-              :placeholder="$t('home_buscar')"
-              @change="setToQueryFilter('search')"
-              @keyup.enter="setToQueryFilter('search')"
-            />
+            <input id="myInput" v-model="query.name" type="search " class="input-search"
+              :placeholder="$t('home_buscar')" @change="setToQueryFilter('search')"
+              @keyup.enter="setToQueryFilter('search')" />
           </div>
         </div>
         <div class="cont-btn">
-          <button
-            class="content-btn w-full text-center py-4"
-            :style="`background: ${
-              settingByTemplate && settingByTemplate.color_primario
-                ? settingByTemplate.color_primario
-                : '#25D366'
-            };`"
-            @click="closedSearch"
-          >
-            <span
-              class="text-16 font-bold btn-txt"
-              :style="`color:${
-                settingByTemplate && settingByTemplate.color_secundario
-                  ? settingByTemplate.color_secundario
-                  : '#FFFFFF'
-              };`"
-            >
+          <button class="content-btn w-full text-center py-4" :style="`background: ${settingByTemplate && settingByTemplate.color_primario
+            ? settingByTemplate.color_primario
+            : '#25D366'
+            };`" @click="closedSearch">
+            <span class="text-16 font-bold btn-txt" :style="`color:${settingByTemplate && settingByTemplate.color_secundario
+              ? settingByTemplate.color_secundario
+              : '#FFFFFF'
+              };`">
               {{ $t('home_vamos') }}
             </span>
           </button>
@@ -104,6 +74,8 @@ export default {
     },
     setToQueryFilter(type) {
       if (type === 'search') {
+        console.log(this.query)
+        console.log("AA", type)
         this.query.name = this.query.name || null
         this.getSearch(this.query.name)
       }
@@ -171,6 +143,7 @@ export default {
   padding-bottom: 10px;
   overflow: hidden;
 }
+
 .products-search {
   display: flex;
   flex-direction: row;
@@ -181,20 +154,24 @@ export default {
   max-width: 900px;
   z-index: 10;
 }
+
 input[type='search'] {
   border: none;
   width: 100%;
 }
+
 .search-input-content {
   @apply w-full flex flex-row justify-start items-center z-20;
   font-size: 25px;
   color: #000;
   font-weight: 800;
 }
+
 .input-search {
   border-bottom: 1px solid black;
   @apply w-full items-center z-10;
 }
+
 ::-webkit-input-placeholder {
   @apply text-left items-center;
   font-size: 25px;
@@ -202,26 +179,32 @@ input[type='search'] {
   color: #000;
   padding-left: 5px;
 }
+
 .form-search:focus .cont-search-up {
   display: flex;
 }
+
 .cont-search-up {
   @apply -mt-4;
   display: none;
 }
+
 .txt-search-up {
   font-size: 25px;
   font-weight: 800;
   margin-left: 10px;
   color: #2c2930;
 }
+
 .cont-btn {
   @apply h-full flex flex-col justify-center items-center;
 }
+
 .content-btn {
   max-height: 37px;
   border-radius: 5px;
 }
+
 .content-btn:hover {
   @apply shadow-lg;
   background-color: #edeaea;
@@ -230,82 +213,102 @@ input[type='search'] {
 .content-btn:hover .btn-txt {
   color: #2c2930;
 }
+
 .close-container {
   width: 100%;
   max-width: 900px;
   @apply relative h-50 flex justify-end items-center;
 }
+
 .leftright {
   @apply h-2 w-20 absolute rounded-2 transform -rotate-45 transition-all ease-in duration-200;
 }
+
 .rightleft {
   @apply h-2 w-20 absolute rounded-2 transform rotate-45 transition-all ease-in duration-200;
 }
+
 .content-close {
   @apply flex justify-center items-center cursor-pointer;
   width: 20px;
   height: 20px;
 }
+
 .content-close:hover .leftright {
   @apply transform rotate-0;
 }
+
 .content-close:hover .rightleft {
   @apply transform rotate-0;
 }
+
 @screen sm {
   .products-search {
     @apply w-full flex flex-col justify-items-center items-center;
   }
+
   .search-input-content {
     @apply w-8/0;
   }
+
   .cont-btn {
     margin-top: 10px;
     @apply w-8/0 h-auto;
   }
+
   .content-btn {
     @apply w-full;
     height: 48px;
   }
+
   .content-close {
     margin-right: 20px;
     margin-top: 20px;
   }
 }
+
 @media (min-width: 480px) {
   .products-search {
     @apply flex flex-row;
   }
+
   .search-input-content {
     @apply w-auto;
   }
+
   .cont-btn {
     margin-top: 0px;
     @apply w-auto h-auto;
   }
+
   .content-btn {
     width: 80px;
     height: 48px;
   }
 }
+
 @media (min-width: 640px) {
   .content-btn {
     width: 180px;
   }
 }
+
 @screen md {
   .products-search {
     @apply -mt-6;
   }
+
   .search-input-content {
     @apply w-6/0;
   }
 }
+
 @screen xl {
   .search-input-content {
     @apply w-7/0;
   }
 }
+
 @screen xml {
   .search-input-content {
     @apply w-8/0;
