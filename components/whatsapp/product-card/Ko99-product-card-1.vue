@@ -15,7 +15,7 @@
           <img
             v-lazy="
               product?.foto_cloudinary == 'sin_foto.jpeg'
-                ? 'https://res.cloudinary.com/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
+                ? 'https://img.komercia.store/komerciaacademico/image/upload/v1637945917/komerica/sws8xa8z0oyu252nqxzv_cgwcdb.png'
                 : idCloudinary(product.foto_cloudinary, 550, 550)
             "
             width="265"

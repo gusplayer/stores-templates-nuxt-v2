@@ -65,7 +65,7 @@
         >
           <img
             v-lazy="
-              `https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1620052318/midasSoluciones/LOGO_CHICO_1_ezxrjw.png`
+              `https://img.komercia.store/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1620052318/midasSoluciones/LOGO_CHICO_1_ezxrjw.png`
             "
             class="logo-midasoluciones"
             alt="Logo Img"
@@ -82,7 +82,7 @@
           >
             <img
               v-lazy="
-                `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
+                `https://img.komercia.store/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
               "
               class="logo-wapi"
               alt="Logo Img"

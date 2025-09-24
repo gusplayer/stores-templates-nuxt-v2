@@ -65,7 +65,7 @@
         <img
           v-if="logo"
           v-lazy="
-            `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
+            `https://img.komercia.store/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1575331333/components/files/majg1iax3sjgrtyvrs9x.png`
           "
           width="120"
           loading="lazy"
@@ -75,7 +75,7 @@
         <img
           v-else
           v-lazy="
-            `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
+            `https://img.komercia.store/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
           "
           width="120"
           loading="lazy"

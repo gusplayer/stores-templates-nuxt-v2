@@ -56,7 +56,7 @@ export default {
 }
 .content-bg {
   background-position: 50% 72.0205%;
-  /* background-image: url('https://res.cloudinary.com/brahyanr10/image/upload/v1616200598/Template11/Newslatter/newsletter-bg_cko8so.jpg'); */
+  /* background-image: url('https://img.komercia.store/brahyanr10/image/upload/v1616200598/Template11/Newslatter/newsletter-bg_cko8so.jpg'); */
   @apply w-full flex flex-col justify-center items-center bg-fixed bg-no-repeat bg-cover;
 }
 .content-txt {

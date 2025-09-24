@@ -1,6 +1,7 @@
 export const strict = false
 import axios from 'axios'
 import getCookie from '../utils/getCookie'
+import { normalizeCloudinaryPayload } from '@/utils/cloudinary'
 export const state = () => ({
   fullPathServer: '',
   template: '',
@@ -190,7 +191,12 @@ export const mutations = {
     state.whatsapp = state.dataStore.redes.whatsapp
   },
   SET_SHOPPING_CART(state, value) {
-    state.productsCart = value || []
+    const normalizedCart = normalizeCloudinaryPayload(value)
+    state.productsCart = Array.isArray(normalizedCart)
+      ? normalizedCart
+      : normalizedCart
+      ? [normalizedCart]
+      : []
   },
   UPDATE_CONTENT_CART(state) {
     state.totalCart = 0
@@ -212,29 +218,30 @@ export const mutations = {
     state.cities = payload
   },
   SET_CATEGORIES: (state, payload) => {
-    state.categorias = payload
+    state.categorias = normalizeCloudinaryPayload(payload)
   },
   SET_SUBCATEGORIES: (state, payload) => {
-    state.subcategorias = payload
+    state.subcategorias = normalizeCloudinaryPayload(payload)
   },
   SET_STORE_GEOLOCALIZACION: (state, payload) => {
-    state.geolocalizacion = payload
+    state.geolocalizacion = normalizeCloudinaryPayload(payload)
   },
   SET_STORE_POLICIES: (state, payload) => {
-    state.storePolicies = payload
+    state.storePolicies = normalizeCloudinaryPayload(payload)
   },
   SET_CHECKOUT_WHATS_APP: (state, payload) => {
-    state.checkoutWhatsApp = payload
+    state.checkoutWhatsApp = normalizeCloudinaryPayload(payload)
   },
   SET_ENTITIES: (state, payload) => {
-    state.storeEntities = payload
+    state.storeEntities = normalizeCloudinaryPayload(payload)
   },
   SET_SETTINGS_BY_TEMPLATE: (state, { templateNumber, value }) => {
+    const normalizedValue = normalizeCloudinaryPayload(value)
     if (templateNumber === 5 || templateNumber === 99) {
-      state.settingByTemplate = value
+      state.settingByTemplate = normalizedValue
     } else {
       const statePropertyName = `settingByTemplate${templateNumber}`
-      state[statePropertyName] = value
+      state[statePropertyName] = normalizedValue
     }
   },
   SET_STATE_WAPIME: (state, value) => {
@@ -244,7 +251,7 @@ export const mutations = {
     state.analytics_tagmanager = value
   },
   DATA: (state, response) => {
-    state.dataStore = response.data
+    state.dataStore = normalizeCloudinaryPayload(response.data)
   },
   SET_SERVER_PATH(state, value) {
     state.fullPathServer = value
@@ -253,7 +260,7 @@ export const mutations = {
     state.template = value
   },
   SET_DATA_HOKO(state, data) {
-    state.dataHoko = data
+    state.dataHoko = normalizeCloudinaryPayload(data)
   },
   SET_STATE_MODAL_PWD(state, data) {
     state.stateModalPwd = data
@@ -265,7 +272,7 @@ export const mutations = {
     state.tempInfo = data
   },
   SET_LOGO_STORE(state, data) {
-    state.logoStore = data
+    state.logoStore = normalizeCloudinaryPayload(data)
   },
   /////////
   // SET_LIST_ARTICLES(state, value) {

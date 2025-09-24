@@ -68,7 +68,7 @@
               :src="
                 banner.img_main
                   ? idCloudinary(banner.img_main, 850, 850)
-                  : 'https://res.cloudinary.com/komercia-components/image/upload/c_scale,q_auto:best,f_auto/v1598040886/sws8xa8z0oyu252nqxzv.webp'
+                  : 'https://img.komercia.store/komercia-components/image/upload/c_scale,q_auto:best,f_auto/v1598040886/sws8xa8z0oyu252nqxzv.webp'
               "
               alt="banner1"
               width="616"
@@ -84,7 +84,7 @@
                 :src="
                   banner.img_second_1
                     ? idCloudinary(banner.img_second_1, 550, 550)
-                    : 'https://res.cloudinary.com/komercia-components/image/upload/c_scale,q_auto:best,f_auto/v1598040886/sws8xa8z0oyu252nqxzv.webp'
+                    : 'https://img.komercia.store/komercia-components/image/upload/c_scale,q_auto:best,f_auto/v1598040886/sws8xa8z0oyu252nqxzv.webp'
                 "
                 alt="banner2"
                 width="292"
@@ -97,7 +97,7 @@
                 :src="
                   banner.img_second_2
                     ? idCloudinary(banner.img_second_2, 550, 550)
-                    : 'https://res.cloudinary.com/komercia-components/image/upload/c_scale,q_auto:best,f_auto/v1598040886/sws8xa8z0oyu252nqxzv.webp'
+                    : 'https://img.komercia.store/komercia-components/image/upload/c_scale,q_auto:best,f_auto/v1598040886/sws8xa8z0oyu252nqxzv.webp'
                 "
                 alt="banner3"
                 width="292"

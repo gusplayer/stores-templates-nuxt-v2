@@ -226,7 +226,7 @@
           >
             <img
               v-lazy="
-                `https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
+                `https://img.komercia.store/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1582151044/assets/cnrizgaks15xpkxk22ex.png`
               "
               class="logo2"
               alt="Logo Img"

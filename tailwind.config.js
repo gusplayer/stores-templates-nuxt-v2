@@ -2387,7 +2387,7 @@ module.exports = {
       },
       backgroundImage: (theme) => ({
         hworkbg:
-          "url('https://res.cloudinary.com/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1610008708/Komercia/Work/flowers-infobox-line-bg_wcixcy.svg')",
+          "url('https://img.komercia.store/brahyanr10/image/upload/c_scale,q_auto:best,f_auto/v1610008708/Komercia/Work/flowers-infobox-line-bg_wcixcy.svg')",
       }),
     },
   },

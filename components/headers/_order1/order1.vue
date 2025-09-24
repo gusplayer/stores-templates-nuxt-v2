@@ -990,7 +990,7 @@ export default {
   },
   data() {
     return {
-      // img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
+      // img: 'https://img.komercia.store/komerciaacademico/image/upload/v1583535445/komerciaAcademico/CARRITO_y2lbh6.png',
       shippingCities: [],
       // rangosByCiudad: [],
       remove: false,

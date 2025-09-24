@@ -65,7 +65,7 @@
             rel="noreferrer noopener"
           >
             <img
-              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335270/Templates%20Modos%20de%20pago/Credibanco_lprsof.png"
+              src="https://img.komercia.store/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335270/Templates%20Modos%20de%20pago/Credibanco_lprsof.png"
               alt="logo Credibanco"
             />
           </a>
@@ -82,7 +82,7 @@
             {{ $t('productdetail_ConsignaciondaviplataMsg') }}
           </p>
           <img
-            src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333767/Templates%20Modos%20de%20pago/5c89c897e1917d9209a762af_davi_qn90y9.png"
+            src="https://img.komercia.store/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333767/Templates%20Modos%20de%20pago/5c89c897e1917d9209a762af_davi_qn90y9.png"
             alt="logo daviPlata"
           />
         </div>
@@ -95,7 +95,7 @@
             rel="noreferrer noopener"
           >
             <img
-              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333023/Templates%20Modos%20de%20pago/Efecty-png_q3fvog.png"
+              src="https://img.komercia.store/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333023/Templates%20Modos%20de%20pago/Efecty-png_q3fvog.png"
               alt="logo efecty"
             />
           </a>
@@ -111,7 +111,7 @@
             rel="noreferrer noopener"
           >
             <img
-              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606331948/Templates%20Modos%20de%20pago/mercadopago_jyalpa.png"
+              src="https://img.komercia.store/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606331948/Templates%20Modos%20de%20pago/mercadopago_jyalpa.png"
               alt="logo mercadopago"
             />
           </a>
@@ -127,7 +127,7 @@
             rel="noreferrer noopener"
           >
             <img
-              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333553/Templates%20Modos%20de%20pago/Nequi_by_Bancolombia_hxhkhb.png"
+              src="https://img.komercia.store/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606333553/Templates%20Modos%20de%20pago/Nequi_by_Bancolombia_hxhkhb.png"
               alt="logo nequi"
             />
           </a>
@@ -138,7 +138,7 @@
             {{ $t('productdetail_PasarelaEpaycoMsg') }}
           </p>
           <img
-            src="https://res.cloudinary.com/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1579296851/assets/pasarela-epayco.png"
+            src="https://img.komercia.store/komercia-components/image/upload/c_scale,w_500,q_auto:best,f_auto/v1579296851/assets/pasarela-epayco.png"
             alt="Pasarela de pagos epayco"
           />
         </div>
@@ -166,7 +166,7 @@
           </p>
           <a href="https://wompi.co/" target="_blank" rel="noreferrer noopener">
             <img
-              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335739/Templates%20Modos%20de%20pago/wompi_jxuitu.png"
+              src="https://img.komercia.store/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1606335739/Templates%20Modos%20de%20pago/wompi_jxuitu.png"
               alt="wompi"
               border="0"
             />
@@ -183,7 +183,7 @@
             rel="noreferrer noopener"
           >
             <img
-              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1639078440/wePay4u/powered_by_z7sgqp.png"
+              src="https://img.komercia.store/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1639078440/wePay4u/powered_by_z7sgqp.png"
               alt="wePay4u"
               border="0"
             />
@@ -200,7 +200,7 @@
             rel="noreferrer noopener"
           >
             <img
-              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1645131256/komerica/tucompra_ss0oys.png"
+              src="https://img.komercia.store/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1645131256/komerica/tucompra_ss0oys.png"
               alt="tu_compra"
               border="0"
             />
@@ -217,7 +217,7 @@
             rel="noreferrer noopener"
           >
             <img
-              src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1645131256/komerica/flow_jevnwy.png"
+              src="https://img.komercia.store/komerciaacademico/image/upload/c_scale,w_500,q_auto:best,f_auto/v1645131256/komerica/flow_jevnwy.png"
               alt="flow"
               border="0"
             />

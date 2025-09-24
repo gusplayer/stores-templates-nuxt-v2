@@ -739,7 +739,7 @@ export default {
               if (this.settingByTemplate10[0].detailsProduct.url_img_bg) {
                 imagen.style.backgroundImage = `url(${this.settingByTemplate10[0].detailsProduct.url_img_bg})`
               } else {
-                imagen.style.backgroundImage = `url(https://res.cloudinary.com/brahyanr10/image/upload/v1614233821/Temp10/Productos/bg-beagrumb_gxvk1i.jpg)`
+                imagen.style.backgroundImage = `url(https://img.komercia.store/brahyanr10/image/upload/v1614233821/Temp10/Productos/bg-beagrumb_gxvk1i.jpg)`
               }
             } else if (value == 2) {
               imagen.style.backgroundImage = ''

@@ -76,7 +76,7 @@ export default {
           title: 'Colombia',
           currencySign: '$',
           simbolo: 'COP',
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Colombia_kz1t6d.png',
+          img: 'https://img.komercia.store/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Colombia_kz1t6d.png',
         },
         {
           id: 2,
@@ -84,7 +84,7 @@ export default {
           title: 'Internacional',
           currencySign: '$',
           simbolo: 'USD',
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Internacional_rzalry.png',
+          img: 'https://img.komercia.store/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Internacional_rzalry.png',
         },
         {
           id: 3,
@@ -92,7 +92,7 @@ export default {
           title: 'México',
           currencySign: '$',
           simbolo: 'MXN',
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Mexico_dibihf.png',
+          img: 'https://img.komercia.store/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Mexico_dibihf.png',
         },
         {
           id: 6,
@@ -100,7 +100,7 @@ export default {
           title: 'Argentina',
           currencySign: '$',
           simbolo: 'ARS',
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/q_auto,f_auto/v1653417092/komerica/Banderas/Argentina_twinoc.png',
+          img: 'https://img.komercia.store/komerciaacademico/image/upload/q_auto,f_auto/v1653417092/komerica/Banderas/Argentina_twinoc.png',
         },
         {
           id: 7,
@@ -108,7 +108,7 @@ export default {
           title: 'Chile',
           currencySign: '$',
           simbolo: 'CLP',
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Chile_rzygtf.png',
+          img: 'https://img.komercia.store/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Chile_rzygtf.png',
         },
         {
           id: 8,
@@ -116,7 +116,7 @@ export default {
           title: 'Puerto Rico',
           currencySign: '$',
           simbolo: 'USD',
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Puerto_Rico_uorvfh.png',
+          img: 'https://img.komercia.store/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Puerto_Rico_uorvfh.png',
         },
         {
           id: 9,
@@ -124,7 +124,7 @@ export default {
           title: 'Perú',
           currencySign: 'S/',
           simbolo: '',
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Peru_v36g5q.png',
+          img: 'https://img.komercia.store/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Peru_v36g5q.png',
         },
         {
           id: 10,
@@ -132,7 +132,7 @@ export default {
           title: 'Panamá',
           currencySign: '$',
           simbolo: 'USD',
-          img: 'https://res.cloudinary.com/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Panama_pdney2.png',
+          img: 'https://img.komercia.store/komerciaacademico/image/upload/q_auto,f_auto/v1653417091/komerica/Banderas/Panama_pdney2.png',
         },
       ],
     }

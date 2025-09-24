@@ -4,7 +4,7 @@
       class="wrapper-banner flex w-full max-w-5xl items-center justify-center bg-[#028090]"
     >
       <img
-        src="https://res.cloudinary.com/komerciaacademico/image/upload/v1721394158/Template17/Captura_de_pantalla_2024-07-19_075326_fm2pnf.png"
+        src="https://img.komercia.store/komerciaacademico/image/upload/v1721394158/Template17/Captura_de_pantalla_2024-07-19_075326_fm2pnf.png"
         alt=""
       />
     </div>

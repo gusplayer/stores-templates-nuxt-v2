@@ -74,14 +74,14 @@ export default {
           {
             url_redirect: '/',
             img_res:
-              'https://res.cloudinary.com/komerciaacademico/image/upload/v1721394513/Template17/Captura_de_pantalla_2024-07-19_075201_bchplw.png',
-            img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1721394513/Template17/Captura_de_pantalla_2024-07-19_075201_bchplw.png',
+              'https://img.komercia.store/komerciaacademico/image/upload/v1721394513/Template17/Captura_de_pantalla_2024-07-19_075201_bchplw.png',
+            img: 'https://img.komercia.store/komerciaacademico/image/upload/v1721394513/Template17/Captura_de_pantalla_2024-07-19_075201_bchplw.png',
           },
           {
             url_redirect: '/',
             img_res:
-              'https://res.cloudinary.com/komerciaacademico/image/upload/v1721394513/Template17/Captura_de_pantalla_2024-07-19_075201_bchplw.png',
-            img: 'https://res.cloudinary.com/komerciaacademico/image/upload/v1721394513/Template17/Captura_de_pantalla_2024-07-19_075201_bchplw.png',
+              'https://img.komercia.store/komerciaacademico/image/upload/v1721394513/Template17/Captura_de_pantalla_2024-07-19_075201_bchplw.png',
+            img: 'https://img.komercia.store/komerciaacademico/image/upload/v1721394513/Template17/Captura_de_pantalla_2024-07-19_075201_bchplw.png',
           },
         ],
       },

@@ -12,13 +12,13 @@
         <div class="wrapper-img-text" @click="clearFilters">
           <img
             v-if="dataStore.id == 12664"
-            src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649430112/Xiaomi_logo__2021_ejxsbk.png"
+            src="https://img.komercia.store/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649430112/Xiaomi_logo__2021_ejxsbk.png"
             class="product-image"
             alt="icon all"
           />
           <img
             v-else
-            src="https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649430214/2549900_umsosz.png"
+            src="https://img.komercia.store/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649430214/2549900_umsosz.png"
             class="product-image"
             alt="icon all"
           />
@@ -48,7 +48,7 @@
           <img
             v-lazy="
               category.imagenCloudinary == null
-                ? 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649367838/2659360_s1ap5f.png'
+                ? 'https://img.komercia.store/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649367838/2659360_s1ap5f.png'
                 : idCloudinary(category.imagenCloudinary, 150, 150)
             "
             :class="
@@ -103,7 +103,7 @@
           <img
             v-lazy="
               subcategory.imagenCloudinary == null
-                ? 'https://res.cloudinary.com/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649367838/2659360_s1ap5f.png'
+                ? 'https://img.komercia.store/komerciaacademico/image/upload/c_scale,w_80,q_auto:best,f_auto/v1649367838/2659360_s1ap5f.png'
                 : idCloudinary(subcategory.imagenCloudinary, 150, 150)
             "
             :class="
