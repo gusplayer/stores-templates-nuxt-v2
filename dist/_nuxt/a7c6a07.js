@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[267],{1537:function(e,t,n){"use strict";n.r(t);var l={name:"KoTemplate8",layout:"default"},o=n(3),component=Object(o.a)(l,(function(){return(0,this._self._c)("p",[this._v("Template8")])}),[],!1,null,null,null);t.default=component.exports}}]);

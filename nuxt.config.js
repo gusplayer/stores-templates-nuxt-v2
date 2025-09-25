@@ -84,7 +84,7 @@ export default {
 
   // Facebook Pixel module configuration
   facebook: { pixelId: '671820736795254', autoPageView: true },
-
+  serverMiddleware: ['~/server-middleware/redirect-wapi-stores.js'],
   // Build configuration
   build: {
     postcss: {
