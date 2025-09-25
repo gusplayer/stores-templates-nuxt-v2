@@ -384,8 +384,8 @@ export const actions = {
     const cookies = getCookie('authPwd')
     if (
       state.dataStore?.disenoModals?.[0] &&
-      state.dataStore.disenoModals[0].stateModal == 1 &&
-      state.dataStore.disenoModals[0].password
+      state.dataStore.disenoModals[0]?.stateModal == 1 &&
+      state.dataStore.disenoModals[0]?.password
     ) {
       if (cookies) {
         const { success } = await dispatch('GET_ACCESS_CODE', {
@@ -395,7 +395,7 @@ export const actions = {
         if (success) {
           commit('SET_STATE_MODAL_PWD', true)
         } else {
-          if (cookies == state.dataStore.disenoModals[0].password) {
+          if (cookies == state.dataStore.disenoModals?.[0]?.password) {
             commit('SET_STATE_MODAL_PWD', true)
           }
         }

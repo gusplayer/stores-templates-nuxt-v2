@@ -14,6 +14,11 @@ Vue.use(VueLazyload, {
       if (listener && listener.src) {
         listener.src = replaceCloudinaryDomain(listener.src)
       }
+      if (listener && listener.el && listener.el.dataset) {
+        listener.el.dataset.src = replaceCloudinaryDomain(listener.el.dataset.src)
+        listener.el.dataset.error = replaceCloudinaryDomain(listener.el.dataset.error)
+        listener.el.dataset.loading = replaceCloudinaryDomain(listener.el.dataset.loading)
+      }
     },
     webp(listener) {
       if (listener && listener.src) {
@@ -28,10 +33,29 @@ Vue.use(VueLazyload, {
   },
   adapter: {
     loading({ el }) {
-      if (el && el.getAttribute) {
-        const src = el.getAttribute('data-src') || el.getAttribute('src')
+      if (el) {
+        if (el.dataset && el.dataset.src) {
+          el.dataset.src = replaceCloudinaryDomain(el.dataset.src)
+        }
+        const src = el.getAttribute('src')
         if (src) {
-          el.setAttribute('data-src', replaceCloudinaryDomain(src))
+          el.setAttribute('src', replaceCloudinaryDomain(src))
+        }
+      }
+    },
+    loaded({ el }) {
+      if (el && el.getAttribute) {
+        const src = el.getAttribute('src')
+        if (src) {
+          el.setAttribute('src', replaceCloudinaryDomain(src))
+        }
+      }
+    },
+    error({ el }) {
+      if (el && el.getAttribute) {
+        const src = el.getAttribute('src')
+        if (src) {
+          el.setAttribute('src', replaceCloudinaryDomain(src))
         }
       }
     },
