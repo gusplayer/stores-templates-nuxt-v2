@@ -79,6 +79,7 @@ export default {
         price: 'ASC',
         topSales: null,
       },
+      productsLoadError: false,
       query: {
         page: 1,
         name: null,
@@ -204,6 +205,15 @@ export default {
           this.totalProducts = data.count
           this.minPrice = data.priceMinimum
           this.maxPrice = data.priceLimit
+          this.productsLoadError = false
+          console.info(
+            '[products] Loaded catalog page',
+            this.previousPage,
+            'with',
+            Array.isArray(this.listProducts) ? this.listProducts.length : 0,
+            'items for store',
+            this.dataStore?.id || 'unknown'
+          )
         } else {
           this.listProducts = []
           this.previousPage = 1
@@ -211,9 +221,25 @@ export default {
           this.totalProducts = 0
           this.minPrice = 0
           this.maxPrice = 0
+          this.productsLoadError = true
+          console.warn(
+            '[products] API responded without success, fallback to empty list',
+            this.dataStore?.id || 'unknown'
+          )
         }
       } catch (error) {
         console.error('Error fetching products:', error)
+        this.listProducts = []
+        this.previousPage = 1
+        this.filters.limit = 24
+        this.totalProducts = 0
+        this.minPrice = 0
+        this.maxPrice = 0
+        this.productsLoadError = true
+        console.warn(
+          '[products] Falling back to empty list after fetch exception',
+          this.dataStore?.id || 'unknown'
+        )
       }
     },
     // Asignar valores en las query's

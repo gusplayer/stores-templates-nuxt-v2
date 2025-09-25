@@ -178,17 +178,68 @@ export const mutations = {
     state.stateListBLogs = value
   },
   SET_DATA(state) {
-    state.tags = state.dataStore.tags.sort(function (prev, next) {
-      return next.orden - prev.orden
-    })
-    state.categorias = state.categorias.sort(function (prev, next) {
-      return next.orden - prev.orden
-    })
-    state.mediospago = state.dataStore.medioPagos
-    if (state.dataStore?.mediosEnvios[0]?.valores) {
-      state.envios.valores = JSON.parse(state.dataStore.mediosEnvios[0].valores)
+    const tags = Array.isArray(state.dataStore?.tags)
+      ? [...state.dataStore.tags]
+      : []
+    if (!tags.length) {
+      console.warn(
+        '[store] No tags received for store',
+        state.dataStore?.id || 'unknown'
+      )
     }
-    state.whatsapp = state.dataStore.redes.whatsapp
+    state.tags = tags.sort((prev, next) => {
+      const prevOrden = typeof prev?.orden === 'number' ? prev.orden : 0
+      const nextOrden = typeof next?.orden === 'number' ? next.orden : 0
+      return nextOrden - prevOrden
+    })
+
+    const categories = Array.isArray(state.categorias)
+      ? [...state.categorias]
+      : []
+    if (!categories.length) {
+      console.warn(
+        '[store] No categories available in state before sorting',
+        state.dataStore?.id || 'unknown'
+      )
+    }
+    state.categorias = categories.sort((prev, next) => {
+      const prevOrden = typeof prev?.orden === 'number' ? prev.orden : 0
+      const nextOrden = typeof next?.orden === 'number' ? next.orden : 0
+      return nextOrden - prevOrden
+    })
+
+    state.mediospago = state.dataStore?.medioPagos || {}
+    if (!Object.keys(state.mediospago).length) {
+      console.info(
+        '[store] medioPagos not provided, using empty object',
+        state.dataStore?.id || 'unknown'
+      )
+    }
+
+    const mediosEnvios = Array.isArray(state.dataStore?.mediosEnvios)
+      ? state.dataStore.mediosEnvios
+      : []
+    const valoresEnvio = mediosEnvios[0]?.valores
+    if (valoresEnvio) {
+      try {
+        state.envios.valores = JSON.parse(valoresEnvio)
+      } catch (error) {
+        console.error('Error parsing envios.valores', error)
+      }
+    } else {
+      console.info(
+        '[store] No shipping values configured for store',
+        state.dataStore?.id || 'unknown'
+      )
+    }
+
+    state.whatsapp = state.dataStore?.redes?.whatsapp || ''
+    if (!state.whatsapp) {
+      console.warn(
+        '[store] Store is missing WhatsApp contact',
+        state.dataStore?.id || 'unknown'
+      )
+    }
   },
   SET_SHOPPING_CART(state, value) {
     const normalizedCart = normalizeCloudinaryPayload(value)
@@ -251,7 +302,11 @@ export const mutations = {
     state.analytics_tagmanager = value
   },
   DATA: (state, response) => {
-    state.dataStore = normalizeCloudinaryPayload(response.data)
+    const payload = response?.data ? response.data : {}
+    state.dataStore = normalizeCloudinaryPayload(payload) || {}
+    if (!response?.data) {
+      console.error('[store] Empty data payload received, using fallback object')
+    }
   },
   SET_SERVER_PATH(state, value) {
     state.fullPathServer = value
