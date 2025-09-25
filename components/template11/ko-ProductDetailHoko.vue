@@ -35,7 +35,11 @@
                   class="swiper-slide photos_selected"
                   @click="selectedPhoto(foto)"
                 >
-                  <img class="img-list" v-lazy="foto" alt="Product Img" />
+                  <img
+                    class="img-list"
+                    v-lazy="idCloudinary(foto, 150, 150)"
+                    alt="Product Img"
+                  />
                 </div>
               </div>
               <!-- <div class="swiper-prev" v-if="data.images.length > 3">
@@ -55,7 +59,7 @@
               </div>
             </div>
             <div class="photos_responsive">
-              <ProductSlide :photos="data.images" />
+              <ProductSlide :photos="cdnImages" />
             </div>
           </div>
         </div>
@@ -248,6 +252,11 @@ export default {
     dataHoko() {
       return this.$store.state.dataHoko
     },
+    cdnImages() {
+      return Array.isArray(this.data?.images)
+        ? this.data.images.map((image) => this.idCloudinary(image, 550, 550))
+        : []
+    },
   },
   watch: {
     quantityValue(value) {
@@ -348,7 +357,11 @@ export default {
       }
     },
     selectedPhoto(photo) {
-      this.selectPhotoUrl = photo
+      if (!photo) {
+        this.selectPhotoUrl = ''
+        return
+      }
+      this.selectPhotoUrl = this.idCloudinaryQuality(photo, 850, 850)
     },
   },
 }

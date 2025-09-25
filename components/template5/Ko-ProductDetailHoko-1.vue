@@ -21,7 +21,7 @@
                 class="swiper-slide photos_selected"
               >
                 <img
-                  v-lazy="foto"
+                  v-lazy="idCloudinary(foto, 150, 150)"
                   loading="lazy"
                   class="img-list"
                   alt="Product Img"
@@ -34,7 +34,7 @@
           <div class="wrapper-photo_main">
             <div v class="photo_main">
               <img
-                v-lazy="this.selectPhotoUrl"
+                v-lazy="selectPhotoUrl"
                 loading="lazy"
                 class="photo_main"
                 alt="Product Zoom"
@@ -42,7 +42,7 @@
             </div>
           </div>
           <div class="photos_responsive">
-            <productSlide :photos="data.images" />
+            <productSlide :photos="cdnImages" />
           </div>
         </div>
         <div class="wrapper-right">
@@ -181,6 +181,7 @@ import axios from 'axios'
 import productSlide from './_productdetails/productSlideHoko.vue'
 import koDescription from './_productdetails/descriptionProduct-hoko.vue'
 import mobileCheck from '@/mixins/mobileCheck'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'Ko5ProductDetailHoko',
   components: {
@@ -201,7 +202,7 @@ export default {
       return ''
     },
   },
-  mixins: [mobileCheck],
+  mixins: [mobileCheck, idCloudinary],
   props: {
     dataStore: {
       type: Object,
@@ -257,6 +258,11 @@ export default {
     },
     dataHoko() {
       return this.$store.state.dataHoko
+    },
+    cdnImages() {
+      return Array.isArray(this.data?.images)
+        ? this.data.images.map((image) => this.idCloudinary(image, 550, 550))
+        : []
     },
   },
   watch: {
@@ -358,7 +364,11 @@ export default {
       }
     },
     selectedPhoto(photo) {
-      this.selectPhotoUrl = photo
+      if (!photo) {
+        this.selectPhotoUrl = ''
+        return
+      }
+      this.selectPhotoUrl = this.idCloudinaryQuality(photo, 850, 850)
     },
   },
 }

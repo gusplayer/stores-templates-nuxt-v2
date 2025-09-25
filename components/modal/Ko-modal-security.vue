@@ -1,45 +1,45 @@
 <template>
   <div
-    v-if="dataStore?.disenoModals[0]?.stateModal === 1 && !stateModalPwd"
+    v-if="dataStore?.disenoModals?.[0]?.stateModal === 1 && !stateModalPwd"
     class="wrapper-security-modal"
     :style="{
       background:
-        dataStore?.disenoModals[0]?.colorBg_1 || 'rgba(5, 5, 5, 0.897)',
+        dataStore?.disenoModals?.[0]?.colorBg_1 || 'rgba(5, 5, 5, 0.897)',
     }"
   >
     <div
       class="content-security-modal"
-      :style="{ background: dataStore?.disenoModals[0]?.colorBg_2 || 'White' }"
+      :style="{ background: dataStore?.disenoModals?.[0]?.colorBg_2 || 'White' }"
     >
       <img
-        v-if="dataStore?.disenoModals[0]?.img"
-        v-lazy="idCloudinary(dataStore.disenoModals[0].img, 550, 550)"
+        v-if="dataStore?.disenoModals?.[0]?.img"
+        v-lazy="idCloudinary(dataStore.disenoModals?.[0]?.img, 550, 550)"
         alt="img-modal-block"
         :style="{
-          width: dataStore?.disenoModals[0]?.width_img || '120px',
-          marginBottom: dataStore?.disenoModals[0]?.marginBottomImg || '10px',
+          width: dataStore?.disenoModals?.[0]?.width_img || '120px',
+          marginBottom: dataStore?.disenoModals?.[0]?.marginBottomImg || '10px',
         }"
       />
       <p
         :style="{
-          color: dataStore?.disenoModals[0]?.colorTitle || 'white',
-          fontSize: dataStore?.disenoModals[0]?.fontSizeTitle || '20px',
-          fontWeight: dataStore?.disenoModals[0]?.fontWeighTitle || 'bold',
-          marginBottom: dataStore?.disenoModals[0]?.marginBottomTitle || '15px',
+          color: dataStore?.disenoModals?.[0]?.colorTitle || 'white',
+          fontSize: dataStore?.disenoModals?.[0]?.fontSizeTitle || '20px',
+          fontWeight: dataStore?.disenoModals?.[0]?.fontWeighTitle || 'bold',
+          marginBottom: dataStore?.disenoModals?.[0]?.marginBottomTitle || '15px',
         }"
       >
-        {{ dataStore.disenoModals[0].title }}
+        {{ dataStore.disenoModals?.[0]?.title }}
       </p>
       <p
         :style="{
-          color: dataStore?.disenoModals[0]?.colorDescription || 'white',
-          fontSize: dataStore?.disenoModals[0]?.fontSizeDescription || '16px',
-          fontWeight: dataStore?.disenoModals[0]?.fontWeighDescription || '400',
+          color: dataStore?.disenoModals?.[0]?.colorDescription || 'white',
+          fontSize: dataStore?.disenoModals?.[0]?.fontSizeDescription || '16px',
+          fontWeight: dataStore?.disenoModals?.[0]?.fontWeighDescription || '400',
           marginBottom:
-            dataStore?.disenoModals[0]?.marginBottomDescription || '20px',
+            dataStore?.disenoModals?.[0]?.marginBottomDescription || '20px',
         }"
       >
-        {{ dataStore.disenoModals[0].description }}
+        {{ dataStore.disenoModals?.[0]?.description }}
       </p>
       <div class="inputBox">
         <input
@@ -49,9 +49,9 @@
           type="password"
           class="input-text"
           :style="{
-            color: dataStore?.disenoModals[0]?.colorBorder || 'black',
+            color: dataStore?.disenoModals?.[0]?.colorBorder || 'black',
             border: `solid 2px ${
-              dataStore?.disenoModals[0]?.colorBorder || 'black'
+              dataStore?.disenoModals?.[0]?.colorBorder || 'black'
             }`,
           }"
           placeholder="Ingresar contraseña"
@@ -66,8 +66,8 @@
       <button
         class="btn-acceptModal mt-10"
         :style="{
-          color: dataStore?.disenoModals[0]?.colorTextBtn || 'white',
-          backgroundColor: dataStore?.disenoModals[0]?.colorBgBtn || 'black',
+          color: dataStore?.disenoModals?.[0]?.colorTextBtn || 'white',
+          backgroundColor: dataStore?.disenoModals?.[0]?.colorBgBtn || 'black',
         }"
         @click="closedModal"
       >
@@ -107,7 +107,8 @@ export default {
   },
   methods: {
     async closedModal() {
-      if (this.dataStore.disenoModals[0]?.password) {
+      const modalConfig = this.dataStore?.disenoModals?.[0]
+      if (modalConfig?.password) {
         if (this.pwd) {
           const { success } = await this.$store.dispatch('GET_ACCESS_CODE', {
             id_tienda: this.dataStore.id,
@@ -122,9 +123,10 @@ export default {
       }
     },
     passwordStore() {
-      if (this.dataStore.disenoModals[0].password == this.pwd) {
+      const modalConfig = this.dataStore?.disenoModals?.[0]
+      if (modalConfig?.password === this.pwd) {
         this.$store.commit('SET_STATE_MODAL_PWD', true)
-        this.setCookies(this.dataStore.disenoModals[0].password)
+        this.setCookies(modalConfig.password)
       } else {
         this.stateMgs = true
       }

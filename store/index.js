@@ -141,6 +141,12 @@ export const mutations = {
     setCurrentSetting(state, { ...value, template: '16' }),
   SET_CURRENT_SETTING_MODAL(state, value) {
     if (value && value.data) {
+      if (!Array.isArray(state.dataStore?.disenoModals)) {
+        if (!state.dataStore || typeof state.dataStore !== 'object') {
+          state.dataStore = {}
+        }
+        state.dataStore.disenoModals = []
+      }
       state.dataStore.disenoModals[0] = value.data
     }
   },
@@ -377,7 +383,7 @@ export const actions = {
   async GET_COOKIES_PWD({ state, commit, dispatch }) {
     const cookies = getCookie('authPwd')
     if (
-      state.dataStore?.disenoModals[0] &&
+      state.dataStore?.disenoModals?.[0] &&
       state.dataStore.disenoModals[0].stateModal == 1 &&
       state.dataStore.disenoModals[0].password
     ) {
@@ -1505,7 +1511,8 @@ async function handleKomercia(id, template, isDataTemplate, commit, dispatch) {
   }
 }
 async function handleDataStore(state, commit) {
-  if (state?.dataStore?.disenoModals[0]?.stateModal === 1) {
+  const modalConfig = state?.dataStore?.disenoModals?.[0]
+  if (modalConfig?.stateModal === 1) {
     await commit('SET_STATE_MODAL_PWD', false)
   }
 }

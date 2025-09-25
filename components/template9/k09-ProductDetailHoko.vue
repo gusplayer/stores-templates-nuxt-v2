@@ -36,7 +36,11 @@
               v-for="(foto, itemsfoto) in data.images"
               :key="itemsfoto"
             >
-              <img class="img-list" v-lazy="foto" alt="Product Img" />
+              <img
+                class="img-list"
+                v-lazy="idCloudinary(foto, 550, 550)"
+                alt="Product Img"
+              />
             </div>
           </div>
         </div>
@@ -170,6 +174,7 @@
 import axios from 'axios'
 import OptionAcordion from './_productdetails/OptAcordion-hoko'
 import OptionTab from './_productdetails/OptTab-hoko'
+import idCloudinary from '@/mixins/idCloudinary'
 export default {
   name: 'Ko9ProductDetailHoko',
   props: {
@@ -184,6 +189,7 @@ export default {
     OptionAcordion,
     OptionTab,
   },
+  mixins: [idCloudinary],
   mounted() {
     this.asyncauthToken()
   },
@@ -325,7 +331,11 @@ export default {
       }
     },
     selectedPhoto(photo) {
-      this.selectPhotoUrl = photo
+      if (!photo) {
+        this.selectPhotoUrl = ''
+        return
+      }
+      this.selectPhotoUrl = this.idCloudinaryQuality(photo, 850, 850)
     },
   },
   watch: {
