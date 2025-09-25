@@ -17,7 +17,7 @@ module.exports = function (req, res, next) {
 
 
   const rules = {
-    8489: 'https://www.mariapazprincess.com/',
+    8489: 'https://catalogomariapazprincess.komercia.store/',
     18265: 'https://fitnesssuplementos.komercia.store/',
     15997: 'https://orginalworld.komercia.store/',
   }
