@@ -21,7 +21,7 @@
                 class="swiper-slide photos_selected"
               >
                 <img
-                  v-lazy="idCloudinary(foto, 150, 150)"
+                  v-lazy="foto"
                   loading="lazy"
                   class="img-list"
                   alt="Product Img"
@@ -34,7 +34,7 @@
           <div class="wrapper-photo_main">
             <div v class="photo_main">
               <img
-                v-lazy="selectPhotoUrl"
+                v-lazy="this.selectPhotoUrl"
                 loading="lazy"
                 class="photo_main"
                 alt="Product Zoom"
@@ -42,7 +42,7 @@
             </div>
           </div>
           <div class="photos_responsive">
-            <productSlide :photos="cdnImages" />
+            <productSlide :photos="data.images" />
           </div>
         </div>
         <div class="wrapper-right">
@@ -181,7 +181,7 @@ import axios from 'axios'
 import productSlide from './_productdetails/productSlideHoko.vue'
 import koDescription from './_productdetails/descriptionProduct-hoko.vue'
 import mobileCheck from '@/mixins/mobileCheck'
-import idCloudinary from '@/mixins/idCloudinary'
+import { normalizeCloudinaryPayload } from '@/utils/cloudinary'
 export default {
   name: 'Ko5ProductDetailHoko',
   components: {
@@ -202,7 +202,7 @@ export default {
       return ''
     },
   },
-  mixins: [mobileCheck, idCloudinary],
+  mixins: [mobileCheck],
   props: {
     dataStore: {
       type: Object,
@@ -259,11 +259,6 @@ export default {
     dataHoko() {
       return this.$store.state.dataHoko
     },
-    cdnImages() {
-      return Array.isArray(this.data?.images)
-        ? this.data.images.map((image) => this.idCloudinary(image, 550, 550))
-        : []
-    },
   },
   watch: {
     quantityValue(value) {
@@ -305,7 +300,7 @@ export default {
         .get(`https://hoko.com.co/api/member/myproducts/${id}`, config)
         .then((response) => {
           this.loading = false
-          this.data = response.data.product
+          this.data = normalizeCloudinaryPayload(response.data.product)
           if (this.data) {
             this.selectedPhoto(this.data.images[0])
             this.maxQuantityValue = this.data.stock.amount
@@ -364,11 +359,7 @@ export default {
       }
     },
     selectedPhoto(photo) {
-      if (!photo) {
-        this.selectPhotoUrl = ''
-        return
-      }
-      this.selectPhotoUrl = this.idCloudinaryQuality(photo, 850, 850)
+      this.selectPhotoUrl = photo
     },
   },
 }

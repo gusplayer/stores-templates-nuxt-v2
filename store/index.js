@@ -184,68 +184,17 @@ export const mutations = {
     state.stateListBLogs = value
   },
   SET_DATA(state) {
-    const tags = Array.isArray(state.dataStore?.tags)
-      ? [...state.dataStore.tags]
-      : []
-    if (!tags.length) {
-      console.warn(
-        '[store] No tags received for store',
-        state.dataStore?.id || 'unknown'
-      )
-    }
-    state.tags = tags.sort((prev, next) => {
-      const prevOrden = typeof prev?.orden === 'number' ? prev.orden : 0
-      const nextOrden = typeof next?.orden === 'number' ? next.orden : 0
-      return nextOrden - prevOrden
+    state.tags = state.dataStore.tags.sort(function (prev, next) {
+      return next.orden - prev.orden
     })
-
-    const categories = Array.isArray(state.categorias)
-      ? [...state.categorias]
-      : []
-    if (!categories.length) {
-      console.warn(
-        '[store] No categories available in state before sorting',
-        state.dataStore?.id || 'unknown'
-      )
-    }
-    state.categorias = categories.sort((prev, next) => {
-      const prevOrden = typeof prev?.orden === 'number' ? prev.orden : 0
-      const nextOrden = typeof next?.orden === 'number' ? next.orden : 0
-      return nextOrden - prevOrden
+    state.categorias = state.categorias.sort(function (prev, next) {
+      return next.orden - prev.orden
     })
-
-    state.mediospago = state.dataStore?.medioPagos || {}
-    if (!Object.keys(state.mediospago).length) {
-      console.info(
-        '[store] medioPagos not provided, using empty object',
-        state.dataStore?.id || 'unknown'
-      )
+    state.mediospago = state.dataStore.medioPagos
+    if (state.dataStore?.mediosEnvios[0]?.valores) {
+      state.envios.valores = JSON.parse(state.dataStore.mediosEnvios[0].valores)
     }
-
-    const mediosEnvios = Array.isArray(state.dataStore?.mediosEnvios)
-      ? state.dataStore.mediosEnvios
-      : []
-    const valoresEnvio = mediosEnvios[0]?.valores
-    if (valoresEnvio) {
-      try {
-        state.envios.valores = JSON.parse(valoresEnvio)
-      } catch (error) {
-        console.error('Error parsing envios.valores', error)
-      }
-    } else {
-      console.info(
-        '[store] No shipping values configured for store',
-        state.dataStore?.id || 'unknown'
-      )
-    }
-
-    state.whatsapp = state.dataStore?.redes?.whatsapp || ''
-    if (!state.whatsapp) {
-      console.warn(
-        '[store] Store is missing WhatsApp contact',
-        state.dataStore?.id || 'unknown'
-      )
-    }
+    state.whatsapp = state.dataStore.redes.whatsapp
   },
   SET_SHOPPING_CART(state, value) {
     const normalizedCart = normalizeCloudinaryPayload(value)
@@ -308,11 +257,7 @@ export const mutations = {
     state.analytics_tagmanager = value
   },
   DATA: (state, response) => {
-    const payload = response?.data ? response.data : {}
-    state.dataStore = normalizeCloudinaryPayload(payload) || {}
-    if (!response?.data) {
-      console.error('[store] Empty data payload received, using fallback object')
-    }
+    state.dataStore = normalizeCloudinaryPayload(response.data)
   },
   SET_SERVER_PATH(state, value) {
     state.fullPathServer = value
@@ -382,11 +327,8 @@ export const actions = {
   },
   async GET_COOKIES_PWD({ state, commit, dispatch }) {
     const cookies = getCookie('authPwd')
-    if (
-      state.dataStore?.disenoModals?.[0] &&
-      state.dataStore.disenoModals[0]?.stateModal == 1 &&
-      state.dataStore.disenoModals[0]?.password
-    ) {
+    const modalConfig = state.dataStore?.disenoModals?.[0]
+    if (modalConfig && modalConfig.stateModal == 1 && modalConfig.password) {
       if (cookies) {
         const { success } = await dispatch('GET_ACCESS_CODE', {
           id_tienda: state.dataStore.id,
@@ -395,7 +337,7 @@ export const actions = {
         if (success) {
           commit('SET_STATE_MODAL_PWD', true)
         } else {
-          if (cookies == state.dataStore.disenoModals?.[0]?.password) {
+          if (cookies == modalConfig.password) {
             commit('SET_STATE_MODAL_PWD', true)
           }
         }
@@ -448,7 +390,6 @@ export const actions = {
     commit('SET_SERVER_PATH', value)
   },
   async GET_DATA_TIENDA_BY_ID({ state, commit, dispatch }, idTienda) {
-    console.info('[store] Fetching store data', { idTienda })
     try {
       const { data } = await axios({
         method: 'GET',
@@ -458,11 +399,6 @@ export const actions = {
         },
       })
       if (data) {
-        console.info('[store] Store data loaded', {
-          idTienda,
-          template: data?.data?.template,
-          status: data?.data?.estado,
-        })
         await Promise.all([
           dispatch('GET_LOGO_STORE', data.data.id),
           dispatch('SET_INCREMENT_STORE_VIEW', data.data.id),
@@ -484,18 +420,13 @@ export const actions = {
         commit('SET_DATA')
       }
     } catch (err) {
-      console.error('[store] Error loading store data', {
-        idTienda,
-        status: err?.response?.status,
-        message: err?.message,
-      })
+      console.log('Data store', err?.response)
     }
   },
   GET_DATA({ commit }) {
     commit('SET_DATA')
   },
   async GET_LOGO_STORE({ commit, state }, idTienda) {
-    console.info('[store] Fetching logo', { idTienda })
     try {
       const { data } = await axios({
         method: 'GET',
@@ -506,17 +437,9 @@ export const actions = {
       })
       if (data) {
         commit('SET_LOGO_STORE', data.data)
-        console.info('[store] Logo loaded', {
-          idTienda,
-          hasLogo: Boolean(data?.data?.logo),
-        })
       }
     } catch (err) {
-      console.error('[store] Error loading logo', {
-        idTienda,
-        status: err?.response?.status,
-        message: err?.message,
-      })
+      console.log('GET_LOGO_STORE', err?.response)
     }
   },
 
@@ -530,11 +453,12 @@ export const actions = {
         },
       })
     } catch (err) {
-      console.warn('[store] Failed to increment store views', {
-        idTienda,
-        status: err?.response?.status,
-        message: err?.message,
-      })
+      console.log(
+        'Data increment store view',
+        err?.response?.data,
+        'status',
+        err?.response?.status
+      )
     }
   },
   async SEND_ANALYTICS_STORE({ state }, params) {
@@ -701,7 +625,6 @@ export const actions = {
     { commit, state },
     { idStore, templateStore }
   ) {
-    console.info('[store] Fetching template settings', { idStore, templateStore })
     try {
       const { data } = await axios({
         method: 'GET',
@@ -715,29 +638,15 @@ export const actions = {
           templateNumber: templateStore,
           value: data.data,
         })
-        console.info('[store] Template settings loaded', {
-          idStore,
-          templateStore,
-          hasData: Boolean(data?.data),
-        })
       }
     } catch (err) {
-      console.error('[store] Error fetching template settings', {
-        idStore,
-        templateStore,
-        status: err?.response?.status,
-        message: err?.message,
-      })
+      console.log('Data setting Laravel', err?.response)
     }
   },
   async GET_SETTINGS_BY_TEMPLATE_NODE(
     { commit, state },
     { idStore, templateStore }
   ) {
-    console.info('[store] Fetching node template settings', {
-      idStore,
-      templateStore,
-    })
     try {
       const { data } = await axios({
         method: 'GET',
@@ -748,19 +657,9 @@ export const actions = {
           templateNumber: templateStore,
           value: data.body,
         })
-        console.info('[store] Node settings loaded', {
-          idStore,
-          templateStore,
-          hasData: Boolean(data?.body),
-        })
       }
     } catch (err) {
-      console.error('[store] Error fetching node settings', {
-        idStore,
-        templateStore,
-        status: err?.response?.status,
-        message: err?.message,
-      })
+      console.log('Data setting NODE', err?.response)
     }
   },
   // async GET_SETTINGS_BY_TEMPLATE_AWS(
@@ -1511,8 +1410,7 @@ async function handleKomercia(id, template, isDataTemplate, commit, dispatch) {
   }
 }
 async function handleDataStore(state, commit) {
-  const modalConfig = state?.dataStore?.disenoModals?.[0]
-  if (modalConfig?.stateModal === 1) {
+  if (state?.dataStore?.disenoModals?.[0]?.stateModal === 1) {
     await commit('SET_STATE_MODAL_PWD', false)
   }
 }

@@ -6,7 +6,7 @@ const UPLOAD_SEGMENT = '/upload/'
 
 function extractCloudinaryInfo(url) {
   if (!url || typeof url !== 'string') return null
-  if (!url.includes(CLOUDINARY_HOST) && !url.includes(CDN_HOST)) return null
+  if (!url.includes(CLOUDINARY_HOST)) return null
   const normalizedUrl = url.trim()
   if (!normalizedUrl) return null
   const segments = normalizedUrl.split('/')
@@ -25,15 +25,13 @@ function extractCloudinaryInfo(url) {
 
 export function replaceCloudinaryDomain(url) {
   if (!url || typeof url !== 'string') return url
-  if (!url.includes(CLOUDINARY_HOST)) {
-    return url.includes(CDN_HOST) ? url.replace(/(https?:)?\/\/img\.komercia\.store/gi, CDN_BASE_URL) : url
-  }
+  if (!url.includes(CLOUDINARY_HOST)) return url
   return url.replace(/(https?:)?\/\/res\.cloudinary\.com/gi, CDN_BASE_URL)
 }
 
 export function buildCloudinaryUrl(url, transformation = '') {
   const info = extractCloudinaryInfo(url)
-  if (!info) return replaceCloudinaryDomain(url)
+  if (!info) return url
 
   const cleanTransformation = transformation
     ? transformation.replace(/^\/+/, '').replace(/\/+$/, '')
@@ -45,7 +43,7 @@ export function buildCloudinaryUrl(url, transformation = '') {
 
 export function buildCloudinaryWebp(url, transformation = '', extension = 'webp') {
   const info = extractCloudinaryInfo(url)
-  if (!info) return replaceCloudinaryDomain(url)
+  if (!info) return url
 
   const [publicId] = info.resourcePath.split('.')
   if (!publicId) return url

@@ -13,7 +13,7 @@
     >
       <img
         v-if="dataStore?.disenoModals?.[0]?.img"
-        v-lazy="idCloudinary(dataStore.disenoModals?.[0]?.img, 550, 550)"
+        v-lazy="idCloudinary(dataStore?.disenoModals?.[0]?.img, 550, 550)"
         alt="img-modal-block"
         :style="{
           width: dataStore?.disenoModals?.[0]?.width_img || '120px',
@@ -28,7 +28,7 @@
           marginBottom: dataStore?.disenoModals?.[0]?.marginBottomTitle || '15px',
         }"
       >
-        {{ dataStore.disenoModals?.[0]?.title }}
+        {{ dataStore?.disenoModals?.[0]?.title }}
       </p>
       <p
         :style="{
@@ -39,7 +39,7 @@
             dataStore?.disenoModals?.[0]?.marginBottomDescription || '20px',
         }"
       >
-        {{ dataStore.disenoModals?.[0]?.description }}
+        {{ dataStore?.disenoModals?.[0]?.description }}
       </p>
       <div class="inputBox">
         <input
@@ -124,7 +124,7 @@ export default {
     },
     passwordStore() {
       const modalConfig = this.dataStore?.disenoModals?.[0]
-      if (modalConfig?.password === this.pwd) {
+      if (modalConfig?.password == this.pwd) {
         this.$store.commit('SET_STATE_MODAL_PWD', true)
         this.setCookies(modalConfig.password)
       } else {

@@ -35,11 +35,7 @@
                   class="swiper-slide photos_selected"
                   @click="selectedPhoto(foto)"
                 >
-                  <img
-                    class="img-list"
-                    v-lazy="idCloudinary(foto, 150, 150)"
-                    alt="Product Img"
-                  />
+                  <img class="img-list" v-lazy="foto" alt="Product Img" />
                 </div>
               </div>
               <!-- <div class="swiper-prev" v-if="data.images.length > 3">
@@ -59,7 +55,7 @@
               </div>
             </div>
             <div class="photos_responsive">
-              <ProductSlide :photos="cdnImages" />
+              <ProductSlide :photos="data.images" />
             </div>
           </div>
         </div>
@@ -177,6 +173,7 @@
 import axios from 'axios'
 import idCloudinary from '@/mixins/idCloudinary'
 import mobileCheck from '@/mixins/mobileCheck'
+import { normalizeCloudinaryPayload } from '@/utils/cloudinary'
 export default {
   name: 'Ko11ProductDetailHoko',
   components: {
@@ -252,11 +249,6 @@ export default {
     dataHoko() {
       return this.$store.state.dataHoko
     },
-    cdnImages() {
-      return Array.isArray(this.data?.images)
-        ? this.data.images.map((image) => this.idCloudinary(image, 550, 550))
-        : []
-    },
   },
   watch: {
     quantityValue(value) {
@@ -298,7 +290,7 @@ export default {
         .get(`https://hoko.com.co/api/member/myproducts/${id}`, config)
         .then((response) => {
           this.loading = false
-          this.data = response.data.product
+          this.data = normalizeCloudinaryPayload(response.data.product)
           if (this.data) {
             this.selectedPhoto(this.data.images[0])
             this.maxQuantityValue = this.data.stock.amount
@@ -357,11 +349,7 @@ export default {
       }
     },
     selectedPhoto(photo) {
-      if (!photo) {
-        this.selectPhotoUrl = ''
-        return
-      }
-      this.selectPhotoUrl = this.idCloudinaryQuality(photo, 850, 850)
+      this.selectPhotoUrl = photo
     },
   },
 }

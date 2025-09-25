@@ -1,11 +1,7 @@
 <template>
   <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="w-full flex">
     <div class="swiper-wrapper">
-      <div
-        class="swiper-slide"
-        v-for="(photo, index) in normalizedPhotos"
-        :key="index"
-      >
+      <div class="swiper-slide" v-for="(photo, index) in photos" :key="index">
         <img
           loading="lazy"
           :src="photo"
@@ -19,11 +15,8 @@
 </template>
 
 <script>
-import idCloudinary from '@/mixins/idCloudinary'
-
 export default {
   ame: 'Ko5ProductSlideDetailsHoko',
-  mixins: [idCloudinary],
   props: ['photos'],
   data() {
     return {
@@ -51,11 +44,6 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
-    },
-    normalizedPhotos() {
-      return Array.isArray(this.photos)
-        ? this.photos.map((photo) => this.idCloudinary(photo, 550, 550))
-        : []
     },
   },
 }

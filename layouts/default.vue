@@ -327,6 +327,10 @@ export default {
             googleMerchants ?? 'ce4pJPC3AEQoDU6jNkAEqV-Dwa1OUU8GxtRTR0d_MM8',
         },
         {
+          name: 'Content-Security-Policy',
+          content: "script-src 'none'",
+        },
+        {
           name: 'Cache-control',
           content: 'no-cache, no-store, must-revalidate',
         },

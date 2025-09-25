@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://komercia.store/sitemap.xml

@@ -50,6 +50,7 @@ export default {
   modules: [
     '@nuxtjs/gtm',
     'nuxt-facebook-pixel-module',
+    ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 }],
     '@nuxtjs/sitemap', // Activate the sitemap module
   ],
 
