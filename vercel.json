@@ -4,7 +4,14 @@
     {
       "src": "nuxt.config.js",
       "use": "@nuxtjs/vercel-builder",
-      "config": {}
+      "config": {
+        "serverFiles": [
+          "server-middleware/**"
+        ]
+      }
     }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/" }
   ]
 }
