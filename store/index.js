@@ -442,6 +442,7 @@ export const actions = {
     commit('SET_SERVER_PATH', value)
   },
   async GET_DATA_TIENDA_BY_ID({ state, commit, dispatch }, idTienda) {
+    console.info('[store] Fetching store data', { idTienda })
     try {
       const { data } = await axios({
         method: 'GET',
@@ -451,6 +452,11 @@ export const actions = {
         },
       })
       if (data) {
+        console.info('[store] Store data loaded', {
+          idTienda,
+          template: data?.data?.template,
+          status: data?.data?.estado,
+        })
         await Promise.all([
           dispatch('GET_LOGO_STORE', data.data.id),
           dispatch('SET_INCREMENT_STORE_VIEW', data.data.id),
@@ -472,13 +478,18 @@ export const actions = {
         commit('SET_DATA')
       }
     } catch (err) {
-      console.log('Data store', err?.response)
+      console.error('[store] Error loading store data', {
+        idTienda,
+        status: err?.response?.status,
+        message: err?.message,
+      })
     }
   },
   GET_DATA({ commit }) {
     commit('SET_DATA')
   },
   async GET_LOGO_STORE({ commit, state }, idTienda) {
+    console.info('[store] Fetching logo', { idTienda })
     try {
       const { data } = await axios({
         method: 'GET',
@@ -489,9 +500,17 @@ export const actions = {
       })
       if (data) {
         commit('SET_LOGO_STORE', data.data)
+        console.info('[store] Logo loaded', {
+          idTienda,
+          hasLogo: Boolean(data?.data?.logo),
+        })
       }
     } catch (err) {
-      console.log('GET_LOGO_STORE', err?.response)
+      console.error('[store] Error loading logo', {
+        idTienda,
+        status: err?.response?.status,
+        message: err?.message,
+      })
     }
   },
 
@@ -505,12 +524,11 @@ export const actions = {
         },
       })
     } catch (err) {
-      console.log(
-        'Data increment store view',
-        err?.response?.data,
-        'status',
-        err?.response?.status
-      )
+      console.warn('[store] Failed to increment store views', {
+        idTienda,
+        status: err?.response?.status,
+        message: err?.message,
+      })
     }
   },
   async SEND_ANALYTICS_STORE({ state }, params) {
@@ -677,6 +695,7 @@ export const actions = {
     { commit, state },
     { idStore, templateStore }
   ) {
+    console.info('[store] Fetching template settings', { idStore, templateStore })
     try {
       const { data } = await axios({
         method: 'GET',
@@ -690,15 +709,29 @@ export const actions = {
           templateNumber: templateStore,
           value: data.data,
         })
+        console.info('[store] Template settings loaded', {
+          idStore,
+          templateStore,
+          hasData: Boolean(data?.data),
+        })
       }
     } catch (err) {
-      console.log('Data setting Laravel', err?.response)
+      console.error('[store] Error fetching template settings', {
+        idStore,
+        templateStore,
+        status: err?.response?.status,
+        message: err?.message,
+      })
     }
   },
   async GET_SETTINGS_BY_TEMPLATE_NODE(
     { commit, state },
     { idStore, templateStore }
   ) {
+    console.info('[store] Fetching node template settings', {
+      idStore,
+      templateStore,
+    })
     try {
       const { data } = await axios({
         method: 'GET',
@@ -709,9 +742,19 @@ export const actions = {
           templateNumber: templateStore,
           value: data.body,
         })
+        console.info('[store] Node settings loaded', {
+          idStore,
+          templateStore,
+          hasData: Boolean(data?.body),
+        })
       }
     } catch (err) {
-      console.log('Data setting NODE', err?.response)
+      console.error('[store] Error fetching node settings', {
+        idStore,
+        templateStore,
+        status: err?.response?.status,
+        message: err?.message,
+      })
     }
   },
   // async GET_SETTINGS_BY_TEMPLATE_AWS(
