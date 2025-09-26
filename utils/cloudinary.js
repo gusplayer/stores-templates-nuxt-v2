@@ -6,9 +6,14 @@ const UPLOAD_SEGMENT = '/upload/'
 
 function extractCloudinaryInfo(url) {
   if (!url || typeof url !== 'string') return null
-  if (!url.includes(CLOUDINARY_HOST)) return null
   const normalizedUrl = url.trim()
   if (!normalizedUrl) return null
+
+  const hasAllowedHost = ALLOWED_HOSTS.some((host) =>
+    normalizedUrl.includes(host),
+  )
+  if (!hasAllowedHost) return null
+
   const segments = normalizedUrl.split('/')
   if (segments.length < 5) return null
   const host = segments[2]
