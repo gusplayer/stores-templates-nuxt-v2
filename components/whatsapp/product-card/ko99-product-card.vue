@@ -91,7 +91,7 @@
             </p>
             <p
               v-if="
-                dataStore?.id === 18265 &&
+                dataStore?.id === 18264 &&
                 product?.tag_promocion == 1 &&
                 product?.promocion_valor
               "
@@ -136,7 +136,7 @@
             </p>
             <p
               v-if="
-                dataStore?.id === 18265 &&
+                dataStore?.id === 18264 &&
                 product?.tag_promocion == 1 &&
                 product?.promocion_valor
               "
