@@ -106,13 +106,13 @@
               }}
             </p>
             <p
-              v-if="maxPrice > 0 && dataStore?.id !== 18265"
+              v-if="maxPrice > 0 && dataStore?.id !== 18264"
               class="separator-price"
             >
               -
             </p>
             <p
-              v-if="maxPrice > 0 && dataStore?.id !== 18265"
+              v-if="maxPrice > 0 && dataStore?.id !== 18264"
               class="txt-product-price"
             >
               {{
