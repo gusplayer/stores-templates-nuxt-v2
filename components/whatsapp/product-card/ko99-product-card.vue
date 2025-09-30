@@ -91,7 +91,7 @@
             </p>
             <p
               v-if="
-                dataStore?.id === 18265 &&
+                dataStore?.id === 18264 &&
                 product?.tag_promocion == 1 &&
                 product?.promocion_valor
               "
@@ -106,13 +106,13 @@
               }}
             </p>
             <p
-              v-if="maxPrice > 0 && dataStore?.id !== 18265"
+              v-if="maxPrice > 0 && dataStore?.id !== 18264"
               class="separator-price"
             >
               -
             </p>
             <p
-              v-if="maxPrice > 0 && dataStore?.id !== 18265"
+              v-if="maxPrice > 0 && dataStore?.id !== 18264"
               class="txt-product-price"
             >
               {{
@@ -136,7 +136,7 @@
             </p>
             <p
               v-if="
-                dataStore?.id === 18265 &&
+                dataStore?.id === 18264 &&
                 product?.tag_promocion == 1 &&
                 product?.promocion_valor
               "

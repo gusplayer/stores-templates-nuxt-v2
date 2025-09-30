@@ -36,27 +36,27 @@
           <div class="content-right">
             <div class="flex">
               <p
-                v-if="salesData.unidades > 0 && dataStore.id != 18265"
+                v-if="salesData.unidades > 0 && dataStore.id != 18264"
                 class="card-info-2"
               >
                 {{ $t('productdetail_stock') }}
               </p>
               <p
-                v-if="salesData.unidades > 0 && dataStore.id == 18265"
+                v-if="salesData.unidades > 0 && dataStore.id == 18264"
                 class="card-info-2"
               >
                 {{ $t('productdetail_flavorstock') }}
               </p>
 
               <p
-                v-if="spent && salesData.unidades == 0 && dataStore.id != 18265"
+                v-if="spent && salesData.unidades == 0 && dataStore.id != 18264"
                 class="card-info-1"
               >
                 {{ $t('productdetail_productoAgotado') }}
                 "😥"
               </p>
               <p
-                v-if="spent && salesData.unidades == 0 && dataStore.id == 18265"
+                v-if="spent && salesData.unidades == 0 && dataStore.id == 18264"
                 class="card-info-1"
               >
                 {{ $t('productdetail_productoAgotadoTasty') }}😥
@@ -447,7 +447,7 @@
               (data.productosInfo.dealerWhatsapp === '0' ||
                 data.productosInfo.dealerWhatsapp === null ||
                 data.productosInfo.dealerWhatsapp === '') &&
-              dataStore.id != 18265
+              dataStore.id != 18264
             "
             class="wrapper-btn"
           >
@@ -461,7 +461,7 @@
               (data.productosInfo.dealerWhatsapp === '0' ||
                 data.productosInfo.dealerWhatsapp === null ||
                 data.productosInfo.dealerWhatsapp === '') &&
-              dataStore.id == 18265
+              dataStore.id == 18264
             "
             class="wrapper-btn"
           >
