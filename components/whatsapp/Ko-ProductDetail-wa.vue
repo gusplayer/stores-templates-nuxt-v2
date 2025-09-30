@@ -36,7 +36,7 @@
           <div class="content-right">
             <div class="flex">
               <p
-                v-if="salesData.unidades > 0 && dataStore.id != 1826"
+                v-if="salesData.unidades > 0 && dataStore.id != 18264"
                 class="card-info-2"
               >
                 {{ $t('productdetail_stock') }}
