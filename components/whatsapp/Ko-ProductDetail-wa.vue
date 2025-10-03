@@ -36,27 +36,27 @@
           <div class="content-right">
             <div class="flex">
               <p
-                v-if="salesData.unidades > 0 && dataStore.id != 18642"
+                v-if="salesData.unidades > 0 && !storeHasPromoOverride"
                 class="card-info-2"
               >
                 {{ $t('productdetail_stock') }}
               </p>
               <p
-                v-if="salesData.unidades > 0 && dataStore.id == 18642"
+                v-if="salesData.unidades > 0 && storeHasPromoOverride"
                 class="card-info-2"
               >
                 {{ $t('productdetail_flavorstock') }}
               </p>
 
               <p
-                v-if="spent && salesData.unidades == 0 && dataStore.id != 18642"
+                v-if="spent && salesData.unidades == 0 && !storeHasPromoOverride"
                 class="card-info-1"
               >
                 {{ $t('productdetail_productoAgotado') }}
                 "😥"
               </p>
               <p
-                v-if="spent && salesData.unidades == 0 && dataStore.id == 18642"
+                v-if="spent && salesData.unidades == 0 && storeHasPromoOverride"
                 class="card-info-1"
               >
                 {{ $t('productdetail_productoAgotadoTasty') }}😥
@@ -447,7 +447,7 @@
               (data.productosInfo.dealerWhatsapp === '0' ||
                 data.productosInfo.dealerWhatsapp === null ||
                 data.productosInfo.dealerWhatsapp === '') &&
-              dataStore.id != 18642
+              !storeHasPromoOverride
             "
             class="wrapper-btn"
           >
@@ -461,7 +461,7 @@
               (data.productosInfo.dealerWhatsapp === '0' ||
                 data.productosInfo.dealerWhatsapp === null ||
                 data.productosInfo.dealerWhatsapp === '') &&
-              dataStore.id == 18642
+              storeHasPromoOverride
             "
             class="wrapper-btn"
           >
@@ -487,6 +487,7 @@ import currency from '@/mixins/formatCurrent'
 import mobileCheck from '@/mixins/mobileCheck'
 import extensions from '@/mixins/elemenTiptap.vue'
 import { productHeadMixin } from '@/mixins/productHeadMixin'
+import { isSpecialStore } from '@/utils/promoStores'
 export default {
   name: 'KoProductDetailWa',
   components: {
@@ -562,6 +563,9 @@ export default {
         this.$store.state.settingByTemplate ||
         this.$store.state.settingBaseWapir
       )
+    },
+    storeHasPromoOverride() {
+      return isSpecialStore(this.dataStore?.id)
     },
     rangosByCiudad() {
       return this.envios
