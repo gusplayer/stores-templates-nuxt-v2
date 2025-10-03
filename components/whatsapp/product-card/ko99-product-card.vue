@@ -90,11 +90,7 @@
               }}
             </p>
             <p
-              v-if="
-                dataStore?.id === 18642 &&
-                product?.tag_promocion == 1 &&
-                product?.promocion_valor
-              "
+              v-if="shouldShowPromoStrike"
               class="ml-5 text-sm text-red-500 line-through"
             >
               {{
@@ -106,13 +102,13 @@
               }}
             </p>
             <p
-              v-if="maxPrice > 0 && dataStore?.id !== 18642"
+              v-if="maxPrice > 0 && !storeHasPromoOverride"
               class="separator-price"
             >
               -
             </p>
             <p
-              v-if="maxPrice > 0 && dataStore?.id !== 18642"
+              v-if="maxPrice > 0 && !storeHasPromoOverride"
               class="txt-product-price"
             >
               {{
@@ -135,11 +131,7 @@
               }}
             </p>
             <p
-              v-if="
-                dataStore?.id === 18642 &&
-                product?.tag_promocion == 1 &&
-                product?.promocion_valor
-              "
+              v-if="shouldShowPromoStrike"
               class="ml-5 text-sm text-red-500 line-through"
             >
               {{
@@ -227,6 +219,7 @@
 import idCloudinary from '@/mixins/idCloudinary'
 import currency from '@/mixins/formatCurrent'
 import mobileCheck from '@/mixins/mobileCheck'
+import { isSpecialStore } from '@/utils/promoStores'
 export default {
   name: 'ProductCardWa2',
   mixins: [idCloudinary, currency, mobileCheck],
@@ -287,6 +280,16 @@ export default {
         }
       }
       return !this.product.stock
+    },
+    storeHasPromoOverride() {
+      return isSpecialStore(this.dataStore?.id)
+    },
+    shouldShowPromoStrike() {
+      return (
+        this.storeHasPromoOverride &&
+        this.product?.tag_promocion == 1 &&
+        this.product?.promocion_valor
+      )
     },
   },
   watch: {
