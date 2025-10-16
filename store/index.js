@@ -931,7 +931,7 @@ export const actions = {
         },
       })
       if (data) {
-        let productServer = data.data
+        let productServer = normalizeCloudinaryPayload(data.data)
         let merged = []
         for (let i = 0; i < productServer.length; i++) {
           merged.push({
