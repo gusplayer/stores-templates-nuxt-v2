@@ -44,6 +44,7 @@ export const actions = {
           favorite: params.favorite,
           'top-sales': params.topSales,
           price: params.price,
+          order: params.order,
         },
         headers: {
           KOMERCIA_PUBLIC_ROUTES_KEY: rootState.routerKey,

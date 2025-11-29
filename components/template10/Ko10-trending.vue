@@ -18,7 +18,10 @@
           <span class="subtittle">{{ trending.description }}</span>
         </div>
       </div>
-      <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
+      <div
+        ref="mySwiper"
+        v-swiper:mySwiper="swiperOption"
+      >
         <div class="swiper-wrapper pb-10">
           <div
             v-for="product in listProducts"
@@ -33,12 +36,21 @@
             />
           </div>
         </div>
-        <div v-if="listProducts.length == 0" class="content-products-empty">
+        <div
+          v-if="listProducts.length == 0"
+          class="content-products-empty"
+        >
           <p>{{ $t('home_msgCatalogo') }}</p>
         </div>
       </div>
-      <div v-if="trending.visibleBtn" class="btn-products">
-        <nuxt-link to="/productos" class="btn">
+      <div
+        v-if="trending.visibleBtn"
+        class="btn-products"
+      >
+        <nuxt-link
+          to="/productos"
+          class="btn"
+        >
           <p>{{ trending.displayName }}</p>
         </nuxt-link>
       </div>
@@ -125,6 +137,7 @@ export default {
           page: 1,
           // promotion: 1,
           topSales: 1,
+          order: 'DESC',
         }
       )
       if (success) {
