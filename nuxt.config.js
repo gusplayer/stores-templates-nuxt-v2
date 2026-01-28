@@ -44,7 +44,6 @@ export default {
     { src: '~/plugins/vueLazyLoad.js', ssr: false },
     { src: '~/plugins/elementTipTap', ssr: false },
     { src: '~/plugins/chatwoot.js', ssr: false },
-    { src: '~/plugins/increment-store-view.client.js', ssr: false },
   ],
 
   // Nuxt modules to be included in the build
