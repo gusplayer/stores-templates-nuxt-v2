@@ -44,6 +44,7 @@ export default {
     { src: '~/plugins/vueLazyLoad.js', ssr: false },
     { src: '~/plugins/elementTipTap', ssr: false },
     { src: '~/plugins/chatwoot.js', ssr: false },
+    { src: '~/plugins/increment-store-view.client.js', ssr: false },
   ],
 
   // Nuxt modules to be included in the build
@@ -96,6 +97,7 @@ export default {
     transpile: ['vee-validate/dist/rules'],
     optimizeCSS: true,
     parallel: true,
+    extractCSS: process.env.NODE_ENV === 'production',
     splitChunks: {
       pages: true,
       vendor: true,
@@ -106,6 +108,15 @@ export default {
     optimization: { splitChunks: { name: false } },
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) config.devtool = 'source-map'
+    },
+  },
+  render: {
+    compressor: false,
+    static: {
+      maxAge: 1000 * 60 * 60 * 24 * 365,
+    },
+    http2: {
+      push: true,
     },
   },
 
