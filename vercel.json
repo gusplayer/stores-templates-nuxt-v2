@@ -5,20 +5,12 @@
       "src": "nuxt.config.js",
       "use": "@nuxtjs/vercel-builder",
       "config": {
-        "serverFiles": ["server-middleware/**"]
+        "serverFiles": ["server-middleware/**"],
+        "memory": 1024,
+        "maxDuration": 30
       }
     }
   ],
-  "functions": {
-    "api/**/*.js": {
-      "memory": 1024,
-      "maxDuration": 30
-    },
-    "**/*.js": {
-      "memory": 1024,
-      "maxDuration": 30
-    }
-  },
   "headers": [
     {
       "source": "/_nuxt/(.*)",
@@ -53,3 +45,4 @@
     }
   ]
 }
+
