@@ -96,7 +96,7 @@ export default {
     },
     transpile: ['vee-validate/dist/rules'],
     optimizeCSS: true,
-    parallel: true,
+    parallel: process.env.NODE_ENV !== 'production',
     extractCSS: process.env.NODE_ENV === 'production',
     splitChunks: {
       pages: true,
