@@ -401,7 +401,7 @@ export const actions = {
       if (data) {
         await Promise.all([
           dispatch('GET_LOGO_STORE', data.data.id),
-          dispatch('SET_INCREMENT_STORE_VIEW', data.data.id),
+
           dispatch('GET_ANALYTICS_TAGMANAGER', data.data.id),
           dispatch('GET_CATEGORIES', data.data.id),
           dispatch('GET_SUBCATEGORIES', data.data.id),

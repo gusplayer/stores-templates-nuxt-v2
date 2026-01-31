@@ -585,6 +585,10 @@ export default {
     }
     // Envía datos para registrar vistas en la pagina
     this.sendAnalyticsStore()
+    // Increment store view on client side to reduce server load
+    if (this.dataStore && this.dataStore.id) {
+      this.$store.dispatch('SET_INCREMENT_STORE_VIEW', this.dataStore.id)
+    }
     // Agrega un listener de mensajes
     window.parent.postMessage('message', '*')
     window.addEventListener('message', this.addEventListenerTemplate)
