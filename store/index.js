@@ -399,24 +399,13 @@ export const actions = {
         },
       })
       if (data) {
+        commit('DATA', data)
         await Promise.all([
           dispatch('GET_LOGO_STORE', data.data.id),
-
           dispatch('GET_ANALYTICS_TAGMANAGER', data.data.id),
           dispatch('GET_CATEGORIES', data.data.id),
           dispatch('GET_SUBCATEGORIES', data.data.id),
-          dispatch('GET_GEOLOCALIZACION', data.data.id),
-          dispatch('GET_STORE_POLICIES', data.data.id),
-          dispatch('GET_WHATS_APP_CHECKOUT', data.data.id),
-          dispatch('GET_ENTITIES', data.data.id),
-          dispatch('GET_ARTICLES', {
-            id_tienda: data.data.id,
-            page: 1,
-            limit: 1,
-            vuex: true,
-          }),
         ])
-        commit('DATA', data)
         commit('SET_DATA')
       }
     } catch (err) {
@@ -1374,8 +1363,12 @@ async function handleWapi(commit, dispatch, idWapi, isDataTemplate) {
 async function handleKomercia(id, template, isDataTemplate, commit, dispatch) {
   if (id) {
     commit('SET_TEMPLATE_STORE', template)
-    await dispatch('GET_DATA_TIENDA_BY_ID', id)
-    await dispatch('GET_DATA_HOKO', id)
+
+    const promises = [
+      dispatch('GET_DATA_TIENDA_BY_ID', id),
+      dispatch('GET_DATA_HOKO', id)
+    ]
+
     if (
       (template === 7 ||
         template === 9 ||
@@ -1387,26 +1380,23 @@ async function handleKomercia(id, template, isDataTemplate, commit, dispatch) {
         template === 16) &&
       !isDataTemplate
     ) {
-      await dispatch('GET_SETTINGS_BY_TEMPLATE_NODE', {
-        templateStore: template,
-        idStore: id,
-      })
+      promises.push(
+        dispatch('GET_SETTINGS_BY_TEMPLATE_NODE', {
+          templateStore: template,
+          idStore: id,
+        })
+      )
+    } else if ((template === 5 || template === 99) && !isDataTemplate) {
+      promises.push(
+        dispatch('GET_SETTINGS_BY_TEMPLATE', {
+          templateStore: template,
+          idStore: id,
+        })
+      )
+      commit('SET_STATE_WAPIME', false)
     }
-    // else if () {
-    //   if (id && template) {
-    //     await dispatch('GET_SETTINGS_BY_TEMPLATE_AWS', {
-    //       templateStore: template,
-    //       subdominio: state.dataStore.subdominio,
-    //     })
-    //   }
-    // }
-    else if ((template === 5 || template === 99) && !isDataTemplate) {
-      await dispatch('GET_SETTINGS_BY_TEMPLATE', {
-        templateStore: template,
-        idStore: id,
-      })
-      await commit('SET_STATE_WAPIME', false)
-    }
+
+    await Promise.all(promises)
   }
 }
 async function handleDataStore(state, commit) {

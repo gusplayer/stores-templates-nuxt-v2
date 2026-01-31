@@ -583,6 +583,21 @@ export default {
     if (this.$route.query?.openCart === 'true') {
       this.$store.commit('SET_OPEN_ORDER', true)
     }
+
+    // Load non-critical data on client side
+    if (this.dataStore && this.dataStore.id) {
+      const id = this.dataStore.id
+      this.$store.dispatch('GET_GEOLOCALIZACION', id)
+      this.$store.dispatch('GET_STORE_POLICIES', id)
+      this.$store.dispatch('GET_WHATS_APP_CHECKOUT', id)
+      this.$store.dispatch('GET_ENTITIES', id)
+      this.$store.dispatch('GET_ARTICLES', {
+        id_tienda: id,
+        page: 1,
+        limit: 1,
+        vuex: true,
+      })
+    }
     // Envía datos para registrar vistas en la pagina
     this.sendAnalyticsStore()
     // Increment store view on client side to reduce server load
