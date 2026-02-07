@@ -39,7 +39,7 @@
         },
         {
           "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
+          "value": "ALLOWALL"
         }
       ]
     }
