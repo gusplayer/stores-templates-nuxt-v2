@@ -3,8 +3,8 @@ import axios from 'axios'
 import getCookie from '../utils/getCookie'
 import { normalizeCloudinaryPayload } from '@/utils/cloudinary'
 
-// Timeout para llamadas API en SSR (8 segundos)
-const API_TIMEOUT = 8000
+// Timeout para llamadas API en SSR (configurable via env, default 8 segundos)
+const API_TIMEOUT = parseInt(process.env.API_TIMEOUT) || 8000
 export const state = () => ({
   fullPathServer: '',
   template: '',
