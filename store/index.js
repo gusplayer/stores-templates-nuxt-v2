@@ -2,6 +2,9 @@ export const strict = false
 import axios from 'axios'
 import getCookie from '../utils/getCookie'
 import { normalizeCloudinaryPayload } from '@/utils/cloudinary'
+
+// Timeout para llamadas API en SSR (configurable via env, default 8 segundos)
+const API_TIMEOUT = parseInt(process.env.API_TIMEOUT) || 8000
 export const state = () => ({
   fullPathServer: '',
   template: '',
@@ -397,6 +400,7 @@ export const actions = {
         headers: {
           KOMERCIA_PUBLIC_ROUTES_KEY: state.routerKey,
         },
+        timeout: API_TIMEOUT,
       })
       if (data) {
         commit('DATA', data)
@@ -409,7 +413,7 @@ export const actions = {
         commit('SET_DATA')
       }
     } catch (err) {
-      console.log('Data store', err?.response)
+      console.log('Data store', err?.message || err?.response)
     }
   },
   GET_DATA({ commit }) {
@@ -423,12 +427,13 @@ export const actions = {
         headers: {
           KOMERCIA_PUBLIC_ROUTES_KEY: state.routerKey,
         },
+        timeout: API_TIMEOUT,
       })
       if (data) {
         commit('SET_LOGO_STORE', data.data)
       }
     } catch (err) {
-      console.log('GET_LOGO_STORE', err?.response)
+      console.log('GET_LOGO_STORE', err?.message || err?.response)
     }
   },
 
@@ -499,13 +504,14 @@ export const actions = {
         headers: {
           KOMERCIA_PUBLIC_ROUTES_KEY: state.routerKey,
         },
+        timeout: API_TIMEOUT,
       })
       if (data) {
         commit('SET_CATEGORIES', data.data)
         return { success: true, data: data }
       }
     } catch (err) {
-      console.log('Data categories', err?.response)
+      console.log('Data categories', err?.message || err?.response)
     }
   },
   async GET_SUBCATEGORIES({ commit, state }, idTienda) {
@@ -516,13 +522,14 @@ export const actions = {
         headers: {
           KOMERCIA_PUBLIC_ROUTES_KEY: state.routerKey,
         },
+        timeout: API_TIMEOUT,
       })
       if (data) {
         commit('SET_SUBCATEGORIES', data.data)
         return { success: true, data: data }
       }
     } catch (err) {
-      console.log('Data subcategories', err?.response)
+      console.log('Data subcategories', err?.message || err?.response)
     }
   },
   async GET_GEOLOCALIZACION({ commit, state }, idTienda) {
@@ -621,6 +628,7 @@ export const actions = {
         headers: {
           KOMERCIA_PUBLIC_ROUTES_KEY: state.routerKey,
         },
+        timeout: API_TIMEOUT,
       })
       if (data) {
         commit(`SET_SETTINGS_BY_TEMPLATE`, {
@@ -629,7 +637,7 @@ export const actions = {
         })
       }
     } catch (err) {
-      console.log('Data setting Laravel', err?.response)
+      console.log('Data setting Laravel', err?.message || err?.response)
     }
   },
   async GET_SETTINGS_BY_TEMPLATE_NODE(
@@ -640,6 +648,7 @@ export const actions = {
       const { data } = await axios({
         method: 'GET',
         url: `${state.urlNodeSettings}/template${templateStore}?id=${idStore}`,
+        timeout: API_TIMEOUT,
       })
       if (data) {
         commit(`SET_SETTINGS_BY_TEMPLATE`, {
@@ -648,7 +657,7 @@ export const actions = {
         })
       }
     } catch (err) {
-      console.log('Data setting NODE', err?.response)
+      console.log('Data setting NODE', err?.message || err?.response)
     }
   },
   // async GET_SETTINGS_BY_TEMPLATE_AWS(
@@ -697,12 +706,13 @@ export const actions = {
         headers: {
           KOMERCIA_PUBLIC_ROUTES_KEY: state.routerKey,
         },
+        timeout: API_TIMEOUT,
       })
       if (data) {
         commit('SET_ANALITICS_TAGMANAGER', data.data)
       }
     } catch (err) {
-      console.log('Data integraciones', err?.response)
+      console.log('Data integraciones', err?.message || err?.response)
     }
   },
   async GET_DESCUENTOS({ state }) {
@@ -1285,7 +1295,8 @@ async function getIdData(state, req, commit) {
   } else if (getURL?.esSubdominio && getURL?.nombreTienda) {
     try {
       const response = await axios.get(
-        `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL.nombreTienda}`
+        `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL.nombreTienda}`,
+        { timeout: API_TIMEOUT }
       )
 
       id = response.data.data.id || response.data.data.storeId
@@ -1305,13 +1316,14 @@ async function getIdData(state, req, commit) {
       }
     } catch (err) {
       console.log(
-        `No se encontro la tienda ${getURL.nombreTienda} subdominio, ${err}`
+        `No se encontro la tienda ${getURL.nombreTienda} subdominio, ${err?.message || err}`
       )
     }
   } else if (getURL?.esDominio && getURL?.nombreTienda) {
     try {
       const response = await axios.get(
-        `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL?.nombreTienda}&isDomain=1`
+        `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL?.nombreTienda}&isDomain=1`,
+        { timeout: API_TIMEOUT }
       )
       id = response.data.data.id || response.data.data.storeId
       template =
@@ -1324,7 +1336,7 @@ async function getIdData(state, req, commit) {
       }
     } catch (err) {
       console.log(
-        `No se encontro la tienda ${getURL.nombreTienda} dominio, ${err}`
+        `No se encontro la tienda ${getURL.nombreTienda} dominio, ${err?.message || err}`
       )
     }
   }

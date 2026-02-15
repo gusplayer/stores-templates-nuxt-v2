@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /cart
+Disallow: /micompra
+Disallow: /wa/*/micompra
+Disallow: /_nuxt/
+Disallow: /api/
+
+# Block common bot paths
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /administrator/
+Disallow: /.env
+Disallow: /config.php
