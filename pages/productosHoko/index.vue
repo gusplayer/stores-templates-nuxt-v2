@@ -25,9 +25,15 @@ export default {
         9: 'K09ProductListHoko',
         10: 'KoNoDisponibleHoko',
         11: 'K11ProductListHoko',
+        12: 'KoNoDisponibleHoko',
         13: 'KoNoDisponibleHoko',
         14: 'KoNoDisponibleHoko',
+        15: 'KoNoDisponibleHoko',
+        16: 'KoNoDisponibleHoko',
+        17: 'KoNoDisponibleHoko',
+        99: 'KoNoDisponibleHoko',
       },
+      defaultComponent: 'KoNoDisponibleHoko',
     }
   },
   computed: {
@@ -46,12 +52,11 @@ export default {
     //   return this.$store.getters['products/filterProducts']
     // },
     indexTemplate() {
-      let productListComponent = ''
       // eslint-disable-next-line no-prototype-builtins
       if (this.componentMapping.hasOwnProperty(this.template)) {
-        productListComponent = this.componentMapping[parseInt(this.template)]
+        return this.componentMapping[parseInt(this.template)]
       }
-      return productListComponent
+      return this.defaultComponent
     },
     componentsProps() {
       return {
