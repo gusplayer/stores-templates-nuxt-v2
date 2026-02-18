@@ -100,6 +100,8 @@ module.exports = function (req, res, next) {
   // 1. Verificar User-Agent de bots bloqueados (prioridad alta)
   for (const bot of BLOCKED_USER_AGENTS) {
     if (userAgent.includes(bot)) {
+      // Log para diagnóstico (solo en desarrollo o si necesitas debug)
+      console.log(`[block-bots] Blocked: ${bot} | UA: ${userAgent.substring(0, 100)} | Path: ${pathname}`)
       // Retornar 403 para bots bloqueados
       res.statusCode = 403
       res.setHeader('Content-Type', 'text/plain')

@@ -1189,7 +1189,7 @@ export const getters = {
     }
   },
   locationStore(state) {
-    if (!state.dataStore) {
+    if (!state.dataStore || !state.dataStore.id) {
       return null
     }
 
@@ -1199,11 +1199,15 @@ export const getters = {
 
     const suffix = state.dataStore.template !== 3 ? 'store' : 'co'
 
-    if (state.dataStore.tiendasInfo.dominio) {
+    if (state.dataStore.tiendasInfo?.dominio) {
       return state.dataStore.tiendasInfo.dominio
     }
 
-    return `https://${state.dataStore.subdominio}.komercia.${suffix}`
+    if (state.dataStore.subdominio) {
+      return `https://${state.dataStore.subdominio}.komercia.${suffix}`
+    }
+
+    return null
   },
   userDropshipping(state) {
     if (state.productsCart) {
