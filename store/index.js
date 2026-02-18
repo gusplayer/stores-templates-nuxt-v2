@@ -353,15 +353,45 @@ export const actions = {
       const { subdomain, id, template, idWapi, isDataTemplate } =
         await getIdData(state, req, commit)
 
-      if (idWapi) {
-        await handleWapi(commit, dispatch, idWapi, isDataTemplate)
-      } else {
-        await handleKomercia(id, template, isDataTemplate, commit, dispatch)
+      // Fail-fast: Si hay error en getIdData, no continuar con llamadas API
+      if (state.storeError) {
+        const param = {
+          url: req.headers.host,
+          parts: req.headers.host.split('.'),
+          subdomain: subdomain || null,
+          id: 0,
+          dataStore: 'No se encontro la tienda',
+          description: '',
+          title: '',
+        }
+        commit('SET_INFO', param)
+        return
       }
 
-      if (!state.storeError) {
-        await handleDataStore(state, commit)
+      if (idWapi) {
+        await handleWapi(commit, dispatch, idWapi, isDataTemplate, state)
+      } else {
+        await handleKomercia(id, template, isDataTemplate, commit, dispatch, state)
       }
+
+      // Segunda verificación después de las llamadas API
+      // Si hay error, retornar con datos mínimos
+      if (state.storeError) {
+        const param = {
+          url: req.headers.host,
+          parts: req.headers.host.split('.'),
+          subdomain: subdomain || null,
+          id: 0,
+          dataStore: 'No se encontro la tienda',
+          description: '',
+          title: '',
+        }
+        commit('SET_INFO', param)
+        return
+      }
+
+      // Solo ejecutar si no hay errores
+      await handleDataStore(state, commit)
 
       // Añadir una verificación de seguridad para el objeto `dataStore`
       // y para las propiedades que se usarán en el `head` de Vue-meta.
@@ -1289,6 +1319,19 @@ async function getIdData(state, req, commit) {
   let isDataTemplate = null
   let subdomain = getURL?.nombreTienda ?? null
 
+  // Fail-fast: Si no hay nombre de tienda válido, retornar inmediatamente
+  if (!getURL?.nombreTienda && !getURL?.idTienda) {
+    state.storeError = true
+    return { subdomain: null, id: 0, template: 0, idWapi: null, isDataTemplate: null }
+  }
+
+  // Fail-fast: Bloquear dominios de Vercel directos (no son tiendas reales)
+  const host = req.headers.host || ''
+  if (host.includes('vercel.app') || host.includes('vercel-dns')) {
+    state.storeError = true
+    return { subdomain: null, id: 0, template: 0, idWapi: null, isDataTemplate: null }
+  }
+
   if (getURL?.idTienda) {
     idWapi = getURL.idTienda
     template = 99
@@ -1298,6 +1341,12 @@ async function getIdData(state, req, commit) {
         `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL.nombreTienda}`,
         { timeout: API_TIMEOUT }
       )
+
+      // Verificar que la respuesta tenga datos válidos
+      if (!response?.data?.data?.id && !response?.data?.data?.storeId) {
+        state.storeError = true
+        return { subdomain, id: 0, template: 0, idWapi: null, isDataTemplate: null }
+      }
 
       id = response.data.data.id || response.data.data.storeId
       template =
@@ -1315,9 +1364,12 @@ async function getIdData(state, req, commit) {
         })
       }
     } catch (err) {
+      // Fail-fast: Marcar error y retornar inmediatamente
       console.log(
         `No se encontro la tienda ${getURL.nombreTienda} subdominio, ${err?.message || err}`
       )
+      state.storeError = true
+      return { subdomain, id: 0, template: 0, idWapi: null, isDataTemplate: null }
     }
   } else if (getURL?.esDominio && getURL?.nombreTienda) {
     try {
@@ -1325,91 +1377,139 @@ async function getIdData(state, req, commit) {
         `${state.urlAWSsettings}/api/v1/templates/websites/template?criteria=${getURL?.nombreTienda}&isDomain=1`,
         { timeout: API_TIMEOUT }
       )
+
+      // Verificar que la respuesta tenga datos válidos
+      if (!response?.data?.data?.id && !response?.data?.data?.storeId) {
+        state.storeError = true
+        return { subdomain, id: 0, template: 0, idWapi: null, isDataTemplate: null }
+      }
+
       id = response.data.data.id || response.data.data.storeId
       template =
         response.data.data.templateNumber || response.data.data.template
-      if (template === 15 || template === 6) {
+
+      // Establecer isDataTemplate para dominios (igual que subdominios)
+      if (
+        template === 15 ||
+        template === 6 ||
+        response?.data?.data?.webSiteTemplate
+      ) {
+        isDataTemplate = true
         commit(`SET_SETTINGS_BY_TEMPLATE`, {
           templateNumber: template,
           value: response.data.data.webSiteTemplate,
         })
       }
     } catch (err) {
+      // Fail-fast: Marcar error y retornar inmediatamente
       console.log(
         `No se encontro la tienda ${getURL.nombreTienda} dominio, ${err?.message || err}`
       )
+      state.storeError = true
+      return { subdomain, id: 0, template: 0, idWapi: null, isDataTemplate: null }
     }
   }
-  if (
-    (getURL.nombreTienda === '' &&
-      template === 0 &&
-      (id === 0 || idWapi === null)) ||
-    getURL.nombreTienda === 'komercia' ||
-    (template === 0 && (id === 0 || idWapi === null))
-  ) {
+
+  // Validación final: Solo marcar error si no tenemos datos válidos
+  // No sobrescribir storeError si ya está en true
+  const hasValidStore = (id > 0 || idWapi) && template > 0
+  const isBlockedName = getURL.nombreTienda === 'komercia'
+
+  if (!hasValidStore || isBlockedName) {
     state.storeError = true
-    id = 0
-    template = 0
-    idWapi = null
-  } else {
-    state.storeError = false
+    return { subdomain, id: 0, template: 0, idWapi: null, isDataTemplate: null }
   }
+
+  // Solo establecer storeError = false si llegamos aquí con datos válidos
+  state.storeError = false
   return { subdomain, id, template, idWapi, isDataTemplate }
 }
 
-async function handleWapi(commit, dispatch, idWapi, isDataTemplate) {
+async function handleWapi(commit, dispatch, idWapi, isDataTemplate, state) {
   commit('SET_TEMPLATE_STORE', 99)
 
-  // await dispatch('GET_SETTINGS_BY_TEMPLATE_WAPI', idWapi)
+  // Primero obtener datos de la tienda - es crítico
+  await dispatch('GET_DATA_TIENDA_BY_ID', idWapi)
+
+  // Si no se obtuvieron datos de la tienda, no continuar
+  // Verificar que id sea un número positivo válido
+  if (!state?.dataStore?.id || state.dataStore.id <= 0) {
+    state.storeError = true
+    return
+  }
+
+  // Llamadas secundarias (no bloquean si fallan, pero logueamos para debugging)
   if (!isDataTemplate) {
     await dispatch('GET_SETTINGS_BY_TEMPLATE', {
       templateStore: 99,
       idStore: idWapi,
+    }).catch((err) => {
+      console.log(`GET_SETTINGS_BY_TEMPLATE wapi failed: ${err?.message || err}`)
     })
   }
-  await dispatch('GET_DATA_TIENDA_BY_ID', idWapi)
 
   commit('SET_STATE_WAPIME', true)
 }
 
-async function handleKomercia(id, template, isDataTemplate, commit, dispatch) {
-  if (id) {
-    commit('SET_TEMPLATE_STORE', template)
-
-    const promises = [
-      dispatch('GET_DATA_TIENDA_BY_ID', id),
-      dispatch('GET_DATA_HOKO', id)
-    ]
-
-    if (
-      (template === 7 ||
-        template === 9 ||
-        template === 10 ||
-        template === 11 ||
-        template === 12 ||
-        template === 13 ||
-        template === 14 ||
-        template === 16) &&
-      !isDataTemplate
-    ) {
-      promises.push(
-        dispatch('GET_SETTINGS_BY_TEMPLATE_NODE', {
-          templateStore: template,
-          idStore: id,
-        })
-      )
-    } else if ((template === 5 || template === 99) && !isDataTemplate) {
-      promises.push(
-        dispatch('GET_SETTINGS_BY_TEMPLATE', {
-          templateStore: template,
-          idStore: id,
-        })
-      )
-      commit('SET_STATE_WAPIME', false)
-    }
-
-    await Promise.all(promises)
+async function handleKomercia(id, template, isDataTemplate, commit, dispatch, state) {
+  if (!id || id <= 0) {
+    return
   }
+
+  commit('SET_TEMPLATE_STORE', template)
+
+  // Primero obtener datos de la tienda - es crítico
+  await dispatch('GET_DATA_TIENDA_BY_ID', id)
+
+  // Si no se obtuvieron datos de la tienda, no continuar
+  // Verificar que id sea un número positivo válido
+  if (!state?.dataStore?.id || state.dataStore.id <= 0) {
+    state.storeError = true
+    return
+  }
+
+  // Llamadas secundarias en paralelo (no bloquean si fallan, pero logueamos para debugging)
+  const secondaryPromises = [
+    dispatch('GET_DATA_HOKO', id).catch((err) => {
+      // Hoko es opcional, solo loguear si hay error inesperado
+      if (err?.response?.status !== 404) {
+        console.log(`GET_DATA_HOKO failed: ${err?.message || err}`)
+      }
+    })
+  ]
+
+  if (
+    (template === 7 ||
+      template === 9 ||
+      template === 10 ||
+      template === 11 ||
+      template === 12 ||
+      template === 13 ||
+      template === 14 ||
+      template === 16) &&
+    !isDataTemplate
+  ) {
+    secondaryPromises.push(
+      dispatch('GET_SETTINGS_BY_TEMPLATE_NODE', {
+        templateStore: template,
+        idStore: id,
+      }).catch((err) => {
+        console.log(`GET_SETTINGS_BY_TEMPLATE_NODE failed for template ${template}: ${err?.message || err}`)
+      })
+    )
+  } else if ((template === 5 || template === 99) && !isDataTemplate) {
+    secondaryPromises.push(
+      dispatch('GET_SETTINGS_BY_TEMPLATE', {
+        templateStore: template,
+        idStore: id,
+      }).catch((err) => {
+        console.log(`GET_SETTINGS_BY_TEMPLATE failed for template ${template}: ${err?.message || err}`)
+      })
+    )
+    commit('SET_STATE_WAPIME', false)
+  }
+
+  await Promise.all(secondaryPromises)
 }
 async function handleDataStore(state, commit) {
   if (state?.dataStore?.disenoModals?.[0]?.stateModal === 1) {
