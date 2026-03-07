@@ -149,7 +149,10 @@
                       )
                   }}
                 </p>
-                <div v-else class="w-full min-w-[60px] max-w-[100px]"></div>
+                <div
+                  v-else
+                  class="w-full min-w-[60px] max-w-[100px]"
+                ></div>
                 <div class="ml-5 flex h-full items-start">
                   <boteBasura-icon
                     class="cursor-pointer text-20 text-[#2c2930] transition-all duration-300 ease-in-out hover:text-red-500"
@@ -191,9 +194,9 @@
                 <details
                   v-if="
                     rangosByCiudad.envio_metodo === 'precio_ciudad' &&
-                    shippingCities.length > 0 &&
-                    !getFreeShipping &&
-                    !FreeShippingCart
+                      shippingCities.length > 0 &&
+                      !getFreeShipping &&
+                      !FreeShippingCart
                   "
                 >
                   <summary class="text-color">
@@ -209,7 +212,7 @@
                           <b>
                             {{
                               shippingCities[index].nombre_ciu ===
-                              'Sin especificar'
+                                'Sin especificar'
                                 ? 'Resto del país'
                                 : shippingCities[index].nombre_ciu
                             }}:
@@ -231,9 +234,9 @@
                 <div
                   v-else-if="
                     rangosByCiudad.envio_metodo === 'tarifa_plana' &&
-                    shipping > 0 &&
-                    getFreeShipping &&
-                    !FreeShippingCart
+                      shipping > 0 &&
+                      getFreeShipping &&
+                      !FreeShippingCart
                   "
                 >
                   <li class="text-color list-none">
@@ -250,8 +253,8 @@
                 <div
                   v-else-if="
                     rangosByCiudad.envio_metodo === 'precio' &&
-                    getFreeShipping &&
-                    !FreeShippingCart
+                      getFreeShipping &&
+                      !FreeShippingCart
                   "
                 >
                   <div v-if="shippingTarifaPrecio > 0">
@@ -265,19 +268,25 @@
                       }}
                     </p>
                   </div>
-                  <p v-else-if="shippingTarifaPrecio >= 0" class="text-color">
+                  <p
+                    v-else-if="shippingTarifaPrecio >= 0"
+                    class="text-color"
+                  >
                     {{ $t('footer_tarifaPrecio') }}
                   </p>
-                  <p v-else class="text-TarifaPrecio">
+                  <p
+                    v-else
+                    class="text-TarifaPrecio"
+                  >
                     {{ $t('footer_encioNoconfig') }}
                   </p>
                 </div>
                 <p
                   v-else-if="
                     rangosByCiudad.envio_metodo === 'gratis' &&
-                    shippingCities.length <= 0 &&
-                    !getFreeShipping &&
-                    !FreeShippingCart
+                      shippingCities.length <= 0 &&
+                      !getFreeShipping &&
+                      !FreeShippingCart
                   "
                   class="without_shipping_cost"
                 >
@@ -286,9 +295,9 @@
                 <p
                   v-else-if="
                     rangosByCiudad.envio_metodo === 'sintarifa' &&
-                    shippingCities.length <= 0 &&
-                    !getFreeShipping &&
-                    !FreeShippingCart
+                      shippingCities.length <= 0 &&
+                      !getFreeShipping &&
+                      !FreeShippingCart
                   "
                   class="without_shipping_cost"
                 >
@@ -297,19 +306,25 @@
                 <p
                   v-else-if="
                     rangosByCiudad.envio_metodo === 'sinEnvio' &&
-                    shippingCities.length <= 0 &&
-                    !getFreeShipping
+                      shippingCities.length <= 0 &&
+                      !getFreeShipping
                   "
                   class="without_shipping_cost"
                 >
                   No aplica
                 </p>
 
-                <p v-else-if="FreeShippingCart" class="without_shipping_cost">
+                <p
+                  v-else-if="FreeShippingCart"
+                  class="without_shipping_cost"
+                >
                   {{ $t('footer_tarifaPrecio') }}
                 </p>
               </span>
-              <span v-if="discountDescuentos" class="order_total_net">
+              <span
+                v-if="discountDescuentos"
+                class="order_total_net"
+              >
                 <p>{{ $t('footer_descuento') }}</p>
                 <p>
                   -
@@ -341,8 +356,8 @@
                     (totalCart +
                       (shipping ? shipping : 0) +
                       (shippingTarifaPrecio &&
-                      shippingTarifaPrecio != 'empty' &&
-                      !FreeShippingCart
+                        shippingTarifaPrecio != 'empty' &&
+                        !FreeShippingCart
                         ? shippingTarifaPrecio
                         : 0) -
                       discountDescuentos)
@@ -359,9 +374,9 @@
               <div
                 v-if="
                   isQuotation() ||
-                  (!countryStore &&
-                    productsCart.length &&
-                    dataStore.estado == 1)
+                    (!countryStore &&
+                      productsCart.length &&
+                      dataStore.estado == 1)
                 "
                 class="mb-10 w-full"
               >
@@ -385,8 +400,8 @@
               <p
                 v-if="
                   productsCart.length &&
-                  shippingTarifaPrecio == 'empty' &&
-                  estadoShippingTarifaPrecio
+                    shippingTarifaPrecio == 'empty' &&
+                    estadoShippingTarifaPrecio
                 "
                 class="mb-10 text-center text-14 font-semibold text-[#2c2930]"
               >
@@ -418,13 +433,13 @@
               <button
                 v-if="
                   !stateOrderWapi &&
-                  productsCart.length &&
-                  !isQuotation() &&
-                  dataStore.estado == 1 &&
-                  !estadoShippingTarifaPrecio &&
-                  countryStore &&
-                  IsMinValorTotal() &&
-                  expiredDate(dataStore.fechaExpiracion)
+                    productsCart.length &&
+                    !isQuotation() &&
+                    dataStore.estado == 1 &&
+                    !estadoShippingTarifaPrecio &&
+                    countryStore &&
+                    IsMinValorTotal() &&
+                    expiredDate(dataStore.fechaExpiracion)
                 "
                 id="InitiateCheckoutTag"
                 class="mb-10 w-full rounded-5 border-2 border-[#2c2930] bg-[#2c2930] px-10 py-8 text-center text-16 font-bold text-white-white transition-all duration-300 ease-in-out hover:border-[#a1a1a1] hover:bg-[#a1a1a1] hover:text-[#2c2930]"
@@ -436,14 +451,14 @@
               <button
                 v-if="
                   stateOrderWapi &&
-                  productsCart.length &&
-                  !isQuotation() &&
-                  dataStore.estado == 1 &&
-                  !estadoShippingTarifaPrecio &&
-                  countryStore &&
-                  IsMinValorTotal() &&
-                  settingByTemplate.pago_online == 1 &&
-                  expiredDate(dataStore.fechaExpiracion)
+                    productsCart.length &&
+                    !isQuotation() &&
+                    dataStore.estado == 1 &&
+                    !estadoShippingTarifaPrecio &&
+                    countryStore &&
+                    IsMinValorTotal() &&
+                    settingByTemplate.pago_online == 1 &&
+                    expiredDate(dataStore.fechaExpiracion)
                 "
                 id="InitiateCheckoutTag"
                 class="mb-10 flex w-full items-center justify-center rounded-5 py-8 text-16 font-bold"
@@ -463,12 +478,12 @@
               <button
                 v-if="
                   stateOrderWapi &&
-                  productsCart.length &&
-                  !isQuotation() &&
-                  IsMinValorTotal() &&
-                  dataStore.estado == 1 &&
-                  dataStore.redes.whatsapp &&
-                  expiredDate(dataStore.fechaExpiracion)
+                    productsCart.length &&
+                    !isQuotation() &&
+                    IsMinValorTotal() &&
+                    dataStore.estado == 1 &&
+                    dataStore.redes.whatsapp &&
+                    expiredDate(dataStore.fechaExpiracion)
                 "
                 class="flex w-full items-center justify-center rounded-5 py-8 text-16 font-bold"
                 :class="!stateOrderWapi ? 'mb-10' : 'mb-0'"
@@ -522,7 +537,10 @@
               {{ $t('footer_carritoVacio3') }}
             </p>
           </div>
-          <nuxt-link class="w-full" :to="setUrlCloseOrder">
+          <nuxt-link
+            class="w-full"
+            :to="setUrlCloseOrder"
+          >
             <p
               class="rounded-5 border-2 border-[#2c2930] bg-transparent px-10 py-8 text-center text-16 font-bold text-[#2c2930] transition-all duration-300 ease-in-out hover:border-[#a1a1a1] hover:text-[#a1a1a1]"
               @click="closedOrder"
@@ -581,8 +599,8 @@
           <ValidationObserver
             v-if="
               (inputCheckoutWPP && inputCheckoutWPP.length === 0) ||
-              inputCheckoutWPP === null ||
-              inputCheckoutWPP === undefined
+                inputCheckoutWPP === null ||
+                inputCheckoutWPP === undefined
             "
             ref="observer"
             tag="form"
@@ -612,7 +630,10 @@
                 >
                   {{ errors[0] }}
                 </span>
-                <div v-else class="mb-18"></div>
+                <div
+                  v-else
+                  class="mb-18"
+                ></div>
               </template>
             </validation-provider>
             <p class="mb-2 text-14 font-medium text-[#7e7e7e]">
@@ -639,13 +660,19 @@
                 >
                   {{ errors[0] }}
                 </span>
-                <div v-else class="mb-18"></div>
+                <div
+                  v-else
+                  class="mb-18"
+                ></div>
               </template>
             </validation-provider>
             <p class="mb-2 text-14 font-medium text-[#7e7e7e]">
               {{ $t('footer_formCorreo') }} ({{ $t('footer_norquerido') }})
             </p>
-            <validation-provider name="email" class="flex w-full flex-col">
+            <validation-provider
+              name="email"
+              class="flex w-full flex-col"
+            >
               <template slot-scope="{ errors }">
                 <input
                   id="ContactEmail"
@@ -661,7 +688,10 @@
                 >
                   {{ errors[0] }}
                 </span>
-                <div v-else class="mb-18"></div>
+                <div
+                  v-else
+                  class="mb-18"
+                ></div>
               </template>
             </validation-provider>
             <p class="mb-2 text-14 font-medium text-[#7e7e7e]">
@@ -688,7 +718,10 @@
                 >
                   {{ errors[0] }}
                 </span>
-                <div v-else class="mb-18"></div>
+                <div
+                  v-else
+                  class="mb-18"
+                ></div>
               </template>
             </validation-provider>
             <P class="mb-2 text-14 font-medium text-[#7e7e7e]">
@@ -713,7 +746,10 @@
                 >
                   {{ errors[0] }}
                 </span>
-                <div v-else class="mb-18"></div>
+                <div
+                  v-else
+                  class="mb-18"
+                ></div>
               </template>
             </validation-provider>
             <P class="mb-2 text-14 font-medium text-[#7e7e7e]">
@@ -738,7 +774,10 @@
                 >
                   {{ errors[0] }}
                 </span>
-                <div v-else class="mb-18"></div>
+                <div
+                  v-else
+                  class="mb-18"
+                ></div>
               </template>
             </validation-provider>
             <P class="mb-2 text-14 font-medium text-[#7e7e7e]">
@@ -762,7 +801,10 @@
                 >
                   {{ errors[0] }}
                 </span>
-                <div v-else class="mb-18"></div>
+                <div
+                  v-else
+                  class="mb-18"
+                ></div>
               </template>
             </validation-provider>
           </ValidationObserver>
@@ -802,7 +844,10 @@
                     >
                       {{ errors[0] }}
                     </span>
-                    <div v-else class="mb-18"></div>
+                    <div
+                      v-else
+                      class="mb-18"
+                    ></div>
                   </template>
                 </validation-provider>
               </div>
@@ -861,11 +906,11 @@
                 <path
                   d="M44,24c0,11.045 -8.955,20 -20,20c-11.045,0 -20,-8.955 -20,-20c0,-11.045 8.955,-20 20,-20c11.045,0 20,8.955 20,20z"
                   fill="#4caf50"
-                ></path>
+                />
                 <path
                   d="M34.602,14.602l-13.602,13.597l-5.602,-5.598l-2.797,2.797l8.399,8.403l16.398,-16.402z"
                   fill="#ffffff"
-                ></path>
+                />
               </g>
             </g>
           </svg>
@@ -1173,15 +1218,22 @@ export default {
     this.productsFreeShippingCart()
     this.IsMinValorTotal()
     this.obtainDiscountValue()
+
+    if (this.dataStore && this.dataStore.id) {
+      this.$store.dispatch('GET_WHATS_APP_CHECKOUT', this.dataStore.id)
+    }
   },
   methods: {
-    modalBehaviorWhatsApp(value) {
+    async modalBehaviorWhatsApp(value) {
       if (this.quickSale?.state) {
         this.$store.commit('DELETE_ALL_ITEMS_CART')
         this.$store.commit('UPDATE_CONTENT_CART')
         this.$store.commit('SET_OPEN_ORDER', false)
         this.$store.commit('SET_STATE_FORM_MODAL_WHATS_APP', false)
       } else {
+        if (value && this.dataStore && this.dataStore.id) {
+          await this.$store.dispatch('GET_WHATS_APP_CHECKOUT', this.dataStore.id)
+        }
         this.formOrdenWhatsAPP = value
       }
     },
