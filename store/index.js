@@ -187,17 +187,17 @@ export const mutations = {
     state.stateListBLogs = value
   },
   SET_DATA(state) {
-    state.tags = state.dataStore.tags.sort(function (prev, next) {
+    state.tags = (state.dataStore?.tags || []).sort(function (prev, next) {
       return next.orden - prev.orden
     })
-    state.categorias = state.categorias.sort(function (prev, next) {
+    state.categorias = (state.categorias || []).sort(function (prev, next) {
       return next.orden - prev.orden
     })
-    state.mediospago = state.dataStore.medioPagos
-    if (state.dataStore?.mediosEnvios[0]?.valores) {
+    state.mediospago = state.dataStore?.medioPagos || []
+    if (state.dataStore?.mediosEnvios?.[0]?.valores) {
       state.envios.valores = JSON.parse(state.dataStore.mediosEnvios[0].valores)
     }
-    state.whatsapp = state.dataStore.redes.whatsapp
+    state.whatsapp = state.dataStore?.redes?.whatsapp
   },
   SET_SHOPPING_CART(state, value) {
     const normalizedCart = normalizeCloudinaryPayload(value)
