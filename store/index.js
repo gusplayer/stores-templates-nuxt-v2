@@ -3,6 +3,37 @@ import axios from 'axios'
 import getCookie from '../utils/getCookie'
 import { normalizeCloudinaryPayload } from '@/utils/cloudinary'
 
+// El endpoint NestJS de productos (Neon) responde en camelCase; la lógica del
+// carrito consume el shape legacy snake_case de Laravel. Adaptador para no tocar
+// el merge ni los componentes.
+const toSnakeKeys = (obj) =>
+  Object.fromEntries(
+    Object.entries(obj).map(([k, v]) => [
+      k.replace(/[A-Z]/g, (m) => '_' + m.toLowerCase()),
+      v,
+    ])
+  )
+
+const toLegacyCheckoutProduct = (p) => ({
+  id: p.id,
+  nombre: p.nombre,
+  foto: p.foto,
+  precio: p.precio,
+  activo: p.activo,
+  orden: p.orden,
+  tag: p.tag,
+  con_variante: p.conVariante,
+  envio_gratis: p.envioGratis,
+  foto_cloudinary: p.fotoCloudinary,
+  informacion_producto: p.productosInfo ? [toSnakeKeys(p.productosInfo)] : [],
+  variantes: (p.productosVariantes || []).map((v) => ({
+    id: v.id,
+    variantes: v.variantes,
+    id_producto: p.id,
+    combinaciones: v.productosVariantesCombinaciones || [],
+  })),
+})
+
 // Timeout para llamadas API en SSR (configurable via env, default 8 segundos)
 const API_TIMEOUT = parseInt(process.env.API_TIMEOUT) || 8000
 export const state = () => ({
@@ -919,12 +950,17 @@ export const actions = {
   },
   async SEND_SUSCRIPTOR({ state }, params) {
     try {
+      // Newsletter directo a la base primaria (Neon/NestJS); antes iba a
+      // Laravel/MySQL y el panel (que lee suscriptores desde NestJS) no los veía
       const { data } = await axios({
         method: 'POST',
-        url: `${state.urlKomercia}/api/tienda/suscriptor`,
+        url: `${state.urlAWSsettings}/api/v1/subscribers/public`,
+        headers: {
+          KOMERCIA_PUBLIC_ROUTES_KEY: state.routerKey,
+        },
         data: {
           email: params.email,
-          tienda: params.tienda,
+          storeId: params.tienda,
         },
       })
       if (data) {
@@ -947,21 +983,28 @@ export const actions = {
   },
   async VERIFY_PRODUCTS({ state, commit }) {
     if (state.productsCart?.length > 0) {
-      let idProducts = state.productsCart.map((a) => a.id.toString())
-      if (idProducts.length == 1) {
-        idProducts = [idProducts]
-      }
+      const idProducts = state.productsCart.map((a) => Number(a.id))
+      // Valida el carrito contra Neon (NestJS), donde vive el stock real que las
+      // ventas decrementan — antes iba a Laravel/MySQL con stock desfasado
       const { data } = await axios({
         method: 'POST',
-        url: `${state.urlKomercia}/api/ids/por/productos`,
-        headers: state.configAxios.headers,
+        url: `${state.urlAWSsettings}/api/v1/products/public/checkout/many`,
+        headers: {
+          KOMERCIA_PUBLIC_ROUTES_KEY: state.routerKey,
+        },
         data: {
-          id_tienda: state.dataStore.id,
+          storeId: state.dataStore.id,
           ids: idProducts,
         },
       })
       if (data) {
-        let productServer = normalizeCloudinaryPayload(data.data)
+        // reordenar por id: el merge con productsCart es posicional
+        const byId = new Map(
+          (data.data || []).map((p) => [String(p.id), toLegacyCheckoutProduct(p)])
+        )
+        let productServer = normalizeCloudinaryPayload(
+          idProducts.map((id) => byId.get(String(id))).filter(Boolean)
+        )
         let merged = []
         for (let i = 0; i < productServer.length; i++) {
           merged.push({
