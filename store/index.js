@@ -36,6 +36,20 @@ const toLegacyCheckoutProduct = (p) => ({
 
 // Timeout para llamadas API en SSR (configurable via env, default 8 segundos)
 const API_TIMEOUT = parseInt(process.env.API_TIMEOUT) || 8000
+
+// En SSR (funciones de Vercel) la ruta Vercel -> Cloudflare -> Railway se cuelga
+// de forma intermitente; desde el servidor se llama al origen de Railway directo.
+// El navegador sigue usando api.komercia.app (detras de Cloudflare).
+const API_PUBLIC_URL = 'https://api.komercia.app'
+const API_ORIGIN_URL = 'https://api-production-9b752.up.railway.app'
+if (process.server) {
+  axios.interceptors.request.use((config) => {
+    if (config.url && config.url.startsWith(API_PUBLIC_URL)) {
+      config.url = API_ORIGIN_URL + config.url.slice(API_PUBLIC_URL.length)
+    }
+    return config
+  })
+}
 export const state = () => ({
   fullPathServer: '',
   template: '',
@@ -73,8 +87,7 @@ export const state = () => ({
   urlNodeSettings: 'https://editor-production-b24f.up.railway.app',
   // urlTemplate: 'https://templates.komercia.co',
   // urlComponents: 'https://components.komercia.co',
-  // urlAWSsettings: 'https://api.komercia.app',
-  urlAWSsettings: 'https://api-production-9b752.up.railway.app',
+  urlAWSsettings: 'https://api.komercia.app',
   routerKey: 'c6979297-txfg-4962-7sag-709c76a71755',
   configAxios: {
     headers: {
