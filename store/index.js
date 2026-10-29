@@ -73,7 +73,8 @@ export const state = () => ({
   urlNodeSettings: 'https://editor-production-b24f.up.railway.app',
   // urlTemplate: 'https://templates.komercia.co',
   // urlComponents: 'https://components.komercia.co',
-  urlAWSsettings: 'https://api.komercia.app',
+  // urlAWSsettings: 'https://api.komercia.app',
+  urlAWSsettings: 'https://api-production-9b752.up.railway.app',
   routerKey: 'c6979297-txfg-4962-7sag-709c76a71755',
   configAxios: {
     headers: {
@@ -379,7 +380,7 @@ export const actions = {
       }
     }
   },
-  async nuxtServerInit({ commit, dispatch, state }, { req }) {
+  async nuxtServerInit({ commit, dispatch, state }, { req, res }) {
     // Aseguramos que el objeto 'req' existe antes de usarlo.
     if (process.server && req && req.headers) {
       const { subdomain, id, template, idWapi, isDataTemplate } =
@@ -397,6 +398,7 @@ export const actions = {
           title: '',
         }
         commit('SET_INFO', param)
+        preventErrorCache(res)
         return
       }
 
@@ -419,6 +421,7 @@ export const actions = {
           title: '',
         }
         commit('SET_INFO', param)
+        preventErrorCache(res)
         return
       }
 
@@ -847,6 +850,7 @@ export const actions = {
       const { data } = await axios({
         method: 'GET',
         url: `${state.urlKomercia}/api/hoko/${id}`,
+        timeout: API_TIMEOUT,
       })
       if (data.data) {
         dispatch('GET_PRODUCTSHOKO', 1)
@@ -1351,6 +1355,14 @@ function obtenerInfoURL(url) {
     esSubdominio,
     esDominio,
     idTienda,
+  }
+}
+
+// Un fallo transitorio de la API no debe quedar en la cache del CDN
+// sirviendo "No se encontro la tienda" a todos los visitantes.
+function preventErrorCache(res) {
+  if (res && !res.headersSent) {
+    res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate')
   }
 }
 
